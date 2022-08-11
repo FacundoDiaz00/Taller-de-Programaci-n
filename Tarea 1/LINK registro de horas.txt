@@ -5,3 +5,8 @@ i2 = agus
 i3 = valen 
 i4 = reco
 i5 = daniel
+
+semantica de operaciones del sistema:
+
+listar -> operacion que devuelve set(string)
+obtener -> operacion que devuelve set(DT...) ó DT...
