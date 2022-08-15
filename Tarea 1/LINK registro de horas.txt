@@ -8,5 +8,7 @@ i5 = daniel
 
 semantica de operaciones del sistema:
 
-listar -> operacion que devuelve set(string)
-obtener -> operacion que devuelve set(DT...) ó DT...
+
+Ej: semanticas
+obtenerIdTuristas = devuelve el id (ej nombre) de todos los uristas
+obtenerDTTuristas = devuelve todos los dt turistas
