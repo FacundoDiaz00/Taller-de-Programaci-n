@@ -12,3 +12,4 @@ semantica de operaciones del sistema:
 Ej: semanticas
 obtenerIdTuristas = devuelve el id (ej nombre) de todos los uristas
 obtenerDTTuristas = devuelve todos los dt turistas
+
