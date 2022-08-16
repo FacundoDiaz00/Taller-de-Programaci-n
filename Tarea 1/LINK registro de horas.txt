@@ -13,5 +13,3 @@ Ej: semanticas
 obtenerIdTuristas = devuelve el id (ej nombre) de todos los uristas
 obtenerDTTuristas = devuelve todos los dt turistas
 
-editar doc modelo de dominio:
-https://docs.google.com/document/d/1KYkjfz7hOZZdTbTpxvwhf0yFuzv9Dx1ieOLMRcoKwgs/edit?usp=sharing
