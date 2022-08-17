@@ -18,10 +18,10 @@ Inscripcion a salida Turistica:
 
 
 Agregar actividad turistica a paquete
-	obtenerIdsPaquetesRegistrados() : Set(String)
+	obtenerIdPaquetesRegistrados() : Set(String)
 	(|||REPETIDA|||) obtenerIdsDepartamentos(): Set(String)
-	obtenerIdsActividadesDeDepartamentoQueNoEstenEnPaquete(depto: String, paquete: String): Set(String) 
-	agregarActividadAPaquete(nombreActividad: String, paquete: String)
+	obtenerIdActividadesDeDepartamentoQueNoEstenEnPaquete(nomDepto: String, nomPaquete: String): Set(String) 
+	agregarActividadAPaquete(nomActividad: String, nomPaquete: String)
 
 
 
