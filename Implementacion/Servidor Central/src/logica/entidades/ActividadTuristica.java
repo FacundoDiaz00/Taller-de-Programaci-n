@@ -1,6 +1,8 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Equipo taller prog 16
@@ -15,6 +17,9 @@ public class ActividadTuristica {
     private String cuidad;
     private LocalDate fechaAlta;
 
+    private Map<String, Paquete> paquetes;
+    private Map<String, SalidaTuristica> salidas;
+
     public ActividadTuristica(String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta) {
         this.nombre = nombre;
         this.descrpicion = descrpicion;
@@ -22,6 +27,8 @@ public class ActividadTuristica {
         this.costoPorTurista = costoPorTurista;
         this.cuidad = cuidad;
         this.fechaAlta = fechaAlta;
+        this.paquetes = new HashMap<>();
+        this.salidas = new HashMap<>();
     }
 
     @Override
@@ -75,5 +82,21 @@ public class ActividadTuristica {
 
     public void setFechaAlta(LocalDate fechaAlta) {
         this.fechaAlta = fechaAlta;
+    }
+
+    public Map<String, Paquete> getPaquetes() {
+        return paquetes;
+    }
+
+    public void setPaquetes(Map<String, Paquete> paquetes) {
+        this.paquetes = paquetes;
+    }
+
+    public Map<String, SalidaTuristica> getSalidas() {
+        return salidas;
+    }
+
+    public void setSalidas(Map<String, SalidaTuristica> salidas) {
+        this.salidas = salidas;
     }
 }

@@ -1,5 +1,8 @@
 package logica.entidades;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Equipo taller prog 16
  */
@@ -10,10 +13,13 @@ public class Departamento {
     private String descripcion;
     private String url;
 
+    Map<String, ActividadTuristica> actividadTuristicas;
+
     public Departamento(String nombre, String descripcion, String url) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.url = url;
+        this.actividadTuristicas = new HashMap<>();
     }
 
     @Override
@@ -43,5 +49,13 @@ public class Departamento {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Map<String, ActividadTuristica> getActividadTuristicas() {
+        return actividadTuristicas;
+    }
+
+    public void setActividadTuristicas(Map<String, ActividadTuristica> actividadTuristicas) {
+        this.actividadTuristicas = actividadTuristicas;
     }
 }

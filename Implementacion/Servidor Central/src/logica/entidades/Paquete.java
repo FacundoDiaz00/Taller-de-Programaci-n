@@ -1,5 +1,8 @@
 package logica.entidades;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Equipo taller prog 16
  */
@@ -11,11 +14,14 @@ public class Paquete {
     private int validez;
     private float descuento;
 
+    private Map<String, ActividadTuristica> actividades;
+
     public Paquete(String nombre, String descrpicion, int validez, float descuento) {
         this.nombre = nombre;
         this.descrpicion = descrpicion;
         this.validez = validez;
         this.descuento = descuento;
+        this.actividades = new HashMap<>();
     }
 
     @Override
@@ -53,5 +59,13 @@ public class Paquete {
 
     public void setDescuento(float descuento) {
         this.descuento = descuento;
+    }
+
+    public Map<String, ActividadTuristica> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(Map<String, ActividadTuristica> actividades) {
+        this.actividades = actividades;
     }
 }
