@@ -1,0 +1,29 @@
+Operaciones de controladores:
+
+Alta de Usuario:
+	altaProveedor(nickname,nombre,apellido,descripcion,url?:string, FNacimiento:DTFecha):bool
+	altaTurista(nickname, nombre, apellido, correo:string, FNaciomiento:DTFecha):bool
+
+Consulta de actividad Turistica.
+	obtenerIdDepartamentos() : Set(String)
+	obtenerIdActividadesTuristicas(departamento: String) : Set(String)
+	obtenerDetallesActividadTuristica(nombreAct: String): DTActividadTuristicaDetalles
+
+Inscripcion a salida Turistica:
+	(|||REPETIDA|||) obtenerIdDepartamentos() : Set(String)
+	obtenerIdTuristas() : set(String)
+	(|||REPETIDA|||)obtenerIdActividadesTuristicas(departamento: String) : Set(String)
+	obtenerDTSalidasTuriticas(nombreActTuri : string) : set(DtSalidaTuristica)
+	altaInscrpicionSalidaTuristica (nomActTuri : string, nomSalTuri : string, nicknameTuri : string, cantTuris : integer, fechaInscp : DTFecha)
+
+
+Agregar actividad turistica a paquete
+	obtenerIdsPaquetesRegistrados() : Set(String)
+	(|||REPETIDA|||) obtenerIdsDepartamentos(): Set(String)
+	obtenerIdsActividadesDeDepartamentoQueNoEstenEnPaquete(depto: String, paquete: String): Set(String) 
+	agregarActividadAPaquete(nombreActividad: String, paquete: String)
+
+
+
+
+
