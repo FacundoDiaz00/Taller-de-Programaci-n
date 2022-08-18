@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class AltaDeUsuario extends JInternalFrame {
 	private JTextField textField;
@@ -35,32 +39,43 @@ public class AltaDeUsuario extends JInternalFrame {
 	 */
 	public AltaDeUsuario() {
 		setTitle("Registrar Usuario");
-		setBounds(100, 100, 409, 418);
-		getContentPane().setLayout(new BorderLayout(0, 0));
+		setBounds(100, 100, 409, 270);
+		getContentPane().setLayout(null);
 		
-		JPanel inputs = new JPanel();
-		getContentPane().add(inputs, BorderLayout.NORTH);
-		inputs.setLayout(new BoxLayout(inputs, BoxLayout.Y_AXIS));
+		JLabel lblNewLabel = new JLabel("NickName:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(10, 11, 103, 14);
+		getContentPane().add(lblNewLabel);
 		
-		JPanel panel = new JPanel();
-		inputs.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		JLabel lblNewLabel_1 = new JLabel("Nombre:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(10, 36, 103, 14);
+		getContentPane().add(lblNewLabel_1);
 		
-		JLabel labelNinkName = new JLabel("NickName");
-		labelNinkName.setSize(100, 100);
-		panel.add(labelNinkName, BorderLayout.WEST);
+		JLabel lblNewLabel_1_1 = new JLabel("Apellido:");
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1_1.setBounds(10, 61, 103, 14);
+		getContentPane().add(lblNewLabel_1_1);
 		
 		textField = new JTextField();
-		panel.add(textField);
+		textField.setBounds(125, 8, 258, 20);
+		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JPanel panel_1 = new JPanel();
-		inputs.add(panel_1);
+		JLabel lblNewLabel_1_1_1 = new JLabel("Correo electronico:");
+		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1_1_1.setBounds(10, 86, 103, 14);
+		getContentPane().add(lblNewLabel_1_1_1);
 		
-		JPanel botonera = new JPanel();
-		botonera.setBackground(Color.RED);
-		getContentPane().add(botonera, BorderLayout.SOUTH);
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Fecha nacimiento:");
+		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1_1_1_1.setBounds(10, 111, 103, 14);
+		getContentPane().add(lblNewLabel_1_1_1_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Tipo de Usuario:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setBounds(10, 136, 103, 14);
+		getContentPane().add(lblNewLabel_2);
 
 	}
-
 }
