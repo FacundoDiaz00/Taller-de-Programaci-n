@@ -3,18 +3,19 @@ package presentacion;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JToolBar;
-import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
+
+import logica.controladores.*;
+
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Principal {
+	IControladorUsuario CUS;
 
 	private JFrame frmEstacionDeTrabajo;
 
@@ -39,7 +40,6 @@ public class Principal {
 	 */
 	public Principal() {
 		initialize();
-		
 	}
 
 	/**
