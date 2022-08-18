@@ -39,6 +39,7 @@ public class Principal {
 	 */
 	public Principal() {
 		initialize();
+		
 	}
 
 	/**
@@ -55,6 +56,10 @@ public class Principal {
 		
 		JMenu sistemaMenu = new JMenu("Sistema");
 		menuBar.add(sistemaMenu);
+		
+		ConsultaDeUsuario panelConsultaDeUsuario = new ConsultaDeUsuario();
+		panelConsultaDeUsuario.setVisible(false);
+		frmEstacionDeTrabajo.getContentPane().add(panelConsultaDeUsuario);
 		
 		JMenuItem salirJMenuItem = new JMenuItem("Salir");
 		salirJMenuItem.addActionListener(new ActionListener() {
@@ -75,6 +80,12 @@ public class Principal {
 		mnUsuario.add(registrarUsuarioJMenuItem);
 		
 		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
+		consultarUsuarioJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelConsultaDeUsuario.setVisible(true);
+			}
+		});
+
 		mnUsuario.add(consultarUsuarioJMenuItem);
 		
 		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
