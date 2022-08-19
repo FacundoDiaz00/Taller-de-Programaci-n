@@ -13,8 +13,14 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
+import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTUsuario;
 
 import javax.swing.JTextPane;
 import javax.swing.JSplitPane;
@@ -25,6 +31,8 @@ import javax.swing.JTextArea;
 import javax.swing.JLayeredPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import java.util.List;
 
 public class ConsultaDeUsuario extends JInternalFrame {
 	/**
@@ -47,7 +55,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDeUsuario() {
-        ArrayList<String> usuarios = IControladorUsuario.obtenerIdUsuarios();
+        List<String> usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerIdUsuarios();
 		
         setResizable(true);
         setIconifiable(true);
@@ -95,10 +103,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel = new JLabel("Nickname: ");
         panel_3.add(lblNewLabel);
         
-        JTextArea txtrErgsesss = new JTextArea();
-        txtrErgsesss.setEditable(false);
-        txtrErgsesss.setText("...");
-        panel_3.add(txtrErgsesss);
+        JTextArea txtNickname = new JTextArea();
+        txtNickname.setEditable(false);
+        txtNickname.setText("...");
+        panel_3.add(txtNickname);
         
         JPanel panel_4 = new JPanel();
         panel_mostrar_datos.add(panel_4);
@@ -107,10 +115,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel_2 = new JLabel("Nombre: ");
         panel_4.add(lblNewLabel_2);
         
-        JTextArea txtrErgsesss_1 = new JTextArea();
-        txtrErgsesss_1.setText("...");
-        txtrErgsesss_1.setEditable(false);
-        panel_4.add(txtrErgsesss_1);
+        JTextArea txtNombre = new JTextArea();
+        txtNombre.setText("...");
+        txtNombre.setEditable(false);
+        panel_4.add(txtNombre);
         
         JPanel panel_5 = new JPanel();
         panel_mostrar_datos.add(panel_5);
@@ -119,10 +127,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel_2_1 = new JLabel("Apellido: ");
         panel_5.add(lblNewLabel_2_1);
         
-        JTextArea txtrErgsesss_1_1 = new JTextArea();
-        txtrErgsesss_1_1.setText("...");
-        txtrErgsesss_1_1.setEditable(false);
-        panel_5.add(txtrErgsesss_1_1);
+        JTextArea txtApellido = new JTextArea();
+        txtApellido.setText("...");
+        txtApellido.setEditable(false);
+        panel_5.add(txtApellido);
         
         JPanel panel_6 = new JPanel();
         panel_mostrar_datos.add(panel_6);
@@ -131,10 +139,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel_3 = new JLabel("Correo: ");
         panel_6.add(lblNewLabel_3);
         
-        JTextArea txtrErgsesss_1_1_1 = new JTextArea();
-        txtrErgsesss_1_1_1.setText("...");
-        txtrErgsesss_1_1_1.setEditable(false);
-        panel_6.add(txtrErgsesss_1_1_1);
+        JTextArea txtCorreo = new JTextArea();
+        txtCorreo.setText("...");
+        txtCorreo.setEditable(false);
+        panel_6.add(txtCorreo);
         
         JPanel panel_7 = new JPanel();
         panel_mostrar_datos.add(panel_7);
@@ -143,10 +151,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel_4 = new JLabel("Fecha de Nacimiento: ");
         panel_7.add(lblNewLabel_4);
         
-        JTextArea txtrErgsesss_1_1_1_1 = new JTextArea();
-        txtrErgsesss_1_1_1_1.setText("...");
-        txtrErgsesss_1_1_1_1.setEditable(false);
-        panel_7.add(txtrErgsesss_1_1_1_1);
+        JTextArea txtFechaDeNacimiento = new JTextArea();
+        txtFechaDeNacimiento.setText("...");
+        txtFechaDeNacimiento.setEditable(false);
+        panel_7.add(txtFechaDeNacimiento);
         
         JPanel panel_3_1 = new JPanel();
         panel_mostrar_datos.add(panel_3_1);
@@ -155,10 +163,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblTipo = new JLabel("Tipo: ");
         panel_3_1.add(lblTipo);
         
-        JTextArea txtrErgsesss_2 = new JTextArea();
-        txtrErgsesss_2.setText("...");
-        txtrErgsesss_2.setEditable(false);
-        panel_3_1.add(txtrErgsesss_2);
+        JTextArea txtTipo = new JTextArea();
+        txtTipo.setText("...");
+        txtTipo.setEditable(false);
+        panel_3_1.add(txtTipo);
         
         JPanel panel_derecha = new JPanel();
         panel_consulta.add(panel_derecha);
@@ -180,9 +188,9 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel_5 = new JLabel("Actividades y salidas: ");
         proveedor_panel.add(lblNewLabel_5);
         
-        JTextArea textArea = new JTextArea();
-        textArea.setText("...");
-        proveedor_panel.add(textArea);
+        JTextArea txtActividadesYSalidasProveedor = new JTextArea();
+        txtActividadesYSalidasProveedor.setText("...");
+        proveedor_panel.add(txtActividadesYSalidasProveedor);
         
         JPanel turista_panel = new JPanel();
         turista_panel.setVisible(false);
@@ -192,23 +200,79 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JLabel lblNewLabel_6 = new JLabel("Salidas a las que se inscribió: ");
         turista_panel.add(lblNewLabel_6);
         
-        JTextArea textArea_1 = new JTextArea();
-        textArea_1.setText("...");
-        turista_panel.add(textArea_1);
+        JTextArea txtSalidasTurista = new JTextArea();
+        txtSalidasTurista.setText("...");
+        turista_panel.add(txtSalidasTurista);
         
         
         
-        
+        comboBox_1.addPopupMenuListener( new PopupMenuListener() {
+
+			@Override
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				// Esto es lo que actualiza la lista cada vez que se abre.
+				var usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerIdUsuarios();
+				comboBox_1.setModel(new DefaultComboBoxModel(usuarios.toArray()));
+			}
+
+			@Override
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void popupMenuCanceled(PopupMenuEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         
         comboBox_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		// actualizar items pues se seleccionó un nuevo tiem del COMBO BOX
+        		// Esto es lo que se ejecuta cada vez que se selecciona un item de la lista
+        		String seleccion = (String) comboBox_1.getSelectedItem();
         		
+        		try {
+        			DTUsuario usr = Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(seleccion);
+        			boolean mostrar_datos = true;
+        			
+        			txtNickname.setText(usr.getNickname());
+        			txtNombre.setText(usr.getNombre());
+        			txtApellido.setText(usr.getApellido());
+        			txtCorreo.setText(usr.getCorreo());
+        			txtFechaDeNacimiento.setText(usr.getFechaNac().toString());
 
-                panel_izquierda.setVisible(true);
-        		panel_consulta.setVisible(true);
-        		casos.setVisible(true);
-        		turista_panel.setVisible(true);
+            		boolean mostrar_proveedor;
+            		boolean mostrar_turista;
+            		
+            		if (usr instanceof DTTurista) { 
+            			DTTurista tur = (DTTurista) usr;
+            			mostrar_proveedor = false;
+            			mostrar_turista = true;
+            			      
+            			// TODO: Esto hay que formatearlo mejor pero por ahora debería funcionar
+            			txtSalidasTurista.setText(tur.getInscripciones().toString());
+            		} else if (usr instanceof DTProveedor) {
+            			DTProveedor prov = (DTProveedor) usr;
+            			mostrar_proveedor = true;
+            			mostrar_turista = false;
+            			// TODO: Esto hay que formatearlo mejor pero por ahora debería funcionar
+            			txtActividadesYSalidasProveedor.setText(prov.getActividadesSalidas().toString());
+            		} else {
+            			throw new Exception("Se devolvió un tipo de DTUsuario no registado");
+            		}
+            		
+            		panel_consulta.setVisible(mostrar_datos);
+            		proveedor_panel.setVisible(mostrar_proveedor);
+            		turista_panel.setVisible(mostrar_turista);
+        		} catch (Exception exepcion_busqueda_usuario) {
+        			// Esta excepcion no debería ocurrir pero por las dudas la pongo
+        			
+        		}
+        		
+        		
         	}
         });
     }

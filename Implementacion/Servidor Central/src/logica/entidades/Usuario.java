@@ -2,6 +2,8 @@ package logica.entidades;
 
 import java.time.LocalDate;
 
+import logica.datatypes.DTUsuario;
+
 /**
  * @author Equipo taller prog 16
  */
@@ -24,8 +26,8 @@ public class Usuario {
 
     @Override
     public boolean equals(Object obj) {
-        return this.nickname.equals(((Usuario)obj).nickname)
-               || this.correo.equals(((Usuario)obj).correo);
+        return this.nickname.equals(((Usuario) obj).nickname)
+                || this.correo.equals(((Usuario) obj).correo);
     }
 
     public String getNickname() {
@@ -68,5 +70,8 @@ public class Usuario {
         this.fechaNac = fechaNac;
     }
 
+    public DTUsuario getDTUsuario() {
+        return new DTUsuario(nickname, nombre, apellido, correo, fechaNac);
+    }
 
 }

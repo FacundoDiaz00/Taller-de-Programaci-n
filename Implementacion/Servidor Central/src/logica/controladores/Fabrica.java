@@ -5,7 +5,7 @@ package logica.controladores;
  */
 
 public class Fabrica {
-    private Fabrica instancia;
+    private static Fabrica instancia;
     private IControladorActividadTuristica cAT;
     private IControladorPaquete cP;
     private IControladorUsuario cU;
@@ -13,7 +13,7 @@ public class Fabrica {
     private Fabrica() {
     }
 
-    public Fabrica getInstancia(){
+    public static Fabrica getInstancia(){
         if(instancia == null){
             instancia = new Fabrica();
         }

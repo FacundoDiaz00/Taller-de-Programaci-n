@@ -3,19 +3,24 @@ package logica.entidades;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTUsuario;
 
 /**
  * @author Equipo taller prog 16
  */
 
-public class Proveedor extends Usuario{
+public class Proveedor extends Usuario {
 
     private String descrpicionGeneral;
     private String link;
 
     private Map<String, ActividadTuristica> actividadesTuristicas;
 
-    public Proveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, String descrpicionGeneral, String link) {
+    public Proveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
+            String descrpicionGeneral, String link) {
         super(nickname, nombre, apellido, correo, fechaNac);
         this.descrpicionGeneral = descrpicionGeneral;
         this.link = link;
@@ -44,5 +49,17 @@ public class Proveedor extends Usuario{
 
     public void setActividadesTuristicas(Map<String, ActividadTuristica> actividadesTuristicas) {
         this.actividadesTuristicas = actividadesTuristicas;
+    }
+
+    @Override
+    public DTUsuario getDTUsuario() {
+        DTUsuario dtUsuario = super.getDTUsuario();
+        Map<String, List<String>> salidas = new HashMap<>();
+
+        for (ActividadTuristica a : actividadesTuristicas.values()) {
+            salidas.put(a.getNombre(), a.obtenerIdSalidasTuristicas());
+        }
+
+        return new DTProveedor(dtUsuario, descrpicionGeneral, link, salidas);
     }
 }
