@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -13,6 +14,10 @@ import logica.controladores.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JDesktopPane;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class Principal {
 	IControladorUsuario CUS;
@@ -56,10 +61,17 @@ public class Principal {
 		
 		JMenu sistemaMenu = new JMenu("Sistema");
 		menuBar.add(sistemaMenu);
+		frmEstacionDeTrabajo.getContentPane().setLayout(new BoxLayout(frmEstacionDeTrabajo.getContentPane(), BoxLayout.X_AXIS));
 		
+		JDesktopPane desktopPane = new JDesktopPane();
+		frmEstacionDeTrabajo.getContentPane().add(desktopPane);
+
 		ConsultaDeUsuario panelConsultaDeUsuario = new ConsultaDeUsuario();
+		panelConsultaDeUsuario.setBounds(0, 0, 700, 442);
 		panelConsultaDeUsuario.setVisible(false);
-		frmEstacionDeTrabajo.getContentPane().add(panelConsultaDeUsuario);
+		desktopPane.setLayout(null);
+		desktopPane.add(panelConsultaDeUsuario);
+		
 		
 		JMenuItem salirJMenuItem = new JMenuItem("Salir");
 		salirJMenuItem.addActionListener(new ActionListener() {
