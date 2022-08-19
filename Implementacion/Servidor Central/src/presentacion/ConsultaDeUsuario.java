@@ -197,6 +197,13 @@ public class ConsultaDeUsuario extends JInternalFrame {
         casos.add(turista_panel);
         turista_panel.setLayout(new BoxLayout(turista_panel, BoxLayout.Y_AXIS));
         
+        JLabel lblNewLabel_6_1 = new JLabel("Nacionalidad: ");
+        turista_panel.add(lblNewLabel_6_1);
+        
+        JTextArea txtNacionalidad = new JTextArea();
+        txtNacionalidad.setText("...");
+        turista_panel.add(txtNacionalidad);
+        
         JLabel lblNewLabel_6 = new JLabel("Salidas a las que se inscribió: ");
         turista_panel.add(lblNewLabel_6);
         
@@ -252,6 +259,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
             			mostrar_proveedor = false;
             			mostrar_turista = true;
             			      
+            			txtNacionalidad.setText(tur.getNacionalidad());
             			// TODO: Esto hay que formatearlo mejor pero por ahora debería funcionar
             			txtSalidasTurista.setText(tur.getInscripciones().toString());
             		} else if (usr instanceof DTProveedor) {
