@@ -97,7 +97,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		lblNewLabel_1_1_1_1_1_1_1.setBounds(7, 191, 120, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_1_1_1);
 		
-		JComboBox comboProveedores = new JComboBox<String>();
+		comboProveedores = new JComboBox<String>();
 		comboProveedores.setBounds(145, 7, 212, 24);
 		getContentPane().add(comboProveedores);
 		
@@ -147,7 +147,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
        	
        });
 		
-		JComboBox comboDepartamentos = new JComboBox();
+		comboDepartamentos = new JComboBox();
 		comboDepartamentos.setBounds(145, 32, 212, 24);
 		getContentPane().add(comboDepartamentos);
 		
@@ -227,7 +227,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	}
 	
 	public void actualizarComboProveedores() {
-		ArrayList<String> provs = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdProveedores();
+		List<String> provs = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdProveedores();
 		comboProveedores.setModel(new DefaultComboBoxModel(provs.toArray()));
 	}
 	

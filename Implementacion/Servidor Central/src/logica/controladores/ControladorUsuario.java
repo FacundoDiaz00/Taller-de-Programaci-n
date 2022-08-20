@@ -34,24 +34,12 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 	
 	public ArrayList<String> obtenerIdProveedores() {
-		System.out.printf("ENTRE al CU ");
 		ManejadorUsuario MU = ManejadorUsuario.getInstancia();
-		Map<String, Usuario> usuarios = MU.getUsuarios();
+		List<Usuario> usuarios = MU.getUsuarios();
 		ArrayList<String> res = new ArrayList<String>();
-		
-		var it = usuarios.keySet().iterator();
-
-		while(it.hasNext()){
-			System.out.printf("PUDE ENTRAR a ITERAR;  ");
-			String clave = it.next();
-			System.out.printf(clave);
-			System.out.printf("PRONTO PARA ENTRAR A LO OTRO");
-			Usuario usr = usuarios.get(clave);
-			System.out.print(usuarios.get(clave).getNombre());
-			System.out.printf(usr.getNombre());
-			//casteamos a usr como proveedor:
-			if(usr instanceof Proveedor) {
-				res.add(usr.getNickname());
+		for(Usuario user : usuarios){
+			if(user instanceof Proveedor) {
+				res.add(user.getNickname());
 			}
 		}
 		return res;

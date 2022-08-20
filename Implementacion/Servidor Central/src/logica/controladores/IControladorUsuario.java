@@ -14,8 +14,6 @@ import java.util.List;
 public interface IControladorUsuario {
 	public List<String> obtenerIdUsuarios();
 
-	public ArrayList<String> obtenerIdProveedores();
-
 	public DTUsuario obtenerDTUsuario(String nickname);
 	
 	public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad);

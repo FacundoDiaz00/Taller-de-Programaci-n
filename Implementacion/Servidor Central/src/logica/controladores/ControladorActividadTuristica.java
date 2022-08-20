@@ -52,17 +52,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public ControladorActividadTuristica() {
 	}
 	
-	public ArrayList<String> obtenerIdProveedores() {
-		Fabrica F = Fabrica.getInstancia();
-		IControladorUsuario ICU = F.getIControladorUsuario();
-		System.out.printf("llegue al CAT");
-		return ICU.obtenerIdProveedores();	
+	public List<String> obtenerIdProveedores() {
+		ControladorUsuario cu = new ControladorUsuario();
+		return cu.obtenerIdProveedores();
 	}
 	
-	public Set<String> obtenerIdDepartamentos(){
+	public List<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
-		Set<String> idDepartamentos = MU.obtenerIdDepartamentos();
-		return idDepartamentos;
+		return new ArrayList<String>(MU.obtenerIdDepartamentos());
 	}
 	
 	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
