@@ -19,6 +19,7 @@ import javax.swing.JDesktopPane;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import java.awt.Rectangle;
 
 public class Principal {
 	IControladorUsuario CUS;
@@ -27,7 +28,7 @@ public class Principal {
 
 	private AltaDeUsuario frmIntAltaUsuario;
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
-
+	private AltaDePaquete frmIntAltaPaquete;
 	/**
 	 * Launch the application.
 	 */
@@ -54,14 +55,22 @@ public class Principal {
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
+		frmIntAltaPaquete = new AltaDePaquete();
+		frmIntAltaPaquete.setNormalBounds(new Rectangle(30, 30, 400, 400));
+		frmIntAltaPaquete.setResizable(true);
+		frmIntAltaPaquete.setMaximizable(true);
+		frmIntAltaPaquete.setIconifiable(true);
+		frmIntAltaPaquete.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frmIntAltaPaquete.setClosable(true);
 
 
 		frmIntAltaUsuario.setVisible(false);
 		frmIntConsultaDeUsuario.setVisible(false);
-
+		frmIntAltaPaquete.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 	}
 
 	/**
@@ -107,8 +116,8 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				frmIntConsultaDeUsuario.setVisible(true);
 			}
+		
 		});
-
 		mnUsuario.add(consultarUsuarioJMenuItem);
 		
 		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
@@ -135,8 +144,13 @@ public class Principal {
 		JMenu mnNewMenu = new JMenu("Paquetes");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Paquete");
-		mnNewMenu.add(mntmNewMenuItem);
+		JMenuItem altaPaqueteJMenuItem = new JMenuItem("Registrar Paquete");
+		altaPaqueteJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent f) {
+				frmIntAltaPaquete.setVisible(true);
+			}
+		});
+		mnNewMenu.add(altaPaqueteJMenuItem);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Consulta de Paquete");
 		mnNewMenu.add(mntmNewMenuItem_2);

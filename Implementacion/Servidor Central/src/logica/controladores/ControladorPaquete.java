@@ -18,6 +18,6 @@ public class ControladorPaquete implements IControladorPaquete{
         }
         Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento);
         mp.addPaquete(paq);
-        return true;
+        return true; 
     }
 }
