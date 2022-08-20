@@ -3,6 +3,9 @@ package logica.datatypes;
 import java.time.LocalDate;
 import java.util.Map;
 
+import logica.entidades.Paquete;
+import logica.entidades.SalidaTuristica;
+
 /**
  * @author Equipo taller prog 16
  */
