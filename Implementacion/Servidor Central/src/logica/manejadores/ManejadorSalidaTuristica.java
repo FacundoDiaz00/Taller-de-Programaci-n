@@ -9,12 +9,12 @@ import logica.entidades.SalidaTuristica;
  */
 
 public class ManejadorSalidaTuristica {
-    private ManejadorSalidaTuristica instancia;
+    private static ManejadorSalidaTuristica instancia;
 
     private Map<String, SalidaTuristica> salidas;
 
-    public ManejadorSalidaTuristica getInstancia(){
-        if(instancia == null){
+    public static ManejadorSalidaTuristica getInstancia() {
+        if (instancia == null) {
             instancia = new ManejadorSalidaTuristica();
         }
         return instancia;

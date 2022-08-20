@@ -2,7 +2,9 @@ package logica.entidades;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
 /**
  * @author Equipo taller prog 16
@@ -20,7 +22,8 @@ public class ActividadTuristica {
     private Map<String, Paquete> paquetes;
     private Map<String, SalidaTuristica> salidas;
 
-    public ActividadTuristica(String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta) {
+    public ActividadTuristica(String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
+            LocalDate fechaAlta) {
         this.nombre = nombre;
         this.descrpicion = descrpicion;
         this.duracion = duracion;
@@ -33,7 +36,7 @@ public class ActividadTuristica {
 
     @Override
     public boolean equals(Object obj) {
-        return ((ActividadTuristica)obj).nombre.equals(this.nombre);
+        return ((ActividadTuristica) obj).nombre.equals(this.nombre);
     }
 
     public String getNombre() {
@@ -98,5 +101,13 @@ public class ActividadTuristica {
 
     public void setSalidas(Map<String, SalidaTuristica> salidas) {
         this.salidas = salidas;
+    }
+
+    public List<String> obtenerIdSalidasTuristicas() {
+        var listaSalidas = new ArrayList<String>();
+        for (var salida : salidas.values()) {
+            listaSalidas.add(salida.getNombre());
+        }
+        return listaSalidas;
     }
 }

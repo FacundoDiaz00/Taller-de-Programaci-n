@@ -14,14 +14,15 @@ public class Inscripcion {
     private Compra compra;
     private SalidaTuristica salidaTuristica;
 
-    public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, Compra compra, SalidaTuristica salidaTuristica) {
+    public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, Compra compra,
+            SalidaTuristica salidaTuristica) {
         this.fechaInscrpicion = fechaInscrpicion;
         this.cantidadTuristas = cantidadTuristas;
         this.compra = compra;
         this.salidaTuristica = salidaTuristica;
     }
 
-    //Todo falta el calculo de costoInscripcion
+    // Todo falta el calculo de costoInscripcion
 
     public LocalDate getFechaInscrpicion() {
         return fechaInscrpicion;
@@ -53,5 +54,9 @@ public class Inscripcion {
 
     public void setSalidaTuristica(SalidaTuristica salidaTuristica) {
         this.salidaTuristica = salidaTuristica;
+    }
+
+    public String getNombreSalida() {
+        return salidaTuristica.getNombre();
     }
 }

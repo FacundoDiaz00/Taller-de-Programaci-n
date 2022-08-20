@@ -4,18 +4,17 @@ import java.util.Map;
 
 import logica.entidades.Departamento;
 
-
 /**
  * @author Equipo taller prog 16
  */
 
 public class ManejadorDepartamento {
-    private ManejadorDepartamento instancia;
+    private static ManejadorDepartamento instancia;
 
     private Map<String, Departamento> departamentos;
 
-    public ManejadorDepartamento getInstancia(){
-        if(instancia == null){
+    public static ManejadorDepartamento getInstancia() {
+        if (instancia == null) {
             instancia = new ManejadorDepartamento();
         }
         return instancia;
