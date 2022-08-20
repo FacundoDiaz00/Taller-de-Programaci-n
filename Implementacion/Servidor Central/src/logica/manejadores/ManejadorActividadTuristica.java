@@ -1,6 +1,9 @@
 package logica.manejadores;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import logica.entidades.ActividadTuristica;
 
@@ -20,8 +23,12 @@ public class ManejadorActividadTuristica {
         return instancia;
     }
 
-    public Map<String, ActividadTuristica> getActividades() {
-        return actividades;
+    public List<ActividadTuristica> getActividades() {
+        return new ArrayList<ActividadTuristica>(actividades.values());
+    }
+
+    public Set<String> obtenerIdActividadTuristica(){
+        return actividades.keySet();
     }
 
     public void addActividad(ActividadTuristica actividad) {
