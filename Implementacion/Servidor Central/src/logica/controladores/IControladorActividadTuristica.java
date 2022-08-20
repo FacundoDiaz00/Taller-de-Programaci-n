@@ -17,6 +17,6 @@ public interface IControladorActividadTuristica {
 	ArrayList<String> obtenerIdProveedores();
 	ArrayList<String> obtenerIdDepartamentos();
 	boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta);
-
+	//fin operaciones AAT
 
 }

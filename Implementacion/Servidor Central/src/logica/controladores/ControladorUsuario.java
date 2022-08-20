@@ -40,6 +40,30 @@ public class ControladorUsuario implements IControladorUsuario {
         return ret;
     }
 	
+	public ArrayList<String> obtenerIdProveedores() {
+		System.out.printf("ENTRE al CU ");
+		ManejadorUsuario MU = ManejadorUsuario.getInstancia();
+		Map<String, Usuario> usuarios = MU.getUsuarios();
+		ArrayList<String> res = new ArrayList<String>();
+		
+		var it = usuarios.keySet().iterator();
+
+		while(it.hasNext()){
+			System.out.printf("PUDE ENTRAR a ITERAR;  ");
+			String clave = it.next();
+			System.out.printf(clave);
+			System.out.printf("PRONTO PARA ENTRAR A LO OTRO");
+			Usuario usr = usuarios.get(clave);
+			System.out.print(usuarios.get(clave).getNombre());
+			System.out.printf(usr.getNombre());
+			//casteamos a usr como proveedor:
+			if(usr instanceof Proveedor) {
+				res.add(usr.getNickname());
+			}
+		}
+		return res;
+	}
+	
     public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         if(mu.existeUsuario(nickname, correo)) {
@@ -70,21 +94,6 @@ public class ControladorUsuario implements IControladorUsuario {
         return u.getDTUsuario();
     }
 
-	public ArrayList<String> obtenerIdProveedores() {
-		ManejadorUsuario MU = ManejadorUsuario.getInstancia();
-		Map<String, Usuario> usuarios = MU.getUsuarios();
-		ArrayList<String> res = new ArrayList<String>();
-		
-		Iterator<String> it = usuarios.keySet().iterator();
-		while(it.hasNext()){
-			String clave = it.next();
-			Usuario usr = usuarios.get(clave);
-			//casteamos a usr como proveedor:
-			if(usr instanceof Proveedor) {
-				res.add(usr.getNombre());
-			}
-		}
-		return res;
-	}
+
 
 }

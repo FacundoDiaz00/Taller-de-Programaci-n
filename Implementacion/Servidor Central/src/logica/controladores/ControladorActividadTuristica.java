@@ -40,6 +40,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public ArrayList<String> obtenerIdProveedores() {
 		Fabrica F = Fabrica.getInstancia();
 		IControladorUsuario ICU = F.getIControladorUsuario();
+		System.out.printf("llegue al CAT");
 		return ICU.obtenerIdProveedores();	
 	}
 	
