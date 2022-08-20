@@ -18,14 +18,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     public List<String> obtenerIdUsuarios() {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        var usuarios = ins.getUsuarios();
-        
-        //todo Esto deberia estar en el controlador creo
-    	var ret = new ArrayList<String>();
-    	if (!usuarios.isEmpty()) {
-    		ret = new ArrayList<>(usuarios.keySet());
-    	} 
-        return ret;
+        return new ArrayList<String>(ins.obtenerIdUsuarios());
     }
 	
     public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
