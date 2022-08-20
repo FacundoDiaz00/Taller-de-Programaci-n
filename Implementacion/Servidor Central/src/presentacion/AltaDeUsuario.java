@@ -206,5 +206,8 @@ public class AltaDeUsuario extends JInternalFrame {
         nickname.setText("");
         correo.setText("");
         Fnacimiento.setText("");
+        nacionalidad.setText("");
+        url.setText("");
+        descripcion.setText("");
     }
 }
