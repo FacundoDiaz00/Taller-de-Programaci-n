@@ -9,6 +9,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
+
+import logica.controladores.Fabrica;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +42,11 @@ public class Principal {
 	 */
 	public Principal() {
 		initialize();
+        Fabrica fabrica = Fabrica.getInstance();
+        ICU = fabrica.getIControladorUsuario();
+		
+        creUsrInternalFrame = new CrearUsuario(ICU);
+        creUsrInternalFrame.setVisible(false);
 	}
 
 	/**

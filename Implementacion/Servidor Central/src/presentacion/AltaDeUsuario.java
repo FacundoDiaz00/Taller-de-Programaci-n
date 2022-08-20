@@ -28,22 +28,6 @@ public class AltaDeUsuario extends JInternalFrame {
 	private JTextField correo;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaDeUsuario frame = new AltaDeUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AltaDeUsuario(IControladorUsuario icu) {
@@ -114,10 +98,13 @@ public class AltaDeUsuario extends JInternalFrame {
 		JComboBox tipoUsuario = new JComboBox();
 		tipoUsuario.setBounds(155, 131, 212, 24);
 		getContentPane().add(tipoUsuario);
+		tipoUsuario.addItem("hola");
+		tipoUsuario.addItem("chau");
 		
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				agregarUsuario(e);
 			}
 		});
 		btnNewButton.setBounds(272, 201, 117, 25);
@@ -132,11 +119,17 @@ public class AltaDeUsuario extends JInternalFrame {
 		});
 		btnCancelar.setBounds(10, 201, 117, 25);
 		getContentPane().add(btnCancelar);
-	    private void limpiarFormulario() {
-	        textFieldNombre.setText("");
-	        textFieldApellido.setText("");
-	        textFieldCI.setText("");
-	    }
 
 	}
+	private void agregarUsuario(ActionEvent action) {
+		
+		
+	}
+    private void limpiarFormulario() {
+        nombre.setText("");
+        apellido.setText("");
+        nickname.setText("");
+        correo.setText("");
+        fnacimiento.setText("");
+    }
 }
