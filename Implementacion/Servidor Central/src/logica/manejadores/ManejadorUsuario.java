@@ -9,7 +9,7 @@ import logica.entidades.Usuario;
  */
 
 public class ManejadorUsuario {
-    private ManejadorUsuario instancia;
+    private static ManejadorUsuario instancia;
 
     private Map<String, Usuario> usuarios;   
 

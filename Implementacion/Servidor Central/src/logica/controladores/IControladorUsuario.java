@@ -12,5 +12,5 @@ import java.util.List;
 public interface IControladorUsuario {
 	public List<String> obtenerIdUsuarios();
 
-	public ArrayList<String> obtenerIDProveedores();
+	public ArrayList<String> obtenerIdProveedores();
 }

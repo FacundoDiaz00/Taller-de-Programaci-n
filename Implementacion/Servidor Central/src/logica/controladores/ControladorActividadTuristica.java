@@ -24,13 +24,13 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public ArrayList<String> obtenerIdProveedores() {
 		Fabrica F = Fabrica.getInstancia();
 		IControladorUsuario ICU = F.getIControladorUsuario();
-		return ICU.obtenerIDProveedores();	
+		return ICU.obtenerIdProveedores();	
 	}
 	
 	public ArrayList<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
 		Map<String, Departamento> departamentos = MU.getDepartamentos();
-		ArrayList<String> res = null;
+		ArrayList<String> res = new ArrayList<String>();
 		
 		Iterator<String> it = departamentos.keySet().iterator();
 		while(it.hasNext()){
@@ -40,6 +40,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 	
 	public boolean altaActividadTurística(String nomProv, String desc, int dur, int costo, String ciudad, LocalDate fecha ) {
+		
 		return false;
 	}
 }

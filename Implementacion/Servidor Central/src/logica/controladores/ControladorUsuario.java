@@ -2,8 +2,10 @@ package logica.controladores;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
+import logica.entidades.Proveedor;
 import logica.entidades.Usuario;
 
 
@@ -21,11 +23,20 @@ public class ControladorUsuario implements IControladorUsuario {
         return new ArrayList<>();
     }
 
-	public Collection<String> obtenerIDProveedores() {
+	public ArrayList<String> obtenerIdProveedores() {
 		ManejadorUsuario MU = ManejadorUsuario.getInstancia();
-		Map<String, Usuario> Usuarios = MU.getUsuarios();
-		Collection<String> res;
+		Map<String, Usuario> usuarios = MU.getUsuarios();
+		ArrayList<String> res = new ArrayList<String>();
 		
+		Iterator<String> it = usuarios.keySet().iterator();
+		while(it.hasNext()){
+			String clave = it.next();
+			Usuario usr = usuarios.get(clave);
+			//casteamos a usr como proveedor:
+			if(usr instanceof Proveedor) {
+				res.add(usr.getNombre());
+			}
+		}
 		return res;
 	}
 

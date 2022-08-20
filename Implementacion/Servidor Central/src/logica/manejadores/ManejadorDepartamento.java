@@ -10,7 +10,7 @@ import logica.entidades.Departamento;
  */
 
 public class ManejadorDepartamento {
-    private ManejadorDepartamento instancia;
+    private static ManejadorDepartamento instancia;
 
     private Map<String, Departamento> departamentos;
 
