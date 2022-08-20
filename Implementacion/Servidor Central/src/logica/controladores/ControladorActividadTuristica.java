@@ -7,9 +7,7 @@ import logica.controladores.Fabrica;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.time.LocalDate;
 
 import excepciones.DeparamentoYaRegistradoException;
@@ -37,23 +35,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public ControladorActividadTuristica() {
 	}
 	
-	public ArrayList<String> obtenerIdProveedores() {
-		Fabrica F = Fabrica.getInstancia();
-		IControladorUsuario ICU = F.getIControladorUsuario();
-		System.out.printf("llegue al CAT");
-		return ICU.obtenerIdProveedores();	
+	public List<String> obtenerIdProveedores() {
+		ControladorUsuario cu = new ControladorUsuario();
+		return cu.obtenerIdProveedores();
 	}
 	
-	public ArrayList<String> obtenerIdDepartamentos(){
+	public List<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
-		Map<String, Departamento> departamentos = MU.getDepartamentos();
-		ArrayList<String> res = new ArrayList<String>();
-		
-		Iterator<String> it = departamentos.keySet().iterator();
-		while(it.hasNext()){
-		  res.add(it.next());
-		}
-		return res;
+		return new ArrayList<String>(MU.obtenerIdDepartamentos());
 	}
 	
 	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
