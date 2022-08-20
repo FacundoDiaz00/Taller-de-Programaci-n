@@ -4,13 +4,21 @@ import logica.entidades.Turista;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import logica.entidades.Proveedor;
+
+import java.util.List;
+
+import logica.datatypes.DTUsuario;
+import logica.entidades.Usuario;
+import logica.manejadores.ManejadorUsuario;
+
 /**
  * @author Equipo taller prog 16
  */
 public class ControladorUsuario implements IControladorUsuario {
-    public ArrayList<String> obtenerIdUsuarios() {
-        // TODO implement here
-        return new ArrayList<>();
+
+    public List<String> obtenerIdUsuarios() {
+        ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        return ins.obtenerIdUsuarios();
     }
 	
     public Boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
@@ -35,6 +43,12 @@ public class ControladorUsuario implements IControladorUsuario {
         Proveedor u = new Proveedor(nickname, nombre, apellido, correo,FNacimiento, descripcion, link);
         mu.addUsuario(u);
         return true;
+    }
+
+    public DTUsuario obtenerDTUsuario(String nickname) {
+        ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        Usuario u = ins.getUsuario(nickname);
+        return u.getDTUsuario();
     }
 
 }

@@ -1,8 +1,23 @@
-Operaciones de controladores:
+# Operaciones de controladores:
 
 Alta de Usuario:
 	altaProveedor(nickname,nombre,apellido,descripcion,url?:string, FNacimiento:DTFecha):bool
 	altaTurista(nickname, nombre, apellido, correo:string, FNaciomiento:DTFecha):bool
+
+CdeU Alta de actividad: 
+
+	obtenerIdProveedores() set(string)
+	obtenerIdDepartamentos() : set(string) [REPETIDA]
+	altaActividadTurística(nomProv: string, desc : string, dur : integer, costo : integer, ciudad : string, fecha : DTFecha) : bool
+
+CU: ALTA DE SALIDA
+	obtenerIdDepartamentos() : set(string) [repetida]
+	obtenerIdActividadesDeDepartamento(dep : string) : set(string)
+	altaDeSalida(nomSalida : string, fechaHora : DTFechaYHora, maxCantTuristas : integer, fechaAlta: DTFecha) : bool
+
+Consulta de Usuario:
+	obtenerIdUsuarios() : Set(String)
+	obtenerDTUsuario() : DTUsuario
 
 Consulta de actividad Turistica.
 	obtenerIdDepartamentos() : Set(String)
@@ -25,5 +40,11 @@ Agregar actividad turistica a paquete
 
 
 
+# Operaciones de manejadores:
+
+ManejadorUsuario:
+	static getInstancia() : ManejadorUsuario 
+	getUsuarios(): Set(Usuario)
+	obtenerIdUsuarios() : Set(String) //devuelve los nicknames
 
 
