@@ -21,7 +21,7 @@ public class Principal {
 
 	private AltaDeUsuario frmIntAltaUsuario;
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,7 +48,7 @@ public class Principal {
 		CAD = fabrica.getIControladorActividadTuristica();
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 
 
 		frmIntAltaUsuario.setVisible(false);
@@ -160,4 +160,21 @@ public class Principal {
 		mnNewMenu.add(mntmNewMenuItem_1);
 	}
 
+	/*
+	 * Exponemos estos métodos para poder llamarlo desde otros módulos
+	 * Se puede pasar null como parámetro y que no se seleccione nada desde antes
+	 */
+	public void mostrarConsultaDeUsuario(String nickname) {
+		if (nickname != null) {
+			frmIntConsultaDeUsuario.seleccionYaHecha(nickname);			
+		}
+		frmIntConsultaDeUsuario.setVisible(true);
+	}
+
+	/*
+	 * Exponemos estos métodos para poder llamarlo desde otros módulos
+	 */
+	public void mostrarAltaDeUsuario() {
+		
+	}
 }
