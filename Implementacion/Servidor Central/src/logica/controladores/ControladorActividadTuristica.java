@@ -7,6 +7,7 @@ import logica.entidades.Departamento;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.time.LocalDate;
 
 /**
  * @author Equipo taller prog 16
@@ -17,23 +18,23 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 	
 	public Collection<String> obtenerIdProveedores() {
-		ControladorUsuario CU;
+		ControladorUsuario CU = ControladorUsuario();
 		return CU.obtenerIDProveedores();	
 	}
 	
 	public Collection<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
 		Map<String, Departamento> departamentos = MU.getDepartamentos();
-		Collection<String> res;
+		Collection<String> res = null;
 		
-		Iterator it = departamentos.keySet().iterator();
+		Iterator<String> it = departamentos.keySet().iterator();
 		while(it.hasNext()){
 		  res.add(it.next());
 		}
 		return res;
 	}
 	
-	public boolean altaActividadTurística(String nomProv, String desc, int dur, int costo, String ciudad, fecha : DTFecha) {
+	public boolean altaActividadTurística(String nomProv, String desc, int dur, int costo, String ciudad, LocalDate fecha ) {
 		return false;
 	}
 }
