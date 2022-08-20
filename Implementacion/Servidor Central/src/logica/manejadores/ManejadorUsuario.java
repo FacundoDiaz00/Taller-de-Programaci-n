@@ -3,9 +3,6 @@ package logica.manejadores;
 import java.util.Map;
 import java.util.HashMap;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import logica.entidades.Usuario;
 
 /**
@@ -21,20 +18,11 @@ public class ManejadorUsuario {
     	usuarios = new HashMap<String, Usuario>();
     }
 
-    public static ManejadorUsuario getInstancia(){
-        if(instancia == null){
+    public static ManejadorUsuario getInstancia() {
+        if (instancia == null) {
             instancia = new ManejadorUsuario();
         }
         return instancia;
-    }
-
-    public List<String> obtenerIdUsuarios() {
-        //todo Esto deberia estar en el controlador creo
-    	var ret = new ArrayList<String>();
-    	if (!usuarios.isEmpty()) {
-    		ret = new ArrayList<>(usuarios.keySet());
-    	} 
-        return ret;
     }
 
     public Map<String, Usuario> getUsuarios() {
@@ -51,8 +39,10 @@ public class ManejadorUsuario {
     
     public boolean existeUsuario(String nickname, String correo) {
         for (String key: usuarios.keySet()){
+        	// FIXME quitar prints
             System.out.println(key +" = coso key"+usuarios.get(key));
         }
+        // FIXME quitar prints
         System.out.print("usuario existente: "+usuarios.containsKey(nickname));
     	return usuarios.containsKey(nickname) || (usuarios.get(nickname) != null && usuarios.get(nickname).getCorreo() == correo);
     }
