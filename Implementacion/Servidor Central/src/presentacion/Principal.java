@@ -56,7 +56,7 @@ public class Principal {
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
 		frmIntAltaPaquete = new AltaDePaquete();
-		frmIntAltaPaquete.setNormalBounds(new Rectangle(30, 30, 400, 400));
+		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 400, 400));
 		frmIntAltaPaquete.setResizable(true);
 		frmIntAltaPaquete.setMaximizable(true);
 		frmIntAltaPaquete.setIconifiable(true);
