@@ -10,6 +10,8 @@ import logica.controladores.IControladorPaquete;
 
 import javax.swing.JSpinner;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -18,7 +20,13 @@ public class AltaDePaquete extends JInternalFrame{
 	private JTextField descrp;
 	public AltaDePaquete() {
 		setTitle("Registrar Paquete de Actividades.");
+		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
+        setResizable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setClosable(true);
 		
 		JLabel lblIngreseLosDatos = new JLabel("Ingrese los datos del Paquete a registrar.");
 		lblIngreseLosDatos.setBounds(12, 20, 318, 15);

@@ -53,16 +53,17 @@ public class Principal {
 		CAD = fabrica.getIControladorActividadTuristica();
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntAltaPaquete = new AltaDePaquete();
 
 		frmIntAltaUsuario.setVisible(false);
-		frmIntConsultaDeUsuario.setVisible(false);
 		frmIntAltaPaquete.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
+		frmIntConsultaDeUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+
 
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
 
