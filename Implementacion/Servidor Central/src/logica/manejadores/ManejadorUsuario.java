@@ -1,10 +1,6 @@
 package logica.manejadores;
 
-import java.util.Map;
-import java.util.HashMap;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import logica.entidades.Usuario;
 
@@ -21,36 +17,37 @@ public class ManejadorUsuario {
     	usuarios = new HashMap<String, Usuario>();
     }
 
-    public static ManejadorUsuario getInstancia(){
-        if(instancia == null){
+    public static ManejadorUsuario getInstancia() {
+        if (instancia == null) {
             instancia = new ManejadorUsuario();
         }
         return instancia;
     }
 
-    public List<String> obtenerIdUsuarios() {
-        //todo Esto deberia estar en el controlador creo
-    	var ret = new ArrayList<String>();
-    	if (!usuarios.isEmpty()) {
-    		ret = new ArrayList<>(usuarios.keySet());
-    	} 
-        return ret;
+    public List<Usuario> getUsuarios() {
+        return new ArrayList<Usuario>(usuarios.values());
     }
 
-    public Map<String, Usuario> getUsuarios() {
-        return usuarios;
+    public Set<String> obtenerIdUsuarios(){
+        return usuarios.keySet();
     }
 
     public void addUsuario(Usuario usuario) {
-        usuarios.put(usuario.getNombre(), usuario);
+        usuarios.put(usuario.getNickname(), usuario);
     }
 
     public Usuario getUsuario(String nombre) {
         return usuarios.get(nombre);
     }
     
-    public Boolean existeUsuario(String nickname) {
-    	return usuarios.containsKey(nickname);
+    public boolean existeUsuario(String nickname, String correo) {
+        for (String key: usuarios.keySet()){
+        	// FIXME quitar prints
+            System.out.println(key +" = coso key"+usuarios.get(key));
+        }
+        // FIXME quitar prints
+        System.out.print("usuario existente: "+usuarios.containsKey(nickname));
+    	return usuarios.containsKey(nickname) || (usuarios.get(nickname) != null && usuarios.get(nickname).getCorreo() == correo);
     }
     
 }

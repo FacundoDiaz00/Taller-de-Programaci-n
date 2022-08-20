@@ -1,6 +1,9 @@
 package logica.manejadores;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import logica.entidades.Paquete;
 
@@ -20,8 +23,12 @@ public class ManejadorPaquete {
         return instancia;
     }
 
-    public Map<String, Paquete> getPaquetes() {
-        return paquetes;
+    public List<Paquete> getPaquetes() {
+        return new ArrayList<Paquete>(paquetes.values());
+    }
+
+    public Set<String> obtenerIdPaquetes() {
+        return paquetes.keySet();
     }
 
     public void addPaquete(Paquete paquete) {

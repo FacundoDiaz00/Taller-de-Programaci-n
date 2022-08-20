@@ -2,14 +2,11 @@ package presentacion;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
+import excepciones.DeparamentoYaRegistradoException;
 import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
 
 import java.awt.event.MouseAdapter;
@@ -23,6 +20,7 @@ import java.awt.Rectangle;
 
 public class Principal {
 	IControladorUsuario CUS;
+	IControladorActividadTuristica CAD;
 
 	private JFrame frmEstacionDeTrabajo;
 
@@ -52,8 +50,10 @@ public class Principal {
 		initialize();
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
+		CAD = fabrica.getIControladorActividadTuristica();
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
 		frmIntAltaPaquete = new AltaDePaquete();
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 400, 400));
@@ -71,6 +71,21 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
+
+		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
+
+		try {
+			CAD.altaDepartamento("Montevideo", "Capital" , "www.algo.com");
+		} catch (DeparamentoYaRegistradoException e){
+			JOptionPane.showMessageDialog(frmEstacionDeTrabajo, "Error al crear el departamento hadcode en Principal", "Por dios...", JOptionPane.ERROR_MESSAGE);
+		}
+
+
+		/*------------------*/
+
+
+
+
 	}
 
 	/**
@@ -109,6 +124,11 @@ public class Principal {
 		menuBar.add(mnUsuario);
 		
 		JMenuItem registrarUsuarioJMenuItem = new JMenuItem("Registrar Usuario");
+		registrarUsuarioJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntAltaUsuario.setVisible(true);
+			}
+		});
 		mnUsuario.add(registrarUsuarioJMenuItem);
 		
 		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
@@ -159,4 +179,21 @@ public class Principal {
 		mnNewMenu.add(mntmNewMenuItem_1);
 	}
 
+	/*
+	 * Exponemos estos métodos para poder llamarlo desde otros módulos
+	 * Se puede pasar null como parámetro y que no se seleccione nada desde antes
+	 */
+	public void mostrarConsultaDeUsuario(String nickname) {
+		if (nickname != null) {
+			frmIntConsultaDeUsuario.seleccionYaHecha(nickname);			
+		}
+		frmIntConsultaDeUsuario.setVisible(true);
+	}
+
+	/*
+	 * Exponemos estos métodos para poder llamarlo desde otros módulos
+	 */
+	public void mostrarAltaDeUsuario() {
+		
+	}
 }

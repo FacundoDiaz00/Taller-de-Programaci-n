@@ -1,7 +1,8 @@
 package logica.manejadores;
 
-import java.util.Map;
+import java.util.*;
 
+import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 
 /**
@@ -13,6 +14,10 @@ public class ManejadorDepartamento {
 
     private Map<String, Departamento> departamentos;
 
+    private ManejadorDepartamento(){
+        departamentos = new HashMap<>();
+    }
+
     public static ManejadorDepartamento getInstancia() {
         if (instancia == null) {
             instancia = new ManejadorDepartamento();
@@ -20,8 +25,12 @@ public class ManejadorDepartamento {
         return instancia;
     }
 
-    public Map<String, Departamento> getDepartamentos() {
-        return departamentos;
+    public List<Departamento> getDepartamentos() {
+        return new ArrayList<Departamento>(departamentos.values());
+    }
+
+    public Set<String> obtenerIdDepartamentos(){
+        return departamentos.keySet();
     }
 
     public void addDepartamento(Departamento departamento) {
@@ -30,6 +39,10 @@ public class ManejadorDepartamento {
 
     public Departamento getDepartamento(String nombre) {
         return departamentos.get(nombre);
+    }
+
+    public boolean exists(String nomDep){
+        return departamentos.containsKey(nomDep);
     }
 
 }
