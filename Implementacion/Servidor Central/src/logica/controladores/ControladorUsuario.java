@@ -21,9 +21,9 @@ public class ControladorUsuario implements IControladorUsuario {
         return ins.obtenerIdUsuarios();
     }
 	
-    public Boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
+    public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-        if(mu.existeUsuario(nickname)) {
+        if(mu.existeUsuario(nickname, correo)) {
             //throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
         	return false;
         }
@@ -33,9 +33,9 @@ public class ControladorUsuario implements IControladorUsuario {
         return true;
     }
     
-    public Boolean altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento){
+    public boolean altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento){
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-        if(mu.existeUsuario(nickname)) {
+        if(mu.existeUsuario(nickname, correo)) {
             //throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
         	return false;
         }

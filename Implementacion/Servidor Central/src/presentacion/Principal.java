@@ -110,6 +110,11 @@ public class Principal {
 		menuBar.add(mnUsuario);
 		
 		JMenuItem registrarUsuarioJMenuItem = new JMenuItem("Registrar Usuario");
+		registrarUsuarioJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntAltaUsuario.setVisible(true);
+			}
+		});
 		mnUsuario.add(registrarUsuarioJMenuItem);
 		
 		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
