@@ -29,6 +29,7 @@ public class ManejadorUsuario {
     }
 
     public List<String> obtenerIdUsuarios() {
+        //todo Esto deberia estar en el controlador creo
     	var ret = new ArrayList<String>();
     	if (!usuarios.isEmpty()) {
     		ret = new ArrayList<>(usuarios.keySet());
