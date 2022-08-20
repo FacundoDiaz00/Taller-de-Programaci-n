@@ -25,7 +25,10 @@ import logica.manejadores.ManejadorUsuario;
  */
 public class ControladorUsuario implements IControladorUsuario {
 
-    public List<String> obtenerIdUsuarios() {
+	public ControladorUsuario() {
+	}
+    
+	public List<String> obtenerIdUsuarios() {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         var usuarios = ins.getUsuarios();
         
@@ -35,12 +38,6 @@ public class ControladorUsuario implements IControladorUsuario {
     		ret = new ArrayList<>(usuarios.keySet());
     	} 
         return ret;
-	public ControladorUsuario() {
-	}
-	
-    public ArrayList<String> obtenerIdUsuarios() {
-        // TODO implement here
-        return new ArrayList<>();
     }
 	
     public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
