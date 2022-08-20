@@ -49,7 +49,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Consultar un Usuario");
-        setBounds(30, 30, 400, 280);
+        setBounds(30, 30, 400, 279);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         
         JPanel panel_principal = new JPanel();
