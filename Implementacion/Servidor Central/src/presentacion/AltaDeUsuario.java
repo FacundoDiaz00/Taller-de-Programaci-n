@@ -142,7 +142,6 @@ public class AltaDeUsuario extends JInternalFrame {
 		nacionalidad.setColumns(10);
 		nacionalidad.setBounds(131, 163, 258, 20);
 		getContentPane().add(nacionalidad);
-		nacionalidad.setEnabled(false);
 		
 		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("URL:");
 		lblNewLabel_1_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -165,6 +164,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		getContentPane().add(url);
 		
 	   tipoUsuario.addActionListener(new ActionListener() {     
+		     @Override
 		     public void actionPerformed(ActionEvent e) {
 		        if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
 		        	nacionalidad.setEnabled(false);
@@ -180,24 +180,23 @@ public class AltaDeUsuario extends JInternalFrame {
 
 	}
 	private void agregarUsuario(ActionEvent action) {
-	      String fecha = Fnacimiento.getText();
+	      String fecha = Fnacimiento.toString();
 	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	      LocalDate fechaNac = LocalDate.parse(fecha, JEFormatter);
 	      boolean existeUsuario;
 		if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
-			System.out.print(fechaNac);
-		    existeUsuario = icu.altaProveedor(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), descripcion.getText().toString(),url.getText().toString(), fechaNac);
+		      existeUsuario = icu.altaProveedor(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), descripcion.toString(),url.toString(), fechaNac);
 		}else {
-			existeUsuario = icu.altaTurista(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), fechaNac, nacionalidad.getText().toString());
+			existeUsuario = icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
 		}
-
 		if(existeUsuario) {
-			limpiarFormulario();
+            limpiarFormulario();
             setVisible(false);
 			JOptionPane.showMessageDialog (null, "El usuario se ha creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
 	}
     private void limpiarFormulario() {
         nombre.setText("");
