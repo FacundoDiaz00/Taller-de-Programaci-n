@@ -9,11 +9,11 @@ import logica.entidades.Usuario;
  */
 
 public class ManejadorUsuario {
-    private ManejadorUsuario instancia;
+    private static ManejadorUsuario instancia;
 
     private Map<String, Usuario> usuarios;   
 
-    public ManejadorUsuario getInstancia(){
+    public static ManejadorUsuario getInstancia(){
         if(instancia == null){
             instancia = new ManejadorUsuario();
         }
@@ -30,6 +30,10 @@ public class ManejadorUsuario {
 
     public Usuario getUsuario(String nombre) {
         return usuarios.get(nombre);
+    }
+    
+    public Boolean existeUsuario(String nickname) {
+    	return usuarios.containsKey(nickname);
     }
     
 }
