@@ -20,6 +20,8 @@ public class Fabrica {
         return instancia;
     }
 
+    // Todo en el ejemplo crean una instancia por cada vez que la llaman, pero no le encuentro sentido ni a esto ni a que la fabrica sea un singleton, no tiene datos que mantener
+
     public IControladorActividadTuristica getIControladorActividadTuristica() {
         if(cAT == null){
             cAT = new ControladorActividadTuristica();
