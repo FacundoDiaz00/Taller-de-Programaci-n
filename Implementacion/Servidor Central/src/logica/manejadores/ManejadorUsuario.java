@@ -1,7 +1,6 @@
 package logica.manejadores;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 import logica.entidades.Usuario;
 
@@ -25,8 +24,12 @@ public class ManejadorUsuario {
         return instancia;
     }
 
-    public Map<String, Usuario> getUsuarios() {
-        return usuarios;
+    public List<Usuario> getUsuarios() {
+        return new ArrayList<Usuario>(usuarios.values());
+    }
+
+    public Set<String> obtenerIdUsuarios(){
+        return usuarios.keySet();
     }
 
     public void addUsuario(Usuario usuario) {

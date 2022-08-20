@@ -1,8 +1,8 @@
 package logica.manejadores;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 
 /**
@@ -25,8 +25,12 @@ public class ManejadorDepartamento {
         return instancia;
     }
 
-    public Map<String, Departamento> getDepartamentos() {
-        return departamentos;
+    public List<Departamento> getDepartamentos() {
+        return new ArrayList<Departamento>(departamentos.values());
+    }
+
+    public Set<String> obtenerIdDepartamentos(){
+        return departamentos.keySet();
     }
 
     public void addDepartamento(Departamento departamento) {

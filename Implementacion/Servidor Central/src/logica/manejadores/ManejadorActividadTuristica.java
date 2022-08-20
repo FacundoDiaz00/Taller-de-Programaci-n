@@ -27,7 +27,7 @@ public class ManejadorActividadTuristica {
         return new ArrayList<ActividadTuristica>(actividades.values());
     }
 
-    public Set<String> obtenerIdActividadTuristica(){
+    public Set<String> obtenerIdActividadesTuristicas(){
         return actividades.keySet();
     }
 
