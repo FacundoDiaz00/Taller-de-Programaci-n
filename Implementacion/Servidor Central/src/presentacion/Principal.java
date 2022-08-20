@@ -9,7 +9,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
-import logica.controladores.*;
+import logica.controladores.Fabrica;
+import logica.controladores.IControladorUsuario;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
@@ -23,6 +24,9 @@ public class Principal {
 	IControladorUsuario CUS;
 
 	private JFrame frmEstacionDeTrabajo;
+
+	private AltaDeUsuario frmIntAltaUsuario;
+	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
 
 	/**
 	 * Launch the application.
@@ -45,6 +49,19 @@ public class Principal {
 	 */
 	public Principal() {
 		initialize();
+        Fabrica fabrica = Fabrica.getInstancia();
+        CUS = fabrica.getIControladorUsuario();
+
+		frmIntAltaUsuario = new AltaDeUsuario(CUS);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
+
+
+		frmIntAltaUsuario.setVisible(false);
+		frmIntConsultaDeUsuario.setVisible(false);
+
+		frmEstacionDeTrabajo.getContentPane().setLayout(null);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 	}
 
 	/**
@@ -65,12 +82,6 @@ public class Principal {
 		
 		JDesktopPane desktopPane = new JDesktopPane();
 		frmEstacionDeTrabajo.getContentPane().add(desktopPane);
-
-		ConsultaDeUsuario panelConsultaDeUsuario = new ConsultaDeUsuario();
-		panelConsultaDeUsuario.setBounds(0, 0, 700, 442);
-		panelConsultaDeUsuario.setVisible(false);
-		desktopPane.setLayout(null);
-		desktopPane.add(panelConsultaDeUsuario);
 		
 		
 		JMenuItem salirJMenuItem = new JMenuItem("Salir");
@@ -94,7 +105,7 @@ public class Principal {
 		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
 		consultarUsuarioJMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelConsultaDeUsuario.setVisible(true);
+				frmIntConsultaDeUsuario.setVisible(true);
 			}
 		});
 
