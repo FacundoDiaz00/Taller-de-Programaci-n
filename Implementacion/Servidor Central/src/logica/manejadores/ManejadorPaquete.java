@@ -32,4 +32,8 @@ public class ManejadorPaquete {
         return paquetes.get(nombre);
     }
 
+	public boolean existePaquete(String nombre) {
+		return (paquetes.containsKey(nombre));
+	}
+
 }
