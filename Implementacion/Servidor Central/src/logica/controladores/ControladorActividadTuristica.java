@@ -4,8 +4,7 @@ import logica.manejadores.ManejadorDepartamento;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.ControladorUsuario;
 import logica.controladores.Fabrica;
-
-
+import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 
 import java.util.ArrayList;
@@ -39,8 +38,17 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return res;
 	}
 	
-	public boolean altaActividadTurística(String nomProv, String desc, int dur, int costo, String ciudad, LocalDate fecha ) {
-		
+	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
+		if(!existeActividadTuristica(nombreActividad)) {
+			ActividadTuristica AT = new ActividadTuristica(nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+			
+			return true;
+		}
+		return false;
+	}
+
+	private boolean existeActividadTuristica(String nomActividad) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }
