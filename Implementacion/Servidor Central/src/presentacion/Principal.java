@@ -2,26 +2,20 @@ package presentacion;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
+import excepciones.DeparamentoYaRegistradoException;
 import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 
 public class Principal {
 	IControladorUsuario CUS;
+	IControladorActividadTuristica CAD;
 
 	private JFrame frmEstacionDeTrabajo;
 
@@ -51,6 +45,7 @@ public class Principal {
 		initialize();
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
+		CAD = fabrica.getIControladorActividadTuristica();
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
@@ -62,6 +57,21 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+
+		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
+
+		try {
+			CAD.altaDepartamento("Montevideo", "Capital" , "www.algo.com");
+		} catch (DeparamentoYaRegistradoException e){
+			JOptionPane.showMessageDialog(frmEstacionDeTrabajo, "Error al crear el departamento hadcode en Principal", "Por dios...", JOptionPane.ERROR_MESSAGE);
+		}
+
+
+		/*------------------*/
+
+
+
+
 	}
 
 	/**
