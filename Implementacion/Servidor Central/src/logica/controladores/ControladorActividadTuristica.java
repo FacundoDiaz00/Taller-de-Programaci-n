@@ -10,6 +10,7 @@ import logica.entidades.Departamento;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.time.LocalDate;
 
 import excepciones.DeparamentoYaRegistradoException;
@@ -30,6 +31,7 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 
 import logica.entidades.ActividadTuristica;
 import logica.datatypes.DTSalidaTuristica;
+import java.util.Set;
 
 /**
  * @author Equipo taller prog 16
@@ -37,7 +39,6 @@ import logica.datatypes.DTSalidaTuristica;
 
 public class ControladorActividadTuristica implements IControladorActividadTuristica {
 
-    @Override
     public void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException {
         ManejadorDepartamento md = ManejadorDepartamento.getInstancia();
         if(!md.exists(nom)){
@@ -48,7 +49,6 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         }
 
     }
-<<<<<<< refs/remotes/origin/altaDeActividadTuristica
 	public ControladorActividadTuristica() {
 	}
 	
@@ -59,16 +59,10 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return ICU.obtenerIdProveedores();	
 	}
 	
-	public ArrayList<String> obtenerIdDepartamentos(){
+	public Set<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
-		Map<String, Departamento> departamentos = MU.getDepartamentos();
-		ArrayList<String> res = new ArrayList<String>();
-		
-		Iterator<String> it = departamentos.keySet().iterator();
-		while(it.hasNext()){
-		  res.add(it.next());
-		}
-		return res;
+		Set<String> idDepartamentos = MU.obtenerIdDepartamentos();
+		return idDepartamentos;
 	}
 	
 	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
@@ -84,8 +78,6 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		// TODO Auto-generated method stub
 		return false;
 	}
-}
-=======
     
     public ArrayList<String> obtenerIdActividadesTuristicas(String departamento){
     	ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
@@ -113,16 +105,4 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     	DTActividadTuristicaDetalle detalle = new DTActividadTuristicaDetalle(salidas, paquetes,actividad.getNombre(), actividad.getDescrpicion(), actividad.getCostoPorTurista(), actividad.getCuidad(), actividad.getDuracion(), actividad.getFechaAlta());
     	return detalle;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
->>>>>>> Operaciones de la consulta
