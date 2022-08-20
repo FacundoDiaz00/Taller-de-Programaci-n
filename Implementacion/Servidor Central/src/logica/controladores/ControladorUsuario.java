@@ -23,7 +23,7 @@ public class ControladorUsuario implements IControladorUsuario {
 	
     public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-        if(mu.existeUsuario(nickname)) {
+        if(mu.existeUsuario(nickname, correo)) {
             //throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
         	return false;
         }
@@ -35,7 +35,7 @@ public class ControladorUsuario implements IControladorUsuario {
     
     public boolean altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento){
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-        if(mu.existeUsuario(nickname)) {
+        if(mu.existeUsuario(nickname, correo)) {
             //throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
         	return false;
         }

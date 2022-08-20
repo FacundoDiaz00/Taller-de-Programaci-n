@@ -49,8 +49,8 @@ public class ManejadorUsuario {
         return usuarios.get(nombre);
     }
     
-    public Boolean existeUsuario(String nickname) {
-    	return usuarios.containsKey(nickname);
+    public Boolean existeUsuario(String nickname, String correo) {
+    	return usuarios.containsKey(nickname) || usuarios.get(nickname).getCorreo() == correo;
     }
     
 }
