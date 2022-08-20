@@ -2,22 +2,26 @@ package presentacion;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JToolBar;
-import java.awt.BorderLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+
+import excepciones.DeparamentoYaRegistradoException;
+import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.IControladorUsuario;
+
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Principal {
+	IControladorUsuario CUS;
+	IControladorActividadTuristica CAD;
 
 	private JFrame frmEstacionDeTrabajo;
 
+	private AltaDeUsuario frmIntAltaUsuario;
+	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,6 +43,35 @@ public class Principal {
 	 */
 	public Principal() {
 		initialize();
+        Fabrica fabrica = Fabrica.getInstancia();
+        CUS = fabrica.getIControladorUsuario();
+		CAD = fabrica.getIControladorActividadTuristica();
+
+		frmIntAltaUsuario = new AltaDeUsuario(CUS);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
+
+
+		frmIntAltaUsuario.setVisible(false);
+		frmIntConsultaDeUsuario.setVisible(false);
+
+		frmEstacionDeTrabajo.getContentPane().setLayout(null);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+
+		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
+
+		try {
+			CAD.altaDepartamento("Montevideo", "Capital" , "www.algo.com");
+		} catch (DeparamentoYaRegistradoException e){
+			JOptionPane.showMessageDialog(frmEstacionDeTrabajo, "Error al crear el departamento hadcode en Principal", "Por dios...", JOptionPane.ERROR_MESSAGE);
+		}
+
+
+		/*------------------*/
+
+
+
+
 	}
 
 	/**
@@ -55,6 +88,11 @@ public class Principal {
 		
 		JMenu sistemaMenu = new JMenu("Sistema");
 		menuBar.add(sistemaMenu);
+		frmEstacionDeTrabajo.getContentPane().setLayout(new BoxLayout(frmEstacionDeTrabajo.getContentPane(), BoxLayout.X_AXIS));
+		
+		JDesktopPane desktopPane = new JDesktopPane();
+		frmEstacionDeTrabajo.getContentPane().add(desktopPane);
+		
 		
 		JMenuItem salirJMenuItem = new JMenuItem("Salir");
 		salirJMenuItem.addActionListener(new ActionListener() {
@@ -72,9 +110,20 @@ public class Principal {
 		menuBar.add(mnUsuario);
 		
 		JMenuItem registrarUsuarioJMenuItem = new JMenuItem("Registrar Usuario");
+		registrarUsuarioJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntAltaUsuario.setVisible(true);
+			}
+		});
 		mnUsuario.add(registrarUsuarioJMenuItem);
 		
 		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
+		consultarUsuarioJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntConsultaDeUsuario.setVisible(true);
+			}
+		});
+
 		mnUsuario.add(consultarUsuarioJMenuItem);
 		
 		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
@@ -111,4 +160,21 @@ public class Principal {
 		mnNewMenu.add(mntmNewMenuItem_1);
 	}
 
+	/*
+	 * Exponemos estos métodos para poder llamarlo desde otros módulos
+	 * Se puede pasar null como parámetro y que no se seleccione nada desde antes
+	 */
+	public void mostrarConsultaDeUsuario(String nickname) {
+		if (nickname != null) {
+			frmIntConsultaDeUsuario.seleccionYaHecha(nickname);			
+		}
+		frmIntConsultaDeUsuario.setVisible(true);
+	}
+
+	/*
+	 * Exponemos estos métodos para poder llamarlo desde otros módulos
+	 */
+	public void mostrarAltaDeUsuario() {
+		
+	}
 }

@@ -3,17 +3,18 @@ package logica.manejadores;
 import java.util.Map;
 
 import logica.entidades.Paquete;
+
 /**
  * @author Equipo taller prog 16
  */
 
 public class ManejadorPaquete {
-    private ManejadorPaquete instancia;
+    private static ManejadorPaquete instancia;
 
     private Map<String, Paquete> paquetes;
 
-    public ManejadorPaquete getInstancia(){
-        if(instancia == null){
+    public static ManejadorPaquete getInstancia() {
+        if (instancia == null) {
             instancia = new ManejadorPaquete();
         }
         return instancia;
@@ -30,5 +31,5 @@ public class ManejadorPaquete {
     public Paquete getPaquete(String nombre) {
         return paquetes.get(nombre);
     }
-    
+
 }
