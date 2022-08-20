@@ -37,14 +37,8 @@ public class ManejadorUsuario {
         return usuarios.get(nombre);
     }
     
-    public boolean existeUsuario(String nickname, String correo) {
-        for (String key: usuarios.keySet()){
-        	// FIXME quitar prints
-            System.out.println(key +" = coso key"+usuarios.get(key));
-        }
-        // FIXME quitar prints
-        System.out.print("usuario existente: "+usuarios.containsKey(nickname));
-    	return usuarios.containsKey(nickname) || (usuarios.get(nickname) != null && usuarios.get(nickname).getCorreo() == correo);
+    public Boolean existeUsuario(String nickname, String correo) {
+    	return usuarios.containsKey(nickname) || usuarios.get(nickname).getCorreo() == correo;
     }
     
 }
