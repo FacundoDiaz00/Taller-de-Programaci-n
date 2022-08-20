@@ -186,9 +186,9 @@ public class AltaDeUsuario extends JInternalFrame {
 	      boolean existeUsuario;
 		if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
 			System.out.print(fechaNac);
-		    existeUsuario = icu.altaProveedor(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), descripcion.toString(),url.toString(), fechaNac);
+		    existeUsuario = icu.altaProveedor(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), descripcion.getText().toString(),url.getText().toString(), fechaNac);
 		}else {
-			existeUsuario = icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
+			existeUsuario = icu.altaTurista(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), fechaNac, nacionalidad.getText().toString());
 		}
 
 		if(existeUsuario) {

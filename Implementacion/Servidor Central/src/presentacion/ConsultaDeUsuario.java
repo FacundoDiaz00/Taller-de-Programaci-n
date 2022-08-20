@@ -1,47 +1,41 @@
 package presentacion;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
-import javax.swing.SpringLayout;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import logica.controladores.Fabrica;
-import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 
-import javax.swing.JTextPane;
-import javax.swing.JSplitPane;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
-import javax.swing.JLayeredPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.List;
 
 public class ConsultaDeUsuario extends JInternalFrame {
+	private JComboBox<String> comboBoxSeleccionUsr;
+	
+	public void actualizarComboBox() {
+		List<String> usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerIdUsuarios();
+		comboBoxSeleccionUsr.setModel(new DefaultComboBoxModel(usuarios.toArray()));
+	}
 
 
 	/**
 	 * Create the frame.
 	 */
 	public ConsultaDeUsuario() {
-        List<String> usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerIdUsuarios();
 		
         setResizable(true);
         setIconifiable(true);
@@ -62,10 +56,12 @@ public class ConsultaDeUsuario extends JInternalFrame {
         
         JLabel lblNewLabel_1 = new JLabel("Elija un usuario:");
         panel_eleccion.add(lblNewLabel_1);
-        JComboBox comboBox_1 = new JComboBox(usuarios.toArray());
+        
         
 
-        panel_eleccion.add(comboBox_1);
+        comboBoxSeleccionUsr = new JComboBox<String>();
+        panel_eleccion.add(comboBoxSeleccionUsr);
+        actualizarComboBox();
         
         
         
@@ -73,7 +69,6 @@ public class ConsultaDeUsuario extends JInternalFrame {
         panel_principal.add(panel_consulta);
         
         JPanel panel_izquierda = new JPanel();
-        panel_izquierda.setVisible(false);
         panel_consulta.add(panel_izquierda);
         panel_izquierda.setLayout(new BoxLayout(panel_izquierda, BoxLayout.Y_AXIS));
         
@@ -161,7 +156,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
         JPanel casos = new JPanel();
         
         // HACER VISIBLE CUANDO SE SELECCIONE UN USUARIO
-        casos.setVisible(false);
+        panel_consulta.setVisible(false);
         panel_derecha.add(casos);
         
         casos.setLayout(new BoxLayout(casos, BoxLayout.Y_AXIS));
@@ -199,13 +194,12 @@ public class ConsultaDeUsuario extends JInternalFrame {
         
         
         
-        comboBox_1.addPopupMenuListener( new PopupMenuListener() {
+        comboBoxSeleccionUsr.addPopupMenuListener( new PopupMenuListener() {
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				// Esto es lo que actualiza la lista cada vez que se abre.
-				var usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerIdUsuarios();
-				comboBox_1.setModel(new DefaultComboBoxModel(usuarios.toArray()));
+				actualizarComboBox();
 			}
 
 			@Override
@@ -222,13 +216,14 @@ public class ConsultaDeUsuario extends JInternalFrame {
         	
         });
         
-        comboBox_1.addActionListener(new ActionListener() {
+        comboBoxSeleccionUsr.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		// Esto es lo que se ejecuta cada vez que se selecciona un item de la lista
-        		String seleccion = (String) comboBox_1.getSelectedItem();
-        		
+        		String seleccion = (String) comboBoxSeleccionUsr.getSelectedItem();
+        		System.out.println(seleccion);
         		try {
         			DTUsuario usr = Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(seleccion);
+        			
         			boolean mostrar_datos = true;
         			
         			txtNickname.setText(usr.getNickname());
@@ -245,13 +240,17 @@ public class ConsultaDeUsuario extends JInternalFrame {
             			mostrar_proveedor = false;
             			mostrar_turista = true;
             			      
+            			txtTipo.setText("Turista");
             			txtNacionalidad.setText(tur.getNacionalidad());
+            			
             			// TODO: Esto hay que formatearlo mejor pero por ahora debería funcionar
             			txtSalidasTurista.setText(tur.getInscripciones().toString());
             		} else if (usr instanceof DTProveedor) {
             			DTProveedor prov = (DTProveedor) usr;
             			mostrar_proveedor = true;
             			mostrar_turista = false;
+            			txtTipo.setText("Proveedor");
+            			
             			// TODO: Esto hay que formatearlo mejor pero por ahora debería funcionar
             			txtActividadesYSalidasProveedor.setText(prov.getActividadesSalidas().toString());
             		} else {
@@ -259,9 +258,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
             		}
             		
             		panel_consulta.setVisible(mostrar_datos);
+            		casos.setVisible(mostrar_datos);
             		proveedor_panel.setVisible(mostrar_proveedor);
             		turista_panel.setVisible(mostrar_turista);
-        		} catch (Exception exepcion_busqueda_usuario) {
+        		} catch (Exception ex) {
         			// Esta excepcion no debería ocurrir pero por las dudas la pongo
         			
         		}
