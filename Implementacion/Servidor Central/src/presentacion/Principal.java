@@ -54,15 +54,7 @@ public class Principal {
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario();
 		frmIntAltaPaquete = new AltaDePaquete();
-		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 400, 400));
-		frmIntAltaPaquete.setResizable(true);
-		frmIntAltaPaquete.setMaximizable(true);
-		frmIntAltaPaquete.setIconifiable(true);
-		frmIntAltaPaquete.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frmIntAltaPaquete.setClosable(true);
-
 
 		frmIntAltaUsuario.setVisible(false);
 		frmIntConsultaDeUsuario.setVisible(false);
@@ -166,7 +158,7 @@ public class Principal {
 		
 		JMenuItem altaPaqueteJMenuItem = new JMenuItem("Registrar Paquete");
 		altaPaqueteJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent f) {
+			public void actionPerformed(ActionEvent arg0) {
 				frmIntAltaPaquete.setVisible(true);
 			}
 		});
