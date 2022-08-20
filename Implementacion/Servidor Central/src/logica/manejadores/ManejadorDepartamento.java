@@ -14,7 +14,7 @@ public class ManejadorDepartamento {
 
     private Map<String, Departamento> departamentos;
 
-    public ManejadorDepartamento getInstancia(){
+    public static ManejadorDepartamento getInstancia(){
         if(instancia == null){
             instancia = new ManejadorDepartamento();
         }

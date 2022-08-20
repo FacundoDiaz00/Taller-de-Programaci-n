@@ -13,7 +13,7 @@ public class ManejadorUsuario {
 
     private Map<String, Usuario> usuarios;   
 
-    public ManejadorUsuario getInstancia(){
+    public static ManejadorUsuario getInstancia(){
         if(instancia == null){
             instancia = new ManejadorUsuario();
         }
