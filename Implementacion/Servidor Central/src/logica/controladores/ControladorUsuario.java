@@ -13,6 +13,9 @@ import logica.manejadores.ManejadorUsuario;
  * @author Equipo taller prog 16
  */
 public class ControladorUsuario implements IControladorUsuario {
+	public ControladorUsuario() {
+	}
+	
     public ArrayList<String> obtenerIdUsuarios() {
         // TODO implement here
         return new ArrayList<>();

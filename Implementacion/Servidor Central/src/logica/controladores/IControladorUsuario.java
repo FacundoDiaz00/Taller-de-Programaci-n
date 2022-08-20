@@ -1,5 +1,7 @@
 package logica.controladores;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -9,4 +11,6 @@ import java.util.List;
 
 public interface IControladorUsuario {
 	public List<String> obtenerIdUsuarios();
+
+	public ArrayList<String> obtenerIDProveedores();
 }

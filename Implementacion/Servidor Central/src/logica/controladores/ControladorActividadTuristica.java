@@ -2,9 +2,13 @@ package logica.controladores;
 
 import logica.manejadores.ManejadorDepartamento;
 import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.ControladorUsuario;
+import logica.controladores.Fabrica;
+
+
 import logica.entidades.Departamento;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.time.LocalDate;
@@ -17,15 +21,16 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public ControladorActividadTuristica() {
 	}
 	
-	public Collection<String> obtenerIdProveedores() {
-		ControladorUsuario CU = ControladorUsuario();
-		return CU.obtenerIDProveedores();	
+	public ArrayList<String> obtenerIdProveedores() {
+		Fabrica F = Fabrica.getInstancia();
+		IControladorUsuario ICU = F.getIControladorUsuario();
+		return ICU.obtenerIDProveedores();	
 	}
 	
-	public Collection<String> obtenerIdDepartamentos(){
+	public ArrayList<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
 		Map<String, Departamento> departamentos = MU.getDepartamentos();
-		Collection<String> res = null;
+		ArrayList<String> res = null;
 		
 		Iterator<String> it = departamentos.keySet().iterator();
 		while(it.hasNext()){
