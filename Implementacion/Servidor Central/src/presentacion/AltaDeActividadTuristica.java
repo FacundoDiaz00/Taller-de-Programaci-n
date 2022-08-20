@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import logica.controladores.Fabrica;
+import java.util.ArrayList;
 
 public class AltaDeActividadTuristica extends JInternalFrame {
 	
@@ -38,7 +39,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	 */
 	public AltaDeActividadTuristica(IControladorActividadTuristica icat) {
 		Fabrica f = Fabrica.getInstancia();
-		this.icat = f.getIControladorUsuario();
+		this.icat = f.getIControladorActividadTuristica();
 		setTitle("Alta de Actividad Turistica");
 		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
@@ -102,14 +103,14 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		JComboBox comboProveedores = new JComboBox();
 		comboProveedores.setBounds(145, 7, 212, 24);
 		getContentPane().add(comboProveedores);
-		comboProveedores.addItem("Proveedor");
-		comboProveedores.addItem("Turista");
+		ArrayList<String> proveedores = icat.obtenerIdProveedores();
+		comboProveedores.addItem(proveedores);
 		this.tipoUsuario = comboProveedores;
 		
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				agregarUsuario(e);
+				//agregarUsuario(e);
 			}
 		});
 		btnNewButton.setBounds(272, 259, 117, 25);
@@ -151,20 +152,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		getContentPane().add(comboDepartamentos);
 		
 	   comboProveedores.addActionListener(new ActionListener() {     
-		     public void actionPerformed(ActionEvent e) {
-		        if(comboProveedores.getSelectedItem().toString() == "Proveedor") {
-		        	ciudad.setEnabled(false);
-		        	url.setEnabled(true);
-		        	FdeAlLta.setEnabled(true);
-		        }else {
-		        	ciudad.setEnabled(true);
-		        	url.setEnabled(false);
-		        	FdeAlLta.setEnabled(false);
-		        }
-		     }
+		     public void actionPerformed(ActionEvent e) {}
 		   });
 
 	}
+	/*
 	private void agregarUsuario(ActionEvent action) {
 	      String fecha = costo.getText();
 	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -185,10 +177,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	*/
     private void limpiarFormulario() {
         nombre.setText("");
         descripcion.setText("");
-        nickname.setText("");
+        //nickname.setText("");
         duracion.setText("");
         costo.setText("");
     }

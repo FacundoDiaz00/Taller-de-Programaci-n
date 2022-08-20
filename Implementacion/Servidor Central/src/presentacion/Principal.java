@@ -21,7 +21,7 @@ public class Principal {
 
 	private AltaDeUsuario frmIntAltaUsuario;
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
-	
+	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
 	/**
 	 * Launch the application.
 	 */
@@ -49,15 +49,17 @@ public class Principal {
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
+		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 
 
 		frmIntAltaUsuario.setVisible(false);
 		frmIntConsultaDeUsuario.setVisible(false);
-
+		frmIntAltaActividadTuristica.setVisible(false);
+		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
-
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
 
 		try {
@@ -133,6 +135,11 @@ public class Principal {
 		menuBar.add(mnNewMenu_3);
 		
 		JMenuItem registrarActividadJMenuItem = new JMenuItem("Registrar Actividad Turística");
+		registrarActividadJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntAltaActividadTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(registrarActividadJMenuItem);
 		
 		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
