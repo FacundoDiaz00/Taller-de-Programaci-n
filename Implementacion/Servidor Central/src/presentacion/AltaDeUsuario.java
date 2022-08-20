@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import logica.controladores.Fabrica;
 
 public class AltaDeUsuario extends JInternalFrame {
 	
@@ -39,6 +40,8 @@ public class AltaDeUsuario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaDeUsuario(IControladorUsuario icu) {
+		Fabrica f = Fabrica.getInstancia();
+		this.icu = f.getIControladorUsuario();
 		setTitle("Registrar Usuario");
 		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
@@ -139,6 +142,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		nacionalidad.setColumns(10);
 		nacionalidad.setBounds(131, 163, 258, 20);
 		getContentPane().add(nacionalidad);
+		nacionalidad.setEnabled(false);
 		
 		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("URL:");
 		lblNewLabel_1_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -161,7 +165,6 @@ public class AltaDeUsuario extends JInternalFrame {
 		getContentPane().add(url);
 		
 	   tipoUsuario.addActionListener(new ActionListener() {     
-		     @Override
 		     public void actionPerformed(ActionEvent e) {
 		        if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
 		        	nacionalidad.setEnabled(false);
@@ -177,16 +180,20 @@ public class AltaDeUsuario extends JInternalFrame {
 
 	}
 	private void agregarUsuario(ActionEvent action) {
-	      String fecha = Fnacimiento.toString();
+	      String fecha = Fnacimiento.getText();
 	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	      LocalDate fechaNac = LocalDate.parse(fecha, JEFormatter);
 	      boolean existeUsuario;
 		if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
-		      existeUsuario = icu.altaProveedor(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), descripcion.toString(),url.toString(), fechaNac);
+			System.out.print(fechaNac);
+		    existeUsuario = icu.altaProveedor(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), descripcion.toString(),url.toString(), fechaNac);
 		}else {
 			existeUsuario = icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
 		}
+
 		if(existeUsuario) {
+			limpiarFormulario();
+            setVisible(false);
 			JOptionPane.showMessageDialog (null, "El usuario se ha creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
