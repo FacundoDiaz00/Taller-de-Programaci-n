@@ -58,7 +58,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return false;
 	}
 
-	private boolean existeActividadTuristica(String nomActividad) {
+	public boolean existeActividadTuristica(String nomActividad) {
 		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
 		return MAT.exists(nomActividad);
 	}
