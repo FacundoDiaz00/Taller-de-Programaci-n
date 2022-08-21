@@ -68,7 +68,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     public ArrayList<String> obtenerIdActividadesTuristicas(String departamento){
     	ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
     	List<ActividadTuristica> actividades = mat.getActividades();
-    	ArrayList<String> idActividades = new ArrayList();
+    	System.out.print(actividades.isEmpty());
+    	ArrayList<String> idActividades = new ArrayList<String>();
     	for(var actividad: actividades) {
     		idActividades.add(actividad.getNombre());
     	}
