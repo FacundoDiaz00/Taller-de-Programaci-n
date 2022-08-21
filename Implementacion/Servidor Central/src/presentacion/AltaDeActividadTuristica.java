@@ -123,29 +123,6 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 			}
         	
         });
-        
-	   
-       comboProveedores.addPopupMenuListener( new PopupMenuListener() {
-
-			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				// Esto es lo que actualiza la lista cada vez que se abre.
-				actualizarComboProveedores();
-			}
-
-			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-       	
-       });
 		
 		comboDepartamentos = new JComboBox();
 		comboDepartamentos.setBounds(145, 32, 212, 24);
@@ -172,6 +149,29 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		getContentPane().add(costo);
 		//this.comboProveedores = comboProveedores;
 	
+       comboDepartamentos.addPopupMenuListener( new PopupMenuListener() {
+
+			@Override
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				// Esto es lo que actualiza la lista cada vez que se abre.
+				actualizarComboDepartamentos();
+			}
+
+			@Override
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				// TODO Auto-generated method stub
+					
+				}
+
+			@Override
+			public void popupMenuCanceled(PopupMenuEvent e) {
+				// TODO Auto-generated method stub
+					
+				}
+	       });		
+		
+		
+		
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -206,12 +206,12 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private void agregarAT(ActionEvent action) {
 		String prov = comboProveedores.getSelectedItem().toString();
 		String dpto = comboDepartamentos.getSelectedItem().toString();
-		String nom = nombre.getText();
-		String desc = descripcion.getText();
-		int dur = Integer.parseInt(duracion.getText());
-		float cost = Float.parseFloat(costo.getText());
-		String ciu = ciudad.getText();
-		String FAlta = FdeAlta.getText();
+		String nom = nombre.getText().toString();
+		String desc = descripcion.getText().toString();
+		int dur = Integer.parseInt(duracion.getText().toString());
+		float cost = Float.parseFloat(costo.getText().toString());
+		String ciu = ciudad.getText().toString();
+		String FAlta = FdeAlta.getText().toString();
 	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	      LocalDate fecha = LocalDate.parse(FAlta, JEFormatter);
 	      boolean existeActividad;
@@ -229,6 +229,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	public void actualizarComboProveedores() {
 		List<String> provs = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdProveedores();
 		comboProveedores.setModel(new DefaultComboBoxModel(provs.toArray()));
+	}
+	
+	public void actualizarComboDepartamentos() {
+		List<String> deptos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+		comboDepartamentos.setModel(new DefaultComboBoxModel(deptos.toArray()));
 	}
 	
     private void limpiarFormulario() {
