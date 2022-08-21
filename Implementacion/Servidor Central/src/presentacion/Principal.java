@@ -22,6 +22,7 @@ public class Principal {
 	private AltaDeUsuario frmIntAltaUsuario;
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
 	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
+	private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
 	/**
 	 * Launch the application.
 	 */
@@ -46,20 +47,23 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
-
-		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
-
-
-		frmIntAltaUsuario.setVisible(false);
+		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
 		frmIntConsultaDeUsuario.setVisible(false);
 		frmIntAltaActividadTuristica.setVisible(false);
+		frmIntConsultaDeActividadTuristica.setVisible(false);
 		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
+		
+				frmIntAltaUsuario = new AltaDeUsuario(CUS);
+				
+				
+						frmIntAltaUsuario.setVisible(false);
+						frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
 
 		try {
@@ -143,6 +147,11 @@ public class Principal {
 		mnNewMenu_3.add(registrarActividadJMenuItem);
 		
 		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
+		consultarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntConsultaDeActividadTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(consultarActividadTuristicaJMenuItem);
 		
 		JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");

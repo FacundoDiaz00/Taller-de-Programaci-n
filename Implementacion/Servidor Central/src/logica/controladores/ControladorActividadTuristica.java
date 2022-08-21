@@ -1,37 +1,18 @@
 package logica.controladores;
 
-import logica.manejadores.ManejadorDepartamento;
-import logica.controladores.IControladorActividadTuristica;
-import logica.controladores.ControladorUsuario;
-import logica.controladores.Fabrica;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.Departamento;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.time.LocalDate;
-
 import excepciones.DeparamentoYaRegistradoException;
-import logica.entidades.Departamento;
-import logica.entidades.Paquete;
-import logica.entidades.SalidaTuristica;
-import logica.manejadores.ManejadorDepartamento;
-import logica.manejadores.ManejadorActividadTuristica;
+import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
+import logica.entidades.ActividadTuristica;
+import logica.entidades.Departamento;
+import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorDepartamento;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import logica.datatypes.DTActividadTuristicaDetalle;
-
-import logica.entidades.ActividadTuristica;
-import logica.datatypes.DTSalidaTuristica;
-import java.util.Set;
 
 /**
  * @author Equipo taller prog 16
@@ -74,7 +55,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return false;
 	}
 
-	private boolean existeActividadTuristica(String nomActividad) {
+	public boolean existeActividadTuristica(String nomActividad) {
 		// TODO Auto-generated method stub
 		return false;
 	}

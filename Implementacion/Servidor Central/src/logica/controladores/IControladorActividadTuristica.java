@@ -1,6 +1,7 @@
 package logica.controladores;
 
 import excepciones.DeparamentoYaRegistradoException;
+import logica.datatypes.DTActividadTuristicaDetalle;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ public interface IControladorActividadTuristica {
 	List<String> obtenerIdProveedores();
 	List<String> obtenerIdDepartamentos();
 	boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta);
+	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);
+	ArrayList<String> obtenerIdActividadesTuristicas(String departamento);
+	boolean existeActividadTuristica(String nomActividad);
+
 	//fin operaciones AAT
 
 }
