@@ -12,6 +12,11 @@ import logica.controladores.IControladorUsuario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JDesktopPane;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import java.awt.Rectangle;
 
 public class Principal {
 	IControladorUsuario CUS;
@@ -23,6 +28,7 @@ public class Principal {
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
 	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
 	private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
+	private AltaDePaquete frmIntAltaPaquete;
 	/**
 	 * Launch the application.
 	 */
@@ -50,11 +56,21 @@ public class Principal {
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
+		frmIntAltaPaquete = new AltaDePaquete();
+		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
+
+		frmIntAltaUsuario.setVisible(false);
+		frmIntAltaPaquete.setVisible(false);
+		frmEstacionDeTrabajo.getContentPane().setLayout(null);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntConsultaDeUsuario.setVisible(false);
 		frmIntAltaActividadTuristica.setVisible(false);
 		frmIntConsultaDeActividadTuristica.setVisible(false);
 		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
@@ -64,6 +80,8 @@ public class Principal {
 				
 						frmIntAltaUsuario.setVisible(false);
 						frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+
+
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
 
 		try {
@@ -128,8 +146,8 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				frmIntConsultaDeUsuario.setVisible(true);
 			}
+		
 		});
-
 		mnUsuario.add(consultarUsuarioJMenuItem);
 		
 		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
@@ -166,8 +184,13 @@ public class Principal {
 		JMenu mnNewMenu = new JMenu("Paquetes");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Paquete");
-		mnNewMenu.add(mntmNewMenuItem);
+		JMenuItem altaPaqueteJMenuItem = new JMenuItem("Registrar Paquete");
+		altaPaqueteJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntAltaPaquete.setVisible(true);
+			}
+		});
+		mnNewMenu.add(altaPaqueteJMenuItem);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Consulta de Paquete");
 		mnNewMenu.add(mntmNewMenuItem_2);

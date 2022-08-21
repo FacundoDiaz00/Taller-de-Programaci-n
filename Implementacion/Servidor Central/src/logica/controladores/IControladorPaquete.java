@@ -6,4 +6,6 @@ package logica.controladores;
 
 
 public interface IControladorPaquete {
+    public boolean altaTurista(String nombre, String descripcion, int periodovalidez, float descuento);
+
 }

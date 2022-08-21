@@ -22,6 +22,7 @@ public class Paquete {
         this.validez = validez;
         this.descuento = descuento;
         this.actividades = new HashMap<>();
+        //TODO: fecha de alta.
     }
 
     @Override

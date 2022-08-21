@@ -183,7 +183,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		ciudad.setColumns(10);
 		ciudad.setBounds(131, 163, 258, 20);
 		getContentPane().add(ciudad);
-		ciudad.setEnabled(false);
+		ciudad.setEnabled(true);
 		
 		FdeAlta = new JTextField();
 		FdeAlta.setColumns(10);
