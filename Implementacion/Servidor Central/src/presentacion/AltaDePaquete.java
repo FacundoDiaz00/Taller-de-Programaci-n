@@ -20,7 +20,7 @@ public class AltaDePaquete extends JInternalFrame{
 	private JTextField descrp;
 	public AltaDePaquete() {
 		setTitle("Registrar Paquete de Actividades.");
-		setBounds(100, 100, 409, 328);
+		setBounds(100, 100, 461, 342);
 		getContentPane().setLayout(null);
         setResizable(true);
         setIconifiable(true);
@@ -79,17 +79,24 @@ public class AltaDePaquete extends JInternalFrame{
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Fabrica f = Fabrica.getInstancia();
-				IControladorPaquete cp = f.getIControladorPaquete();
-				boolean alta = cp.altaTurista(txtNombre.getText(),descrp.getText(),(int)perVal.getValue(),(int)desc.getValue());
-				if(alta) {
-					JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
-				}else {
-					JOptionPane.showMessageDialog(null, "Error./n Ya existe un Paquete de Actividades con el nombre elejido.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
+				if(txtNombre.getText().toString() != "") {
+					Fabrica f = Fabrica.getInstancia();
+					IControladorPaquete cp = f.getIControladorPaquete();
 
+					boolean alta = cp.altaTurista(txtNombre.getText().toString(),descrp.getText().toString(),(int)perVal.getValue(),(int)desc.getValue());
+					if(alta) {
+						JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
+						setVisible(false);
+						limpiarForm();
+
+					}else {
+						JOptionPane.showMessageDialog(null, "Error. Ya existe un Paquete de Actividades con el nombre elejido.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
+
+					}
+				}else {
+					//TODO: no detecta bien la entrada vacia todavia.
+					JOptionPane.showMessageDialog(null, "Error. El nombre del paquete no puede ser vacio.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
 				}
-				
-				
 			}
 		});
 		btnConfirmar.setBounds(12, 278, 117, 25);
@@ -98,6 +105,7 @@ public class AltaDePaquete extends JInternalFrame{
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				limpiarForm();
 				setVisible(false);
 			}
 		});
@@ -105,5 +113,9 @@ public class AltaDePaquete extends JInternalFrame{
 		getContentPane().add(btnCancelar);
 		
 	}
+	private void limpiarForm() {
+        txtNombre.setText("");
+        descrp.setText("");
+    }
 	
 }
