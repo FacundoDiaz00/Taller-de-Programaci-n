@@ -1,11 +1,13 @@
 package logica.manejadores;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import logica.entidades.Paquete;
+import logica.entidades.Usuario;
 
 /**
  * @author Equipo taller prog 16
@@ -15,7 +17,9 @@ public class ManejadorPaquete {
     private static ManejadorPaquete instancia;
 
     private Map<String, Paquete> paquetes;
-
+    private ManejadorPaquete() {
+    	paquetes = new HashMap<String, Paquete>();
+    }
     public static ManejadorPaquete getInstancia() {
         if (instancia == null) {
             instancia = new ManejadorPaquete();
@@ -38,5 +42,9 @@ public class ManejadorPaquete {
     public Paquete getPaquete(String nombre) {
         return paquetes.get(nombre);
     }
+
+	public boolean existePaquete(String nombre) {
+		return (paquetes.containsKey(nombre));
+	}
 
 }
