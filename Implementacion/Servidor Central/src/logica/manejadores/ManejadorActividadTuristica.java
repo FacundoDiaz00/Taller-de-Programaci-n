@@ -1,6 +1,8 @@
 package logica.manejadores;
 
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,10 +17,15 @@ public class ManejadorActividadTuristica {
     private static ManejadorActividadTuristica instancia;
 
     private Map<String, ActividadTuristica> actividades;
-
+    
+    private ManejadorActividadTuristica() {
+    	actividades = new HashMap<String, ActividadTuristica>();
+    }
+    
     public static ManejadorActividadTuristica getInstancia() {
         if (instancia == null) {
             instancia = new ManejadorActividadTuristica();
+            
         }
         return instancia;
     }
@@ -37,5 +44,9 @@ public class ManejadorActividadTuristica {
 
     public ActividadTuristica getActividad(String nombre) {
         return actividades.get(nombre);
+    }
+    public boolean exists(String id){
+    	return actividades.containsKey(id);
+    	
     }
 }

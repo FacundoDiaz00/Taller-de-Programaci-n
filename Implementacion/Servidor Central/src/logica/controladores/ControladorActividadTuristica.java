@@ -6,6 +6,7 @@ import logica.controladores.ControladorUsuario;
 import logica.controladores.Fabrica;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
+import logica.manejadores.ManejadorActividadTuristica;
 
 import java.util.*;
 import java.time.LocalDate;
@@ -52,14 +53,13 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
 			Departamento d = MD.getDepartamento(departamento);
 			d.asociarActividadTuristica(AT);
-			
 			return true;
 		}
 		return false;
 	}
 
 	private boolean existeActividadTuristica(String nomActividad) {
-		// TODO Auto-generated method stub
-		return false;
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+		return MAT.exists(nomActividad);
 	}
 }
