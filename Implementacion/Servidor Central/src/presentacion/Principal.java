@@ -27,6 +27,7 @@ public class Principal {
 	private AltaDeUsuario frmIntAltaUsuario;
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
 	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
+	private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
 	private AltaDePaquete frmIntAltaPaquete;
 	/**
 	 * Launch the application.
@@ -52,19 +53,19 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
-
-		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
+		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
+		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntAltaPaquete = new AltaDePaquete();
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 
 		frmIntAltaUsuario.setVisible(false);
 		frmIntAltaPaquete.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntConsultaDeUsuario.setVisible(false);
 		frmIntAltaActividadTuristica.setVisible(false);
+		frmIntConsultaDeActividadTuristica.setVisible(false);
 		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
@@ -72,6 +73,13 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
+		
+				frmIntAltaUsuario = new AltaDeUsuario(CUS);
+				
+				
+						frmIntAltaUsuario.setVisible(false);
+						frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 
 
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
@@ -157,6 +165,11 @@ public class Principal {
 		mnNewMenu_3.add(registrarActividadJMenuItem);
 		
 		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
+		consultarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntConsultaDeActividadTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(consultarActividadTuristicaJMenuItem);
 		
 		JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");

@@ -188,7 +188,7 @@ public class AltaDeUsuario extends JInternalFrame {
 			System.out.print(fechaNac);
 		    existeUsuario = icu.altaProveedor(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), descripcion.getText().toString(),url.getText().toString(), fechaNac);
 		}else {
-			existeUsuario = icu.altaTurista(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), fechaNac, nacionalidad.getText().toString());
+			existeUsuario = icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
 		}
 
 		if(existeUsuario) {
@@ -198,6 +198,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		}else {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
 	}
     private void limpiarFormulario() {
         nombre.setText("");
