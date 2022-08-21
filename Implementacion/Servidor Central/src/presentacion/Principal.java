@@ -56,13 +56,13 @@ public class Principal {
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
+		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntAltaPaquete = new AltaDePaquete();
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 
 		frmIntAltaUsuario.setVisible(false);
 		frmIntAltaPaquete.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntConsultaDeUsuario.setVisible(false);
 		frmIntAltaActividadTuristica.setVisible(false);
 		frmIntConsultaDeActividadTuristica.setVisible(false);

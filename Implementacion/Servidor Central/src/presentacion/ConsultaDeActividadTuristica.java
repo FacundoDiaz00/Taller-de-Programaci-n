@@ -1,7 +1,15 @@
 package presentacion;
 
 import logica.controladores.Fabrica;
+import java.util.List;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTUsuario;
+import logica.entidades.ActividadTuristica;
+import logica.entidades.SalidaTuristica;
+import logica.entidades.Usuario;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
@@ -10,7 +18,12 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
+import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTPaquete;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
 
@@ -33,7 +46,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		Fabrica f = Fabrica.getInstancia();
 		this.icat = f.getIControladorActividadTuristica();
 		setTitle("Consutla de Actividad Turística");
-		setBounds(100, 100, 409, 369);
+		setBounds(100, 100, 409, 337);
 		getContentPane().setLayout(null);
         setResizable(true);
         setIconifiable(true);
@@ -115,26 +128,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		JComboBox comboActividades = new JComboBox();
 		comboActividades.setBounds(145, 32, 212, 24);
 		getContentPane().add(comboActividades);
-
-	
-		JButton aceptar = new JButton("Aceptar");
-		aceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				consultaDeActividad(e);
-			}
-		});
-		aceptar.setBounds(270, 303, 117, 25);
-		getContentPane().add(aceptar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                limpiarFormulario();
-                setVisible(false);
-			}
-		});
-		btnCancelar.setBounds(7, 303, 117, 25);
-		getContentPane().add(btnCancelar);
+		this.comboActividades = comboActividades;
 		
 		JTextArea nombre = new JTextArea();
 		nombre.setEditable(false);
@@ -201,10 +195,39 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		   
 		     }
 	   });
+	   
+	   comboActividades.addActionListener(new ActionListener() {     
+		     public void actionPerformed(ActionEvent e) {
+		    	 consultaDeActividad(e);
+		   }
+	   });
 
 }
 	
 	private void consultaDeActividad(ActionEvent action) {
+		String seleccion = (String) comboActividades.getSelectedItem();
+		System.out.println(seleccion);
+		try {
+			DTActividadTuristicaDetalle actividad = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDetallesActividadTuristica(seleccion);
+			
+			boolean mostrar_datos = true;
+			boolean mostrar_proveedor = true;
+			
+			nombre.setText(actividad.getNombre());
+			ciudad.setText(actividad.getCuidad());
+			costo.setText(String.valueOf(actividad.getCostoPorTurista()));
+			descripcion.setText(actividad.getDescripcion());
+			fechaAlta.setText(actividad.getFechaAlta().toString());
+			duracion.setText(String.valueOf(actividad.getDuracion()));
+			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
+	    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
+			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
+	    	comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
+			
+		} catch (Exception ex) {
+			// Esta excepcion no debería ocurrir pero por las dudas la pongo
+			
+		}
 
 	}
 	

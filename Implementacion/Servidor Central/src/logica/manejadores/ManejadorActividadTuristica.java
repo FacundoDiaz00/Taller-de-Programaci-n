@@ -31,6 +31,7 @@ public class ManejadorActividadTuristica {
     }
 
     public List<ActividadTuristica> getActividades() {
+    	System.out.print(actividades.isEmpty());
         return new ArrayList<ActividadTuristica>(actividades.values());
     }
 
