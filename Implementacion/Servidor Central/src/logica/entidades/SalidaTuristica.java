@@ -2,6 +2,7 @@ package logica.entidades;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * @author Equipo taller prog 16
@@ -15,6 +16,8 @@ public class SalidaTuristica {
     private LocalDateTime fechaHoraSalida;
     private String lugarSalida;
 
+    private Set<Inscripcion> inscripciones;
+
     public SalidaTuristica(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida) {
         this.nombre = nombre;
         this.cantMaxTuristas = cantMaxTuristas;
@@ -26,6 +29,15 @@ public class SalidaTuristica {
     @Override
     public boolean equals(Object obj) {
         return ((SalidaTuristica)obj).nombre.equals(this.nombre);
+    }
+
+
+    public Set<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(Set<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
     }
 
     public String getNombre() {
