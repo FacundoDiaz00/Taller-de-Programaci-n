@@ -58,4 +58,9 @@ public class Departamento {
     public void setActividadTuristicas(Map<String, ActividadTuristica> actividadTuristicas) {
         this.actividadTuristicas = actividadTuristicas;
     }
+
+	public void asociarActividadTuristica(ActividadTuristica AT) {
+		actividadTuristicas.put(AT.getNombre(), AT);
+	}
+   
 }

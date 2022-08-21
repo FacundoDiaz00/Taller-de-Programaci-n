@@ -26,6 +26,7 @@ public class Principal {
 
 	private AltaDeUsuario frmIntAltaUsuario;
 	private ConsultaDeUsuario frmIntConsultaDeUsuario; //Lo dejo de esta forma asi queda igual al ejemplo y no tenemos que tocar el metodo initialize
+	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
 	private AltaDePaquete frmIntAltaPaquete;
 	/**
 	 * Launch the application.
@@ -53,6 +54,8 @@ public class Principal {
 		CAD = fabrica.getIControladorActividadTuristica();
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
+		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntAltaPaquete = new AltaDePaquete();
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 
@@ -61,9 +64,14 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
 		frmIntConsultaDeUsuario.setVisible(false);
+		frmIntAltaActividadTuristica.setVisible(false);
+		
+		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
 
 
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
@@ -141,6 +149,11 @@ public class Principal {
 		menuBar.add(mnNewMenu_3);
 		
 		JMenuItem registrarActividadJMenuItem = new JMenuItem("Registrar Actividad Turística");
+		registrarActividadJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntAltaActividadTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(registrarActividadJMenuItem);
 		
 		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");

@@ -1,5 +1,7 @@
 package logica.controladores;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import logica.datatypes.DTUsuario;
 
 import java.time.LocalDate;

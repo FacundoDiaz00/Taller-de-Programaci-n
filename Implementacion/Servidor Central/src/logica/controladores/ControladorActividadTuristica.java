@@ -1,5 +1,16 @@
 package logica.controladores;
 
+import logica.manejadores.ManejadorDepartamento;
+import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.ControladorUsuario;
+import logica.controladores.Fabrica;
+import logica.entidades.ActividadTuristica;
+import logica.entidades.Departamento;
+import logica.manejadores.ManejadorActividadTuristica;
+
+import java.util.*;
+import java.time.LocalDate;
+
 import excepciones.DeparamentoYaRegistradoException;
 import logica.entidades.Departamento;
 import logica.manejadores.ManejadorDepartamento;
@@ -22,4 +33,33 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 
     }
+	public ControladorActividadTuristica() {
+	}
+	
+	public List<String> obtenerIdProveedores() {
+		ControladorUsuario cu = new ControladorUsuario();
+		return cu.obtenerIdProveedores();
+	}
+	
+	public List<String> obtenerIdDepartamentos(){
+		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
+		return new ArrayList<String>(MU.obtenerIdDepartamentos());
+	}
+	
+	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
+		if(!existeActividadTuristica(nombreActividad)) {
+			ActividadTuristica AT = new ActividadTuristica(nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+			
+			ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
+			Departamento d = MD.getDepartamento(departamento);
+			d.asociarActividadTuristica(AT);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean existeActividadTuristica(String nomActividad) {
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+		return MAT.exists(nomActividad);
+	}
 }
