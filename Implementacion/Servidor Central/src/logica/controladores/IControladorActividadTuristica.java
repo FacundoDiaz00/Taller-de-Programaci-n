@@ -8,6 +8,14 @@ import excepciones.DeparamentoYaRegistradoException;
 
 public interface IControladorActividadTuristica {
 
+
+    /**
+     * Crea un nuevo departamento en base a los parametros pasados
+     * @param nom
+     * @param descr
+     * @param URL
+     * @throws DeparamentoYaRegistradoException
+     */
     void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException;
 
 
