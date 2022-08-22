@@ -28,6 +28,8 @@ import java.awt.event.MouseEvent;
 public class ConsultaDeUsuario extends JInternalFrame {
 	private Principal principal;
 	
+	String seleccionNickname;
+	
 	private JComboBox<String> comboBoxSeleccionUsr;
 	
 	JPanel panel_principal;
@@ -239,6 +241,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
         
         comboBoxSeleccionUsr.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		seleccionNickname = (String) comboBoxSeleccionUsr.getSelectedItem();
         		seSeleccionoUnUsuario();
         	}
         });
@@ -252,7 +255,8 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	}
 	
 	public void seleccionYaHecha(String nickname) {
-		// TODO ejecutar el caso con la selección ya hecha
+		seleccionNickname = nickname;
+		seSeleccionoUnUsuario();
 	}
 	
 	public void ejecutarCasoConsultaSalidaTuristca(String nombreSalida) {
@@ -263,12 +267,12 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	public void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
 		// TODO: implementar que se abra la ventana con esta actividad ya elegida
 		System.out.println("Se quiso ejecutar el caso de uso Consulta Actividad Turistica con el nombre "+ nombreActividad);
+		principal.mostrarConsultaDeActividadTuristica(nombreActividad);
 	}
 
 
 	private void seSeleccionoUnUsuario() {
-		// Esto es lo que se ejecuta cada vez que se selecciona un item de la lista
-		String seleccion = (String) comboBoxSeleccionUsr.getSelectedItem();
+		String seleccion = seleccionNickname;
 		System.out.println(seleccion);
 		try {
 			DTUsuario usr = Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(seleccion);
