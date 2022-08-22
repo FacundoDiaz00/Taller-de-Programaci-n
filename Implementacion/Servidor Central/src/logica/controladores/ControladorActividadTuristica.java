@@ -47,13 +47,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		if(!existeActividadTuristica(nombreActividad)) {
 			//Se crea instancia
 			ActividadTuristica AT = new ActividadTuristica(nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
-			
+		
 			//Se agrega a la coleccion
 			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
 			MAD.addActividad(AT);
 			
 			ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
 			Departamento d = MD.getDepartamento(departamento);
+		
 			d.asociarActividadTuristica(AT);
 			return true;
 		}
