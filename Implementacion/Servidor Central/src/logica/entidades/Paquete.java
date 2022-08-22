@@ -2,6 +2,7 @@ package logica.entidades;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Equipo taller prog 16
@@ -68,5 +69,13 @@ public class Paquete {
 
     public void setActividades(Map<String, ActividadTuristica> actividades) {
         this.actividades = actividades;
+    }
+    
+    public Set<String> obtenerIdActividadesIncluidas() {
+    	return actividades.keySet();
+    }
+
+    public void agregarActividad(ActividadTuristica actividad) {
+        actividades.put(actividad.getNombre(), actividad);
     }
 }

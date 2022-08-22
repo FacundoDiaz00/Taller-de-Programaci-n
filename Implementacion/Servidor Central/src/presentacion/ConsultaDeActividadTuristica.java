@@ -26,6 +26,7 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTPaquete;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
+	private String seleccionActividad;
 
 	private final JComboBox comboSalidas;
 	private final JComboBox comboPaquetes;
@@ -204,8 +205,21 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 
 }
 	
+	public void seleccionYaHecha(String nombreAct) {
+		limpiarFormulario();
+		seleccionActividad = nombreAct;
+		seSeleccionoUnaActividad();
+	}
+	
 	private void consultaDeActividad(ActionEvent action) {
-		String seleccion = (String) comboActividades.getSelectedItem();
+		seleccionActividad = (String) comboActividades.getSelectedItem();
+		seSeleccionoUnaActividad();
+	}
+		
+	
+	private void seSeleccionoUnaActividad() {
+		String seleccion = seleccionActividad;
+		
 		System.out.println(seleccion);
 		try {
 			DTActividadTuristicaDetalle actividad = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDetallesActividadTuristica(seleccion);
@@ -228,13 +242,14 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 			
 		}
-
 	}
 	
 	public void actualizarComboDepartamentos() {
 		List<String> deps = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
+	
+	
 	
     private void limpiarFormulario() {
         nombre.setText("");

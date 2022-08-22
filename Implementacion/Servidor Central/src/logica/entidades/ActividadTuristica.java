@@ -110,4 +110,8 @@ public class ActividadTuristica {
         }
         return listaSalidas;
     }
+
+    public void agregarPaquete(Paquete paquete) {
+        this.paquetes.put(paquete.getNombre(), paquete);
+    }
 }
