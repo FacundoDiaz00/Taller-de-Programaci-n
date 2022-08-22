@@ -75,11 +75,11 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
 		
-				frmIntAltaUsuario = new AltaDeUsuario(CUS);
-				
-				
-						frmIntAltaUsuario.setVisible(false);
-						frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+		frmIntAltaUsuario = new AltaDeUsuario(CUS);
+		
+		
+		frmIntAltaUsuario.setVisible(false);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 
 
 		/*ToDo eliminar esto cuando tengamos los datos de prueba*/
@@ -209,11 +209,13 @@ public class Principal {
 		}
 		frmIntConsultaDeUsuario.setVisible(true);
 	}
-
-	/*
-	 * Exponemos estos métodos para poder llamarlo desde otros módulos
-	 */
-	public void mostrarAltaDeUsuario() {
-		
+	
+	public void mostrarConsultaDeActividadTuristica(String nombreActividad) {
+		if (nombreActividad != null) {
+			frmIntConsultaDeActividadTuristica.seleccionYaHecha(nombreActividad);			
+		}
+		frmIntConsultaDeActividadTuristica.setVisible(true);
 	}
+
+
 }
