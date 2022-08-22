@@ -2,6 +2,7 @@ package logica.controladores;
 
 import excepciones.DeparamentoYaRegistradoException;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTPaqueteDetalles;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
