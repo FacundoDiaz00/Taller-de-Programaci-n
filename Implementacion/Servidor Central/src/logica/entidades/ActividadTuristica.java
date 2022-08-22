@@ -1,5 +1,7 @@
 package logica.entidades;
 
+import logica.datatypes.DTActividadTuristica;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -32,6 +34,10 @@ public class ActividadTuristica {
         this.fechaAlta = fechaAlta;
         this.paquetes = new HashMap<>();
         this.salidas = new HashMap<>();
+    }
+
+    public DTActividadTuristica obtenerDTActividadTuristica(){
+        return new DTActividadTuristica(nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
     }
 
     @Override
