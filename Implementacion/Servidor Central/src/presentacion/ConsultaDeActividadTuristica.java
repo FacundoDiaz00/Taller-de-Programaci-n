@@ -212,7 +212,6 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	}
 	
 	private void consultaDeActividad(ActionEvent action) {
-		limpiarFormulario();
 		seleccionActividad = (String) comboActividades.getSelectedItem();
 		seSeleccionoUnaActividad();
 	}

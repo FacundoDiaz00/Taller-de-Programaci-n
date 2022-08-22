@@ -320,11 +320,15 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				
 				txtTipo.setText("Proveedor");
 				
-				// TODO: Esto hay que formatearlo mejor pero por ahora debería funcionar
+				
 				var act_sal = prov.getActividadesSalidas();
+				
+				System.out.print(act_sal.toString());
+				
 				panelActividadesYSalidasProveedor.removeAll();
 				
 				for (var actividad : act_sal.keySet()) {
+					System.out.print(actividad);
 					JPanel panel = new JPanel();
 					JLabel titulo = new JLabel("Actividad: ");
 					panel.add(titulo);
@@ -339,6 +343,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 					panel.add(nomb_actividad);
 					
 					for (var salida : act_sal.get(actividad)) {
+						System.out.print(salida);
 						JLabel nomb_salida = new JLabel(salida);
 						nomb_salida.addMouseListener(new MouseAdapter() {
 				        	@Override
@@ -346,7 +351,6 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				        		ejecutarCasoConsultaSalidaTuristca(salida);
 				        	}
 				        });
-						// ir agregando las salidas a panelActividadesYSalidasProveedor
 					}
 					panelActividadesYSalidasProveedor.add(panel);
 				}

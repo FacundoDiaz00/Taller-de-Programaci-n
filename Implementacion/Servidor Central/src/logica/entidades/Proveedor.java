@@ -1,6 +1,7 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -54,10 +55,13 @@ public class Proveedor extends Usuario {
     @Override
     public DTUsuario getDTUsuario() {
         DTUsuario dtUsuario = super.getDTUsuario();
+        
         Map<String, List<String>> salidas = new HashMap<>();
 
         for (ActividadTuristica a : actividadesTuristicas.values()) {
-            salidas.put(a.getNombre(), a.obtenerIdSalidasTuristicas());
+            salidas.put(a.getNombre(), new ArrayList<String>());
+            var salidasList = a.obtenerIdSalidasTuristicas();
+            salidas.get(a.getNombre()).addAll(salidasList);
         }
 
         return new DTProveedor(dtUsuario, descrpicionGeneral, link, salidas);
