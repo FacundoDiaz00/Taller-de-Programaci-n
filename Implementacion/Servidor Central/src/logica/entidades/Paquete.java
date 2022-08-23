@@ -1,6 +1,7 @@
 package logica.entidades;
 
 import logica.datatypes.DTActividadTuristica;
+import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 
 import java.util.HashMap;
@@ -36,6 +37,10 @@ public class Paquete {
             mapDtAct.put(act.getNombre(), act.obtenerDTActividadTuristica());
         }
         return new DTPaqueteDetalles(nombre, descrpicion, validez, descuento, mapDtAct);
+    }
+
+    public DTPaquete obtenerDTPaquete(){
+        return new DTPaquete(nombre, descrpicion, validez, descuento);
     }
 
     @Override

@@ -5,6 +5,9 @@ import logica.datatypes.DTActividadTuristica;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorDepartamento;
 import logica.manejadores.ManejadorUsuario;
+import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTPaquete;
+import logica.datatypes.DTSalidaTuristica;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -56,6 +59,19 @@ public class ActividadTuristica {
 
     public DTActividadTuristica obtenerDTActividadTuristica(){
         return new DTActividadTuristica(nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
+    }
+
+    public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(){
+        HashMap<String, DTPaquete> packs = new HashMap<>();
+        for(Paquete pack : paquetes.values()){
+            packs.put(pack.getNombre(), pack.obtenerDTPaquete());
+        }
+        HashMap<String, DTSalidaTuristica> salid = new HashMap<>();
+        for(SalidaTuristica sal : salidas.values()){
+            salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
+        }
+
+        return new DTActividadTuristicaDetalle(salid, packs, nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
     }
 
     @Override

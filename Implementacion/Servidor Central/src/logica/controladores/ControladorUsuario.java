@@ -57,6 +57,7 @@ public class ControladorUsuario implements IControladorUsuario {
         mu.addUsuario(u);
     }
 
+    @Override
     public void altaProveedor(String nickname, String nombre, String apellido, String correo, String descripcion, String link, LocalDate FNacimiento) throws UsuarioYaRegistradoException{
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         if(mu.existeUsuario(nickname, correo)) {
@@ -66,6 +67,7 @@ public class ControladorUsuario implements IControladorUsuario {
         mu.addUsuario(u);
     }
 
+    @Override
     public DTUsuario obtenerDTUsuarioDetalle(String nickname) {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         Usuario u = ins.getUsuario(nickname);
@@ -75,6 +77,23 @@ public class ControladorUsuario implements IControladorUsuario {
     public void agregarSalida(SalidaTuristica st) {
     	//TODO: Implentarla
     }
+	@Override
+	public DTUsuario obtenerDTUsuario(String nickname) {
+		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        Usuario u = ins.getUsuario(nickname);
+        return u.getDTUsuario();
+	}
+
+	@Override
+	public void modificarUsuario(DTUsuario datosNuevos) {
+		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        Usuario u = ins.getUsuario(datosNuevos.getNickname());
+        if (u != null) {
+        	u.setearDatos(datosNuevos);
+        }
+        
+	}
+
 
 
 }
