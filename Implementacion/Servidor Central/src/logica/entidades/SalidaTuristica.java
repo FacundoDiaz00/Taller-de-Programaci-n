@@ -97,4 +97,8 @@ public class SalidaTuristica {
     public void setLugarSalida(String lugarSalida) {
         this.lugarSalida = lugarSalida;
     }
+    
+    public void asociarActividadASalida() {
+  
+    }
 }

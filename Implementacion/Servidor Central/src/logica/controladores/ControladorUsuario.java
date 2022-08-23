@@ -5,6 +5,7 @@ import logica.entidades.Turista;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import logica.entidades.Proveedor;
+import logica.entidades.SalidaTuristica;
 
 import java.util.List;
 
@@ -71,6 +72,9 @@ public class ControladorUsuario implements IControladorUsuario {
         return u.getDTUsuarioDetalle();
     }
 
+    public void agregarSalida(SalidaTuristica st) {
+    	//TODO: Implentarla
+    }
 
 
 }
