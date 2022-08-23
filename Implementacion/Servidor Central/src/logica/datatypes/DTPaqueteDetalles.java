@@ -15,12 +15,12 @@ public class DTPaqueteDetalles extends DTPaquete {
         this.actividades = actividades;
     }
 
-    @Override
+
     public Map<String, DTActividadTuristica> getActividades() {
         return actividades;
     }
 
-    @Override
+
     public void setActividades(Map<String, DTActividadTuristica> actividades) {
         this.actividades = actividades;
     }

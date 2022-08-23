@@ -13,14 +13,11 @@ public class DTPaquete extends DTActividadTuristica {
     private int validez;
     private float descuento;
 
-    private Map<String, DTActividadTuristica> actividades; //Todo discutir este atributo aca
-
     public DTPaquete(String nombre, String descrpicion, int validez, float descuento) {
         this.nombre = nombre;
         this.descrpicion = descrpicion;
         this.validez = validez;
         this.descuento = descuento;
-        this.actividades = new HashMap<>();
     }
 
     @Override
@@ -60,11 +57,4 @@ public class DTPaquete extends DTActividadTuristica {
         this.descuento = descuento;
     }
 
-    public Map<String, DTActividadTuristica> getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(Map<String, DTActividadTuristica> actividades) {
-        this.actividades = actividades;
-    }
 }

@@ -74,7 +74,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return MAT.exists(nomActividad);
 	}
     
-    public ArrayList<String> obtenerIdActividadesTuristicas(String departamento){
+    public List<String> obtenerIdActividadesTuristicas(String departamento){
     	ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
     	List<ActividadTuristica> actividades = mat.getActividades();
     	System.out.print(actividades.isEmpty());
@@ -87,19 +87,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     
     public DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct) {
     	ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-    	ActividadTuristica actividad = mat.getActividad(nombreAct);
-        Map<String, DTPaquete> paquetes = null;
-        Map<String, DTSalidaTuristica> salidas = null;
-    	for(var salida: actividad.getSalidas().entrySet()) {
-    		DTSalidaTuristica salidaActual = new DTSalidaTuristica(salida.getValue().getNombre(),salida.getValue().getCantMaxTuristas(), salida.getValue().getFechaAlta(), salida.getValue().getFechaHoraSalida(), salida.getValue().getLugarSalida());
-    		salidas.put(salida.getKey(), salidaActual);
-    	};
-    	for(var paquete: actividad.getPaquetes().entrySet()) {
-    		DTPaquete paqueteActual = new DTPaquete(paquete.getValue().getNombre(), paquete.getValue().getDescrpicion(), paquete.getValue().getValidez(), paquete.getValue().getDescuento());
-    		paquetes.put(paquete.getKey(),paqueteActual);
-    	}
-    	DTActividadTuristicaDetalle detalle = new DTActividadTuristicaDetalle(salidas, paquetes,actividad.getNombre(), actividad.getDescrpicion(), actividad.getCostoPorTurista(), actividad.getCuidad(), actividad.getDuracion(), actividad.getFechaAlta());
-    	return detalle;
+    	return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
     }
 
 	@Override
