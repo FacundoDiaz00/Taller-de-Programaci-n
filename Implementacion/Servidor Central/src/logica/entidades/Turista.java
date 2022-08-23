@@ -27,6 +27,22 @@ public class Turista extends Usuario {
         this.inscripciones = new HashSet<>();
     }
 
+
+    public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp){
+        Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal);
+        inscripciones.add(insc);
+    }
+
+
+    public boolean estaInscriptoASalida(String nomSalTuri){
+        for (Inscripcion insc : inscripciones){
+            if(insc.estaInscriptoASalida(nomSalTuri)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getNacionalidad() {
         return nacionalidad;
     }

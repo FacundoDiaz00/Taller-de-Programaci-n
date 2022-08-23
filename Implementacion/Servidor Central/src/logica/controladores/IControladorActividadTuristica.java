@@ -1,8 +1,11 @@
 package logica.controladores;
 
 import excepciones.DeparamentoYaRegistradoException;
+import excepciones.InscripcionYaRegistradaException;
+import excepciones.SuperaElMaximoDeTuristasException;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaqueteDetalles;
+import logica.datatypes.DTSalidaTuristica;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,5 +36,24 @@ public interface IControladorActividadTuristica {
 	boolean existeActividadTuristica(String nomActividad);
 
 	//fin operaciones AAT
+
+	/**
+	 * Devueve los DtSalidasTuristas de todas las salidas asociadas con la actividad identificada con nombreActTuri
+	 * @param nombreActTuri identificador de la actividad turistica
+	 * @return
+	 */
+	List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri);
+
+	/**
+	 *
+	 * @param nomSalTurim
+	 * @param nicknameTuris
+	 * @param canTuris
+	 * @param fechaInscrp
+	 * @throws InscripcionYaRegistradaException
+	 * @throws SuperaElMaximoDeTuristasException
+	 */
+	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException;
+
 
 }

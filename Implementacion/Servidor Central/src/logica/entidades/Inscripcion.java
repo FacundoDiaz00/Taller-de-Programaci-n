@@ -19,10 +19,17 @@ public class Inscripcion {
         this.fechaInscrpicion = fechaInscrpicion;
         this.cantidadTuristas = cantidadTuristas;
         this.compra = compra;
+        salidaTuristica.agregarInscripcionASalida(this);
         this.salidaTuristica = salidaTuristica;
     }
 
     // Todo falta el calculo de costoInscripcion
+
+
+    public boolean estaInscriptoASalida(String nomSalTuri){
+        return salidaTuristica.getNombre().equals(nomSalTuri);
+    }
+
 
     public LocalDate getFechaInscrpicion() {
         return fechaInscrpicion;
