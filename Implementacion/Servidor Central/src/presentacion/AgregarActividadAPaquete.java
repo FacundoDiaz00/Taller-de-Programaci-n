@@ -156,12 +156,21 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	   panel.add(parte_inferior, BorderLayout.SOUTH);
 	   parte_inferior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	   
-	   JButton btnAgregar_1 = new JButton("Agregar");
-	   parte_inferior.add(btnAgregar_1);
+	   JButton botonAgregar = new JButton("Agregar");
+	   parte_inferior.add(botonAgregar);
 	   
-	   JButton btnCancelar_1 = new JButton("Cancelar");
-	   parte_inferior.add(btnCancelar_1);
+	   JButton botonCancelar = new JButton("Cancelar");
+	   parte_inferior.add(botonCancelar);
 
+	}
+	
+	public void setVisible(boolean visi) {
+		if (visi) {
+			limpiarSelecciones();
+			actualizarComboActividades();
+			actualizarComboDepartamentos();
+		}
+		super.setVisible(visi);
 	}
 	
 	private void actualizarComboPaquete() {
