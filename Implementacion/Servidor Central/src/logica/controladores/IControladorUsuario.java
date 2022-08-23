@@ -17,4 +17,8 @@ public interface IControladorUsuario {
 	public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad);
 	
 	public boolean altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento);
+	
+	public DTUsuario obtenerDTUsuario(String nickname);
+	
+	public void modificarUsuario(DTUsuario datosNuevos);
 }

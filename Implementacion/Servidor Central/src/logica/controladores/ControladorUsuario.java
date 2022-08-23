@@ -74,6 +74,23 @@ public class ControladorUsuario implements IControladorUsuario {
         return u.getDTUsuarioDetalle();
     }
 
+	@Override
+	public DTUsuario obtenerDTUsuario(String nickname) {
+		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        Usuario u = ins.getUsuario(nickname);
+        return u.getDTUsuario();
+	}
+
+	@Override
+	public void modificarUsuario(DTUsuario datosNuevos) {
+		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        Usuario u = ins.getUsuario(datosNuevos.getNickname());
+        if (u != null) {
+        	u.setearDatos(datosNuevos);
+        }
+        
+	}
+
 
 
 }

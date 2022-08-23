@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+import logica.datatypes.DTProveedor;
 import logica.datatypes.DTProveedorDetalle;
+import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 
 /**
@@ -51,6 +53,11 @@ public class Proveedor extends Usuario {
     public void setActividadesTuristicas(Map<String, ActividadTuristica> actividadesTuristicas) {
         this.actividadesTuristicas = actividadesTuristicas;
     }
+    
+    @Override
+    public DTUsuario getDTUsuario() {
+        return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), descrpicionGeneral, link);
+    }
 
     @Override
     public DTUsuario getDTUsuarioDetalle() {
@@ -64,4 +71,12 @@ public class Proveedor extends Usuario {
 
         return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), descrpicionGeneral, link, salidas);
     }
+    
+    @Override
+    public void setearDatos(DTUsuario datosNuevos) {
+		super.setearDatos(datosNuevos);
+		DTProveedor prov = (DTProveedor) datosNuevos;
+		this.descrpicionGeneral = prov.getDescrpicionGeneral();
+		this.link = prov.getLink();
+	}
 }
