@@ -8,6 +8,6 @@ import excepciones.PaqueteYaRegistradoException;
 
 
 public interface IControladorPaquete {
-    public void altaTurista(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException;
+    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException;
 
 }

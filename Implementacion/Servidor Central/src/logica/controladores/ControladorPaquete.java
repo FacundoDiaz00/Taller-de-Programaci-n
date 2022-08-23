@@ -9,7 +9,7 @@ import logica.manejadores.ManejadorPaquete;
  */
 
 public class ControladorPaquete implements IControladorPaquete{
-    public void altaTurista(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException {
+    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException {
         
     	ManejadorPaquete mp = ManejadorPaquete.getInstancia();
         
