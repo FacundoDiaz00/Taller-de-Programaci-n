@@ -12,8 +12,8 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import logica.controladores.Fabrica;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTTurista;
+import logica.datatypes.DTProveedorDetalle;
+import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
 
 import javax.swing.DefaultComboBoxModel;
@@ -275,7 +275,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		String seleccion = seleccionNickname;
 		System.out.println(seleccion);
 		try {
-			DTUsuario usr = Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(seleccion);
+			DTUsuario usr = Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetalle(seleccion);
 			
 			boolean mostrar_datos = true;
 			boolean mostrar_proveedor = true;
@@ -287,8 +287,8 @@ public class ConsultaDeUsuario extends JInternalFrame {
 			txtFechaDeNacimiento.setText(usr.getFechaNac().toString());
 
 			
-			if (usr instanceof DTTurista) { 
-				DTTurista tur = (DTTurista) usr;
+			if (usr instanceof DTTuristaDetalle) { 
+				DTTuristaDetalle tur = (DTTuristaDetalle) usr;
 
 				casos.removeAll();
 				casos.add(turista_panel);
@@ -312,8 +312,8 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				}
 				
 				panelSalidasTurista.add(panelSalidasTurista);
-			} else if (usr instanceof DTProveedor) {
-				DTProveedor prov = (DTProveedor) usr;
+			} else if (usr instanceof DTProveedorDetalle) {
+				DTProveedorDetalle prov = (DTProveedorDetalle) usr;
 				
 				casos.removeAll();
 				casos.add(proveedor_panel);

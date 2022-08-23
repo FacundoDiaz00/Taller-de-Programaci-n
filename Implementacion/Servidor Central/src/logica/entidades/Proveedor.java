@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-import logica.datatypes.DTProveedor;
+import logica.datatypes.DTProveedorDetalle;
 import logica.datatypes.DTUsuario;
 
 /**
@@ -53,9 +53,7 @@ public class Proveedor extends Usuario {
     }
 
     @Override
-    public DTUsuario getDTUsuario() {
-        DTUsuario dtUsuario = super.getDTUsuario();
-        
+    public DTUsuario getDTUsuarioDetalle() {
         Map<String, List<String>> salidas = new HashMap<>();
 
         for (ActividadTuristica a : actividadesTuristicas.values()) {
@@ -64,6 +62,6 @@ public class Proveedor extends Usuario {
             salidas.get(a.getNombre()).addAll(salidasList);
         }
 
-        return new DTProveedor(dtUsuario, descrpicionGeneral, link, salidas);
+        return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), descrpicionGeneral, link, salidas);
     }
 }
