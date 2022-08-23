@@ -66,4 +66,9 @@ public class Proveedor extends Usuario {
 
         return new DTProveedor(dtUsuario, descrpicionGeneral, link, salidas);
     }
+
+	public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {
+		// TODO Auto-generated method stub
+		
+	}
 }
