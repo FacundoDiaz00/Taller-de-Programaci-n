@@ -51,16 +51,19 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	
 	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
 		if(!existeActividadTuristica(nombreActividad)) {
-			//Se crea instancia
+			//Se crea instancia:
 			ActividadTuristica AT = new ActividadTuristica(nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
 			
-			//Se agrega a la coleccion
+			//Se agrega a la coleccion de actividades:
 			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
 			MAD.addActividad(AT);
 			
+			//Se agrega la relacion con el departamento:
 			ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
 			Departamento d = MD.getDepartamento(departamento);
 			d.asociarActividadTuristica(AT);
+			
+			//TODO: Se agrega la relacion con el proveedor:
 			return true;
 		}
 		return false;
