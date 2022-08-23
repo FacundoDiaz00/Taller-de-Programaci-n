@@ -1,4 +1,5 @@
 package logica.controladores;
+import excepciones.UsuarioYaRegistradoException;
 import logica.manejadores.ManejadorUsuario;
 import logica.entidades.Turista;
 import java.time.LocalDate;
@@ -52,29 +53,25 @@ public class ControladorUsuario implements IControladorUsuario {
 		}
 		return res;
 	}
-	
-    public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad){
+
+    @Override
+    public void altaTurista(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento, String nacionalidad) throws UsuarioYaRegistradoException {
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         if(mu.existeUsuario(nickname, correo)) {
-            //throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
-        	return false;
+            throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
         }
 
         Turista u = new Turista(nickname, nombre, apellido, correo,FNacimiento,nacionalidad);
         mu.addUsuario(u);
-        return true;
     }
-    
-    public boolean altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento){
+
+    public void altaProveedor(String nickname, String nombre, String apellido, String correo, String descripcion, String link, LocalDate FNacimiento) throws UsuarioYaRegistradoException{
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         if(mu.existeUsuario(nickname, correo)) {
-            //throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
-        	return false;
+            throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
         }
-
         Proveedor u = new Proveedor(nickname, nombre, apellido, correo,FNacimiento, descripcion, link);
         mu.addUsuario(u);
-        return true;
     }
 
     public DTUsuario obtenerDTUsuario(String nickname) {

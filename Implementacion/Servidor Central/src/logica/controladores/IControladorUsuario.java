@@ -2,6 +2,8 @@ package logica.controladores;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import excepciones.UsuarioYaRegistradoException;
 import logica.datatypes.DTUsuario;
 
 import java.time.LocalDate;
@@ -12,11 +14,11 @@ import java.util.List;
  */
 
 public interface IControladorUsuario {
-	public List<String> obtenerIdUsuarios();
+	List<String> obtenerIdUsuarios();
 
-	public DTUsuario obtenerDTUsuario(String nickname);
+	DTUsuario obtenerDTUsuario(String nickname);
 	
-	public boolean altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad);
+	void altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad) throws UsuarioYaRegistradoException;
 	
-	public boolean altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento);
+	void altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento) throws UsuarioYaRegistradoException;
 }

@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.EventQueue;
+
+import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.IControladorUsuario;
 
 import javax.swing.JInternalFrame;
@@ -183,22 +185,20 @@ public class AltaDeUsuario extends JInternalFrame {
 	      String fecha = Fnacimiento.getText();
 	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	      LocalDate fechaNac = LocalDate.parse(fecha, JEFormatter);
-	      boolean existeUsuario;
-		if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
-			System.out.print(fechaNac);
-		    existeUsuario = icu.altaProveedor(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), descripcion.getText().toString(),url.getText().toString(), fechaNac);
-		}else {
-			existeUsuario = icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
-		}
-
-		if(existeUsuario) {
+		try{
+			if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
+				icu.altaProveedor(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), descripcion.getText().toString(),url.getText().toString(), fechaNac);
+			}else {
+				icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
+			}
 			limpiarFormulario();
-            setVisible(false);
+			setVisible(false);
 			JOptionPane.showMessageDialog (null, "El usuario se ha creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-		}else {
+
+		} catch (UsuarioYaRegistradoException e) {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+			throw new RuntimeException(e);
 		}
-		
 	}
     private void limpiarFormulario() {
         nombre.setText("");
