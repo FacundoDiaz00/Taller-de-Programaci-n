@@ -2,4 +2,4 @@ CdeU Alta de actividad:
 
 obtenerIdProveedores() set(string)
 obtenerIdDepartamentos() : set(string)
-altaActividadTurística(nomProv: string, desc : string, dur : integer, costo : integer, ciudad : string, fecha : DTFecha) : bool
+altaActividadTurística(nomProv: string,depto: string, nomAct: string, desc : string, dur : integer, costo : integer, ciudad : string, fecha : DTFecha) : bool
