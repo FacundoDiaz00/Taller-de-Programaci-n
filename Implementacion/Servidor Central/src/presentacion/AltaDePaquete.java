@@ -83,7 +83,7 @@ public class AltaDePaquete extends JInternalFrame{
 					Fabrica f = Fabrica.getInstancia();
 					IControladorPaquete cp = f.getIControladorPaquete();
 
-					boolean alta = cp.altaTurista(txtNombre.getText().toString(),descrp.getText().toString(),(int)perVal.getValue(),(int)desc.getValue());
+					boolean alta = cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(),(int)perVal.getValue(),(int)desc.getValue());
 					if(alta) {
 						JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
 						setVisible(false);

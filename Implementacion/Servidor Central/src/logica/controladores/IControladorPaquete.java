@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface IControladorPaquete {
-    public boolean altaTurista(String nombre, String descripcion, int periodovalidez, float descuento);
+    public boolean altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento);
     
     public List<String> obtenerIdPaquetes();
     

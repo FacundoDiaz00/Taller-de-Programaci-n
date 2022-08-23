@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class ControladorPaquete implements IControladorPaquete{
-    public boolean altaTurista(String nombre, String descripcion, int periodovalidez, float descuento) {
+    public boolean altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) {
         
     	ManejadorPaquete mp = ManejadorPaquete.getInstancia();
         
