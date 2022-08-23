@@ -13,7 +13,7 @@ public class DTPaquete extends DTActividadTuristica {
     private int validez;
     private float descuento;
 
-    private Map<String, DTActividadTuristica> actividades;
+    private Map<String, DTActividadTuristica> actividades; //Todo discutir este atributo aca
 
     public DTPaquete(String nombre, String descrpicion, int validez, float descuento) {
         this.nombre = nombre;
