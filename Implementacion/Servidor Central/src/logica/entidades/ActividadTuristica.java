@@ -1,6 +1,10 @@
 package logica.entidades;
 
+import logica.controladores.ControladorUsuario;
 import logica.datatypes.DTActividadTuristica;
+import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorDepartamento;
+import logica.manejadores.ManejadorUsuario;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -24,7 +28,7 @@ public class ActividadTuristica {
     private Map<String, Paquete> paquetes;
     private Map<String, SalidaTuristica> salidas;
 
-    public ActividadTuristica(String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
+    public ActividadTuristica(String nombreProveedor, String departamento,String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
             LocalDate fechaAlta) {
         this.nombre = nombre;
         this.descrpicion = descrpicion;
@@ -34,6 +38,20 @@ public class ActividadTuristica {
         this.fechaAlta = fechaAlta;
         this.paquetes = new HashMap<>();
         this.salidas = new HashMap<>();
+        
+		//Se agrega a la coleccion de actividades:
+		ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
+		MAD.addActividad(this);
+		
+		//Se agrega la relacion con el departamento:
+		ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
+		Departamento d = MD.getDepartamento(departamento);
+		d.asociarActividadTuristica(this);
+		
+		//Se agrega la relacion con el proveedor:
+		ControladorUsuario CU = new ControladorUsuario();
+		Proveedor p = CU.obtenerProveedor(nombreProveedor);
+		p.asociarActividadTuristica(this);
     }
 
     public DTActividadTuristica obtenerDTActividadTuristica(){
@@ -119,5 +137,8 @@ public class ActividadTuristica {
 
     public void agregarPaquete(Paquete paquete) {
         this.paquetes.put(paquete.getNombre(), paquete);
+    }
+    public void asociarSalidaAActividad(SalidaTuristica st){
+    	//TODO: Corresponde a ALTA SALIDA TURISTICA
     }
 }
