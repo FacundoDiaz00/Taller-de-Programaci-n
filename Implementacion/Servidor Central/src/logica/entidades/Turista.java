@@ -2,12 +2,12 @@ package logica.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 
 import logica.datatypes.DTTurista;
+import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
 
 /**
@@ -66,16 +66,19 @@ public class Turista extends Usuario {
     public void setInscripciones(Set<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
+    
+    public DTUsuario getDtUsuario() {
+    	return new DTTurista(getNickname(), getNombre(), getApellido(), nacionalidad, getFechaNac(), nacionalidad);
+    }
 
     @Override
-    public DTUsuario getDTUsuario() {
-        DTUsuario dtUsuario = super.getDTUsuario();
+    public DTUsuario getDTUsuarioDetalle() {
         List<String> salidas = new ArrayList<>();
 
         for (Inscripcion inscripcion : inscripciones) {
             salidas.add(inscripcion.getNombreSalida());
         }
 
-        return new DTTurista(dtUsuario, this.nacionalidad, salidas);
+        return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), nacionalidad, salidas);
     }
 }

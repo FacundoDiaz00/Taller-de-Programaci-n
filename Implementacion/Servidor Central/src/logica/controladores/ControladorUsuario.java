@@ -5,21 +5,12 @@ import logica.entidades.Turista;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import logica.entidades.Proveedor;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
 
 import java.util.List;
 
 import logica.datatypes.DTUsuario;
 import logica.entidades.Usuario;
-import logica.manejadores.ManejadorUsuario;
 
-import logica.entidades.Proveedor;
-import logica.entidades.Usuario;
-
-
-import logica.manejadores.ManejadorUsuario;
 
 /**
  * @author Equipo taller prog 16
@@ -74,10 +65,10 @@ public class ControladorUsuario implements IControladorUsuario {
         mu.addUsuario(u);
     }
 
-    public DTUsuario obtenerDTUsuario(String nickname) {
+    public DTUsuario obtenerDTUsuarioDetalle(String nickname) {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         Usuario u = ins.getUsuario(nickname);
-        return u.getDTUsuario();
+        return u.getDTUsuarioDetalle();
     }
 
 

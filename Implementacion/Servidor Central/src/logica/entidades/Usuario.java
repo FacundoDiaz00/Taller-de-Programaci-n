@@ -69,8 +69,12 @@ public class Usuario {
     public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
-
+    
     public DTUsuario getDTUsuario() {
+        return new DTUsuario(nickname, nombre, apellido, correo, fechaNac);
+    }
+
+    public DTUsuario getDTUsuarioDetalle() {
         return new DTUsuario(nickname, nombre, apellido, correo, fechaNac);
     }
 
