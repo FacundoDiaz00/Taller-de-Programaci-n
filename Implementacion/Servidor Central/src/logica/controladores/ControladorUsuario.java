@@ -27,6 +27,14 @@ public class ControladorUsuario implements IControladorUsuario {
 
 	public ControladorUsuario() {
 	}
+	
+	public Turista obtenerTurista(String nomTur){
+		return null;
+	}
+	
+	public Proveedor obtenerProveedor(String nomProv){
+		return null;
+	}
     
 	public List<String> obtenerIdUsuarios() {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
