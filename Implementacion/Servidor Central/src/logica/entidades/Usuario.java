@@ -77,5 +77,11 @@ public class Usuario {
     public DTUsuario getDTUsuarioDetalle() {
         return new DTUsuario(nickname, nombre, apellido, correo, fechaNac);
     }
+    
+	public void setearDatos(DTUsuario datosNuevos) {
+		this.nombre = datosNuevos.getNombre();
+		this.apellido = datosNuevos.getApellido();
+		this.fechaNac = datosNuevos.getFechaNac();
+	}
 
 }

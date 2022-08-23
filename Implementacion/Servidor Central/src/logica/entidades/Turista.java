@@ -67,7 +67,9 @@ public class Turista extends Usuario {
         this.inscripciones = inscripciones;
     }
     
-    public DTUsuario getDtUsuario() {
+    
+    @Override
+    public DTUsuario getDTUsuario() {
     	return new DTTurista(getNickname(), getNombre(), getApellido(), nacionalidad, getFechaNac(), nacionalidad);
     }
 
@@ -81,4 +83,11 @@ public class Turista extends Usuario {
 
         return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), nacionalidad, salidas);
     }
+
+    @Override
+    public void setearDatos(DTUsuario datosNuevos) {
+		super.setearDatos(datosNuevos);
+		DTTurista tur = (DTTurista) datosNuevos;
+		this.nacionalidad = tur.getNacionalidad();
+	}
 }
