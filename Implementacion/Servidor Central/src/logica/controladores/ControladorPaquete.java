@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import logica.entidades.ActividadTuristica;
+import excepciones.PaqueteYaRegistradoException;
 import logica.entidades.Paquete;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorPaquete;
@@ -17,17 +18,15 @@ import java.util.List;
  */
 
 public class ControladorPaquete implements IControladorPaquete{
-    public boolean altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) {
+    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException {
         
     	ManejadorPaquete mp = ManejadorPaquete.getInstancia();
         
         if(mp.existePaquete(nombre)) {
-            //TODO: throw exeption.
-        	return false;
+            throw new PaqueteYaRegistradoException("Ya existe en el sistema un paquete con el nombre: "+nombre);
         }
         Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento);
         mp.addPaquete(paq);
-        return true; 
     }
 
     @Override

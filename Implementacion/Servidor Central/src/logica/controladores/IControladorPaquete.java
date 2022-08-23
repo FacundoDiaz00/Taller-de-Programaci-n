@@ -4,20 +4,18 @@ import logica.datatypes.DTPaqueteDetalles;
 
 import java.util.List;
 
+import excepciones.PaqueteYaRegistradoException;
+
 /**
  * @author Equipo taller prog 16
  */
 
 
 public interface IControladorPaquete {
-    public boolean altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento);
-    
+    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException;
     public List<String> obtenerIdPaquetes();
-    
     public List<String> obtenerIdDepartamentos();
-    
     public List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
-    
     public void agregarActividadAPaquete(String nombreAct, String nombrePaq);
 
     /**

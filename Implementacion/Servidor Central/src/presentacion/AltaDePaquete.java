@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import excepciones.PaqueteYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorPaquete;
 
@@ -79,24 +80,19 @@ public class AltaDePaquete extends JInternalFrame{
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(txtNombre.getText().toString() != "") {
+				try {
 					Fabrica f = Fabrica.getInstancia();
 					IControladorPaquete cp = f.getIControladorPaquete();
 
-					boolean alta = cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(),(int)perVal.getValue(),(int)desc.getValue());
-					if(alta) {
-						JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
-						setVisible(false);
-						limpiarForm();
+					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue());
+					JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
+					setVisible(false);
+					limpiarForm();
+				}catch(PaqueteYaRegistradoException e){
+					JOptionPane.showMessageDialog(null, "Error. Ya existe un Paquete de Actividades con el nombre elejido.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
 
-					}else {
-						JOptionPane.showMessageDialog(null, "Error. Ya existe un Paquete de Actividades con el nombre elejido.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
-
-					}
-				}else {
-					//TODO: no detecta bien la entrada vacia todavia.
-					JOptionPane.showMessageDialog(null, "Error. El nombre del paquete no puede ser vacio.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
 				}
+				
 			}
 		});
 		btnConfirmar.setBounds(12, 278, 117, 25);
