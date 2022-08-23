@@ -38,4 +38,9 @@ public class ManejadorSalidaTuristica {
     public SalidaTuristica getSalida(String nombre) {
         return salidas.get(nombre);
     }
+    
+    public Boolean existeSalidaTuristica(String nombre) {
+    	//TODO: Corresponde a ALTA SALIDA TURISTICA
+    	return true;
+    }
 }

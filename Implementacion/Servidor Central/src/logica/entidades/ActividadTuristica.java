@@ -138,4 +138,7 @@ public class ActividadTuristica {
     public void agregarPaquete(Paquete paquete) {
         this.paquetes.put(paquete.getNombre(), paquete);
     }
+    public void asociarSalidaAActividad(SalidaTuristica st){
+    	//TODO: Corresponde a ALTA SALIDA TURISTICA
+    }
 }
