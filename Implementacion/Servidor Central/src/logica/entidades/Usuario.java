@@ -8,7 +8,7 @@ import logica.datatypes.DTUsuario;
  * @author Equipo taller prog 16
  */
 
-public class Usuario {
+public class  Usuario {
 
     private String nickname;
     private String nombre;
