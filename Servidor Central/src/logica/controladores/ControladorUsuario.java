@@ -35,7 +35,8 @@ public class ControladorUsuario implements IControladorUsuario {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         return new ArrayList<String>(ins.obtenerIdUsuarios());
     }
-	
+
+    @Override
 	public ArrayList<String> obtenerIdProveedores() {
 		ManejadorUsuario MU = ManejadorUsuario.getInstancia();
 		List<Usuario> usuarios = MU.getUsuarios();
@@ -47,6 +48,19 @@ public class ControladorUsuario implements IControladorUsuario {
 		}
 		return res;
 	}
+
+    @Override
+    public List<String> obtenerIdTuristas() {
+        ManejadorUsuario MU = ManejadorUsuario.getInstancia();
+        List<Usuario> usuarios = MU.getUsuarios();
+        ArrayList<String> res = new ArrayList<String>();
+        for(Usuario user : usuarios){
+            if(user instanceof Turista) {
+                res.add(user.getNickname());
+            }
+        }
+        return res;
+    }
 
     @Override
     public void altaTurista(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento, String nacionalidad) throws UsuarioYaRegistradoException {
@@ -77,7 +91,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     public void agregarSalida(SalidaTuristica st) {
-    	//TODO: Implentarla
+    	//TODO: Implentarla  ¿Esta correcto que esto este aca? Mirando el digrama de comunicacion creo que va en el manejador de salida
     }
 	@Override
 	public DTUsuario obtenerDTUsuario(String nickname) {

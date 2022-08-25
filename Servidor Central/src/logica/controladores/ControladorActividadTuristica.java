@@ -36,11 +36,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     }
 	public ControladorActividadTuristica() {
 	}
-	
-	public List<String> obtenerIdProveedores() {
-		ControladorUsuario cu = new ControladorUsuario();
-		return cu.obtenerIdProveedores();
-	}
+
 	
 	public List<String> obtenerIdDepartamentos(){
 		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();

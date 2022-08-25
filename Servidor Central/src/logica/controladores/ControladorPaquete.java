@@ -45,11 +45,6 @@ public class ControladorPaquete implements IControladorPaquete{
 		return new ArrayList<String>(mp.obtenerIdPaquetes());
 	}
 
-	@Override
-	public List<String> obtenerIdDepartamentos() {
-		var cat = new ControladorActividadTuristica();
-		return cat.obtenerIdDepartamentos();
-	}
 
 	@Override
 	public List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq) {

@@ -240,7 +240,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	}
 	
 	public void actualizarComboProveedores() {
-		List<String> provs = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdProveedores();
+		List<String> provs = Fabrica.getInstancia().getIControladorUsuario().obtenerIdProveedores();
 		comboProveedores.setModel(new DefaultComboBoxModel(provs.toArray()));
 	}
 	
