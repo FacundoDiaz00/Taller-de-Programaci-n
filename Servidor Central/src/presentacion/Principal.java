@@ -30,6 +30,7 @@ public class Principal {
 	private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
 	private AltaDePaquete frmIntAltaPaquete;
 	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
+	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
 
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
 	/**
@@ -57,6 +58,7 @@ public class Principal {
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
+		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica();
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
 		frmInscribirseASalidaTurística = new InscribirseASalidaTurística();
@@ -73,7 +75,8 @@ public class Principal {
 		frmIntConsultaDeActividadTuristica.setVisible(false);
 		frmIntAgregarActividadAPaquete.setVisible(false);
 		frmInscribirseASalidaTurística.setVisible(false);
-		
+		frmIntAltaSalidaTuristica.setVisible(false);
+
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -83,6 +86,7 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
 
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		
@@ -182,6 +186,11 @@ public class Principal {
 		mnNewMenu_3.add(consultarActividadTuristicaJMenuItem);
 		
 		JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");
+		registrarSalidaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntAltaSalidaTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(registrarSalidaJMenuItem);
 		
 		JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");

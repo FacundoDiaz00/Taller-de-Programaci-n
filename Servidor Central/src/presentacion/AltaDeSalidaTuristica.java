@@ -11,12 +11,15 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 
 import javax.swing.JSpinner;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JTextField dia;
@@ -24,11 +27,11 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JTextField anio;
 	private JTextField nombre;
 	private JTextField lugar;
-	private JComboBox<String> actividadTuristica;
+	private JComboBox actividadTuristica;
 	private JComboBox<Integer> hora;
 	private JSpinner maxTuristas;
 	private JButton btnAceptar;
-	private JComboBox<String> departamento;
+	private JComboBox departamento;
 	Fabrica f = Fabrica.getInstancia();
 	IControladorActividadTuristica ca = f.getIControladorActividadTuristica();
 	
@@ -49,41 +52,46 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(lblDepart);
 		
 		//Cuando se setea un departamento, se habilita la seleccion de una actividad.
-		
-		List<String> deptos = ca.obtenerIdDepartamentos();
-		Vector<String>Vdeptos = new Vector<String>(deptos);
-		//System.out.println(Vdeptos.firstElement());
-		//Vector<String>v1 = new Vector<String>();
-		//v1.addElement("pepe");
-		
 
-		departamento = new JComboBox<String>(Vdeptos);
+
+		departamento = new JComboBox();
+		departamento.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				actualizarDepartamentos();
+				
+			}
+		});
 		departamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(departamento.getSelectedItem() != null) {
 					actividadTuristica.setEnabled(true);
-					List<String> acts = ca.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
-					for(int i = 0;i<acts.size();i++) {
-						actividadTuristica.addItem(acts.get(i));
-					}
+					
 				}
 			}
 		});
 		getContentPane().add(departamento);
 
 		departamento.setBounds(150, 45, 175, 24);
-		//List<String> deptos = ca.obtenerIdDepartamentos();
-		/*for(int i = 0;i<deptos.size();i++) {
-			departamento.addItem(deptos.get(i));
-		}*/
-		//this.departamento = departamento;
 
 		
 		JLabel lblActividadTurisica = new JLabel("Actividad Turisica:");
 		lblActividadTurisica.setBounds(12, 85, 128, 15);
 		getContentPane().add(lblActividadTurisica);
 		
-		actividadTuristica = new JComboBox<String>();
+		actividadTuristica = new JComboBox();
+		actividadTuristica.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				actualizarActTur();
+			}
+		});
 		actividadTuristica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(actividadTuristica.getSelectedItem() != null) {
@@ -184,12 +192,35 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setEnabled(false);
-		btnAceptar.setBounds(12, 320, 117, 25);
+		btnAceptar.setBounds(280, 322, 117, 25);
 		getContentPane().add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(280, 320, 117, 25);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiarFormulario();
+                setVisible(false);
+			}
+		});
+		btnCancelar.setBounds(12, 322, 117, 25);
 		getContentPane().add(btnCancelar);
 
+	}
+	private void limpiarFormulario() {
+		
+	}
+	private void actualizarDepartamentos() {
+		List<String> deptos = ca.obtenerIdDepartamentos();
+		departamento.setModel(new DefaultComboBoxModel<>(deptos.toArray()));
+		if(deptos.size() > 0){
+			departamento.setSelectedIndex(0);
+		}
+	}
+	private void actualizarActTur() {
+		List<String> acts = ca.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
+		actividadTuristica.setModel(new DefaultComboBoxModel<>(acts.toArray()));
+		if(acts.size() > 0){
+			actividadTuristica.setSelectedIndex(0);
+		}
 	}
 }
