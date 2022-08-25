@@ -6,9 +6,15 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
+import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
+
 import javax.swing.JSpinner;
-import javax.swing.JList;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JTextField textField;
@@ -16,7 +22,10 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JTextField textField_2;
 	private JTextField nombre;
 	private JTextField lugar;
-
+	JComboBox<String> actividadTuristica;
+	Fabrica f = Fabrica.getInstancia();
+	IControladorActividadTuristica ca = f.getIControladorActividadTuristica();
+	
 	/**
 	 * Create the frame.
 	 */
@@ -33,15 +42,33 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lblDepart.setBounds(12, 50, 112, 15);
 		getContentPane().add(lblDepart);
 		
-		JComboBox departamento = new JComboBox();
+		//Cuando se setea un departamento, se habilita la seleccion de una actividad.
+		JComboBox<String> departamento = new JComboBox<String>();
+		departamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(departamento.getSelectedItem() != null) {
+					actividadTuristica.setEnabled(true);
+					List<String> acts = ca.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
+					for(int i = 0;i<acts.size();i++) {
+						actividadTuristica.addItem(acts.get(i));
+					}
+				}
+			}
+		});
 		departamento.setBounds(150, 45, 175, 24);
+		List<String> deptos = ca.obtenerIdDepartamentos();
+		for(int i = 0;i<deptos.size();i++) {
+			departamento.addItem(deptos.get(i));
+		}
+		
 		getContentPane().add(departamento);
+		
 		
 		JLabel lblActividadTurisica = new JLabel("Actividad Turisica:");
 		lblActividadTurisica.setBounds(12, 85, 128, 15);
 		getContentPane().add(lblActividadTurisica);
 		
-		JComboBox actividadTuristica = new JComboBox();
+		actividadTuristica = new JComboBox<String>();
 		actividadTuristica.setEnabled(false);
 		actividadTuristica.setBounds(150, 80, 175, 24);
 		getContentPane().add(actividadTuristica);
