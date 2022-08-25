@@ -14,6 +14,7 @@ import logica.manejadores.ManejadorSalidaTuristica;
 import logica.manejadores.ManejadorUsuario;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -102,8 +103,13 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
 	
-	public void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDate fecha, int hora, String lugar, int cantMaxTur) {
+	public void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDateTime fechaYHoraActividad,LocalDate fechaAlta, String lugar, int cantMaxTur) {
 		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
+		if(ms.existeSalidaTuristica(nombre)) {
+			//throw...
+		}else {
+			SalidaTuristica st = new SalidaTuristica(nombre, cantMaxTur, fechaAlta, fechaYHoraActividad, lugar);
+		}
 	}
 }
 

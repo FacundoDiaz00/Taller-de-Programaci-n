@@ -9,6 +9,7 @@ import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.DTSalidaTuristica;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,11 +60,11 @@ public interface IControladorActividadTuristica {
 	 * @param departamento
 	 * @param actividadT
 	 * @param nombre
-	 * @param fecha
-	 * @param hora
+	 * @param fechaYHoraActividad
+	 * @param fechaAlta
 	 * @param lugar
 	 * @param cantMaxTur
 	 */
-	void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDate fecha, int hora, String lugar, int cantMaxTur);
-
+	void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDateTime fechaYHoraActividad,LocalDate fechaAlta, String lugar, int cantMaxTur);
+	
 }

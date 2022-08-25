@@ -1,6 +1,7 @@
 package logica.entidades;
 
 import logica.datatypes.DTSalidaTuristica;
+import logica.manejadores.ManejadorActividadTuristica;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +27,8 @@ public class SalidaTuristica {
         this.fechaAlta = fechaAlta;
         this.fechaHoraSalida = fechaHoraSalida;
         this.lugarSalida = lugarSalida;
+        ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
+        //ActividadTuristica at = mat.obtenerIdActividadeTuristica()
     }
 
     public int obtenerCantidadInscriptos(){

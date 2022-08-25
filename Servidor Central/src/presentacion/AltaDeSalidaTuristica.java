@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -26,6 +27,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JSpinner dia;
 	private JSpinner mes;
 	private JSpinner anio;
+	private JSpinner anior; 
+	private JSpinner mesr; 
+	private JSpinner diar; 
 	private JTextField nombre;
 	private JTextField lugar;
 	private JComboBox actividadTuristica;
@@ -41,7 +45,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	 */
 	public AltaDeSalidaTuristica() {
 		setTitle("Registrar Salida Turistica.");
-		setBounds(100, 100, 490, 391);
+		setBounds(100, 100, 461, 415);
 		getContentPane().setLayout(null);
 		
 		JLabel lblIngreseLosDatos = new JLabel("Ingrese los datos de la Salida Turistica a Registrar.");
@@ -179,7 +183,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		
 		lugar = new JTextField();
 		lugar.setEnabled(false);
-		lugar.setBounds(66, 223, 163, 19);
+		lugar.setBounds(66, 223, 221, 19);
 		getContentPane().add(lugar);
 		lugar.setColumns(10);
 		
@@ -195,7 +199,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			}
 		});
 		btnAceptar.setEnabled(false);
-		btnAceptar.setBounds(280, 322, 117, 25);
+		btnAceptar.setBounds(322, 346, 117, 25);
 		getContentPane().add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -205,8 +209,39 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
                 setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(12, 322, 117, 25);
+		btnCancelar.setBounds(12, 346, 117, 25);
 		getContentPane().add(btnCancelar);
+		
+		JLabel lblFechaDeRegistro = new JLabel("Fecha de Registro:");
+		lblFechaDeRegistro.setBounds(12, 295, 138, 15);
+		getContentPane().add(lblFechaDeRegistro);
+		
+		JSpinner diar = new JSpinner();
+		diar.setEnabled(false);
+		diar.setBounds(157, 293, 47, 19);
+		getContentPane().add(diar);
+		
+		JLabel label_2 = new JLabel("/");
+		label_2.setBounds(208, 293, 13, 15);
+		getContentPane().add(label_2);
+		
+		JSpinner mesr = new JSpinner();
+		mesr.setEnabled(false);
+		mesr.setBounds(215, 293, 47, 19);
+		getContentPane().add(mesr);
+		
+		JLabel label_1_1 = new JLabel("/");
+		label_1_1.setBounds(265, 293, 4, 15);
+		getContentPane().add(label_1_1);
+		
+		anior = new JSpinner();
+		anior.setEnabled(false);
+		anior.setBounds(273, 293, 60, 19);
+		getContentPane().add(anior);
+		
+		JLabel lblddmmyyyy_1 = new JLabel("(dd/mm/yyyy)");
+		lblddmmyyyy_1.setBounds(339, 293, 92, 15);
+		getContentPane().add(lblddmmyyyy_1);
 
 	}
 	private void limpiarFormulario() {
@@ -227,7 +262,8 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		}
 	}
 	private void aceptarAltaSalidaTuristica() {
-		LocalDate fecha = LocalDate.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue());
-		ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,(int)hora.getSelectedItem(),lugar.getText().toString(), (int)maxTuristas.getValue());
+		LocalDate fechaR = LocalDate.of((int)anior.getValue(), (int)mesr.getValue(), (int)diar.getValue());
+		LocalDateTime fecha = LocalDateTime.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue(),(int)hora.getSelectedItem(),0);
+		ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
 	}
 }
