@@ -34,6 +34,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         }
 
     }
+    
 	public ControladorActividadTuristica() {
 	}
 
