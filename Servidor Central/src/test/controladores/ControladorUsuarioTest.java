@@ -2,9 +2,19 @@ package test.controladores;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import logica.controladores.Fabrica;
+import logica.controladores.IControladorUsuario;
+
 class ControladorUsuarioTest {
+	private static IControladorUsuario cu;
+	
+	@BeforeAll
+	static void preparacionPrevia() {
+		cu = Fabrica.getInstancia().getIControladorUsuario();
+	}
 
 	@Test
 	void testObtenerTurista() {

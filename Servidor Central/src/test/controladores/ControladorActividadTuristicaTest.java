@@ -15,10 +15,10 @@ class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;
 	
 	@BeforeAll
-	public static void iniciar() {
-		Fabrica fabrica = Fabrica.getInstancia();
-		cat = fabrica.getIControladorActividadTuristica();
+	static void preparacionPrevia() {
+		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 	}
+
 
 	@Test
 	public void testAltaDepartamentoOK() {

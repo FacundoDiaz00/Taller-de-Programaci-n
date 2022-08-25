@@ -12,7 +12,7 @@ class ControladorPaqueteTest {
 	private static IControladorPaquete cp;
 
 	@BeforeAll
-	static void setUpBeforeClass() {
+	static void preparacionPrevia() {
 		cp = Fabrica.getInstancia().getIControladorPaquete();
 	}
 
