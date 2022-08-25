@@ -1,5 +1,6 @@
 package logica.controladores;
 
+import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.DeparamentoYaRegistradoException;
 import excepciones.InscripcionYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
@@ -30,7 +31,7 @@ public interface IControladorActividadTuristica {
     //Operaciones de CdeU: Alta de Actividad Turistica
 	List<String> obtenerIdProveedores();
 	List<String> obtenerIdDepartamentos();
-	boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta);
+	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta) throws ActividadTuristicaYaRegistradaException;
 	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);
 	List<String> obtenerIdActividadesTuristicas(String departamento);
 	boolean existeActividadTuristica(String nomActividad);

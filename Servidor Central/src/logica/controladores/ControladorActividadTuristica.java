@@ -1,8 +1,6 @@
 package logica.controladores;
 
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
@@ -49,15 +47,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return new ArrayList<String>(MU.obtenerIdDepartamentos());
 	}
 	
-	public boolean altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) {
+	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) throws ActividadTuristicaYaRegistradaException {
 		if(!existeActividadTuristica(nombreActividad)) {
 			//Se crea instancia:
 			ActividadTuristica AT = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
 			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
 			MAD.addActividad(AT);
-			return true;
+		} else {
+			throw new ActividadTuristicaYaRegistradaException("Ya existe el usuario con el nombre " + nombreActividad);
 		}
-		return false;
 	}
 
 	public boolean existeActividadTuristica(String nomActividad) {

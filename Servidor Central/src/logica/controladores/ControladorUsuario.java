@@ -22,11 +22,13 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 	
 	public Turista obtenerTurista(String nomTur){
-		return null;
+		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		return (Turista) mu.getUsuario(nomTur);
 	}
 	
 	public Proveedor obtenerProveedor(String nomProv){
-		return null;
+        ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		return (Proveedor) mu.getUsuario(nomProv);
 	}
     
 	public List<String> obtenerIdUsuarios() {

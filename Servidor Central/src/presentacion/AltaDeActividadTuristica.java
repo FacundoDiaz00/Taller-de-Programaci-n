@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.EventQueue;
+
+import excepciones.ActividadTuristicaYaRegistradaException;
 import logica.controladores.IControladorActividadTuristica;
 import logica.entidades.Proveedor;
 import logica.entidades.Usuario;
@@ -26,6 +28,8 @@ import javax.swing.JFrame;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import logica.controladores.Fabrica;
+
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +37,7 @@ import java.util.List;
 public class AltaDeActividadTuristica extends JInternalFrame {
 	
 	private JComboBox<String> comboProveedores;
-	private JComboBox comboDepartamentos;
+	private JComboBox<String> comboDepartamentos;
 	private JTextField nombre;
 	private JTextField costo;
 	private JTextField descripcion;
@@ -204,26 +208,35 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 }
 	
 	private void agregarAT(ActionEvent action) {
-		String prov = comboProveedores.getSelectedItem().toString();
-		String dpto = comboDepartamentos.getSelectedItem().toString();
-		String nom = nombre.getText().toString();
-		String desc = descripcion.getText().toString();
-		int dur = Integer.parseInt(duracion.getText().toString());
-		float cost = Float.parseFloat(costo.getText().toString());
-		String ciu = ciudad.getText().toString();
-		String FAlta = FdeAlta.getText().toString();
-	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	      LocalDate fecha = LocalDate.parse(FAlta, JEFormatter);
-	      boolean existeActividad;
-	    existeActividad = icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha);
 
-		if(existeActividad) {
+		try{
+			String prov = comboProveedores.getSelectedItem().toString();
+			String dpto = comboDepartamentos.getSelectedItem().toString();
+			String nom = nombre.getText().toString();
+			String desc = descripcion.getText().toString();
+			int dur = Integer.parseInt(duracion.getText().toString());
+			float cost = Float.parseFloat(costo.getText().toString());
+			String ciu = ciudad.getText().toString();
+			String FAlta = FdeAlta.getText().toString();
+			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate fecha = LocalDate.parse(FAlta, JEFormatter);
+
+
+			icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha);
 			limpiarFormulario();
-            setVisible(false);
+			setVisible(false);
 			JOptionPane.showMessageDialog (null, "Se ha dado de alta la Actividad Turistica con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-		}else {
+		}catch (ActividadTuristicaYaRegistradaException e){
+			JOptionPane.showMessageDialog(null, "Ya existe una actividad turistica con este nombre registrada en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+		}catch (DateTimeParseException e){
+			JOptionPane.showMessageDialog(null, "Fecha alta invalido, es un campo obligatorio y su formato es dd/mm/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
+		}catch (NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "Hay campos numéricos con datos inválido", "Error", JOptionPane.ERROR_MESSAGE);
+		}catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta la Actividad Turistica", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
+
 	}
 	
 	public void actualizarComboProveedores() {
@@ -239,7 +252,8 @@ public class AltaDeActividadTuristica extends JInternalFrame {
     private void limpiarFormulario() {
         nombre.setText("");
         descripcion.setText("");
-        //nickname.setText("");
+		comboProveedores.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
         duracion.setText("");
         costo.setText("");
     }
