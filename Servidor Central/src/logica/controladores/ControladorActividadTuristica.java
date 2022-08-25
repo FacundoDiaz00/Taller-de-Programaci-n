@@ -101,4 +101,11 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
+	
+	public void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDate fecha, int hora, String lugar, int cantMaxTur) {
+		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
+	}
 }
+
+
+

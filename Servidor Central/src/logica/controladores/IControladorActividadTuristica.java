@@ -54,6 +54,16 @@ public interface IControladorActividadTuristica {
 	 * @throws SuperaElMaximoDeTuristasException
 	 */
 	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException;
-
+	/**
+	 * 
+	 * @param departamento
+	 * @param actividadT
+	 * @param nombre
+	 * @param fecha
+	 * @param hora
+	 * @param lugar
+	 * @param cantMaxTur
+	 */
+	void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDate fecha, int hora, String lugar, int cantMaxTur);
 
 }

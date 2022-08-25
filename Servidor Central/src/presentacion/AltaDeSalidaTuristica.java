@@ -14,6 +14,7 @@ import javax.swing.JSpinner;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -22,9 +23,9 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
-	private JTextField dia;
-	private JTextField mes;
-	private JTextField anio;
+	private JSpinner dia;
+	private JSpinner mes;
+	private JSpinner anio;
 	private JTextField nombre;
 	private JTextField lugar;
 	private JComboBox actividadTuristica;
@@ -40,7 +41,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	 */
 	public AltaDeSalidaTuristica() {
 		setTitle("Registrar Salida Turistica.");
-		setBounds(100, 100, 428, 391);
+		setBounds(100, 100, 490, 391);
 		getContentPane().setLayout(null);
 		
 		JLabel lblIngreseLosDatos = new JLabel("Ingrese los datos de la Salida Turistica a Registrar.");
@@ -131,34 +132,31 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lblCantidadMaximaDe.setBounds(12, 259, 208, 15);
 		getContentPane().add(lblCantidadMaximaDe);
 		
-		dia = new JTextField();
+		dia = new JSpinner();
 		dia.setEnabled(false);
-		dia.setBounds(157, 153, 30, 19);
+		dia.setBounds(157, 153, 47, 19);
 		getContentPane().add(dia);
-		dia.setColumns(10);
 		
 		JLabel label = new JLabel("/");
-		label.setBounds(190, 155, 4, 15);
+		label.setBounds(208, 155, 13, 15);
 		getContentPane().add(label);
 		
-		mes = new JTextField();
+		mes = new JSpinner();
 		mes.setEnabled(false);
-		mes.setBounds(199, 153, 30, 19);
+		mes.setBounds(215, 153, 47, 19);
 		getContentPane().add(mes);
-		mes.setColumns(10);
 		
 		JLabel label_1 = new JLabel("/");
-		label_1.setBounds(231, 155, 4, 15);
+		label_1.setBounds(265, 155, 4, 15);
 		getContentPane().add(label_1);
 		
-		anio = new JTextField();
+		anio = new JSpinner();
 		anio.setEnabled(false);
-		anio.setBounds(238, 153, 60, 19);
+		anio.setBounds(273, 153, 60, 19);
 		getContentPane().add(anio);
-		anio.setColumns(10);
 		
 		JLabel lblddmmyyyy = new JLabel("(dd/mm/yyyy)");
-		lblddmmyyyy.setBounds(303, 155, 112, 15);
+		lblddmmyyyy.setBounds(339, 155, 92, 15);
 		getContentPane().add(lblddmmyyyy);
 		
 		nombre = new JTextField();
@@ -191,6 +189,11 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(maxTuristas);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aceptarAltaSalidaTuristica();
+			}
+		});
 		btnAceptar.setEnabled(false);
 		btnAceptar.setBounds(280, 322, 117, 25);
 		getContentPane().add(btnAceptar);
@@ -222,5 +225,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		if(acts.size() > 0){
 			actividadTuristica.setSelectedIndex(0);
 		}
+	}
+	private void aceptarAltaSalidaTuristica() {
+		LocalDate fecha = LocalDate.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue());
+		ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,(int)hora.getSelectedItem(),lugar.getText().toString(), (int)maxTuristas.getValue());
 	}
 }
