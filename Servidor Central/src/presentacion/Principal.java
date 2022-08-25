@@ -29,6 +29,7 @@ public class Principal {
 	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
 	private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
 	private AltaDePaquete frmIntAltaPaquete;
+	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
 	/**
 	 * Launch the application.
 	 */
@@ -58,6 +59,7 @@ public class Principal {
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntAltaPaquete = new AltaDePaquete();
+		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete();
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 
 		frmIntAltaUsuario.setVisible(false);
@@ -66,6 +68,7 @@ public class Principal {
 		frmIntConsultaDeUsuario.setVisible(false);
 		frmIntAltaActividadTuristica.setVisible(false);
 		frmIntConsultaDeActividadTuristica.setVisible(false);
+		frmIntAgregarActividadAPaquete.setVisible(false);
 		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
@@ -74,9 +77,9 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
-		
 		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -196,6 +199,11 @@ public class Principal {
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Agregar Actividad Turística a Paquete");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntAgregarActividadAPaquete.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 	}
 

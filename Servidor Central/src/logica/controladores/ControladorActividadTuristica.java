@@ -53,6 +53,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		if(!existeActividadTuristica(nombreActividad)) {
 			//Se crea instancia:
 			ActividadTuristica AT = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
+			MAD.addActividad(AT);
 			return true;
 		}
 		return false;
