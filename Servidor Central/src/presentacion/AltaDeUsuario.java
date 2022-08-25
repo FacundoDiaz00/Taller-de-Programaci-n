@@ -15,18 +15,22 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import logica.controladores.Fabrica;
 
 public class AltaDeUsuario extends JInternalFrame {
-	
-	
+
+	private final String OPCION_PROVEEDOR = "Proveedor";
+	private final String OPCION_TURISTA = "Turista";
+
 	private JTextField nombre;
 	private JTextField nickname;
 	private JTextField Fnacimiento;
@@ -55,17 +59,17 @@ public class AltaDeUsuario extends JInternalFrame {
 		
 		JLabel lblNewLabel = new JLabel("Nickname:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(7, 37, 77, 14);
+		lblNewLabel.setBounds(40, 40, 77, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre:");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(6, 63, 64, 14);
+		lblNewLabel_1.setBounds(53, 65, 64, 14);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Apellido:");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1.setBounds(7, 89, 63, 14);
+		lblNewLabel_1_1.setBounds(54, 90, 63, 14);
 		getContentPane().add(lblNewLabel_1_1);
 		
 		nombre = new JTextField();
@@ -75,17 +79,17 @@ public class AltaDeUsuario extends JInternalFrame {
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Correo:");
 		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1.setBounds(7, 111, 53, 14);
+		lblNewLabel_1_1_1.setBounds(64, 115, 53, 14);
 		getContentPane().add(lblNewLabel_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Fecha nacimiento:");
 		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1.setBounds(0, 139, 137, 14);
+		lblNewLabel_1_1_1_1.setBounds(7, 140, 110, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Tipo de Usuario:");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_2.setBounds(7, 12, 120, 14);
+		lblNewLabel_2.setBounds(0, 12, 120, 14);
 		getContentPane().add(lblNewLabel_2);
 		
 		nickname = new JTextField();
@@ -95,7 +99,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		
 		Fnacimiento = new JTextField();
 		Fnacimiento.setColumns(10);
-		Fnacimiento.setBounds(141, 137, 248, 20);
+		Fnacimiento.setBounds(131, 137, 258, 20);
 		getContentPane().add(Fnacimiento);
 		
 		apellido = new JTextField();
@@ -109,11 +113,11 @@ public class AltaDeUsuario extends JInternalFrame {
 		getContentPane().add(correo);
 		
 		
-		JComboBox tipoUsuario = new JComboBox();
-		tipoUsuario.setBounds(145, 7, 212, 24);
+		tipoUsuario = new JComboBox();
+		tipoUsuario.setBounds(131, 7, 258, 24);
 		getContentPane().add(tipoUsuario);
-		tipoUsuario.addItem("Proveedor");
-		tipoUsuario.addItem("Turista");
+		tipoUsuario.addItem(OPCION_PROVEEDOR);
+		tipoUsuario.addItem(OPCION_TURISTA);
 		this.tipoUsuario = tipoUsuario;
 		
 		JButton btnNewButton = new JButton("Aceptar");
@@ -132,12 +136,12 @@ public class AltaDeUsuario extends JInternalFrame {
                 setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 259, 117, 25);
+		btnCancelar.setBounds(20, 259, 117, 25);
 		getContentPane().add(btnCancelar);
 		
 		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Nacionalidad:");
 		lblNewLabel_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1_1.setBounds(7, 165, 97, 14);
+		lblNewLabel_1_1_1_1_1.setBounds(17, 165, 97, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_1);
 		
 		nacionalidad = new JTextField();
@@ -148,7 +152,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		
 		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("URL:");
 		lblNewLabel_1_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1_1_1.setBounds(7, 217, 97, 14);
+		lblNewLabel_1_1_1_1_1_1.setBounds(20, 218, 97, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_1_1);
 		
 		descripcion = new JTextField();
@@ -158,7 +162,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		
 		JLabel lblNewLabel_1_1_1_1_1_1_1 = new JLabel("Descripción:");
 		lblNewLabel_1_1_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1_1_1_1.setBounds(7, 191, 97, 14);
+		lblNewLabel_1_1_1_1_1_1_1.setBounds(20, 192, 97, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_1_1_1);
 		
 		url = new JTextField();
@@ -182,22 +186,29 @@ public class AltaDeUsuario extends JInternalFrame {
 
 	}
 	private void agregarUsuario(ActionEvent action) {
-	      String fecha = Fnacimiento.getText();
-	      DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	      LocalDate fechaNac = LocalDate.parse(fecha, JEFormatter);
-		try{
-			if(tipoUsuario.getSelectedItem().toString() == "Proveedor") {
-				icu.altaProveedor(nickname.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), descripcion.getText().toString(),url.getText().toString(), fechaNac);
+		String fecha = Fnacimiento.getText();
+		LocalDate fechaNac;
+		try {
+			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			fechaNac = LocalDate.parse(fecha, JEFormatter);
+			//Todo falta verificar los campos obligatorios
+			if(tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)) {
+				icu.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), descripcion.getText(),url.getText(), fechaNac);
 			}else {
-				icu.altaTurista(nickname.toString(), nombre.toString(), apellido.toString(), correo.toString(), fechaNac, nacionalidad.toString());
+				icu.altaTurista(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac, nacionalidad.getText());
 			}
 			limpiarFormulario();
 			setVisible(false);
 			JOptionPane.showMessageDialog (null, "El usuario se ha creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (UsuarioYaRegistradoException e) {
-			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
-			throw new RuntimeException(e);
+			JOptionPane.showMessageDialog(this, "Ya existe un usuario con este nickname o con este correo", "Error", JOptionPane.ERROR_MESSAGE);
+			//throw new RuntimeException(e); //Todo ¿porque ponen esto?
+		} catch (DateTimeParseException e){
+			JOptionPane.showMessageDialog(this, "Fecha nacimiento invalida, es un campo obligatorio y su formato es dd/mm/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
+			//throw new RuntimeException(e);
+		} catch(Exception e){
+			JOptionPane.showMessageDialog(this, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
     private void limpiarFormulario() {
