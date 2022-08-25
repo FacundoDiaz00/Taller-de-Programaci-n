@@ -14,8 +14,8 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField nombre;
+	private JTextField lugar;
 
 	/**
 	 * Create the frame.
@@ -33,17 +33,18 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lblDepart.setBounds(12, 50, 112, 15);
 		getContentPane().add(lblDepart);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(150, 45, 175, 24);
-		getContentPane().add(comboBox);
+		JComboBox departamento = new JComboBox();
+		departamento.setBounds(150, 45, 175, 24);
+		getContentPane().add(departamento);
 		
 		JLabel lblActividadTurisica = new JLabel("Actividad Turisica:");
 		lblActividadTurisica.setBounds(12, 85, 128, 15);
 		getContentPane().add(lblActividadTurisica);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(150, 80, 175, 24);
-		getContentPane().add(comboBox_1);
+		JComboBox actividadTuristica = new JComboBox();
+		actividadTuristica.setEnabled(false);
+		actividadTuristica.setBounds(150, 80, 175, 24);
+		getContentPane().add(actividadTuristica);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(12, 120, 70, 15);
@@ -66,6 +67,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(lblCantidadMaximaDe);
 		
 		textField = new JTextField();
+		textField.setEnabled(false);
 		textField.setBounds(157, 153, 30, 19);
 		getContentPane().add(textField);
 		textField.setColumns(10);
@@ -75,6 +77,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(label);
 		
 		textField_1 = new JTextField();
+		textField_1.setEnabled(false);
 		textField_1.setBounds(199, 153, 30, 19);
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
@@ -84,6 +87,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(label_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setEnabled(false);
 		textField_2.setBounds(238, 153, 60, 19);
 		getContentPane().add(textField_2);
 		textField_2.setColumns(10);
@@ -92,25 +96,30 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lblddmmyyyy.setBounds(303, 155, 112, 15);
 		getContentPane().add(lblddmmyyyy);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(80, 118, 245, 19);
-		getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		nombre = new JTextField();
+		nombre.setEnabled(false);
+		nombre.setBounds(80, 118, 245, 19);
+		getContentPane().add(nombre);
+		nombre.setColumns(10);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(66, 185, 58, 24);
-		getContentPane().add(comboBox_2);
+		JComboBox hora = new JComboBox();
+		hora.setEnabled(false);
+		hora.setBounds(66, 185, 58, 24);
+		getContentPane().add(hora);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(66, 223, 163, 19);
-		getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		lugar = new JTextField();
+		lugar.setEnabled(false);
+		lugar.setBounds(66, 223, 163, 19);
+		getContentPane().add(lugar);
+		lugar.setColumns(10);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(227, 257, 60, 20);
-		getContentPane().add(spinner);
+		JSpinner maxTuristas = new JSpinner();
+		maxTuristas.setEnabled(false);
+		maxTuristas.setBounds(227, 257, 60, 20);
+		getContentPane().add(maxTuristas);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setEnabled(false);
 		btnAceptar.setBounds(12, 320, 117, 25);
 		getContentPane().add(btnAceptar);
 		
