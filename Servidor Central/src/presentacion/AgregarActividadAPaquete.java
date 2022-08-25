@@ -2,23 +2,20 @@ package presentacion;
 
 import logica.controladores.IControladorUsuario;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
+
 import logica.controladores.Fabrica;
 import java.awt.Dimension;
 import java.awt.Component;
-import javax.swing.Box;
+import java.util.List;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class AgregarActividadAPaquete extends JInternalFrame {
 	private JComboBox comboPaquetes;
@@ -30,6 +27,12 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AgregarActividadAPaquete() {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				cancelar();
+			}
+		});
 		setTitle("Agregar Actividad Turística a Paquete");
 		setBounds(100, 100, 410, 206);
         setResizable(true);
@@ -58,7 +61,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				actualizarComboActividades();
+				actualizarComboPaquete();
 			}
 
 			@Override
@@ -86,7 +89,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		
 	   comboPaquetes.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		        // Se seleccionó un paquete
+		    	 selecionarPaquete();
 		     }
 		   });
 	   
@@ -125,8 +128,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	   
 	   comboDepartamentos.addActionListener(new ActionListener() {
 		   	public void actionPerformed(ActionEvent e) {
-		   		// Se seleccionó un departamento
-		   		actualizarComboActividades();
+				seleccionDepartamento();
 		   	}
 	   });
 	   
@@ -150,7 +152,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	   panelSeleccionActividad.add(lblNewLabel_2_1_1);
 	   
 	   comboActividades = new JComboBox();
-	   
+	   comboActividades.setEnabled(false);
 	   comboActividades.addPopupMenuListener( new PopupMenuListener() {
 
 			@Override
@@ -187,9 +189,19 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	   parte_inferior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	   
 	   JButton botonCancelar = new JButton("Cancelar");
+	   botonCancelar.addActionListener(new ActionListener() {
+	   	public void actionPerformed(ActionEvent e) {
+	   		cancelar();
+	   	}
+	   });
 	   parte_inferior.add(botonCancelar);
 	   
 	   JButton botonAgregar = new JButton("Agregar");
+	   botonAgregar.addActionListener(new ActionListener() {
+	   	public void actionPerformed(ActionEvent e) {
+	   		agregarActividad();
+	   	}
+	   });
 	   parte_inferior.add(botonAgregar);
 
 	}
@@ -202,26 +214,81 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		}
 		super.setVisible(visi);
 	}
+
+	private void seleccionDepartamento(){
+		if(comboPaquetes.getSelectedItem() != null){
+			comboActividades.setEnabled(true);
+			actualizarComboActividades();
+		}
+	}
 	
+	private void selecionarPaquete() {
+		if(comboDepartamentos.getSelectedItem() != null){
+			comboActividades.setEnabled(true);
+			actualizarComboActividades();
+		}
+	}
+
 	private void actualizarComboPaquete() {
-		
+		List<String> idsPaquetes = Fabrica.getInstancia().getIControladorPaquete().obtenerIdPaquetes();
+		comboPaquetes.setModel(new DefaultComboBoxModel(idsPaquetes.toArray()));
+		if(idsPaquetes.size() > 0){
+			comboPaquetes.setSelectedIndex(0);
+			if(comboDepartamentos.getSelectedItem() != null){
+				actualizarComboActividades();
+			}
+		}
 	}
 	
 	private void actualizarComboDepartamentos() {
-		
+		List<String> idsDepartamentos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+		comboDepartamentos.setModel(new DefaultComboBoxModel<>(idsDepartamentos.toArray()));
+		if(idsDepartamentos.size() > 0) {
+			comboDepartamentos.setSelectedIndex(0);
+			if(comboPaquetes.getSelectedItem() != null){
+				actualizarComboActividades();
+			}
+		}
+
 	}
 	
 	private void actualizarComboActividades() {
-		
+		String depId = (String) comboDepartamentos.getSelectedItem();
+		String packId = (String) comboPaquetes.getSelectedItem();
+		//No va a estar habilitado el combo si no seleciono la actividad y el pack
+		List<String> idsActividades = Fabrica.getInstancia().getIControladorPaquete().obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId, packId);
+		comboActividades.setModel(new DefaultComboBoxModel<>(idsActividades.toArray()));
+		if(idsActividades.size() > 0){
+			comboActividades.setSelectedIndex(0);
+		}
 	}
 	
     private void limpiarSelecciones() {
-    	comboPaquetes.setSelectedItem("elija un paquete");
-    	comboDepartamentos.setSelectedItem("elija un departamento");
-    	comboActividades.setSelectedItem("elija una actividad");
+		actualizarComboPaquete();
+		actualizarComboDepartamentos();
     }
     
     private void agregarActividad() {
-    	
+		String act = (String) comboActividades.getSelectedItem();
+		String pack = (String) comboPaquetes.getSelectedItem();
+
+		if(act == null || pack == null){
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un departamento, actividad de actividad turística y un paquete", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			Fabrica.getInstancia().getIControladorPaquete().agregarActividadAPaquete(act, pack);
+			setVisible(false);
+			limpiarSelecciones();
+			JOptionPane.showMessageDialog(null, "Se agregó la actividad al paquete", "Registro de asociación actividad a paquete", JOptionPane.INFORMATION_MESSAGE);
+		}
+
     }
+    
+    private void cancelar() {
+    	setVisible(false);
+    	limpiarSelecciones();
+    }
+    
+    
+    
+    
 }
