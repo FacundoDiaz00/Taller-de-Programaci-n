@@ -202,13 +202,13 @@ public class AltaDeUsuario extends JInternalFrame {
 			JOptionPane.showMessageDialog (null, "El usuario se ha creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (UsuarioYaRegistradoException e) {
-			JOptionPane.showMessageDialog(this, "Ya existe un usuario con este nickname o con este correo", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ya existe un usuario con este nickname o con este correo", "Error", JOptionPane.ERROR_MESSAGE);
 			//throw new RuntimeException(e); //Todo ¿porque ponen esto?
 		} catch (DateTimeParseException e){
-			JOptionPane.showMessageDialog(this, "Fecha nacimiento invalida, es un campo obligatorio y su formato es dd/mm/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Fecha nacimiento invalida, es un campo obligatorio y su formato es dd/mm/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
 			//throw new RuntimeException(e);
 		} catch(Exception e){
-			JOptionPane.showMessageDialog(this, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
     private void limpiarFormulario() {
