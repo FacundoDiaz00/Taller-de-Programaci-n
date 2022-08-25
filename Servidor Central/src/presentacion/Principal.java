@@ -89,6 +89,7 @@ public class Principal {
 
 		try {
 			CAD.altaDepartamento("Montevideo", "Capital" , "www.algo.com");
+			CAD.altaDepartamento("Colonia", "NO Capital" , "www.algo2.com");
 		} catch (DeparamentoYaRegistradoException e){
 			JOptionPane.showMessageDialog(frmEstacionDeTrabajo, "Error al crear el departamento hadcode en Principal", "Por dios...", JOptionPane.ERROR_MESSAGE);
 		}

@@ -60,13 +60,12 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
     
     public List<String> obtenerIdActividadesTuristicas(String departamento){
-    	ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-    	List<ActividadTuristica> actividades = mat.getActividades();
-    	System.out.print(actividades.isEmpty());
-    	ArrayList<String> idActividades = new ArrayList<String>();
-    	for(var actividad: actividades) {
-    		idActividades.add(actividad.getNombre());
-    	}
+		List<String> idActividades = new ArrayList<>();
+    	ManejadorDepartamento mdep = ManejadorDepartamento.getInstancia();
+		Departamento dep = mdep.getDepartamento(departamento);
+		for(ActividadTuristica act : dep.getActividadTuristicas().values()){
+			idActividades.add(act.getNombre());
+		}
     	return idActividades;
     }
     
