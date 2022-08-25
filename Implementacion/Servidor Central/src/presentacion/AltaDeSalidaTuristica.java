@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
@@ -23,11 +24,11 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JTextField anio;
 	private JTextField nombre;
 	private JTextField lugar;
-	JComboBox<String> actividadTuristica;
-	JComboBox<Integer> hora;
-	JSpinner maxTuristas;
-	JButton btnAceptar;
-	
+	private JComboBox<String> actividadTuristica;
+	private JComboBox<Integer> hora;
+	private JSpinner maxTuristas;
+	private JButton btnAceptar;
+	private JComboBox<String> departamento;
 	Fabrica f = Fabrica.getInstancia();
 	IControladorActividadTuristica ca = f.getIControladorActividadTuristica();
 	
@@ -48,7 +49,15 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(lblDepart);
 		
 		//Cuando se setea un departamento, se habilita la seleccion de una actividad.
-		JComboBox<String> departamento = new JComboBox<String>();
+		
+		List<String> deptos = ca.obtenerIdDepartamentos();
+		Vector<String>Vdeptos = new Vector<String>(deptos);
+		//System.out.println(Vdeptos.firstElement());
+		//Vector<String>v1 = new Vector<String>();
+		//v1.addElement("pepe");
+		
+
+		departamento = new JComboBox<String>(Vdeptos);
 		departamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(departamento.getSelectedItem() != null) {
@@ -60,14 +69,15 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 				}
 			}
 		});
-		departamento.setBounds(150, 45, 175, 24);
-		List<String> deptos = ca.obtenerIdDepartamentos();
-		for(int i = 0;i<deptos.size();i++) {
-			departamento.addItem(deptos.get(i));
-		}
-		
 		getContentPane().add(departamento);
-		
+
+		departamento.setBounds(150, 45, 175, 24);
+		//List<String> deptos = ca.obtenerIdDepartamentos();
+		/*for(int i = 0;i<deptos.size();i++) {
+			departamento.addItem(deptos.get(i));
+		}*/
+		//this.departamento = departamento;
+
 		
 		JLabel lblActividadTurisica = new JLabel("Actividad Turisica:");
 		lblActividadTurisica.setBounds(12, 85, 128, 15);
