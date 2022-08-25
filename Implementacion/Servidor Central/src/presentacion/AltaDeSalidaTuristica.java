@@ -13,6 +13,7 @@ import logica.controladores.IControladorActividadTuristica;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -25,6 +26,8 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	JComboBox<String> actividadTuristica;
 	JComboBox<Integer> hora;
 	JSpinner maxTuristas;
+	JButton btnAceptar;
+	
 	Fabrica f = Fabrica.getInstancia();
 	IControladorActividadTuristica ca = f.getIControladorActividadTuristica();
 	
@@ -81,6 +84,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 					hora.setEnabled(true);
 					lugar.setEnabled(true);
 					maxTuristas.setEnabled(true);
+					btnAceptar.setEnabled(true);
 				}
 			}
 		});
@@ -148,7 +152,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		hora = new JComboBox<Integer>();
 		hora.setEnabled(false);
 		hora.setBounds(66, 185, 58, 24);
-		List<Integer> aux = null;
+		List<Integer> aux = new ArrayList<Integer>();
 		for(int i = 0;i<=23;i++) {
 			aux.add(i);
 		}
@@ -168,7 +172,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		maxTuristas.setBounds(227, 257, 60, 20);
 		getContentPane().add(maxTuristas);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setEnabled(false);
 		btnAceptar.setBounds(12, 320, 117, 25);
 		getContentPane().add(btnAceptar);
