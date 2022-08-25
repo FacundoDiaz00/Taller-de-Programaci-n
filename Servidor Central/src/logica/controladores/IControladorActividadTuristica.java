@@ -29,7 +29,6 @@ public interface IControladorActividadTuristica {
     void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException;
 
     //Operaciones de CdeU: Alta de Actividad Turistica
-	List<String> obtenerIdProveedores();
 	List<String> obtenerIdDepartamentos();
 	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta) throws ActividadTuristicaYaRegistradaException;
 	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);

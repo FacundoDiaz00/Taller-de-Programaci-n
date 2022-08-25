@@ -12,11 +12,12 @@ import excepciones.PaqueteYaRegistradoException;
 
 
 public interface IControladorPaquete {
-    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException;
-    public List<String> obtenerIdPaquetes();
-    public List<String> obtenerIdDepartamentos();
-    public List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
-    public void agregarActividadAPaquete(String nombreAct, String nombrePaq);
+    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException;
+    List<String> obtenerIdPaquetes();
+
+    List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
+    void agregarActividadAPaquete(String nombreAct, String nombrePaq);
+
 
     /**
      * Devuelve todos los DTPaqueteDetalles de todos los paquetes registrados en el sistema.

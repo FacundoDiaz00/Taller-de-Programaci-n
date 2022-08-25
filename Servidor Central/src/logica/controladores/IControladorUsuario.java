@@ -16,6 +16,10 @@ import java.util.List;
 public interface IControladorUsuario {
 	List<String> obtenerIdUsuarios();
 
+	List<String> obtenerIdProveedores();
+
+	List<String> obtenerIdTuristas();
+
 	DTUsuario obtenerDTUsuario(String nickname);
 	DTUsuario obtenerDTUsuarioDetalle(String nickname);
 	
