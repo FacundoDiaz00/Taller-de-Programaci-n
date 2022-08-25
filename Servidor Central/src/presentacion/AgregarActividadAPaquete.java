@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import logica.controladores.Fabrica;
+import java.awt.Dimension;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class AgregarActividadAPaquete extends JInternalFrame {
 	private JComboBox comboPaquetes;
@@ -28,7 +31,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	 */
 	public AgregarActividadAPaquete() {
 		setTitle("Agregar Actividad Turística a Paquete");
-		setBounds(100, 100, 409, 328);
+		setBounds(100, 100, 410, 206);
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -41,13 +44,13 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel selecciones = new JPanel();
-		panel.add(selecciones, BorderLayout.CENTER);
+		panel.add(selecciones, BorderLayout.NORTH);
 		selecciones.setLayout(new BoxLayout(selecciones, BoxLayout.Y_AXIS));
 		
 		JPanel panelSeleccionPaquete = new JPanel();
 		selecciones.add(panelSeleccionPaquete);
 		
-		JLabel lblNewLabel_2 = new JLabel("Paquete:");
+		JLabel lblNewLabel_2 = new JLabel(" Paquete:");
 		
 		
 		comboPaquetes = new JComboBox();
@@ -55,7 +58,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				// Esto es lo que actualiza la lista cada vez que se abre.
+				actualizarComboActividades();
 			}
 
 			@Override
@@ -71,10 +74,15 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 			}
         	
         });
-		
-		panelSeleccionPaquete.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+		panelSeleccionPaquete.setLayout(new BoxLayout(panelSeleccionPaquete, BoxLayout.X_AXIS));
 		panelSeleccionPaquete.add(lblNewLabel_2);
+		
+		Component gluePaquete = Box.createHorizontalStrut(120);
+		panelSeleccionPaquete.add(gluePaquete);
 		panelSeleccionPaquete.add(comboPaquetes);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		panelSeleccionPaquete.add(horizontalStrut);
 		
 	   comboPaquetes.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
@@ -82,9 +90,12 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		     }
 		   });
 	   
+	   Component verticalStrut = Box.createVerticalStrut(10);
+	   selecciones.add(verticalStrut);
+	   
 	   JPanel panelSeleccionDepartamento = new JPanel();
 	   selecciones.add(panelSeleccionDepartamento);
-	   panelSeleccionDepartamento.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+	   panelSeleccionDepartamento.setLayout(new BoxLayout(panelSeleccionDepartamento, BoxLayout.X_AXIS));
 	   
 	   JLabel lblNewLabel_2_1 = new JLabel("Departamento de la Actividad:");
 	   panelSeleccionDepartamento.add(lblNewLabel_2_1);
@@ -95,7 +106,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				// Esto es lo que actualiza la lista cada vez que se abre.
+				actualizarComboDepartamentos();
 			}
 
 			@Override
@@ -118,13 +129,24 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		   		actualizarComboActividades();
 		   	}
 	   });
+	   
+	   Component glue_Departamento = Box.createHorizontalStrut(5);
+	   panelSeleccionDepartamento.add(glue_Departamento);
 	   panelSeleccionDepartamento.add(comboDepartamentos);
+	   
+	   Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+	   panelSeleccionDepartamento.add(horizontalStrut_1);
+	   
+	   Component verticalStrut_1 = Box.createVerticalStrut(10);
+	   selecciones.add(verticalStrut_1);
 	   
 	   JPanel panelSeleccionActividad = new JPanel();
 	   selecciones.add(panelSeleccionActividad);
-	   panelSeleccionActividad.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+	   panelSeleccionActividad.setLayout(new BoxLayout(panelSeleccionActividad, BoxLayout.X_AXIS));
 	   
 	   JLabel lblNewLabel_2_1_1 = new JLabel("Actividad:");
+	   lblNewLabel_2_1_1.setMinimumSize(new Dimension(100, 14));
+	   lblNewLabel_2_1_1.setMaximumSize(new Dimension(100, 14));
 	   panelSeleccionActividad.add(lblNewLabel_2_1_1);
 	   
 	   comboActividades = new JComboBox();
@@ -133,7 +155,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				// Esto es lo que actualiza la lista cada vez que se abre.
+				actualizarComboActividades();
 			}
 
 			@Override
@@ -150,25 +172,33 @@ public class AgregarActividadAPaquete extends JInternalFrame {
       	
       });
 	   
+	   Component glueActividadTuristica = Box.createHorizontalStrut(120);
+	   panelSeleccionActividad.add(glueActividadTuristica);
+	   
 	   panelSeleccionActividad.add(comboActividades);
+	   
+	   Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+	   panelSeleccionActividad.add(horizontalStrut_2);
+	   
+
 	   
 	   JPanel parte_inferior = new JPanel();
 	   panel.add(parte_inferior, BorderLayout.SOUTH);
 	   parte_inferior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	   
-	   JButton botonAgregar = new JButton("Agregar");
-	   parte_inferior.add(botonAgregar);
-	   
 	   JButton botonCancelar = new JButton("Cancelar");
 	   parte_inferior.add(botonCancelar);
+	   
+	   JButton botonAgregar = new JButton("Agregar");
+	   parte_inferior.add(botonAgregar);
 
 	}
 	
 	public void setVisible(boolean visi) {
 		if (visi) {
 			limpiarSelecciones();
-			actualizarComboActividades();
 			actualizarComboDepartamentos();
+			actualizarComboPaquete();
 		}
 		super.setVisible(visi);
 	}
