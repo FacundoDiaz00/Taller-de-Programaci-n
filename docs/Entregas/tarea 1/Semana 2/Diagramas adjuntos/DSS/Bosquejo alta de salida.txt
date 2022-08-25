@@ -1,0 +1,5 @@
+CU: ALTA DE SALIDA
+
+obtenerIdDepartamentos() : set(string)
+obtenerIdActividadesDeDepartamento(dep : string) : set(string)
+altaDeSalida(nomSalida : string, fechaHora : DTFechaYHora, maxCantTuristas : integer, fechaAlta: DTFecha) : bool
