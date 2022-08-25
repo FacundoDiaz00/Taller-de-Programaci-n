@@ -102,13 +102,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
-	
-	public void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDateTime fechaYHoraActividad,LocalDate fechaAlta, String lugar, int cantMaxTur) {
+
+	public void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur){
 		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
 		if(ms.existeSalidaTuristica(nombre)) {
 			//throw...
 		}else {
-			SalidaTuristica st = new SalidaTuristica(nombre, cantMaxTur, fechaAlta, fechaYHoraActividad, lugar);
+			SalidaTuristica st = new SalidaTuristica(actividad,nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar);
+			ms.addSalida(st);
 		}
 	}
 }

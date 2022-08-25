@@ -65,6 +65,6 @@ public interface IControladorActividadTuristica {
 	 * @param lugar
 	 * @param cantMaxTur
 	 */
-	void altaSalidaTuristica(String departamento, String actividadT, String nombre, LocalDateTime fechaYHoraActividad,LocalDate fechaAlta, String lugar, int cantMaxTur);
+	void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur);
 	
 }
