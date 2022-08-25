@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import java.awt.Dimension;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class InscribirseASalidaTurística extends JInternalFrame {
 	private JTextField textField;
@@ -44,7 +45,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InscribirseASalidaTurística() {
-		setBounds(100, 100, 423, 453);
+		setBounds(100, 100, 583, 318);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel botones = new JPanel();
@@ -100,6 +101,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		elementos.add(verticalStrut2);
 		
 		JPanel infoSalida = new JPanel();
+		infoSalida.setBorder(new TitledBorder(null, "Salidas turisticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		elementos.add(infoSalida);
 		infoSalida.setLayout(new BorderLayout(0, 0));
 		
@@ -117,7 +119,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		Component horizontalStrut_6 = Box.createHorizontalStrut(40);
 		panel_8.add(horizontalStrut_6);
 		
-		JLabel lblNewLabel_4 = new JLabel("Salidas turisticas");
+		JLabel lblNewLabel_4 = new JLabel("Seleccione una salida");
 		panel_8.add(lblNewLabel_4);
 		
 		Component horizontalStrut_7 = Box.createHorizontalStrut(40);
@@ -137,13 +139,17 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_1.add(panel_3);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
+		Component horizontalStrut_18 = Box.createHorizontalStrut(20);
+		panel_3.add(horizontalStrut_18);
+		
+		JLabel lblNewLabel_3 = new JLabel("Nombre");
 		panel_3.add(lblNewLabel_3);
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_8);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
 		panel_3.add(textField);
 		textField.setColumns(10);
 		
@@ -155,13 +161,17 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_1.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
+		Component horizontalStrut_19 = Box.createHorizontalStrut(20);
+		panel_4.add(horizontalStrut_19);
+		
+		JLabel lblNewLabel_5 = new JLabel("Lugar salida");
 		panel_4.add(lblNewLabel_5);
 		
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
 		panel_4.add(horizontalStrut_9);
 		
 		textField_1 = new JTextField();
+		textField_1.setEditable(false);
 		panel_4.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -172,13 +182,17 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_1.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
+		Component horizontalStrut_20 = Box.createHorizontalStrut(20);
+		panel_5.add(horizontalStrut_20);
+		
+		JLabel lblNewLabel_6 = new JLabel("Fecha alta");
 		panel_5.add(lblNewLabel_6);
 		
 		Component horizontalStrut_10 = Box.createHorizontalStrut(20);
 		panel_5.add(horizontalStrut_10);
 		
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		panel_5.add(textField_2);
 		textField_2.setColumns(10);
 		
@@ -189,13 +203,17 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_1.add(panel_6);
 		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel_7 = new JLabel("New label");
+		Component horizontalStrut_21 = Box.createHorizontalStrut(20);
+		panel_6.add(horizontalStrut_21);
+		
+		JLabel lblNewLabel_7 = new JLabel("Capacidad de turistas");
 		panel_6.add(lblNewLabel_7);
 		
 		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
 		panel_6.add(horizontalStrut_11);
 		
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		panel_6.add(textField_3);
 		textField_3.setColumns(10);
 		
@@ -206,13 +224,17 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_1.add(panel_7);
 		panel_7.setLayout(new BoxLayout(panel_7, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel_8 = new JLabel("New label");
+		Component horizontalStrut_22 = Box.createHorizontalStrut(20);
+		panel_7.add(horizontalStrut_22);
+		
+		JLabel lblNewLabel_8 = new JLabel("Fecha y hora de salida");
 		panel_7.add(lblNewLabel_8);
 		
 		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
 		panel_7.add(horizontalStrut_12);
 		
 		textField_4 = new JTextField();
+		textField_4.setEditable(false);
 		panel_7.add(textField_4);
 		textField_4.setColumns(10);
 		
