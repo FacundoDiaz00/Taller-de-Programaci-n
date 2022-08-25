@@ -1,29 +1,42 @@
 package presentacion;
 
+import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.IControladorUsuario;
+
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
 import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import java.awt.Dimension;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.List;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class InscribirseASalidaTurística extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField nombreTextField;
+	private JTextField lugarTextField;
+	private JTextField fechaAltaTextField;
+	private JTextField capacidadDeTuristaTextField;
+	private JTextField fechaYHoraDeSalidaTextField;
+	private JTextField diaTextField;
+
+	private JComboBox comboDepartamento;
+	private JComboBox comboActividad;
+	private JComboBox comboTurista;
+	private JTextField mesTextField;
+	private JTextField añoTextField;
+
+
+
 
 	/**
 	 * Launch the application.
@@ -45,7 +58,18 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InscribirseASalidaTurística() {
-		setBounds(100, 100, 583, 318);
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				cancelar();
+			}
+		});
+		setResizable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
+		setTitle("Inscribirse a salida turistica");
+		setBounds(100, 100, 545, 398);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel botones = new JPanel();
@@ -53,9 +77,19 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		botones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton cancelarButton = new JButton("Cancelar");
+		cancelarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelar();
+			}
+		});
 		botones.add(cancelarButton);
 		
 		JButton aceptarButton = new JButton("Aceptar");
+		aceptarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acpetar();
+			}
+		});
 		botones.add(aceptarButton);
 		
 		JPanel elementos = new JPanel();
@@ -66,14 +100,31 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		elementos.add(departamentoPanel);
 		departamentoPanel.setLayout(new BoxLayout(departamentoPanel, BoxLayout.X_AXIS));
 		
+		Component horizontalStrut_23 = Box.createHorizontalStrut(20);
+		departamentoPanel.add(horizontalStrut_23);
+		
 		JLabel lblNewLabel = new JLabel("Departamento:");
 		departamentoPanel.add(lblNewLabel);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
+		Component horizontalStrut = Box.createHorizontalStrut(43);
 		departamentoPanel.add(horizontalStrut);
 		
-		JComboBox comboBox = new JComboBox();
-		departamentoPanel.add(comboBox);
+		comboDepartamento = new JComboBox();
+		comboDepartamento.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				actualizarDepartamentos();
+			}
+		});
+		comboDepartamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				seleccionarDepartamento();
+			}
+		});
+		departamentoPanel.add(comboDepartamento);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		departamentoPanel.add(horizontalStrut_1);
@@ -85,14 +136,31 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		elementos.add(actividadPanel);
 		actividadPanel.setLayout(new BoxLayout(actividadPanel, BoxLayout.X_AXIS));
 		
+		Component horizontalStrut_24 = Box.createHorizontalStrut(20);
+		actividadPanel.add(horizontalStrut_24);
+		
 		JLabel lblNewLabel_1 = new JLabel("Actividad Turistica:");
 		actividadPanel.add(lblNewLabel_1);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		actividadPanel.add(horizontalStrut_2);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		actividadPanel.add(comboBox_1);
+		comboActividad = new JComboBox();
+		comboActividad.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				actualizarActividadesTuristicas();
+			}
+		});
+		comboActividad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				seleccionarActividadesTuristicas();
+			}
+		});
+		actividadPanel.add(comboActividad);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		actividadPanel.add(horizontalStrut_3);
@@ -125,8 +193,13 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		Component horizontalStrut_7 = Box.createHorizontalStrut(40);
 		panel_8.add(horizontalStrut_7);
 		
-		JList list = new JList();
-		panel_2.add(list, BorderLayout.CENTER);
+		JList salidaList = new JList();
+		salidaList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				seleccionarSalidaTuristicas();
+			}
+		});
+		panel_2.add(salidaList, BorderLayout.CENTER);
 		
 		JPanel panel_1 = new JPanel();
 		infoSalida.add(panel_1);
@@ -145,13 +218,13 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		JLabel lblNewLabel_3 = new JLabel("Nombre");
 		panel_3.add(lblNewLabel_3);
 		
-		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_8 = Box.createHorizontalStrut(93);
 		panel_3.add(horizontalStrut_8);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		panel_3.add(textField);
-		textField.setColumns(10);
+		nombreTextField = new JTextField();
+		nombreTextField.setEditable(false);
+		panel_3.add(nombreTextField);
+		nombreTextField.setColumns(10);
 		
 		Component horizontalStrut_13 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_13);
@@ -167,13 +240,13 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		JLabel lblNewLabel_5 = new JLabel("Lugar salida");
 		panel_4.add(lblNewLabel_5);
 		
-		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_9 = Box.createHorizontalStrut(68);
 		panel_4.add(horizontalStrut_9);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		panel_4.add(textField_1);
-		textField_1.setColumns(10);
+		lugarTextField = new JTextField();
+		lugarTextField.setEditable(false);
+		panel_4.add(lugarTextField);
+		lugarTextField.setColumns(10);
 		
 		Component horizontalStrut_14 = Box.createHorizontalStrut(20);
 		panel_4.add(horizontalStrut_14);
@@ -188,13 +261,13 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		JLabel lblNewLabel_6 = new JLabel("Fecha alta");
 		panel_5.add(lblNewLabel_6);
 		
-		Component horizontalStrut_10 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_10 = Box.createHorizontalStrut(80);
 		panel_5.add(horizontalStrut_10);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		panel_5.add(textField_2);
-		textField_2.setColumns(10);
+		fechaAltaTextField = new JTextField();
+		fechaAltaTextField.setEditable(false);
+		panel_5.add(fechaAltaTextField);
+		fechaAltaTextField.setColumns(10);
 		
 		Component horizontalStrut_15 = Box.createHorizontalStrut(20);
 		panel_5.add(horizontalStrut_15);
@@ -209,13 +282,13 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		JLabel lblNewLabel_7 = new JLabel("Capacidad de turistas");
 		panel_6.add(lblNewLabel_7);
 		
-		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_11 = Box.createHorizontalStrut(14);
 		panel_6.add(horizontalStrut_11);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		panel_6.add(textField_3);
-		textField_3.setColumns(10);
+		capacidadDeTuristaTextField = new JTextField();
+		capacidadDeTuristaTextField.setEditable(false);
+		panel_6.add(capacidadDeTuristaTextField);
+		capacidadDeTuristaTextField.setColumns(10);
 		
 		Component horizontalStrut_16 = Box.createHorizontalStrut(20);
 		panel_6.add(horizontalStrut_16);
@@ -230,13 +303,13 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		JLabel lblNewLabel_8 = new JLabel("Fecha y hora de salida");
 		panel_7.add(lblNewLabel_8);
 		
-		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_12 = Box.createHorizontalStrut(12);
 		panel_7.add(horizontalStrut_12);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		panel_7.add(textField_4);
-		textField_4.setColumns(10);
+		fechaYHoraDeSalidaTextField = new JTextField();
+		fechaYHoraDeSalidaTextField.setEditable(false);
+		panel_7.add(fechaYHoraDeSalidaTextField);
+		fechaYHoraDeSalidaTextField.setColumns(10);
 		
 		Component horizontalStrut_17 = Box.createHorizontalStrut(20);
 		panel_7.add(horizontalStrut_17);
@@ -251,24 +324,158 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		elementos.add(turista);
 		turista.setLayout(new BoxLayout(turista, BoxLayout.X_AXIS));
 		
+		Component horizontalStrut_25 = Box.createHorizontalStrut(20);
+		turista.add(horizontalStrut_25);
+		
 		JLabel lblNewLabel_2 = new JLabel("Turista: ");
 		turista.add(lblNewLabel_2);
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_4 = Box.createHorizontalStrut(80);
 		turista.add(horizontalStrut_4);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		turista.add(comboBox_2);
+		comboTurista = new JComboBox();
+		comboTurista.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				actualizarTuristas();
+			}
+		});
+		turista.add(comboTurista);
 		
 		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
 		turista.add(horizontalStrut_5);
 		
-
+		Component verticalStrut_1 = Box.createVerticalStrut(10);
+		elementos.add(verticalStrut_1);
 		
-
-
+		JPanel panel_9 = new JPanel();
+		elementos.add(panel_9);
+		panel_9.setLayout(new BoxLayout(panel_9, BoxLayout.X_AXIS));
 		
+		Component horizontalStrut_26 = Box.createHorizontalStrut(20);
+		panel_9.add(horizontalStrut_26);
+		
+		JLabel lblNewLabel_9 = new JLabel("Fecha inscripcion");
+		panel_9.add(lblNewLabel_9);
+		
+		Component horizontalStrut_28 = Box.createHorizontalStrut(27);
+		panel_9.add(horizontalStrut_28);
+		
+		diaTextField = new JTextField();
+		panel_9.add(diaTextField);
+		diaTextField.setColumns(10);
+		
+		JLabel lblNewLabel_11 = new JLabel(" / ");
+		panel_9.add(lblNewLabel_11);
+		
+		mesTextField = new JTextField();
+		panel_9.add(mesTextField);
+		mesTextField.setColumns(10);
+		
+		JLabel lblNewLabel_12 = new JLabel(" / ");
+		panel_9.add(lblNewLabel_12);
+		
+		añoTextField = new JTextField();
+		panel_9.add(añoTextField);
+		añoTextField.setColumns(10);
+		
+		JLabel lblNewLabel_13 = new JLabel(" (dd/mm/yyyy)");
+		panel_9.add(lblNewLabel_13);
+		
+		Component horizontalStrut_27 = Box.createHorizontalStrut(20);
+		panel_9.add(horizontalStrut_27);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		panel_9.add(horizontalGlue);
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(10);
+		elementos.add(verticalStrut_2);
+		
+		JPanel panel_10 = new JPanel();
+		elementos.add(panel_10);
+		panel_10.setLayout(new BoxLayout(panel_10, BoxLayout.X_AXIS));
+		
+		Component horizontalStrut_29 = Box.createHorizontalStrut(20);
+		panel_10.add(horizontalStrut_29);
+		
+		JLabel lblNewLabel_10 = new JLabel("Cantidad turistas");
+		panel_10.add(lblNewLabel_10);
+		
+		Component horizontalStrut_30 = Box.createHorizontalStrut(30);
+		panel_10.add(horizontalStrut_30);
+		
+		JSpinner spinner = new JSpinner();
+		panel_10.add(spinner);
+		
+		Component horizontalStrut_31 = Box.createHorizontalStrut(20);
+		panel_10.add(horizontalStrut_31);
 
 	}
+
+
+	private void actualizarDepartamentos(){
+		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		List<String> idDeps = cat.obtenerIdDepartamentos();
+		comboDepartamento.setModel(new DefaultComboBoxModel<>(idDeps.toArray()));
+		if(idDeps.size() > 0){
+			comboDepartamento.setSelectedIndex(0);
+			seleccionarDepartamento();
+			actualizarActividadesTuristicas();
+		}
+
+	}
+
+	private void seleccionarDepartamento(){
+		comboActividad.setEnabled(true);
+	}
+
+	private void actualizarActividadesTuristicas(){
+		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		String dep = (String)comboDepartamento.getSelectedItem();
+		List<String> idActs = cat.obtenerIdActividadesTuristicas(dep);
+		comboActividad.setModel(new DefaultComboBoxModel<>(idActs.toArray()));
+		if(idActs.size() > 0){
+			comboActividad.setSelectedIndex(0);
+			seleccionarActividadesTuristicas();
+			actualizarSalidaTuristicas();
+		}
+	}
+
+	private void seleccionarActividadesTuristicas(){
+
+	}
+
+	private void actualizarSalidaTuristicas(){
+
+	}
+
+	private void seleccionarSalidaTuristicas(){
+
+	}
+
+	private void actualizarTuristas(){
+		IControladorUsuario cu = Fabrica.getInstancia().getIControladorUsuario();
+		List<String> idTuris = cu.obtenerIdTuristas();
+		comboTurista.setModel(new DefaultComboBoxModel<>(idTuris.toArray()));
+		if(idTuris.size() > 0){
+			comboTurista.setSelectedIndex(0);
+		}
+	}
+
+	private void cancelar(){
+
+	}
+
+	private void acpetar(){
+
+	}
+
+
+
+
+
 
 }
