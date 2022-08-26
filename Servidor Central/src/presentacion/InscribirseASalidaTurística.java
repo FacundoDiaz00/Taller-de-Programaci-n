@@ -35,25 +35,6 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	private JTextField mesTextField;
 	private JTextField añoTextField;
 
-
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InscribirseASalidaTurística frame = new InscribirseASalidaTurística();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
