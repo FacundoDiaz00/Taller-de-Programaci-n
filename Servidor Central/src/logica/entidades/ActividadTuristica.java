@@ -58,7 +58,7 @@ public class ActividadTuristica {
     }
 
     public DTActividadTuristica obtenerDTActividadTuristica(){
-        return new DTActividadTuristica(nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
+        return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta());
     }
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(){
@@ -71,12 +71,12 @@ public class ActividadTuristica {
             salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
         }
 
-        return new DTActividadTuristicaDetalle(salid, packs, nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
+        return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta());
     }
 
     @Override
     public boolean equals(Object obj) {
-        return ((ActividadTuristica) obj).nombre.equals(this.nombre);
+        return ((ActividadTuristica) obj).getNombre().equals(this.getNombre());
     }
 
     public String getNombre() {

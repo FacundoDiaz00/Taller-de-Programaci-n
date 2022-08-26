@@ -56,7 +56,7 @@ public class Proveedor extends Usuario {
     
     @Override
     public DTUsuario getDTUsuario() {
-        return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), descrpicionGeneral, link);
+        return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getDescrpicionGeneral(), getLink());
     }
 
     @Override
@@ -68,20 +68,19 @@ public class Proveedor extends Usuario {
             var salidasList = a.obtenerIdSalidasTuristicas();
             salidas.get(a.getNombre()).addAll(salidasList);
         }
-
-        return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), descrpicionGeneral, link, salidas);
+        
+        return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getDescrpicionGeneral(), getLink(), salidas);
     }
 
 	public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {
 		// TODO Auto-generated method stub
-		
 	}
     
     @Override
     public void setearDatos(DTUsuario datosNuevos) {
 		super.setearDatos(datosNuevos);
 		DTProveedor prov = (DTProveedor) datosNuevos;
-		this.descrpicionGeneral = prov.getDescrpicionGeneral();
-		this.link = prov.getLink();
+		this.setDescrpicionGeneral(prov.getDescrpicionGeneral());
+		this.setLink(prov.getLink());
 	}
 }
