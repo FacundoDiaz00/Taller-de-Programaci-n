@@ -1,6 +1,7 @@
 package logica.entidades;
 
 import logica.datatypes.DTSalidaTuristica;
+import logica.manejadores.ManejadorActividadTuristica;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,14 +19,19 @@ public class SalidaTuristica {
     private LocalDateTime fechaHoraSalida;
     private String lugarSalida;
 
+    private ActividadTuristica actividad;
     private Set<Inscripcion> inscripciones;
 
-    public SalidaTuristica(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida) {
+    public SalidaTuristica(String IDActividad,String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida) {
         this.nombre = nombre;
         this.cantMaxTuristas = cantMaxTuristas;
         this.fechaAlta = fechaAlta;
         this.fechaHoraSalida = fechaHoraSalida;
         this.lugarSalida = lugarSalida;
+        ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica at = mat.obtenerActividadTuristica(IDActividad);
+        at.asociarSalidaAActividad(this);
+        asociarActividadASalida(at);
     }
 
     public int obtenerCantidadInscriptos(){
@@ -98,7 +104,7 @@ public class SalidaTuristica {
         this.lugarSalida = lugarSalida;
     }
     
-    public void asociarActividadASalida() {
-  
+    public void asociarActividadASalida(ActividadTuristica act) {
+        actividad = act;
     }
 }

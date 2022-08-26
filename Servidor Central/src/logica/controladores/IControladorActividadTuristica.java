@@ -1,15 +1,11 @@
 package logica.controladores;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.DTSalidaTuristica;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -55,5 +51,19 @@ public interface IControladorActividadTuristica {
 	 */
 	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException;
 
-
+	/**
+	 *
+	 * @param depto
+	 * @param actividad
+	 * @param nombre
+	 * @param fechaYHoraSalida
+	 * @param fechaAlta
+	 * @param lugar
+	 * @param cantMaxTur
+	 * @throws SalidaYaRegistradaException
+	 * @throws FechaAltaActividadPosteriorAFechaAltaSalidaException
+	 * @throws FechaAltaSalidaPosteriorAFechaSalidaException
+	 */
+	void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
+	
 }
