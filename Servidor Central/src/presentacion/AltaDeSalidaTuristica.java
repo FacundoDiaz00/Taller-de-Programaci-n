@@ -38,6 +38,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaDeSalidaTuristica() {
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
 		setTitle("Registrar Salida Turistica.");
 		setBounds(100, 100, 461, 415);
 		getContentPane().setLayout(null);
