@@ -17,18 +17,9 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerTurista() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testObtenerProveedor() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	void testObtenerIdUsuarios() {
-		fail("Not yet implemented"); // TODO
+		assertTrue(cu != null);
+		
 	}
 
 	@Test
@@ -67,20 +58,10 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testAgregarSalidaOK() {
-		fail("Not yet implemented"); // TODO
-	}
-	
-	@Test
-	void testAgregarSalidaRepetida() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	void testObtenerDTUsuario() {
 		fail("Not yet implemented"); // TODO
 	}
-
+	
 	@Test
 	void testModificarUsuario() {
 		fail("Not yet implemented"); // TODO

@@ -13,6 +13,7 @@ import excepciones.PaqueteYaRegistradoException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 import logica.manejadores.ManejadorActividadTuristica;
@@ -41,18 +42,6 @@ class ControladorActividadTuristicaTest {
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
-			
-			ManejadorDepartamento md = ManejadorDepartamento.getInstancia();        
-			assertTrue(md != null);
-			
-			assertTrue(md.exists(nom));
-			
-			Departamento dep = md.getDepartamento(nom);
-			assertTrue(dep != null);
-			
-			assertEquals(nom, dep.getNombre());
-			assertEquals(descr, dep.getDescripcion());
-			assertEquals(url, dep.getUrl());    
 		}
 		
     }
@@ -75,18 +64,6 @@ class ControladorActividadTuristicaTest {
 			assertThrows(DeparamentoYaRegistradoException.class, ()->{
 				cat.altaDepartamento(nom, descr, url);
 			});
-			
-			ManejadorDepartamento md = ManejadorDepartamento.getInstancia();        
-			assertTrue(md != null);
-			
-			assertTrue(md.exists(nom));
-			
-			Departamento dep = md.getDepartamento(nom);
-			assertTrue(dep != null);
-			
-			assertEquals(nom, dep.getNombre());
-			assertEquals(descr, dep.getDescripcion());
-			assertEquals(url, dep.getUrl());    
 		}
     }
 
@@ -142,11 +119,15 @@ class ControladorActividadTuristicaTest {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
 				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
 			}
 			try {
 				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
 			}
 			
 			try {
@@ -155,16 +136,13 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 			
-			ManejadorActividadTuristica mact = ManejadorActividadTuristica.getInstancia();        
-			assertTrue(mact != null);
-			
-			assertTrue(mact.exists(nombreActividad));
-			
-			ActividadTuristica act = mact.getActividad(nombreActividad);
+			assertTrue(cat.existeActividadTuristica(nombreActividad));
+						
+			DTActividadTuristicaDetalle act = cat.obtenerDetallesActividadTuristica(nombreActividad);
 			assertTrue(act != null);
 			
 			assertEquals(nombreActividad, act.getNombre());
-			assertEquals(descripcion, act.getDescrpicion());
+			assertEquals(descripcion, act.getDescripcion());
 			assertEquals(duracion, act.getDuracion());
 			assertEquals(costo, act.getCostoPorTurista());
 			assertEquals(ciudad, act.getCuidad());
@@ -194,11 +172,15 @@ class ControladorActividadTuristicaTest {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
 				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
 			}
 			try {
 				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
 			}
 			
 			try {
@@ -211,17 +193,14 @@ class ControladorActividadTuristicaTest {
 			assertThrows(ActividadTuristicaYaRegistradaException.class, ()->{
 				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
 			});
-						
-			ManejadorActividadTuristica mact = ManejadorActividadTuristica.getInstancia();        
-			assertTrue(mact != null);
 			
-			assertTrue(mact.exists(nombreActividad));
+			assertTrue(cat.existeActividadTuristica(nombreActividad));
 			
-			ActividadTuristica act = mact.getActividad(nombreActividad);
+			DTActividadTuristicaDetalle act = cat.obtenerDetallesActividadTuristica(nombreActividad);
 			assertTrue(act != null);
 			
 			assertEquals(nombreActividad, act.getNombre());
-			assertEquals(descripcion, act.getDescrpicion());
+			assertEquals(descripcion, act.getDescripcion());
 			assertEquals(duracion, act.getDuracion());
 			assertEquals(costo, act.getCostoPorTurista());
 			assertEquals(ciudad, act.getCuidad());
@@ -250,11 +229,16 @@ class ControladorActividadTuristicaTest {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
 				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
 			}
+			
 			try {
 				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
 			}
 			
 			try {
@@ -271,19 +255,65 @@ class ControladorActividadTuristicaTest {
 			assertFalse(ids_loop.remove(nombreActividad));
 		}
 	}
-	
+		
+	@Test
+    public void testObtenerDetallesActividadTuristica() {
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < 100; i++) {
+			String nombreProveedor = "Proveedor testObtenerDetallesActividadTuristica i=" + (i % 10);
+			String departamento = "Departamento testObtenerDetallesActividadTuristica i=" + (i % 10);
+			String nombreActividad = "Actividad testObtenerDetallesActividadTuristica i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10;
+			String ciudad = "Ciudad";
+			LocalDate fechaAlta = LocalDate.now();
+			
+			try {
+				cat.altaDepartamento(departamento, descripcion, departamento);
+			} catch (DeparamentoYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+			
+			try {
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+			} catch (UsuarioYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+			
+			try {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+			
+			DTActividadTuristicaDetalle act = cat.obtenerDetallesActividadTuristica(nombreActividad);
+			assertTrue(act != null);
+			
+			assertEquals(nombreActividad, act.getNombre());
+			assertEquals(descripcion, act.getDescripcion());
+			assertEquals(duracion, act.getDuracion());
+			assertEquals(costo, act.getCostoPorTurista());
+			assertEquals(ciudad, act.getCuidad());
+			assertEquals(fechaAlta, act.getFechaAlta());
+			
+			
+			// TODO agregar paquetes y que esto verifique que se devuelven
+			assertTrue(act.getPaquetes().isEmpty());
+			assertTrue(act.getSalidas().isEmpty());
+		}
+    }
+
 	@Test
 	public void teasExisteActividadTuristica() {
 		fail("Not yet implemented");
 	}
-    
-    
-
-	@Test
-    public void testObtenerDetallesActividadTuristica() {
-		fail("Not yet implemented");
-    }
-
+	
 	@Test
 	public void testObtenerDTSalidasTuristicas() {
 		fail("Not yet implemented");
