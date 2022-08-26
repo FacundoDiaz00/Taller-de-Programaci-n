@@ -18,7 +18,7 @@ public class ManejadorPaquete {
 
     private Map<String, Paquete> paquetes;
     private ManejadorPaquete() {
-    	paquetes = new HashMap<String, Paquete>();
+    	paquetes = new HashMap<>();
     }
     public static ManejadorPaquete getInstancia() {
         if (instancia == null) {

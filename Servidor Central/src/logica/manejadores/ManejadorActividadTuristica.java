@@ -50,4 +50,8 @@ public class ManejadorActividadTuristica {
     	return actividades.containsKey(id);
     	
     }
+
+    public ActividadTuristica obtenerActividadTuristica(String IDActividad) {
+        return actividades.get(IDActividad);
+    }
 }

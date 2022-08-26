@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 public class AltaDePaquete extends JInternalFrame{
 	private JTextField txtNombre;
 	private JTextField descrp;
+	private JSpinner perVal;
+	private JSpinner desc;
 	public AltaDePaquete() {
 		setTitle("Registrar Paquete de Actividades.");
 		setBounds(100, 100, 461, 342);
@@ -55,7 +57,7 @@ public class AltaDePaquete extends JInternalFrame{
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		JSpinner perVal = new JSpinner();
+		perVal = new JSpinner();
 		perVal.setBounds(153, 78, 49, 20);
 		getContentPane().add(perVal);
 		
@@ -63,7 +65,7 @@ public class AltaDePaquete extends JInternalFrame{
 		lbldias.setBounds(206, 80, 70, 15);
 		getContentPane().add(lbldias);
 		
-		JSpinner desc = new JSpinner();
+		desc = new JSpinner();
 		desc.setBounds(100, 108, 56, 20);
 		getContentPane().add(desc);
 		
@@ -112,6 +114,8 @@ public class AltaDePaquete extends JInternalFrame{
 	private void limpiarForm() {
         txtNombre.setText("");
         descrp.setText("");
+		perVal.setValue(0);
+		desc.setValue(0);
     }
 	
 }

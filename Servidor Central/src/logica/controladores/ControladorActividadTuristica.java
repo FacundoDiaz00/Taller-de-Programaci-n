@@ -2,7 +2,6 @@ package logica.controladores;
 
 import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
@@ -14,9 +13,10 @@ import logica.manejadores.ManejadorSalidaTuristica;
 import logica.manejadores.ManejadorUsuario;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Equipo taller prog 16
@@ -101,4 +101,27 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
+
+	public void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
+		ManejadorActividadTuristica ma = ManejadorActividadTuristica.getInstancia();
+		if(ms.existeSalidaTuristica(nombre)) {
+			throw new SalidaYaRegistradaException("La salida con nombre" + nombre +" ya existe en el sistema.");
+		}
+		// AltaActividad < AltaSalida < Salida, se chequean ambas desigualdades.
+
+		if (ma.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)){
+			throw new FechaAltaActividadPosteriorAFechaAltaSalidaException("La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");
+		}
+		if(fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))){
+			throw new FechaAltaSalidaPosteriorAFechaSalidaException("La fecha de la Salida debe ser posterior a la fecha de su registro");
+		}
+		else {
+			SalidaTuristica st = new SalidaTuristica(actividad,nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar);
+			ms.addSalida(st);
+		}
+	}
 }
+
+
+
