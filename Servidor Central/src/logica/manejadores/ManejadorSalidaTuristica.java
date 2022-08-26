@@ -1,9 +1,6 @@
 package logica.manejadores;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import logica.entidades.SalidaTuristica;
 
@@ -15,7 +12,9 @@ public class ManejadorSalidaTuristica {
     private static ManejadorSalidaTuristica instancia;
 
     private Map<String, SalidaTuristica> salidas;
-
+    private ManejadorSalidaTuristica(){
+        salidas = new HashMap<String, SalidaTuristica>();
+    }
     public static ManejadorSalidaTuristica getInstancia() {
         if (instancia == null) {
             instancia = new ManejadorSalidaTuristica();
@@ -40,7 +39,6 @@ public class ManejadorSalidaTuristica {
     }
     
     public Boolean existeSalidaTuristica(String nombre) {
-    	//TODO: Corresponde a ALTA SALIDA TURISTICA
-    	return true;
+    	return salidas.containsKey(nombre);
     }
 }

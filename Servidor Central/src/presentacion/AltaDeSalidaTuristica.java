@@ -2,17 +2,12 @@ package presentacion;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.*;
 
+import excepciones.SalidaYaRegistradaException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 
-import javax.swing.JSpinner;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -108,6 +103,10 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 					lugar.setEnabled(true);
 					maxTuristas.setEnabled(true);
 					btnAceptar.setEnabled(true);
+					diar.setEnabled(true);
+					mesr.setEnabled(true);
+					anior.setEnabled(true);
+
 				}
 			}
 		});
@@ -216,7 +215,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lblFechaDeRegistro.setBounds(12, 295, 138, 15);
 		getContentPane().add(lblFechaDeRegistro);
 		
-		JSpinner diar = new JSpinner();
+		diar = new JSpinner();
 		diar.setEnabled(false);
 		diar.setBounds(157, 293, 47, 19);
 		getContentPane().add(diar);
@@ -225,7 +224,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		label_2.setBounds(208, 293, 13, 15);
 		getContentPane().add(label_2);
 		
-		JSpinner mesr = new JSpinner();
+		mesr = new JSpinner();
 		mesr.setEnabled(false);
 		mesr.setBounds(215, 293, 47, 19);
 		getContentPane().add(mesr);
@@ -261,9 +260,22 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			actividadTuristica.setSelectedIndex(0);
 		}
 	}
+
 	private void aceptarAltaSalidaTuristica() {
-		LocalDate fechaR = LocalDate.of((int)anior.getValue(), (int)mesr.getValue(), (int)diar.getValue());
-		LocalDateTime fecha = LocalDateTime.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue(),(int)hora.getSelectedItem(),0);
-		ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
+		try{
+			LocalDate fechaR = LocalDate.of((int)anior.getValue(), (int)mesr.getValue(), (int)diar.getValue());
+			LocalDateTime fecha = LocalDateTime.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue(),(int)hora.getSelectedItem(),0);
+			ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
+			JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Salida",JOptionPane.INFORMATION_MESSAGE );
+			System.out.println("aca");
+			setVisible(false);
+			limpiarForm();
+		}catch(SalidaYaRegistradaException e){
+			JOptionPane.showMessageDialog(null, "Error. Ya existe una Salida con el nombre elejido.","Registro de Salida",JOptionPane.WARNING_MESSAGE );
+
+		}
+	}
+
+	private void limpiarForm() {
 	}
 }

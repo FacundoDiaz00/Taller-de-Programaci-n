@@ -1,9 +1,6 @@
 package logica.controladores;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.DTSalidaTuristica;
@@ -65,6 +62,6 @@ public interface IControladorActividadTuristica {
 	 * @param lugar
 	 * @param cantMaxTur
 	 */
-	void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur);
+	void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException;
 	
 }

@@ -103,10 +103,10 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
 
-	public void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur){
+	public void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException{
 		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
 		if(ms.existeSalidaTuristica(nombre)) {
-			//throw...
+			throw new SalidaYaRegistradaException("La salida con nombre" + nombre +" ya existe en el sistema.");
 		}else {
 			SalidaTuristica st = new SalidaTuristica(actividad,nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar);
 			ms.addSalida(st);
