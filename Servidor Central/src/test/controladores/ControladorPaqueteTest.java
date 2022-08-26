@@ -49,10 +49,8 @@ class ControladorPaqueteTest {
 			assertEquals(nombre, paq.getNombre());
 			assertEquals(descripcion, paq.getDescrpicion());
 			assertEquals(periodovalidez, paq.getValidez());
-			assertTrue(Math.abs(descuento - paq.getDescuento()) < 1);
-			
-			var ids = cp.obtenerIdPaquetes();
-			assertTrue(ids.contains(nombre));			
+			// Uso esto por los posibles errores al comparar float y doubles
+			assertTrue(Math.abs(descuento - paq.getDescuento()) < 1);	
 		}
 		
 	}
@@ -75,19 +73,22 @@ class ControladorPaqueteTest {
 			assertThrows(PaqueteYaRegistradoException.class, ()->{
 				cp.altaPaquete(nombre, descripcion, periodovalidez, descuento);	
 			});	
+			ManejadorPaquete mp = ManejadorPaquete.getInstancia();        
+			assertTrue(mp != null);
 			
+			assertTrue(mp.existePaquete(nombre));
 			
-			var ids = cp.obtenerIdPaquetes();
-			assertTrue(ids.contains(nombre));
-		}
-		
-		
+			Paquete paq = mp.getPaquete(nombre);
+			assertTrue(paq != null);
+			
+			assertEquals(nombre, paq.getNombre());
+			assertEquals(descripcion, paq.getDescrpicion());
+			assertEquals(periodovalidez, paq.getValidez());
+			// Uso esto por los posibles errores al comparar float y doubles
+			assertTrue(Math.abs(descuento - paq.getDescuento()) < 1);	
+		}	
 	}
 
-	@Test
-	final void testObtenerDetallesPaquetes() {
-		fail("Not yet implemented"); // TODO
-	}
 
 	@Test
 	final void testObtenerIdPaquetes() {
@@ -103,12 +104,7 @@ class ControladorPaqueteTest {
 				cp.altaPaquete(nombre, descripcion, periodovalidez, descuento);	
 			} catch (Exception e) {
 				fail(e.getMessage());
-			};
-			
-			assertThrows(PaqueteYaRegistradoException.class, ()->{
-				cp.altaPaquete(nombre, descripcion, periodovalidez, descuento);	
-			});	
-			
+			};	
 			
 			var id_loop = cp.obtenerIdPaquetes();
 			
@@ -127,6 +123,10 @@ class ControladorPaqueteTest {
 		
 	}
 
+	@Test
+	final void testObtenerDetallesPaquetes() {
+		fail("Not yet implemented"); // TODO
+	}
 
 	@Test
 	final void testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete() {
