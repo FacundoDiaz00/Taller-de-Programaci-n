@@ -1,9 +1,9 @@
 package presentacion;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
 
+import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
+import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.SalidaYaRegistradaException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
@@ -267,15 +266,31 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			LocalDateTime fecha = LocalDateTime.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue(),(int)hora.getSelectedItem(),0);
 			ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
 			JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Salida",JOptionPane.INFORMATION_MESSAGE );
-			System.out.println("aca");
 			setVisible(false);
 			limpiarForm();
-		}catch(SalidaYaRegistradaException e){
-			JOptionPane.showMessageDialog(null, "Error. Ya existe una Salida con el nombre elejido.","Registro de Salida",JOptionPane.WARNING_MESSAGE );
-
+		} catch(SalidaYaRegistradaException e) {
+			JOptionPane.showMessageDialog(null, "Error. Ya existe una Salida con el nombre elejido.", "Registro de Salida", JOptionPane.WARNING_MESSAGE);
+		} catch (FechaAltaSalidaPosteriorAFechaSalidaException ee){
+			JOptionPane.showMessageDialog(null, "Error. La Fecha de Salida debe ser posterior a la Fecha de Registro.", "Registro de Salida", JOptionPane.WARNING_MESSAGE);
+		} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException eee){
+			JOptionPane.showMessageDialog(null, "Error. La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.", "Registro de Salida", JOptionPane.WARNING_MESSAGE);
 		}
+
 	}
 
 	private void limpiarForm() {
+		nombre.setText("");
+		departamento.setSelectedIndex(0);
+		actividadTuristica.setSelectedIndex(0);
+		dia.setValue(0);
+		mes.setValue(0);
+		anio.setValue(0);
+		hora.setSelectedIndex(0);
+		lugar.setText("");
+		maxTuristas.setValue(0);
+		diar.setValue(0);
+		mesr.setValue(0);
+		anior.setValue(0);
+
 	}
 }
