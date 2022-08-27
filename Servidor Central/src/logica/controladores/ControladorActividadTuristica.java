@@ -102,7 +102,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
 
-	public void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+	public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
 		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
 		ManejadorActividadTuristica ma = ManejadorActividadTuristica.getInstancia();
 		if(ms.existeSalidaTuristica(nombre)) {

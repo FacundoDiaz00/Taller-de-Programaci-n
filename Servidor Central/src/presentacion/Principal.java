@@ -19,6 +19,7 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.Rectangle;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Principal {
 	IControladorUsuario CUS;
@@ -324,11 +325,38 @@ public class Principal {
 			icat.altaActividadTuristica("eldiez" , "Rivera", "Cabalgata en Valle del Lunarejo",
 					"Cabalgata por el área protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras", LocalDate.of(2022,8,1));
 
+			//Salidas
+			icat.altaSalidaTuristica("Degusta", "Degusta Agosto", LocalDateTime.of(2022,8,20,17,0),
+					LocalDate.of(2022,7,21), "Sociedad Agropecuaria de Rocha", 20);
+			icat.altaSalidaTuristica("Degusta", "Degusta Setiembre", LocalDateTime.of(2022,9,3,17,0),
+					LocalDate.of(2022,7,22), "Sociedad Agropecuaria de Rocha", 20);
+			icat.altaSalidaTuristica("Teatro con Sabores", "Teatro con Sabores 1", LocalDateTime.of(2022,9,4,18,0),
+					LocalDate.of(2022,7,23), "Club Deportivo Unión", 30);
+			icat.altaSalidaTuristica("Teatro con Sabores", "Teatro con Sabores 2", LocalDateTime.of(2022,9,11,18,0),
+					LocalDate.of(2022,7,23), "Club Deportivo Unión", 30);
+			icat.altaSalidaTuristica("Tour por Colonia del Sacramento", "Tour Colonia del Sacramento 11-09", LocalDateTime.of(2022,9,11,10,0),
+					LocalDate.of(2022,8,5), "Encuentro en la base del Faro", 5);
+			icat.altaSalidaTuristica("Tour por Colonia del Sacramento", "Tour Colonia del Sacramento 18-09", LocalDateTime.of(2022,9,18,10,0),
+					LocalDate.of(2022,8,5), "Encuentro en la base del Faro", 5);
+			icat.altaSalidaTuristica("Almuerzo en el Real de San Carlos", "Almuerzo 1", LocalDateTime.of(2022,9,18,12,0),
+					LocalDate.of(2022,8,4), "Restaurante de la Plaza de Toros", 5);
+			icat.altaSalidaTuristica("Almuerzo en el Real de San Carlos", "Almuerzo 2", LocalDateTime.of(2022,9,25,12,0),
+					LocalDate.of(2022,8,4), "Restaurante de la Plaza de Toros", 5);
+			icat.altaSalidaTuristica("Almuerzo en Valle del Lunarejo", "Almuerzo 3", LocalDateTime.of(2022,9,10,12,0),
+					LocalDate.of(2022,8,15), "Posada Del Lunarejo", 4);
+			icat.altaSalidaTuristica("Almuerzo en Valle del Lunarejo", "Almuerzo 4", LocalDateTime.of(2022,9,11,12,0),
+					LocalDate.of(2022,8,15), "Posada Del Lunarejo", 4);
+			icat.altaSalidaTuristica( "Cabalgata en Valle del Lunarejo","Cabalgata 1", LocalDateTime.of(2022,9,10,16,0),
+					LocalDate.of(2022,8,15), "Posada Del Lunarejo", 4);
+			icat.altaSalidaTuristica( "Cabalgata en Valle del Lunarejo","Cabalgata 2", LocalDateTime.of(2022,9,11,16,0),
+					LocalDate.of(2022,8,15), "Posada Del Lunarejo", 4);
+
 
 
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error a la hora de cargar los datos de prueba." +
 					" Sugerimos que esta operación sea la primera que se haga cuando se ejecuta el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
 
 	}

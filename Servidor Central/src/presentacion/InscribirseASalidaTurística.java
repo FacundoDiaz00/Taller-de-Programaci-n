@@ -511,7 +511,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			}
 
 			if(seleccionado.getFechaHoraSalida() != null){
-				fechaYHoraDeSalidaTextField.setText( seleccionado.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' hh:mm")));
+				fechaYHoraDeSalidaTextField.setText( seleccionado.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")));
 			} else {
 				fechaYHoraDeSalidaTextField.setText("");
 			}
