@@ -9,15 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.DeparamentoYaRegistradoException;
-import excepciones.PaqueteYaRegistradoException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.Departamento;
-import logica.manejadores.ManejadorActividadTuristica;
-import logica.manejadores.ManejadorDepartamento;
 
 class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;

@@ -2,24 +2,14 @@ package test.controladores;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.DeparamentoYaRegistradoException;
 import excepciones.PaqueteYaRegistradoException;
-import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorPaquete;
 import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaqueteDetalles;
-import logica.entidades.Departamento;
-import logica.entidades.Paquete;
-import logica.manejadores.ManejadorDepartamento;
-import logica.manejadores.ManejadorPaquete;
 
 class ControladorPaqueteTest {
 	private static IControladorPaquete cp;
