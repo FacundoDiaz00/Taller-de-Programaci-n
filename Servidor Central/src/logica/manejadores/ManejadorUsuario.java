@@ -11,10 +11,12 @@ import logica.entidades.Usuario;
 public class ManejadorUsuario {
     private static ManejadorUsuario instancia;
 
-    private Map<String, Usuario> usuarios;
+    private Map<String, Usuario> usuariosPorNick;
+    private Map<String, Usuario> usuariosPorCorreo;
     
     private ManejadorUsuario() {
-    	usuarios = new HashMap<String, Usuario>();
+    	usuariosPorCorreo = new HashMap<String, Usuario>();
+        usuariosPorNick = new HashMap<String, Usuario>();
     }
 
     public static ManejadorUsuario getInstancia() {
@@ -25,23 +27,31 @@ public class ManejadorUsuario {
     }
 
     public List<Usuario> getUsuarios() {
-        return new ArrayList<Usuario>(usuarios.values());
+        return new ArrayList<Usuario>(usuariosPorNick.values());
     }
 
-    public Set<String> obtenerIdUsuarios(){
-        return usuarios.keySet();
+    public Set<String> obtenerCorreoUsuarios(){
+        return usuariosPorCorreo.keySet();
+    }
+
+    public Set<String> obtenerNickUsuarios(){
+        return usuariosPorNick.keySet();
     }
 
     public void addUsuario(Usuario usuario) {
-        usuarios.put(usuario.getNickname(), usuario);
+        usuariosPorNick.put(usuario.getNickname(), usuario);
+        usuariosPorCorreo.put(usuario.getCorreo(), usuario);
     }
 
-    public Usuario getUsuario(String nombre) {
-        return usuarios.get(nombre);
+    public Usuario getUsuarioPorNick(String nickname) {
+        return usuariosPorNick.get(nickname);
+    }
+    public Usuario getUsuarioPorCorreo(String correo) {
+        return usuariosPorCorreo.get(correo);
     }
     
     public boolean existeUsuario(String nickname, String correo) {
-    	return usuarios.containsKey(nickname) || (usuarios.get(nickname) != null && usuarios.get(nickname).getCorreo() == correo);
+    	return usuariosPorNick.containsKey(nickname) || usuariosPorCorreo.containsKey(correo);
     }
     
 }
