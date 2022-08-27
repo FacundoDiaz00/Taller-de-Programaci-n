@@ -266,6 +266,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deptos.toArray()));
 	}
 	
+	
     private void limpiarFormulario() {
         nombre.setText("");
         descripcion.setText("");
@@ -273,5 +274,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
         duracion.setText("");
         costo.setText("");
+        ciudad.setText("");
+        FdeAlta.setText("");
     }
 }

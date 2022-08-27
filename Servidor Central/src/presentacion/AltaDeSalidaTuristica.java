@@ -297,6 +297,8 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 	private void limpiarForm() {
 		nombre.setText("");
+		departamento.setModel(new DefaultComboBoxModel<>(new String[0]));
+		actividadTuristica.setModel(new DefaultComboBoxModel<>(new String[0]));
 		dia.setValue(1);
 		mes.setValue(1);
 		anio.setValue(2022);
