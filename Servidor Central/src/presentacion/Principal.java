@@ -249,6 +249,15 @@ public class Principal {
 		frmIntConsultaDeActividadTuristica.setVisible(true);
 	}
 	
+	public void mostrarConsultaDeSalidaTuristica(String nombreSalida) {
+		if (nombreSalida != null) {
+			// FIXME: descomentar e implementar las operaciones basandose en lo de arriba
+			// frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);			
+		}
+		// frmIntConsultaDeSalidaTuristica.setVisible(true);
+	}
+	
+		
 	private void cargarDatosDePrueba() {
 		IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
