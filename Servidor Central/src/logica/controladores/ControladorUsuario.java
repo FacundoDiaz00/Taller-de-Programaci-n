@@ -21,19 +21,19 @@ public class ControladorUsuario implements IControladorUsuario {
 	public ControladorUsuario() {
 	}
 	
-	public Turista obtenerTurista(String nomTur){
+	public Turista obtenerTurista(String nickTur){
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		return (Turista) mu.getUsuario(nomTur);
+		return (Turista) mu.getUsuarioPorNick(nickTur);
 	}
 	
-	public Proveedor obtenerProveedor(String nomProv){
+	public Proveedor obtenerProveedor(String nickProv){
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		return (Proveedor) mu.getUsuario(nomProv);
+		return (Proveedor) mu.getUsuarioPorNick(nickProv);
 	}
     
 	public List<String> obtenerIdUsuarios() {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        return new ArrayList<String>(ins.obtenerIdUsuarios());
+        return new ArrayList<String>(ins.obtenerNickUsuarios());
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ControladorUsuario implements IControladorUsuario {
     @Override
     public DTUsuario obtenerDTUsuarioDetalle(String nickname) {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        Usuario u = ins.getUsuario(nickname);
+        Usuario u = ins.getUsuarioPorNick(nickname);
         return u.getDTUsuarioDetalle();
     }
 
@@ -96,14 +96,14 @@ public class ControladorUsuario implements IControladorUsuario {
 	@Override
 	public DTUsuario obtenerDTUsuario(String nickname) {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        Usuario u = ins.getUsuario(nickname);
+        Usuario u = ins.getUsuarioPorNick(nickname);
         return u.getDTUsuario();
 	}
 
 	@Override
 	public void modificarUsuario(DTUsuario datosNuevos) {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        Usuario u = ins.getUsuario(datosNuevos.getNickname());
+        Usuario u = ins.getUsuarioPorNick(datosNuevos.getNickname());
         if (u != null) {
         	u.setearDatos(datosNuevos);
         }
