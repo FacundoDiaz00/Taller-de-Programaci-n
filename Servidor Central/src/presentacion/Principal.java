@@ -117,7 +117,7 @@ public class Principal {
 	private void initialize() {
 		frmEstacionDeTrabajo = new JFrame();
 		frmEstacionDeTrabajo.setTitle("Estacion de trabajo");
-		frmEstacionDeTrabajo.setBounds(100, 100, 700, 500);
+		frmEstacionDeTrabajo.setBounds(100, 100, 940, 600);
 		frmEstacionDeTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();

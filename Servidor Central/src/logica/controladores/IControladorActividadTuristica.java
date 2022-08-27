@@ -49,7 +49,7 @@ public interface IControladorActividadTuristica {
 	 * @throws InscripcionYaRegistradaException
 	 * @throws SuperaElMaximoDeTuristasException
 	 */
-	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException;
+	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 
 	/**
 	 *

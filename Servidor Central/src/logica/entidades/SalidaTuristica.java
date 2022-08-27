@@ -5,6 +5,7 @@ import logica.manejadores.ManejadorActividadTuristica;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -28,6 +29,9 @@ public class SalidaTuristica {
         this.fechaAlta = fechaAlta;
         this.fechaHoraSalida = fechaHoraSalida;
         this.lugarSalida = lugarSalida;
+        setActividad(null);
+        setInscripciones(new HashSet<>());
+
         ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica at = mat.obtenerActividadTuristica(IDActividad);
         at.asociarSalidaAActividad(this);
@@ -106,5 +110,13 @@ public class SalidaTuristica {
     
     public void asociarActividadASalida(ActividadTuristica act) {
         actividad = act;
+    }
+
+    public ActividadTuristica getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(ActividadTuristica actividad) {
+        this.actividad = actividad;
     }
 }
