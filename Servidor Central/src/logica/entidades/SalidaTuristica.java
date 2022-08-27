@@ -56,7 +56,7 @@ public class SalidaTuristica {
 
     @Override
     public boolean equals(Object obj) {
-        return ((SalidaTuristica)obj).nombre.equals(this.nombre);
+        return ((SalidaTuristica)obj).getNombre().equals(this.getNombre());
     }
 
 

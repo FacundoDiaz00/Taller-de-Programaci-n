@@ -36,16 +36,16 @@ public class Paquete {
         for(ActividadTuristica act : actividades.values()){
             mapDtAct.put(act.getNombre(), act.obtenerDTActividadTuristica());
         }
-        return new DTPaqueteDetalles(nombre, descrpicion, validez, descuento, mapDtAct);
+        return new DTPaqueteDetalles(getNombre(), getDescrpicion(), getValidez(), getDescuento(), mapDtAct);
     }
 
     public DTPaquete obtenerDTPaquete(){
-        return new DTPaquete(nombre, descrpicion, validez, descuento);
+        return new DTPaquete(getNombre(), getDescrpicion(), getValidez(), getDescuento());
     }
 
     @Override
     public boolean equals(Object obj) {
-        return this.nombre.equals(((Paquete)obj).nombre);
+        return this.getNombre().equals(((Paquete)obj).getNombre());
     }
 
     public String getNombre() {

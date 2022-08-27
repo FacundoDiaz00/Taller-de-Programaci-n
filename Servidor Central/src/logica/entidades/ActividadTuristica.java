@@ -80,7 +80,7 @@ public class ActividadTuristica {
 
     @Override
     public boolean equals(Object obj) {
-        return ((ActividadTuristica) obj).nombre.equals(this.nombre);
+        return ((ActividadTuristica) obj).getNombre().equals(this.getNombre());
     }
 
     public String getNombre() {

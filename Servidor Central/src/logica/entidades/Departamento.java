@@ -24,7 +24,7 @@ public class Departamento {
 
     @Override
     public boolean equals(Object obj) {
-        return ((Departamento)obj).nombre.equals(this.nombre);
+        return ((Departamento)obj).getNombre().equals(this.getNombre());
     }
 
     public String getNombre() {

@@ -26,8 +26,8 @@ public class  Usuario {
 
     @Override
     public boolean equals(Object obj) {
-        return this.nickname.equals(((Usuario) obj).nickname)
-                || this.correo.equals(((Usuario) obj).correo);
+        return this.getNickname().equals(((Usuario) obj).getNickname())
+                || this.getCorreo().equals(((Usuario) obj).getCorreo());
     }
 
     public String getNickname() {
@@ -71,17 +71,17 @@ public class  Usuario {
     }
     
     public DTUsuario getDTUsuario() {
-        return new DTUsuario(nickname, nombre, apellido, correo, fechaNac);
+        return new DTUsuario(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac());
     }
 
     public DTUsuario getDTUsuarioDetalle() {
-        return new DTUsuario(nickname, nombre, apellido, correo, fechaNac);
+        return new DTUsuario(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac());
     }
     
 	public void setearDatos(DTUsuario datosNuevos) {
-		this.nombre = datosNuevos.getNombre();
-		this.apellido = datosNuevos.getApellido();
-		this.fechaNac = datosNuevos.getFechaNac();
+		this.setNombre(datosNuevos.getNombre());
+		this.setApellido(datosNuevos.getApellido());
+		this.setFechaNac(datosNuevos.getFechaNac());
 	}
 
 }
