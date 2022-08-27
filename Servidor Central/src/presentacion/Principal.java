@@ -60,7 +60,7 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, CUS);
 		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica();
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
