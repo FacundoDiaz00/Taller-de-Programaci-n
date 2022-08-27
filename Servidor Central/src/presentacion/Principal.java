@@ -34,7 +34,7 @@ public class Principal {
 	private AltaDePaquete frmIntAltaPaquete;
 	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
-
+	private ConsultaDeSalidaTuristica	frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
 	/**
 	 * Launch the application.
@@ -60,11 +60,13 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
+		
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, CUS);
 		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica();
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
 		frmInscribirseASalidaTurística = new InscribirseASalidaTurística();
+		frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(CAD);
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntAltaPaquete = new AltaDePaquete();
 		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete();
@@ -79,7 +81,8 @@ public class Principal {
 		frmIntAgregarActividadAPaquete.setVisible(false);
 		frmInscribirseASalidaTurística.setVisible(false);
 		frmIntAltaSalidaTuristica.setVisible(false);
-
+		frmIntConsultaDeSalidaTuristica.setVisible(false);
+		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -90,7 +93,8 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
-
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
+		
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		
 		frmIntAltaUsuario.setVisible(false);
@@ -187,7 +191,13 @@ public class Principal {
 		mnNewMenu_3.add(registrarSalidaJMenuItem);
 		
 		JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
+		consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntConsultaDeSalidaTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(consultarSalidaTuristicaJMenuItem);
+		
 		
 		JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
 		inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
