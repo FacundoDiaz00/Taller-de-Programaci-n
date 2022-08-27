@@ -46,6 +46,7 @@ public class AltaDeUsuario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaDeUsuario(IControladorUsuario icu) {
+	
 		Fabrica f = Fabrica.getInstancia();
 		this.icu = f.getIControladorUsuario();
 		setTitle("Registrar Usuario");
@@ -120,14 +121,14 @@ public class AltaDeUsuario extends JInternalFrame {
 		tipoUsuario.addItem(OPCION_TURISTA);
 		this.tipoUsuario = tipoUsuario;
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				agregarUsuario(e);
 			}
 		});
-		btnNewButton.setBounds(272, 259, 117, 25);
-		getContentPane().add(btnNewButton);
+		btnAceptar.setBounds(272, 259, 117, 25);
+		getContentPane().add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -189,6 +190,15 @@ public class AltaDeUsuario extends JInternalFrame {
 		String fecha = Fnacimiento.getText();
 		LocalDate fechaNac;
 		try {
+			if(tipoUsuario.getSelectedItem().toString().equals(OPCION_TURISTA) && (nombre.getText().isBlank()|| 
+					apellido.getText().isBlank() || nickname.getText().isBlank() || Fnacimiento.getText().isBlank() || nacionalidad.getText().isBlank())) {
+				JOptionPane.showMessageDialog(null, "Los campos nombre, apellido, nickname, correo, fecha de nacimiento y nacionalidad son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}else if(tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR) && (descripcion.getText().isBlank()||  nombre.getText().isBlank()|| 
+					apellido.getText().isBlank() || nickname.getText().isBlank() || Fnacimiento.getText().isBlank())) {
+				JOptionPane.showMessageDialog(null, "Los campos nombre, apellido, nickname, correo, fecha de nacimiento, nacionalidad y descripción son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			fechaNac = LocalDate.parse(fecha, JEFormatter);
 			//Todo falta verificar los campos obligatorios

@@ -90,7 +90,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	@Override
 	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion {
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		Turista turis = (Turista) mu.getUsuario(nicknameTuris);
+		Turista turis = (Turista) mu.getUsuarioPorNick(nicknameTuris);
 		if(turis.estaInscriptoASalida(nomSalTurim)){
 			throw new InscripcionYaRegistradaException("Ya exite una inscrpcion entre la salida " + nomSalTurim + " y el turista " + nicknameTuris);
 		}
