@@ -31,6 +31,8 @@ public class ActividadTuristica {
     private Map<String, Paquete> paquetes;
     private Map<String, SalidaTuristica> salidas;
 
+    private Proveedor proveedor;
+
     public ActividadTuristica(String nombreProveedor, String departamento,String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
             LocalDate fechaAlta) {
         this.nombre = nombre;
@@ -41,6 +43,7 @@ public class ActividadTuristica {
         this.fechaAlta = fechaAlta;
         this.paquetes = new HashMap<>();
         this.salidas = new HashMap<>();
+
         
 		//Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
@@ -55,10 +58,11 @@ public class ActividadTuristica {
 		ControladorUsuario CU = new ControladorUsuario();
 		Proveedor p = CU.obtenerProveedor(nombreProveedor);
 		p.asociarActividadTuristica(this);
+        proveedor = p;
     }
 
     public DTActividadTuristica obtenerDTActividadTuristica(){
-        return new DTActividadTuristica(nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
+        return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNombre());
     }
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(){
@@ -71,7 +75,7 @@ public class ActividadTuristica {
             salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
         }
 
-        return new DTActividadTuristicaDetalle(salid, packs, nombre, descrpicion, costoPorTurista, cuidad, duracion, fechaAlta);
+        return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNombre());
     }
 
     @Override
@@ -141,6 +145,14 @@ public class ActividadTuristica {
 
     public void setSalidas(Map<String, SalidaTuristica> salidas) {
         this.salidas = salidas;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     public List<String> obtenerIdSalidasTuristicas() {
