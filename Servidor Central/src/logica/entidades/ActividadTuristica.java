@@ -62,7 +62,7 @@ public class ActividadTuristica {
     }
 
     public DTActividadTuristica obtenerDTActividadTuristica(){
-        return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNombre());
+        return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname());
     }
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(){
