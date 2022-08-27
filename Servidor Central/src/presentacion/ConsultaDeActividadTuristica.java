@@ -219,8 +219,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	
 	private void seSeleccionoUnaActividad() {
 		String seleccion = seleccionActividad;
-		
-		System.out.println(seleccion);
+
 		try {
 			DTActividadTuristicaDetalle actividad = icat.obtenerDetallesActividadTuristica(seleccion);
 			
@@ -231,15 +230,17 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			fechaAlta.setText(actividad.getFechaAlta().toString());
 			proveedor.setText(actividad.getNicknameProveedor());
 			duracion.setText(String.valueOf(actividad.getDuracion()));
+			
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
+			for(DTSalidaTuristica salida: salidas) {
+				comboSalidas.addItem(salida.getNombre());
+			}
 			
-			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTSalidaTuristica
-	    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
 			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
-			
-			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTPaquete
-	    	comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
-			
+			for(DTPaquete paquete: paquetes) {
+				comboPaquetes.addItem(paquete.getNombre());
+			}
+		
 		} catch (Exception ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 			
@@ -260,8 +261,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
         costo.setText("");
 		ciudad.setText("");
 		fechaAlta.setText("");
-		// FIXME: comento pq se rompe por alguna razón
-		// comboSalidas.setSelectedIndex(0);
-		// comboPaquetes.setSelectedIndex(0);
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboPaquetes.setModel(new DefaultComboBoxModel<>(new String[0]));
     }
 }
