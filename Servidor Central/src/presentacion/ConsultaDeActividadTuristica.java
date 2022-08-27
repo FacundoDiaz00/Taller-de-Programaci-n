@@ -229,7 +229,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			costo.setText(String.valueOf(actividad.getCostoPorTurista()));
 			descripcion.setText(actividad.getDescripcion());
 			fechaAlta.setText(actividad.getFechaAlta().toString());
-			proveedor.setText(actividad.getNombreProveedor());
+			proveedor.setText(actividad.getNicknameProveedor());
 			duracion.setText(String.valueOf(actividad.getDuracion()));
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
 			
