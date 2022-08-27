@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 
+import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
@@ -28,7 +29,7 @@ public class Turista extends Usuario {
     }
 
 
-    public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp){
+    public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion {
         Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal);
         inscripciones.add(insc);
     }

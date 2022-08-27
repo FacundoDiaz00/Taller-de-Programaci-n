@@ -49,11 +49,10 @@ public interface IControladorActividadTuristica {
 	 * @throws InscripcionYaRegistradaException
 	 * @throws SuperaElMaximoDeTuristasException
 	 */
-	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException;
+	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 
 	/**
 	 *
-	 * @param depto
 	 * @param actividad
 	 * @param nombre
 	 * @param fechaYHoraSalida
@@ -64,6 +63,6 @@ public interface IControladorActividadTuristica {
 	 * @throws FechaAltaActividadPosteriorAFechaAltaSalidaException
 	 * @throws FechaAltaSalidaPosteriorAFechaSalidaException
 	 */
-	void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
+	void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
 	
 }

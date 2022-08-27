@@ -16,6 +16,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JSpinner dia;
@@ -38,6 +40,12 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaDeSalidaTuristica() {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarForm();
+			}
+		});
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
@@ -138,6 +146,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(lblCantidadMaximaDe);
 		
 		dia = new JSpinner();
+		dia.setModel(new SpinnerNumberModel(1, 1, 31, 1));
 		dia.setEnabled(false);
 		dia.setBounds(157, 153, 47, 19);
 		getContentPane().add(dia);
@@ -147,6 +156,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(label);
 		
 		mes = new JSpinner();
+		mes.setModel(new SpinnerNumberModel(1, 1, 12, 1));
 		mes.setEnabled(false);
 		mes.setBounds(215, 153, 47, 19);
 		getContentPane().add(mes);
@@ -156,6 +166,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(label_1);
 		
 		anio = new JSpinner();
+		anio.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
 		anio.setEnabled(false);
 		anio.setBounds(273, 153, 60, 19);
 		getContentPane().add(anio);
@@ -189,6 +200,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lugar.setColumns(10);
 		
 		maxTuristas = new JSpinner();
+		maxTuristas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		maxTuristas.setEnabled(false);
 		maxTuristas.setBounds(227, 257, 60, 20);
 		getContentPane().add(maxTuristas);
@@ -206,7 +218,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				limpiarFormulario();
+				limpiarForm();
                 setVisible(false);
 			}
 		});
@@ -218,6 +230,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(lblFechaDeRegistro);
 		
 		diar = new JSpinner();
+		diar.setModel(new SpinnerNumberModel(1, 1, 31, 1));
 		diar.setEnabled(false);
 		diar.setBounds(157, 293, 47, 19);
 		getContentPane().add(diar);
@@ -227,6 +240,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(label_2);
 		
 		mesr = new JSpinner();
+		mesr.setModel(new SpinnerNumberModel(1, 1, 12, 1));
 		mesr.setEnabled(false);
 		mesr.setBounds(215, 293, 47, 19);
 		getContentPane().add(mesr);
@@ -236,6 +250,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(label_1_1);
 		
 		anior = new JSpinner();
+		anior.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
 		anior.setEnabled(false);
 		anior.setBounds(273, 293, 60, 19);
 		getContentPane().add(anior);
@@ -245,9 +260,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(lblddmmyyyy_1);
 
 	}
-	private void limpiarFormulario() {
-		
-	}
+
 	private void actualizarDepartamentos() {
 		List<String> deptos = ca.obtenerIdDepartamentos();
 		departamento.setModel(new DefaultComboBoxModel<>(deptos.toArray()));
@@ -267,7 +280,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		try{
 			LocalDate fechaR = LocalDate.of((int)anior.getValue(), (int)mesr.getValue(), (int)diar.getValue());
 			LocalDateTime fecha = LocalDateTime.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue(),(int)hora.getSelectedItem(),0);
-			ca.altaSalidaTuristica(departamento.getSelectedItem().toString(),actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
+			ca.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
 			JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Salida",JOptionPane.INFORMATION_MESSAGE );
 			setVisible(false);
 			limpiarForm();
@@ -285,15 +298,15 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		nombre.setText("");
 		departamento.setSelectedIndex(0);
 		actividadTuristica.setSelectedIndex(0);
-		dia.setValue(0);
-		mes.setValue(0);
-		anio.setValue(0);
+		dia.setValue(1);
+		mes.setValue(1);
+		anio.setValue(2022);
 		hora.setSelectedIndex(0);
 		lugar.setText("");
-		maxTuristas.setValue(0);
-		diar.setValue(0);
-		mesr.setValue(0);
-		anior.setValue(0);
+		maxTuristas.setValue(1);
+		diar.setValue(1);
+		mesr.setValue(1);
+		anior.setValue(2022);
 
 	}
 }

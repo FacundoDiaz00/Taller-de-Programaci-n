@@ -1,8 +1,12 @@
 package presentacion;
 
+import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import excepciones.InscripcionYaRegistradaException;
+import excepciones.SuperaElMaximoDeTuristasException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTSalidaTuristica;
 
 import java.awt.EventQueue;
 
@@ -13,7 +17,13 @@ import java.awt.Component;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,37 +32,23 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 public class InscribirseASalidaTurística extends JInternalFrame {
+
+	JSpinner diaSpinner;
+	JSpinner mesSpinner;
+	JSpinner anioSpinner;
+	JSpinner cantTuristasSprinner;
+	private Map<String, DTSalidaTuristica> dtSalidas;
+
 	private JTextField nombreTextField;
 	private JTextField lugarTextField;
 	private JTextField fechaAltaTextField;
 	private JTextField capacidadDeTuristaTextField;
 	private JTextField fechaYHoraDeSalidaTextField;
-	private JTextField diaTextField;
+	JList salidaList;
 
 	private JComboBox comboDepartamento;
 	private JComboBox comboActividad;
 	private JComboBox comboTurista;
-	private JTextField mesTextField;
-	private JTextField añoTextField;
-
-
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InscribirseASalidaTurística frame = new InscribirseASalidaTurística();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -69,7 +65,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("Inscribirse a salida turistica");
-		setBounds(100, 100, 545, 398);
+		setBounds(100, 100, 600, 427);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel botones = new JPanel();
@@ -193,13 +189,29 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		Component horizontalStrut_7 = Box.createHorizontalStrut(40);
 		panel_8.add(horizontalStrut_7);
 		
-		JList salidaList = new JList();
+		JScrollPane scrollPane = new JScrollPane();
+		panel_2.add(scrollPane, BorderLayout.CENTER);
+		
+		salidaList = new JList();
 		salidaList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				seleccionarSalidaTuristicas();
 			}
 		});
-		panel_2.add(salidaList, BorderLayout.CENTER);
+		salidaList.setVisibleRowCount(5);
+		scrollPane.setViewportView(salidaList);
+		
+		JPanel panel_11 = new JPanel();
+		panel_2.add(panel_11, BorderLayout.SOUTH);
+		panel_11.setLayout(new BoxLayout(panel_11, BoxLayout.X_AXIS));
+		
+		JButton btnNewButton = new JButton("Recargar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				recargarSalidas();
+			}
+		});
+		panel_11.add(btnNewButton);
 		
 		JPanel panel_1 = new JPanel();
 		infoSalida.add(panel_1);
@@ -364,23 +376,23 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		Component horizontalStrut_28 = Box.createHorizontalStrut(27);
 		panel_9.add(horizontalStrut_28);
 		
-		diaTextField = new JTextField();
-		panel_9.add(diaTextField);
-		diaTextField.setColumns(10);
+		diaSpinner = new JSpinner();
+		diaSpinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
+		panel_9.add(diaSpinner);
 		
 		JLabel lblNewLabel_11 = new JLabel(" / ");
 		panel_9.add(lblNewLabel_11);
 		
-		mesTextField = new JTextField();
-		panel_9.add(mesTextField);
-		mesTextField.setColumns(10);
+		mesSpinner = new JSpinner();
+		mesSpinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
+		panel_9.add(mesSpinner);
 		
 		JLabel lblNewLabel_12 = new JLabel(" / ");
 		panel_9.add(lblNewLabel_12);
 		
-		añoTextField = new JTextField();
-		panel_9.add(añoTextField);
-		añoTextField.setColumns(10);
+		anioSpinner = new JSpinner();
+		anioSpinner.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
+		panel_9.add(anioSpinner);
 		
 		JLabel lblNewLabel_13 = new JLabel(" (dd/mm/yyyy)");
 		panel_9.add(lblNewLabel_13);
@@ -407,8 +419,9 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		Component horizontalStrut_30 = Box.createHorizontalStrut(30);
 		panel_10.add(horizontalStrut_30);
 		
-		JSpinner spinner = new JSpinner();
-		panel_10.add(spinner);
+		cantTuristasSprinner = new JSpinner();
+		cantTuristasSprinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		panel_10.add(cantTuristasSprinner);
 		
 		Component horizontalStrut_31 = Box.createHorizontalStrut(20);
 		panel_10.add(horizontalStrut_31);
@@ -421,6 +434,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		List<String> idDeps = cat.obtenerIdDepartamentos();
 		comboDepartamento.setModel(new DefaultComboBoxModel<>(idDeps.toArray()));
 		if(idDeps.size() > 0){
+			comboActividad.setEnabled(true);
 			comboDepartamento.setSelectedIndex(0);
 			seleccionarDepartamento();
 			actualizarActividadesTuristicas();
@@ -430,6 +444,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 
 	private void seleccionarDepartamento(){
 		comboActividad.setEnabled(true);
+		actualizarActividadesTuristicas();
 	}
 
 	private void actualizarActividadesTuristicas(){
@@ -440,19 +455,70 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		if(idActs.size() > 0){
 			comboActividad.setSelectedIndex(0);
 			seleccionarActividadesTuristicas();
-			actualizarSalidaTuristicas();
 		}
+		actualizarSalidaTuristicas();
 	}
 
 	private void seleccionarActividadesTuristicas(){
-
+		actualizarSalidaTuristicas();
 	}
 
 	private void actualizarSalidaTuristicas(){
+		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		String act = (String)comboActividad.getSelectedItem();
+		if(act == null){
+			dtSalidas = new HashMap<>();
+			DefaultListModel<String> listModel = new DefaultListModel<>();
+			salidaList.setModel(listModel);
+		} else {
+			List<DTSalidaTuristica> salidasLists =  cat.obtenerDTSalidasTuristicas(act);
+			dtSalidas = new HashMap<>();
+			for(DTSalidaTuristica salidaDtIter : salidasLists){
+				dtSalidas.put(salidaDtIter.getNombre(), salidaDtIter);
+			}
+			DefaultListModel<String> listModel = new DefaultListModel<>();
+			for (DTSalidaTuristica ss : dtSalidas.values()){
+				listModel.addElement(ss.getNombre());
+			}
+			salidaList.setModel(listModel);
+
+			if(dtSalidas.size() > 0){
+				salidaList.setSelectedIndex(0);
+			}
+		}
+
+		seleccionarSalidaTuristicas();
 
 	}
 
 	private void seleccionarSalidaTuristicas(){
+		String idSeleccionado = (String) salidaList.getSelectedValue();
+		if(idSeleccionado == null){
+			nombreTextField.setText("");
+			lugarTextField.setText("");
+			fechaAltaTextField.setText("");
+			fechaYHoraDeSalidaTextField.setText("");
+			capacidadDeTuristaTextField.setText("");
+		} else {
+			DTSalidaTuristica seleccionado = dtSalidas.get(idSeleccionado);
+			nombreTextField.setText(seleccionado.getNombre());
+			lugarTextField.setText(seleccionado.getLugarSalida());
+
+			if(seleccionado.getFechaAlta() != null){
+				fechaAltaTextField.setText( seleccionado.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			} else {
+				fechaAltaTextField.setText("");
+			}
+
+			if(seleccionado.getFechaHoraSalida() != null){
+				fechaYHoraDeSalidaTextField.setText( seleccionado.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")));
+			} else {
+				fechaYHoraDeSalidaTextField.setText("");
+			}
+
+			capacidadDeTuristaTextField.setText(String.valueOf(seleccionado.getCantMaxTuristas()));
+		}
+
 
 	}
 
@@ -464,12 +530,72 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			comboTurista.setSelectedIndex(0);
 		}
 	}
+	
+	private void recargarSalidas() {
+		actualizarSalidaTuristicas();
+	}
 
 	private void cancelar(){
-
+		limpiarFormulario();
 	}
 
 	private void acpetar(){
+		String idSalida = (String)salidaList.getSelectedValue();
+		String idTuristas = (String)comboTurista.getSelectedItem();
+		if(idSalida == null){
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar una salida turística, seleccione una y vuelve a intentar ", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if(idTuristas == null){
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un turista, seleccione uno y vuelve a intentar", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		LocalDate fechaInscripcion;
+		try{
+			int day = (int)diaSpinner.getValue();
+			int mouth = (int)mesSpinner.getValue();
+			int year = (int)anioSpinner.getValue();
+			fechaInscripcion = LocalDate.of(year,mouth,day);
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null, "La fecha de inscripción elegida inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		int cantidadTurista = (int)cantTuristasSprinner.getValue();
+		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		try {
+			cat.altaInscripcionSalidaTuristica(idSalida, idTuristas, cantidadTurista, fechaInscripcion);
+			setVisible(false);
+			limpiarFormulario();
+			JOptionPane.showMessageDialog(null, "Inscripción creada con éxito..", "Error", JOptionPane.INFORMATION_MESSAGE);
+		} catch (InscripcionYaRegistradaException e) {
+			JOptionPane.showMessageDialog(null, "Este turista ya esta inscripto a esta salida turística.", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (SuperaElMaximoDeTuristasException e) {
+			JOptionPane.showMessageDialog(null, "Con los turistas de esta inscripción se supera la cantidad máxima de turistas permitidos en esta salida turística.", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (FechaAltaSalidaTuristicaPosteriorAFechaInscripcion e) {
+			JOptionPane.showMessageDialog(null, "La fecha de inscripción no puede ser anterior a la fecha de alta de la salida turística.", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Error general al crear la inscripción.", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void setVisible(boolean aFlag) {
+		super.setVisible(aFlag);
+		if(aFlag){
+			//Cuando se encienda el formulario tambien nos aseguramos que to_do este limpio
+			limpiarFormulario();
+		}
+
+	}
+
+	private void limpiarFormulario(){
+		actualizarDepartamentos(); //Eso actualiza las actividades y salidas
+		actualizarTuristas();
+		diaSpinner.setValue(1);
+		mesSpinner.setValue(1);
+		anioSpinner.setValue(2022);
+		cantTuristasSprinner.setValue(1);
 
 	}
 

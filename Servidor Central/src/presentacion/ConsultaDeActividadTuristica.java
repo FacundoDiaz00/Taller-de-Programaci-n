@@ -39,6 +39,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	private JTextArea ciudad;
 	private JTextArea costo;
 	private JTextArea fechaAlta;
+	private JTextArea proveedor;
 	
 	/**
 	 * Create the frame.
@@ -47,7 +48,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		Fabrica f = Fabrica.getInstancia();
 		this.icat = f.getIControladorActividadTuristica();
 		setTitle("Consutla de Actividad Turística");
-		setBounds(100, 100, 409, 337);
+		setBounds(100, 100, 409, 424);
 		getContentPane().setLayout(null);
         setResizable(true);
         setIconifiable(true);
@@ -77,22 +78,22 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		
 		JLabel duracionLabel = new JLabel("Duracion:");
 		duracionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		duracionLabel.setBounds(7, 111, 120, 14);
+		duracionLabel.setBounds(7, 164, 120, 14);
 		getContentPane().add(duracionLabel);
 		
 		JLabel costoLabel = new JLabel("Costo:");
 		costoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		costoLabel.setBounds(0, 139, 121, 14);
+		costoLabel.setBounds(0, 192, 121, 14);
 		getContentPane().add(costoLabel);
 		
 		JLabel ciudadLabel = new JLabel("Ciudad:");
 		ciudadLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		ciudadLabel.setBounds(7, 165, 120, 14);
+		ciudadLabel.setBounds(7, 218, 120, 14);
 		getContentPane().add(ciudadLabel);
 		
 		JLabel fechaAltaLabel = new JLabel("Fecha de alta:");
 		fechaAltaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		fechaAltaLabel.setBounds(7, 191, 120, 14);
+		fechaAltaLabel.setBounds(7, 244, 120, 14);
 		getContentPane().add(fechaAltaLabel);
 		
 		JComboBox comboDeps = new JComboBox<String>();
@@ -137,57 +138,68 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		getContentPane().add(nombre);
 		this.nombre = nombre;
 		
-		JTextArea descripcion = new JTextArea();
-		descripcion.setEditable(false);
-		descripcion.setBounds(145, 89, 212, 15);
-		getContentPane().add(descripcion);
-		this.descripcion = descripcion;
-		
 		JTextArea duracion = new JTextArea();
 		duracion.setEditable(false);
-		duracion.setBounds(145, 111, 212, 15);
+		duracion.setBounds(145, 164, 212, 15);
 		getContentPane().add(duracion);
 		this.duracion = duracion;
 	
 		
 		JTextArea costo = new JTextArea();
 		costo.setEditable(false);
-		costo.setBounds(145, 139, 212, 15);
+		costo.setBounds(145, 192, 212, 15);
 		getContentPane().add(costo);
 		this.costo = costo;
 		
 		JTextArea ciudad = new JTextArea();
 		ciudad.setEditable(false);
-		ciudad.setBounds(145, 165, 212, 15);
+		ciudad.setBounds(145, 218, 212, 15);
 		getContentPane().add(ciudad);
 		this.ciudad = ciudad;
 		
 		JTextArea fechaAlta = new JTextArea();
 		fechaAlta.setEditable(false);
-		fechaAlta.setBounds(145, 191, 212, 15);
+		fechaAlta.setBounds(145, 244, 212, 15);
 		getContentPane().add(fechaAlta);
 		this.fechaAlta = fechaAlta;
 		
 		JComboBox comboSalidas = new JComboBox();
-		comboSalidas.setBounds(145, 218, 212, 24);
+		comboSalidas.setBounds(145, 289, 212, 24);
 		getContentPane().add(comboSalidas);
 		this.comboSalidas = comboSalidas;
 
 		
 		JLabel salidasTuristicasLabel = new JLabel("Salidas turísticas:");
 		salidasTuristicasLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		salidasTuristicasLabel.setBounds(0, 223, 139, 14);
+		salidasTuristicasLabel.setBounds(-12, 294, 139, 14);
 		getContentPane().add(salidasTuristicasLabel);
 		
 		JComboBox comboPaquetes = new JComboBox();
-		comboPaquetes.setBounds(145, 251, 212, 24);
+		comboPaquetes.setBounds(145, 314, 212, 24);
 		getContentPane().add(comboPaquetes);
 		this.comboPaquetes = comboPaquetes;
 		
 		JLabel paquetesLabel = new JLabel("Paquetes:");
 		paquetesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		paquetesLabel.setBounds(46, 256, 81, 14);
+		paquetesLabel.setBounds(46, 319, 81, 14);
 		getContentPane().add(paquetesLabel);
+		
+		descripcion = new JTextArea();
+		descripcion.setLineWrap(true);
+		descripcion.setWrapStyleWord(true);
+		descripcion.setEditable(false);
+		descripcion.setBounds(145, 84, 212, 69);
+		getContentPane().add(descripcion);
+		
+		JLabel lblProveedor = new JLabel("Proveedor:");
+		lblProveedor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblProveedor.setBounds(7, 269, 120, 14);
+		getContentPane().add(lblProveedor);
+		
+		proveedor = new JTextArea();
+		proveedor.setEditable(false);
+		proveedor.setBounds(145, 270, 212, 15);
+		getContentPane().add(proveedor);
 		
 	   comboDeps.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
@@ -232,6 +244,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			costo.setText(String.valueOf(actividad.getCostoPorTurista()));
 			descripcion.setText(actividad.getDescripcion());
 			fechaAlta.setText(actividad.getFechaAlta().toString());
+			proveedor.setText(actividad.getNombreProveedor());
 			duracion.setText(String.valueOf(actividad.getDuracion()));
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
 	    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));

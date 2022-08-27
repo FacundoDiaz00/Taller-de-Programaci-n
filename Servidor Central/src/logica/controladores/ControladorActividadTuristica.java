@@ -88,7 +88,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	@Override
-	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException {
+	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion {
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) mu.getUsuario(nicknameTuris);
 		if(turis.estaInscriptoASalida(nomSalTurim)){
@@ -103,13 +103,13 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
 	}
 
-	public void altaSalidaTuristica(String depto, String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+	public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
 		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
 		ManejadorActividadTuristica ma = ManejadorActividadTuristica.getInstancia();
 		if(ms.existeSalidaTuristica(nombre)) {
 			throw new SalidaYaRegistradaException("La salida con nombre" + nombre +" ya existe en el sistema.");
 		}
-		// AltaActividad < AltaSalida < Salida, se chequean ambas desigualdades.
+		// AltaActividad <= AltaSalida <= Salida, se chequean ambas desigualdades.
 
 		if (ma.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)){
 			throw new FechaAltaActividadPosteriorAFechaAltaSalidaException("La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");

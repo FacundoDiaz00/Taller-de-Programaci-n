@@ -1,5 +1,7 @@
 package logica.entidades;
 
+import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+
 import java.time.LocalDate;
 
 /**
@@ -15,7 +17,10 @@ public class Inscripcion {
     private SalidaTuristica salidaTuristica;
 
     public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, Compra compra,
-            SalidaTuristica salidaTuristica) {
+            SalidaTuristica salidaTuristica) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion  {
+        if(salidaTuristica.getFechaAlta().isAfter(fechaInscrpicion)){
+            throw new FechaAltaSalidaTuristicaPosteriorAFechaInscripcion("La fecha de inscripción es previa a la fecha de registro de la salida turística elegida. Modifique la fecha e inténtenlo de nuevo.");
+        }
         this.fechaInscrpicion = fechaInscrpicion;
         this.cantidadTuristas = cantidadTuristas;
         this.compra = compra;

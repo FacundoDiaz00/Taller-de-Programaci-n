@@ -6,9 +6,6 @@ package logica.controladores;
 
 public class Fabrica {
     private static Fabrica instancia;
-    private IControladorActividadTuristica cAT;
-    private IControladorPaquete cP;
-    private IControladorUsuario cU;
 
     private Fabrica() {
     }
@@ -23,23 +20,14 @@ public class Fabrica {
     // Todo en el ejemplo crean una instancia por cada vez que la llaman, pero no le encuentro sentido ni a esto ni a que la fabrica sea un singleton, no tiene datos que mantener
 
     public IControladorActividadTuristica getIControladorActividadTuristica() {
-        if(cAT == null){
-            cAT = new ControladorActividadTuristica();
-        }
-        return cAT;
+        return new ControladorActividadTuristica();
     }
 
     public IControladorPaquete getIControladorPaquete() {
-        if(cP == null){
-            cP = new ControladorPaquete();
-        }
-        return cP;
+        return new ControladorPaquete();
     }
 
     public IControladorUsuario getIControladorUsuario() {
-        if(cU == null){
-            cU = new ControladorUsuario();
-        }
-        return cU;
+        return new ControladorUsuario();
     }
 }
