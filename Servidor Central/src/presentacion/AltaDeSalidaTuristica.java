@@ -297,8 +297,6 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 	private void limpiarForm() {
 		nombre.setText("");
-		departamento.setSelectedIndex(0);
-		actividadTuristica.setSelectedIndex(0);
 		dia.setValue(1);
 		mes.setValue(1);
 		anio.setValue(2022);
