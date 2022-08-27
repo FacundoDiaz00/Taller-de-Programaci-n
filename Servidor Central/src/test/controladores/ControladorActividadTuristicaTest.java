@@ -26,6 +26,39 @@ class ControladorActividadTuristicaTest {
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 	}
+	
+	// No es un test en sí
+	static void generarActividades(int cant, String id) throws Exception {
+		preparacionPrevia();
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < cant; i++) {
+			String nickProveedor = "Proveedor " + id + " i=" + i;
+			String departamento = "Departamento " + id + " i=" + i;
+			String nombreActividad = "Actividad " + id + " i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10.85;
+			String ciudad = "Ciudad";
+			LocalDate fechaAlta = LocalDate.now();
+			
+			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+		}
+	}
+	
+	// No es un test en sí
+	static void generarDepartamentos(int cant, String id) throws Exception {
+		preparacionPrevia();
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < cant; i++) {
+			String nom = "Departamento " + id + " i=" + i;
+			String descr = "Descripcion";
+			String url = "https://www.canelones-departamento.org.uy/inicio.html";
+			
+			cat.altaDepartamento(nom, descr, url);
+		}
+	}
 
 
 	@Test
