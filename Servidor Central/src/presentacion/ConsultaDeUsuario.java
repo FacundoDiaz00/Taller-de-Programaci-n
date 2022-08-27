@@ -11,7 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
-import logica.controladores.Fabrica;
+import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedorDetalle;
 import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 
 public class ConsultaDeUsuario extends JInternalFrame {
 	private Principal principal;
+	private IControladorUsuario icu;
 	
 	String seleccionNickname;
 	
@@ -61,8 +62,9 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDeUsuario(Principal principal) {
+	public ConsultaDeUsuario(Principal principal, IControladorUsuario icu) {
 		this.principal = principal;
+		this.icu = icu;
 		
         setResizable(true);
         setIconifiable(true);
@@ -250,8 +252,16 @@ public class ConsultaDeUsuario extends JInternalFrame {
     }
 	
 	public void actualizarComboBox() {
-		List<String> usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerIdUsuarios();
+		List<String> usuarios = icu.obtenerIdUsuarios();
 		comboBoxSeleccionUsr.setModel(new DefaultComboBoxModel(usuarios.toArray()));
+	}
+	
+	@Override
+	public void setVisible(boolean flag) {
+		super.setVisible(flag);
+		if (flag) {
+			actualizarComboBox();			
+		}
 	}
 	
 	public void seleccionYaHecha(String nickname) {
@@ -265,8 +275,6 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	}
 	
 	public void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
-		// TODO: implementar que se abra la ventana con esta actividad ya elegida
-		System.out.println("Se quiso ejecutar el caso de uso Consulta Actividad Turistica con el nombre "+ nombreActividad);
 		principal.mostrarConsultaDeActividadTuristica(nombreActividad);
 	}
 
@@ -275,7 +283,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		String seleccion = seleccionNickname;
 		System.out.println(seleccion);
 		try {
-			DTUsuario usr = Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetalle(seleccion);
+			DTUsuario usr = icu.obtenerDTUsuarioDetalle(seleccion);
 			
 			boolean mostrar_datos = true;
 			boolean mostrar_proveedor = true;
@@ -322,9 +330,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				
 				
 				var act_sal = prov.getActividadesSalidas();
-				
-				System.out.print(act_sal.toString());
-				
+								
 				panelActividadesYSalidasProveedor.removeAll();
 				
 				for (var actividad : act_sal.keySet()) {

@@ -1,27 +1,16 @@
 package presentacion;
 
-import logica.controladores.Fabrica;
 import java.util.List;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTTurista;
-import logica.datatypes.DTUsuario;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.SalidaTuristica;
-import logica.entidades.Usuario;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTPaquete;
 
@@ -45,8 +34,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDeActividadTuristica(IControladorActividadTuristica icat) {
-		Fabrica f = Fabrica.getInstancia();
-		this.icat = f.getIControladorActividadTuristica();
+		this.icat = icat;
 		setTitle("Consutla de Actividad Turística");
 		setBounds(100, 100, 409, 424);
 		getContentPane().setLayout(null);
@@ -203,7 +191,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		
 	   comboDeps.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 List<String> actividades = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
+		    	 List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
 		    	 comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
 		   
 		     }
@@ -234,10 +222,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		
 		System.out.println(seleccion);
 		try {
-			DTActividadTuristicaDetalle actividad = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDetallesActividadTuristica(seleccion);
-			
-			boolean mostrar_datos = true;
-			boolean mostrar_proveedor = true;
+			DTActividadTuristicaDetalle actividad = icat.obtenerDetallesActividadTuristica(seleccion);
 			
 			nombre.setText(actividad.getNombre());
 			ciudad.setText(actividad.getCuidad());
@@ -247,8 +232,12 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			proveedor.setText(actividad.getNombreProveedor());
 			duracion.setText(String.valueOf(actividad.getDuracion()));
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
+			
+			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTSalidaTuristica
 	    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
 			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
+			
+			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTPaquete
 	    	comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
 			
 		} catch (Exception ex) {
@@ -258,7 +247,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	}
 	
 	public void actualizarComboDepartamentos() {
-		List<String> deps = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+		List<String> deps = icat.obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
 	
@@ -271,7 +260,8 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
         costo.setText("");
 		ciudad.setText("");
 		fechaAlta.setText("");
-		comboSalidas.setSelectedIndex(0);
-		comboPaquetes.setSelectedIndex(0);
+		// FIXME: comento pq se rompe por alguna razón
+		// comboSalidas.setSelectedIndex(0);
+		// comboPaquetes.setSelectedIndex(0);
     }
 }

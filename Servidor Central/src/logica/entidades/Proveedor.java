@@ -73,7 +73,7 @@ public class Proveedor extends Usuario {
     }
 
 	public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {
-		// TODO Auto-generated method stub
+		actividadesTuristicas.put(actividadTuristica.getNombre(), actividadTuristica);
 	}
     
     @Override
