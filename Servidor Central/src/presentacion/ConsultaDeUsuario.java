@@ -85,14 +85,16 @@ public class ConsultaDeUsuario extends JInternalFrame {
         
         panel_eleccion = new JPanel();
         panel_principal.add(panel_eleccion);
-        panel_eleccion.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panel_eleccion.setLayout(null);
         
         JLabel lblNewLabel_1 = new JLabel("Elija un usuario:");
+        lblNewLabel_1.setBounds(12, 10, 114, 15);
         panel_eleccion.add(lblNewLabel_1);
         
         
 
         comboBoxSeleccionUsr = new JComboBox<String>();
+        comboBoxSeleccionUsr.setBounds(133, 5, 245, 24);
         panel_eleccion.add(comboBoxSeleccionUsr);
         actualizarComboBox();
         
