@@ -37,6 +37,8 @@ public class Principal {
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
 	private ConsultaDeSalidaTuristica	frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
+
+	private ConsultaDePaquete frmIntConsultaDePaquete;
 	/**
 	 * Launch the application.
 	 */
@@ -73,6 +75,7 @@ public class Principal {
 		frmIntAltaPaquete = new AltaDePaquete(CP);
 		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
+		frmIntConsultaDePaquete = new ConsultaDePaquete();
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmIntAltaUsuario.setVisible(false);
@@ -83,8 +86,8 @@ public class Principal {
 		frmIntAgregarActividadAPaquete.setVisible(false);
 		frmInscribirseASalidaTurística.setVisible(false);
 		frmIntAltaSalidaTuristica.setVisible(false);
+		frmIntConsultaDePaquete.setVisible(false);
 		frmIntConsultaDeSalidaTuristica.setVisible(false);
-		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -95,7 +98,9 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
+
 		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -219,6 +224,11 @@ public class Principal {
 		mnNewMenu.add(altaPaqueteJMenuItem);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Consulta de Paquete");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmIntConsultaDePaquete.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Agregar Actividad Turística a Paquete");
