@@ -5,6 +5,7 @@ import logica.datatypes.DTPaqueteDetalles;
 import java.time.LocalDate;
 import java.util.List;
 
+import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.PaqueteYaRegistradoException;
 
 /**
@@ -17,7 +18,7 @@ public interface IControladorPaquete {
     List<String> obtenerIdPaquetes();
 
     List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
-    void agregarActividadAPaquete(String nombreAct, String nombrePaq);
+    void agregarActividadAPaquete(String nombreAct, String nombrePaq) throws ActividadTuristicaYaRegistradaException;
 
 
     /**
