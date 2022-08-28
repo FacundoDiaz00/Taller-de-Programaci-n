@@ -1,6 +1,8 @@
 package logica.entidades;
 
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import logica.datatypes.DTInscripcion;
+import logica.datatypes.DTTurista;
 
 import java.time.LocalDate;
 
@@ -15,9 +17,10 @@ public class Inscripcion {
 
     private Compra compra;
     private SalidaTuristica salidaTuristica;
+    private Turista turista;
 
     public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, Compra compra,
-            SalidaTuristica salidaTuristica) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion  {
+            SalidaTuristica salidaTuristica, Turista tur) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion  {
         if(salidaTuristica.getFechaAlta().isAfter(fechaInscrpicion)){
             throw new FechaAltaSalidaTuristicaPosteriorAFechaInscripcion("La fecha de inscripción es previa a la fecha de registro de la salida turística elegida. Modifique la fecha e inténtenlo de nuevo.");
         }
@@ -26,10 +29,10 @@ public class Inscripcion {
         this.compra = compra;
         salidaTuristica.agregarInscripcionASalida(this);
         this.salidaTuristica = salidaTuristica;
+        this.turista = tur;
     }
 
     // Todo falta el calculo de costoInscripcion
-
 
     public boolean estaInscriptoASalida(String nomSalTuri){
         return salidaTuristica.getNombre().equals(nomSalTuri);
@@ -70,5 +73,9 @@ public class Inscripcion {
 
     public String getNombreSalida() {
         return salidaTuristica.getNombre();
+    }
+    
+    public DTInscripcion getDTInscripcion(){
+    	return new DTInscripcion(this.fechaInscrpicion, this.cantidadTuristas, this.compra.toString(), this.salidaTuristica.obtenerDTSalidaTuristica(),(DTTurista) this.turista.getDTUsuario());
     }
 }

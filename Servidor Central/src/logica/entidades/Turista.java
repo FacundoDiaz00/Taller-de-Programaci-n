@@ -30,7 +30,7 @@ public class Turista extends Usuario {
 
 
     public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion {
-        Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal);
+        Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal, this);
         inscripciones.add(insc);
     }
 
