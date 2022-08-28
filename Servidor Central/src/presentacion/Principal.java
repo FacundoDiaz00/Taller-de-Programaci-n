@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 public class Principal {
 	IControladorUsuario CUS;
 	IControladorActividadTuristica CAD;
+	IControladorPaquete CP;
 
 	private JFrame frmEstacionDeTrabajo;
 
@@ -34,7 +35,7 @@ public class Principal {
 	private AltaDePaquete frmIntAltaPaquete;
 	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
-
+	private ConsultaDeSalidaTuristica	frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
 	/**
 	 * Launch the application.
@@ -60,14 +61,17 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
+		CP = fabrica.getIControladorPaquete();
+		
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, CUS);
-		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica();
+		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica(CAD);
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
-		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
-		frmInscribirseASalidaTurística = new InscribirseASalidaTurística();
+		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, CAD);
+		frmInscribirseASalidaTurística = new InscribirseASalidaTurística(CAD, CUS);
+		frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(CAD);
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
-		frmIntAltaPaquete = new AltaDePaquete();
-		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete();
+		frmIntAltaPaquete = new AltaDePaquete(CP);
+		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
@@ -79,7 +83,8 @@ public class Principal {
 		frmIntAgregarActividadAPaquete.setVisible(false);
 		frmInscribirseASalidaTurística.setVisible(false);
 		frmIntAltaSalidaTuristica.setVisible(false);
-
+		frmIntConsultaDeSalidaTuristica.setVisible(false);
+		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -90,8 +95,7 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
-
-		frmIntAltaUsuario = new AltaDeUsuario(CUS);
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
 		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -187,7 +191,13 @@ public class Principal {
 		mnNewMenu_3.add(registrarSalidaJMenuItem);
 		
 		JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
+		consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntConsultaDeSalidaTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(consultarSalidaTuristicaJMenuItem);
+		
 		
 		JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
 		inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
@@ -257,16 +267,19 @@ public class Principal {
 		// frmIntConsultaDeSalidaTuristica.setVisible(true);
 	}
 	
+	public void mostrarConsultaDePaquete(String nombrePaquete) {
+		if (nombrePaquete != null) {
+			// FIXME: descomentar e implementar las operaciones basandose en lo de arriba
+			// frmIntConsultaDePaquete.seleccionYaHecha(nombrePaquete);			
+		}
+		// frmIntConsultaDePaquete.setVisible(true);
+	}
+	
 		
 	private void cargarDatosDePrueba() {
 		IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
 		IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();
-
-		//Cargo los departamentos
-
-		//Cargo los usuarios
-
 		try{
 
 			//Cargo Departamentos
@@ -361,6 +374,29 @@ public class Principal {
 					LocalDate.of(2022,8,15), "Posada Del Lunarejo", 4);
 
 
+			//Inscripciones
+			icat.altaInscripcionSalidaTuristica("Degusta Agosto", "lachiqui" , 3, LocalDate.of(2022, 8, 15));
+			icat.altaInscripcionSalidaTuristica("Degusta Agosto", "elelvis" , 5, LocalDate.of(2022, 8, 16));
+			icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui" , 3, LocalDate.of(2022, 8, 18));
+			icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita" , 1, LocalDate.of(2022, 8, 19));
+			icat.altaInscripcionSalidaTuristica("Almuerzo 2", "mastropiero" , 2, LocalDate.of(2022, 8, 19));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 1", "anibal" , 1, LocalDate.of(2022, 8, 19));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "chino" , 10, LocalDate.of(2022, 8, 20));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "bobesponja" , 2, LocalDate.of(2022, 8, 20));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal" , 1, LocalDate.of(2022, 8, 21));
+			icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony" , 11, LocalDate.of(2022, 8, 21));
+
+			//Paquete
+			ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20,LocalDate.of(2022, 8, 10)); //todo falta la fecha de alta
+			ipack.altaPaquete("Un día en Colonia", "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15, LocalDate.of(2022, 8, 10)); //todo falta la fecha de alta
+
+			//Agregar Actividad a Paquete
+			ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");
+			ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
+			ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
+			ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
+
+			JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Error", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error a la hora de cargar los datos de prueba." +

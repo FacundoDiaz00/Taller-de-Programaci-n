@@ -116,13 +116,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
         	
@@ -163,13 +161,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 					
 				}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 					
 				}
 	       });		

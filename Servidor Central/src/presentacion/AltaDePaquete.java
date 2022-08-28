@@ -4,9 +4,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import excepciones.PaqueteYaRegistradoException;
-import logica.controladores.Fabrica;
 import logica.controladores.IControladorPaquete;
 
 import javax.swing.JSpinner;
@@ -14,16 +14,27 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
 
 public class AltaDePaquete extends JInternalFrame{
+	private IControladorPaquete cp;
+	
 	private JTextField txtNombre;
-	private JTextField descrp;
+	private JTextArea descrp;
 	private JSpinner perVal;
 	private JSpinner desc;
-	public AltaDePaquete() {
+	private JSpinner anior;
+	private JSpinner mesr;
+	private JSpinner diar;
+	public AltaDePaquete(IControladorPaquete cp) {
+		this.cp = cp;		
+		
 		setTitle("Registrar Paquete de Actividades.");
-		setBounds(100, 100, 461, 342);
+		setBounds(100, 100, 461, 415);
 		getContentPane().setLayout(null);
         setResizable(true);
         setIconifiable(true);
@@ -73,9 +84,14 @@ public class AltaDePaquete extends JInternalFrame{
 		label.setBounds(163, 110, 70, 15);
 		getContentPane().add(label);
 		
-		descrp = new JTextField();
-		descrp.setBounds(12, 160, 416, 106);
-		getContentPane().add(descrp);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 160, 416, 118);
+		getContentPane().add(scrollPane);
+		
+		descrp = new JTextArea();
+		scrollPane.setViewportView(descrp);
+		descrp.setWrapStyleWord(true);
+		descrp.setLineWrap(true);
 		descrp.setColumns(10);
 		
 		
@@ -83,10 +99,8 @@ public class AltaDePaquete extends JInternalFrame{
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Fabrica f = Fabrica.getInstancia();
-					IControladorPaquete cp = f.getIControladorPaquete();
-
-					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue());
+					LocalDate f = LocalDate.of((int)anior.getValue(),(int)mesr.getValue(),(int)diar.getValue());
+					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue(),f);
 					JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
 					setVisible(false);
 					limpiarForm();
@@ -97,7 +111,7 @@ public class AltaDePaquete extends JInternalFrame{
 				
 			}
 		});
-		btnConfirmar.setBounds(12, 278, 117, 25);
+		btnConfirmar.setBounds(311, 341, 117, 25);
 		getContentPane().add(btnConfirmar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -107,8 +121,40 @@ public class AltaDePaquete extends JInternalFrame{
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(311, 278, 117, 25);
+		btnCancelar.setBounds(12, 341, 117, 25);
 		getContentPane().add(btnCancelar);
+		
+		JLabel lblNewLabel = new JLabel("Fecha De Registro:");
+		lblNewLabel.setBounds(12, 300, 134, 15);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel label_1 = new JLabel("/");
+		label_1.setBounds(206, 300, 11, 15);
+		getContentPane().add(label_1);
+		
+		JLabel label_2 = new JLabel("/");
+		label_2.setBounds(268, 300, 11, 15);
+		getContentPane().add(label_2);
+		
+		diar = new JSpinner();
+		diar.setBounds(153, 298, 47, 20);
+		diar.setModel(new SpinnerNumberModel(1, 1, 31, 1));
+		getContentPane().add(diar);
+		
+		
+		mesr = new JSpinner();
+		mesr.setBounds(216, 298, 47, 20);
+		mesr.setModel(new SpinnerNumberModel(1, 1, 12, 1));
+		getContentPane().add(mesr);
+		
+		anior = new JSpinner();
+		anior.setBounds(278, 298, 64, 20);
+		anior.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
+		getContentPane().add(anior);
+		
+		JLabel lblddmmyyyy = new JLabel("(dd/mm/yyyy)");
+		lblddmmyyyy.setBounds(347, 300, 92, 15);
+		getContentPane().add(lblddmmyyyy);
 		
 	}
 	private void limpiarForm() {
@@ -116,6 +162,8 @@ public class AltaDePaquete extends JInternalFrame{
         descrp.setText("");
 		perVal.setValue(0);
 		desc.setValue(0);
+		diar.setValue(0);
+		mesr.setValue(0);
+		anior.setValue(0);
     }
-	
 }

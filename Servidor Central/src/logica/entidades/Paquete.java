@@ -4,6 +4,7 @@ import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -18,16 +19,16 @@ public class Paquete {
     private String descrpicion;
     private int validez;
     private float descuento;
-
+    private LocalDate fechaDeRegistro;
     private Map<String, ActividadTuristica> actividades;
 
-    public Paquete(String nombre, String descrpicion, int validez, float descuento) {
+    public Paquete(String nombre, String descrpicion, int validez, float descuento, LocalDate fechaR) {
         this.nombre = nombre;
         this.descrpicion = descrpicion;
         this.validez = validez;
         this.descuento = descuento;
         this.actividades = new HashMap<>();
-        //TODO: fecha de alta.
+        this.fechaDeRegistro = fechaR;
     }
 
 
@@ -78,6 +79,13 @@ public class Paquete {
 
     public void setDescuento(float descuento) {
         this.descuento = descuento;
+    }
+    public LocalDate fechaDeRegistro() {
+    	return fechaDeRegistro;
+    }
+    
+    public void fechaDeRegistro(LocalDate fr) {
+    	this.fechaDeRegistro = fr;
     }
 
     public Map<String, ActividadTuristica> getActividades() {

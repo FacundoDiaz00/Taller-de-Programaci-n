@@ -1,6 +1,5 @@
 package presentacion;
 
-import logica.controladores.IControladorUsuario;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -10,7 +9,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.IControladorPaquete;
+
 import java.awt.Dimension;
 import java.awt.Component;
 import java.util.List;
@@ -18,6 +19,9 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 public class AgregarActividadAPaquete extends JInternalFrame {
+	private IControladorPaquete cp;
+	private IControladorActividadTuristica cat;
+	
 	private JComboBox comboPaquetes;
 	private JComboBox comboDepartamentos;
 	private JComboBox comboActividades;
@@ -26,7 +30,10 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarActividadAPaquete() {
+	public AgregarActividadAPaquete(IControladorPaquete cp, IControladorActividadTuristica cat) {
+		this.cp = cp;
+		this.cat = cat;
+		
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {
@@ -66,13 +73,11 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
         	
@@ -114,13 +119,11 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
        	
@@ -162,13 +165,11 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
       	
@@ -230,7 +231,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	}
 
 	private void actualizarComboPaquete() {
-		List<String> idsPaquetes = Fabrica.getInstancia().getIControladorPaquete().obtenerIdPaquetes();
+		List<String> idsPaquetes = cp.obtenerIdPaquetes();
 		comboPaquetes.setModel(new DefaultComboBoxModel(idsPaquetes.toArray()));
 		if(idsPaquetes.size() > 0){
 			comboPaquetes.setSelectedIndex(0);
@@ -241,7 +242,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	}
 	
 	private void actualizarComboDepartamentos() {
-		List<String> idsDepartamentos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+		List<String> idsDepartamentos = cat.obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(idsDepartamentos.toArray()));
 		if(idsDepartamentos.size() > 0) {
 			comboDepartamentos.setSelectedIndex(0);
@@ -256,7 +257,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		String depId = (String) comboDepartamentos.getSelectedItem();
 		String packId = (String) comboPaquetes.getSelectedItem();
 		//No va a estar habilitado el combo si no seleciono la actividad y el pack
-		List<String> idsActividades = Fabrica.getInstancia().getIControladorPaquete().obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId, packId);
+		List<String> idsActividades = cp.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId, packId);
 		comboActividades.setModel(new DefaultComboBoxModel<>(idsActividades.toArray()));
 		if(idsActividades.size() > 0){
 			comboActividades.setSelectedIndex(0);
@@ -275,7 +276,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		if(act == null || pack == null){
 			JOptionPane.showMessageDialog(null, "Se debe seleccionar un departamento, actividad de actividad turística y un paquete", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
-			Fabrica.getInstancia().getIControladorPaquete().agregarActividadAPaquete(act, pack);
+			cp.agregarActividadAPaquete(act, pack);
 			setVisible(false);
 			limpiarSelecciones();
 			JOptionPane.showMessageDialog(null, "Se agregó la actividad al paquete", "Registro de asociación actividad a paquete", JOptionPane.INFORMATION_MESSAGE);
