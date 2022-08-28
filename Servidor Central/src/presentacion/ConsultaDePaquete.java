@@ -28,8 +28,6 @@ public class ConsultaDePaquete extends JInternalFrame {
 	private JTextPane descr;
 	private JTextPane descuento;
 	private List<DTPaqueteDetalles> paquetesDetalles;
-
-	private JButton btnConfirmar;
 	private JComboBox actividad;
 	/**
 	 * Create the frame.
@@ -40,7 +38,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 		setClosable(true);
 		setIconifiable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 450, 431);
+		setBounds(100, 100, 450, 382);
 		getContentPane().setLayout(null);
 		
 		JLabel lblPaqueteAConsultar = new JLabel("Paquete a consultar:");
@@ -51,7 +49,6 @@ public class ConsultaDePaquete extends JInternalFrame {
 
 		paquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//perVal.setText();
 			}
 		});
 		paquete.addPopupMenuListener(new PopupMenuListener() {
@@ -102,10 +99,6 @@ public class ConsultaDePaquete extends JInternalFrame {
 		actividad.setBounds(152, 295, 261, 24);
 		getContentPane().add(actividad);
 		
-		btnConfirmar = new JButton("Confirmar.");
-		btnConfirmar.setBounds(152, 362, 117, 25);
-		getContentPane().add(btnConfirmar);
-		
 		JTextPane descuento = new JTextPane();
 		descuento.setBounds(160, 109, 212, 21);
 		getContentPane().add(descuento);
@@ -123,7 +116,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 					break;
 				}
 			}
-			//System.out.print(paqueteSeleccionado.getDescrpicion())
+
 			perVal.setText(String.valueOf(paqueteSeleccionado.getValidez()));
 			descr.setText(paqueteSeleccionado.getDescrpicion());
 			descuento.setText(String.valueOf(paqueteSeleccionado.getDescuento()));

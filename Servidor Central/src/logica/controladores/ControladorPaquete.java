@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import logica.entidades.ActividadTuristica;
+import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.PaqueteYaRegistradoException;
 import logica.entidades.Paquete;
 import logica.manejadores.ManejadorActividadTuristica;
@@ -26,7 +27,6 @@ public class ControladorPaquete implements IControladorPaquete{
         if(mp.existePaquete(nombre)) {
             throw new PaqueteYaRegistradoException("Ya existe en el sistema un paquete con el nombre: "+nombre);
         }
-        System.out.print(descripcion);
         Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento, fechaR);
         mp.addPaquete(paq);
     }
@@ -70,13 +70,16 @@ public class ControladorPaquete implements IControladorPaquete{
 	}
 
 	@Override
-	public void agregarActividadAPaquete(String nombreAct, String nombrePaq) {
+	public void agregarActividadAPaquete(String nombreAct, String nombrePaq) throws ActividadTuristicaYaRegistradaException {
 		ManejadorPaquete mp = ManejadorPaquete.getInstancia();
 		Paquete paq = mp.getPaquete(nombrePaq);
+		
+		if (paq.obtenerIdActividadesIncluidas().contains(nombreAct))
+			throw new ActividadTuristicaYaRegistradaException("El paquete ya incluye esta actividad");
+
 		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
 		ActividadTuristica act = mat.getActividad(nombreAct);
-		
-		// FIXME: qué pasa si ya están asociados?
+				
 		paq.agregarActividad(act);
 		act.agregarPaquete(paq);
 	}

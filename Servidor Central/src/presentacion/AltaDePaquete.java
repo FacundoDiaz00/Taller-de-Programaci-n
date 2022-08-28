@@ -63,7 +63,7 @@ public class AltaDePaquete extends JInternalFrame{
 		getContentPane().add(lblDescripcion);
 		
 		txtNombre = new JTextField();
-		txtNombre.setText("Pepe");
+		txtNombre.setText("");
 		txtNombre.setBounds(75, 48, 114, 19);
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
@@ -99,6 +99,10 @@ public class AltaDePaquete extends JInternalFrame{
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					if(txtNombre.getText().isBlank() || descrp.getText().isBlank()) {
+						JOptionPane.showMessageDialog(null, "Los campos nombre y descripción son obligatorios","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
+						return;
+					}
 					LocalDate f = LocalDate.of((int)anior.getValue(),(int)mesr.getValue(),(int)diar.getValue());
 					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue(),f);
 					JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
@@ -162,8 +166,8 @@ public class AltaDePaquete extends JInternalFrame{
         descrp.setText("");
 		perVal.setValue(0);
 		desc.setValue(0);
-		diar.setValue(0);
-		mesr.setValue(0);
-		anior.setValue(0);
+		diar.setValue(1);
+		mesr.setValue(1);
+		anior.setValue(2001);
     }
 }

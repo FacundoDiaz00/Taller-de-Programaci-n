@@ -302,7 +302,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 
 	private void seSeleccionoUnUsuario() {
 		String seleccion = seleccionNickname;
-		System.out.println(seleccion);
+
 		try {
 			DTUsuario usr = icu.obtenerDTUsuarioDetalle(seleccion);
 			

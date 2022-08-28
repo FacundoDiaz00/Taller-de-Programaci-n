@@ -5,6 +5,9 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+
+import excepciones.ActividadTuristicaYaRegistradaException;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -276,10 +279,14 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		if(act == null || pack == null){
 			JOptionPane.showMessageDialog(null, "Se debe seleccionar un departamento, actividad de actividad turística y un paquete", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
-			cp.agregarActividadAPaquete(act, pack);
-			setVisible(false);
-			limpiarSelecciones();
-			JOptionPane.showMessageDialog(null, "Se agregó la actividad al paquete", "Registro de asociación actividad a paquete", JOptionPane.INFORMATION_MESSAGE);
+			try {
+				cp.agregarActividadAPaquete(act, pack);
+				setVisible(false);
+				limpiarSelecciones();
+				JOptionPane.showMessageDialog(null, "Se agregó la actividad al paquete", "Registro de asociación actividad a paquete", JOptionPane.INFORMATION_MESSAGE);
+			} catch (ActividadTuristicaYaRegistradaException e) {
+				JOptionPane.showMessageDialog(null, "Se debe seleccionar una actividad que no esté ya dentro del paquete", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
     }

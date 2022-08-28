@@ -2,7 +2,9 @@ package logica.controladores;
 
 import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -68,5 +70,9 @@ public interface IControladorActividadTuristica {
 	List<String> obtenerIdSalidasTuristicas(String act);
 
 	DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal);
+
+	DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal);
+	
+	DTInscripcion obtenerDTInscripcion(String nick, String nomSal);
 	
 }
