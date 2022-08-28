@@ -75,7 +75,7 @@ public class ActividadTuristica {
             salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
         }
 
-        return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNombre());
+        return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname());
     }
 
     @Override
