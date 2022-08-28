@@ -18,8 +18,13 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorPaquete;
 import javax.swing.event.PopupMenuEvent;
 import logica.datatypes.DTPaqueteDetalles;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class ConsultaDePaquete extends JInternalFrame {
 	private JComboBox paquete;
+	private JTextPane perVal;
+	private JTextPane desc;
+	private JTextPane descr;
 
 	/**
 	 * Create the frame.
@@ -38,6 +43,11 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(lblPaqueteAConsultar);
 		
 		paquete = new JComboBox();
+		paquete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		paquete.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 			}
@@ -59,11 +69,11 @@ public class ConsultaDePaquete extends JInternalFrame {
 		lblNewLabel.setBounds(12, 115, 81, 15);
 		getContentPane().add(lblNewLabel);
 		
-		JTextPane perVal = new JTextPane();
+		perVal = new JTextPane();
 		perVal.setBounds(152, 80, 40, 21);
 		getContentPane().add(perVal);
 		
-		JTextPane desc = new JTextPane();
+		desc = new JTextPane();
 		desc.setBounds(99, 113, 40, 21);
 		getContentPane().add(desc);
 		
@@ -75,7 +85,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 		lblDescripcion.setBounds(12, 150, 115, 15);
 		getContentPane().add(lblDescripcion);
 		
-		JTextPane descr = new JTextPane();
+		descr = new JTextPane();
 		descr.setBounds(12, 174, 401, 107);
 		getContentPane().add(descr);
 		
@@ -94,11 +104,11 @@ public class ConsultaDePaquete extends JInternalFrame {
 
 	}
 	private void actualizarCamposFormulario() {
+		paquete.setModel(new DefaultComboBoxModel());
 		Fabrica fab = Fabrica.getInstancia();
 		IControladorPaquete cp = fab.getIControladorPaquete();
 		List<DTPaqueteDetalles> ldp = cp.obtenerDetallesPaquetes(); 
 		String[] ids;
-		
 		for(var i: ldp) {
 			paquete.addItem(i.getNombre());
 		}
