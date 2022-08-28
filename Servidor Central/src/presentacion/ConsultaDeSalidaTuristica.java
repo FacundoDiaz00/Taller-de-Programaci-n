@@ -32,7 +32,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private JTextArea maxCantTuristas;
 	private JTextArea fechaAlta;
 	
-	private JList inscriptionList;
+	private JList inscripcionList;
 	private JTextArea nombreInscripto;
 	private JTextArea fechaInscripto;
 	private JTextArea cantTuristasInscripto;
@@ -189,10 +189,9 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(fechaSalida);
 		this.fechaSalida = fechaSalida;
 		
-		JList inscripcionList = new JList();
+		inscripcionList = new JList();
 		inscripcionList.setBounds(17, 279, 137, 133);
 		getContentPane().add(inscripcionList);
-		this.inscriptionList = inscriptionList;
 		
 		JLabel nombreInscriptoLabel = new JLabel("Nombre:");
 		nombreInscriptoLabel.setBounds(172, 280, 60, 15);
@@ -255,10 +254,10 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
             for (DTInscripcion insc : salida.getInscriptos()){
                 listModel.addElement(insc.getTurista().getNickname());
             }
-            inscriptionList.setModel(listModel);
+            inscripcionList.setModel(listModel);
 			
 		} catch (Exception ex) {
-			// Esta excepcion no debería ocurrir pero por las dudas la pongo
+			ex.printStackTrace();
 			
 		}
 	}
