@@ -5,7 +5,6 @@ import javax.swing.*;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.SalidaYaRegistradaException;
-import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 
 import java.awt.event.ActionListener;
@@ -20,6 +19,9 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
+	private IControladorActividadTuristica ca;
+
+	
 	private JSpinner dia;
 	private JSpinner mes;
 	private JSpinner anio;
@@ -33,13 +35,12 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private JSpinner maxTuristas;
 	private JButton btnAceptar;
 	private JComboBox departamento;
-	Fabrica f = Fabrica.getInstancia();
-	IControladorActividadTuristica ca = f.getIControladorActividadTuristica();
 	
 	/**
 	 * Create the frame.
 	 */
-	public AltaDeSalidaTuristica() {
+	public AltaDeSalidaTuristica(IControladorActividadTuristica ca) {
+		this.ca = ca;
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {

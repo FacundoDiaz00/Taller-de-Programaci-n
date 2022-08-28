@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 public class Principal {
 	IControladorUsuario CUS;
 	IControladorActividadTuristica CAD;
+	IControladorPaquete CP;
 
 	private JFrame frmEstacionDeTrabajo;
 
@@ -60,14 +61,16 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         CUS = fabrica.getIControladorUsuario();
 		CAD = fabrica.getIControladorActividadTuristica();
+		CP = fabrica.getIControladorPaquete();
+		
 		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, CUS);
-		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica();
+		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica(CAD);
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
-		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(CAD);
-		frmInscribirseASalidaTurística = new InscribirseASalidaTurística();
+		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, CAD);
+		frmInscribirseASalidaTurística = new InscribirseASalidaTurística(CAD, CUS);
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
-		frmIntAltaPaquete = new AltaDePaquete();
-		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete();
+		frmIntAltaPaquete = new AltaDePaquete(CP);
+		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
@@ -91,7 +94,6 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
 
-		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -255,6 +257,14 @@ public class Principal {
 			// frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);			
 		}
 		// frmIntConsultaDeSalidaTuristica.setVisible(true);
+	}
+	
+	public void mostrarConsultaDePaquete(String nombrePaquete) {
+		if (nombrePaquete != null) {
+			// FIXME: descomentar e implementar las operaciones basandose en lo de arriba
+			// frmIntConsultaDePaquete.seleccionYaHecha(nombrePaquete);			
+		}
+		// frmIntConsultaDePaquete.setVisible(true);
 	}
 	
 		
