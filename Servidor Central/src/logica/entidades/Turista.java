@@ -30,7 +30,7 @@ public class Turista extends Usuario {
 
 
     public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion {
-        Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal);
+        Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal, this);
         inscripciones.add(insc);
     }
 
@@ -70,12 +70,12 @@ public class Turista extends Usuario {
     
     
     @Override
-    public DTUsuario getDTUsuario() {
+    public DTUsuario obtenerDTUsuario() {
     	return new DTTurista(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getNacionalidad());
     }
 
     @Override
-    public DTUsuario getDTUsuarioDetalle() {
+    public DTUsuario obtenerDTUsuarioDetalle() {
         List<String> salidas = new ArrayList<>();
 
         for (Inscripcion inscripcion : inscripciones) {
