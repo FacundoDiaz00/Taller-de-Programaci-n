@@ -260,6 +260,12 @@ class ControladorUsuarioTest {
 		for (int i = 0; i < 50; i++) {
 			String nickname = "Proveedor " + id + " i=" + i;
 			var dtdet = cu.obtenerDTUsuarioDetalle(nickname);
+			String nombre = "NOMBRE PROV";
+			String apellido = "APELLIDO PROV";
+			String correo = "Proveedor " + id + " i=" + i;
+			String descripcion = "HOLA! DESCRIPCION";
+			String link = "www.google.com.provedoor";
+			LocalDate FNacimiento = nowDate.minusYears(30);		
 			
 			assertThrows(ClassCastException.class, () -> {
 				var dtErrorCasteado = (DTTuristaDetalle) dtdet;
@@ -267,13 +273,25 @@ class ControladorUsuarioTest {
 			
 			var dtCasteado = (DTProveedorDetalle) dtdet;
 			
-			// TODO: verificar cada dato obtenido en dtCasteado
+			assertEquals(nickname, dtCasteado.getNickname());
+			assertEquals(nombre, dtCasteado.getNombre());
+			assertEquals(apellido, dtCasteado.getApellido());
+			assertEquals(correo, dtCasteado.getCorreo());
+			assertEquals(descripcion, dtCasteado.getDescrpicionGeneral());
+			assertEquals(link, dtCasteado.getLink());
+			assertEquals(FNacimiento, dtCasteado.getFechaNac());
 		}
 		
 		
 		// Verifico para los turistas
 		for (int i = 0; i < 50; i++) {
 			String nickname = "Turista " + id + " i=" + i;
+			String nombre = "NOMBRE TURISTA";
+			String apellido = "APELLIDO TURISTA";
+			String correo = "TURISTA " + id + " i=" + i;
+			String nacionalidad = "CHINA";
+			LocalDate FNacimiento = nowDate.minusYears(15);
+			
 			var dtdet = cu.obtenerDTUsuarioDetalle(nickname);
 			
 			assertThrows(ClassCastException.class, () -> {
@@ -282,7 +300,12 @@ class ControladorUsuarioTest {
 			
 			var dtCasteado = (DTTuristaDetalle) dtdet;
 			
-			// TODO: verificar cada dato obtenido en dtCasteado
+			assertEquals(nickname, dtCasteado.getNickname());
+			assertEquals(nombre, dtCasteado.getNombre());
+			assertEquals(apellido, dtCasteado.getApellido());
+			assertEquals(correo, dtCasteado.getCorreo());
+			assertEquals(nacionalidad, dtCasteado.getNacionalidad());
+			assertEquals(FNacimiento, dtCasteado.getFechaNac());
 		}
 	}
 
@@ -315,7 +338,6 @@ class ControladorUsuarioTest {
 			
 			var dtCasteado = (DTProveedor) dt;
 			
-			// TODO: verificar cada dato obtenido en dtCasteado
 			assertEquals(nickname, dtCasteado.getNickname());
 			assertEquals(nombre, dtCasteado.getNombre());
 			assertEquals(apellido, dtCasteado.getApellido());
