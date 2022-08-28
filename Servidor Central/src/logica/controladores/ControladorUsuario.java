@@ -104,11 +104,12 @@ public class ControladorUsuario implements IControladorUsuario {
 	@Override
 	public void modificarUsuario(DTUsuario datosNuevos) {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        Usuario u = ins.getUsuarioPorNick(datosNuevos.getNickname());
-        if (u != null) {
-        	u.setearDatos(datosNuevos);
-        }
-        
+        Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());
+        Usuario u_correo = ins.getUsuarioPorCorreo(datosNuevos.getCorreo());
+         
+        if (u_nick == u_correo && u_nick != null) {
+        	u_nick.setearDatos(datosNuevos);
+        }        
 	}
 
 
