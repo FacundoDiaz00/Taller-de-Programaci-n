@@ -75,7 +75,11 @@ public class Inscripcion {
         return salidaTuristica.getNombre();
     }
     
+    public Turista getTurista() {
+    	return this.turista;
+    }
+    
     public DTInscripcion obtenerDTInscripcion(){
-    	return new DTInscripcion(this.fechaInscrpicion, this.cantidadTuristas, this.compra.toString(), this.salidaTuristica.obtenerDTSalidaTuristica(),(DTTurista) this.turista.obtenerDTUsuario());
+    	return new DTInscripcion(this.fechaInscrpicion, this.cantidadTuristas, "", this.salidaTuristica.obtenerDTSalidaTuristica(),(DTTurista) this.turista.obtenerDTUsuario());
     }
 }
