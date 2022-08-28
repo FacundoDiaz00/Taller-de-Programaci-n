@@ -24,6 +24,8 @@ import logica.datatypes.DTPaquete;
 import javax.swing.border.TitledBorder;
 import java.awt.BorderLayout;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionEvent;
 
 public class ConsultaDeSalidaTuristica extends JInternalFrame {
@@ -49,6 +51,13 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDeSalidaTuristica(IControladorActividadTuristica icat) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
+			
 		this.icat = icat;
 		setTitle("Consulta de Salida Turística");
 		setBounds(100, 100, 430, 512);
@@ -200,8 +209,10 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		inscripcionList = new JList();
 		inscripcionList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String tur = inscripcionList.getSelectedValue().toString();
-				turistaSeleccionado(tur);
+				if(inscripcionList.getSelectedValue() != null) {
+					String tur = inscripcionList.getSelectedValue().toString();
+					turistaSeleccionado(tur);
+				}
 			}
 
 			private void turistaSeleccionado(String tur) {
@@ -302,5 +313,14 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
         lugarSalida.setText("");
 		maxCantTuristas.setText("");
 		fechaAlta.setText("");
+		nombreInscripto.setText("");
+		fechaInscripto.setText("");
+		cantTuristasInscripto.setText("");
+		
+		inscripcionList.setModel(new DefaultListModel<>());
+		
+		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboActividades.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
     }
 }
