@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTPaquete;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
 	private String seleccionActividad;
@@ -34,6 +36,12 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDeActividadTuristica(IControladorActividadTuristica icat) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
 		this.icat = icat;
 		setTitle("Consutla de Actividad Turística");
 		setBounds(100, 100, 409, 424);
@@ -261,7 +269,10 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
         costo.setText("");
 		ciudad.setText("");
 		fechaAlta.setText("");
+		proveedor.setText("");
 		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
 		comboPaquetes.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboActividades.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
     }
 }
