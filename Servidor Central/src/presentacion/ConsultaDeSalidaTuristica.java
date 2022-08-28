@@ -1,7 +1,11 @@
 package presentacion;
 
 import java.util.List;
+import java.util.Set;
+
+import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 
@@ -14,9 +18,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTPaquete;
 import javax.swing.border.TitledBorder;
 import java.awt.BorderLayout;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private String seleccionActividad;
@@ -190,6 +198,24 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		this.fechaSalida = fechaSalida;
 		
 		inscripcionList = new JList();
+		inscripcionList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String tur = inscripcionList.getSelectedValue().toString();
+				turistaSeleccionado(tur);
+			}
+
+			private void turistaSeleccionado(String tur) {
+				IControladorUsuario icu = Fabrica.getInstancia().getIControladorUsuario();
+				DTTuristaDetalle datosTur = (DTTuristaDetalle) icu.obtenerDTUsuarioDetalle(tur);
+				String nomSal = comboSalidas.getSelectedItem().toString();
+				DTInscripcion datosInsc = icat.obtenerDTInscripcion(datosTur.getNickname(), nomSal);
+				
+				nombreInscripto.setText(datosTur.getNombre());
+				fechaInscripto.setText(datosInsc.getFechaInscripcion().toString());
+				cantTuristasInscripto.setText(String.valueOf(datosInsc.getCantidadTuristas()));
+				
+			}
+		});
 		inscripcionList.setBounds(17, 279, 137, 133);
 		getContentPane().add(inscripcionList);
 		
@@ -205,15 +231,15 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		cantTuristasLabel.setBounds(172, 334, 113, 15);
 		getContentPane().add(cantTuristasLabel);
 		
-		JTextArea nombreInscripto = new JTextArea();
+		nombreInscripto = new JTextArea();
 		nombreInscripto.setBounds(250, 280, 157, 15);
 		getContentPane().add(nombreInscripto);
 		
-		JTextArea fechaInscripto = new JTextArea();
+		fechaInscripto = new JTextArea();
 		fechaInscripto.setBounds(250, 307, 157, 15);
 		getContentPane().add(fechaInscripto);
 		
-		JTextArea cantTuristasInscripto = new JTextArea();
+		cantTuristasInscripto = new JTextArea();
 		cantTuristasInscripto.setBounds(287, 334, 120, 15);
 		getContentPane().add(cantTuristasInscripto);
 		

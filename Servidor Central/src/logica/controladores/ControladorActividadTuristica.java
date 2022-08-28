@@ -2,10 +2,12 @@ package logica.controladores;
 
 import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
+import logica.entidades.Inscripcion;
 import logica.entidades.SalidaTuristica;
 import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -141,10 +144,27 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristica();
 	}
+	
 	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) {
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristicaDetalle();
+	}
+	
+	public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) {
+		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
+		SalidaTuristica sal = MST.getSalida(nomSal);
+		var inscripciones = sal.getInscripciones();
+		Iterator<Inscripcion> it = inscripciones.iterator();
+		Inscripcion insc = null;
+		boolean encontrado = false;
+		while(!encontrado) {
+			insc = it.next(); 
+			if(insc.getTurista().getNickname() == nick){
+				encontrado = true;
+			} 
+		}
+		return insc.obtenerDTInscripcion();
 	}
 }
 

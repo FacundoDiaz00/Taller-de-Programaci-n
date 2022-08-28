@@ -2,6 +2,7 @@ package logica.controladores;
 
 import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 
@@ -71,5 +72,7 @@ public interface IControladorActividadTuristica {
 	DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal);
 
 	DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal);
+	
+	DTInscripcion obtenerDTInscripcion(String nick, String nomSal);
 	
 }
