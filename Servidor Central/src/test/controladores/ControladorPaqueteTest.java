@@ -34,7 +34,7 @@ class ControladorPaqueteTest {
 			int periodovalidez = 15;
 			float descuento = (float) (i + 0.025);
 			
-			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento);
+			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento, LocalDate.of(2022,1,1));
 		}
 	}
 	

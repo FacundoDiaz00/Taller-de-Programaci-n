@@ -2,6 +2,7 @@ package logica.controladores;
 
 import logica.datatypes.DTPaqueteDetalles;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import excepciones.PaqueteYaRegistradoException;
@@ -12,7 +13,7 @@ import excepciones.PaqueteYaRegistradoException;
 
 
 public interface IControladorPaquete {
-    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException;
+    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR) throws PaqueteYaRegistradoException;
     List<String> obtenerIdPaquetes();
 
     List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
