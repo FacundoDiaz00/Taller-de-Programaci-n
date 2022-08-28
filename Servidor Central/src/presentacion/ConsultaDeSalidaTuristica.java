@@ -262,6 +262,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	   comboDeps.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
 		    	 List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
+		    	 limpiarFormularioSinDepartamento();
 		    	 comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
 		   
 		     }
@@ -272,6 +273,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		    	//se cargan identificadores de salidas
 		    	 String act = comboActividades.getSelectedItem().toString();
 		    	List<String> salidas = icat.obtenerIdSalidasTuristicas(act);
+		    	limpiarFormularioSinDepartamentoNiActividad();
 		    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
 		   }
 	   });
