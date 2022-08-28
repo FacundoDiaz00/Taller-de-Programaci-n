@@ -272,11 +272,6 @@ public class Principal {
 		IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
 		IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();
-
-		//Cargo los departamentos
-
-		//Cargo los usuarios
-
 		try{
 
 			//Cargo Departamentos
@@ -383,8 +378,17 @@ public class Principal {
 			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal" , 1, LocalDate.of(2022, 8, 21));
 			icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony" , 11, LocalDate.of(2022, 8, 21));
 
-			//
+			//Paquete
+			ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20); //todo falta la fecha de alta
+			ipack.altaPaquete("Un día en Colonia", "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15); //todo falta la fecha de alta
 
+			//Agregar Actividad a Paquete
+			ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");
+			ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
+			ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
+			ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
+
+			JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Error", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error a la hora de cargar los datos de prueba." +
