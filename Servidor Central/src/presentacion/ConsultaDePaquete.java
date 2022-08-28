@@ -123,7 +123,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 					break;
 				}
 			}
-			//System.out.print(paqueteSeleccionado.getDescrpicion())
+
 			perVal.setText(String.valueOf(paqueteSeleccionado.getValidez()));
 			descr.setText(paqueteSeleccionado.getDescrpicion());
 			descuento.setText(String.valueOf(paqueteSeleccionado.getDescuento()));

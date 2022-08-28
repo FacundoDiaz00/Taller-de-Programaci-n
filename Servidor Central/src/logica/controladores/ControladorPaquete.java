@@ -26,7 +26,6 @@ public class ControladorPaquete implements IControladorPaquete{
         if(mp.existePaquete(nombre)) {
             throw new PaqueteYaRegistradoException("Ya existe en el sistema un paquete con el nombre: "+nombre);
         }
-        System.out.print(descripcion);
         Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento, fechaR);
         mp.addPaquete(paq);
     }
