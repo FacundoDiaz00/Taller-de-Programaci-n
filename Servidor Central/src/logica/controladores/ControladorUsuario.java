@@ -87,7 +87,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public DTUsuario obtenerDTUsuarioDetalle(String nickname) {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         Usuario u = ins.getUsuarioPorNick(nickname);
-        return u.getDTUsuarioDetalle();
+        return u.obtenerDTUsuarioDetalle();
     }
 
     public void agregarSalida(SalidaTuristica st) {
@@ -97,7 +97,7 @@ public class ControladorUsuario implements IControladorUsuario {
 	public DTUsuario obtenerDTUsuario(String nickname) {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         Usuario u = ins.getUsuarioPorNick(nickname);
-        return u.getDTUsuario();
+        return u.obtenerDTUsuario();
 	}
 
 	@Override

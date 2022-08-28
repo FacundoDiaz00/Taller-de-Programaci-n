@@ -55,7 +55,7 @@ public class SalidaTuristica {
     public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(){
     	Set<DTInscripcion> res = new HashSet<>();
     	for(Inscripcion insc : inscripciones) {
-    		res.add(insc.getDTInscripcion());
+    		res.add(insc.obtenerDTInscripcion());
     	}
         return new DTSalidaTuristicaDetalle(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida, res);
     }

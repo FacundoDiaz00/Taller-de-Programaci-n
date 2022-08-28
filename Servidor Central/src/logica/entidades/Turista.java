@@ -70,12 +70,12 @@ public class Turista extends Usuario {
     
     
     @Override
-    public DTUsuario getDTUsuario() {
+    public DTUsuario obtenerDTUsuario() {
     	return new DTTurista(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getNacionalidad());
     }
 
     @Override
-    public DTUsuario getDTUsuarioDetalle() {
+    public DTUsuario obtenerDTUsuarioDetalle() {
         List<String> salidas = new ArrayList<>();
 
         for (Inscripcion inscripcion : inscripciones) {
