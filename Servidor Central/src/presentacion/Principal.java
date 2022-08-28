@@ -379,6 +379,20 @@ public class Principal {
 					LocalDate.of(2022,8,15), "Posada Del Lunarejo", 4);
 
 
+			//Inscripciones
+			icat.altaInscripcionSalidaTuristica("Degusta Agosto", "lachiqui" , 3, LocalDate.of(2022, 8, 15));
+			icat.altaInscripcionSalidaTuristica("Degusta Agosto", "elelvis" , 5, LocalDate.of(2022, 8, 16));
+			icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui" , 3, LocalDate.of(2022, 8, 18));
+			icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita" , 1, LocalDate.of(2022, 8, 19));
+			icat.altaInscripcionSalidaTuristica("Almuerzo 2", "mastropiero" , 2, LocalDate.of(2022, 8, 19));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 1", "anibal" , 1, LocalDate.of(2022, 8, 19));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "chino" , 10, LocalDate.of(2022, 8, 20));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "bobesponja" , 2, LocalDate.of(2022, 8, 20));
+			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal" , 1, LocalDate.of(2022, 8, 21));
+			icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony" , 11, LocalDate.of(2022, 8, 21));
+
+			//
+
 
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error a la hora de cargar los datos de prueba." +
