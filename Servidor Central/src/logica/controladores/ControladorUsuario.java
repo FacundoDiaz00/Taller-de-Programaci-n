@@ -93,6 +93,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public void agregarSalida(SalidaTuristica st) {
     	//TODO: Implentarla  ¿Esta correcto que esto este aca? Mirando el digrama de comunicacion creo que va en el manejador de salida
     }
+    
 	@Override
 	public DTUsuario obtenerDTUsuario(String nickname) {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();

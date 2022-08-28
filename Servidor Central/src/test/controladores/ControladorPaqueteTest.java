@@ -192,6 +192,81 @@ class ControladorPaqueteTest {
 		
 	}
 
+	
+	@Test
+	final void testAgregarActividadAPaqueteOK() {
+		String id = "testAgregarActividadAPaqueteOK";
+		
+		String nombreDep = "Departamento " + id + " i=" + 0;
+		String nombrePaq = "Paquete " + id + " i=" + 0; 
+		String nickProv = "Proveedor " + id + " i=" + 0;
+		
+		try {
+			// 1 proveedor
+			ControladorUsuarioTest.generarProveedores(1, id);
+			// 1 departamento
+			ControladorActividadTuristicaTest.generarDepartamentos(1, id);
+			// 1 paquete
+			generarPaquetes(1, id);
+			
+			// 80 actividades en un mismo departamento, de un mismo provedor
+			var cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+			for (int i = 0; i < 80; i++) {
+				String nombreActividad = "Actividad " + id + " i=" + i;
+				String descripcion = "Desc";
+				int duracion = 10;
+				float costo = (float) 10.85;
+				String ciudad = "Ciudad";
+				LocalDate fechaAlta = LocalDate.now();
+				
+				cat.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+				
+				cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
+			}
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	final void testAgregarActividadAPaqueteRepetida() {
+		String id = "testAgregarActividadAPaqueteRepetida";
+		
+		String nombreDep = "Departamento " + id + " i=" + 0;
+		String nombrePaq = "Paquete " + id + " i=" + 0; 
+		String nickProv = "Proveedor " + id + " i=" + 0;
+		
+		try {
+			// 1 proveedor
+			ControladorUsuarioTest.generarProveedores(1, id);
+			// 1 departamento
+			ControladorActividadTuristicaTest.generarDepartamentos(1, id);
+			// 1 paquete
+			generarPaquetes(1, id);
+			
+			// 80 actividades en un mismo departamento, de un mismo provedor
+			var cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+			for (int i = 0; i < 80; i++) {
+				String nombreActividad = "Actividad " + id + " i=" + i;
+				String descripcion = "Desc";
+				int duracion = 10;
+				float costo = (float) 10.85;
+				String ciudad = "Ciudad";
+				LocalDate fechaAlta = LocalDate.now();
+				
+				cat.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+				
+				cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
+				
+				assertThrows(PaqueteYaRegistradoException.class, () -> {
+					cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
+				});					
+			}
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
 	@Test
 	final void testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete() {
 		String id = "testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete";
@@ -245,14 +320,6 @@ class ControladorPaqueteTest {
 		
 	}
 
-	@Test
-	final void testAgregarActividadAPaqueteOK() {
-		fail("Not yet implemented"); // TODO
-	}
 	
-	@Test
-	final void testAgregarActividadAPaqueteRepetida() {
-		fail("Not yet implemented"); // TODO
-	}
 
 }
