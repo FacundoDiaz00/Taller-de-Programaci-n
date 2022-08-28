@@ -37,7 +37,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDeActividadTuristica(IControladorActividadTuristica icat) {
+	public ConsultaDeActividadTuristica(Principal p,IControladorActividadTuristica icat) {
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {
