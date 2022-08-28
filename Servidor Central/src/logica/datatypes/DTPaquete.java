@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Equipo taller prog 16
  */
 
-public class DTPaquete extends DTActividadTuristica {
+public class DTPaquete {
     private String nombre;
     private String descrpicion;
     private int validez;
