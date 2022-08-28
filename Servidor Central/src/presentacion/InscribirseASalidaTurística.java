@@ -3,7 +3,6 @@ package presentacion;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
-import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTSalidaTuristica;
@@ -32,11 +31,13 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 public class InscribirseASalidaTurística extends JInternalFrame {
+	private IControladorActividadTuristica cat;
+	private IControladorUsuario cu;
 
-	JSpinner diaSpinner;
-	JSpinner mesSpinner;
-	JSpinner anioSpinner;
-	JSpinner cantTuristasSprinner;
+	private JSpinner diaSpinner;
+	private JSpinner mesSpinner;
+	private JSpinner anioSpinner;
+	private JSpinner cantTuristasSprinner;
 	private Map<String, DTSalidaTuristica> dtSalidas;
 
 	private JTextField nombreTextField;
@@ -44,7 +45,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	private JTextField fechaAltaTextField;
 	private JTextField capacidadDeTuristaTextField;
 	private JTextField fechaYHoraDeSalidaTextField;
-	JList salidaList;
+	private JList salidaList;
 
 	private JComboBox comboDepartamento;
 	private JComboBox comboActividad;
@@ -53,7 +54,10 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InscribirseASalidaTurística() {
+	public InscribirseASalidaTurística(IControladorActividadTuristica cat, IControladorUsuario cu) {
+		this.cat = cat;
+		this.cu = cu;
+		
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {
@@ -420,7 +424,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_10.add(horizontalStrut_30);
 		
 		cantTuristasSprinner = new JSpinner();
-		cantTuristasSprinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		cantTuristasSprinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 		panel_10.add(cantTuristasSprinner);
 		
 		Component horizontalStrut_31 = Box.createHorizontalStrut(20);
@@ -430,7 +434,6 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 
 
 	private void actualizarDepartamentos(){
-		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		List<String> idDeps = cat.obtenerIdDepartamentos();
 		comboDepartamento.setModel(new DefaultComboBoxModel<>(idDeps.toArray()));
 		if(idDeps.size() > 0){
@@ -448,7 +451,6 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	}
 
 	private void actualizarActividadesTuristicas(){
-		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		String dep = (String)comboDepartamento.getSelectedItem();
 		List<String> idActs = cat.obtenerIdActividadesTuristicas(dep);
 		comboActividad.setModel(new DefaultComboBoxModel<>(idActs.toArray()));
@@ -464,7 +466,6 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	}
 
 	private void actualizarSalidaTuristicas(){
-		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		String act = (String)comboActividad.getSelectedItem();
 		if(act == null){
 			dtSalidas = new HashMap<>();
@@ -523,7 +524,6 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 	}
 
 	private void actualizarTuristas(){
-		IControladorUsuario cu = Fabrica.getInstancia().getIControladorUsuario();
 		List<String> idTuris = cu.obtenerIdTuristas();
 		comboTurista.setModel(new DefaultComboBoxModel<>(idTuris.toArray()));
 		if(idTuris.size() > 0){
@@ -561,7 +561,6 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			return;
 		}
 		int cantidadTurista = (int)cantTuristasSprinner.getValue();
-		IControladorActividadTuristica cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		try {
 			cat.altaInscripcionSalidaTuristica(idSalida, idTuristas, cantidadTurista, fechaInscripcion);
 			setVisible(false);

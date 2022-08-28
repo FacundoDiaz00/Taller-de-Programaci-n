@@ -9,15 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.DeparamentoYaRegistradoException;
-import excepciones.PaqueteYaRegistradoException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.Departamento;
-import logica.manejadores.ManejadorActividadTuristica;
-import logica.manejadores.ManejadorDepartamento;
 
 class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;
@@ -26,45 +21,64 @@ class ControladorActividadTuristicaTest {
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 	}
+	
+	// No es un test en sí
+	static void generarActividades(int cant, String id) throws Exception {
+		preparacionPrevia();
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < cant; i++) {
+			String nickProveedor = "Proveedor " + id + " i=" + i;
+			String departamento = "Departamento " + id + " i=" + i;
+			String nombreActividad = "Actividad " + id + " i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10.85;
+			String ciudad = "Ciudad";
+			LocalDate fechaAlta = LocalDate.now();
+			
+			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+		}
+	}
+	
+	// No es un test en sí
+	static void generarDepartamentos(int cant, String id) throws Exception {
+		preparacionPrevia();
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < cant; i++) {
+			String nom = "Departamento " + id + " i=" + i;
+			String descr = "Descripcion";
+			String url = "https://www.canelones-departamento.org.uy/inicio.html";
+			
+			cat.altaDepartamento(nom, descr, url);
+		}
+	}
 
 
 	@Test
 	public void testAltaDepartamentoOK() {
-		assertTrue(cat != null);
-		
-		for (int i = 0; i < 100; i++) {
-			String nom = "Dep testAltaDepartamentoOK" + i;
-			String descr = "Descripcion";
-			String url = "https://www.canelones-departamento.org.uy/inicio.html";
-			
-			try {
-				cat.altaDepartamento(nom, descr, url);			
-			} catch(Exception e) {
-				fail(e.getMessage());
-			}
+		try {
+			generarDepartamentos(100, "testAltaDepartamentoOK");			
+		} catch(Exception e) {
+			fail(e.getMessage());
 		}
-		
     }
 	
 	@Test
 	public void testAltaDepartamentoRepetido() {
 		assertTrue(cat != null);
 		
-		for (int i = 0; i < 100; i++) {
-			String nom = "Dep testAltaDepartamentoRepetido" + i;
-			String descr = "Descripcion";
-			String url = "https://www.canelones-departamento.org.uy/inicio.html";
-			try {
-				cat.altaDepartamento(nom, descr, url);
-			} catch (Exception e) {
-				fail(e.getMessage());
-			};
-			
-			// Repito y debería tirar la excepcion
-			assertThrows(DeparamentoYaRegistradoException.class, ()->{
-				cat.altaDepartamento(nom, descr, url);
-			});
+		try {
+			generarDepartamentos(1, "testAltaDepartamentoRepetido");			
+		} catch(Exception e) {
+			fail(e.getMessage());
 		}
+		
+		// Repito y debería tirar la excepcion
+		assertThrows(DeparamentoYaRegistradoException.class, ()->{
+			generarDepartamentos(1, "testAltaDepartamentoRepetido");
+		});
     }
 
 	@Test

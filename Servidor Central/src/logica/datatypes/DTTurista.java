@@ -18,4 +18,19 @@ public class DTTurista extends DTUsuario {
     public String getNacionalidad() {
         return nacionalidad;
     }
+    
+    @Override
+    public boolean equals(Object e) {
+    	try {
+			var casted = (DTTurista) e;
+			return casted.getNacionalidad().equals(this.nacionalidad) 
+					&& casted.getNickname().equals(this.getNickname())
+					&& casted.getNombre().equals(this.getNombre())
+					&& casted.getApellido().equals(this.getApellido())
+					&& casted.getCorreo().equals(this.getCorreo())
+					&& casted.getFechaNac().equals(this.getFechaNac());
+		} catch (Exception e2) {
+			return false;
+		}    	
+    }
 }

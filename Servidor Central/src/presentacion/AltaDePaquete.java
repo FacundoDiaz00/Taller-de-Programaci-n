@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import excepciones.PaqueteYaRegistradoException;
-import logica.controladores.Fabrica;
 import logica.controladores.IControladorPaquete;
 
 import javax.swing.JSpinner;
@@ -17,11 +16,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AltaDePaquete extends JInternalFrame{
+	private IControladorPaquete cp;
+	
 	private JTextField txtNombre;
 	private JTextField descrp;
 	private JSpinner perVal;
 	private JSpinner desc;
-	public AltaDePaquete() {
+	public AltaDePaquete(IControladorPaquete cp) {
+		this.cp = cp;		
+		
 		setTitle("Registrar Paquete de Actividades.");
 		setBounds(100, 100, 461, 342);
 		getContentPane().setLayout(null);
@@ -83,9 +86,6 @@ public class AltaDePaquete extends JInternalFrame{
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Fabrica f = Fabrica.getInstancia();
-					IControladorPaquete cp = f.getIControladorPaquete();
-
 					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue());
 					JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
 					setVisible(false);
