@@ -3,6 +3,7 @@ package presentacion;
 import java.util.List;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTInscripcion;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
@@ -191,6 +192,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		JList inscripcionList = new JList();
 		inscripcionList.setBounds(17, 279, 137, 133);
 		getContentPane().add(inscripcionList);
+		this.inscriptionList = inscriptionList;
 		
 		JLabel nombreInscriptoLabel = new JLabel("Nombre:");
 		nombreInscriptoLabel.setBounds(172, 280, 60, 15);
@@ -249,7 +251,11 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			lugarSalida.setText(salida.getLugarSalida());
 			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
 			fechaAlta.setText(salida.getFechaAlta().toString());
-			inscriptionList.setModel((ListModel) salida.getInscriptos());
+			DefaultListModel<String> listModel = new DefaultListModel<>();
+            for (DTInscripcion insc : salida.getInscriptos()){
+                listModel.addElement(insc.getTurista().getNickname());
+            }
+            inscriptionList.setModel(listModel);
 			
 		} catch (Exception ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
