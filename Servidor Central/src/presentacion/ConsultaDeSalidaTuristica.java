@@ -304,8 +304,38 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
 	
-	
-	
+    private void limpiarFormularioSinDepartamento() {
+        nombre.setText("");
+        fechaSalida.setText("");
+        horaSalida.setText("");
+        lugarSalida.setText("");
+		maxCantTuristas.setText("");
+		fechaAlta.setText("");
+		nombreInscripto.setText("");
+		fechaInscripto.setText("");
+		cantTuristasInscripto.setText("");
+		
+		inscripcionList.setModel(new DefaultListModel<>());
+		
+		comboActividades.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
+    }
+
+    private void limpiarFormularioSinDepartamentoNiActividad() {
+        nombre.setText("");
+        fechaSalida.setText("");
+        horaSalida.setText("");
+        lugarSalida.setText("");
+		maxCantTuristas.setText("");
+		fechaAlta.setText("");
+		nombreInscripto.setText("");
+		fechaInscripto.setText("");
+		cantTuristasInscripto.setText("");
+		
+		inscripcionList.setModel(new DefaultListModel<>());
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
+    }
+    
     private void limpiarFormulario() {
         nombre.setText("");
         fechaSalida.setText("");
