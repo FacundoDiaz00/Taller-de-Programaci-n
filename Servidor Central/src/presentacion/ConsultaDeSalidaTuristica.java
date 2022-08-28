@@ -65,22 +65,22 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		
 		JLabel hora = new JLabel("Hora:");
 		hora.setHorizontalAlignment(SwingConstants.RIGHT);
-		hora.setBounds(7, 209, 120, 14);
+		hora.setBounds(7, 149, 120, 14);
 		getContentPane().add(hora);
 		
 		JLabel lugarLabel = new JLabel("Lugar de salida:");
 		lugarLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lugarLabel.setBounds(7, 235, 121, 14);
+		lugarLabel.setBounds(7, 175, 121, 14);
 		getContentPane().add(lugarLabel);
 		
 		JLabel maxTuristasLabel = new JLabel("Maxima cantidad de turistas:");
 		maxTuristasLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		maxTuristasLabel.setBounds(7, 261, 212, 14);
+		maxTuristasLabel.setBounds(7, 201, 212, 14);
 		getContentPane().add(maxTuristasLabel);
 		
 		JLabel fechaAltaLabel = new JLabel("Fecha de alta:");
 		fechaAltaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		fechaAltaLabel.setBounds(7, 293, 120, 14);
+		fechaAltaLabel.setBounds(7, 227, 120, 14);
 		getContentPane().add(fechaAltaLabel);
 		
 		JComboBox comboDeps = new JComboBox<String>();
@@ -127,26 +127,26 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		
 		JTextArea horaSalida = new JTextArea();
 		horaSalida.setEditable(false);
-		horaSalida.setBounds(146, 209, 212, 15);
+		horaSalida.setBounds(145, 150, 212, 15);
 		getContentPane().add(horaSalida);
 		this.horaSalida = horaSalida;
 	
 		
 		JTextArea lugarSalida = new JTextArea();
 		lugarSalida.setEditable(false);
-		lugarSalida.setBounds(145, 235, 212, 15);
+		lugarSalida.setBounds(145, 177, 212, 15);
 		getContentPane().add(lugarSalida);
 		this.lugarSalida = lugarSalida;
 		
 		JTextArea maxCantTuristas = new JTextArea();
 		maxCantTuristas.setEditable(false);
-		maxCantTuristas.setBounds(250, 261, 107, 15);
+		maxCantTuristas.setBounds(227, 201, 130, 15);
 		getContentPane().add(maxCantTuristas);
 		this.maxCantTuristas = maxCantTuristas;
 		
 		JTextArea fechaAlta = new JTextArea();
 		fechaAlta.setEditable(false);
-		fechaAlta.setBounds(145, 293, 212, 15);
+		fechaAlta.setBounds(145, 227, 212, 15);
 		getContentPane().add(fechaAlta);
 		this.fechaAlta = fechaAlta;
 		
@@ -168,15 +168,15 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		salidasTuristicasLabel.setBounds(0, 63, 139, 14);
 		getContentPane().add(salidasTuristicasLabel);
 		
-		JComboBox comboPaquetes = new JComboBox();
-		comboPaquetes.setBounds(145, 350, 212, 24);
-		getContentPane().add(comboPaquetes);
-		this.comboPaquetes = comboPaquetes;
+		JComboBox comboInscriptos = new JComboBox();
+		comboInscriptos.setBounds(145, 248, 212, 24);
+		getContentPane().add(comboInscriptos);
+		this.comboPaquetes = comboInscriptos;
 		
-		JLabel paquetesLabel = new JLabel("Paquetes:");
-		paquetesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		paquetesLabel.setBounds(46, 355, 81, 14);
-		getContentPane().add(paquetesLabel);
+		JLabel inscriptosLabel = new JLabel("Inscriptos:");
+		inscriptosLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		inscriptosLabel.setBounds(46, 253, 81, 14);
+		getContentPane().add(inscriptosLabel);
 		
 		fechaSalida = new JTextArea();
 		fechaSalida.setLineWrap(true);
@@ -185,11 +185,6 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		fechaSalida.setBounds(145, 123, 212, 15);
 		getContentPane().add(fechaSalida);
 		this.fechaSalida = fechaSalida;
-		
-		JLabel lblProveedor = new JLabel("Proveedor:");
-		lblProveedor.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblProveedor.setBounds(7, 319, 120, 14);
-		getContentPane().add(lblProveedor);
 		
 		//proveedor = new JTextArea();
 		//proveedor.setEditable(false);
@@ -224,7 +219,6 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			lugarSalida.setText(salida.getLugarSalida());
 			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
 			fechaAlta.setText(salida.getFechaAlta().toString());	
-	    	//comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
 			
 		} catch (Exception ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
@@ -246,8 +240,5 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
         lugarSalida.setText("");
 		maxCantTuristas.setText("");
 		fechaAlta.setText("");
-		// FIXME: comento pq se rompe por alguna razón
-		// comboSalidas.setSelectedIndex(0);
-		// comboPaquetes.setSelectedIndex(0);
     }
 }
