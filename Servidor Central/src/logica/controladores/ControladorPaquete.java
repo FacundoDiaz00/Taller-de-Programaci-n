@@ -73,6 +73,8 @@ public class ControladorPaquete implements IControladorPaquete{
 		Paquete paq = mp.getPaquete(nombrePaq);
 		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
 		ActividadTuristica act = mat.getActividad(nombreAct);
+		
+		// FIXME: qué pasa si ya están asociados?
 		paq.agregarActividad(act);
 		act.agregarPaquete(paq);
 	}
