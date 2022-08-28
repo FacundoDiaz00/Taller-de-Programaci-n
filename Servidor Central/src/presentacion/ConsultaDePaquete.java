@@ -23,8 +23,9 @@ import java.awt.event.ActionEvent;
 public class ConsultaDePaquete extends JInternalFrame {
 	private JComboBox paquete;
 	private JTextPane perVal;
-	private JTextPane desc;
 	private JTextPane descr;
+	private JTextPane descuento;
+	private List<DTPaqueteDetalles> paquetesDetalles;
 
 	/**
 	 * Create the frame.
@@ -71,15 +72,11 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(lblNewLabel);
 		
 		perVal = new JTextPane();
-		perVal.setBounds(152, 80, 40, 21);
+		perVal.setBounds(166, 79, 247, 21);
 		getContentPane().add(perVal);
 		
-		desc = new JTextPane();
-		desc.setBounds(99, 113, 40, 21);
-		getContentPane().add(desc);
-		
 		JLabel label = new JLabel("%");
-		label.setBounds(141, 115, 70, 15);
+		label.setBounds(377, 115, 24, 15);
 		getContentPane().add(label);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion:");
@@ -102,15 +99,38 @@ public class ConsultaDePaquete extends JInternalFrame {
 		JButton btnConfirmar = new JButton("Confirmar.");
 		btnConfirmar.setBounds(152, 362, 117, 25);
 		getContentPane().add(btnConfirmar);
+		
+		JTextPane descuento = new JTextPane();
+		descuento.setBounds(160, 109, 212, 21);
+		getContentPane().add(descuento);
+		this.descuento = descuento;
+	
+	   paquete.addActionListener(new ActionListener() {     
+	     public void actionPerformed(ActionEvent e) {
+			String idPaquete = paquete.getSelectedItem().toString();
+			DTPaqueteDetalles paqueteSeleccionado = null;
+			for(var paquete: paquetesDetalles) {
+				if(paquete.getNombre() == idPaquete) {
+					paqueteSeleccionado = paquete;
+					break;
+				}
+			}
+			System.out.print(paqueteSeleccionado.getDescripcion());
+			perVal.setText(paqueteSeleccionado.getNombre());
+			descr.setText(paqueteSeleccionado.getDescripcion());
+			descuento.setText(String.valueOf(paqueteSeleccionado.getDescuento()));
+	     }
+	   });
+
 
 	}
 	private void actualizarCamposFormulario() {
 		paquete.setModel(new DefaultComboBoxModel());
 		Fabrica fab = Fabrica.getInstancia();
 		IControladorPaquete cp = fab.getIControladorPaquete();
-		List<DTPaqueteDetalles> ldp = cp.obtenerDetallesPaquetes(); 
+		paquetesDetalles = cp.obtenerDetallesPaquetes(); 
 		String[] ids;
-		for(var i: ldp) {
+		for(var i: paquetesDetalles) {
 			paquete.addItem(i.getNombre());
 		}
 
