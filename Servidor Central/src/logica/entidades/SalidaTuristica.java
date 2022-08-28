@@ -1,6 +1,8 @@
 package logica.entidades;
 
+import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.manejadores.ManejadorActividadTuristica;
 
 import java.time.LocalDate;
@@ -50,6 +52,14 @@ public class SalidaTuristica {
         return new DTSalidaTuristica(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida);
     }
 
+    public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(){
+    	Set<DTInscripcion> res = new HashSet<>();
+    	for(Inscripcion insc : inscripciones) {
+    		res.add(insc.obtenerDTInscripcion());
+    	}
+        return new DTSalidaTuristicaDetalle(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida, res);
+    }
+    
     public void agregarInscripcionASalida(Inscripcion ins){
         inscripciones.add(ins);
     }

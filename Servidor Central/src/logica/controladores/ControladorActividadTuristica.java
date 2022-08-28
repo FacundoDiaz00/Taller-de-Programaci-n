@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Equipo taller prog 16
@@ -121,6 +122,23 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			SalidaTuristica st = new SalidaTuristica(actividad,nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar);
 			ms.addSalida(st);
 		}
+	}
+	 
+	public List<String> obtenerIdSalidasTuristicas(String act){
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+		ActividadTuristica at = MAT.getActividad(act);
+		Map<String, SalidaTuristica> salidas = at.getSalidas();
+		List<String> res = new ArrayList<>();
+		for(String idSalida : salidas.keySet()) {
+			res.add(idSalida);
+		}
+		return res;
+	}
+	
+	public  DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) {
+		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
+		SalidaTuristica sal = MST.getSalida(nomSal);
+		return sal.obtenerDTSalidaTuristica();
 	}
 }
 

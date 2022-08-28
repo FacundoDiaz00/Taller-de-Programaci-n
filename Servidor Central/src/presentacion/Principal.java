@@ -35,9 +35,7 @@ public class Principal {
 	private AltaDePaquete frmIntAltaPaquete;
 	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
-	private ConsultaDePaquete frmIntConsultaDePaquete;
-	
-
+	private ConsultaDeSalidaTuristica	frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
 	/**
 	 * Launch the application.
@@ -70,6 +68,7 @@ public class Principal {
 		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
 		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, CAD);
 		frmInscribirseASalidaTurística = new InscribirseASalidaTurística(CAD, CUS);
+		frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(CAD);
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntAltaPaquete = new AltaDePaquete(CP);
 		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
@@ -85,7 +84,12 @@ public class Principal {
 		frmIntAgregarActividadAPaquete.setVisible(false);
 		frmInscribirseASalidaTurística.setVisible(false);
 		frmIntAltaSalidaTuristica.setVisible(false);
+<<<<<<<
 		frmIntConsultaDePaquete.setVisible(false);
+=======
+		frmIntConsultaDeSalidaTuristica.setVisible(false);
+		
+>>>>>>>
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -96,7 +100,11 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
+<<<<<<<
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
+=======
+		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
+>>>>>>>
 		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -192,7 +200,13 @@ public class Principal {
 		mnNewMenu_3.add(registrarSalidaJMenuItem);
 		
 		JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
+		consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmIntConsultaDeSalidaTuristica.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(consultarSalidaTuristicaJMenuItem);
+		
 		
 		JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
 		inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
@@ -280,11 +294,6 @@ public class Principal {
 		IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
 		IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();
-
-		//Cargo los departamentos
-
-		//Cargo los usuarios
-
 		try{
 
 			//Cargo Departamentos
@@ -391,8 +400,17 @@ public class Principal {
 			icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal" , 1, LocalDate.of(2022, 8, 21));
 			icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony" , 11, LocalDate.of(2022, 8, 21));
 
-			//
+			//Paquete
+			ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20); //todo falta la fecha de alta
+			ipack.altaPaquete("Un día en Colonia", "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15); //todo falta la fecha de alta
 
+			//Agregar Actividad a Paquete
+			ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");
+			ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
+			ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
+			ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
+
+			JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Error", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error a la hora de cargar los datos de prueba." +

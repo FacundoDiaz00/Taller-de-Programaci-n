@@ -70,11 +70,11 @@ public class  Usuario {
         this.fechaNac = fechaNac;
     }
     
-    public DTUsuario getDTUsuario() {
+    public DTUsuario obtenerDTUsuario() {
         return new DTUsuario(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac());
     }
 
-    public DTUsuario getDTUsuarioDetalle() {
+    public DTUsuario obtenerDTUsuarioDetalle() {
         return new DTUsuario(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac());
     }
     

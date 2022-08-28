@@ -55,12 +55,12 @@ public class Proveedor extends Usuario {
     }
     
     @Override
-    public DTUsuario getDTUsuario() {
+    public DTUsuario obtenerDTUsuario() {
         return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getDescrpicionGeneral(), getLink());
     }
 
     @Override
-    public DTUsuario getDTUsuarioDetalle() {
+    public DTUsuario obtenerDTUsuarioDetalle() {
         Map<String, List<String>> salidas = new HashMap<>();
 
         for (ActividadTuristica a : actividadesTuristicas.values()) {
