@@ -420,7 +420,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		panel_10.add(horizontalStrut_30);
 		
 		cantTuristasSprinner = new JSpinner();
-		cantTuristasSprinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		cantTuristasSprinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 		panel_10.add(cantTuristasSprinner);
 		
 		Component horizontalStrut_31 = Box.createHorizontalStrut(20);

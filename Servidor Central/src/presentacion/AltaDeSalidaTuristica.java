@@ -200,7 +200,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lugar.setColumns(10);
 		
 		maxTuristas = new JSpinner();
-		maxTuristas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		maxTuristas.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 		maxTuristas.setEnabled(false);
 		maxTuristas.setBounds(227, 257, 60, 20);
 		getContentPane().add(maxTuristas);
