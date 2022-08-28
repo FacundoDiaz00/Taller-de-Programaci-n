@@ -29,35 +29,39 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	private Principal principal;
 	private IControladorUsuario icu;
 	
-	String seleccionNickname;
+	private String seleccionNickname;
 	
 	private JComboBox<String> comboBoxSeleccionUsr;
 	
-	JPanel panel_principal;
-	JPanel panel_eleccion;
-	JPanel panel_consulta;
+	private JPanel panel_principal;
+	private JPanel panel_eleccion;
+	private JPanel panel_consulta;
 	
-	JPanel panel_izquierda;
-	JPanel panel_mostrar_datos;
+	private JPanel panel_izquierda;
+	private JPanel panel_mostrar_datos;
 	
-	JTextArea txtNickname;
-	JTextArea txtNombre;
-	JTextArea txtApellido;
-	JTextArea txtCorreo;
-	JTextArea txtFechaDeNacimiento;
-	JTextArea txtTipo;
-	JTextArea txtNacionalidad;
-	
-	
-	JPanel panel_derecha;
-	JPanel casos;
-	JPanel proveedor_panel;
-	JPanel panelActividadesYSalidasProveedor;
-	JPanel turista_panel;
-	JPanel panelSalidasTurista;
+	private JTextArea txtNickname;
+	private JTextArea txtNombre;
+	private JTextArea txtApellido;
+	private JTextArea txtCorreo;
+	private JTextArea txtFechaDeNacimiento;
+	private JTextArea txtNacionalidad;
+	private JTextArea txtTipo;
 	
 	
-
+	private JPanel panel_derecha;
+	private JPanel casos;
+	private JPanel proveedor_panel;
+	private JPanel panelActividadesYSalidasProveedor;
+	private JPanel turista_panel;
+	private JPanel panelSalidasTurista;
+	private JLabel lblNewLabel_6_2;
+	private JTextArea txtDescripcion;
+	private JLabel lblNewLabel_6_3;
+	private JTextArea txtURL;
+	private JLabel lblSalidasTurista;
+	private JLabel lblActividadesProv;
+	
 
 	/**
 	 * Create the frame.
@@ -81,14 +85,16 @@ public class ConsultaDeUsuario extends JInternalFrame {
         
         panel_eleccion = new JPanel();
         panel_principal.add(panel_eleccion);
-        panel_eleccion.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panel_eleccion.setLayout(null);
         
         JLabel lblNewLabel_1 = new JLabel("Elija un usuario:");
+        lblNewLabel_1.setBounds(12, 10, 114, 15);
         panel_eleccion.add(lblNewLabel_1);
         
         
 
         comboBoxSeleccionUsr = new JComboBox<String>();
+        comboBoxSeleccionUsr.setBounds(133, 5, 245, 24);
         panel_eleccion.add(comboBoxSeleccionUsr);
         actualizarComboBox();
         
@@ -191,8 +197,24 @@ public class ConsultaDeUsuario extends JInternalFrame {
         casos.add(proveedor_panel);
         proveedor_panel.setLayout(new BoxLayout(proveedor_panel, BoxLayout.Y_AXIS));
         
-        JLabel lblNewLabel_5 = new JLabel("Actividades y salidas: ");
-        proveedor_panel.add(lblNewLabel_5);
+        lblNewLabel_6_3 = new JLabel("URL: ");
+        proveedor_panel.add(lblNewLabel_6_3);
+        
+        txtURL = new JTextArea();
+        txtURL.setText("...");
+        txtURL.setEditable(false);
+        proveedor_panel.add(txtURL);
+        
+        lblNewLabel_6_2 = new JLabel("Descripcion general:");
+        proveedor_panel.add(lblNewLabel_6_2);
+        
+        txtDescripcion = new JTextArea();
+        txtDescripcion.setText("...");
+        txtDescripcion.setEditable(false);
+        proveedor_panel.add(txtDescripcion);
+        
+        lblActividadesProv = new JLabel("Actividades y salidas: ");
+        proveedor_panel.add(lblActividadesProv);
         
         panelActividadesYSalidasProveedor = new JPanel();
         proveedor_panel.add(panelActividadesYSalidasProveedor);
@@ -210,12 +232,14 @@ public class ConsultaDeUsuario extends JInternalFrame {
         txtNacionalidad.setText("...");
         turista_panel.add(txtNacionalidad);
         
-        JLabel lblNewLabel_6 = new JLabel("Salidas a las que se inscribió: ");
-        turista_panel.add(lblNewLabel_6);
+        lblSalidasTurista = new JLabel("Salidas a las que se inscribió: ");
+        turista_panel.add(lblSalidasTurista);
         
         panelSalidasTurista = new JPanel();
         turista_panel.add(panelSalidasTurista);
         panelSalidasTurista.setLayout(new BoxLayout(panelSalidasTurista, BoxLayout.Y_AXIS));
+        
+        
         
         
         
@@ -251,7 +275,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
         casos.removeAll();
     }
 	
-	public void actualizarComboBox() {
+	private void actualizarComboBox() {
 		List<String> usuarios = icu.obtenerIdUsuarios();
 		comboBoxSeleccionUsr.setModel(new DefaultComboBoxModel(usuarios.toArray()));
 	}
@@ -269,12 +293,11 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		seSeleccionoUnUsuario();
 	}
 	
-	public void ejecutarCasoConsultaSalidaTuristca(String nombreSalida) {
-		// TODO: implementar que se abra la ventana con esta salida ya elegida
-		System.out.println("Se quiso ejecutar el caso de uso Consulta Salida Turistica con el nombre "+ nombreSalida);
+	private void ejecutarCasoConsultaSalidaTuristca(String nombreSalida) {
+		principal.mostrarConsultaDeSalidaTuristica(nombreSalida);
 	}
 	
-	public void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
+	private void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
 		principal.mostrarConsultaDeActividadTuristica(nombreActividad);
 	}
 
@@ -307,8 +330,18 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				panelSalidasTurista.removeAll();
 				var inscripciones = tur.getInscripciones();
 				
-				for (var insc : inscripciones) {
-					JLabel txt = new JLabel(insc);
+				if (inscripciones.size() == 0) {
+					lblSalidasTurista.setVisible(false);
+					panelSalidasTurista.setVisible(false);
+				} else {
+					lblSalidasTurista.setVisible(true);
+					panelSalidasTurista.setVisible(true);
+				}
+				
+				for (var insc : inscripciones) {					
+			        JTextArea txt = new JTextArea();
+			        txt.setText(insc);
+			        txt.setEditable(false);
 					txt.addMouseListener(new MouseAdapter() {
 			        	@Override
 			        	public void mouseClicked(MouseEvent e) {
@@ -327,37 +360,57 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				casos.add(proveedor_panel);
 				
 				txtTipo.setText("Proveedor");
+				txtDescripcion.setText(prov.getDescrpicionGeneral());
+				txtURL.setText(prov.getLink());
 				
 				
+				panelActividadesYSalidasProveedor.removeAll();
 				var act_sal = prov.getActividadesSalidas();
 								
-				panelActividadesYSalidasProveedor.removeAll();
+				if (act_sal.size() == 0) {
+					lblActividadesProv.setVisible(false);
+					panelActividadesYSalidasProveedor.setVisible(false);
+				} else {
+					lblActividadesProv.setVisible(true);
+					panelActividadesYSalidasProveedor.setVisible(true);
+				}
 				
 				for (var actividad : act_sal.keySet()) {
-					System.out.print(actividad);
+					
+					
 					JPanel panel = new JPanel();
+					panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+					
+					
 					JLabel titulo = new JLabel("Actividad: ");
 					panel.add(titulo);
 					
-					JLabel nomb_actividad = new JLabel(actividad);
-					nomb_actividad.addMouseListener(new MouseAdapter() {
+					JTextArea txt = new JTextArea();
+			        txt.setText(actividad);
+			        txt.setEditable(false);
+					txt.addMouseListener(new MouseAdapter() {
 			        	@Override
 			        	public void mouseClicked(MouseEvent e) {
 			        		ejecutarCasoConsultaActividadTuristca(actividad);
 			        	}
 			        });
-					panel.add(nomb_actividad);
+					
+					panel.add(txt);
 					
 					for (var salida : act_sal.get(actividad)) {
-						System.out.print(salida);
-						JLabel nomb_salida = new JLabel(salida);
-						nomb_salida.addMouseListener(new MouseAdapter() {
+						JTextArea txt_sal = new JTextArea();
+						txt_sal.setText("   Salida: " + salida);
+						txt_sal.setEditable(false);
+						txt_sal.addMouseListener(new MouseAdapter() {
 				        	@Override
 				        	public void mouseClicked(MouseEvent e) {
 				        		ejecutarCasoConsultaSalidaTuristca(salida);
 				        	}
 				        });
+						panel.add(txt_sal);
 					}
+					
+					
 					panelActividadesYSalidasProveedor.add(panel);
 				}
 			} else {

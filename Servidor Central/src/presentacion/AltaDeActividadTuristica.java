@@ -210,17 +210,34 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private void agregarAT(ActionEvent action) {
 
 		try{
-			String prov = comboProveedores.getSelectedItem().toString();
-			String dpto = comboDepartamentos.getSelectedItem().toString();
+			String prov;
+			if(comboProveedores.getSelectedItem() == null) {
+				JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			prov = comboProveedores.getSelectedItem().toString();
+			
+			String dpto;
+			if(comboDepartamentos.getSelectedItem() == null) {
+				JOptionPane.showMessageDialog(null, "Debe seleccionar un departamento", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			dpto = comboDepartamentos.getSelectedItem().toString();
+			
 			String nom = nombre.getText().toString();
 			String desc = descripcion.getText().toString();
 			int dur = Integer.parseInt(duracion.getText().toString());
 			float cost = Float.parseFloat(costo.getText().toString());
 			String ciu = ciudad.getText().toString();
+			
 			String FAlta = FdeAlta.getText().toString();
 			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate fecha = LocalDate.parse(FAlta, JEFormatter);
-
+			
+			if(nom.isBlank() || desc.isBlank() || duracion.getText().toString().isBlank() || ciu.isBlank() || costo.getText().toString().isBlank()) {
+				JOptionPane.showMessageDialog(null, "Los campos nombre, descripción, duración, ciudad y costo son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
 			icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha);
 			limpiarFormulario();
@@ -249,6 +266,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deptos.toArray()));
 	}
 	
+	
     private void limpiarFormulario() {
         nombre.setText("");
         descripcion.setText("");
@@ -256,5 +274,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
         duracion.setText("");
         costo.setText("");
+        ciudad.setText("");
+        FdeAlta.setText("");
     }
 }

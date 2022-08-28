@@ -278,6 +278,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 	private void aceptarAltaSalidaTuristica() {
 		try{
+			System.out.print(actividadTuristica.getSelectedItem().toString());
 			LocalDate fechaR = LocalDate.of((int)anior.getValue(), (int)mesr.getValue(), (int)diar.getValue());
 			LocalDateTime fecha = LocalDateTime.of((int)anio.getValue(),(int)mes.getValue(),(int)dia.getValue(),(int)hora.getSelectedItem(),0);
 			ca.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(),nombre.getText().toString(),fecha,fechaR,lugar.getText().toString(), (int)maxTuristas.getValue());
@@ -296,8 +297,8 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 	private void limpiarForm() {
 		nombre.setText("");
-		departamento.setSelectedIndex(0);
-		actividadTuristica.setSelectedIndex(0);
+		departamento.setModel(new DefaultComboBoxModel<>(new String[0]));
+		actividadTuristica.setModel(new DefaultComboBoxModel<>(new String[0]));
 		dia.setValue(1);
 		mes.setValue(1);
 		anio.setValue(2022);
