@@ -43,9 +43,10 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(lblPaqueteAConsultar);
 		
 		paquete = new JComboBox();
+
 		paquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//perVal.setText();
 			}
 		});
 		paquete.addPopupMenuListener(new PopupMenuListener() {
