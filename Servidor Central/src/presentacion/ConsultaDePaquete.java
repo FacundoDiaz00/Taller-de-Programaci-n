@@ -20,6 +20,8 @@ import javax.swing.event.PopupMenuEvent;
 import logica.datatypes.DTPaqueteDetalles;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Objects;
+
 public class ConsultaDePaquete extends JInternalFrame {
 	private JComboBox paquete;
 	private JTextPane perVal;
@@ -27,6 +29,8 @@ public class ConsultaDePaquete extends JInternalFrame {
 	private JTextPane descuento;
 	private List<DTPaqueteDetalles> paquetesDetalles;
 
+	private JButton btnConfirmar;
+	private JComboBox actividad;
 	/**
 	 * Create the frame.
 	 */
@@ -74,7 +78,8 @@ public class ConsultaDePaquete extends JInternalFrame {
 		perVal = new JTextPane();
 		perVal.setBounds(166, 79, 247, 21);
 		getContentPane().add(perVal);
-		
+		perVal.setEditable(false);
+
 		JLabel label = new JLabel("%");
 		label.setBounds(377, 115, 24, 15);
 		getContentPane().add(label);
@@ -86,17 +91,18 @@ public class ConsultaDePaquete extends JInternalFrame {
 		descr = new JTextPane();
 		descr.setBounds(12, 174, 401, 107);
 		getContentPane().add(descr);
+		descr.setEditable(false);
 		
 		JLabel lblActividadTurisitica = new JLabel("Actividad Turisitica:");
 		lblActividadTurisitica.setBounds(12, 300, 154, 15);
 		getContentPane().add(lblActividadTurisitica);
 		
-		JComboBox actividad = new JComboBox();
+		actividad = new JComboBox();
 		actividad.setEnabled(false);
 		actividad.setBounds(152, 295, 261, 24);
 		getContentPane().add(actividad);
 		
-		JButton btnConfirmar = new JButton("Confirmar.");
+		btnConfirmar = new JButton("Confirmar.");
 		btnConfirmar.setBounds(152, 362, 117, 25);
 		getContentPane().add(btnConfirmar);
 		
@@ -104,21 +110,27 @@ public class ConsultaDePaquete extends JInternalFrame {
 		descuento.setBounds(160, 109, 212, 21);
 		getContentPane().add(descuento);
 		this.descuento = descuento;
-	
+		descuento.setEditable(false);
 	   paquete.addActionListener(new ActionListener() {     
 	     public void actionPerformed(ActionEvent e) {
-			String idPaquete = paquete.getSelectedItem().toString();
-			DTPaqueteDetalles paqueteSeleccionado = null;
-			for(var paquete: paquetesDetalles) {
-				if(paquete.getNombre() == idPaquete) {
+			 actividad.setModel(new DefaultComboBoxModel());
+			 actividad.setEnabled(true);
+			 String idPaquete = paquete.getSelectedItem().toString();
+			 DTPaqueteDetalles paqueteSeleccionado = null;
+			 for(var paquete: paquetesDetalles) {
+				if(Objects.equals(paquete.getNombre(), idPaquete)) {
 					paqueteSeleccionado = paquete;
 					break;
 				}
 			}
-			System.out.print(paqueteSeleccionado.getDescripcion());
-			perVal.setText(paqueteSeleccionado.getNombre());
-			descr.setText(paqueteSeleccionado.getDescripcion());
+			//System.out.print(paqueteSeleccionado.getDescrpicion())
+			perVal.setText(String.valueOf(paqueteSeleccionado.getValidez()));
+			descr.setText(paqueteSeleccionado.getDescrpicion());
 			descuento.setText(String.valueOf(paqueteSeleccionado.getDescuento()));
+			for (var i : paqueteSeleccionado.getActividades().values()){
+				actividad.addItem(i.getNombre().toString());
+			}
+
 	     }
 	   });
 
