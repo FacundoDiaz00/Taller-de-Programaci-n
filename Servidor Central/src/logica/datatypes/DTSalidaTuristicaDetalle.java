@@ -17,5 +17,8 @@ public class DTSalidaTuristicaDetalle extends DTSalidaTuristica{
 		super(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida);
 		this.inscriptos = inscriptos;
 	}
+	public Set<DTInscripcion> getInscriptos(){
+		return this.inscriptos;
+	}
 	
 }

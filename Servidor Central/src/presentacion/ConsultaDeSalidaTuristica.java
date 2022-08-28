@@ -1,8 +1,13 @@
 package presentacion;
 
 import java.util.List;
+import java.util.Set;
+
+import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTInscripcion;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
@@ -12,13 +17,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTPaquete;
+import javax.swing.border.TitledBorder;
+import java.awt.BorderLayout;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.ListSelectionEvent;
 
 public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private String seleccionActividad;
 
 	private final JComboBox comboSalidas;
-	private final JComboBox comboPaquetes;
 	private JComboBox comboActividades;
 	private JComboBox comboDepartamentos;
 	private IControladorActividadTuristica icat;
@@ -29,13 +42,25 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private JTextArea maxCantTuristas;
 	private JTextArea fechaAlta;
 	
+	private JList inscripcionList;
+	private JTextArea nombreInscripto;
+	private JTextArea fechaInscripto;
+	private JTextArea cantTuristasInscripto;
+	
 	/**
 	 * Create the frame.
 	 */
 	public ConsultaDeSalidaTuristica(IControladorActividadTuristica icat) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
+			
 		this.icat = icat;
 		setTitle("Consulta de Salida Turística");
-		setBounds(100, 100, 409, 512);
+		setBounds(100, 100, 430, 512);
 		getContentPane().setLayout(null);
         setResizable(true);
         setIconifiable(true);
@@ -154,7 +179,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		comboSalidas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//salida fue seleccionada:
-				DTSalidaTuristica sal = icat.obtenerDTSalidaTuristica(comboSalidas.getSelectedItem().toString());
+				DTSalidaTuristicaDetalle sal = icat.obtenerDTSalidaTuristicaDetalle(comboSalidas.getSelectedItem().toString());
 				mostrarDatosSalida(sal);
 			}
 		});
@@ -168,14 +193,9 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		salidasTuristicasLabel.setBounds(0, 63, 139, 14);
 		getContentPane().add(salidasTuristicasLabel);
 		
-		JComboBox comboInscriptos = new JComboBox();
-		comboInscriptos.setBounds(145, 248, 212, 24);
-		getContentPane().add(comboInscriptos);
-		this.comboPaquetes = comboInscriptos;
-		
 		JLabel inscriptosLabel = new JLabel("Inscriptos:");
 		inscriptosLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		inscriptosLabel.setBounds(46, 253, 81, 14);
+		inscriptosLabel.setBounds(17, 253, 81, 14);
 		getContentPane().add(inscriptosLabel);
 		
 		fechaSalida = new JTextArea();
@@ -185,6 +205,54 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		fechaSalida.setBounds(145, 123, 212, 15);
 		getContentPane().add(fechaSalida);
 		this.fechaSalida = fechaSalida;
+		
+		inscripcionList = new JList();
+		inscripcionList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				if(inscripcionList.getSelectedValue() != null) {
+					String tur = inscripcionList.getSelectedValue().toString();
+					turistaSeleccionado(tur);
+				}
+			}
+
+			private void turistaSeleccionado(String tur) {
+				IControladorUsuario icu = Fabrica.getInstancia().getIControladorUsuario();
+				DTTuristaDetalle datosTur = (DTTuristaDetalle) icu.obtenerDTUsuarioDetalle(tur);
+				String nomSal = comboSalidas.getSelectedItem().toString();
+				DTInscripcion datosInsc = icat.obtenerDTInscripcion(datosTur.getNickname(), nomSal);
+				
+				nombreInscripto.setText(datosTur.getNombre());
+				fechaInscripto.setText(datosInsc.getFechaInscripcion().toString());
+				cantTuristasInscripto.setText(String.valueOf(datosInsc.getCantidadTuristas()));
+				
+			}
+		});
+		inscripcionList.setBounds(17, 279, 137, 133);
+		getContentPane().add(inscripcionList);
+		
+		JLabel nombreInscriptoLabel = new JLabel("Nombre:");
+		nombreInscriptoLabel.setBounds(172, 280, 60, 15);
+		getContentPane().add(nombreInscriptoLabel);
+		
+		JLabel fechaInscripcionLabel = new JLabel("Fecha:");
+		fechaInscripcionLabel.setBounds(172, 307, 60, 15);
+		getContentPane().add(fechaInscripcionLabel);
+		
+		JLabel cantTuristasLabel = new JLabel("Cant. Turistas:");
+		cantTuristasLabel.setBounds(172, 334, 113, 15);
+		getContentPane().add(cantTuristasLabel);
+		
+		nombreInscripto = new JTextArea();
+		nombreInscripto.setBounds(250, 280, 157, 15);
+		getContentPane().add(nombreInscripto);
+		
+		fechaInscripto = new JTextArea();
+		fechaInscripto.setBounds(250, 307, 157, 15);
+		getContentPane().add(fechaInscripto);
+		
+		cantTuristasInscripto = new JTextArea();
+		cantTuristasInscripto.setBounds(287, 334, 120, 15);
+		getContentPane().add(cantTuristasInscripto);
 		
 		//proveedor = new JTextArea();
 		//proveedor.setEditable(false);
@@ -210,7 +278,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 
 }
 	
-	private void mostrarDatosSalida(DTSalidaTuristica salida) {
+	private void mostrarDatosSalida(DTSalidaTuristicaDetalle salida) {
 		try {
 			
 			nombre.setText(salida.getNombre());
@@ -218,10 +286,15 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			horaSalida.setText(salida.getFechaHoraSalida().toString());
 			lugarSalida.setText(salida.getLugarSalida());
 			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
-			fechaAlta.setText(salida.getFechaAlta().toString());	
+			fechaAlta.setText(salida.getFechaAlta().toString());
+			DefaultListModel<String> listModel = new DefaultListModel<>();
+            for (DTInscripcion insc : salida.getInscriptos()){
+                listModel.addElement(insc.getTurista().getNickname());
+            }
+            inscripcionList.setModel(listModel);
 			
 		} catch (Exception ex) {
-			// Esta excepcion no debería ocurrir pero por las dudas la pongo
+			ex.printStackTrace();
 			
 		}
 	}
@@ -231,8 +304,38 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
 	
-	
-	
+    private void limpiarFormularioSinDepartamento() {
+        nombre.setText("");
+        fechaSalida.setText("");
+        horaSalida.setText("");
+        lugarSalida.setText("");
+		maxCantTuristas.setText("");
+		fechaAlta.setText("");
+		nombreInscripto.setText("");
+		fechaInscripto.setText("");
+		cantTuristasInscripto.setText("");
+		
+		inscripcionList.setModel(new DefaultListModel<>());
+		
+		comboActividades.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
+    }
+
+    private void limpiarFormularioSinDepartamentoNiActividad() {
+        nombre.setText("");
+        fechaSalida.setText("");
+        horaSalida.setText("");
+        lugarSalida.setText("");
+		maxCantTuristas.setText("");
+		fechaAlta.setText("");
+		nombreInscripto.setText("");
+		fechaInscripto.setText("");
+		cantTuristasInscripto.setText("");
+		
+		inscripcionList.setModel(new DefaultListModel<>());
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
+    }
+    
     private void limpiarFormulario() {
         nombre.setText("");
         fechaSalida.setText("");
@@ -240,5 +343,14 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
         lugarSalida.setText("");
 		maxCantTuristas.setText("");
 		fechaAlta.setText("");
+		nombreInscripto.setText("");
+		fechaInscripto.setText("");
+		cantTuristasInscripto.setText("");
+		
+		inscripcionList.setModel(new DefaultListModel<>());
+		
+		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboActividades.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
     }
 }
