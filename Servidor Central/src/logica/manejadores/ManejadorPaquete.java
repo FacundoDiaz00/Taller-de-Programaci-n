@@ -36,6 +36,7 @@ public class ManejadorPaquete {
     }
 
     public void addPaquete(Paquete paquete) {
+    	System.out.print(paquete.getDescrpicion());
         paquetes.put(paquete.getNombre(), paquete);
     }
 
