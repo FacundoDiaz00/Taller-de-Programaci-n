@@ -2,6 +2,7 @@ package logica.controladores;
 
 import logica.datatypes.DTPaqueteDetalles;
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import logica.entidades.ActividadTuristica;
@@ -18,14 +19,14 @@ import java.util.List;
  */
 
 public class ControladorPaquete implements IControladorPaquete{
-    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento) throws PaqueteYaRegistradoException {
+    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR) throws PaqueteYaRegistradoException {
         
     	ManejadorPaquete mp = ManejadorPaquete.getInstancia();
         
         if(mp.existePaquete(nombre)) {
             throw new PaqueteYaRegistradoException("Ya existe en el sistema un paquete con el nombre: "+nombre);
         }
-        Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento);
+        Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento, fechaR);
         mp.addPaquete(paq);
     }
 
