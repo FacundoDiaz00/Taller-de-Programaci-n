@@ -23,12 +23,11 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private JComboBox comboDepartamentos;
 	private IControladorActividadTuristica icat;
 	private JTextArea nombre;
-	private JTextArea descripcion;
-	private JTextArea duracion;
-	private JTextArea ciudad;
-	private JTextArea costo;
+	private JTextArea fechaSalida;
+	private JTextArea horaSalida;
+	private JTextArea lugarSalida;
+	private JTextArea maxCantTuristas;
 	private JTextArea fechaAlta;
-	private JTextArea proveedor;
 	
 	/**
 	 * Create the frame.
@@ -59,25 +58,25 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		nombreLabel.setBounds(7, 97, 121, 14);
 		getContentPane().add(nombreLabel);
 		
-		JLabel descripcionLabel = new JLabel("Descripcion:");
-		descripcionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		descripcionLabel.setBounds(7, 123, 120, 14);
-		getContentPane().add(descripcionLabel);
+		JLabel fechaLabel = new JLabel("Fecha:");
+		fechaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		fechaLabel.setBounds(7, 123, 120, 14);
+		getContentPane().add(fechaLabel);
 		
-		JLabel duracionLabel = new JLabel("Duracion:");
-		duracionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		duracionLabel.setBounds(7, 209, 120, 14);
-		getContentPane().add(duracionLabel);
+		JLabel hora = new JLabel("Hora:");
+		hora.setHorizontalAlignment(SwingConstants.RIGHT);
+		hora.setBounds(7, 209, 120, 14);
+		getContentPane().add(hora);
 		
-		JLabel costoLabel = new JLabel("Costo:");
-		costoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		costoLabel.setBounds(7, 235, 121, 14);
-		getContentPane().add(costoLabel);
+		JLabel lugarLabel = new JLabel("Lugar de salida:");
+		lugarLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lugarLabel.setBounds(7, 235, 121, 14);
+		getContentPane().add(lugarLabel);
 		
-		JLabel ciudadLabel = new JLabel("Ciudad:");
-		ciudadLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		ciudadLabel.setBounds(7, 261, 120, 14);
-		getContentPane().add(ciudadLabel);
+		JLabel maxTuristasLabel = new JLabel("Maxima cantidad de turistas:");
+		maxTuristasLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		maxTuristasLabel.setBounds(7, 261, 212, 14);
+		getContentPane().add(maxTuristasLabel);
 		
 		JLabel fechaAltaLabel = new JLabel("Fecha de alta:");
 		fechaAltaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -126,24 +125,24 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		getContentPane().add(nombre);
 		this.nombre = nombre;
 		
-		JTextArea duracion = new JTextArea();
-		duracion.setEditable(false);
-		duracion.setBounds(146, 209, 212, 15);
-		getContentPane().add(duracion);
-		this.duracion = duracion;
+		JTextArea horaSalida = new JTextArea();
+		horaSalida.setEditable(false);
+		horaSalida.setBounds(146, 209, 212, 15);
+		getContentPane().add(horaSalida);
+		this.horaSalida = horaSalida;
 	
 		
-		JTextArea costo = new JTextArea();
-		costo.setEditable(false);
-		costo.setBounds(145, 235, 212, 15);
-		getContentPane().add(costo);
-		this.costo = costo;
+		JTextArea lugarSalida = new JTextArea();
+		lugarSalida.setEditable(false);
+		lugarSalida.setBounds(145, 235, 212, 15);
+		getContentPane().add(lugarSalida);
+		this.lugarSalida = lugarSalida;
 		
-		JTextArea ciudad = new JTextArea();
-		ciudad.setEditable(false);
-		ciudad.setBounds(145, 261, 212, 15);
-		getContentPane().add(ciudad);
-		this.ciudad = ciudad;
+		JTextArea maxCantTuristas = new JTextArea();
+		maxCantTuristas.setEditable(false);
+		maxCantTuristas.setBounds(250, 261, 107, 15);
+		getContentPane().add(maxCantTuristas);
+		this.maxCantTuristas = maxCantTuristas;
 		
 		JTextArea fechaAlta = new JTextArea();
 		fechaAlta.setEditable(false);
@@ -152,6 +151,13 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		this.fechaAlta = fechaAlta;
 		
 		JComboBox comboSalidas = new JComboBox();
+		comboSalidas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//salida fue seleccionada:
+				DTSalidaTuristica sal = icat.obtenerDTSalidaTuristica(comboSalidas.getSelectedItem().toString());
+				mostrarDatosSalida(sal);
+			}
+		});
 		comboSalidas.setBounds(145, 58, 212, 24);
 		getContentPane().add(comboSalidas);
 		this.comboSalidas = comboSalidas;
@@ -172,22 +178,23 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		paquetesLabel.setBounds(46, 355, 81, 14);
 		getContentPane().add(paquetesLabel);
 		
-		descripcion = new JTextArea();
-		descripcion.setLineWrap(true);
-		descripcion.setWrapStyleWord(true);
-		descripcion.setEditable(false);
-		descripcion.setBounds(145, 123, 212, 69);
-		getContentPane().add(descripcion);
+		fechaSalida = new JTextArea();
+		fechaSalida.setLineWrap(true);
+		fechaSalida.setWrapStyleWord(true);
+		fechaSalida.setEditable(false);
+		fechaSalida.setBounds(145, 123, 212, 15);
+		getContentPane().add(fechaSalida);
+		this.fechaSalida = fechaSalida;
 		
 		JLabel lblProveedor = new JLabel("Proveedor:");
 		lblProveedor.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblProveedor.setBounds(7, 319, 120, 14);
 		getContentPane().add(lblProveedor);
 		
-		proveedor = new JTextArea();
-		proveedor.setEditable(false);
-		proveedor.setBounds(145, 319, 212, 15);
-		getContentPane().add(proveedor);
+		//proveedor = new JTextArea();
+		//proveedor.setEditable(false);
+	//	proveedor.setBounds(145, 319, 212, 15);
+		//getContentPane().add(proveedor);
 		
 	   comboDeps.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
@@ -199,46 +206,25 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	   
 	   comboActividades.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 consultaDeActividad(e);
+		    	//se cargan identificadores de salidas
+		    	 String act = comboActividades.getSelectedItem().toString();
+		    	List<String> salidas = icat.obtenerIdSalidasTuristicas(act);
+		    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
 		   }
 	   });
 
 }
 	
-	public void seleccionYaHecha(String nombreAct) {
-		limpiarFormulario();
-		seleccionActividad = nombreAct;
-		seSeleccionoUnaActividad();
-	}
-	
-	private void consultaDeActividad(ActionEvent action) {
-		seleccionActividad = (String) comboActividades.getSelectedItem();
-		seSeleccionoUnaActividad();
-	}
-		
-	
-	private void seSeleccionoUnaActividad() {
-		String seleccion = seleccionActividad;
-		
-		System.out.println(seleccion);
+	private void mostrarDatosSalida(DTSalidaTuristica salida) {
 		try {
-			DTActividadTuristicaDetalle actividad = icat.obtenerDetallesActividadTuristica(seleccion);
 			
-			nombre.setText(actividad.getNombre());
-			ciudad.setText(actividad.getCuidad());
-			costo.setText(String.valueOf(actividad.getCostoPorTurista()));
-			descripcion.setText(actividad.getDescripcion());
-			fechaAlta.setText(actividad.getFechaAlta().toString());
-			proveedor.setText(actividad.getNicknameProveedor());
-			duracion.setText(String.valueOf(actividad.getDuracion()));
-			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
-			
-			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTSalidaTuristica
-	    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
-			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
-			
-			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTPaquete
-	    	comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
+			nombre.setText(salida.getNombre());
+			fechaSalida.setText(salida.getFechaHoraSalida().toString());
+			horaSalida.setText(salida.getFechaHoraSalida().toString());
+			lugarSalida.setText(salida.getLugarSalida());
+			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
+			fechaAlta.setText(salida.getFechaAlta().toString());	
+	    	//comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
 			
 		} catch (Exception ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
@@ -255,10 +241,10 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	
     private void limpiarFormulario() {
         nombre.setText("");
-        descripcion.setText("");
-        duracion.setText("");
-        costo.setText("");
-		ciudad.setText("");
+        fechaSalida.setText("");
+        horaSalida.setText("");
+        lugarSalida.setText("");
+		maxCantTuristas.setText("");
 		fechaAlta.setText("");
 		// FIXME: comento pq se rompe por alguna razón
 		// comboSalidas.setSelectedIndex(0);

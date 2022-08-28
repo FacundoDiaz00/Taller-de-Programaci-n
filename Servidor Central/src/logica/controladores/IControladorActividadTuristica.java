@@ -64,5 +64,9 @@ public interface IControladorActividadTuristica {
 	 * @throws FechaAltaSalidaPosteriorAFechaSalidaException
 	 */
 	void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
+
+	List<String> obtenerIdSalidasTuristicas(String act);
+
+	DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal);
 	
 }
