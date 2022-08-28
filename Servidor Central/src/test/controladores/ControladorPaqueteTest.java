@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.PaqueteYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorPaquete;
@@ -133,7 +134,11 @@ class ControladorPaqueteTest {
 			String nombrePaq = "Paquete " + id + " i=" + i;  
 			for  (int j = 0; j < 10; j++) {
 				String nombreActString = "Actividad " + id + " i=" + (i*10 + j);
-				cp.agregarActividadAPaquete(nombreActString, nombrePaq);
+				try {
+					cp.agregarActividadAPaquete(nombreActString, nombrePaq);
+				} catch (Exception e) {
+					fail(e.getMessage());
+				}
 			}			
 		}
 		
@@ -258,7 +263,7 @@ class ControladorPaqueteTest {
 				
 				cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 				
-				assertThrows(PaqueteYaRegistradoException.class, () -> {
+				assertThrows(ActividadTuristicaYaRegistradaException.class, () -> {
 					cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 				});					
 			}

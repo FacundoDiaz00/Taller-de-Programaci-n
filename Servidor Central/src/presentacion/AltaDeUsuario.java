@@ -119,6 +119,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		getContentPane().add(tipoUsuario);
 		tipoUsuario.addItem(OPCION_PROVEEDOR);
 		tipoUsuario.addItem(OPCION_TURISTA);
+		tipoUsuario.setSelectedIndex(0);
 		this.tipoUsuario = tipoUsuario;
 		
 		JButton btnAceptar = new JButton("Aceptar");
@@ -196,7 +197,7 @@ public class AltaDeUsuario extends JInternalFrame {
 				return;
 			}else if(tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR) && (descripcion.getText().isBlank()||  nombre.getText().isBlank()|| 
 					apellido.getText().isBlank() || nickname.getText().isBlank() || Fnacimiento.getText().isBlank())) {
-				JOptionPane.showMessageDialog(null, "Los campos nombre, apellido, nickname, correo, fecha de nacimiento, nacionalidad y descripción son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Los campos nombre, apellido, nickname, correo, fecha de nacimiento y descripción son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
