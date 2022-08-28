@@ -58,41 +58,27 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testAltaDepartamentoOK() {
-		assertTrue(cat != null);
-		
-		for (int i = 0; i < 100; i++) {
-			String nom = "Dep testAltaDepartamentoOK" + i;
-			String descr = "Descripcion";
-			String url = "https://www.canelones-departamento.org.uy/inicio.html";
-			
-			try {
-				cat.altaDepartamento(nom, descr, url);			
-			} catch(Exception e) {
-				fail(e.getMessage());
-			}
+		try {
+			generarDepartamentos(100, "testAltaDepartamentoOK");			
+		} catch(Exception e) {
+			fail(e.getMessage());
 		}
-		
     }
 	
 	@Test
 	public void testAltaDepartamentoRepetido() {
 		assertTrue(cat != null);
 		
-		for (int i = 0; i < 100; i++) {
-			String nom = "Dep testAltaDepartamentoRepetido" + i;
-			String descr = "Descripcion";
-			String url = "https://www.canelones-departamento.org.uy/inicio.html";
-			try {
-				cat.altaDepartamento(nom, descr, url);
-			} catch (Exception e) {
-				fail(e.getMessage());
-			};
-			
-			// Repito y debería tirar la excepcion
-			assertThrows(DeparamentoYaRegistradoException.class, ()->{
-				cat.altaDepartamento(nom, descr, url);
-			});
+		try {
+			generarDepartamentos(1, "testAltaDepartamentoRepetido");			
+		} catch(Exception e) {
+			fail(e.getMessage());
 		}
+		
+		// Repito y debería tirar la excepcion
+		assertThrows(DeparamentoYaRegistradoException.class, ()->{
+			generarDepartamentos(1, "testAltaDepartamentoRepetido");
+		});
     }
 
 	@Test
