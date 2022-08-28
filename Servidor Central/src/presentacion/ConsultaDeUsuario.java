@@ -240,28 +240,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
         panelSalidasTurista.setLayout(new BoxLayout(panelSalidasTurista, BoxLayout.Y_AXIS));
         
         
-        
-        
-        
-        comboBoxSeleccionUsr.addPopupMenuListener( new PopupMenuListener() {
-
-			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				// Esto es lo que actualiza la lista cada vez que se abre.
-				actualizarComboBox();
-			}
-
-			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				
-			}
-
-			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
-				
-			}
-        	
-        });
+      
         
         comboBoxSeleccionUsr.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -305,9 +284,6 @@ public class ConsultaDeUsuario extends JInternalFrame {
 
 		try {
 			DTUsuario usr = icu.obtenerDTUsuarioDetalle(seleccion);
-			
-			boolean mostrar_datos = true;
-			boolean mostrar_proveedor = true;
 			
 			txtNickname.setText(usr.getNickname());
 			txtNombre.setText(usr.getNombre());
@@ -414,7 +390,6 @@ public class ConsultaDeUsuario extends JInternalFrame {
 			} else {
 				throw new Exception("Se devolvió un tipo de DTUsuario no registado");
 			}
-			
 			
 		} catch (Exception ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
