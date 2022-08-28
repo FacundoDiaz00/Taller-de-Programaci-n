@@ -37,6 +37,8 @@ public class Principal {
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
 	private ConsultaDeSalidaTuristica	frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
+
+	private ConsultaDePaquete frmIntConsultaDePaquete;
 	/**
 	 * Launch the application.
 	 */
@@ -84,12 +86,8 @@ public class Principal {
 		frmIntAgregarActividadAPaquete.setVisible(false);
 		frmInscribirseASalidaTurística.setVisible(false);
 		frmIntAltaSalidaTuristica.setVisible(false);
-<<<<<<<
 		frmIntConsultaDePaquete.setVisible(false);
-=======
 		frmIntConsultaDeSalidaTuristica.setVisible(false);
-		
->>>>>>>
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -100,11 +98,9 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
-<<<<<<<
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
-=======
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
->>>>>>>
+
 		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
