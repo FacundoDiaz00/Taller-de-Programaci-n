@@ -397,8 +397,8 @@ public class Principal {
 			icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony" , 11, LocalDate.of(2022, 8, 21));
 
 			//Paquete
-			ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20); //todo falta la fecha de alta
-			ipack.altaPaquete("Un día en Colonia", "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15); //todo falta la fecha de alta
+			ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20,LocalDate.of(2022, 8, 10)); //todo falta la fecha de alta
+			ipack.altaPaquete("Un día en Colonia", "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15, LocalDate.of(2022, 8, 10)); //todo falta la fecha de alta
 
 			//Agregar Actividad a Paquete
 			ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");
