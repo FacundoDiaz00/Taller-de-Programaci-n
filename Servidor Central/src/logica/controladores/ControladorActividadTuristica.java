@@ -3,6 +3,7 @@ package logica.controladores;
 import excepciones.*;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 import logica.entidades.SalidaTuristica;
@@ -139,6 +140,11 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristica();
+	}
+	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) {
+		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
+		SalidaTuristica sal = MST.getSalida(nomSal);
+		return sal.obtenerDTSalidaTuristicaDetalle();
 	}
 }
 
