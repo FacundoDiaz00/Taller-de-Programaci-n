@@ -13,15 +13,19 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTPaquete;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
+	private IControladorActividadTuristica icat;
+	private Principal principal;
+	
 	private String seleccionActividad;
 
 	private final JComboBox comboSalidas;
 	private final JComboBox comboPaquetes;
 	private JComboBox comboActividades;
 	private JComboBox comboDepartamentos;
-	private IControladorActividadTuristica icat;
 	private JTextArea nombre;
 	private JTextArea descripcion;
 	private JTextArea duracion;
@@ -33,7 +37,14 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDeActividadTuristica(IControladorActividadTuristica icat) {
+	public ConsultaDeActividadTuristica(Principal p,IControladorActividadTuristica icat) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
+		this.principal = p;
 		this.icat = icat;
 		setTitle("Consutla de Actividad Turística");
 		setBounds(100, 100, 409, 424);
@@ -84,12 +95,12 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		fechaAltaLabel.setBounds(7, 244, 120, 14);
 		getContentPane().add(fechaAltaLabel);
 		
-		JComboBox comboDeps = new JComboBox<String>();
-		comboDeps.setBounds(145, 7, 212, 24);
-		getContentPane().add(comboDeps);
+		comboDepartamentos = new JComboBox<String>();
+		comboDepartamentos.setBounds(145, 7, 212, 24);
+		getContentPane().add(comboDepartamentos);
 		
 		
-        comboDeps.addPopupMenuListener( new PopupMenuListener() {
+		comboDepartamentos.addPopupMenuListener( new PopupMenuListener() {
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
@@ -99,62 +110,51 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
         	
         });
         
-        this.comboDepartamentos = comboDeps;
-        
 	 
 		
-		JComboBox comboActividades = new JComboBox();
+        comboActividades = new JComboBox();
 		comboActividades.setBounds(145, 32, 212, 24);
 		getContentPane().add(comboActividades);
-		this.comboActividades = comboActividades;
 		
-		JTextArea nombre = new JTextArea();
+		nombre = new JTextArea();
 		nombre.setEditable(false);
 		nombre.setBounds(145, 63, 212, 15);
 		getContentPane().add(nombre);
-		this.nombre = nombre;
 		
-		JTextArea duracion = new JTextArea();
+		duracion = new JTextArea();
 		duracion.setEditable(false);
 		duracion.setBounds(145, 164, 212, 15);
 		getContentPane().add(duracion);
-		this.duracion = duracion;
 	
 		
-		JTextArea costo = new JTextArea();
+		costo = new JTextArea();
 		costo.setEditable(false);
 		costo.setBounds(145, 192, 212, 15);
 		getContentPane().add(costo);
-		this.costo = costo;
 		
-		JTextArea ciudad = new JTextArea();
+		ciudad = new JTextArea();
 		ciudad.setEditable(false);
 		ciudad.setBounds(145, 218, 212, 15);
 		getContentPane().add(ciudad);
-		this.ciudad = ciudad;
 		
-		JTextArea fechaAlta = new JTextArea();
+		fechaAlta = new JTextArea();
 		fechaAlta.setEditable(false);
 		fechaAlta.setBounds(145, 244, 212, 15);
 		getContentPane().add(fechaAlta);
-		this.fechaAlta = fechaAlta;
 		
-		JComboBox comboSalidas = new JComboBox();
+		comboSalidas = new JComboBox();
 		comboSalidas.setBounds(145, 289, 212, 24);
 		getContentPane().add(comboSalidas);
-		this.comboSalidas = comboSalidas;
 
 		
 		JLabel salidasTuristicasLabel = new JLabel("Salidas turísticas:");
@@ -162,10 +162,9 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		salidasTuristicasLabel.setBounds(-12, 294, 139, 14);
 		getContentPane().add(salidasTuristicasLabel);
 		
-		JComboBox comboPaquetes = new JComboBox();
+		comboPaquetes = new JComboBox();
 		comboPaquetes.setBounds(145, 314, 212, 24);
 		getContentPane().add(comboPaquetes);
-		this.comboPaquetes = comboPaquetes;
 		
 		JLabel paquetesLabel = new JLabel("Paquetes:");
 		paquetesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -189,9 +188,9 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		proveedor.setBounds(145, 270, 212, 15);
 		getContentPane().add(proveedor);
 		
-	   comboDeps.addActionListener(new ActionListener() {     
+		comboDepartamentos.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
+		    	 List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDepartamentos.getSelectedItem().toString());
 		    	 comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
 		   
 		     }
@@ -200,6 +199,18 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	   comboActividades.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
 		    	 consultaDeActividad(e);
+		   }
+	   });
+	   
+	   comboSalidas.addActionListener(new ActionListener() {     
+		     public void actionPerformed(ActionEvent e) {
+		    	 ejecutarCasoConsultaSalidaTuristca((String) comboSalidas.getSelectedItem());
+		   }
+	   });
+	   
+	   comboPaquetes.addActionListener(new ActionListener() {     
+		     public void actionPerformed(ActionEvent e) {
+		    	 ejecutarCasoConsultaPaquete((String) comboPaquetes.getSelectedItem());
 		   }
 	   });
 
@@ -219,8 +230,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	
 	private void seSeleccionoUnaActividad() {
 		String seleccion = seleccionActividad;
-		
-		System.out.println(seleccion);
+
 		try {
 			DTActividadTuristicaDetalle actividad = icat.obtenerDetallesActividadTuristica(seleccion);
 			
@@ -231,15 +241,17 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			fechaAlta.setText(actividad.getFechaAlta().toString());
 			proveedor.setText(actividad.getNicknameProveedor());
 			duracion.setText(String.valueOf(actividad.getDuracion()));
+			
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
+			for(DTSalidaTuristica salida: salidas) {
+				comboSalidas.addItem(salida.getNombre());
+			}
 			
-			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTSalidaTuristica
-	    	comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
 			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
-			
-			// FIXME: DefaultComboBoxModel no sabe qué hacer con un array de DTPaquete
-	    	comboPaquetes.setModel(new DefaultComboBoxModel(paquetes.toArray()));
-			
+			for(DTPaquete paquete: paquetes) {
+				comboPaquetes.addItem(paquete.getNombre());
+			}
+		
 		} catch (Exception ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 			
@@ -251,6 +263,14 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
 	
+	private void ejecutarCasoConsultaSalidaTuristca(String nombreSalida) {
+		principal.mostrarConsultaDeSalidaTuristica(nombreSalida);
+	}
+	
+	private void ejecutarCasoConsultaPaquete(String nombrePaquete) {
+		principal.mostrarConsultaDePaquete(nombrePaquete);
+	}
+	
 	
 	
     private void limpiarFormulario() {
@@ -260,8 +280,10 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
         costo.setText("");
 		ciudad.setText("");
 		fechaAlta.setText("");
-		// FIXME: comento pq se rompe por alguna razón
-		// comboSalidas.setSelectedIndex(0);
-		// comboPaquetes.setSelectedIndex(0);
+		proveedor.setText("");
+		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboPaquetes.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboActividades.setModel(new DefaultComboBoxModel<>(new String[0]));
+		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
     }
 }
