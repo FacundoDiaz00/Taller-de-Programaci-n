@@ -398,9 +398,13 @@ class ControladorUsuarioTest {
 			var dtprov = (DTProveedor) cu.obtenerDTUsuario(nicknameProv);
 	
 			// Si no modifico nada:
-			cu.modificarUsuario(dttur);
-			cu.modificarUsuario(dtprov);
-			
+			try{
+				cu.modificarUsuario(dttur);
+				cu.modificarUsuario(dtprov);
+			} catch (Exception e){
+				fail(e.getMessage());
+			}
+
 			assertEquals(dttur, (DTTurista) cu.obtenerDTUsuario(nicknameTur));		
 			assertEquals(dtprov, (DTProveedor) cu.obtenerDTUsuario(nicknameProv));
 	
@@ -409,9 +413,14 @@ class ControladorUsuarioTest {
 			
 			var dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre() + nuevoString, dttur.getApellido() + nuevoString, dttur.getCorreo(), dttur.getFechaNac().plusDays(1), dttur.getNacionalidad() + nuevoString);
 			var dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre() + nuevoString, dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
-	
-			cu.modificarUsuario(dtTurNuevo);
-			cu.modificarUsuario(dtProvNuevo);
+
+
+			try{
+				cu.modificarUsuario(dtTurNuevo);
+				cu.modificarUsuario(dtProvNuevo);
+			} catch (Exception e){
+				fail(e.getMessage());
+			}
 			
 			dttur = (DTTurista) cu.obtenerDTUsuario(dtTurNuevo.getNickname());
 			dtprov = (DTProveedor) cu.obtenerDTUsuario(dtProvNuevo.getNickname());		
@@ -422,10 +431,14 @@ class ControladorUsuarioTest {
 			// Caso en el que se modifica el correo
 			dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(), dttur.getCorreo() + nuevoString, dttur.getFechaNac(), dttur.getNacionalidad());
 			dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), dtprov.getDescrpicionGeneral(), dtprov.getLink());
-	
-			cu.modificarUsuario(dtTurNuevo);
-			cu.modificarUsuario(dtProvNuevo);
-			
+
+			try{
+				cu.modificarUsuario(dtTurNuevo);
+				cu.modificarUsuario(dtProvNuevo);
+			} catch (Exception e){
+				fail(e.getMessage());
+			}
+
 			dttur = (DTTurista) cu.obtenerDTUsuario(dtTurNuevo.getNickname());
 			dtprov = (DTProveedor) cu.obtenerDTUsuario(dtProvNuevo.getNickname());
 			assertNotEquals(dtTurNuevo, dttur);
@@ -434,14 +447,20 @@ class ControladorUsuarioTest {
 			// Caso en el que se modifica el nick:
 			dtTurNuevo = new DTTurista(dttur.getNickname() + nuevoString, dttur.getNombre(), dttur.getApellido(), dttur.getCorreo(), dttur.getFechaNac(), dttur.getNacionalidad());
 			dtProvNuevo = new DTProveedor(dtprov.getNickname() + nuevoString, dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo(), dtprov.getFechaNac(), dtprov.getDescrpicionGeneral(), dtprov.getLink());
-	
-			cu.modificarUsuario(dtTurNuevo);
-			cu.modificarUsuario(dtProvNuevo);
-			
+
+			try{
+				cu.modificarUsuario(dtTurNuevo);
+				cu.modificarUsuario(dtProvNuevo);
+			} catch (Exception e){
+				fail(e.getMessage());
+			}
+
 			dttur = (DTTurista) cu.obtenerDTUsuario(dttur.getNickname());
 			dtprov = (DTProveedor) cu.obtenerDTUsuario(dtprov.getNickname());
 			assertNotEquals(dtTurNuevo, dttur);
-			assertNotEquals(dtProvNuevo, dtprov);	
+			assertNotEquals(dtProvNuevo, dtprov);
+
+			//Todo falta verificar el cambio de nickname o correo
 		}
 	}
 
