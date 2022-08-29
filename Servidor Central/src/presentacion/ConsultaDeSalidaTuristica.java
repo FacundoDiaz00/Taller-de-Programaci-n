@@ -29,7 +29,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionEvent;
 
 public class ConsultaDeSalidaTuristica extends JInternalFrame {
-	private String seleccionActividad;
+	private String seleccionSalida;
 
 	private final JComboBox comboSalidas;
 	private JComboBox comboActividades;
@@ -51,6 +51,8 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDeSalidaTuristica(IControladorActividadTuristica icat) {
+		this.icat = icat;
+
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {
@@ -58,7 +60,6 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			}
 		});
 			
-		this.icat = icat;
 		setTitle("Consulta de Salida Turística");
 		setBounds(100, 100, 430, 512);
 		getContentPane().setLayout(null);
@@ -179,8 +180,8 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		comboSalidas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//salida fue seleccionada:
-				DTSalidaTuristicaDetalle sal = icat.obtenerDTSalidaTuristicaDetalle(comboSalidas.getSelectedItem().toString());
-				mostrarDatosSalida(sal);
+				seleccionSalida = comboSalidas.getSelectedItem().toString();
+				mostrarDatosSalida();
 			}
 		});
 		comboSalidas.setBounds(145, 58, 212, 24);
@@ -218,7 +219,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			private void turistaSeleccionado(String tur) {
 				IControladorUsuario icu = Fabrica.getInstancia().getIControladorUsuario();
 				DTTuristaDetalle datosTur = (DTTuristaDetalle) icu.obtenerDTUsuarioDetalle(tur);
-				String nomSal = comboSalidas.getSelectedItem().toString();
+				String nomSal = seleccionSalida;
 				DTInscripcion datosInsc = icat.obtenerDTInscripcion(datosTur.getNickname(), nomSal);
 				
 				nombreInscripto.setText(datosTur.getNombre());
@@ -278,9 +279,16 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		   }
 	   });
 
-}
+	}
 	
-	private void mostrarDatosSalida(DTSalidaTuristicaDetalle salida) {
+	
+	public void seleccionYaHecha(String salida) {
+		seleccionSalida = salida;
+		mostrarDatosSalida();
+	}
+	
+	private void mostrarDatosSalida() {
+		DTSalidaTuristicaDetalle salida = icat.obtenerDTSalidaTuristicaDetalle(seleccionSalida);
 		try {
 			
 			nombre.setText(salida.getNombre());
