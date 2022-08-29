@@ -24,12 +24,12 @@ public class Inscripcion {
         if(salidaTuristica.getFechaAlta().isAfter(fechaInscrpicion)){
             throw new FechaAltaSalidaTuristicaPosteriorAFechaInscripcion("La fecha de inscripción es previa a la fecha de registro de la salida turística elegida. Modifique la fecha e inténtenlo de nuevo.");
         }
-        this.fechaInscrpicion = fechaInscrpicion;
-        this.cantidadTuristas = cantidadTuristas;
-        this.compra = compra;
+        setFechaInscrpicion(fechaInscrpicion);
+        setCantidadTuristas(cantidadTuristas);
+        setCompra(compra);
         salidaTuristica.agregarInscripcionASalida(this);
-        this.salidaTuristica = salidaTuristica;
-        this.turista = tur;
+        setSalidaTuristica(salidaTuristica);
+        setTurista(tur);
     }
 
     // Todo falta el calculo de costoInscripcion
@@ -74,12 +74,16 @@ public class Inscripcion {
     public String getNombreSalida() {
         return salidaTuristica.getNombre();
     }
-    
+
+    public void setTurista(Turista turista) {
+        this.turista = turista;
+    }
+
     public Turista getTurista() {
     	return this.turista;
     }
     
     public DTInscripcion obtenerDTInscripcion(){
-    	return new DTInscripcion(this.fechaInscrpicion, this.cantidadTuristas, "", this.salidaTuristica.obtenerDTSalidaTuristica(),(DTTurista) this.turista.obtenerDTUsuario());
+    	return new DTInscripcion(getFechaInscrpicion(), getCantidadTuristas(), "", getSalidaTuristica().obtenerDTSalidaTuristica(),(DTTurista) getTurista().obtenerDTUsuario());
     }
 }

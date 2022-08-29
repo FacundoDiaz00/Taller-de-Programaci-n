@@ -16,10 +16,10 @@ public class Departamento {
     Map<String, ActividadTuristica> actividadTuristicas;
 
     public Departamento(String nombre, String descripcion, String url) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.url = url;
-        this.actividadTuristicas = new HashMap<>();
+        setNombre(nombre);
+        setDescripcion(descripcion);
+        setUrl(url);
+        setActividadTuristicas(new HashMap<>());
     }
 
     @Override

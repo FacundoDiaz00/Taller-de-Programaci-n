@@ -27,11 +27,11 @@ public class SalidaTuristica {
     private Set<Inscripcion> inscripciones;
 
     public SalidaTuristica(String IDActividad,String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida) {
-        this.nombre = nombre;
-        this.cantMaxTuristas = cantMaxTuristas;
-        this.fechaAlta = fechaAlta;
-        this.fechaHoraSalida = fechaHoraSalida;
-        this.lugarSalida = lugarSalida;
+        setNombre(nombre);
+        setCantMaxTuristas(cantMaxTuristas);
+        setFechaAlta(fechaAlta);
+        setFechaHoraSalida(fechaHoraSalida);
+        setLugarSalida(lugarSalida);
         setActividad(null);
         setInscripciones(new HashSet<>());
 
@@ -50,7 +50,7 @@ public class SalidaTuristica {
     }
 
     public DTSalidaTuristica obtenerDTSalidaTuristica(){
-        return new DTSalidaTuristica(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida);
+        return new DTSalidaTuristica(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida());
     }
 
     public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(){
@@ -58,7 +58,7 @@ public class SalidaTuristica {
     	for(Inscripcion insc : inscripciones) {
     		res.add(insc.obtenerDTInscripcion());
     	}
-        return new DTSalidaTuristicaDetalle(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida, res);
+        return new DTSalidaTuristicaDetalle(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida(), res);
     }
     
     public void agregarInscripcionASalida(Inscripcion ins){

@@ -35,15 +35,14 @@ public class ActividadTuristica {
 
     public ActividadTuristica(String nombreProveedor, String departamento,String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
             LocalDate fechaAlta) {
-        this.nombre = nombre;
-        this.descrpicion = descrpicion;
-        this.duracion = duracion;
-        this.costoPorTurista = costoPorTurista;
-        this.cuidad = cuidad;
-        this.fechaAlta = fechaAlta;
-        this.paquetes = new HashMap<>();
-        this.salidas = new HashMap<>();
-
+        setNombre(nombre);
+        setDescrpicion(descrpicion);
+        setDuracion(duracion);
+        setCostoPorTurista(costoPorTurista);
+        setCuidad(cuidad);
+        setFechaAlta(fechaAlta);
+        setPaquetes(new HashMap<>());
+        setSalidas(new HashMap<>());
         
 		//Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();

@@ -23,9 +23,9 @@ public class Turista extends Usuario {
     public Turista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
             String nacionalidad) {
         super(nickname, nombre, apellido, correo, fechaNac);
-        this.nacionalidad = nacionalidad;
-        this.compras = new HashSet<>();
-        this.inscripciones = new HashSet<>();
+        setNacionalidad(nacionalidad);
+        setCompras(new HashSet<>());
+        setInscripciones(new HashSet<>());
     }
 
 

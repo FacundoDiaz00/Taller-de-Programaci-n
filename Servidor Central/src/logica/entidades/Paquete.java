@@ -23,12 +23,13 @@ public class Paquete {
     private Map<String, ActividadTuristica> actividades;
 
     public Paquete(String nombre, String descrpicion, int validez, float descuento, LocalDate fechaR) {
-        this.nombre = nombre;
-        this.descrpicion = descrpicion;
-        this.validez = validez;
-        this.descuento = descuento;
-        this.actividades = new HashMap<>();
-        this.fechaDeRegistro = fechaR;
+        setNombre(nombre);
+        setDescrpicion(descrpicion);
+        setValidez(validez);
+        setDescuento(descuento);
+        setActividades(new HashMap<>());
+        setFechaDeRegistro(fechaR);
+
     }
 
 
@@ -84,7 +85,7 @@ public class Paquete {
     	return fechaDeRegistro;
     }
     
-    public void fechaDeRegistro(LocalDate fr) {
+    public void setFechaDeRegistro(LocalDate fr) {
     	this.fechaDeRegistro = fr;
     }
 

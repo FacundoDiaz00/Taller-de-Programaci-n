@@ -17,11 +17,11 @@ public class  Usuario {
     private LocalDate fechaNac;
 
     public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac) {
-        this.nickname = nickname;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.correo = correo;
-        this.fechaNac = fechaNac;
+        setNickname(nickname);
+        setNombre(nombre);
+        setApellido(apellido);
+        setCorreo(correo);
+        setFechaNac(fechaNac);
     }
 
     @Override
