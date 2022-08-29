@@ -352,7 +352,9 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 			try {
-				cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7) ,fechaAlta.plusYears(6), "lugar", 5);
+				if(i % 2 == 0){
+					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7) ,fechaAlta.plusYears(6), "lugar", 5);
+				}
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
@@ -373,7 +375,11 @@ class ControladorActividadTuristicaTest {
 			assertEquals(fechaAlta, act.getFechaAlta());
 			assertFalse(act.getPaquetes().isEmpty());
 
-			assertFalse(act.getSalidas().isEmpty());
+			if(i % 2 == 0){
+				assertFalse(act.getSalidas().isEmpty());
+			} else {
+				assertTrue(act.getSalidas().isEmpty());
+			}
 			assertTrue(act.getPaquetes().containsKey("Paquete"));
 
 			try {
