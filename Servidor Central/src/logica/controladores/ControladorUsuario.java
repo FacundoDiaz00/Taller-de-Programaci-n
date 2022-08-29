@@ -109,7 +109,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());
         Usuario u_correo = ins.getUsuarioPorCorreo(datosNuevos.getCorreo());
          
-        if (u_nick.equals(u_correo) && u_nick != null) {
+        if (u_nick != null && u_correo != null && u_nick.equals(u_correo)) {
         	u_nick.setearDatos(datosNuevos);
         } else {
             throw new ModificacionUsuarioNoPermitida("No coincide el nickname con el correo de este usuario. Estos dos valores no debe ser modificados.");
