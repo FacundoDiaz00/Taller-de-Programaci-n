@@ -99,7 +99,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		lugarLabel.setBounds(7, 175, 121, 14);
 		getContentPane().add(lugarLabel);
 		
-		JLabel maxTuristasLabel = new JLabel("Maxima cantidad de turistas:");
+		JLabel maxTuristasLabel = new JLabel("Máxima cantidad de turistas:");
 		maxTuristasLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		maxTuristasLabel.setBounds(7, 201, 212, 14);
 		getContentPane().add(maxTuristasLabel);

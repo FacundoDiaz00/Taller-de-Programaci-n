@@ -64,8 +64,8 @@ public class ModificarUsuario extends JInternalFrame {
 		});
 		scrollPane.setViewportView(usuariosList);
 		
-		JLabel lblNewLabel = new JLabel("Seleccionar el usuario a modificar");
-		lblNewLabel.setBounds(10, 11, 206, 31);
+		JLabel lblNewLabel = new JLabel("Seleccionar el usuario a modificar: ");
+		lblNewLabel.setBounds(10, 11, 254, 31);
 		getContentPane().add(lblNewLabel);
 		
 		nicknameTextField = new JTextField();
@@ -107,34 +107,34 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_1_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Fecha Nacimiento");
-		lblNewLabel_1_1_1_1_1.setBounds(180, 159, 103, 14);
+		lblNewLabel_1_1_1_1_1.setBounds(180, 159, 139, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_1);
 		
 		diaSpinner = new JSpinner();
 		diaSpinner.setModel(new SpinnerNumberModel(1, 1, 30, 1));
-		diaSpinner.setBounds(293, 156, 44, 20);
+		diaSpinner.setBounds(350, 157, 44, 20);
 		getContentPane().add(diaSpinner);
 		
 		JLabel lblNewLabel_2 = new JLabel("/");
-		lblNewLabel_2.setBounds(343, 159, 14, 14);
+		lblNewLabel_2.setBounds(402, 159, 14, 14);
 		getContentPane().add(lblNewLabel_2);
 		
 		mesSpinner = new JSpinner();
 		mesSpinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
-		mesSpinner.setBounds(353, 156, 44, 20);
+		mesSpinner.setBounds(420, 157, 44, 20);
 		getContentPane().add(mesSpinner);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("/");
-		lblNewLabel_2_1.setBounds(405, 159, 14, 14);
+		lblNewLabel_2_1.setBounds(469, 159, 14, 14);
 		getContentPane().add(lblNewLabel_2_1);
 		
 		anioSprinner = new JSpinner();
 		anioSprinner.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
-		anioSprinner.setBounds(417, 156, 66, 20);
+		anioSprinner.setBounds(476, 157, 66, 20);
 		getContentPane().add(anioSprinner);
 		
 		JLabel lblNewLabel_1_1_1_1_2 = new JLabel("Nacionalidad");
-		lblNewLabel_1_1_1_1_2.setBounds(180, 187, 84, 14);
+		lblNewLabel_1_1_1_1_2.setBounds(180, 187, 103, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2);
 		
 		nacionalidadTextFIeld = new JTextField();
@@ -146,7 +146,7 @@ public class ModificarUsuario extends JInternalFrame {
 		lblNewLabel_1_1_1_1_2_1.setBounds(180, 218, 84, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2_1);
 		
-		JLabel lblNewLabel_1_1_1_1_2_1_1 = new JLabel("Descripcion");
+		JLabel lblNewLabel_1_1_1_1_2_1_1 = new JLabel("Descripción");
 		lblNewLabel_1_1_1_1_2_1_1.setBounds(180, 243, 103, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2_1_1);
 		
@@ -176,7 +176,7 @@ public class ModificarUsuario extends JInternalFrame {
 				cancelar();
 			}
 		});
-		cancelarButton.setBounds(394, 331, 89, 23);
+		cancelarButton.setBounds(387, 331, 96, 23);
 		getContentPane().add(cancelarButton);
 		
 		JButton recargarButton = new JButton("Recargar");
@@ -185,7 +185,7 @@ public class ModificarUsuario extends JInternalFrame {
 				actualizarUsuarios();
 			}
 		});
-		recargarButton.setBounds(10, 331, 89, 23);
+		recargarButton.setBounds(10, 331, 115, 23);
 		getContentPane().add(recargarButton);
 
 	}

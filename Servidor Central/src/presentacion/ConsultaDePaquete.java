@@ -62,10 +62,10 @@ public class ConsultaDePaquete extends JInternalFrame {
 		paquete = new JComboBox();		
 		
 		
-		paquete.setBounds(153, 35, 249, 24);
+		paquete.setBounds(163, 35, 239, 24);
 		getContentPane().add(paquete);
 		
-		JLabel lblPeriodoDeValidez = new JLabel("Periodo de validez:");
+		JLabel lblPeriodoDeValidez = new JLabel("Período de validez:");
 		lblPeriodoDeValidez.setBounds(11, 102, 136, 15);
 		getContentPane().add(lblPeriodoDeValidez);
 		
@@ -82,7 +82,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 		label.setBounds(376, 132, 24, 15);
 		getContentPane().add(label);
 		
-		JLabel lblDescripcion = new JLabel("Descripcion:");
+		JLabel lblDescripcion = new JLabel("Descripción:");
 		lblDescripcion.setBounds(12, 150, 115, 15);
 		getContentPane().add(lblDescripcion);
 		
@@ -91,7 +91,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(descr);
 		descr.setEditable(false);
 		
-		JLabel lblActividadTurisitica = new JLabel("Actividad Turisitica:");
+		JLabel lblActividadTurisitica = new JLabel("Actividad Turística:");
 		lblActividadTurisitica.setBounds(12, 300, 154, 15);
 		getContentPane().add(lblActividadTurisitica);
 				
@@ -120,7 +120,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 				seSeleccionoUnPaquete();
 			}
 		});
-		btnNewButton.setBounds(343, 69, 85, 21);
+		btnNewButton.setBounds(313, 69, 115, 21);
 		getContentPane().add(btnNewButton);
 	}
 	

@@ -52,7 +52,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	public AltaDeActividadTuristica(IControladorActividadTuristica icat) {
 		Fabrica f = Fabrica.getInstancia();
 		this.icat = f.getIControladorActividadTuristica();
-		setTitle("Alta de Actividad Turistica");
+		setTitle("Alta de Actividad Turística");
 		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
         setResizable(true);
@@ -76,12 +76,12 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		lblNewLabel_1.setBounds(6, 63, 121, 14);
 		getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Descripcion:");
+		JLabel lblNewLabel_1_1 = new JLabel("Descripción:");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_1.setBounds(7, 89, 120, 14);
 		getContentPane().add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Duracion:");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Duración:");
 		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_1_1.setBounds(7, 111, 120, 14);
 		getContentPane().add(lblNewLabel_1_1_1);
@@ -238,15 +238,15 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 			icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha);
 			limpiarFormulario();
 			setVisible(false);
-			JOptionPane.showMessageDialog (null, "Se ha dado de alta la Actividad Turistica con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog (null, "Se ha dado de alta la Actividad Turística con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 		}catch (ActividadTuristicaYaRegistradaException e){
-			JOptionPane.showMessageDialog(null, "Ya existe una actividad turistica con este nombre registrada en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ya existe una actividad turística con este nombre registrada en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
 		}catch (DateTimeParseException e){
-			JOptionPane.showMessageDialog(null, "Fecha alta invalido, es un campo obligatorio y su formato es dd/mm/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Fecha alta inválido, es un campo obligatorio y su formato es dd/mm/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
 		}catch (NumberFormatException e){
 			JOptionPane.showMessageDialog(null, "Hay campos numéricos con datos inválido", "Error", JOptionPane.ERROR_MESSAGE);
 		}catch (Exception e){
-			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta la Actividad Turistica", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta la Actividad Turística", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 
