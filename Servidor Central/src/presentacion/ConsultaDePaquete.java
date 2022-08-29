@@ -128,8 +128,10 @@ public class ConsultaDePaquete extends JInternalFrame {
 	public void setVisible(boolean flag) {
 		super.setVisible(flag);
 		
-		if (flag)
-			actualizarCamposFormulario();
+		if (flag) {
+			actualizarDTPaqueteDetalles();
+			actualizarCamposFormulario();			
+		}
 	}
 	
 	private void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
