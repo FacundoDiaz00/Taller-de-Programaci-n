@@ -47,7 +47,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		});
 		this.principal = p;
 		this.icat = icat;
-		setTitle("Consutla de Actividad Turística");
+		setTitle("Consulta de Actividad Turística");
 		setBounds(100, 100, 409, 424);
 		getContentPane().setLayout(null);
         setResizable(true);

@@ -4,6 +4,8 @@ package logica.datatypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import logica.entidades.ActividadTuristica;
+
 /**
  * @author Equipo taller prog 16
  */
@@ -14,13 +16,15 @@ public class DTSalidaTuristica {
 	private LocalDate fechaAlta;
 	private LocalDateTime fechaHoraSalida;
 	private String lugarSalida;
+    private DTActividadTuristica actividad;
 
-	public DTSalidaTuristica(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida) {
+	public DTSalidaTuristica(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida,DTActividadTuristica actividad) {
 		this.nombre = nombre;
 		this.cantMaxTuristas = cantMaxTuristas;
 		this.fechaAlta = fechaAlta;
 		this.fechaHoraSalida = fechaHoraSalida;
 		this.lugarSalida = lugarSalida;
+		this.actividad = actividad;
 	}
 
 	@Override
@@ -46,6 +50,10 @@ public class DTSalidaTuristica {
 
 	public String getLugarSalida() {
 		return lugarSalida;
+	}
+
+	public DTActividadTuristica getActividad() {
+		return actividad;
 	}
 
 }
