@@ -5,17 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import excepciones.*;
 import logica.controladores.IControladorUsuario;
 import logica.controladores.IControladorPaquete;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.SalidaYaRegistradaException;
-import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
@@ -421,28 +416,28 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaOK() {
-		String nickname = "Turista ";
-		String nombre = "NOMBRE TURISTA";
-		String apellido = "APELLIDO TURISTA";
-		String correo = "TURISTA ";
+		}
+	
+	@Test
+	public void testAltaInscripcionSalidaTuristicaRepetida() {
+
+
+		String nickname = "testAltaInscripcionSalidaTuristicaRepetida Turista nickname";
+		String nombre = "testAltaInscripcionSalidaTuristicaRepetida NOMBRE TURISTA";
+		String apellido = "testAltaInscripcionSalidaTuristicaRepetida APELLIDO TURISTA";
+		String correo = "testAltaInscripcionSalidaTuristicaRepetida TURISTA correo";
 		String nacionalidad = "CHINA";
 		LocalDate FNacimiento = LocalDate.now();
-		try {
-			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
-		}catch (Exception e){
-		fail(e.getMessage());
-		}
-		String nombreProveedor = "prov";
-		String departamento = "deptoTest";
-		String nombreActividad = "actividad";
-		String descripcion = "Desc";
+
+		String nombreProveedor = "testAltaInscripcionSalidaTuristicaRepetida prov";
+		String departamento = "testAltaInscripcionSalidaTuristicaRepetida deptoTest";
+		String nombreActividad = "testAltaInscripcionSalidaTuristicaRepetida actividad";
+		String descripcion = "testAltaInscripcionSalidaTuristicaRepetida Desc";
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
 		LocalDate fechaAlta = LocalDate.now();
-
-
-		String nombreSalida = "salida";
+		String nombreSalida = "testAltaInscripcionSalidaTuristicaRepetida salida";
 		LocalDate f = LocalDate.now();
 		LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
 		LocalDate fechaAltaSalida = f;
@@ -450,51 +445,70 @@ class ControladorActividadTuristicaTest {
 		int cantMaxTuristas = 10;
 
 		try {
+			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
-		} catch (UsuarioYaRegistradoException e) {
-			// Esperable, no pasa nada.
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-
-		try {
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
 			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
-		} catch(Exception e) {
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,LocalDate.now().plusYears(5));
+		}catch (Exception e){
 			fail(e.getMessage());
 		}
+
+		assertThrows(InscripcionYaRegistradaException.class, () -> {
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,LocalDate.now().plusYears(5));
+		});
+	}
+
+
+	@Test
+	public void testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada() {
+
+
+		String nickname = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada Turista nickname";
+		String nombre = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada NOMBRE TURISTA";
+		String apellido = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada APELLIDO TURISTA";
+		String correo = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada TURISTA correo";
+		String nacionalidad = "CHINA";
+		LocalDate FNacimiento = LocalDate.now();
+
+		String nombreProveedor = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada prov";
+		String departamento = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada deptoTest";
+		String nombreActividad = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada actividad";
+		String descripcion = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada Desc";
+		int duracion = 10;
+		float costo = (float) 10;
+		String ciudad = "Ciudad";
+		LocalDate fechaAlta = LocalDate.now();
+		String nombreSalida = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada salida";
+		LocalDate f = LocalDate.now();
+		LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+		LocalDate fechaAltaSalida = f;
+		String lugar = "lugar";
+		int cantMaxTuristas = 3;
 
 		try {
+			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
+			cu.altaTurista(nickname + "2", nombre, apellido, correo + 2, FNacimiento, nacionalidad);
+			cat.altaDepartamento(departamento, descripcion, departamento);
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
 			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
-		}catch(SalidaYaRegistradaException e) {
-			fail(e.getMessage());
-		} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
-			fail(e.getMessage());
-		} catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,LocalDate.now().plusYears(5));
+		}catch (Exception e){
 			fail(e.getMessage());
 		}
-		try{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,LocalDate.now().plusYears(5));
-		}catch (Exception e) {
-			fail(e.getMessage());
-		}
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getFechaInscripcion(),LocalDate.now().plusYears(5));
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCantidadTuristas(),1);
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getTurista().getNickname(),nickname);
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getSalidaTuristica().getNombre(),nombreSalida);
-		assertFalse(cat.obtenerDTSalidaTuristicaDetalle(nombreSalida).getInscriptos().isEmpty());
+
+		assertThrows(SuperaElMaximoDeTuristasException.class , ()->{
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname + "2",2,LocalDate.now().plusYears(5));
+		});
 
 	}
-	
-	@Test
-	public void testAltaInscripcionSalidaTuristicaRepetida() {
-		fail("Not yet implemented");
-	}
-	
+
+
+
+
+
 	@Test
 	public void testAltaSalidaTuristicaOK() {
 		assertTrue(cat != null);
