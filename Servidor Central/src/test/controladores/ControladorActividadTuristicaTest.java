@@ -415,7 +415,7 @@ class ControladorActividadTuristicaTest {
 			assertEquals(lugar, sal.getLugarSalida());
 			assertEquals(cantMaxTuristas, sal.getCantMaxTuristas());
 			
-			DTSalidaTuristicaDetalle salDetalle = cat.obtenerDTSalidaTuristicaDetalle(nombreActividad);
+			DTSalidaTuristicaDetalle salDetalle = cat.obtenerDTSalidaTuristicaDetalle(nombreSalida);
 			assertTrue(salDetalle.getInscriptos().isEmpty());
 		}
 	}
