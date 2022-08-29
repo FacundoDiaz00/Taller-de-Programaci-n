@@ -3,24 +3,34 @@ package test.controladores;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import logica.controladores.IControladorUsuario;
 import logica.controladores.IControladorPaquete;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.DeparamentoYaRegistradoException;
+import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
+import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
+import excepciones.SalidaYaRegistradaException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
 
 class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;
+	private static IControladorUsuario cu;
+	
 	private static IControladorPaquete cp;
 	@BeforeAll
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		cu = Fabrica.getInstancia().getIControladorUsuario();
 		cp = Fabrica.getInstancia().getIControladorPaquete();
 	}
 	
@@ -56,7 +66,6 @@ class ControladorActividadTuristicaTest {
 			cat.altaDepartamento(nom, descr, url);
 		}
 	}
-
 
 	@Test
 	public void testAltaDepartamentoOK() {
@@ -365,6 +374,76 @@ class ControladorActividadTuristicaTest {
 	@Test
 	public void testAltaInscripcionSalidaTuristicaRepetida() {
 		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void testAltaSalidaTuristicaOK() {
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < 100; i++) {
+			
+			String nombreProveedor = "Proveedor testAltaSalidaTuristicaOK i=" + (i % 10);
+			String departamento = "Departamento testAltaSalidaTuristicaOK i=" + (i % 10);
+			String nombreActividad = "Actividad testAltaSalidaTuristicaOK i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10;
+			String ciudad = "Ciudad";
+			LocalDate fechaAlta = LocalDate.now();
+			
+	
+			String nombreSalida = "Salida testAltaSalidaTuristicaOK i=" + i;
+			LocalDate f = LocalDate.now();
+			LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+			LocalDate fechaAltaSalida = f;
+			String lugar = "lugar";
+			int cantMaxTuristas = 10;
+			
+			try {
+				cat.altaDepartamento(departamento, descripcion, departamento);
+			} catch (DeparamentoYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+			try {
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+			} catch (UsuarioYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+			
+			try {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+			
+			try {
+				cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+			}catch(SalidaYaRegistradaException e) {
+				fail(e.getMessage());
+			} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
+				fail(e.getMessage());
+			} catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
+				fail(e.getMessage());
+			}			
+			
+			//assertTrue(cat.existeSalidaTuristica(nombreSalida));
+						
+			DTSalidaTuristica sal = cat.obtenerDTSalidaTuristica(nombreSalida);
+			assertTrue(sal != null);
+			
+			assertEquals(nombreSalida, sal.getNombre());
+			assertEquals(fechaHoraSalida, sal.getFechaHoraSalida());
+			assertEquals(fechaAlta, sal.getFechaAlta());
+			assertEquals(lugar, sal.getLugarSalida());
+			assertEquals(cantMaxTuristas, sal.getCantMaxTuristas());
+			
+			DTSalidaTuristicaDetalle salDetalle = cat.obtenerDTSalidaTuristicaDetalle(nombreSalida);
+			assertTrue(salDetalle.getInscriptos().isEmpty());
+		}
 	}
 
 }

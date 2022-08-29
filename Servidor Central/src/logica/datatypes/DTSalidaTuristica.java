@@ -32,39 +32,20 @@ public class DTSalidaTuristica {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public int getCantMaxTuristas() {
 		return cantMaxTuristas;
-	}
-
-	public void setCantMaxTuristas(int cantMaxTuristas) {
-		this.cantMaxTuristas = cantMaxTuristas;
 	}
 
 	public LocalDate getFechaAlta() {
 		return fechaAlta;
 	}
 
-	public void setFechaAlta(LocalDate fechaAlta) {
-		this.fechaAlta = fechaAlta;
-	}
-
 	public LocalDateTime getFechaHoraSalida() {
 		return fechaHoraSalida;
-	}
-
-	public void setFechaHoraSalida(LocalDateTime fechaHoraSalida) {
-		this.fechaHoraSalida = fechaHoraSalida;
 	}
 
 	public String getLugarSalida() {
 		return lugarSalida;
 	}
 
-	public void setLugarSalida(String lugarSalida) {
-		this.lugarSalida = lugarSalida;
-	}
 }
