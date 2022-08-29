@@ -44,7 +44,7 @@ public class ModificarUsuario extends JInternalFrame {
 		setResizable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 605, 395);
+		setBounds(100, 100, 596, 391);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -75,11 +75,11 @@ public class ModificarUsuario extends JInternalFrame {
 		nicknameTextField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nickname");
-		lblNewLabel_1.setBounds(199, 35, 84, 14);
+		lblNewLabel_1.setBounds(180, 38, 84, 14);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nombre");
-		lblNewLabel_1_1.setBounds(199, 66, 84, 14);
+		lblNewLabel_1_1.setBounds(180, 66, 84, 14);
 		getContentPane().add(lblNewLabel_1_1);
 		
 		nombreTextFIeld = new JTextField();
@@ -99,15 +99,15 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(correoTextFIeld);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Apellido");
-		lblNewLabel_1_1_1.setBounds(199, 97, 84, 14);
+		lblNewLabel_1_1_1.setBounds(180, 97, 84, 14);
 		getContentPane().add(lblNewLabel_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Correo");
-		lblNewLabel_1_1_1_1.setBounds(199, 128, 84, 14);
+		lblNewLabel_1_1_1_1.setBounds(180, 128, 84, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Fecha Nacimiento");
-		lblNewLabel_1_1_1_1_1.setBounds(199, 159, 84, 14);
+		lblNewLabel_1_1_1_1_1.setBounds(180, 159, 103, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_1);
 		
 		diaSpinner = new JSpinner();
@@ -134,7 +134,7 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(anioSprinner);
 		
 		JLabel lblNewLabel_1_1_1_1_2 = new JLabel("Nacionalidad");
-		lblNewLabel_1_1_1_1_2.setBounds(199, 187, 84, 14);
+		lblNewLabel_1_1_1_1_2.setBounds(180, 187, 84, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2);
 		
 		nacionalidadTextFIeld = new JTextField();
@@ -143,11 +143,11 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(nacionalidadTextFIeld);
 		
 		JLabel lblNewLabel_1_1_1_1_2_1 = new JLabel("URL");
-		lblNewLabel_1_1_1_1_2_1.setBounds(199, 218, 84, 14);
+		lblNewLabel_1_1_1_1_2_1.setBounds(180, 218, 84, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2_1);
 		
 		JLabel lblNewLabel_1_1_1_1_2_1_1 = new JLabel("Descripcion");
-		lblNewLabel_1_1_1_1_2_1_1.setBounds(199, 243, 84, 14);
+		lblNewLabel_1_1_1_1_2_1_1.setBounds(180, 243, 103, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2_1_1);
 		
 		descripcionTextArea = new JTextArea();

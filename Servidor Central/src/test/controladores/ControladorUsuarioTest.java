@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import excepciones.ModificacionUsuarioNoPermitida;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -429,9 +430,16 @@ class ControladorUsuarioTest {
 	
 			
 			// Caso en el que se modifica el correo
-			dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(), dttur.getCorreo() + nuevoString, dttur.getFechaNac(), dttur.getNacionalidad());
-			dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), dtprov.getDescrpicionGeneral(), dtprov.getLink());
+			var dtTurNuevo2 = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(), dttur.getCorreo() + nuevoString, dttur.getFechaNac(), dttur.getNacionalidad());
+			var dtProvNuevo2 = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), dtprov.getDescrpicionGeneral(), dtprov.getLink());
 
+
+			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
+				cu.modificarUsuario(dtTurNuevo2);
+			});
+			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
+				cu.modificarUsuario(dtProvNuevo2);
+			});
 			try{
 				cu.modificarUsuario(dtTurNuevo);
 				cu.modificarUsuario(dtProvNuevo);
