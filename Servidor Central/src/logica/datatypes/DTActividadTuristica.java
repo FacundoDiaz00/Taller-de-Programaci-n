@@ -59,8 +59,5 @@ public class DTActividadTuristica {
 		this.fechaAlta = fechaAlta;
 		this.nicknameProveedor = nicknameProveedor;
 	}
-	
-	public DTActividadTuristica() {
-		
-	}
+
 }

@@ -20,18 +20,10 @@ public class DTPaquete {
         this.descuento = descuento;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return this.nombre.equals(((DTPaquete)obj).nombre);
-    }
-
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getDescrpicion() {
         return descrpicion;
