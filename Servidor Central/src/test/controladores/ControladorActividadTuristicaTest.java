@@ -25,13 +25,19 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;
 	private static IControladorUsuario cu;
-	
 	private static IControladorPaquete cp;
+
+	private static LocalDate nowLocalDate;
+	private static LocalDateTime nowLocalDateTime;
+	
 	@BeforeAll
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		cu = Fabrica.getInstancia().getIControladorUsuario();
 		cp = Fabrica.getInstancia().getIControladorPaquete();
+		
+		nowLocalDate = LocalDate.now();
+		nowLocalDateTime = LocalDateTime.now();
 	}
 	
 	// No es un test en sí
@@ -47,9 +53,26 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10.85;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
+			LocalDate fechaAlta = nowLocalDate;
 			
 			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+		}
+	}
+	
+	// No es un test en sí
+	static void generarSalidas(int cant, String id) throws Exception {
+		preparacionPrevia();
+		assertTrue(cat != null);
+		
+		for (int i = 0; i < cant; i++) {
+			String nombreActividad = "Actividad " + id + " i=" + i;
+			String nombreSalida = "Salida " + id + " i=" + i;
+			String ciudad = "Ciudad salida";
+			LocalDate fechaAlta = nowLocalDate;
+			LocalDateTime fechaYHoraSalida = nowLocalDateTime.plusDays(40);
+			int cantMaxTur = 10;
+			
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad, cantMaxTur);
 		}
 	}
 	
@@ -360,10 +383,40 @@ class ControladorActividadTuristicaTest {
     }
 
 
-
 	@Test
 	public void testObtenerDTSalidasTuristicas() {
-		fail("Not yet implemented");
+		String id = "testObtenerDTSalidasTuristicas";
+		
+		try {
+			ControladorUsuarioTest.generarProveedores(100, id);
+			ControladorActividadTuristicaTest.generarDepartamentos(100, id);
+			generarActividades(100, id);
+			generarSalidas(100, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for (int i = 0; i < 100; i++) {
+			String nombreActividad = "Actividad " + id + " i=" + i;
+			String nombreSalida = "Salida " + id + " i=" + i;
+			String ciudad = "Ciudad salida";
+			LocalDate fechaAlta = nowLocalDate;
+			LocalDateTime fechaYHoraSalida = nowLocalDateTime.plusDays(40);
+			int cantMaxTur = 10;
+			
+			
+			var salidas = cat.obtenerDTSalidasTuristicas(nombreActividad);
+			
+			assertEquals(1, salidas.size());
+			
+			for (var sal: salidas) {
+				assertEquals(nombreSalida, sal.getNombre());
+				assertEquals(ciudad, sal.getLugarSalida());
+				assertEquals(fechaAlta, sal.getFechaAlta());
+				assertEquals(fechaYHoraSalida, sal.getFechaHoraSalida());
+				assertEquals(cantMaxTur, sal.getCantMaxTuristas());
+			}
+		}
 	}
 
 	@Test
@@ -511,7 +564,8 @@ class ControladorActividadTuristicaTest {
 			assertTrue(salDetalle.getInscriptos().isEmpty());
 		}
 	}
-@Test
+	
+	@Test
 	public void testAltaSalidaTuristicaRepetida() {
 		assertTrue(cat != null);
 
