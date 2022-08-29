@@ -38,6 +38,9 @@ public class Principal {
 	private ConsultaDeSalidaTuristica	frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
 
+	private ModificarUsuario frmModificarUsuario;
+
+
 	private ConsultaDePaquete frmIntConsultaDePaquete;
 	/**
 	 * Launch the application.
@@ -74,6 +77,7 @@ public class Principal {
 		frmIntAltaUsuario = new AltaDeUsuario(CUS);
 		frmIntAltaPaquete = new AltaDePaquete(CP);
 		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
+		frmModificarUsuario = new ModificarUsuario(CUS);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 		frmIntConsultaDePaquete = new ConsultaDePaquete(this, CP);
 
@@ -88,6 +92,8 @@ public class Principal {
 		frmIntAltaSalidaTuristica.setVisible(false);
 		frmIntConsultaDePaquete.setVisible(false);
 		frmIntConsultaDeSalidaTuristica.setVisible(false);
+		frmModificarUsuario.setVisible(false);
+		
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
@@ -100,16 +106,10 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
+		frmEstacionDeTrabajo.getContentPane().add(frmModificarUsuario);
 
-		
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
-
-
-
-
-
-
 
 	}
 
@@ -166,6 +166,11 @@ public class Principal {
 		mnUsuario.add(consultarUsuarioJMenuItem);
 		
 		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
+		modificarUsuarioJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmModificarUsuario.setVisible(true);
+			}
+		});
 		mnUsuario.add(modificarUsuarioJMenuItem);
 		
 		JMenu mnNewMenu_3 = new JMenu("Actividades/Salidas turisticas");

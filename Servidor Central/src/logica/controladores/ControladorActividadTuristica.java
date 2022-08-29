@@ -56,7 +56,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
 			MAD.addActividad(AT);
 		} else {
-			throw new ActividadTuristicaYaRegistradaException("Ya existe el usuario con el nombre " + nombreActividad);
+			throw new ActividadTuristicaYaRegistradaException("Ya existe la actividad con el nombre " + nombreActividad);
 		}
 	}
 

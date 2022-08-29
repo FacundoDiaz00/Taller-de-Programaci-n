@@ -3,6 +3,7 @@ package logica.controladores;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.UsuarioYaRegistradoException;
 import logica.datatypes.DTUsuario;
 
@@ -27,5 +28,5 @@ public interface IControladorUsuario {
 	void altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento) throws UsuarioYaRegistradoException;
 		
 	
-	void modificarUsuario(DTUsuario datosNuevos);
+	void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida;
 }

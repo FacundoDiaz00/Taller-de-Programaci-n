@@ -83,4 +83,6 @@ public class Proveedor extends Usuario {
 		this.setDescrpicionGeneral(prov.getDescrpicionGeneral());
 		this.setLink(prov.getLink());
 	}
+
+
 }
