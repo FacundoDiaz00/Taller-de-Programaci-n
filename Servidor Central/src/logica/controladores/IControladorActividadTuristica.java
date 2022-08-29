@@ -31,7 +31,7 @@ public interface IControladorActividadTuristica {
 	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta) throws ActividadTuristicaYaRegistradaException;
 	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);
 	List<String> obtenerIdActividadesTuristicas(String departamento);
-	boolean existeActividadTuristica(String nomActividad);
+	//boolean existeActividadTuristica(String nomActividad);
 
 	//fin operaciones AAT
 

@@ -150,8 +150,9 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 			
-			assertTrue(cat.existeActividadTuristica(nombreActividad));
-						
+			//assertTrue(cat.existeActividadTuristica(nombreActividad));
+			assertTrue(cat.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
+
 			DTActividadTuristicaDetalle act = cat.obtenerDetallesActividadTuristica(nombreActividad);
 			assertTrue(act != null);
 			
@@ -208,8 +209,9 @@ class ControladorActividadTuristicaTest {
 				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
 			});
 			
-			assertTrue(cat.existeActividadTuristica(nombreActividad));
-			
+			//assertTrue(cat.existeActividadTuristica(nombreActividad));
+			assertTrue(cat.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
+
 			DTActividadTuristicaDetalle act = cat.obtenerDetallesActividadTuristica(nombreActividad);
 			assertTrue(act != null);
 			
@@ -323,11 +325,8 @@ class ControladorActividadTuristicaTest {
 		}
     }
 
-	@Test
-	public void teasExisteActividadTuristica() {
-		fail("Not yet implemented");
-	}
-	
+
+
 	@Test
 	public void testObtenerDTSalidasTuristicas() {
 		fail("Not yet implemented");
