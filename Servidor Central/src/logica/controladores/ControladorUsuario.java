@@ -1,4 +1,5 @@
 package logica.controladores;
+import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.UsuarioYaRegistradoException;
 import logica.manejadores.ManejadorUsuario;
 import logica.entidades.Turista;
@@ -102,14 +103,17 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void modificarUsuario(DTUsuario datosNuevos) {
-		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+	public void modificarUsuario( DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida{
+        ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+
         Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());
         Usuario u_correo = ins.getUsuarioPorCorreo(datosNuevos.getCorreo());
          
-        if (u_nick == u_correo && u_nick != null) {
+        if (u_nick.equals(u_correo) && u_nick != null) {
         	u_nick.setearDatos(datosNuevos);
-        }        
+        } else {
+            throw new ModificacionUsuarioNoPermitida("No coincide el nickname con el correo de este usuario. Estos dos valores no debe ser modificados.");
+        }
 	}
 
 

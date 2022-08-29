@@ -1,16 +1,27 @@
 package presentacion;
 
+import excepciones.ModificacionUsuarioNoPermitida;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTProveedor;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTUsuario;
 
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ModificarUsuario extends JInternalFrame {
+
+
+	DTUsuario dtUsuario;
+
 	private JTextField nicknameTextField;
 	private JTextField nombreTextFIeld;
 	private JTextField apellidoTextFIeld;
@@ -21,6 +32,7 @@ public class ModificarUsuario extends JInternalFrame {
 	private JSpinner diaSpinner;
 	private JSpinner mesSpinner;
 	private JSpinner anioSprinner;
+	private JTextArea descripcionTextArea;
 	IControladorUsuario icu;
 
 	/**
@@ -32,12 +44,12 @@ public class ModificarUsuario extends JInternalFrame {
 		setResizable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 605, 370);
+		setBounds(100, 100, 605, 395);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.RED);
-		panel.setBounds(10, 38, 166, 253);
+		panel.setBounds(10, 38, 166, 282);
 		getContentPane().add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
@@ -47,6 +59,7 @@ public class ModificarUsuario extends JInternalFrame {
 		usuariosList = new JList();
 		usuariosList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
+				seleccionarUsuario();
 			}
 		});
 		scrollPane.setViewportView(usuariosList);
@@ -56,6 +69,7 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel);
 		
 		nicknameTextField = new JTextField();
+		nicknameTextField.setEditable(false);
 		nicknameTextField.setBounds(293, 32, 286, 20);
 		getContentPane().add(nicknameTextField);
 		nicknameTextField.setColumns(10);
@@ -79,6 +93,7 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(apellidoTextFIeld);
 		
 		correoTextFIeld = new JTextField();
+		correoTextFIeld.setEditable(false);
 		correoTextFIeld.setColumns(10);
 		correoTextFIeld.setBounds(293, 125, 286, 20);
 		getContentPane().add(correoTextFIeld);
@@ -132,11 +147,13 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_1_1_1_1_2_1);
 		
 		JLabel lblNewLabel_1_1_1_1_2_1_1 = new JLabel("Descripcion");
-		lblNewLabel_1_1_1_1_2_1_1.setBounds(199, 249, 84, 14);
+		lblNewLabel_1_1_1_1_2_1_1.setBounds(199, 243, 84, 14);
 		getContentPane().add(lblNewLabel_1_1_1_1_2_1_1);
 		
-		JTextArea descripcionTextArea = new JTextArea();
-		descripcionTextArea.setBounds(293, 244, 286, 47);
+		descripcionTextArea = new JTextArea();
+		descripcionTextArea.setLineWrap(true);
+		descripcionTextArea.setWrapStyleWord(true);
+		descripcionTextArea.setBounds(293, 244, 286, 76);
 		getContentPane().add(descripcionTextArea);
 		
 		urlTextField = new JTextField();
@@ -145,15 +162,30 @@ public class ModificarUsuario extends JInternalFrame {
 		getContentPane().add(urlTextField);
 		
 		JButton aceptarButton = new JButton("Aceptar");
-		aceptarButton.setBounds(490, 302, 89, 23);
+		aceptarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aceptar();
+			}
+		});
+		aceptarButton.setBounds(490, 331, 89, 23);
 		getContentPane().add(aceptarButton);
 		
 		JButton cancelarButton = new JButton("Cancelar");
-		cancelarButton.setBounds(394, 302, 89, 23);
+		cancelarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelar();
+			}
+		});
+		cancelarButton.setBounds(394, 331, 89, 23);
 		getContentPane().add(cancelarButton);
 		
 		JButton recargarButton = new JButton("Recargar");
-		recargarButton.setBounds(10, 302, 89, 23);
+		recargarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarUsuarios();
+			}
+		});
+		recargarButton.setBounds(10, 331, 89, 23);
 		getContentPane().add(recargarButton);
 
 	}
@@ -166,28 +198,152 @@ public class ModificarUsuario extends JInternalFrame {
 		}
 		usuariosList.setModel(listModel);
 		if(idUsers.size() > 0){
-			seleccionarUsuario();
+			usuariosList.setSelectedIndex(0);
+			//seleccionarUsuario();
 		} else {
-			enableCamposInfoUsuario(false);
+			enableCamposInfoUsuario(false, false);//No importa el valor de soyProveedor
 		}
 	}
 
+	@Override
+	public void setVisible(boolean aFlag) {
+		if(aFlag){
+			actualizarUsuarios();
+		}
+		super.setVisible(aFlag);
+	}
+
 	private void seleccionarUsuario(){
-		enableCamposInfoUsuario(true);
+		String nicknameUser = (String)usuariosList.getSelectedValue();
+		if(nicknameUser == null){
+			return;
+		}
+		DTUsuario dtsUsuarios = icu.obtenerDTUsuario(nicknameUser);
+		this.dtUsuario = dtsUsuarios;
+		nicknameTextField.setText(dtsUsuarios.getNickname());
+		nombreTextFIeld.setText(dtsUsuarios.getNombre());
+		apellidoTextFIeld.setText(dtsUsuarios.getApellido());
+		correoTextFIeld.setText(dtsUsuarios.getCorreo());
+		diaSpinner.setValue(dtsUsuarios.getFechaNac().getDayOfMonth());
+		mesSpinner.setValue(dtsUsuarios.getFechaNac().getMonthValue());
+		anioSprinner.setValue(dtsUsuarios.getFechaNac().getYear());
+		if(dtsUsuarios instanceof DTProveedor){
+			DTProveedor dtProveedor = (DTProveedor) dtsUsuarios;
+			descripcionTextArea.setText(dtProveedor.getDescrpicionGeneral());
+			urlTextField.setText(dtProveedor.getLink());
+			enableCamposInfoUsuario(true, true);
+		}else{
+			DTTurista dtTurista = (DTTurista) dtsUsuarios;
+			nacionalidadTextFIeld.setText(dtTurista.getNacionalidad());
+			enableCamposInfoUsuario(true, false);
+		}
+
+
+
 	}
 
-	private void enableCamposInfoUsuario(boolean estado/*, boolean soyProveedor*/){
-		nicknameTextField.setEnabled(estado);
-		nombreTextFIeld.setEnabled(estado);
-		apellidoTextFIeld.setEnabled(estado);
-		correoTextFIeld.setEnabled(estado);
-		nicknameTextField.setEnabled(estado);
-		nicknameTextField.setEnabled(estado);
-		nicknameTextField.setEnabled(estado);
-		nicknameTextField.setEnabled(estado);
-		nicknameTextField.setEnabled(estado);
+	private void enableCamposInfoUsuario(boolean estado, boolean soyProveedor){
+		if(!estado){
+			nicknameTextField.setText("");
+			nombreTextFIeld.setText("");
+			apellidoTextFIeld.setText("");
+			correoTextFIeld.setText("");
+			diaSpinner.setValue(1);
+			mesSpinner.setValue(1);
+			anioSprinner.setValue(2022);
+		}
+		nombreTextFIeld.setEditable(estado);
+		apellidoTextFIeld.setEditable(estado);
+		diaSpinner.setEnabled(estado);
+		mesSpinner.setEnabled(estado);
+		anioSprinner.setEnabled(estado);
+		if(!soyProveedor && estado){
+			nacionalidadTextFIeld.setEditable(true);
+		} else {
+			nacionalidadTextFIeld.setText("");
+			nacionalidadTextFIeld.setEditable(false);
+		}
+		if(soyProveedor && estado){
+			urlTextField.setEditable(true);
+			descripcionTextArea.setEditable(true);
+		} else {
+			urlTextField.setEditable(false);
+			urlTextField.setText("");
+			descripcionTextArea.setEditable(false);
+			descripcionTextArea.setText("");
+		}
 	}
 
+
+	private void aceptar(){
+		String nickname = nicknameTextField.getText();
+		String nombre = nombreTextFIeld.getText();
+		String apellido = apellidoTextFIeld.getText();
+		String correo = correoTextFIeld.getText();
+		String nacionalidad = nacionalidadTextFIeld.getText();
+		String url = urlTextField.getText();
+		String descripcion = descripcionTextArea.getText();
+
+		LocalDate fechaNac;
+		try{
+			int dia = (int)diaSpinner.getValue();
+			int mes = (int)mesSpinner.getValue();
+			int anio = (int)anioSprinner.getValue();
+			fechaNac = LocalDate.of(anio, mes, dia);
+		}catch (Exception e){
+			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if(nombre == null || nombre.trim().equals("")){
+			JOptionPane.showMessageDialog(null, "El nombre es un campo obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if(apellido == null || apellido.trim().equals("")){
+			JOptionPane.showMessageDialog(null, "El apellido es un campo obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+
+
+		DTUsuario dtu;
+
+		if(this.dtUsuario instanceof DTProveedor){
+			if(descripcion == null || descripcion.trim().equals("")){
+				JOptionPane.showMessageDialog(null, "La descripcion es un campo obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			dtu = new DTProveedor(nickname, nombre, apellido, correo, fechaNac, descripcion, url );
+		} else {
+			if(nacionalidad== null || nacionalidad.trim().equals("")){
+				JOptionPane.showMessageDialog(null, "La nacionalidad es un campo obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			dtu = new DTTurista(nickname, nombre, apellido, correo, fechaNac, nacionalidad);
+		}
+
+		try{
+			icu.modificarUsuario(dtu);
+			setVisible(false);
+			JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.", "Operación con éxito.", JOptionPane.INFORMATION_MESSAGE);
+		}catch (ModificacionUsuarioNoPermitida e){
+			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+		}catch (Exception e){
+			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+
+
+
+	}
+
+	private void cancelar(){
+		enableCamposInfoUsuario(false,false);
+		setVisible(false);
+	}
 
 
 }
