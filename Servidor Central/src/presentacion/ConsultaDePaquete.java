@@ -4,12 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.event.PopupMenuListener;
@@ -41,6 +44,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDePaquete(Principal principal, IControladorPaquete cp) {
+		setResizable(true);
 		this.cp = cp;
 		this.principal = principal;
 		
@@ -56,31 +60,26 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(lblPaqueteAConsultar);
 		
 		paquete = new JComboBox();		
-		paquete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				paqueteSeleccionado = (String) paquete.getSelectedItem();
-				seSeleccionoUnPaquete();
-			}
-		});
 		
-		paquete.setBounds(166, 35, 247, 24);
+		
+		paquete.setBounds(153, 35, 249, 24);
 		getContentPane().add(paquete);
 		
 		JLabel lblPeriodoDeValidez = new JLabel("Periodo de validez:");
-		lblPeriodoDeValidez.setBounds(12, 85, 136, 15);
+		lblPeriodoDeValidez.setBounds(11, 102, 136, 15);
 		getContentPane().add(lblPeriodoDeValidez);
 		
 		JLabel lblNewLabel = new JLabel("Descuento:");
-		lblNewLabel.setBounds(12, 115, 81, 15);
+		lblNewLabel.setBounds(11, 132, 81, 15);
 		getContentPane().add(lblNewLabel);
 		
 		perVal = new JTextPane();
-		perVal.setBounds(166, 79, 247, 21);
+		perVal.setBounds(150, 96, 221, 21);
 		getContentPane().add(perVal);
 		perVal.setEditable(false);
 
 		JLabel label = new JLabel("%");
-		label.setBounds(377, 115, 24, 15);
+		label.setBounds(376, 132, 24, 15);
 		getContentPane().add(label);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion:");
@@ -98,25 +97,31 @@ public class ConsultaDePaquete extends JInternalFrame {
 				
 
 		actividad = new JComboBox();
-		
-		actividad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (! desactivarMostrarConsultas) {
-					var act = (String) actividad.getSelectedItem();
-					ejecutarCasoConsultaActividadTuristca(act);
-				}
-			}
-		});
-		
 		actividad.setEnabled(false);
 		actividad.setBounds(152, 295, 261, 24);
 		getContentPane().add(actividad);
 		
+		actividad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ejecutarCasoConsultaActividadTuristca((String) actividad.getSelectedItem());
+			}
+		});
+		
 		JTextPane descuento = new JTextPane();
-		descuento.setBounds(160, 109, 212, 21);
+		descuento.setBounds(149, 126, 222, 21);
 		getContentPane().add(descuento);
 		this.descuento = descuento;
 		descuento.setEditable(false);
+		
+		JButton btnNewButton = new JButton("Consultar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				paqueteSeleccionado = (String) paquete.getSelectedItem();
+				seSeleccionoUnPaquete();
+			}
+		});
+		btnNewButton.setBounds(343, 69, 85, 21);
+		getContentPane().add(btnNewButton);
 	}
 	
 	@Override
@@ -128,41 +133,43 @@ public class ConsultaDePaquete extends JInternalFrame {
 	}
 	
 	private void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
-		principal.mostrarConsultaDeActividadTuristica(nombreActividad);
+		if (!desactivarMostrarConsultas && nombreActividad != null) {
+			principal.mostrarConsultaDeActividadTuristica(nombreActividad);
+		}
 	}
 	
 	private void seSeleccionoUnPaquete() {
-		String idPaquete = this.paqueteSeleccionado;	
+		String idPaquete = paqueteSeleccionado;	
+		
 		desactivarMostrarConsultas = true;
 		
-		paquete.setSelectedItem(idPaquete);
-		actividad.setModel(new DefaultComboBoxModel());
+		actividad.removeAllItems();
 		
 		actividad.setEnabled(true);
-		DTPaqueteDetalles paqueteSeleccionado = null;
-		for(var paquete: paquetesDetalles) {
-			if(Objects.equals(paquete.getNombre(), idPaquete)) {
-				paqueteSeleccionado = paquete;
+		DTPaqueteDetalles p = null;
+		for (var dtpaquete: paquetesDetalles) {
+			if(dtpaquete.getNombre().equals(idPaquete)) {
+				p = dtpaquete;
 				break;
 			}
 		}
-		if(paqueteSeleccionado != null) {		
-			perVal.setText(String.valueOf(paqueteSeleccionado.getValidez()));
-			descr.setText(paqueteSeleccionado.getDescrpicion());
-			descuento.setText(String.valueOf(paqueteSeleccionado.getDescuento()));
-			for (var i : paqueteSeleccionado.getActividades().values()){
-				actividad.addItem(i.getNombre().toString());
-			}
+		if (p != null) {		
+			perVal.setText(String.valueOf(p.getValidez()));
+			descr.setText(p.getDescrpicion());
+			descuento.setText(String.valueOf(p.getDescuento()));
+			
+			var nombresAct = p.getActividades().keySet();
+			actividad.setModel(new DefaultComboBoxModel(nombresAct.toArray()));
 		}
-
-		desactivarMostrarConsultas = false;
+		SwingUtilities.invokeLater(() -> desactivarMostrarConsultas = false);
+	}
+	
+	private void actualizarDTPaqueteDetalles() {
+		paquetesDetalles = cp.obtenerDetallesPaquetes(); 
 	}
 	
 	private void actualizarCamposFormulario() {
-		paquete.setModel(new DefaultComboBoxModel());
-		Fabrica fab = Fabrica.getInstancia();
-		IControladorPaquete cp = fab.getIControladorPaquete();
-		paquetesDetalles = cp.obtenerDetallesPaquetes(); 
+		paquete.removeAllItems();
 		String[] ids;
 		for(var i: paquetesDetalles) {
 			paquete.addItem(i.getNombre());
@@ -171,6 +178,9 @@ public class ConsultaDePaquete extends JInternalFrame {
 	
 	public void seleccionYaHecha(String nombrePaq) {
 		paqueteSeleccionado = nombrePaq;
+		paquete.removeAllItems();
+
+		actualizarDTPaqueteDetalles();
 		seSeleccionoUnPaquete();
 	}
 }

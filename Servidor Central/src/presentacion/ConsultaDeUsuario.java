@@ -283,6 +283,8 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	}
 	
 	public void seleccionYaHecha(String nickname) {
+		comboBoxSeleccionUsr.removeAllItems();
+		
 		seleccionNickname = nickname;
 		seSeleccionoUnUsuario();
 	}

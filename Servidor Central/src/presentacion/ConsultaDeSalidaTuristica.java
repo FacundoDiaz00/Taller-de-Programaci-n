@@ -283,6 +283,10 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	
 	
 	public void seleccionYaHecha(String salida) {
+		comboDepartamentos.removeAllItems();
+		comboSalidas.removeAllItems();
+		comboActividades.removeAllItems();
+		
 		seleccionSalida = salida;
 		mostrarDatosSalida();
 	}

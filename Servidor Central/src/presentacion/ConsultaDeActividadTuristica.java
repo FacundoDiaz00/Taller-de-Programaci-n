@@ -191,9 +191,11 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		
 		comboDepartamentos.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDepartamentos.getSelectedItem().toString());
-		    	 comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
-		   
+		    	 var dep = comboDepartamentos.getSelectedItem();
+		    	 if (dep != null) {
+		    		 List<String> actividades = icat.obtenerIdActividadesTuristicas((String) dep);
+		    		 comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));		   		    		 
+		    	 }
 		     }
 	   });
 	   
@@ -205,22 +207,22 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	   
 	   comboSalidas.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 if (mostrarOtrasConsultas)
-		    		 ejecutarCasoConsultaSalidaTuristca((String) comboSalidas.getSelectedItem());
+	    		 ejecutarCasoConsultaSalidaTuristca((String) comboSalidas.getSelectedItem());
 		   }
 	   });
 	   
 	   comboPaquetes.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 if (mostrarOtrasConsultas)
-		    		 ejecutarCasoConsultaPaquete((String) comboPaquetes.getSelectedItem());
+	    		 ejecutarCasoConsultaPaquete((String) comboPaquetes.getSelectedItem());
 		   }
 	   });
 
 }
 	
 	public void seleccionYaHecha(String nombreAct) {
-		limpiarFormulario();
+		comboActividades.removeAllItems();
+		comboDepartamentos.removeAllItems();
+				
 		seleccionActividad = nombreAct;
 		seSeleccionoUnaActividad();
 	}
@@ -245,6 +247,10 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			proveedor.setText(actividad.getNicknameProveedor());
 			duracion.setText(String.valueOf(actividad.getDuracion()));
 			
+			comboSalidas.removeAllItems();
+			comboPaquetes.removeAllItems();
+			
+			
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
 			for(DTSalidaTuristica salida: salidas) {
 				comboSalidas.addItem(salida.getNombre());
@@ -259,7 +265,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 			
 		}
-		mostrarOtrasConsultas = true;
+		SwingUtilities.invokeLater(() -> mostrarOtrasConsultas = true);
 	}
 	
 	public void actualizarComboDepartamentos() {
@@ -268,11 +274,15 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	}
 	
 	private void ejecutarCasoConsultaSalidaTuristca(String nombreSalida) {
-		principal.mostrarConsultaDeSalidaTuristica(nombreSalida);
+		if (mostrarOtrasConsultas) {
+			principal.mostrarConsultaDeSalidaTuristica(nombreSalida);
+		}
 	}
 	
 	private void ejecutarCasoConsultaPaquete(String nombrePaquete) {
-		principal.mostrarConsultaDePaquete(nombrePaquete);
+		if (mostrarOtrasConsultas) {
+			principal.mostrarConsultaDePaquete(nombrePaquete);	
+		}
 	}
 	
 	
