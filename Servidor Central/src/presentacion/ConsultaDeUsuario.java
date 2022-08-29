@@ -204,6 +204,8 @@ public class ConsultaDeUsuario extends JInternalFrame {
         proveedor_panel.add(lblNewLabel_6_2);
         
         txtDescripcion = new JTextArea();
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setWrapStyleWord(true);
         txtDescripcion.setText("...");
         txtDescripcion.setEditable(false);
         proveedor_panel.add(txtDescripcion);
