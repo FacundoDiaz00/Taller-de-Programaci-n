@@ -3,6 +3,8 @@ package test.controladores;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import excepciones.ModificacionUsuarioNoPermitida;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTProveedorDetalle;
@@ -18,11 +21,13 @@ import logica.datatypes.DTTuristaDetalle;
 
 class ControladorUsuarioTest {
 	private static IControladorUsuario cu = null;
+	private static IControladorActividadTuristica cat = null;
 	private static LocalDate nowDate;
 	
 	@BeforeAll
 	static void preparacionPrevia() {
 		cu = Fabrica.getInstancia().getIControladorUsuario();
+		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		nowDate = LocalDate.now();
 	}
 	
@@ -246,15 +251,36 @@ class ControladorUsuarioTest {
 		try {
 			generarProveedores(50, id);
 			generarTuristas(50, id);
+			ControladorActividadTuristicaTest.generarDepartamentos(50, id);
+			ControladorActividadTuristicaTest.generarActividades(50, id);
+			ControladorActividadTuristicaTest.generarSalidas(50, id);
 		} catch (Exception e) {
 			fail(e.getMessage());
+		}		
+		
+		// A los primeros 40 les asigno una sola salida
+		for (int i = 0; i < 40; i++) {
+			String nombreSalida = "Salida " + id + " i=" + i;
+			String nickname = "Turista " + id + " i=" + i;
+			try {			
+				cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}	
 		}
 		
-		// TODO: generar actividades
-		
-		// TODO: generar salidas y asignarlas a las actividades
-		
-		// TODO: asignarle salidas a los turistas y actividades a los proveedores
+		// A los ultimos 10 les asigno una todas las salidas
+		for (int i = 40; i < 50; i++) {
+			String nickname = "Turista " + id + " i=" + i;
+			for (int j = 0; j < 40; j++) {
+				String nombreSalida = "Salida " + id + " i=" + j;
+				try {			
+					cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
+				} catch (Exception e) {
+					fail(e.getMessage());
+				}	
+			}
+		}
 		
 		
 		// Verifico para los proveedores
@@ -267,6 +293,8 @@ class ControladorUsuarioTest {
 			String descripcion = "HOLA! DESCRIPCION";
 			String link = "www.google.com.provedoor";
 			LocalDate FNacimiento = nowDate.minusYears(30);		
+			String nombreSalida = "Salida " + id + " i=" + i;
+			String nombreActividad = "Actividad " + id + " i=" + i;
 			
 			assertThrows(ClassCastException.class, () -> {
 				var dtErrorCasteado = (DTTuristaDetalle) dtdet;
@@ -281,6 +309,14 @@ class ControladorUsuarioTest {
 			assertEquals(descripcion, dtCasteado.getDescrpicionGeneral());
 			assertEquals(link, dtCasteado.getLink());
 			assertEquals(FNacimiento, dtCasteado.getFechaNac());
+			
+			assertEquals(1, dtCasteado.getActividadesSalidas().keySet().size());
+			var nombreActObtenida = dtCasteado.getActividadesSalidas().keySet().toArray()[0];
+			assertEquals(nombreActividad, nombreActObtenida);
+			
+			var salidasAsociadasObtenidas = (List) dtCasteado.getActividadesSalidas().values().toArray()[0];
+			assertEquals(1, salidasAsociadasObtenidas.size());
+			assertEquals(nombreSalida, salidasAsociadasObtenidas.get(0));
 		}
 		
 		
@@ -292,6 +328,7 @@ class ControladorUsuarioTest {
 			String correo = "TURISTA " + id + " i=" + i;
 			String nacionalidad = "CHINA";
 			LocalDate FNacimiento = nowDate.minusYears(15);
+			String nombreSalida = "Salida " + id + " i=" + i;
 			
 			var dtdet = cu.obtenerDTUsuarioDetalle(nickname);
 			
@@ -307,6 +344,15 @@ class ControladorUsuarioTest {
 			assertEquals(correo, dtCasteado.getCorreo());
 			assertEquals(nacionalidad, dtCasteado.getNacionalidad());
 			assertEquals(FNacimiento, dtCasteado.getFechaNac());
+			
+			if (i < 40) {
+				assertEquals(1, dtCasteado.getInscripciones().size());
+				var nombreSalObtenida = dtCasteado.getInscripciones().get(0);
+				assertEquals(nombreSalida, nombreSalObtenida);
+			} else {
+				assertEquals(40, dtCasteado.getInscripciones().size());
+			}
+			
 		}
 	}
 

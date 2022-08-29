@@ -65,7 +65,7 @@ class ControladorActividadTuristicaTest {
 			String ciudad = "Ciudad salida";
 			LocalDate fechaAlta = nowLocalDate;
 			LocalDateTime fechaYHoraSalida = nowLocalDateTime.plusDays(40);
-			int cantMaxTur = 10;
+			int cantMaxTur = 50;
 			
 			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad, cantMaxTur);
 		}
@@ -142,9 +142,6 @@ class ControladorActividadTuristicaTest {
 			assertFalse(ids.remove(nom));
 		}
 	}
-
-
-
 
 	@Test
 	public void testAltaActividadTuristicaOK() {
@@ -397,7 +394,7 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testObtenerDTSalidasTuristicas() {
-String id = "testObtenerDTSalidasTuristicas";
+		String id = "testObtenerDTSalidasTuristicas";
 		
 		try {
 			ControladorUsuarioTest.generarProveedores(100, id);
@@ -414,7 +411,7 @@ String id = "testObtenerDTSalidasTuristicas";
 			String ciudad = "Ciudad salida";
 			LocalDate fechaAlta = nowLocalDate;
 			LocalDateTime fechaYHoraSalida = nowLocalDateTime.plusDays(40);
-			int cantMaxTur = 10;
+			int cantMaxTur = 50;
 			
 			
 			var salidas = cat.obtenerDTSalidasTuristicas(nombreActividad);
