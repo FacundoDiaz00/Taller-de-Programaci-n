@@ -380,7 +380,7 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testObtenerDTSalidasTuristicas() {
-		String id = "testObtenerDTSalidasTuristicas";
+String id = "testObtenerDTSalidasTuristicas";
 		
 		try {
 			ControladorUsuarioTest.generarProveedores(100, id);
@@ -416,7 +416,74 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaOK() {
+		String nickname = "Turista ";
+		String nombre = "NOMBRE TURISTA";
+		String apellido = "APELLIDO TURISTA";
+		String correo = "TURISTA ";
+		String nacionalidad = "CHINA";
+		LocalDate FNacimiento = LocalDate.now();
+		try {
+			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
+		}catch (Exception e){
+			fail(e.getMessage());
 		}
+		String nombreProveedor = "prov";
+		String departamento = "deptoTest";
+		String nombreActividad = "actividad";
+		String descripcion = "Desc";
+		int duracion = 10;
+		float costo = (float) 10;
+		String ciudad = "Ciudad";
+		LocalDate fechaAlta = LocalDate.now();
+
+
+		String nombreSalida = "salida";
+		LocalDate f = LocalDate.now();
+		LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+		LocalDate fechaAltaSalida = f;
+		String lugar = "lugar";
+		int cantMaxTuristas = 10;
+
+		try {
+			cat.altaDepartamento(departamento, descripcion, departamento);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		try {
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+		} catch (UsuarioYaRegistradoException e) {
+			// Esperable, no pasa nada.
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		try {
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+		} catch(Exception e) {
+			fail(e.getMessage());
+		}
+
+		try {
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+		}catch(SalidaYaRegistradaException e) {
+			fail(e.getMessage());
+		} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
+			fail(e.getMessage());
+		} catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
+			fail(e.getMessage());
+		}
+		try{
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,LocalDate.now().plusYears(5));
+		}catch (Exception e) {
+			fail(e.getMessage());
+		}
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getFechaInscripcion(),LocalDate.now().plusYears(5));
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCantidadTuristas(),1);
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getTurista().getNickname(),nickname);
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getSalidaTuristica().getNombre(),nombreSalida);
+		assertFalse(cat.obtenerDTSalidaTuristicaDetalle(nombreSalida).getInscriptos().isEmpty());
+
+	}
 	
 	@Test
 	public void testAltaInscripcionSalidaTuristicaRepetida() {
@@ -502,11 +569,7 @@ class ControladorActividadTuristicaTest {
 		assertThrows(SuperaElMaximoDeTuristasException.class , ()->{
 			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname + "2",2,LocalDate.now().plusYears(5));
 		});
-
 	}
-
-
-
 
 
 	@Test
@@ -578,6 +641,7 @@ class ControladorActividadTuristicaTest {
 			assertTrue(salDetalle.getInscriptos().isEmpty());
 		}
 	}
+
 	
 	@Test
 	public void testAltaSalidaTuristicaRepetida() {
