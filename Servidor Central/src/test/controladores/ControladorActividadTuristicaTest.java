@@ -142,7 +142,10 @@ class ControladorActividadTuristicaTest {
 			assertFalse(ids.remove(nom));
 		}
 	}
-	
+
+
+
+
 	@Test
 	public void testAltaActividadTuristicaOK() {
 		assertTrue(cat != null);
@@ -157,7 +160,7 @@ class ControladorActividadTuristicaTest {
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = LocalDate.now();
-			
+
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
@@ -320,10 +323,12 @@ class ControladorActividadTuristicaTest {
 			String nombreProveedor = "Proveedor testObtenerDetallesActividadTuristica i=" + (i % 10);
 			String departamento = "Departamento testObtenerDetallesActividadTuristica i=" + (i % 10);
 			String nombreActividad = "Actividad testObtenerDetallesActividadTuristica i=" + i;
+			String nombreSalida = "Salida testObtenerDetallesActividadTuristica i=" + i;
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = LocalDate.now();
+			LocalDateTime fechaConHoraAhora = LocalDateTime.now();
 			
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
@@ -334,7 +339,7 @@ class ControladorActividadTuristicaTest {
 			}
 			
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+				cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
 			} catch(Exception e) {
@@ -346,6 +351,12 @@ class ControladorActividadTuristicaTest {
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
+			try {
+				cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7) ,fechaAlta.plusYears(6), "lugar", 5);
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+
 			try {
 				cp.agregarActividadAPaquete(nombreActividad,"Paquete");
 			}catch (Exception e){
@@ -362,7 +373,7 @@ class ControladorActividadTuristicaTest {
 			assertEquals(fechaAlta, act.getFechaAlta());
 			assertFalse(act.getPaquetes().isEmpty());
 
-			assertTrue(act.getSalidas().isEmpty());
+			assertFalse(act.getSalidas().isEmpty());
 			assertTrue(act.getPaquetes().containsKey("Paquete"));
 
 			try {
