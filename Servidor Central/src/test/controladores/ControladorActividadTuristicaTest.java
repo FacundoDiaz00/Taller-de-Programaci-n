@@ -564,6 +564,40 @@ class ControladorActividadTuristicaTest {
 		});
 	}
 
+	@Test
+	public void testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida(){
+		String nickname = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida Turista nickname";
+		String nombre = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida NOMBRE TURISTA";
+		String apellido = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida APELLIDO TURISTA";
+		String correo = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida TURISTA correo";
+		String nacionalidad = "CHINA";
+		LocalDate FNacimiento = LocalDate.now();
+		String nombreProveedor = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida prov";
+		String departamento = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida deptoTest";
+		String nombreActividad = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida actividad";
+		String descripcion = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida Desc";
+		int duracion = 10;
+		float costo = (float) 10;
+		String ciudad = "Ciudad";
+		String nombreSalida = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida salida";
+		String lugar = "lugar";
+		int cantMaxTuristas = 3;
+
+		try {
+			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
+			cat.altaDepartamento(departamento, descripcion, departamento);
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, LocalDate.now());
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, LocalDate.now());
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, LocalDateTime.now(), LocalDate.now(), lugar, cantMaxTuristas);
+		}catch (Exception e){
+			fail(e.getMessage());
+		}
+
+		assertThrows(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class , ()->{
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,LocalDate.now().minusDays(1));
+		});
+	}
+
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada() {
