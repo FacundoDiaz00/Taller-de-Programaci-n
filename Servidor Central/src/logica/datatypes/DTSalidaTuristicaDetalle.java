@@ -13,8 +13,8 @@ import java.util.Set;
 public class DTSalidaTuristicaDetalle extends DTSalidaTuristica{
 	private Set<DTInscripcion> inscriptos;
 
-	public DTSalidaTuristicaDetalle(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida, Set<DTInscripcion> inscriptos) {
-		super(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida);
+	public DTSalidaTuristicaDetalle(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida, DTActividadTuristica actividad, Set<DTInscripcion> inscriptos) {
+		super(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida, actividad);
 		this.inscriptos = inscriptos;
 	}
 	public Set<DTInscripcion> getInscriptos(){

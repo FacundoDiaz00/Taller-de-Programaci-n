@@ -38,4 +38,8 @@ public class DTInscripcion {
 	public DTTurista getTurista() {
 		return this.turista;
 	}
+
+	public float getCosto() {
+		return this.cantidadTuristas * this.getSalidaTuristica().getActividad().getCostoPorTurista();
+	}
 }

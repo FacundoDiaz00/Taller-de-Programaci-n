@@ -41,11 +41,12 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private JTextArea lugarSalida;
 	private JTextArea maxCantTuristas;
 	private JTextArea fechaAlta;
-	
+
 	private JList inscripcionList;
 	private JTextArea nombreInscripto;
 	private JTextArea fechaInscripto;
 	private JTextArea cantTuristasInscripto;
+	private JTextArea costoInsc;
 	
 	/**
 	 * Create the frame.
@@ -225,7 +226,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 				nombreInscripto.setText(datosTur.getNombre());
 				fechaInscripto.setText(datosInsc.getFechaInscripcion().toString());
 				cantTuristasInscripto.setText(String.valueOf(datosInsc.getCantidadTuristas()));
-				
+				costoInsc.setText(String.valueOf(datosInsc.getCosto()));
 			}
 		});
 		inscripcionList.setBounds(17, 279, 137, 133);
@@ -254,6 +255,15 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		cantTuristasInscripto = new JTextArea();
 		cantTuristasInscripto.setBounds(287, 334, 120, 15);
 		getContentPane().add(cantTuristasInscripto);
+		
+		JLabel costoInscLabel = new JLabel("Costo Insc.:");
+		costoInscLabel.setBounds(172, 361, 113, 15);
+		getContentPane().add(costoInscLabel);
+		
+		JTextArea costoInsc = new JTextArea();
+		costoInsc.setBounds(287, 361, 120, 15);
+		getContentPane().add(costoInsc);
+		this.costoInsc = costoInsc;
 		
 		//proveedor = new JTextArea();
 		//proveedor.setEditable(false);
@@ -345,6 +355,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		nombreInscripto.setText("");
 		fechaInscripto.setText("");
 		cantTuristasInscripto.setText("");
+		costoInsc.setText("");
 		
 		inscripcionList.setModel(new DefaultListModel<>());
 		comboSalidas.setModel(new DefaultComboBoxModel<>(new String[0]));
@@ -360,6 +371,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		nombreInscripto.setText("");
 		fechaInscripto.setText("");
 		cantTuristasInscripto.setText("");
+		costoInsc.setText("");
 		
 		inscripcionList.setModel(new DefaultListModel<>());
 		

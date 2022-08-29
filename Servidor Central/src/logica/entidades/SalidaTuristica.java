@@ -50,7 +50,7 @@ public class SalidaTuristica {
     }
 
     public DTSalidaTuristica obtenerDTSalidaTuristica(){
-        return new DTSalidaTuristica(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida());
+        return new DTSalidaTuristica(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida(), getActividad().obtenerDTActividadTuristica());
     }
 
     public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(){
@@ -58,7 +58,7 @@ public class SalidaTuristica {
     	for(Inscripcion insc : inscripciones) {
     		res.add(insc.obtenerDTInscripcion());
     	}
-        return new DTSalidaTuristicaDetalle(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida(), res);
+        return new DTSalidaTuristicaDetalle(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida(), getActividad().obtenerDTActividadTuristica(),res);
     }
     
     public void agregarInscripcionASalida(Inscripcion ins){
