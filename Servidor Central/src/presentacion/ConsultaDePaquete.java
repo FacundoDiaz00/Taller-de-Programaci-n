@@ -19,20 +19,30 @@ import logica.controladores.IControladorPaquete;
 import javax.swing.event.PopupMenuEvent;
 import logica.datatypes.DTPaqueteDetalles;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import java.util.Objects;
 
 public class ConsultaDePaquete extends JInternalFrame {
+	private List<DTPaqueteDetalles> paquetesDetalles;
+	private String paqueteSeleccionado;
+	private boolean desactivarMostrarConsultas = false;
+	
+	private Principal principal;
+	private IControladorPaquete cp;
+	
 	private JComboBox paquete;
 	private JTextPane perVal;
 	private JTextPane descr;
 	private JTextPane descuento;
-	private List<DTPaqueteDetalles> paquetesDetalles;
 	private JComboBox actividad;
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDePaquete() {
+	public ConsultaDePaquete(Principal principal, IControladorPaquete cp) {
+		this.cp = cp;
+		this.principal = principal;
 		
 		setTitle("Consulta de Paquete");
 		setClosable(true);
@@ -45,22 +55,14 @@ public class ConsultaDePaquete extends JInternalFrame {
 		lblPaqueteAConsultar.setBounds(12, 40, 154, 15);
 		getContentPane().add(lblPaqueteAConsultar);
 		
-		paquete = new JComboBox();
-
+		paquete = new JComboBox();		
 		paquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				paqueteSeleccionado = (String) paquete.getSelectedItem();
+				seSeleccionoUnPaquete();
 			}
 		});
-		paquete.addPopupMenuListener(new PopupMenuListener() {
-			public void popupMenuCanceled(PopupMenuEvent e) {
-			}
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-			}
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				actualizarCamposFormulario();
-				
-			}
-		});
+		
 		paquete.setBounds(166, 35, 247, 24);
 		getContentPane().add(paquete);
 		
@@ -93,8 +95,19 @@ public class ConsultaDePaquete extends JInternalFrame {
 		JLabel lblActividadTurisitica = new JLabel("Actividad Turisitica:");
 		lblActividadTurisitica.setBounds(12, 300, 154, 15);
 		getContentPane().add(lblActividadTurisitica);
-		
+				
+
 		actividad = new JComboBox();
+		
+		actividad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (! desactivarMostrarConsultas) {
+					var act = (String) actividad.getSelectedItem();
+					ejecutarCasoConsultaActividadTuristca(act);
+				}
+			}
+		});
+		
 		actividad.setEnabled(false);
 		actividad.setBounds(152, 295, 261, 24);
 		getContentPane().add(actividad);
@@ -104,31 +117,47 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(descuento);
 		this.descuento = descuento;
 		descuento.setEditable(false);
-	   paquete.addActionListener(new ActionListener() {     
-	     public void actionPerformed(ActionEvent e) {
-			 actividad.setModel(new DefaultComboBoxModel());
-			 actividad.setEnabled(true);
-			 String idPaquete = paquete.getSelectedItem().toString();
-			 DTPaqueteDetalles paqueteSeleccionado = null;
-			 for(var paquete: paquetesDetalles) {
-				if(Objects.equals(paquete.getNombre(), idPaquete)) {
-					paqueteSeleccionado = paquete;
-					break;
-				}
+	}
+	
+	@Override
+	public void setVisible(boolean flag) {
+		super.setVisible(flag);
+		
+		if (flag)
+			actualizarCamposFormulario();
+	}
+	
+	private void ejecutarCasoConsultaActividadTuristca(String nombreActividad) {
+		principal.mostrarConsultaDeActividadTuristica(nombreActividad);
+	}
+	
+	private void seSeleccionoUnPaquete() {
+		String idPaquete = this.paqueteSeleccionado;	
+		desactivarMostrarConsultas = true;
+		
+		paquete.setSelectedItem(idPaquete);
+		actividad.setModel(new DefaultComboBoxModel());
+		
+		actividad.setEnabled(true);
+		DTPaqueteDetalles paqueteSeleccionado = null;
+		for(var paquete: paquetesDetalles) {
+			if(Objects.equals(paquete.getNombre(), idPaquete)) {
+				paqueteSeleccionado = paquete;
+				break;
 			}
-
+		}
+		if(paqueteSeleccionado != null) {		
 			perVal.setText(String.valueOf(paqueteSeleccionado.getValidez()));
 			descr.setText(paqueteSeleccionado.getDescrpicion());
 			descuento.setText(String.valueOf(paqueteSeleccionado.getDescuento()));
 			for (var i : paqueteSeleccionado.getActividades().values()){
 				actividad.addItem(i.getNombre().toString());
 			}
+		}
 
-	     }
-	   });
-
-
+		desactivarMostrarConsultas = false;
 	}
+	
 	private void actualizarCamposFormulario() {
 		paquete.setModel(new DefaultComboBoxModel());
 		Fabrica fab = Fabrica.getInstancia();
@@ -138,6 +167,10 @@ public class ConsultaDePaquete extends JInternalFrame {
 		for(var i: paquetesDetalles) {
 			paquete.addItem(i.getNombre());
 		}
-
+	}
+	
+	public void seleccionYaHecha(String nombrePaq) {
+		paqueteSeleccionado = nombrePaq;
+		seSeleccionoUnPaquete();
 	}
 }
