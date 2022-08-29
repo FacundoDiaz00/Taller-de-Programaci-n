@@ -109,7 +109,7 @@ public class AltaDePaquete extends JInternalFrame{
 					setVisible(false);
 					limpiarForm();
 				}catch(PaqueteYaRegistradoException e){
-					JOptionPane.showMessageDialog(null, "Error. Ya existe un Paquete de Actividades con el nombre elejido.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
+					JOptionPane.showMessageDialog(null, "Error. Ya existe un Paquete de Actividades con el nombre elegido.","Registro de Paquete",JOptionPane.WARNING_MESSAGE );
 
 				}
 				

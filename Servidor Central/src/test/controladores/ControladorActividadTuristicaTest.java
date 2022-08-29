@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import logica.controladores.IControladorUsuario;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,10 +23,12 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 
 class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;
+	private static IControladorUsuario cu;
 	
 	@BeforeAll
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		cu = Fabrica.getInstancia().getIControladorUsuario();
 	}
 	
 	// No es un test en sí
@@ -60,7 +63,6 @@ class ControladorActividadTuristicaTest {
 			cat.altaDepartamento(nom, descr, url);
 		}
 	}
-
 
 	@Test
 	public void testAltaDepartamentoOK() {
