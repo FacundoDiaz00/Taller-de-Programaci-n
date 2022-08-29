@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import logica.controladores.IControladorUsuario;
+import logica.controladores.IControladorPaquete;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -25,10 +26,12 @@ class ControladorActividadTuristicaTest {
 	private static IControladorActividadTuristica cat;
 	private static IControladorUsuario cu;
 	
+	private static IControladorPaquete cp;
 	@BeforeAll
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		cu = Fabrica.getInstancia().getIControladorUsuario();
+		cp = Fabrica.getInstancia().getIControladorPaquete();
 	}
 	
 	// No es un test en sí
@@ -283,12 +286,22 @@ class ControladorActividadTuristicaTest {
 	@Test
     public void testObtenerDetallesActividadTuristica() {
 		assertTrue(cat != null);
-		
+		String descripcion = "Desc";
+
+		//paquetes:
+		String nombre = "Paquete";
+		int periodovalidez = 15;
+		float descuento = (float) (1);
+		try {
+			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento, LocalDate.of(2022,1,1));
+		}catch (Exception e){
+			fail(e.getMessage());
+		}
+
 		for (int i = 0; i < 100; i++) {
 			String nombreProveedor = "Proveedor testObtenerDetallesActividadTuristica i=" + (i % 10);
 			String departamento = "Departamento testObtenerDetallesActividadTuristica i=" + (i % 10);
 			String nombreActividad = "Actividad testObtenerDetallesActividadTuristica i=" + i;
-			String descripcion = "Desc";
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
@@ -315,7 +328,11 @@ class ControladorActividadTuristicaTest {
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
-			
+			try {
+				cp.agregarActividadAPaquete(nombreActividad,"Paquete");
+			}catch (Exception e){
+				fail(e.getMessage());
+			}
 			DTActividadTuristicaDetalle act = cat.obtenerDetallesActividadTuristica(nombreActividad);
 			assertTrue(act != null);
 			
@@ -325,11 +342,20 @@ class ControladorActividadTuristicaTest {
 			assertEquals(costo, act.getCostoPorTurista());
 			assertEquals(ciudad, act.getCuidad());
 			assertEquals(fechaAlta, act.getFechaAlta());
-			
-			
-			// TODO agregar paquetes y que esto verifique que se devuelven
-			assertTrue(act.getPaquetes().isEmpty());
+			assertFalse(act.getPaquetes().isEmpty());
+
 			assertTrue(act.getSalidas().isEmpty());
+			assertTrue(act.getPaquetes().containsKey("Paquete"));
+
+			try {
+				cat.altaDepartamento(departamento, descripcion, departamento);
+			} catch (DeparamentoYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+
+
 		}
     }
 

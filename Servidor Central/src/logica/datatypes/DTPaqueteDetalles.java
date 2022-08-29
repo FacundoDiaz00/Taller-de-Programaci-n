@@ -20,8 +20,4 @@ public class DTPaqueteDetalles extends DTPaquete {
         return actividades;
     }
 
-
-    public void setActividades(Map<String, DTActividadTuristica> actividades) {
-        this.actividades = actividades;
-    }
 }

@@ -37,24 +37,14 @@ public class DTPaquete {
         return descrpicion;
     }
 
-    public void setDescrpicion(String descrpicion) {
-        this.descrpicion = descrpicion;
-    }
 
     public int getValidez() {
         return validez;
-    }
-
-    public void setValidez(int validez) {
-        this.validez = validez;
     }
 
     public float getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(float descuento) {
-        this.descuento = descuento;
-    }
 
 }
