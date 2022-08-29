@@ -75,7 +75,7 @@ public class Principal {
 		frmIntAltaPaquete = new AltaDePaquete(CP);
 		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
-		frmIntConsultaDePaquete = new ConsultaDePaquete();
+		frmIntConsultaDePaquete = new ConsultaDePaquete(this, CP);
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmIntAltaUsuario.setVisible(false);
@@ -271,18 +271,16 @@ public class Principal {
 	
 	public void mostrarConsultaDeSalidaTuristica(String nombreSalida) {
 		if (nombreSalida != null) {
-			// FIXME: descomentar e implementar las operaciones basandose en lo de arriba
-			// frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);			
+			frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);			
 		}
-		// frmIntConsultaDeSalidaTuristica.setVisible(true);
+		frmIntConsultaDeSalidaTuristica.setVisible(true);
 	}
 	
 	public void mostrarConsultaDePaquete(String nombrePaquete) {
 		if (nombrePaquete != null) {
-			// FIXME: descomentar e implementar las operaciones basandose en lo de arriba
-			// frmIntConsultaDePaquete.seleccionYaHecha(nombrePaquete);			
+			frmIntConsultaDePaquete.seleccionYaHecha(nombrePaquete);			
 		}
-		// frmIntConsultaDePaquete.setVisible(true);
+		frmIntConsultaDePaquete.setVisible(true);
 	}
 	
 		

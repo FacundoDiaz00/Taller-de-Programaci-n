@@ -21,6 +21,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	private Principal principal;
 	
 	private String seleccionActividad;
+	private boolean mostrarOtrasConsultas = true;
 
 	private final JComboBox comboSalidas;
 	private final JComboBox comboPaquetes;
@@ -37,7 +38,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDeActividadTuristica(Principal p,IControladorActividadTuristica icat) {
+	public ConsultaDeActividadTuristica(Principal p, IControladorActividadTuristica icat) {
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent e) {
@@ -204,13 +205,15 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	   
 	   comboSalidas.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 ejecutarCasoConsultaSalidaTuristca((String) comboSalidas.getSelectedItem());
+		    	 if (mostrarOtrasConsultas)
+		    		 ejecutarCasoConsultaSalidaTuristca((String) comboSalidas.getSelectedItem());
 		   }
 	   });
 	   
 	   comboPaquetes.addActionListener(new ActionListener() {     
 		     public void actionPerformed(ActionEvent e) {
-		    	 ejecutarCasoConsultaPaquete((String) comboPaquetes.getSelectedItem());
+		    	 if (mostrarOtrasConsultas)
+		    		 ejecutarCasoConsultaPaquete((String) comboPaquetes.getSelectedItem());
 		   }
 	   });
 
@@ -230,7 +233,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	
 	private void seSeleccionoUnaActividad() {
 		String seleccion = seleccionActividad;
-
+		mostrarOtrasConsultas = false;
 		try {
 			DTActividadTuristicaDetalle actividad = icat.obtenerDetallesActividadTuristica(seleccion);
 			
@@ -256,6 +259,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 			
 		}
+		mostrarOtrasConsultas = true;
 	}
 	
 	public void actualizarComboDepartamentos() {
