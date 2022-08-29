@@ -368,7 +368,7 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaOK() {
-		fail("Not yet implemented");
+
 	}
 	
 	@Test
@@ -392,7 +392,7 @@ class ControladorActividadTuristicaTest {
 			LocalDate fechaAlta = LocalDate.now();
 			
 	
-			String nombreSalida = "Salida testAltaSalidaTuristicaOK i=" + i;
+			String nombreSalida = "Salida testAltaSalidaTuristicaOK" + i;
 			LocalDate f = LocalDate.now();
 			LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
 			LocalDate fechaAltaSalida = f;
@@ -419,7 +419,7 @@ class ControladorActividadTuristicaTest {
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			try {
 				cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
 			}catch(SalidaYaRegistradaException e) {
@@ -428,22 +428,174 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			} catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
 				fail(e.getMessage());
-			}			
-			
+			}
+
 			//assertTrue(cat.existeSalidaTuristica(nombreSalida));
-						
+
 			DTSalidaTuristica sal = cat.obtenerDTSalidaTuristica(nombreSalida);
 			assertTrue(sal != null);
-			
+
 			assertEquals(nombreSalida, sal.getNombre());
 			assertEquals(fechaHoraSalida, sal.getFechaHoraSalida());
 			assertEquals(fechaAlta, sal.getFechaAlta());
 			assertEquals(lugar, sal.getLugarSalida());
 			assertEquals(cantMaxTuristas, sal.getCantMaxTuristas());
-			
+
 			DTSalidaTuristicaDetalle salDetalle = cat.obtenerDTSalidaTuristicaDetalle(nombreSalida);
 			assertTrue(salDetalle.getInscriptos().isEmpty());
 		}
+	}
+@Test
+	public void testAltaSalidaTuristicaRepetida() {
+		assertTrue(cat != null);
+
+		for (int i = 0; i < 2; i++) {
+
+			String nombreProveedor = "Proveedor testAltaSalidaTuristicaRepetida i=" + (i % 10);
+			String departamento = "Departamento testAltaSalidaTuristicaRepetida i=" + (i % 10);
+			String nombreActividad = "Actividad testAltaSalidaTuristicaRepetida i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10;
+			String ciudad = "Ciudad";
+			LocalDate fechaAlta = LocalDate.now();
+
+
+			String nombreSalida = "Salida testAltaSalidaTuristicaRepetida";
+			LocalDate f = LocalDate.now();
+			LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+			LocalDate fechaAltaSalida = f;
+			String lugar = "lugar";
+			int cantMaxTuristas = 10;
+
+			try {
+				cat.altaDepartamento(departamento, descripcion, departamento);
+			} catch (DeparamentoYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+			try {
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+			} catch (UsuarioYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+
+			try {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+			} catch(Exception e) {
+				fail(e.getMessage());
+			}
+			if(i == 1){
+				assertThrows(SalidaYaRegistradaException.class, ()->{
+					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+				});
+			} else {
+				try {
+					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+				}catch(SalidaYaRegistradaException e) {
+					fail(e.getMessage());
+				} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
+					fail(e.getMessage());
+				} catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		}
+	}
+
+	@Test
+	public void testAltaSalidaTuristicaFewchaAltaActividadPosteriorASalida() {
+		assertTrue(cat != null);
+		String nombreProveedor = "Proveedor testAltaSalidaTuristicaAltaPosteriorASalida";
+		String departamento = "Departamento testAltaSalidaTuristicaAltaPosteriorASalida";
+		String nombreActividad = "Actividad testAltaSalidaTuristicaAltaPosteriorASalida";
+		String descripcion = "Desc";
+		int duracion = 10;
+		float costo = (float) 10;
+		String ciudad = "Ciudad";
+		LocalDate fechaAlta = LocalDate.now();
+
+
+		String nombreSalida = "Salida testAltaSalidaTuristicaAltaPosteriorASalida";
+		LocalDate f = LocalDate.now();
+		LocalDateTime fechaHoraSalida = LocalDateTime.now().minusMonths(1);
+		LocalDate fechaAltaSalida = f;
+		String lugar = "lugar";
+		int cantMaxTuristas = 10;
+
+		try {
+			cat.altaDepartamento(departamento, descripcion, departamento);
+		} catch (DeparamentoYaRegistradoException e) {
+			// Esperable, no pasa nada.
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		try {
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+		} catch (UsuarioYaRegistradoException e) {
+			// Esperable, no pasa nada.
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		try {
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+		} catch(Exception e) {
+			fail(e.getMessage());
+		}
+
+		assertThrows(FechaAltaSalidaPosteriorAFechaSalidaException.class, ()->{
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+		});
+	}
+
+	@Test
+	public void testAltaSalidaTuristicaFechaAltaActividadPosteriorAFechaAltaSalidaException() {
+		assertTrue(cat != null);
+		String nombreProveedor = "Proveedor testAltaSalidaTuristicaFechaAltaSalidaPosteriorAFechaSalida";
+		String departamento = "Departamento testAltaSalidaTuristicaFechaAltaSalidaPosteriorAFechaSalida";
+		String nombreActividad = "Actividad testAltaSalidaTuristicaFechaAltaSalidaPosteriorAFechaSalida";
+		String descripcion = "Desc";
+		int duracion = 10;
+		float costo = (float) 10;
+		String ciudad = "Ciudad";
+		LocalDate fechaAlta = LocalDate.now().plusMonths(1);
+
+
+		String nombreSalida = "Salida testAltaSalidaTuristicaFechaAltaSalidaPosteriorAFechaSalida";
+		LocalDateTime fechaHoraSalida = LocalDateTime.now();
+		LocalDate fechaAltaSalida = fechaHoraSalida.toLocalDate();
+		String lugar = "lugar";
+		int cantMaxTuristas = 10;
+
+		try {
+			cat.altaDepartamento(departamento, descripcion, departamento);
+		} catch (DeparamentoYaRegistradoException e) {
+			// Esperable, no pasa nada.
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		try {
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta);
+		} catch (UsuarioYaRegistradoException e) {
+			// Esperable, no pasa nada.
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		try {
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
+		} catch(Exception e) {
+			fail(e.getMessage());
+		}
+
+		assertThrows(FechaAltaActividadPosteriorAFechaAltaSalidaException.class, ()->{
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas);
+		});
 	}
 
 }
