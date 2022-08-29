@@ -271,10 +271,9 @@ public class Principal {
 	
 	public void mostrarConsultaDeSalidaTuristica(String nombreSalida) {
 		if (nombreSalida != null) {
-			// FIXME: descomentar e implementar las operaciones basandose en lo de arriba
-			// frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);			
+			frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);			
 		}
-		// frmIntConsultaDeSalidaTuristica.setVisible(true);
+		frmIntConsultaDeSalidaTuristica.setVisible(true);
 	}
 	
 	public void mostrarConsultaDePaquete(String nombrePaquete) {

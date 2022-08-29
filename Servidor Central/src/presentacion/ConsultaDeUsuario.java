@@ -91,14 +91,9 @@ public class ConsultaDeUsuario extends JInternalFrame {
         lblNewLabel_1.setBounds(12, 10, 114, 15);
         panel_eleccion.add(lblNewLabel_1);
         
-        
-
         comboBoxSeleccionUsr = new JComboBox<String>();
         comboBoxSeleccionUsr.setBounds(133, 5, 245, 24);
-        panel_eleccion.add(comboBoxSeleccionUsr);
-        actualizarComboBox();
-        
-        
+        panel_eleccion.add(comboBoxSeleccionUsr);        
         
         panel_consulta = new JPanel();
         panel_principal.add(panel_consulta);
@@ -239,7 +234,27 @@ public class ConsultaDeUsuario extends JInternalFrame {
         turista_panel.add(panelSalidasTurista);
         panelSalidasTurista.setLayout(new BoxLayout(panelSalidasTurista, BoxLayout.Y_AXIS));
         
-        
+        comboBoxSeleccionUsr.addPopupMenuListener( new PopupMenuListener() {
+
+			@Override
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				// Esto es lo que actualiza la lista cada vez que se abre.
+				actualizarComboBox();
+			}
+
+			@Override
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void popupMenuCanceled(PopupMenuEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
       
         
         comboBoxSeleccionUsr.addActionListener(new ActionListener() {
