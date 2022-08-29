@@ -300,6 +300,29 @@ class ControladorActividadTuristicaTest {
 			assertFalse(ids_loop.remove(nombreActividad));
 		}
 	}
+	
+	@Test
+	public void testObtenerIdSalidasTuristicas(){
+		assertTrue(cat != null);
+		
+		String id = "testObtenerIdSalidasTuristicas";
+		
+		try {
+			ControladorUsuarioTest.generarProveedores(50, id);
+			ControladorActividadTuristicaTest.generarDepartamentos(50, id);
+			ControladorActividadTuristicaTest.generarActividades(50, id);
+			ControladorActividadTuristicaTest.generarSalidas(50, id);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}	
+		
+		for (int j = 0; j < 50; j++) {
+			String nombreActividad = "Actividad " + id + " i=" + j;
+			var salidas = cat.obtenerIdSalidasTuristicas(nombreActividad);
+			
+			assertEquals(1, salidas.size());
+		}
+	}
 		
 	@Test
     public void testObtenerDetallesActividadTuristica() {

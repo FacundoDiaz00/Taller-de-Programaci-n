@@ -8,7 +8,7 @@ import logica.datatypes.DTUsuario;
  * @author Equipo taller prog 16
  */
 
-public class  Usuario {
+public abstract class Usuario {
 
     private String nickname;
     private String nombre;
@@ -70,13 +70,9 @@ public class  Usuario {
         this.fechaNac = fechaNac;
     }
     
-    public DTUsuario obtenerDTUsuario() {
-        return new DTUsuario(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac());
-    }
+    public abstract DTUsuario obtenerDTUsuario();
 
-    public DTUsuario obtenerDTUsuarioDetalle() {
-        return new DTUsuario(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac());
-    }
+    public abstract DTUsuario obtenerDTUsuarioDetalle();
     
 	public void setearDatos(DTUsuario datosNuevos) {
 		this.setNombre(datosNuevos.getNombre());
