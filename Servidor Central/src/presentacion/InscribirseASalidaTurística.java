@@ -374,7 +374,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 		Component horizontalStrut_26 = Box.createHorizontalStrut(20);
 		panel_9.add(horizontalStrut_26);
 		
-		JLabel lblNewLabel_9 = new JLabel("Fecha inscripcion");
+		JLabel lblNewLabel_9 = new JLabel("Fecha inscripción");
 		panel_9.add(lblNewLabel_9);
 		
 		Component horizontalStrut_28 = Box.createHorizontalStrut(27);
@@ -565,7 +565,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			cat.altaInscripcionSalidaTuristica(idSalida, idTuristas, cantidadTurista, fechaInscripcion);
 			setVisible(false);
 			limpiarFormulario();
-			JOptionPane.showMessageDialog(null, "Inscripción creada con éxito..", "Error", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Inscripción creada con éxito.", "Error", JOptionPane.INFORMATION_MESSAGE);
 		} catch (InscripcionYaRegistradaException e) {
 			JOptionPane.showMessageDialog(null, "Este turista ya esta inscripto a esta salida turística.", "Error", JOptionPane.ERROR_MESSAGE);
 		} catch (SuperaElMaximoDeTuristasException e) {

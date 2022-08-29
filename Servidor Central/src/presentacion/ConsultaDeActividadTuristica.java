@@ -71,12 +71,12 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		nombreLabel.setBounds(6, 63, 121, 14);
 		getContentPane().add(nombreLabel);
 		
-		JLabel descripcionLabel = new JLabel("Descripcion:");
+		JLabel descripcionLabel = new JLabel("Descripción:");
 		descripcionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		descripcionLabel.setBounds(7, 89, 120, 14);
 		getContentPane().add(descripcionLabel);
 		
-		JLabel duracionLabel = new JLabel("Duracion:");
+		JLabel duracionLabel = new JLabel("Duración:");
 		duracionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		duracionLabel.setBounds(7, 164, 120, 14);
 		getContentPane().add(duracionLabel);

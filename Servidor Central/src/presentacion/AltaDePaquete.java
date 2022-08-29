@@ -50,7 +50,7 @@ public class AltaDePaquete extends JInternalFrame{
 		lblNombre.setBounds(12, 50, 70, 15);
 		getContentPane().add(lblNombre);
 		
-		JLabel lblPeriodoDeValidez = new JLabel("Periodo de validez:");
+		JLabel lblPeriodoDeValidez = new JLabel("Período de validez:");
 		lblPeriodoDeValidez.setBounds(12, 80, 144, 15);
 		getContentPane().add(lblPeriodoDeValidez);
 		
@@ -72,7 +72,7 @@ public class AltaDePaquete extends JInternalFrame{
 		perVal.setBounds(153, 78, 49, 20);
 		getContentPane().add(perVal);
 		
-		JLabel lbldias = new JLabel("(Dias)");
+		JLabel lbldias = new JLabel("(Días)");
 		lbldias.setBounds(206, 80, 70, 15);
 		getContentPane().add(lbldias);
 		
@@ -105,7 +105,7 @@ public class AltaDePaquete extends JInternalFrame{
 					}
 					LocalDate f = LocalDate.of((int)anior.getValue(),(int)mesr.getValue(),(int)diar.getValue());
 					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue(),f);
-					JOptionPane.showMessageDialog(null, "Operacion realizada con exito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
+					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
 					setVisible(false);
 					limpiarForm();
 				}catch(PaqueteYaRegistradoException e){

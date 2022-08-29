@@ -54,11 +54,11 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		setBounds(100, 100, 461, 415);
 		getContentPane().setLayout(null);
 		
-		JLabel lblIngreseLosDatos = new JLabel("Ingrese los datos de la Salida Turistica a Registrar.");
+		JLabel lblIngreseLosDatos = new JLabel("Ingrese los datos de la Salida Turística a Registrar.");
 		lblIngreseLosDatos.setBounds(12, 12, 385, 15);
 		getContentPane().add(lblIngreseLosDatos);
 		
-		JLabel lblDepart = new JLabel("Departamento :");
+		JLabel lblDepart = new JLabel("Departamento: ");
 		lblDepart.setBounds(12, 50, 112, 15);
 		getContentPane().add(lblDepart);
 		
@@ -89,7 +89,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		departamento.setBounds(150, 45, 175, 24);
 
 		
-		JLabel lblActividadTurisica = new JLabel("Actividad Turisica:");
+		JLabel lblActividadTurisica = new JLabel("Actividad Turística:");
 		lblActividadTurisica.setBounds(12, 85, 128, 15);
 		getContentPane().add(lblActividadTurisica);
 		
@@ -126,7 +126,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		
 		getContentPane().add(actividadTuristica);
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel("Nombre: ");
 		lblNombre.setBounds(12, 120, 70, 15);
 		getContentPane().add(lblNombre);
 		
@@ -134,15 +134,15 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		lblHora.setBounds(12, 190, 47, 15);
 		getContentPane().add(lblHora);
 		
-		JLabel lblFecha = new JLabel("Fecha de la Salida :");
+		JLabel lblFecha = new JLabel("Fecha de la salida: ");
 		lblFecha.setBounds(12, 155, 138, 15);
 		getContentPane().add(lblFecha);
 		
-		JLabel lblLugar = new JLabel("Lugar:");
+		JLabel lblLugar = new JLabel("Lugar: ");
 		lblLugar.setBounds(12, 225, 70, 15);
 		getContentPane().add(lblLugar);
 		
-		JLabel lblCantidadMaximaDe = new JLabel("Cantidad Maxima de turistas:");
+		JLabel lblCantidadMaximaDe = new JLabel("Cantidad Máxima de turistas: ");
 		lblCantidadMaximaDe.setBounds(12, 259, 208, 15);
 		getContentPane().add(lblCantidadMaximaDe);
 		
@@ -286,7 +286,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			setVisible(false);
 			limpiarForm();
 		} catch(SalidaYaRegistradaException e) {
-			JOptionPane.showMessageDialog(null, "Error. Ya existe una Salida con el nombre elejido.", "Registro de Salida", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Error. Ya existe una Salida con el nombre elegido.", "Registro de Salida", JOptionPane.WARNING_MESSAGE);
 		} catch (FechaAltaSalidaPosteriorAFechaSalidaException ee){
 			JOptionPane.showMessageDialog(null, "Error. La Fecha de Salida debe ser posterior a la Fecha de Registro.", "Registro de Salida", JOptionPane.WARNING_MESSAGE);
 		} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException eee){
