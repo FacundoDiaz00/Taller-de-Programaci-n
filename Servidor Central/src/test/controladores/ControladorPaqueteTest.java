@@ -75,7 +75,7 @@ class ControladorPaqueteTest {
 			fail(e.getMessage());
 		}
 		
-		var ids = cp.obtenerIdPaquetes();
+		var ids = cp.obtenerNombrePaquetes();
 		
 		assertTrue(ids != null);
 		

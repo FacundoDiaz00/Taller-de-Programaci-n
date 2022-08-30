@@ -10,7 +10,7 @@ import logica.entidades.SalidaTuristica;
  * @author Equipo taller prog 16
  */
 
-public class DTActividadTuristicaDetalle extends DTActividadTuristica {
+public class  DTActividadTuristicaDetalle extends DTActividadTuristica {
     private Map<String, DTSalidaTuristica> salidas;
     private Map<String, DTPaquete> paquetes;
 

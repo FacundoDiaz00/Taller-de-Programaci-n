@@ -14,10 +14,38 @@ import excepciones.PaqueteYaRegistradoException;
 
 
 public interface IControladorPaquete {
-    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR) throws PaqueteYaRegistradoException;
-    List<String> obtenerIdPaquetes();
 
+    /**
+     * Crea un paquete con los datos enviados por parámetro
+     * @param nombre
+     * @param descripcion
+     * @param periodovalidez
+     * @param descuento
+     * @param fechaR
+     * @throws PaqueteYaRegistradoException
+     */
+    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR) throws PaqueteYaRegistradoException;
+
+    /**
+     * Debuelve de los nombres de todos los paquetes registrados en el sistema
+     * @return
+     */
+    List<String> obtenerNombrePaquetes();
+
+    /**
+     *
+     * @param nombreDep
+     * @param nombrePaq
+     * @return
+     */
     List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
+
+    /**
+     * Agrega una actividad turística identificada por 'nombreAct' al paquete 'nombrePaq'
+     * @param nombreAct
+     * @param nombrePaq
+     * @throws ActividadTuristicaYaRegistradaException
+     */
     void agregarActividadAPaquete(String nombreAct, String nombrePaq) throws ActividadTuristicaYaRegistradaException;
 
 

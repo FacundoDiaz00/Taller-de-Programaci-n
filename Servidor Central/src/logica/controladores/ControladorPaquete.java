@@ -12,9 +12,6 @@ import logica.entidades.Paquete;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorPaquete;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Equipo taller prog 16
  */
@@ -42,7 +39,7 @@ public class ControladorPaquete implements IControladorPaquete{
     }
 
 	@Override
-	public List<String> obtenerIdPaquetes() {
+	public List<String> obtenerNombrePaquetes() {
 		ManejadorPaquete mp = ManejadorPaquete.getInstancia();	
 		return new ArrayList<String>(mp.obtenerIdPaquetes());
 	}

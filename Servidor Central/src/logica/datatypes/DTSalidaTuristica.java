@@ -10,7 +10,7 @@ import logica.entidades.ActividadTuristica;
  * @author Equipo taller prog 16
  */
 
-public class DTSalidaTuristica {
+public class  DTSalidaTuristica {
 	private String nombre;
 	private int cantMaxTuristas;
 	private LocalDate fechaAlta;

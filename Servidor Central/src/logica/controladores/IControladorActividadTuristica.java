@@ -26,14 +26,42 @@ public interface IControladorActividadTuristica {
      */
     void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException;
 
-    //Operaciones de CdeU: Alta de Actividad Turistica
+	/**
+	 * Devuelve el nombre de todos los departamentos cargados en el sistema
+	 * @return
+	 */
 	List<String> obtenerIdDepartamentos();
-	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta) throws ActividadTuristicaYaRegistradaException;
-	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);
-	List<String> obtenerIdActividadesTuristicas(String departamento);
-	//boolean existeActividadTuristica(String nomActividad);
 
-	//fin operaciones AAT
+	/**
+	 * Crea una actividad turística con los parámetros
+	 * @param nombreProveedor
+	 * @param departamento
+	 * @param nombreActividad
+	 * @param descripcion
+	 * @param duracion
+	 * @param costo
+	 * @param ciudad
+	 * @param fechaAlta
+	 * @throws ActividadTuristicaYaRegistradaException
+	 */
+	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta) throws ActividadTuristicaYaRegistradaException;
+
+	/**
+	 * Obtiene los detalles de la actividad turística identificada por 'nombreAct'
+	 * @param nombreAct
+	 * @return
+	 */
+	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);
+
+	/**
+	 * Devuelve los nombres de todas las actividades turísticas.
+	 * @param departamento
+	 * @return
+	 */
+	List<String> obtenerIdActividadesTuristicas(String departamento);
+
+
+
 
 	/**
 	 * Devueve los DtSalidasTuristas de todas las salidas asociadas con la actividad identificada con nombreActTuri
@@ -67,12 +95,33 @@ public interface IControladorActividadTuristica {
 	 */
 	void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
 
+	/**
+	 * Devuelve los nombres de todas las salidas registradas en el sistema.
+	 * @param act
+	 * @return
+	 */
 	List<String> obtenerIdSalidasTuristicas(String act);
 
+	/**
+	 * Devuelve los datos de la salida identificada por el nombre pasada por parámetro.
+	 * @param nomSal
+	 * @return
+	 */
 	DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal);
 
+	/**
+	 * Devuelve los detalles de los datos de la salida identificada por el nombre pasada por parámetro.
+	 * @param nomSal
+	 * @return
+	 */
 	DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal);
-	
+
+	/**
+	 * Devuelve los datos de la inscripción que tiene un link entre la salida identificada por 'nomSal' y por el turista identificado por 'nick'
+	 * @param nick
+	 * @param nomSal
+	 * @return
+	 */
 	DTInscripcion obtenerDTInscripcion(String nick, String nomSal);
 	
 }
