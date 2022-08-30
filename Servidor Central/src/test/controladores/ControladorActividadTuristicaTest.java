@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
@@ -318,9 +319,11 @@ class ControladorActividadTuristicaTest {
 		
 		for (int j = 0; j < 50; j++) {
 			String nombreActividad = "Actividad " + id + " i=" + j;
+			String nombreSalida = "Salida " + id + " i=" + j;
 			var salidas = cat.obtenerIdSalidasTuristicas(nombreActividad);
 			
 			assertEquals(1, salidas.size());
+			assertEquals(nombreSalida, salidas.get(0));
 		}
 	}
 		
@@ -396,20 +399,22 @@ class ControladorActividadTuristicaTest {
 			assertFalse(act.getPaquetes().isEmpty());
 
 			if(i % 2 == 0){
-				assertFalse(act.getSalidas().isEmpty());
+				assertNotEquals(0, act.getSalidas().size());
+				
+				var nombAct = ((DTSalidaTuristica) act.getSalidas().values().toArray()[0]).getActividad().getNombre();
+				
+				DTSalidaTuristica salida = act.getSalida(nombreSalida);
+				
+				assertNotEquals(null, salida);
+				
+				assertEquals(nombreSalida, salida.getNombre());
+				assertEquals(5, salida.getCantMaxTuristas());
+				assertEquals(fechaAlta.plusYears(6), salida.getFechaAlta());
+				assertEquals(fechaConHoraAhora.plusYears(7), salida.getFechaHoraSalida());				
 			} else {
 				assertTrue(act.getSalidas().isEmpty());
 			}
 			assertTrue(act.getPaquetes().containsKey("Paquete"));
-
-			try {
-				cat.altaDepartamento(departamento, descripcion, departamento);
-			} catch (DeparamentoYaRegistradoException e) {
-				// Esperable, no pasa nada.
-			} catch(Exception e) {
-				fail(e.getMessage());
-			}
-
 
 		}
     }
@@ -515,9 +520,13 @@ class ControladorActividadTuristicaTest {
 			fail(e.getMessage());
 		}
 		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getFechaInscripcion(),LocalDate.now().plusYears(5));
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCantidadTuristas(),1);
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCantidadTuristas(), 1);
 		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getTurista().getNickname(),nickname);
 		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getSalidaTuristica().getNombre(),nombreSalida);
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCosto(), costo);
+		
+		// TODO: agregar test de compra cuando se implemente
+		assertEquals("", cat.obtenerDTInscripcion(nickname,nombreSalida).getCompra());
 		assertFalse(cat.obtenerDTSalidaTuristicaDetalle(nombreSalida).getInscriptos().isEmpty());
 
 	}
