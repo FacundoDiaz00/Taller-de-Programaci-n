@@ -1,5 +1,6 @@
 package logica.entidades;
 
+import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTTurista;
@@ -20,9 +21,13 @@ public class Inscripcion {
     private Turista turista;
 
     public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, Compra compra,
-            SalidaTuristica salidaTuristica, Turista tur) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion  {
+            SalidaTuristica salidaTuristica, Turista tur) throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
+        //alta salida <= alta inscripcion <= fecha salida, se controlan ambas desigualdades.
         if(salidaTuristica.getFechaAlta().isAfter(fechaInscrpicion)){
             throw new FechaAltaSalidaTuristicaPosteriorAFechaInscripcion("La fecha de inscripción es previa a la fecha de registro de la salida turística elegida. Modifique la fecha e inténtenlo de nuevo.");
+        }
+        if(fechaInscrpicion.isAfter(salidaTuristica.getFechaHoraSalida().toLocalDate())){
+            throw new AltaInscripcionPosteriorAFechaSalidaException("La fecha de inscripcion debe ser anterior a la fecha de la salida seleccionada.");
         }
         setFechaInscrpicion(fechaInscrpicion);
         setCantidadTuristas(cantidadTuristas);
