@@ -51,3 +51,7 @@ footer{
     display: flex;
     justify-content: flex-end;
 }
+
+.descripcion-actividad, .descripcion-paquete{
+    min-height: 100px;
+}
