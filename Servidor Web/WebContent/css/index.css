@@ -12,12 +12,16 @@
 }
 
 .card-title{
-    padding: 2px 0 0 5px;
+    padding: 2px 0 0 15px;
 }
 
 .barra_de_navegacion{
     display: grid;
     justify-content: space-between;
+}
+
+.categoria-selecionada{
+    font-weight: bold;
 }
 
 
@@ -26,11 +30,24 @@ footer{
 
 }
 
-#contenedor-actividades-turisticas img{
+#contenedor-actividades-turisticas img, #contenedor-paquetes img{
     height: 100%;
 }
 
-.descripcion-actividad{
-    max-height: 130px;
-    overflow: scroll;
+#contenedor-actividades-turisticas{
+    margin-bottom: 20px;
+}
+
+#contenedor-paquetes{
+    margin-bottom: 10px;
+}
+
+#contenedor-actividades-turisticas > div, #contenedor-paquetes > div{
+    margin-left: 20px;
+}
+
+.botonera{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
