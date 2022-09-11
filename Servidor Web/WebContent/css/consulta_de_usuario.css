@@ -1,0 +1,17 @@
+.imagen_perfil{
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    left: calc(100% - 20px);
+    bottom: 0.2px;
+    top: 0.001px
+}
+
+.consulta_de_usuario{
+    align-content: center;
+}
+
+.nickname_usuario{
+    margin-right: 30px;
+}
