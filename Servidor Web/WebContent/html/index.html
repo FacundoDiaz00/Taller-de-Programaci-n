@@ -2,12 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+
+    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
+    <title>Turismo UY</title>
 </head>
 <body>
-    <h1>HOOOOOLLLLOOOOO</h1>
+<main>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="index.html">Turismo UY</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html"><strong>Actividades y Paquetes</strong></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
+                    <form class="d-flex buscar" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn" ><i class="fas fa-search"></i></button>
+                    </form>
+                    <li class="alta_de_usuario">
+                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
+                    </li>
+                    <li class="iniciar_sesion">
+                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </nav>
+
+
+    <section id="contenedor">
+        <div id="filtros">
+            <div class="card" id="filtro-categoria">
+                <h5 class="card-title">Categorias</h5>
+                <a href="#" class="list-group-item">Categoria 1</a>
+                <a href="#" class="list-group-item">Categoria 2</a>
+            </div>
+            <div class="card" id="filtro-departamentos">
+                <h5 class="card-title">Departamentos</h5>
+                <a href="#" class="list-group-item">Artigas</a>
+                <a href="#" class="list-group-item">Salto</a>
+            </div>
+        </div>
+        <div id="contenedor-items">
+            <div class="card" id="contenedor-actividades-turisticas">
+                <h2 class="card-title">Actividades</h2>
+
+                <div class="card actividad-item" >
+                    <h5 class="card-title">Departamentos</h5>
+                    <a href="#" class="list-group-item">Artigas</a>
+                    <a href="#" class="list-group-item">Salto</a>
+                </div>
+
+            </div>
+
+            <div class="card" id="contenedor-paquetes">
+                <h2 class="card-title">Paquetes</h2>
+
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
+        <span class="" style="font-size: 25px; color: Grey;">
+          <i class="fas fa-route"></i>
+        </span>
+            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
+        </div>
+    </footer>
+</main>
+
+
+<script src="../js/jquery-3.3.1.slim.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
 </body>
 </html>
