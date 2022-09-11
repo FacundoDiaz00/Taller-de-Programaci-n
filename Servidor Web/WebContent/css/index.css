@@ -20,7 +20,17 @@
     justify-content: space-between;
 }
 
+
+
 footer{
 
 }
 
+#contenedor-actividades-turisticas img{
+    height: 100%;
+}
+
+.descripcion-actividad{
+    max-height: 130px;
+    overflow: scroll;
+}
