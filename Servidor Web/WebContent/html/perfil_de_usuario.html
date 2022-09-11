@@ -5,15 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/perfil_de_usuario.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
 
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
+
     <title>Turismo UY</title>
 </head>
 <body>
 <main>
+
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
         <div class="container-fluid">
@@ -58,73 +61,31 @@
 
 
     <section id="contenedor">
-        <div id="filtros">
-            <div class="card" id="filtro-categoria">
-                <h5 class="card-title">Categorias</h5>
-                <a href="#" class="list-group-item">Categoria 1</a>
-                <a href="#" class="list-group-item">Categoria 2</a>
-            </div>
-            <div class="card" id="filtro-departamentos">
-                <h5 class="card-title">Departamentos</h5>
-                <a href="#" class="list-group-item">Artigas</a>
-                <a href="#" class="list-group-item">Salto</a>
-            </div>
+        <div id="contenedor_side_bar">
+
         </div>
         <div id="contenedor-items">
-            <div class="card" id="contenedor-actividades-turisticas">
-                <h2 class="card-title">Actividades</h2>
+            <div class="card" id="contenedor_tab">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="boton-general" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+                    </li>
 
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="../img/actividad1.jpg" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Es uruguay</h5>
-                                <p class="card-text descripcion-actividad">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A autem consequatur enim esse eveniet expedita, fugit mollitia optio provident rerum sunt tempora, veritatis. Aliquam at nostrum tempora! Eius, iusto provident! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque dicta dolore ducimus esse, eveniet inventore laboriosam laborum laudantium maiores nulla optio praesentium qui quibusdam rem saepe sed tempore vitae.</p>
-                            </div>
-                        </div>
-                    </div>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">pepep</div>
+                    <div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="1">epep</div>
+                    <div class="tab-pane fade" id="boton-paquetes-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="2">pepep2</div>
                 </div>
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="../img/actividad2.jpg" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Super uruguay</h5>
-                                <p class="card-text descripcion-actividad">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A autem consequatur enim esse eveniet expedita, </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="../img/actividad3.jpg" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">mmmmmm</h5>
-                                <p class="card-text descripcion-actividad">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A autem consequatur enim esse eveniet expedita, fugit mollitia optio provident rerum sunt tempora, veritatis. Aliquam at nostrum tempora! Eius, iusto provident! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque dicta dolore ducimus esse, eveniet inventore laboriosam laborum laudantium maiores nulla optio praesentium qui quibusdam rem saepe sed tempore vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card" id="contenedor-paquetes">
-                <h2 class="card-title">Paquetes</h2>
 
             </div>
         </div>
-
-
 
     </section>
 
@@ -142,6 +103,7 @@
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/perfil_de_usuario.js"></script>
 
 </body>
 </html>
