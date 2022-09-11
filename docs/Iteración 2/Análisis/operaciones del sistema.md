@@ -4,6 +4,8 @@
   List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String idCategoria)  
 
   List<String> obtenerIdCategoriasDisponibleParaInscripcion(String idActividad, String idTurista)
+  
+  comprarPaquete(idPaquete : string, cantTuristas : int)
 
 ## Modificadas 
 obtenerIdActividadesTuristicas => obtenerIdActividadesConfirmadasPorDepartamento
