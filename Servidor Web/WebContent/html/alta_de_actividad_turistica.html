@@ -5,6 +5,7 @@
     <title>Turismo UY</title>
 
 <!--    <link rel="stylesheet" href="../css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="../css/estilosComun.css">
     <link rel="stylesheet" href="../css/alta_de_actividad_turistica.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
@@ -39,7 +40,7 @@
                 </ul>
 
                 <ul class="navbar-nav d-flex">
-                    <form class="d-flex buscar" role="search">
+                    <form class="d-flex buscar" role="search" id="buscador">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn" ><i id="lupa" class="fas fa-search"></i></button>
                     </form>
@@ -58,52 +59,72 @@
 
 
     <section id="contenedor">
-        <form id="contenedor-form" class="card">
-            <div class="card-body">
-                <h5 class="card-title">Crear Actividad Turistica</h5>
+        <div id="alert_position">
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="departamentos">Departamento:</span>
-                    <select class="form-select" aria-label="Departamentos">
-                        <option value="1">Artigas</option>
-                        <option value="2">Salto</option>
 
-                    </select>
+        </div>
+        <div id="contenedorForm">
+            <form class="card" id="form-alta-actividad">
+                <div class="card-body">
+                    <h5 class="card-title">Crear Actividad Turistica</h5>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label" id="labelDepartamento">Departamento:<span class="obligatorio"> *</span></span>
+                        <select required class="form-select" aria-label="Departamentos">
+                            <option value="1">Artigas</option>
+                            <option value="2">Salto</option>
+                        </select>
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Nombre:<span class="obligatorio"> *</span></span>
+                        <input type="text" required class="form-control" placeholder="Ingrese un nombre" aria-label="Nickname" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Descripcion:<span class="obligatorio"> *</span></span>
+                        <textarea type="text" required class="form-control" placeholder="Ingrese una descripcion" aria-label="Descripcion" aria-describedby="basic-addon1"></textarea>
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Duracion:<span class="obligatorio"> *</span></span>
+
+                        <div class="input-group">
+                            <input type="number" min="0" required class="form-control" placeholder="Ingrese una duracion " aria-label="Duracion" aria-describedby="basic-addon1">
+                            <span class="input-group-text" id="basic-addon1">Horas</span>
+                        </div>
+                    </div>
+
+                    <div class="contenedorinput mb-3 hideArrows" >
+                        <span class="input-label">Costo:<span class="obligatorio"> *</span></span>
+
+                        <div class="input-group">
+                            <input type="number" min="0" required class="form-control" placeholder="Ingrese una costo " aria-label="Duracion" aria-describedby="basic-addon1">
+                            <span class="input-group-text" id="basic-addon2">$</span>
+                        </div>
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Cuidad:<span class="obligatorio"> *</span></span>
+                        <input type="text" required class="form-control" placeholder="Ingrese una cuidad" aria-label="Cuidad" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Imagen:</span>
+                        <input type="file" accept="image/*" class="form-control" placeholder="Ingrese una Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
+                    </div>
+
+
+
+                    <div id="botonera">
+                        <a href="index.html" class="btn btn-danger">Cancelar</a>
+                        <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
+                    </div>
+
                 </div>
+            </form>
+        </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="nickname">Nickname:</span>
-                    <input type="text" class="form-control" placeholder="Nickname" aria-label="Nickname" aria-describedby="basic-addon1">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="nombre">Nombre:</span>
-                    <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="apellido">Apellido:</span>
-                    <input type="text" class="form-control" placeholder="Apellido" aria-label="Apellido" aria-describedby="basic-addon1">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="contraseña">Contraseña:</span>
-                    <input type="text" class="form-control" placeholder="Contraseña" aria-label="Apellido" aria-describedby="basic-addon1">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="contraseña_verificacion">Verificacion contraseña:</span>
-                    <input type="text" class="form-control" placeholder="Verificacion contraseña" aria-label="Apellido" aria-describedby="basic-addon1">
-                </div>
-                
-
-                <div id="botonera">
-                    <a href="index.html" class="btn btn-danger">Cancelar</a>
-                    <input type="submit" class="btn btn-success" value="Aceptar">
-                </div>
-
-            </div>
-        </form>
 
     </section>
 
@@ -125,7 +146,8 @@
 
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
-<!--<script src="../js/bootstrap.min.js"></script>-->
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../fontawesome-free-6.2.0-web/js/all.js"></script>
+<script src="../js/comportamientoComun.js"></script>
+<script src="../js/alta_de_actividad_turistica.js"></script>
 </html>

@@ -1,13 +1,26 @@
 #contenedor{
     padding: 10px;
     min-height: calc(100vh - 141.5px);
+    display: grid;
+    grid-template-rows: 1fr;
+}
+
+#alert_position{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+
+#contenedorForm{
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#contenedor-form{
-    width: 600px;
+form{
+    width: 800px;
 }
 
 #botonera{
@@ -17,4 +30,18 @@
 
 #lupa{
     color: white;
+}
+
+.contenedorinput{
+    display: flex;
+    align-items: baseline;
+}
+
+.contenedorinput .input-label{
+    width: 250px;
+    margin-right: 10px;
+}
+
+textarea{
+    max-height: 120px;
 }
