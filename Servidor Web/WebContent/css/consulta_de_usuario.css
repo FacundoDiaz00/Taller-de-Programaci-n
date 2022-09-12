@@ -1,9 +1,21 @@
+.cardPerfil{
+    display: grid !important;
+    grid-template-columns: 0.3fr 1fr;
+    grid-column-gap: 20px;
+    padding: 20px;
+}
+
+.perfil{
+    width: 250px;
+    height: 250px;
+}
+
 .imagen_perfil{
     border-radius: 50%;
     height: 48px;
     width: 48px;
     position: absolute;
-    left: calc(100% - 22px);
+    left: calc(100% - 50px);
     bottom: -2px;
 }
 
@@ -12,6 +24,5 @@
 }
 
 .nickname_usuario{
-    margin-right: 20px;
-    margin-left: 10px;
+    margin-right: 50px;
 }

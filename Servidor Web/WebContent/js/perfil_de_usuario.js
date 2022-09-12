@@ -4,8 +4,10 @@ function cambiarSeleccionado($botonSeleccionado, $botonOtro1, $botonOtro2) {
     $botonSeleccionado.addClass("show");
     $botonOtro1.removeClass("active");
     $botonOtro1.removeClass("show");
+    $botonOtro1.removeClass("cardPerfil");
     $botonOtro2.removeClass("show");
     $botonOtro2.removeClass("active");
+    $botonOtro2.removeClass("cardPerfil");
 }
 
 $("#boton-paquetes")[0].addEventListener("click", function() {
@@ -14,6 +16,7 @@ $("#boton-paquetes")[0].addEventListener("click", function() {
 })
 
 $("#boton-general")[0].addEventListener("click", function() {
+    $("#boton-general-pane").addClass("cardPerfil");
     cambiarSeleccionado($("#boton-general-pane"), $("#boton-paquetes-pane"), $("#boton-salidas-pane"));
 })
 
