@@ -30,6 +30,8 @@ footer{
 
 }
 
+
+
 #contenedor-actividades-turisticas img, #contenedor-paquetes img{
     height: 100%;
 }
@@ -54,4 +56,17 @@ footer{
 
 .descripcion-actividad, .descripcion-paquete{
     min-height: 100px;
+    max-height: 170px;
+    overflow-y: auto;
+}
+.header-card-with-button{
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 10px 0 5px 0;
+    align-items: center;
+}
+
+.header-card-with-button > a{
+    height: 40px;
 }
