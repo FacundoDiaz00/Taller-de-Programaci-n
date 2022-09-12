@@ -20,3 +20,7 @@
 #buscador{
     width: 250px;
 }
+
+form[role="search"] i{
+    color: white;
+}
