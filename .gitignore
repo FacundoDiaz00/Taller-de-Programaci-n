@@ -218,3 +218,5 @@ Implementacion/Servidor Central/src/.idea/
 *.crswap
 
 *.code-workspace
+
+*.dtmp
