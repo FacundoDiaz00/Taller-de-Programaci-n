@@ -1,0 +1,49 @@
+#contenedor{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 300px 0.8fr;
+    grid-column-gap: 20px;
+    min-height: calc(100vh - 141.5px);
+}
+
+.cardPerfil{
+    display: grid !important;
+    grid-template-columns: 0.3fr 1fr;
+    grid-column-gap: 20px;
+    padding: 20px;
+}
+
+.perfil{
+    width: 250px;
+    height: 250px;
+}
+
+.imagen_perfil{
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    left: calc(100% - 50px);
+    bottom: -2px;
+}
+
+.consulta_de_usuario{
+    align-content: center;
+}
+
+.nickname_usuario{
+    margin-right: 50px;
+}
+
+.pencil{
+    margin-left: 20px;
+    color: #C34227;
+}
+
+.text{
+    color: #4e555b;
+}
+
+.imagenSalidas{
+    margin: 10px;
+}

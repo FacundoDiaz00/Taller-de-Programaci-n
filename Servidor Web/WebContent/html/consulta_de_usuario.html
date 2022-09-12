@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/consulta_de_salida_turistica.css">
+    <link rel="stylesheet" href="../css/consulta_de_usuario.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
@@ -24,7 +24,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-sm-between consulta_de_usuario" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
                     <li class="nav-item ">
@@ -38,16 +38,28 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
-                    <form class="d-flex buscar" role="search">
+                <ul class="navbar-nav d-flex">
+                    <form class="d-flex buscar" role="search" id="buscador">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
-                    <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
-                    </li>
-                    <li class="iniciar_sesion">
-                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nickname_usuario" href="perfil_de_usuario.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Harry Estilos
+                            <img  class="imagen_perfil " src="../img/harry_estilos.png">
+                        </a>
+                        <!--                        no anda el dropdown queda como mejora agregarlo-->
+
+                        <!--                        <ul class="dropdown-menu">-->
+                        <!--                            <li><a class="dropdown-item" href="#">Action</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Another action</a></li>-->
+                        <!--                            <li><hr class="dropdown-divider"></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+                        <!--                        </ul>-->
+                        <!--                        <ul class="dropdown-menu">-->
+                        <!--                            <li><a class="dropdown-item" href="perfil_de_usuario.html">Ver Perfil</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>-->
+                        <!--                        </ul>-->
                     </li>
                 </ul>
 
@@ -56,25 +68,7 @@
 
     </nav>
 
-
     <section id="contenedor">
-        <div id="filtros">
-            <!--            <div class="card" id="filtro-categoria">-->
-            <!--                <h5 class="card-title">Actividades</h5>-->
-            <!--                <a href="#" class="list-group-item">Actividad 1</a>-->
-            <!--                <a href="#" class="list-group-item">Actividad 2</a>-->
-            <!--            </div>-->
-            <!--            <div class="card" id="filtro-departamentos">-->
-            <!--                <h5 class="card-title">Departamentos</h5>-->
-            <!--                <a href="#" class="list-group-item">Artigas</a>-->
-            <!--                <a href="#" class="list-group-item">Salto</a>-->
-            <!--            </div>-->
-        </div>
-        <div id="contenedor-items">
-            <!--            <div class="card" id="contenedor-salidas-turisticas">-->
-            <!--                <h2 class="card-title">Salidas Turísticas</h2>-->
-            <!--            </div>-->
-        </div>
 
     </section>
 
