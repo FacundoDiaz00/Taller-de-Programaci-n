@@ -1,12 +1,22 @@
-boton_seleccionado = $("#boton-paquetes");
-console.log("Cargando perfil_de_usuario.js", $("#boton-paquetes"));
-$("#boton-paquetes")[0].addEventListener("click", function() {
-    $("#boton-paquetes-pane").addClass("active");
-    $("#boton-paquetes-pane").addClass("show");
-    $("#boton-general-pane").removeClass("active");
-    $("#boton-general-pane").removeClass("show");
-    $("#boton-salidas-pane").removeClass("show");
-    $("#boton-salidas-pane").removeClass("active");
+function cambiarSeleccionado($botonSeleccionado, $botonOtro1, $botonOtro2) {
+    console.log("cambiarSeleccionado");
+    $botonSeleccionado.addClass("active");
+    $botonSeleccionado.addClass("show");
+    $botonOtro1.removeClass("active");
+    $botonOtro1.removeClass("show");
+    $botonOtro2.removeClass("show");
+    $botonOtro2.removeClass("active");
+}
 
-    console.log("Paquetes");
+$("#boton-paquetes")[0].addEventListener("click", function() {
+    console.log($("#boton-paquetes-pane"));
+    cambiarSeleccionado($("#boton-paquetes-pane"), $("#boton-general-pane"), $("#boton-salidas-pane"));
+})
+
+$("#boton-general")[0].addEventListener("click", function() {
+    cambiarSeleccionado($("#boton-general-pane"), $("#boton-paquetes-pane"), $("#boton-salidas-pane"));
+})
+
+$("#boton-salidas")[0].addEventListener("click", function() {
+    cambiarSeleccionado($("#boton-salidas-pane"), $("#boton-paquetes-pane"), $("#boton-general-pane"));
 })
