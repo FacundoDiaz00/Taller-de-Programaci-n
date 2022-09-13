@@ -1,5 +1,4 @@
 #contenedor{
-    padding: 10px;
     min-height: calc(100vh - 141.5px);
     display: grid;
     grid-template-rows: 1fr;
@@ -29,21 +28,20 @@
 }
 
 .contenedorinput{
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: baseline;
 }
 
 .contenedorinput .input-label{
-    width: 250px;
+    width: 200px;
     margin-right: 10px;
 }
 
-textarea{
-    max-height: 120px;
+#tipoUsuarioRadioButtonContainer{
+    display: flex;
 }
 
-#contenedorCategorias{
-    width: 100%;
-    max-height: 250px;
-    overflow-y: auto;
+#tipoUsuarioRadioButtonContainer .form-check{
+    margin-right: 10px;
 }

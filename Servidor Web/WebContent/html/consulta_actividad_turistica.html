@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/consulta_actividad_turistica.css">
     <link rel="stylesheet" href="../css/estilosComun.css">
+    <link rel="stylesheet" href="../css/consulta_actividad_turistica.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
@@ -37,18 +37,18 @@
 
                 </ul>
 
-                <ul class="navbar-nav d-flex">
-                    <form class="d-flex buscar" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn" ><i class="fas fa-search"></i></button>
-                    </form>
-                    <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
-                    </li>
-                    <li class="iniciar_sesion">
-                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav d-flex">
+                        <form class="d-flex buscar" role="search">
+                            <input class="form-control me-2" id="buscador" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn" ><i class="fas fa-search"></i></button>
+                        </form>
+                        <li class="alta_de_usuario">
+                            <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
+                        </li>
+                        <li class="iniciar_sesion">
+                            <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                        </li>
+                    </ul>
 
             </div>
         </div>
@@ -58,27 +58,46 @@
 
         <div id="info-actividad">
 
-            <div id="info-general-imagen">
-                <img src="../img/actividad1.png " alt="" class="imagen">
-            </div>
-
-            <div id="info">
-                <div>
-                    <h2>Degusta</h2>
-                    <ul>
-                        <li><a href="#">Alta salida turistica</a></li>
-                        <li><a href="#">Agregar a paquete de actividades turisticas</a></li>
-                    </ul>
-
+                <div id="info-general-imagen">
+                    <img src="https://tinyurl.com/bdehz9bb" alt="">
                 </div>
 
-                <div id="descripcion">
-                    <h5 class="">Descripcion</h5>
-                    <p>Festival gastronómico de productos locales en Rocha</p>
+                <div id="info">
+                        <h2>Degusta</h2>
+                        <h6>Creado el 20/7/2022</h6>
+                        <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
+                        <ul>
+                            <li><a href="#">Crear una salida turistica</a></li>
+                        </ul>
                 </div>
-                <div id="infoGeneralActividad">
+
+                <div id="resto-de-la-info-actividad">
+                    <div id="descripcion">
+                        <h5 class="">Descripcion</h5>
+                        <p>Festival gastron´omico de productos locales en Rocha</p>
+                    </div>
+
+
+
+                    <div class="div-doble" id="Duracion">
+                        <h5 class="">Duracion: </h5>
+                        <p>3 horas</p>
+                    </div>
+                    <div class="div-doble" id="Costo">
+                        <h5 class="">Costo: </h5>
+                        <p>800$</p>
+                    </div>
+                    <div class="div-doble" id="Cuidad">
+                        <h5 class="">Cuidad: </h5>
+                        <p>Rocha</p>
+                    </div>
+                    <div class="div-doble" id="Departamento">
+                        <h5 class="">Departamento: </h5>
+                        <p>Rocha</p>
+                    </div>
+
                     <div id="categorias">
-                        <h5 class="">Categorias</h5>
+                        <h5 class="">Categorias:</h5>
                         <ul>
                             <li> Gastronomía</li>
                         </ul>
@@ -103,40 +122,39 @@
 
             </div>
 
+            <div id="contenedor-salidas-paquetes">
+                <div id="contenedor-items">
+                    <div class="card" id="contenedor-salidas-turisticas">
+                        <h2 class="card-title">Salidas Turisticas:</h2>
 
-        </div>
-
-        <div id="contenedor-salidas-paquetes">
-            <div id="contenedor-items">
-                <div class="card" id="contenedor-salidas-turisticas">
-                    <h2 class="card-title">Salidas</h2>
-
-                    <div class="card mb-3" style="max-width: 800px;">
-                        <div class="row g-0">
-                            <div class="col-md-4 img-contain">
-                                <img src="../img/salida1.png" class="img-fluid rounded-start">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Degusta Agosto</h5>
-                                    <div class="botonera">
-                                        <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+                        <div class="card mb-3" style="max-width: 800px;">
+                            <div class="row g-0">
+                                <div class="col-md-4 img-contain">
+                                    <img src="https://tinyurl.com/4jwed4jx" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Degusta Agosto</h5>
+                                        <div class="botonera">
+                                            <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card mb-3" style="max-width: 800px;">
-                        <div class="row g-0">
-                            <div class="col-md-4 img-contain">
-                                <img src="../img/salida2.png" class="img-fluid rounded-start">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Degusta Setiembre</h5>
-                                    <div class="botonera">
-                                        <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+                        <div class="card mb-3" style="max-width: 800px;">
+                            <div class="row g-0">
+                                <div class="col-md-4 img-contain">
+                                    <img src="https://tinyurl.com/2maxmx6c" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Degusta Setiembre</h5>
+                                        <div class="botonera">
+                                            <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -145,8 +163,17 @@
 
                 </div>
 
-                <div class="card" id="contenedor-paquetes">
-                    <h2 class="card-title">Paquetes</h2>
+                        <div class="card mb-3" style="max-width: 800px;">
+                            <div class="row g-0">
+                                <div class="col-md-4 img-contain">
+                                    <img src="https://tinyurl.com/3ppwdca4" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Disfrutar Rocha</h5>
+                                        <div class="botonera">
+                                            <a href="#" class="btn btn-primary">Ver mas</a>
+                                        </div>
 
                     <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
                         <div class="row g-0">
