@@ -7,6 +7,8 @@
   
   comprarPaquete(idPaquete : string, cantTuristas : int)
 
+  List<DTListadoUsuario> obtenerDTListadoUsuarios();
+
   obtenerDTUsuarioDetallePrivado(nick: String): DTUsuario (pero devuelve en realidad DTTuristaDetallePrivado y DTProveedorDetallePrivado)
 
 ## Modificadas 
