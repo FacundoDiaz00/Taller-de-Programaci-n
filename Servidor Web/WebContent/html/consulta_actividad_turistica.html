@@ -4,76 +4,197 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/estilosComun.css">
     <link rel="stylesheet" href="../css/consulta_actividad_turistica.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
 
-    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
     <title>Turismo UY</title>
 </head>
 <body>
-    <main>
-        <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">Turismo UY</a>
+<main>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Turismo UY</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
-                        <li class="nav-item ">
-                            <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html"><strong>Actividades y Paquetes</strong></a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
-                        </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Actividades y Paquetes</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
+                    </li>
+
+                </ul>
+
+                <ul class="navbar-nav d-flex">
+                    <form class="d-flex buscar" role="search">
+                        <input class="form-control me-2" id="buscador" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn" ><i class="fas fa-search"></i></button>
+                    </form>
+                    <li class="alta_de_usuario">
+                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
+                    </li>
+                    <li class="iniciar_sesion">
+                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <section id="contenedor">
+
+        <div id="titulo">
+            <h1>Consulta de actividad</h1>
+        </div>
+
+        <div></div>
+
+        <div id="info-actividad">
+
+
+
+            <div id="info-general-imagen">
+                <img src="https://tinyurl.com/bdehz9bb" alt="">
+            </div>
+
+            <div id="info">
+                <h2>Degusta</h2>
+                <h6>Creado el 20/7/2022</h6>
+                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
+                <ul>
+                    <li><a href="#">Crear una salida turistica</a></li>
+                </ul>
+            </div>
+
+            <div id="resto-de-la-info-actividad">
+                <div id="descripcion">
+                    <h5 class="">Descripcion</h5>
+                    <p>Festival gastronómico de productos locales en Rocha</p>
+                </div>
+
+
+
+                <div class="div-doble" id="Duracion">
+                    <h5 class="">Duracion: </h5>
+                    <p>3 horas</p>
+                </div>
+                <div class="div-doble" id="Costo">
+                    <h5 class="">Costo: </h5>
+                    <p>800$</p>
+                </div>
+                <div class="div-doble" id="Cuidad">
+                    <h5 class="">Cuidad: </h5>
+                    <p>Rocha</p>
+                </div>
+                <div class="div-doble" id="Departamento">
+                    <h5 class="">Departamento: </h5>
+                    <p>Rocha</p>
+                </div>
+
+                <div id="categorias">
+                    <h5 class="">Categorias:</h5>
+                    <ul>
+                        <li> Gastronomía</li>
                     </ul>
-
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
-                        <form class="d-flex buscar" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn" ><i class="fas fa-search"></i></button>
-                        </form>
-                        <li class="alta_de_usuario">
-                            <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
-                        </li>
-                        <li class="iniciar_sesion">
-                            <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
-                        </li>
-                    </ul>
-
                 </div>
             </div>
-        </nav>
 
-        <section id="contenedor">
-            
-        </section>
+        </div>
 
-        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-            <div class="container text-center">
+        <div id="contenedor-salidas-paquetes">
+            <div id="contenedor-items">
+                <div class="card" id="contenedor-salidas-turisticas">
+                    <h2 class="card-title">Salidas Turisticas:</h2>
+
+                    <div class="card mb-3" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 img-contain">
+                                <img src="https://tinyurl.com/4jwed4jx" class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Degusta Agosto</h5>
+                                    <div class="botonera">
+                                        <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 img-contain">
+                                <img src="https://tinyurl.com/2maxmx6c" class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Degusta Setiembre</h5>
+                                    <div class="botonera">
+                                        <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="contenedor-paquetes">
+                    <h2 class="card-title">Paquetes:</h2>
+
+                    <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
+                        <div class="row g-0">
+                            <div class="col-md-4 img-contain">
+                                <img src="../img/pack1.png" class="img-fluid rounded-start paquetes">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body cards">
+                                    <h5 class="card-title">Disfrutar Rocha</h5>
+                                    <p class="card-text" > Cantidad de Turistas: 5</p>
+                                    <p class="card-text" > Fecha Alta: 15/8/2022</p>
+                                    <div class="botonera">
+                                        <a href="consulta_de_paquete.html" class="btn btn-primary">Ver mas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
             <span class="" style="font-size: 25px; color: Grey;">
                 <i class="fas fa-route"></i>
             </span>
             <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
-            </div>
-        </footer>
+        </div>
+    </footer>
 
-    </main>
-
-
+</main>
 
 
-    <script src="../js/jquery-3.3.1.slim.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+
+
+
+<script src="../js/jquery-3.3.1.slim.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 </body>
 </html>
