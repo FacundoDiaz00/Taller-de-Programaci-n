@@ -1,9 +1,6 @@
 #contenedor{
-
-    display: grid;
-    grid-template-columns: 500px 1fr;
-    grid-column-gap: 20px;
-    min-height: calc(100vh - 141.5px);
+    padding: 10px;
+    height: 603px;
 }
 
 #filtros > div{
@@ -11,12 +8,14 @@
     margin-left: 5px;
 }
 
-.card-salidas{
+.cards{
     display: grid !important;
-    grid-template-columns: 0.8fr 0.2fr;
+    grid-template-columns: 0.7fr 500px;
     grid-column-gap: 20px;
 }
 
-.imagenSalidas{
+.imagenActividades{
     margin: 10px 20px 10px 10px;
+    width: 500px !important;
+    height: 100% !important;
 }
