@@ -11,7 +11,6 @@ function cambiarSeleccionado($botonSeleccionado, $botonOtro1, $botonOtro2) {
 }
 
 $("#boton-paquetes")[0].addEventListener("click", function() {
-    console.log($("#boton-paquetes-pane"));
     cambiarSeleccionado($("#boton-paquetes-pane"), $("#boton-general-pane"), $("#boton-salidas-pane"));
 })
 
