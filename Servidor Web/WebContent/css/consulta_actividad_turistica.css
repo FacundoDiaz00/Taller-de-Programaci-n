@@ -58,3 +58,13 @@
     justify-content: flex-end;
 }
 
+#infoGeneralActividad{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
+
+.imagen{
+    margin: 10px 20px 10px 10px
+}
+

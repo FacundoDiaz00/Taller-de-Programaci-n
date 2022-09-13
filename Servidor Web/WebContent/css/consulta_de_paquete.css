@@ -1,0 +1,11 @@
+#contenedor{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 300px 0.8fr;
+    grid-column-gap: 20px;
+    min-height: calc(100vh - 141.5px);
+}
+
+.imagen{
+    margin: 10px 20px 10px 10px;
+}
