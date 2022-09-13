@@ -17,10 +17,17 @@
 .hideArrows input[type=number] {
     -moz-appearance: textfield;
 }
-#buscador{
-    width: 250px;
-}
+
+
 
 form[role="search"] i{
     color: white;
+}
+
+form[role="search"] input{
+    width: 250px;
+}
+
+.eliminarElemento{
+    display: none;
 }

@@ -5,20 +5,20 @@
     <title>Turismo UY</title>
 
 <!--    <link rel="stylesheet" href="../css/bootstrap.min.css">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../css/estilosComun.css">
     <link rel="stylesheet" href="../css/alta_de_actividad_turistica.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
 
 </head>
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-
         <div class="container-fluid">
-
             <a class="navbar-brand" href="index.html">Turismo UY</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
                     <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html"><strong>Actividades y Paquetes</strong></a>
+                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Actividades y Paquetes</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
@@ -37,12 +37,13 @@
                     <li class="nav-item ">
                         <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
                     </li>
+
                 </ul>
 
                 <ul class="navbar-nav d-flex">
-                    <form class="d-flex buscar" role="search" id="buscador">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn" ><i id="lupa" class="fas fa-search"></i></button>
+                    <form class="d-flex buscar" role="search">
+                        <input class="form-control me-2" id="buscador" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
                     <li class="alta_de_usuario">
                         <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
@@ -54,15 +55,11 @@
 
             </div>
         </div>
-
     </nav>
 
 
     <section id="contenedor">
-        <div id="alert_position">
-
-
-        </div>
+        <div id="alert_position"></div>
         <div id="contenedorForm">
             <form class="card" id="form-alta-actividad">
                 <div class="card-body">
@@ -71,8 +68,8 @@
                     <div class="contenedorinput mb-3">
                         <span class="input-label" id="labelDepartamento">Departamento:<span class="obligatorio"> *</span></span>
                         <select required class="form-select" aria-label="Departamentos">
-                            <option value="1">Artigas</option>
-                            <option value="2">Salto</option>
+                            <option value="Rocha">Rocha</option>
+
                         </select>
                     </div>
 
@@ -113,6 +110,17 @@
                         <span class="input-label">Imagen:</span>
                         <input type="file" accept="image/*" class="form-control" placeholder="Ingrese una Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
                     </div>
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Categorias:</span>
+                        <div id="contenedorCategorias">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Gastronomía
+                                </label>
+                            </div>
+                         </div>
+                    </div>
 
 
 
@@ -147,7 +155,6 @@
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../fontawesome-free-6.2.0-web/js/all.js"></script>
 <script src="../js/comportamientoComun.js"></script>
 <script src="../js/alta_de_actividad_turistica.js"></script>
 </html>
