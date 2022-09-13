@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/consulta_de_salida_turistica.css">
+    <link rel="stylesheet" href="../css/consulta_de_usuario.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
@@ -24,11 +24,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-sm-between consulta_de_usuario" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
                     <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Actividades y Paquetes</a>
+                        <a class="nav-link active" aria-current="page" href="index.html">Actividades y Paquetes</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
@@ -38,16 +38,28 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
-                    <form class="d-flex buscar" role="search">
+                <ul class="navbar-nav d-flex">
+                    <form class="d-flex buscar" role="search" id="buscador">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
-                    <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
-                    </li>
-                    <li class="iniciar_sesion">
-                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nickname_usuario" href="perfil_de_usuario.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rosa María Martínez
+                            <img  class="imagen_perfil " src="../img/la_chiqui.png">
+                        </a>
+                        <!--                        no anda el dropdown queda como mejora agregarlo-->
+
+                        <!--                        <ul class="dropdown-menu">-->
+                        <!--                            <li><a class="dropdown-item" href="#">Action</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Another action</a></li>-->
+                        <!--                            <li><hr class="dropdown-divider"></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+                        <!--                        </ul>-->
+                        <!--                        <ul class="dropdown-menu">-->
+                        <!--                            <li><a class="dropdown-item" href="perfil_de_usuario.html">Ver Perfil</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>-->
+                        <!--                        </ul>-->
                     </li>
                 </ul>
 
@@ -56,24 +68,130 @@
 
     </nav>
 
-
     <section id="contenedor">
-        <div id="filtros">
-            <!--            <div class="card" id="filtro-categoria">-->
-            <!--                <h5 class="card-title">Actividades</h5>-->
-            <!--                <a href="#" class="list-group-item">Actividad 1</a>-->
-            <!--                <a href="#" class="list-group-item">Actividad 2</a>-->
-            <!--            </div>-->
-            <!--            <div class="card" id="filtro-departamentos">-->
-            <!--                <h5 class="card-title">Departamentos</h5>-->
-            <!--                <a href="#" class="list-group-item">Artigas</a>-->
-            <!--                <a href="#" class="list-group-item">Salto</a>-->
-            <!--            </div>-->
-        </div>
-        <div id="contenedor-items">
-            <!--            <div class="card" id="contenedor-salidas-turisticas">-->
-            <!--                <h2 class="card-title">Salidas Turísticas</h2>-->
-            <!--            </div>-->
+        <div class="card" id="contenedor-actividades-turisticas">
+            <div class="header-card-with-button ">
+                <h2 class="card-title header_usuarios">Usuarios</h2>
+            </div>
+
+
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 img-contain">
+                        <img src="../img/la_chiqui.png" class="img-fluid rounded-start imagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Rosa María Martínez</h5>
+                                <p class="card-text">Nombre: Rosa María</p>
+                                <p class="card-text">Apellido: Martínez</p>
+                                <p class="card-text">Nickname: lachiqui</p>
+                                <p class="card-text">Email: mirtha.legrand.ok@hotmail.com.ar</p>
+                                <p class="card-text">Fecha de Nacimiento: 23/2/1927</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 img-contain">
+                        <img src="../img/isabela.png" class="img-fluid rounded-start imagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Elizabeth Windsor</h5>
+                                <p class="card-text">Nombre: Elizabeth</p>
+                                <p class="card-text">Apellido: Windsor</p>
+                                <p class="card-text">Nickname: isabelita</p>
+                                <p class="card-text">Email: isabelita@thecrown.co.uk</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 img-contain">
+                        <img src="../img/anibal.png" class="img-fluid rounded-start imagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Aníbal Lecter</h5>
+                                <p class="card-text">Nombre: Aníbal</p>
+                                <p class="card-text">Apellido: Lecter</p>
+                                <p class="card-text">Nickname: anibal </p>
+                                <p class="card-text">Email: anibal@fing.edu.uy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 img-contain">
+                        <img src="../img/washington.png" class="img-fluid rounded-start imagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Washington Rocha</h5>
+                                <p class="card-text">Nombre: Washington</p>
+                                <p class="card-text">Apellido: Rocha</p>
+                                <p class="card-text">Nickname: washington </p>
+                                <p class="card-text">Email: washington@turismorocha.gub.uy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 img-contain">
+                        <img src="../img/pablo.png" class="img-fluid rounded-start imagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Pablo Bengoechea</h5>
+                                <p class="card-text">Nombre: Pablo</p>
+                                <p class="card-text">Apellido: Bengoechea</p>
+                                <p class="card-text">Nickname: eldiez  </p>
+                                <p class="card-text">Email: eldiez@socfomturriv.org.uy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 img-contain">
+                        <img src="../img/mercedes.png" class="img-fluid rounded-start imagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Mercedes Venn</h5>
+                                <p class="card-text">Nombre: Mercedes</p>
+                                <p class="card-text">Apellido: Venn</p>
+                                <p class="card-text">Nickname: eldiez  </p>
+                                <p class="card-text">Email: meche@colonia.gub.uy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </section>
