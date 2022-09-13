@@ -11,10 +11,10 @@
 
   obtenerDTUsuarioDetallePrivado(nick: String): DTUsuario (pero devuelve en realidad DTTuristaDetallePrivado y DTProveedorDetallePrivado)
 
+  void altaInscrpicionSalidaTuristica(String nomSalTuri, String nicknameTuris, int cantTuris, Stirng nombrePaquete?) //nueva operacion, se elimina la fecha y se agrega el paquete (este opcional)
+
 ## Modificadas 
 obtenerIdActividadesTuristicas => obtenerIdActividadesConfirmadasPorDepartamento
-
-agregar parametro Paquete al metodo altaInscrpicionSalidaTuristica
 
 agregar parámetro img:Imagen (opcional) al los métodos altaTurista y altaProveedor
 
