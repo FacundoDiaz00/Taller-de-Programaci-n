@@ -14,7 +14,7 @@
 }
 
 .perfil{
-    width: 250px;
+    width: 350px;
     height: 250px;
 }
 
@@ -45,5 +45,15 @@
 }
 
 .imagenSalidas{
-    margin: 10px;
+    margin: 10px 20px 10px 10px;
+}
+
+.paquetes{
+    width: 200px !important;
+    height: 150px !important;
+    margin: 10px 20px 10px 10px;
+}
+
+.cards{
+    margin-right: 20px;
 }
