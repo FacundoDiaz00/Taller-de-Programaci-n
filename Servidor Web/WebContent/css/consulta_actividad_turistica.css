@@ -83,8 +83,18 @@ h6{
     display: flex;
     align-items: baseline;
 }
+#infoGeneralActividad{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
 
 .div-doble h5{
     margin-right: 10px;
+}
+
+
+.imagen{
+    margin: 10px 20px 10px 10px
 }
 

@@ -1,3 +1,7 @@
+#contenedor{
+    padding: 10px;
+}
+
 .cardPerfil{
     display: grid !important;
     grid-template-columns: 0.3fr 1fr;
@@ -25,4 +29,12 @@
 
 .nickname_usuario{
     margin-right: 50px;
+}
+
+.imagen{
+    margin: 10px;
+}
+
+.header_usuarios{
+    margin-right: 10px;
 }
