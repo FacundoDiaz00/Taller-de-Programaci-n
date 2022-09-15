@@ -108,6 +108,70 @@
                         <p class="card-text">Apellido: Martínez<i class="fas fa-pencil-alt pencil"></i></p>
                         <p class="card-text"><b>Email: mirtha.legrand.ok@hotmail.com.ar</b></p>
                         <p class="card-text">Fecha de Nacimiento: 23/2/1927<i class="fas fa-pencil-alt pencil"></i></p>
+                        <div class="bs-example">
+                            <!-- Button HTML (to Trigger Modal) -->
+                            <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
+
+                            <!-- Modal HTML -->
+                            <div id="myModal" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modificar Usuario</h5>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label" >Nickname:</span>
+                                                <input id="input-nickname" type="text" required class="form-control" placeholder="lachiqui" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
+                                            </div>
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label">Nombre:</span>
+                                                <input id="input-nombre" type="text" required class="form-control" placeholder="Rosa María" aria-label="Nombre" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label">Apellido: </span>
+                                                <input id="input-apellido" type="text" required class="form-control" placeholder="Martínez" aria-label="Apellido" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label">Fecha de nacimiento:</span>
+                                                <input id="input-fecha-nacimiento" type="date" required class="form-control" placeholder="23/2/1927" aria-label="Fecha nacimiento" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label">Contraseña: </span>
+                                                <input id="input-contraseña" type="password" required class="form-control" placeholder="Contraseña" aria-label="Nickname" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label"> Correo electronico:</span>
+                                                <input id="input-correo" type="password" required class="form-control" placeholder=" mirtha.legrand.ok@hotmail.com.ar" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
+                                            </div>
+
+                                            <div class="contenedorinput mb-3">
+                                                <span class="input-label">Foto de Perfil:</span>
+                                                <input id="input-imagen" type="file" accept="image/*"  class="form-control" placeholder="Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
+                                            </div>
+
+
+                                            <div class="contenedorinput mb-3 eliminarElemento " id="nacionalidad-field">
+                                                <span class="input-label">Nacionalidad: </span>
+                                                <input id="input-nacionalidad" type="file" accept="image/*"  class="form-control" placeholder="Argentina" aria-label="Imagen" aria-describedby="basic-addon1">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="1">
@@ -199,6 +263,17 @@
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/perfil_de_usuario.js"></script>
+<script src="../js/popUp_modificar_usuario.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".btn").click(function(){
+                $("#myModal").modal('show');
+            });
+            $(".close").click(function(){
+                $("#myModal").modal('hide');
+            });
+        });
+    </script>
 
 </body>
 </html>

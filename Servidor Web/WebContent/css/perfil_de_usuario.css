@@ -57,3 +57,7 @@
 .cards{
     margin-right: 20px;
 }
+
+.deshabilitado{
+    color: Gray;
+}
