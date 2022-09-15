@@ -1,6 +1,9 @@
 #contenedor{
     padding: 10px;
-    height: 603px;
+    min-height: calc(100vh - 141.5px);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-column-gap: 15px;
 }
 
 #filtros > div{
