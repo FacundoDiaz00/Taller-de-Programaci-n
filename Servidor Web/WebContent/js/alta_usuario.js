@@ -1,6 +1,6 @@
 $("#checkTipoProveedor")[0].addEventListener('click', (e) => onProveedorClick(e))
 $("#checkTipoTurista")[0].addEventListener('click', (e) => onTuristaClick(e))
-
+$("#form-alta-usuario")[0].addEventListener('submit', (e) => onSubmit(e))
 
 const onTuristaClick = (e) =>{
     console.log("Click en radiobutton turista")
@@ -24,6 +24,10 @@ const onProveedorClick = (e) =>{
     $("#input-link")[0].type = "text"
 }
 
-const onSubmit = () =>{
-
+const onSubmit = (e) =>{
+    generarMensaje(MENSAJE_TIPO_ERROR, "Mensaje de prueba", "Esto seria un mensaje de error", 0)
+    e.preventDefault(); //Esto cancela el submit
 }
+
+
+
