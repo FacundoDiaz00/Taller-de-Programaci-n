@@ -21,7 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
 
                 <ul class="navbar-nav d-flex">
@@ -114,13 +114,13 @@
                         <span class="input-label">Tipo de usuario<span class="obligatorio"> *</span></span>
                         <div id="tipoUsuarioRadioButtonContainer">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipoUsuario" id="checkTipoProveedor" checked>
+                                <input class="form-check-input" type="radio" name="tipoUsuario" id="checkTipoProveedor"  checked>
                                 <label class="form-check-label" for="checkTipoProveedor">
                                     Proveedor
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipoUsuario" id="checkTipoTurista">
+                                <input class="form-check-input" type="radio" name="tipoUsuario" id="checkTipoTurista" >
                                 <label class="form-check-label" for="checkTipoTurista">
                                     Turista
                                 </label>
@@ -128,17 +128,17 @@
                         </div>
                     </div>
 
-                    <div class="contenedorinput mb-3 " id="">
+                    <div class="contenedorinput mb-3 eliminarElemento " id="nacionalidad-field">
                         <span class="input-label">Nacionalidad:<span class="obligatorio"> *</span></span>
-                        <input id="input-nacionalidad" type="text" required class="form-control" placeholder="Ingrese una nacionalidad" aria-label="Nacionalidad" aria-describedby="basic-addon1">
+                        <input id="input-nacionalidad" type="hidden" required class="form-control" placeholder="Ingrese una nacionalidad" aria-label="Nacionalidad" aria-describedby="basic-addon1">
                     </div>
 
-                    <div class="contenedorinput mb-3">
+                    <div class="contenedorinput mb-3" id="descripcion-general-field">
                         <span class="input-label">Descripcion general:<span class="obligatorio"> *</span></span>
                         <input id="input-descripcionGeneral" type="text" required class="form-control" placeholder="Ingrese una descripcion general" aria-label="Descripcion general" aria-describedby="basic-addon1">
                     </div>
 
-                    <div class="contenedorinput mb-3">
+                    <div class="contenedorinput mb-3" id="link-sito-web-field">
                         <span class="input-label">Link sito web:</span>
                         <input id="input-link" type="text" class="form-control" placeholder="ingrese un link al sitio web" aria-label="Link" aria-describedby="basic-addon1">
                     </div>
@@ -172,6 +172,7 @@
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/comportamientoComun.js"></script>
+    <script src="../js/alta_usuario.js"></script>
 
 
 </body>
