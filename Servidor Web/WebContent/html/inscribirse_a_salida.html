@@ -80,19 +80,19 @@
                 <div class="contenedorinput mb-3">
                     <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="formaPago" id="checkGeneral">
+                        <input class="form-check-input" type="radio" name="formaPago" id="checkGeneral" checked>
                         <label class="form-check-label" for="checkGeneral">
                             General
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="formaPago" id="checkPaquete" checked>
+                        <input class="form-check-input" type="radio" name="formaPago" id="checkPaquete">
                         <label class="form-check-label" for="checkPaquete">
                             Por Paquete
                         </label>
                     </div>
                 </div>
-                <div class="contenedorinput mb-3">
+                <div class="contenedorinput mb-3 eliminarElemento" id="comboPaquetes">
                     <div class="form-group">
                         <label>Paquete:</label>
                         <select class="combobox input-large form-control" name="normal">
@@ -149,9 +149,7 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/sweetalert2.all.min.js"></script>
 <script src="../js/comportamientoComun.js"></script>
-<!--
-<script src="../js/alta_usuario.js"></script>
--->
+<script src="../js/inscribirse_a_salida.js"></script>
 
 
 </body>
