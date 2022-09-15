@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 
 
 
@@ -25,20 +26,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Actividades y Paquetes</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
-                    </li>
-
-                </ul>
 
                 <ul class="navbar-nav d-flex">
                     <form class="d-flex buscar" role="search">
@@ -59,7 +48,28 @@
 
 
     <section id="contenedor">
-        <div id="alert_position"></div>
+        <div id="menu-lateral">
+
+            <!--Acciones generales-->
+            <div class="card list-group" id="opciones">
+                <h5 class="card-title">Acciones</h5>
+                <a href="index.html" class="list-group-item">Ver actividades & paquetes</a>
+                <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
+                <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
+            </div>
+
+            <!--Categoroias-->
+            <div class="card list-group" id="filtro-categoria">
+                <h5 class="card-title">Categorias</h5>
+                <a href="#" class="list-group-item">Gastronomía</a>
+            </div>
+
+            <!--Departametos-->
+            <div class="card list-group" id="filtro-departamentos">
+                <h5 class="card-title">Departamentos</h5>
+                <a href="#" class="list-group-item">Rocha</a>
+            </div>
+        </div>
         <div id="contenedorForm">
             <form class="card" id="form-alta-actividad">
                 <div class="card-body">
@@ -132,6 +142,7 @@
                 </div>
             </form>
         </div>
+        <div></div>
 
 
     </section>
@@ -155,6 +166,7 @@
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/sweetalert2.all.min.js"></script>
 <script src="../js/comportamientoComun.js"></script>
 <script src="../js/alta_de_actividad_turistica.js"></script>
 </html>

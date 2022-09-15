@@ -3,6 +3,8 @@
     min-height: calc(100vh - 141.5px);
     display: grid;
     grid-template-rows: 1fr;
+    grid-template-columns: 300px 1fr 300px;
+    grid-column-gap: 20px;
 }
 
 #alert_position{
@@ -20,7 +22,7 @@
 }
 
 #contenedor form{
-    width: 800px;
+    width: 700px;
 }
 
 #botonera{

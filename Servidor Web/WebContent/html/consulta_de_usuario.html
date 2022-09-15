@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="../css/estilosComun.css">
 
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
     <title>Turismo UY</title>
@@ -24,25 +25,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-sm-between consulta_de_usuario" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-end consulta_de_usuario" id="navbarSupportedContent">
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="index.html">Actividades y Paquetes</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html"><strong>Usuarios</strong></a>
-                    </li>
-                </ul>
 
                 <ul class="navbar-nav d-flex">
                     <form class="d-flex buscar" role="search" id="buscador">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle nickname_usuario" href="perfil_de_usuario.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Rosa María Martínez
@@ -69,13 +60,37 @@
     </nav>
 
     <section id="contenedor">
+
+        <div id="menu-lateral">
+
+            <!--Acciones generales-->
+            <div class="card list-group" id="opciones">
+                <h5 class="card-title">Acciones</h5>
+                <a href="index.html" class="list-group-item">Ver actividades & paquetes</a>
+                <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
+                <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
+            </div>
+
+            <!--Categoroias-->
+            <div class="card list-group" id="filtro-categoria">
+                <h5 class="card-title">Categorias</h5>
+                <a href="#" class="list-group-item">Gastronomía</a>
+            </div>
+
+            <!--Departametos-->
+            <div class="card list-group" id="filtro-departamentos">
+                <h5 class="card-title">Departamentos</h5>
+                <a href="#" class="list-group-item">Rocha</a>
+            </div>
+        </div>
+
         <div class="card" id="contenedor-actividades-turisticas">
-            <div class="header-card-with-button ">
+            <div class="header-card-with-button" style="margin-left: 30px">
                 <h2 class="card-title header_usuarios">Usuarios</h2>
             </div>
 
 
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-3" style="max-width: 800px; margin-left: 15px">
                 <div class="row g-0">
                     <div class="col-md-4 img-contain">
                         <img src="../img/la_chiqui.png" class="img-fluid rounded-start imagen">
@@ -87,8 +102,9 @@
                                 <p class="card-text">Nombre: Rosa María</p>
                                 <p class="card-text">Apellido: Martínez</p>
                                 <p class="card-text">Nickname: lachiqui</p>
-                                <p class="card-text">Email: mirtha.legrand.ok@hotmail.com.ar</p>
-                                <p class="card-text">Fecha de Nacimiento: 23/2/1927</p>
+                                <div class="botonera">
+                                    <a href="perfil_de_usuario.html" class="btn btn-primary">Ver mas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,7 +112,7 @@
             </div>
 
 
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-3" style="max-width: 800px;margin-left: 15px">
                 <div class="row g-0">
                     <div class="col-md-4 img-contain">
                         <img src="../img/isabela.png" class="img-fluid rounded-start imagen">
@@ -108,14 +124,16 @@
                                 <p class="card-text">Nombre: Elizabeth</p>
                                 <p class="card-text">Apellido: Windsor</p>
                                 <p class="card-text">Nickname: isabelita</p>
-                                <p class="card-text">Email: isabelita@thecrown.co.uk</p>
+                                <div class="botonera">
+                                    <a href="#" class="btn btn-primary">Ver mas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-3" style="max-width: 800px;margin-left: 15px">
                 <div class="row g-0">
                     <div class="col-md-4 img-contain">
                         <img src="../img/anibal.png" class="img-fluid rounded-start imagen">
@@ -127,7 +145,9 @@
                                 <p class="card-text">Nombre: Aníbal</p>
                                 <p class="card-text">Apellido: Lecter</p>
                                 <p class="card-text">Nickname: anibal </p>
-                                <p class="card-text">Email: anibal@fing.edu.uy</p>
+                                <div class="botonera">
+                                    <a href="#" class="btn btn-primary">Ver mas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,7 +155,7 @@
             </div>
 
 
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-3" style="max-width: 800px;margin-left: 15px">
                 <div class="row g-0">
                     <div class="col-md-4 img-contain">
                         <img src="../img/washington.png" class="img-fluid rounded-start imagen">
@@ -147,14 +167,16 @@
                                 <p class="card-text">Nombre: Washington</p>
                                 <p class="card-text">Apellido: Rocha</p>
                                 <p class="card-text">Nickname: washington </p>
-                                <p class="card-text">Email: washington@turismorocha.gub.uy</p>
+                                <div class="botonera">
+                                    <a href="perfil_usuario_proveedor.html" class="btn btn-primary">Ver mas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-3" style="max-width: 800px;margin-left: 15px">
                 <div class="row g-0">
                     <div class="col-md-4 img-contain">
                         <img src="../img/pablo.png" class="img-fluid rounded-start imagen">
@@ -166,14 +188,16 @@
                                 <p class="card-text">Nombre: Pablo</p>
                                 <p class="card-text">Apellido: Bengoechea</p>
                                 <p class="card-text">Nickname: eldiez  </p>
-                                <p class="card-text">Email: eldiez@socfomturriv.org.uy</p>
+                                <div class="botonera">
+                                    <a href="#" class="btn btn-primary">Ver mas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-3" style="max-width: 800px;margin-left: 15px">
                 <div class="row g-0">
                     <div class="col-md-4 img-contain">
                         <img src="../img/mercedes.png" class="img-fluid rounded-start imagen">
@@ -185,7 +209,9 @@
                                 <p class="card-text">Nombre: Mercedes</p>
                                 <p class="card-text">Apellido: Venn</p>
                                 <p class="card-text">Nickname: eldiez  </p>
-                                <p class="card-text">Email: meche@colonia.gub.uy</p>
+                                <div class="botonera">
+                                    <a href="#" class="btn btn-primary">Ver mas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -209,7 +235,7 @@
 
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -2,23 +2,43 @@
 
     display: grid;
     grid-template-rows: auto 1fr;
-    grid-template-columns: 700px 1fr;
+    grid-template-columns: 300px 640px 1fr;
     grid-column-gap: 20px;
     min-height: calc(100vh - 141.5px);
 }
+
+#menu-lateral{
+    padding: 10px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
 
 #info-actividad{
     padding: 10px;
     display: grid;
     grid-template-rows: auto 1fr;
     grid-row-gap: 10px;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 300px 1fr;
     background-color: #FAFAFA;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 #titulo{
     padding: 10px;
     background-color: #FAFAFA;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#contenedor-salidas-paquetes{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 h6{
