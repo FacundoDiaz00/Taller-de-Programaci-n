@@ -57,3 +57,12 @@ form[role="search"] input{
 .eliminarElemento{
     display: none;
 }
+
+
+#menu-lateral .card-title{
+    padding: 2px 0 0 15px;
+}
+
+#menu-lateral > div{
+    margin-bottom: 10px;
+}
