@@ -1,16 +1,20 @@
-const alert = (message, type, position) => {
-    let oldAlert = $("#alert")[0];
-    console.log(oldAlert)
-    if(oldAlert !== undefined)
-        oldAlert.remove()
+/**
+ * Genera un popup de error temporizadorParaDesplegar ms despues. COn el tiulo y mensaje espesificado
+ * @param titulo
+ * @param mensaje
+ * @param temporizadorParaDesplegar
+ */
 
-    const wrapper = document.createElement('div')
-    wrapper.innerHTML = [
-        `<div class="alert alert-${type} alert-dismissible" id="alert" role="alert">`,
-        `   <div>${message}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-        '</div>'
-    ].join('')
+const MENSAJE_TIPO_EXITO = 'success'
+const MENSAJE_TIPO_ERROR = 'error'
 
-    position.append(wrapper)
+const generarMensaje = (tipoMensaje, titulo, mensaje, temporizadorParaDesplegar) =>{
+    setTimeout(() => {
+        Swal.fire({
+            icon: tipoMensaje,
+            title: titulo,
+            text: mensaje,
+            confirmButtonText: 'Entendido'
+        })
+    }, temporizadorParaDesplegar)
 }
