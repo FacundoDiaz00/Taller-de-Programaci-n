@@ -1,0 +1,14 @@
+#contenedor{
+    min-height: calc(100vh - 141.5px);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 650px 1fr;
+    grid-column-gap: 20px;
+}
+#centerRow{
+    padding: 20px;
+}
+#title{
+    text-align: center;
+    padding: 20px;
+}
