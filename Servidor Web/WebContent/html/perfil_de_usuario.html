@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/estilosComun.css">
     <link rel="stylesheet" href="../css/perfil_de_usuario.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -25,19 +25,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="index.html"><strong>Actividades y Paquetes</strong></a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
-                    </li>
-                </ul>
+
 
                 <ul class="navbar-nav d-flex">
                     <form class="d-flex buscar" role="search" id="buscador">
@@ -70,22 +60,25 @@
 
 
     <section id="contenedor">
-        <div id="contenedor_side_bar">
-            <div id="filtros">
-                <div class="card list-group" id="acciones-perfil">
-                    <h5 class="card-title"> Perfil</h5>
-                    <a href="inscribirse_a_salida.html" class="list-group-item">Inscribirse a salida</a>
-                </div>
-                <div class="card list-group" id="filtro-categoria">
-                    <h5 class="card-title">Categorias</h5>
-                    <a href="#" class="list-group-item ">Categoria 1</a>
-                    <a href="#" class="list-group-item">Categoria 2</a>
-                </div>
-                <div class="card list-group" id="filtro-departamentos">
-                    <h5 class="card-title">Departamentos</h5>
-                    <a href="#" class="list-group-item">Artigas</a>
-                    <a href="#" class="list-group-item">Salto</a>
-                </div>
+        <div id="menu-lateral">
+
+            <!--Acciones generales-->
+            <div class="card list-group" id="opciones">
+                <h5 class="card-title">Acciones</h5>
+                <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
+                <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
+            </div>
+
+            <!--Categoroias-->
+            <div class="card list-group" id="filtro-categoria">
+                <h5 class="card-title">Categorias</h5>
+                <a href="#" class="list-group-item">Gastronomía</a>
+            </div>
+
+            <!--Departametos-->
+            <div class="card list-group" id="filtro-departamentos">
+                <h5 class="card-title">Departamentos</h5>
+                <a href="#" class="list-group-item">Rocha</a>
             </div>
         </div>
         <div id="contenedor-items">
@@ -203,7 +196,7 @@
 
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/perfil_de_usuario.js"></script>
 
 </body>
