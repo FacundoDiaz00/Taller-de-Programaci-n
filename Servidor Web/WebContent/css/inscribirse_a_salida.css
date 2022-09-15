@@ -1,0 +1,15 @@
+#contenedor{
+    min-height: calc(100vh - 141.5px);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 300px 1fr 300px;
+    grid-column-gap: 20px;
+}
+
+#menu-lateral{
+    margin: 10px 0 0 10px;
+}
+
+#tituloPagina{
+    font-size: 35px;
+}
