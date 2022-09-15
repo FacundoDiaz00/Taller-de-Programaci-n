@@ -16,3 +16,7 @@
 #contenedorDer{
     margin: 10px 0 0 0;
 }
+
+#botonera{
+    grid-template-columns: 1fr 1fr;
+}
