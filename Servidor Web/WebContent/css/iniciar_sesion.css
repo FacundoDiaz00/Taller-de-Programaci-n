@@ -10,5 +10,10 @@
 }
 #title{
     text-align: center;
-    padding: 20px;
+    padding: 10px;
+}
+#icon{
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px
 }
