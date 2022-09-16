@@ -44,36 +44,37 @@
 </nav>
 
 <section id="contenedor">
-    <div>
-        <img src="https://tinyurl.com/2maxmx6c" class="card-img-top" alt="...">
-    </div>
+        <div>
+        </div>
     <div id="centerRow">
         <h2 id="title">Inicio de sesión</h2>
-
         <div id="icon">
             <i class="fa-solid fa-user fa-6x fa-fw"></i>
         </div>
-
-    <div class="input-group mb-3">
+        <span class="input-label">Identificador:<span class="obligatorio"> *</span></span>
+        <div class="input-group mb-3">
         <select class="form-select" aria-label="Default select example">
             <option selected>Email</option>
             <option value="2">Nickname</option>
         </select>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+
+        <input type="text" required class="form-control" aria-label="Text input with dropdown button">
     </div>
         <div class="contenedorinput mb-3">
             <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
             <input id="input-contraseña" type="password" required class="form-control" placeholder="Ingrese una contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
         </div>
-
         <div class="contenedorinput mb-3">
             <span class="input-label">Confirmacion contraseña:<span class="obligatorio"> *</span></span>
             <input id="input-confirmacion-contraseña" type="password" required class="form-control" placeholder="Vuelva a ingresar la contraseña" aria-label="Nickname" aria-describedby="basic-addon1">
         </div>
 
-    </div>
-    <div>
-        <img src="https://tinyurl.com/2maxmx6c" class="card-img-top" alt="...">
+        <!--todo: Centrar botones-->
+        <div class="input-group mx-auto">
+            <a href="index.html" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+            <input type="submit" id="aceptar-boton" class="btn btn-success btn-lg btn-block" value="Aceptar">
+        </div>
+
     </div>
 </section>
 <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
