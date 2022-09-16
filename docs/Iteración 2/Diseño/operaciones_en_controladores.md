@@ -22,6 +22,8 @@
 + obtenerDTSalidasTuristicas(String): List<DTSalidaTuristica>
 + altaSalidaTuristica(String, String, LocalDateTime, LocalDate, String, int): void
 + obtenerIdSalidasTuristicas(String): List <String>
++ obtenerIdActividadesTuristricasConfirmadasPorCategoria(nomCat: String) : set(String)
++ obtenerDetallesActividadTuristica(nombreAct: String): DTActividadTuristicaDetalles
 
 + obtenerDetallesActividadTuristica(String): DTActividadTuristicaDetalle
 + obtenerDTSalidaTuristica(String): DTSalidaTuristica
