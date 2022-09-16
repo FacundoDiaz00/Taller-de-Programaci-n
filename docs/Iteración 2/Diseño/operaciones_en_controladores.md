@@ -72,7 +72,7 @@
 ```
 #### consulta_de_usuario.html
 ```
-+ obtenerDTUsuario(): List<DTUsuario> // para listar en la página en la que aparecen todos los usuarios
++ obtenerDTUsuarios(): List<DTUsuario> // para listar en la página en la que aparecen todos los usuarios
 ```
 #### index.html
 ```
