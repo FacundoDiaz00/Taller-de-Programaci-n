@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/estilosComun.css">
     <link rel="stylesheet" href="../css/perfil_usuario_proveedor.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -70,18 +71,25 @@
 
 
 <section id="contenedor">
-    <div id="contenedor_side_bar">
-        <div id="filtros">
-            <div class="card list-group" id="filtro-categoria">
-                <h5 class="card-title">Categorias</h5>
-                <a href="#" class="list-group-item ">Categoria 1</a>
-                <a href="#" class="list-group-item">Categoria 2</a>
-            </div>
-            <div class="card list-group" id="filtro-departamentos">
-                <h5 class="card-title">Departamentos</h5>
-                <a href="#" class="list-group-item">Artigas</a>
-                <a href="#" class="list-group-item">Salto</a>
-            </div>
+    <div id="menu-lateral">
+        <!--Acciones generales-->
+        <div class="card list-group" id="opciones">
+            <h5 class="card-title">Acciones</h5>
+            <a href="index.html" class="list-group-item">Ver actividades & paquetes</a>
+            <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
+            <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
+        </div>
+
+        <!--Categoroias-->
+        <div class="card list-group" id="filtro-categoria">
+            <h5 class="card-title">Categorias</h5>
+            <a href="#" class="list-group-item active">Gastronomía</a>
+        </div>
+
+        <!--Departametos-->
+        <div class="card list-group" id="filtro-departamentos">
+            <h5 class="card-title">Departamentos</h5>
+            <a href="#" class="list-group-item">Rocha</a>
         </div>
     </div>
     <div id="contenedor-items">
