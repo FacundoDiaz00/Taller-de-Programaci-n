@@ -11,6 +11,7 @@ import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 
 /**
  * @author Equipo taller prog 16
@@ -21,9 +22,9 @@ public class Turista extends Usuario {
     private Set<Compra> compras;
     private Set<Inscripcion> inscripciones;
 
-    public Turista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
+    public Turista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img, 
             String nacionalidad) {
-        super(nickname, nombre, apellido, correo, fechaNac);
+        super(nickname, nombre, apellido, correo, fechaNac, img);
         setNacionalidad(nacionalidad);
         setCompras(new HashSet<>());
         setInscripciones(new HashSet<>());
@@ -72,7 +73,7 @@ public class Turista extends Usuario {
     
     @Override
     public DTUsuario obtenerDTUsuario() {
-    	return new DTTurista(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getNacionalidad());
+    	return new DTTurista(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(), nacionalidad);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class Turista extends Usuario {
             salidas.add(inscripcion.getNombreSalida());
         }
 
-        return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getNacionalidad(), salidas);
+        return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(), nacionalidad, salidas);
     }
 
     @Override

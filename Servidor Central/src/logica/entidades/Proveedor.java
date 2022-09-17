@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTProveedorDetalle;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 
 /**
  * @author Equipo taller prog 16
@@ -22,9 +24,9 @@ public class Proveedor extends Usuario {
 
     private Map<String, ActividadTuristica> actividadesTuristicas;
 
-    public Proveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
+    public Proveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img,
             String descrpicionGeneral, String link) {
-        super(nickname, nombre, apellido, correo, fechaNac);
+        super(nickname, nombre, apellido, correo, fechaNac, img);
         setDescrpicionGeneral(descrpicionGeneral);
         setLink(link);
         setActividadesTuristicas(new HashMap<>());
@@ -56,20 +58,18 @@ public class Proveedor extends Usuario {
     
     @Override
     public DTUsuario obtenerDTUsuario() {
-        return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getDescrpicionGeneral(), getLink());
+        return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(), getDescrpicionGeneral(), getLink());
     }
 
     @Override
     public DTUsuario obtenerDTUsuarioDetalle() {
-        Map<String, List<String>> salidas = new HashMap<>();
+        var dtActDetalles = new ArrayList<DTActividadTuristicaDetalle>();
 
         for (ActividadTuristica a : actividadesTuristicas.values()) {
-            salidas.put(a.getNombre(), new ArrayList<String>());
-            var salidasList = a.obtenerIdSalidasTuristicas();
-            salidas.get(a.getNombre()).addAll(salidasList);
+        	dtActDetalles.add(a.obtenerDTActividadTuristicaDetalle());
         }
         
-        return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getDescrpicionGeneral(), getLink(), salidas);
+        return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(), getDescrpicionGeneral(), getLink(), dtActDetalles);
     }
 
 	public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {

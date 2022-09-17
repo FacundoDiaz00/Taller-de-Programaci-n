@@ -1,5 +1,6 @@
 package logica.datatypes;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -7,17 +8,20 @@ import java.util.Map;
  */
 
 public class DTPaqueteDetalles extends DTPaquete {
-
     private Map<String, DTActividadTuristica> actividades;
+    private List<DTCompra> compras;
 
-    public DTPaqueteDetalles(String nombre, String descrpicion, int validez, float descuento, Map<String, DTActividadTuristica> actividades) {
-        super(nombre, descrpicion, validez, descuento);
+    public DTPaqueteDetalles(String nombre, String descrpicion, float descuento, int validez, List<String> categorias, Imagen img, Map<String, DTActividadTuristica> actividades, List<DTCompra> compras) {
+        super(nombre, descrpicion, descuento, validez, categorias, img);
         this.actividades = actividades;
+        this.compras = compras;
     }
-
 
     public Map<String, DTActividadTuristica> getActividades() {
         return actividades;
     }
 
+    public List<DTCompra> getCompras() {
+        return compras;
+    }
 }

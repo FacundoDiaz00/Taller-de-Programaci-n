@@ -3,10 +3,12 @@ package logica.entidades;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.Imagen;
 import logica.manejadores.ManejadorActividadTuristica;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,11 +24,11 @@ public class SalidaTuristica {
     private LocalDate fechaAlta;
     private LocalDateTime fechaHoraSalida;
     private String lugarSalida;
-
+    private Imagen img;
     private ActividadTuristica actividad;
     private Set<Inscripcion> inscripciones;
 
-    public SalidaTuristica(String IDActividad,String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida) {
+    public SalidaTuristica(String IDActividad,String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida, Imagen img) {
         setNombre(nombre);
         setCantMaxTuristas(cantMaxTuristas);
         setFechaAlta(fechaAlta);
@@ -34,6 +36,7 @@ public class SalidaTuristica {
         setLugarSalida(lugarSalida);
         setActividad(null);
         setInscripciones(new HashSet<>());
+        setImagen(img);
 
         ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica at = mat.obtenerActividadTuristica(IDActividad);
@@ -50,15 +53,15 @@ public class SalidaTuristica {
     }
 
     public DTSalidaTuristica obtenerDTSalidaTuristica(){
-        return new DTSalidaTuristica(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida(), getActividad().obtenerDTActividadTuristica());
+        return new DTSalidaTuristica(nombre, fechaHoraSalida, lugarSalida, fechaAlta, cantMaxTuristas, img, actividad.getNombre());
     }
 
     public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(){
-    	Set<DTInscripcion> res = new HashSet<>();
-    	for(Inscripcion insc : inscripciones) {
-    		res.add(insc.obtenerDTInscripcion());
+    	var insc = new ArrayList<DTInscripcion>();
+    	for(Inscripcion i : inscripciones) {
+    		insc.add(i.obtenerDTInscripcion());
     	}
-        return new DTSalidaTuristicaDetalle(getNombre(), getCantMaxTuristas(), getFechaAlta(), getFechaHoraSalida(), getLugarSalida(), getActividad().obtenerDTActividadTuristica(),res);
+        return new DTSalidaTuristicaDetalle(nombre, fechaHoraSalida, lugarSalida, fechaAlta, cantMaxTuristas, img, getActividad().getNombre(), insc, getActividad().obtenerDTActividadTuristicaDetalle());
     }
     
     public void agregarInscripcionASalida(Inscripcion ins){
@@ -129,5 +132,9 @@ public class SalidaTuristica {
 
     public void setActividad(ActividadTuristica actividad) {
         this.actividad = actividad;
+    }
+    
+    public void setImagen(Imagen img) {
+    	this.img = img;
     }
 }

@@ -2,6 +2,7 @@ package logica.datatypes;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author Equipo taller prog 16
@@ -10,12 +11,14 @@ import java.time.LocalDate;
 public class DTActividadTuristica {
 	private String nombre;
 	private String descripcion;
-	private float costoPorTurista;
+	private LocalDate fechaAlta;
 	private String cuidad;
 	private int duracion;
-	private LocalDate fechaAlta;
-
+	private float costoPorTurista;
 	private String nicknameProveedor;
+ 	private String departamento;
+	private List<String> categorias;
+	private Imagen img;
 
 
 	public String getNombre() {
@@ -60,4 +63,15 @@ public class DTActividadTuristica {
 		this.nicknameProveedor = nicknameProveedor;
 	}
 
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public List<String> getCategorias() {
+		return categorias;
+	}
+
+	public Imagen getImg() {
+		return img;
+	}
 }

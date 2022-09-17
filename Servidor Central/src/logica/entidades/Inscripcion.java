@@ -89,6 +89,12 @@ public class Inscripcion {
     }
     
     public DTInscripcion obtenerDTInscripcion(){
-    	return new DTInscripcion(getFechaInscrpicion(), getCantidadTuristas(), "", getSalidaTuristica().obtenerDTSalidaTuristica(),(DTTurista) getTurista().obtenerDTUsuario());
+    	var costo = 0.0;
+		costo = cantidadTuristas * getSalidaTuristica().getActividad().getCostoPorTurista();
+    	
+		if (compra != null) 
+			costo = costo * (1 - compra.getPaquete().getDescuento()/100);
+		
+    	return new DTInscripcion(fechaInscrpicion, cantidadTuristas, (float)costo, getNombreSalida(), getTurista().getNickname());
     }
 }
