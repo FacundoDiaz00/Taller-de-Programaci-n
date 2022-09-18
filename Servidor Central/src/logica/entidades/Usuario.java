@@ -92,4 +92,9 @@ public abstract class Usuario {
 		this.setFechaNac(datosNuevos.getFechaNac());
 	}
 
+	public DTUsuario obtenerDTUsuarioDetallePrivado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

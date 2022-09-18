@@ -6,6 +6,7 @@ import java.util.Collection;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.UsuarioYaRegistradoException;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +40,8 @@ public interface IControladorUsuario {
 	 * @return
 	 */
 	DTUsuario obtenerDTUsuario(String nickname);
+	
+	List<DTUsuario> obtenerDTUsuarios();
 
 	/**
 	 * Devuelve los detalles del usuario identificado por parámetro.
@@ -46,6 +49,8 @@ public interface IControladorUsuario {
 	 * @return
 	 */
 	DTUsuario obtenerDTUsuarioDetalle(String nickname);
+	
+	DTUsuario obtenerDTUsuarioDetallePrivado(String nickname);
 
 
 	/**
@@ -58,7 +63,7 @@ public interface IControladorUsuario {
 	 * @param nacionalidad
 	 * @throws UsuarioYaRegistradoException
 	 */
-	void altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento, String nacionalidad) throws UsuarioYaRegistradoException;
+	void altaTurista(String nickname, String nombre, String apellido, String correo,LocalDate FNacimiento,  Imagen img, String nacionalidad) throws UsuarioYaRegistradoException;
 
 	/**
 	 * Crea un Proveedor con los parámetros enviados.
@@ -71,7 +76,7 @@ public interface IControladorUsuario {
 	 * @param FNacimiento
 	 * @throws UsuarioYaRegistradoException
 	 */
-	void altaProveedor(String nickname,String nombre,String apellido,String correo,String descripcion,String link, LocalDate FNacimiento) throws UsuarioYaRegistradoException;
+	void altaProveedor(String nickname,String nombre,String apellido,String correo, LocalDate FNacimiento, Imagen img, String descripcion,String link) throws UsuarioYaRegistradoException;
 
 
 	/**
@@ -80,4 +85,6 @@ public interface IControladorUsuario {
 	 * @throws ModificacionUsuarioNoPermitida
 	 */
 	void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida;
+
+	
 }

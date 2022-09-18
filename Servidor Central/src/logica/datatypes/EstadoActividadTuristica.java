@@ -1,5 +1,5 @@
 
-package logica;
+package logica.datatypes;
 
 /**
  * @author Equipo taller prog 16

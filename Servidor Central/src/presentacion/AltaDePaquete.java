@@ -104,7 +104,7 @@ public class AltaDePaquete extends JInternalFrame{
 						return;
 					}
 					LocalDate f = LocalDate.of((int)anior.getValue(),(int)mesr.getValue(),(int)diar.getValue());
-					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue(),f);
+					cp.altaPaquete(txtNombre.getText().toString(),descrp.getText().toString(), (int)perVal.getValue(), (int)desc.getValue(),f, null);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.","Registro de Paquete",JOptionPane.INFORMATION_MESSAGE );
 					setVisible(false);
 					limpiarForm();

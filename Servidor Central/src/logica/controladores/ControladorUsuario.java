@@ -11,6 +11,7 @@ import logica.entidades.SalidaTuristica;
 import java.util.List;
 
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 import logica.entidades.Usuario;
 
 
@@ -64,23 +65,23 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void altaTurista(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento, String nacionalidad) throws UsuarioYaRegistradoException {
+    public void altaTurista(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento, Imagen img, String nacionalidad) throws UsuarioYaRegistradoException {
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         if(mu.existeUsuario(nickname, correo)) {
             throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
         }
 
-        Turista u = new Turista(nickname, nombre, apellido, correo,FNacimiento,nacionalidad);
+        Turista u = new Turista(nickname, nombre, apellido, correo,FNacimiento, img,nacionalidad);
         mu.addUsuario(u);
     }
 
     @Override
-    public void altaProveedor(String nickname, String nombre, String apellido, String correo, String descripcion, String link, LocalDate FNacimiento) throws UsuarioYaRegistradoException{
+    public void altaProveedor(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento, Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException{
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         if(mu.existeUsuario(nickname, correo)) {
             throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
         }
-        Proveedor u = new Proveedor(nickname, nombre, apellido, correo,FNacimiento, descripcion, link);
+        Proveedor u = new Proveedor(nickname, nombre, apellido, correo,FNacimiento, img, descripcion, link);
         mu.addUsuario(u);
     }
 
@@ -91,15 +92,28 @@ public class ControladorUsuario implements IControladorUsuario {
         return u.obtenerDTUsuarioDetalle();
     }
     
+    @Override
+    public DTUsuario obtenerDTUsuarioDetallePrivado(String nickname) {
+        ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+        Usuario u = ins.getUsuarioPorNick(nickname);
+        return u.obtenerDTUsuarioDetallePrivado();
+    }
+    
 	@Override
 	public DTUsuario obtenerDTUsuario(String nickname) {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         Usuario u = ins.getUsuarioPorNick(nickname);
         return u.obtenerDTUsuario();
 	}
+	
+	public List<DTUsuario> obtenerDTUsuarios() {
+		// TODO
+		return null;
+	}
 
 	@Override
-	public void modificarUsuario( DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida{
+	public void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida {
+				
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 
         Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());

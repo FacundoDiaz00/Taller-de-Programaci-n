@@ -206,6 +206,10 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private void agregarAT(ActionEvent action) {
 
 		try{
+			// FIXME llenar esta list con las categorias
+			List<String> categorias = new ArrayList<String>();
+			
+			
 			String prov;
 			if(comboProveedores.getSelectedItem() == null) {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor", "Error", JOptionPane.ERROR_MESSAGE);
@@ -234,8 +238,9 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 				JOptionPane.showMessageDialog(null, "Los campos nombre, descripción, duración, ciudad y costo son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			
 
-			icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha);
+			icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias);
 			limpiarFormulario();
 			setVisible(false);
 			JOptionPane.showMessageDialog (null, "Se ha dado de alta la Actividad Turística con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);

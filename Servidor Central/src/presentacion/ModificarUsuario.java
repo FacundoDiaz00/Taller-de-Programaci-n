@@ -315,14 +315,14 @@ public class ModificarUsuario extends JInternalFrame {
 				return;
 			}
 
-			dtu = new DTProveedor(nickname, nombre, apellido, correo, fechaNac, descripcion, url );
+			dtu = new DTProveedor(nickname, nombre, apellido, correo, fechaNac, null, url, descripcion);
 		} else {
 			if(nacionalidad== null || nacionalidad.trim().equals("")){
 				JOptionPane.showMessageDialog(null, "La nacionalidad es un campo obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
-			dtu = new DTTurista(nickname, nombre, apellido, correo, fechaNac, nacionalidad);
+			dtu = new DTTurista(nickname, nombre, apellido, correo, fechaNac, null, nacionalidad);
 		}
 
 		try{

@@ -167,7 +167,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 	}
 	
 	private void actualizarDTPaqueteDetalles() {
-		paquetesDetalles = cp.obtenerDetallesPaquetes(); 
+		paquetesDetalles = cp.obtenerDTPaquetesDetalles(); 
 	}
 	
 	private void actualizarCamposFormulario() {

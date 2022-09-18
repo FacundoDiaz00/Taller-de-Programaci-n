@@ -237,7 +237,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		String seleccion = seleccionActividad;
 		mostrarOtrasConsultas = false;
 		try {
-			DTActividadTuristicaDetalle actividad = icat.obtenerDetallesActividadTuristica(seleccion);
+			DTActividadTuristicaDetalle actividad = icat.obtenerDTActividadTuristicaDetalle(seleccion);
 			
 			nombre.setText(actividad.getNombre());
 			ciudad.setText(actividad.getCuidad());

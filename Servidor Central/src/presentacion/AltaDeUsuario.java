@@ -204,9 +204,9 @@ public class AltaDeUsuario extends JInternalFrame {
 			fechaNac = LocalDate.parse(fecha, JEFormatter);
 			//Todo falta verificar los campos obligatorios
 			if(tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)) {
-				icu.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), descripcion.getText(),url.getText(), fechaNac);
+				icu.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac, null, descripcion.getText(),url.getText());
 			}else {
-				icu.altaTurista(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac, nacionalidad.getText());
+				icu.altaTurista(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac, null, nacionalidad.getText());
 			}
 			limpiarFormulario();
 			setVisible(false);

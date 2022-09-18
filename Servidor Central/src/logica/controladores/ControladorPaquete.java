@@ -1,6 +1,9 @@
 package logica.controladores;
 
+import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
+import logica.datatypes.Imagen;
+
 import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,19 +20,28 @@ import logica.manejadores.ManejadorPaquete;
  */
 
 public class ControladorPaquete implements IControladorPaquete{
-    public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR) throws PaqueteYaRegistradoException {
+	
+	public ControladorPaquete() {
+		
+	}
+    
+	public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR, Imagen img) throws PaqueteYaRegistradoException {
         
     	ManejadorPaquete mp = ManejadorPaquete.getInstancia();
         
         if(mp.existePaquete(nombre)) {
             throw new PaqueteYaRegistradoException("Ya existe en el sistema un paquete con el nombre: "+nombre);
         }
-        Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento, fechaR);
+        Paquete paq = new Paquete(nombre, descripcion, periodovalidez, descuento, fechaR, img);
         mp.addPaquete(paq);
     }
 
+    public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas) {
+    	// TODO
+    }
+    
     @Override
-    public List<DTPaqueteDetalles> obtenerDetallesPaquetes() {
+    public List<DTPaqueteDetalles> obtenerDTPaquetesDetalles() {
         ArrayList<DTPaqueteDetalles> dtsPacks = new ArrayList<>();
         ManejadorPaquete mp = ManejadorPaquete.getInstancia();
         for (Paquete pack : mp.getPaquetes()){
@@ -37,9 +49,19 @@ public class ControladorPaquete implements IControladorPaquete{
         }
         return dtsPacks;
     }
+    
+    public DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) {
+    	// TODO
+    	return null;
+    }
+    
+    public List<DTPaquete> obtenerDTPaquetes() {
+    	// TODO
+    	return null;
+    }
 
 	@Override
-	public List<String> obtenerNombrePaquetes() {
+	public List<String> obtenerIdPaquetes() {
 		ManejadorPaquete mp = ManejadorPaquete.getInstancia();	
 		return new ArrayList<String>(mp.obtenerIdPaquetes());
 	}
@@ -48,6 +70,9 @@ public class ControladorPaquete implements IControladorPaquete{
 	@Override
 	public List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq) {
 		var cat = new ControladorActividadTuristica();
+		
+		
+		// TODO: filtrar las no aceptadas
 		List<String> actividadesDep = cat.obtenerIdActividadesTuristicas(nombreDep);
 
 		ManejadorPaquete mp = ManejadorPaquete.getInstancia();
@@ -68,6 +93,9 @@ public class ControladorPaquete implements IControladorPaquete{
 
 	@Override
 	public void agregarActividadAPaquete(String nombreAct, String nombrePaq) throws ActividadTuristicaYaRegistradaException {
+		// TODO: mirar DCOM
+		
+		
 		ManejadorPaquete mp = ManejadorPaquete.getInstancia();
 		Paquete paq = mp.getPaquete(nombrePaq);
 		
@@ -80,4 +108,11 @@ public class ControladorPaquete implements IControladorPaquete{
 		paq.agregarActividad(act);
 		act.agregarPaquete(paq);
 	}
+
+	@Override
+	public List<String> obtenerIdPaquetesSinComprar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

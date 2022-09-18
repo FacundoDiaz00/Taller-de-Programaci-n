@@ -1,10 +1,12 @@
 package logica.controladores;
 
 import excepciones.*;
+import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.Imagen;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,6 +33,12 @@ public interface IControladorActividadTuristica {
 	 * @return
 	 */
 	List<String> obtenerIdDepartamentos();
+	
+	/**
+	 * Devuelve el nombre de todos las categorias cargadas en el sistema
+	 * @return
+	 */
+	List<String> obtenerIdCategorias();
 
 	/**
 	 * Crea una actividad turística con los parámetros
@@ -44,14 +52,16 @@ public interface IControladorActividadTuristica {
 	 * @param fechaAlta
 	 * @throws ActividadTuristicaYaRegistradaException
 	 */
-	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta) throws ActividadTuristicaYaRegistradaException;
+	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img, List<String> categorias) throws ActividadTuristicaYaRegistradaException;
 
 	/**
 	 * Obtiene los detalles de la actividad turística identificada por 'nombreAct'
 	 * @param nombreAct
 	 * @return
 	 */
-	DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct);
+	DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct);
+	
+	List<DTActividadTuristica> obtenerDTActividadesTuristicas();
 
 	/**
 	 * Devuelve los nombres de todas las actividades turísticas.
@@ -61,7 +71,7 @@ public interface IControladorActividadTuristica {
 	List<String> obtenerIdActividadesTuristicas(String departamento);
 
 
-
+	List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria);
 
 	/**
 	 * Devueve los DtSalidasTuristas de todas las salidas asociadas con la actividad identificada con nombreActTuri
@@ -70,17 +80,14 @@ public interface IControladorActividadTuristica {
 	 */
 	List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri);
 
-	/**
-	 *
-	 * @param nomSalTurim
-	 * @param nicknameTuris
-	 * @param canTuris
-	 * @param fechaInscrp
-	 * @throws InscripcionYaRegistradaException
-	 * @throws SuperaElMaximoDeTuristasException
-	 */
-	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion,AltaInscripcionPosteriorAFechaSalidaException;
+	
+	// Versión web
+	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, String nombrePaquete) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion,AltaInscripcionPosteriorAFechaSalidaException;
 
+	// Versión estacion de trabajo
+	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion,AltaInscripcionPosteriorAFechaSalidaException;
+
+	
 	/**
 	 *
 	 * @param actividad
@@ -93,7 +100,7 @@ public interface IControladorActividadTuristica {
 	 * @throws FechaAltaActividadPosteriorAFechaAltaSalidaException
 	 * @throws FechaAltaSalidaPosteriorAFechaSalidaException
 	 */
-	void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
+	void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
 
 	/**
 	 * Devuelve los nombres de todas las salidas registradas en el sistema.
@@ -101,6 +108,8 @@ public interface IControladorActividadTuristica {
 	 * @return
 	 */
 	List<String> obtenerIdSalidasTuristicas(String act);
+	
+	List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista);
 
 	/**
 	 * Devuelve los datos de la salida identificada por el nombre pasada por parámetro.

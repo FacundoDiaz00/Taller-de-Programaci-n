@@ -1,10 +1,12 @@
 package logica.controladores;
 
 import excepciones.*;
+import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.Imagen;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 import logica.entidades.Inscripcion;
@@ -49,7 +51,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return new ArrayList<String>(MU.obtenerIdDepartamentos());
 	}
 	
-	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta ) throws ActividadTuristicaYaRegistradaException {
+	public List<String> obtenerIdCategorias() {
+		// TODO
+		return null;
+	}
+	
+	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img, List<String> categorias) throws ActividadTuristicaYaRegistradaException {
+		// TODO: hacer algo con la img y categorias
+		
 		if(!existeActividadTuristica(nombreActividad)) {
 			//Se crea instancia:
 			ActividadTuristica AT = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);
@@ -75,9 +84,19 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     	return idActividades;
     }
     
-    public DTActividadTuristicaDetalle obtenerDetallesActividadTuristica(String nombreAct) {
+    public List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria) {
+    	// TODO
+    	return null;
+    }
+    
+    public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) {
     	ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
     	return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
+    }
+    
+    public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
+    	//TODO
+    	return  null;
     }
 
 	@Override
@@ -91,9 +110,22 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 		return dtsSal;
 	}
+	
+	public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) {
+		// TODO
+		return null;
+	}
 
 	@Override
-	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscrp) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion,AltaInscripcionPosteriorAFechaSalidaException {
+	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, String nombrePaquete) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion,AltaInscripcionPosteriorAFechaSalidaException {
+		// TODO hacer algo con el nombrePaquete y calcular la fecha de insc
+		
+	}
+	
+	@Override
+	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
+			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {		
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) mu.getUsuarioPorNick(nicknameTuris);
 		if(turis.estaInscriptoASalida(nomSalTurim)){
@@ -105,10 +137,16 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		if(cantidadInscrptos + canTuris > sal.getCantMaxTuristas()){
 			throw new SuperaElMaximoDeTuristasException("La salida " + nomSalTurim +  " con las inscripcion ya realizada no tiene la capacidad suficiente para soportar esta inscrpcion");
 		}
-		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscrp);
+		
+		turis.altaInscripcionSalidaTuristica(sal,canTuris,fechaInscripcion);
+		
 	}
 
-	public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+	public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img) throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+		if (fechaAlta == null)
+			fechaAlta = LocalDate.now();
+		
+		
 		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
 		ManejadorActividadTuristica ma = ManejadorActividadTuristica.getInstancia();
 		if(ms.existeSalidaTuristica(nombre)) {
@@ -123,7 +161,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			throw new FechaAltaSalidaPosteriorAFechaSalidaException("La fecha de la Salida debe ser posterior a la fecha de su registro");
 		}
 		else {
-			SalidaTuristica st = new SalidaTuristica(actividad,nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar);
+			SalidaTuristica st = new SalidaTuristica(actividad,nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar, img);
 			ms.addSalida(st);
 		}
 	}
@@ -166,6 +204,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 		return insc.obtenerDTInscripcion();
 	}
+
+	
 }
 
 

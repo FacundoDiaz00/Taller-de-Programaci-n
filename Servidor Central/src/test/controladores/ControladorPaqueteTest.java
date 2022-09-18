@@ -3,6 +3,9 @@ package test.controladores;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,16 +13,48 @@ import org.junit.jupiter.api.Test;
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.PaqueteYaRegistradoException;
 import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTPaqueteDetalles;
 
 class ControladorPaqueteTest {
 	private static IControladorPaquete cp = null;
+	private static IControladorActividadTuristica cat = null;
+	
+	private static List<String> muestraCategorias;
+	private static LocalDate localDateNow;
+	private static LocalDateTime localDateTimeNow;
+	
+	private static LocalDate localDateVieja;
+	private static LocalDate localDateMuyVieja;
+	private static LocalDate localDateFuturo;
 	
 	@BeforeAll
 	static void preparacionPrevia() {
 		cp = Fabrica.getInstancia().getIControladorPaquete();
+		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+		
+		try {
+			/*TODO descomentar cuando esté implementado
+			cat.altaCategoria("EXTREMO");
+			cat.altaCategoria("ARTE");
+			cat.altaCategoria("TRANQUILO");
+			*/
+		} catch (Exception e) {
+			// Nada, las categorias ya fueron agregadas
+		}
+		
+		muestraCategorias = new ArrayList<String>();
+		muestraCategorias.add("EXTREMO");
+		muestraCategorias.add("ARTE");
+		muestraCategorias.add("TRANQUILO");		
+		
+		localDateNow = LocalDate.now();
+		localDateTimeNow = LocalDateTime.now();
+		localDateVieja = LocalDate.of(2022,1,1);
+		localDateMuyVieja = LocalDate.of(2010,1,1);
+		localDateFuturo = LocalDate.of(2026,1,1);
 	}
 
 	// No es un test en sí.
@@ -35,7 +70,7 @@ class ControladorPaqueteTest {
 			int periodovalidez = 15;
 			float descuento = (float) (i + 0.025);
 			
-			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento, LocalDate.of(2022,1,1));
+			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento, localDateVieja, null);
 		}
 	}
 	
@@ -75,7 +110,7 @@ class ControladorPaqueteTest {
 			fail(e.getMessage());
 		}
 		
-		var ids = cp.obtenerNombrePaquetes();
+		var ids = cp.obtenerIdPaquetes();
 		
 		assertTrue(ids != null);
 		
@@ -142,7 +177,7 @@ class ControladorPaqueteTest {
 			}			
 		}
 		
-		var paq_list = cp.obtenerDetallesPaquetes();
+		var paq_list = cp.obtenerDTPaquetesDetalles();
 		assertTrue(paq_list != null);
 		
 		
@@ -222,9 +257,8 @@ class ControladorPaqueteTest {
 				int duracion = 10;
 				float costo = (float) 10.85;
 				String ciudad = "Ciudad";
-				LocalDate fechaAlta = LocalDate.now();
 				
-				cat.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+				cat.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, localDateNow, null, muestraCategorias);	
 				
 				cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 			}
@@ -257,9 +291,8 @@ class ControladorPaqueteTest {
 				int duracion = 10;
 				float costo = (float) 10.85;
 				String ciudad = "Ciudad";
-				LocalDate fechaAlta = LocalDate.now();
 				
-				cat.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+				cat.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, localDateNow, null, muestraCategorias);	
 				
 				cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 				
@@ -297,9 +330,8 @@ class ControladorPaqueteTest {
 				int duracion = 10;
 				float costo = (float) 10.85;
 				String ciudad = "Ciudad";
-				LocalDate fechaAlta = LocalDate.now();
 				
-				cat.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta);	
+				cat.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad, localDateNow, null, muestraCategorias);	
 				
 
 				// 10 actividades de cada provedor en un pquete

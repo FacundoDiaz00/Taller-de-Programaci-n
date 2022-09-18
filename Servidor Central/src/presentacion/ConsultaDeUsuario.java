@@ -358,9 +358,12 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				
 				
 				panelActividadesYSalidasProveedor.removeAll();
-				var act_sal = prov.getActividadesSalidas();
+				
+				
+				var actividades = prov.getActividades();
+			
 								
-				if (act_sal.size() == 0) {
+				if (actividades.size() == 0) {
 					lblActividadesProv.setVisible(false);
 					panelActividadesYSalidasProveedor.setVisible(false);
 				} else {
@@ -368,7 +371,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 					panelActividadesYSalidasProveedor.setVisible(true);
 				}
 				
-				for (var actividad : act_sal.keySet()) {
+				for (var actividad : actividades) {
 					
 					
 					JPanel panel = new JPanel();
@@ -379,25 +382,27 @@ public class ConsultaDeUsuario extends JInternalFrame {
 					panel.add(titulo);
 					
 					JTextArea txt = new JTextArea();
-			        txt.setText(actividad);
+			        txt.setText(actividad.getNombre());
 			        txt.setEditable(false);
 					txt.addMouseListener(new MouseAdapter() {
 			        	@Override
 			        	public void mouseClicked(MouseEvent e) {
-			        		ejecutarCasoConsultaActividadTuristca(actividad);
+			        		ejecutarCasoConsultaActividadTuristca(actividad.getNombre());
 			        	}
 			        });
 					
 					panel.add(txt);
 					
-					for (var salida : act_sal.get(actividad)) {
+					var salidas_de_la_actividad = actividad.getSalidas();
+					
+					for (var salida : salidas_de_la_actividad.values()) {
 						JTextArea txt_sal = new JTextArea();
-						txt_sal.setText("   Salida: " + salida);
+						txt_sal.setText("   Salida: " + salida.getNombre());
 						txt_sal.setEditable(false);
 						txt_sal.addMouseListener(new MouseAdapter() {
 				        	@Override
 				        	public void mouseClicked(MouseEvent e) {
-				        		ejecutarCasoConsultaSalidaTuristca(salida);
+				        		ejecutarCasoConsultaSalidaTuristca(salida.getNombre());
 				        	}
 				        });
 						panel.add(txt_sal);

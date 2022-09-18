@@ -1,6 +1,8 @@
 package logica.controladores;
 
+import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
+import logica.datatypes.Imagen;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,14 +26,22 @@ public interface IControladorPaquete {
      * @param fechaR
      * @throws PaqueteYaRegistradoException
      */
-    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR) throws PaqueteYaRegistradoException;
+    void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR, Imagen img) throws PaqueteYaRegistradoException;
+    
+    void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas);
 
     /**
      * Debuelve de los nombres de todos los paquetes registrados en el sistema
      * @return
      */
-    List<String> obtenerNombrePaquetes();
+    List<String> obtenerIdPaquetes();
 
+    /**
+     * Debuelve de los nombres de todos los paquetes registrados en el sistema
+     * @return
+     */
+    List<String> obtenerIdPaquetesSinComprar();
+    
     /**
      *
      * @param nombreDep
@@ -54,6 +64,9 @@ public interface IControladorPaquete {
      * La misma consiste de todos los datos basicos del paquete y de sus actividades asociadas
      * @return
      */
-    List<DTPaqueteDetalles> obtenerDetallesPaquetes();
-
+    List<DTPaqueteDetalles> obtenerDTPaquetesDetalles();
+    
+    List<DTPaquete> obtenerDTPaquetes();
+    
+    DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete);
 }

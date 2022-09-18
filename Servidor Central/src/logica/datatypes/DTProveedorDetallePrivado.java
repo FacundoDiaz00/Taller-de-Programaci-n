@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import logica.EstadoActividadTuristica;
-
 /**
  * @author Equipo taller prog 16
  */
