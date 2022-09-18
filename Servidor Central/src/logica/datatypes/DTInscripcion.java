@@ -8,17 +8,17 @@ import logica.entidades.SalidaTuristica;
 public class DTInscripcion {
 	private LocalDate fechaInscripcion;
     private int cantidadTuristas;
-    private String compra;
-    private DTSalidaTuristica salidaTuristica;
-    private DTTurista turista;
+    private float costo;
+    private String salida;
+    private String turista;
     
-    public DTInscripcion(LocalDate fechaInscripcion,int cantidadTuristas,String compra,DTSalidaTuristica salidaTuristica,DTTurista turista) {
-    	this.fechaInscripcion = fechaInscripcion;
-    	this.cantidadTuristas = cantidadTuristas;
-    	this.compra = compra;
-    	this.salidaTuristica = salidaTuristica;
-    	this.turista = turista;
-    }
+	public DTInscripcion(LocalDate fechaInscripcion,int cantidadTuristas,float costo,String salida,String turista) {
+		this.fechaInscripcion = fechaInscripcion;
+		this.cantidadTuristas = cantidadTuristas;
+		this.costo = costo;
+		this.salida = salida;
+		this.turista = turista;
+	}
   
 	public LocalDate getFechaInscripcion() {
 		return this.fechaInscripcion;
@@ -28,18 +28,15 @@ public class DTInscripcion {
 		return this.cantidadTuristas;
 	}
 	
-	public String getCompra() {
-		return this.compra;
+	public String getSalidaTuristica() {
+		return this.salida;
 	}
-	
-	public DTSalidaTuristica getSalidaTuristica() {
-		return this.salidaTuristica;
-	}
-	public DTTurista getTurista() {
+
+	public String getTurista() {
 		return this.turista;
 	}
 
 	public float getCosto() {
-		return this.cantidadTuristas * this.getSalidaTuristica().getActividad().getCostoPorTurista();
+		return costo;
 	}
 }

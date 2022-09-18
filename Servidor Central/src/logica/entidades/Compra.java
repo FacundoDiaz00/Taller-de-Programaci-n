@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import logica.datatypes.DTCompra;
+
 /**
  * @author Equipo taller prog 16
  */
@@ -29,6 +31,13 @@ public class Compra {
         this.inscripciones = new HashSet<>();
     }
 
+    
+    public DTCompra obtenerDTCompra() {
+    	var costo = 0.0;
+    	// FIXME calcular bien el costo de la compra
+    	return new DTCompra(fechaCompra, cantidadTuristas, (float)costo, vencimiento, paquete.getNombre());
+    }
+    
     public LocalDate getFechaCompra() {
         return fechaCompra;
     }

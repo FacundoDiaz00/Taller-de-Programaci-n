@@ -312,8 +312,9 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
 			fechaAlta.setText(salida.getFechaAlta().toString());
 			DefaultListModel<String> listModel = new DefaultListModel<>();
-            for (DTInscripcion insc : salida.getInscriptos()){
-                listModel.addElement(insc.getTurista().getNickname());
+			
+            for (DTInscripcion insc : salida.getInscripciones()){
+                listModel.addElement(insc.getTurista());
             }
             inscripcionList.setModel(listModel);
 			

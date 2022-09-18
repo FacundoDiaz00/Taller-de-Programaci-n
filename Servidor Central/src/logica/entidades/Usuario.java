@@ -3,6 +3,7 @@ package logica.entidades;
 import java.time.LocalDate;
 
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 
 /**
  * @author Equipo taller prog 16
@@ -15,13 +16,15 @@ public abstract class Usuario {
     private String apellido;
     private String correo;
     private LocalDate fechaNac;
+    private Imagen img;
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac) {
+    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img) {
         setNickname(nickname);
         setNombre(nombre);
         setApellido(apellido);
         setCorreo(correo);
         setFechaNac(fechaNac);
+        setImagen(img);
     }
 
     @Override
@@ -70,6 +73,15 @@ public abstract class Usuario {
         this.fechaNac = fechaNac;
     }
     
+    public void setImagen(Imagen img) {
+        this.img = img;
+    }
+    
+    
+    public Imagen getImagen() {
+        return img;
+    }
+    
     public abstract DTUsuario obtenerDTUsuario();
 
     public abstract DTUsuario obtenerDTUsuarioDetalle();
@@ -78,6 +90,11 @@ public abstract class Usuario {
 		this.setNombre(datosNuevos.getNombre());
 		this.setApellido(datosNuevos.getApellido());
 		this.setFechaNac(datosNuevos.getFechaNac());
+	}
+
+	public DTUsuario obtenerDTUsuarioDetallePrivado() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

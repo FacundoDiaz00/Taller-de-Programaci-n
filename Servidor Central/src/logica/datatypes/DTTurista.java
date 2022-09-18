@@ -9,9 +9,8 @@ import java.time.LocalDate;
 public class DTTurista extends DTUsuario {
     private String nacionalidad;
 
-    public DTTurista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
-            String nacionalidad) {
-        super(nickname, nombre, apellido, correo, fechaNac);
+    public DTTurista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img, String nacionalidad) {
+        super(nickname, nombre, apellido, correo, fechaNac, img);
         this.nacionalidad = nacionalidad;
     }
 

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import excepciones.ModificacionUsuarioNoPermitida;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,13 +23,13 @@ import logica.datatypes.DTTuristaDetalle;
 class ControladorUsuarioTest {
 	private static IControladorUsuario cu = null;
 	private static IControladorActividadTuristica cat = null;
-	private static LocalDate nowDate;
+	private static LocalDate localDateNow;
 	
 	@BeforeAll
 	static void preparacionPrevia() {
 		cu = Fabrica.getInstancia().getIControladorUsuario();
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
-		nowDate = LocalDate.now();
+		localDateNow = LocalDate.now();
 	}
 	
 	// No es un test en sí
@@ -45,9 +46,9 @@ class ControladorUsuarioTest {
 			String correo = "Proveedor " + id + " i=" + i;
 			String descripcion = "HOLA! DESCRIPCION";
 			String link = "www.google.com.provedoor";
-			LocalDate FNacimiento = nowDate.minusYears(30);
+			LocalDate FNacimiento = localDateNow.minusYears(30);
 			
-			cu.altaProveedor(nickname, nombre, apellido, correo, descripcion, link, FNacimiento);
+			cu.altaProveedor(nickname, nombre, apellido, correo, FNacimiento, null, descripcion, link);
 		}
 	}
 	
@@ -64,9 +65,9 @@ class ControladorUsuarioTest {
 			String apellido = "APELLIDO TURISTA";
 			String correo = "TURISTA " + id + " i=" + i;
 			String nacionalidad = "CHINA";
-			LocalDate FNacimiento = nowDate.minusYears(15);
+			LocalDate FNacimiento = localDateNow.minusYears(15);
 			
-			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
+			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 		}
 	}
 
@@ -202,7 +203,7 @@ class ControladorUsuarioTest {
 		LocalDate FNacimiento = LocalDate.now().minusYears(15);
 		
 		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, nacionalidad);
+			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 		});		
 	}
 
@@ -240,7 +241,7 @@ class ControladorUsuarioTest {
 		LocalDate FNacimiento = LocalDate.now().minusYears(30);
 		
 		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			cu.altaProveedor(nickname, nombre, apellido, correo, descripcion, link, FNacimiento);
+			cu.altaProveedor(nickname, nombre, apellido, correo, FNacimiento, null, descripcion, link);
 		});		
 	}
 	
@@ -292,7 +293,7 @@ class ControladorUsuarioTest {
 			String correo = "Proveedor " + id + " i=" + i;
 			String descripcion = "HOLA! DESCRIPCION";
 			String link = "www.google.com.provedoor";
-			LocalDate FNacimiento = nowDate.minusYears(30);		
+			LocalDate FNacimiento = localDateNow.minusYears(30);		
 			String nombreSalida = "Salida " + id + " i=" + i;
 			String nombreActividad = "Actividad " + id + " i=" + i;
 			
@@ -310,13 +311,13 @@ class ControladorUsuarioTest {
 			assertEquals(link, dtCasteado.getLink());
 			assertEquals(FNacimiento, dtCasteado.getFechaNac());
 			
-			assertEquals(1, dtCasteado.getActividadesSalidas().keySet().size());
-			var nombreActObtenida = dtCasteado.getActividadesSalidas().keySet().toArray()[0];
+			assertEquals(1, dtCasteado.getActividades().size());
+			var nombreActObtenida = dtCasteado.getActividades().get(0).getNombre();
 			assertEquals(nombreActividad, nombreActObtenida);
 			
-			var salidasAsociadasObtenidas = (List) dtCasteado.getActividadesSalidas().values().toArray()[0];
-			assertEquals(1, salidasAsociadasObtenidas.size());
-			assertEquals(nombreSalida, salidasAsociadasObtenidas.get(0));
+			var salidasAsociadasObtenidas = dtCasteado.getActividades().get(0).getSalidas().keySet().toArray();
+			assertEquals(1, salidasAsociadasObtenidas.length);
+			assertEquals(nombreSalida, salidasAsociadasObtenidas[0]);
 		}
 		
 		
@@ -327,7 +328,7 @@ class ControladorUsuarioTest {
 			String apellido = "APELLIDO TURISTA";
 			String correo = "TURISTA " + id + " i=" + i;
 			String nacionalidad = "CHINA";
-			LocalDate FNacimiento = nowDate.minusYears(15);
+			LocalDate FNacimiento = localDateNow.minusYears(15);
 			String nombreSalida = "Salida " + id + " i=" + i;
 			
 			var dtdet = cu.obtenerDTUsuarioDetalle(nickname);
@@ -375,7 +376,7 @@ class ControladorUsuarioTest {
 			String correo = "Proveedor " + id + " i=" + i;
 			String descripcion = "HOLA! DESCRIPCION";
 			String link = "www.google.com.provedoor";
-			LocalDate FNacimiento = nowDate.minusYears(30);			
+			LocalDate FNacimiento = localDateNow.minusYears(30);			
 			
 			var dt = cu.obtenerDTUsuario(nickname);
 			
@@ -402,7 +403,7 @@ class ControladorUsuarioTest {
 			String apellido = "APELLIDO TURISTA";
 			String correo = "TURISTA " + id + " i=" + i;
 			String nacionalidad = "CHINA";
-			LocalDate FNacimiento = nowDate.minusYears(15);
+			LocalDate FNacimiento = localDateNow.minusYears(15);
 			
 			var dt = cu.obtenerDTUsuario(nickname);
 			
@@ -458,8 +459,8 @@ class ControladorUsuarioTest {
 			// Caso típico:
 			String nuevoString = "NUEVO DATO";
 			
-			DTTurista dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre() + nuevoString, dttur.getApellido() + nuevoString, dttur.getCorreo(), dttur.getFechaNac().plusDays(1), dttur.getNacionalidad() + nuevoString);
-			DTProveedor dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre() + nuevoString, dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
+			DTTurista dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre() + nuevoString, dttur.getApellido() + nuevoString, dttur.getCorreo(), dttur.getFechaNac().plusDays(1), null, dttur.getNacionalidad() + nuevoString);
+			DTProveedor dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre() + nuevoString, dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), null, dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
 
 
 			try{
@@ -476,8 +477,8 @@ class ControladorUsuarioTest {
 	
 			
 			// Caso en el que se modifica el correo
-			DTTurista dtTurNuevo2 = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(), dttur.getCorreo() + nuevoString, dttur.getFechaNac(), dttur.getNacionalidad());
-			DTProveedor dtProvNuevo2 = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), dtprov.getDescrpicionGeneral(), dtprov.getLink());
+			DTTurista dtTurNuevo2 = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(), dttur.getCorreo() + nuevoString, dttur.getFechaNac(), null, dttur.getNacionalidad());
+			DTProveedor dtProvNuevo2 = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), null, dtprov.getDescrpicionGeneral(), dtprov.getLink());
 
 			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
 				cu.modificarUsuario(dtTurNuevo2);
@@ -500,8 +501,8 @@ class ControladorUsuarioTest {
 			assertNotEquals(dtProvNuevo2, dtprov);	
 			
 			// Caso en el que se modifica el nick:
-			DTTurista dtTurNuevo3 = new DTTurista(dttur.getNickname() + nuevoString, dttur.getNombre(), dttur.getApellido(), dttur.getCorreo(), dttur.getFechaNac(), dttur.getNacionalidad());
-			DTProveedor dtProvNuevo3 = new DTProveedor(dtprov.getNickname() + nuevoString, dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo(), dtprov.getFechaNac(), dtprov.getDescrpicionGeneral(), dtprov.getLink());
+			DTTurista dtTurNuevo3 = new DTTurista(dttur.getNickname() + nuevoString, dttur.getNombre(), dttur.getApellido(), dttur.getCorreo(), dttur.getFechaNac(), null, dttur.getNacionalidad());
+			DTProveedor dtProvNuevo3 = new DTProveedor(dtprov.getNickname() + nuevoString, dtprov.getNombre(), dtprov.getApellido(), dtprov.getCorreo(), dtprov.getFechaNac(), null, dtprov.getDescrpicionGeneral(), dtprov.getLink());
 
 			
 			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {

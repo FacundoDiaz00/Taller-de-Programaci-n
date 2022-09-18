@@ -12,36 +12,25 @@ import logica.entidades.ActividadTuristica;
 
 public class  DTSalidaTuristica {
 	private String nombre;
-	private int cantMaxTuristas;
-	private LocalDate fechaAlta;
 	private LocalDateTime fechaHoraSalida;
 	private String lugarSalida;
-    private DTActividadTuristica actividad;
+	private LocalDate fechaAlta;
+	private int cantMaxTuristas;
+	private Imagen img;
+    private String actividad;
 
-	public DTSalidaTuristica(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida,DTActividadTuristica actividad) {
+	public DTSalidaTuristica(String nombre, LocalDateTime fechaHoraSalida, String lugarSalida, LocalDate fechaAlta, int cantMaxTuristas, Imagen img, String actividad) {
 		this.nombre = nombre;
-		this.cantMaxTuristas = cantMaxTuristas;
-		this.fechaAlta = fechaAlta;
 		this.fechaHoraSalida = fechaHoraSalida;
 		this.lugarSalida = lugarSalida;
+		this.fechaAlta = fechaAlta;
+		this.cantMaxTuristas = cantMaxTuristas;
+		this.img = img;
 		this.actividad = actividad;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return ((DTSalidaTuristica)obj).nombre.equals(this.nombre);
 	}
 
 	public String getNombre() {
 		return nombre;
-	}
-
-	public int getCantMaxTuristas() {
-		return cantMaxTuristas;
-	}
-
-	public LocalDate getFechaAlta() {
-		return fechaAlta;
 	}
 
 	public LocalDateTime getFechaHoraSalida() {
@@ -52,8 +41,19 @@ public class  DTSalidaTuristica {
 		return lugarSalida;
 	}
 
-	public DTActividadTuristica getActividad() {
-		return actividad;
+	public LocalDate getFechaAlta() {
+		return fechaAlta;
 	}
 
+	public int getCantMaxTuristas() {
+		return cantMaxTuristas;
+	}
+
+	public Imagen getImg() {
+		return img;
+	}
+
+	public String getActividad() {
+		return actividad;
+	}
 }

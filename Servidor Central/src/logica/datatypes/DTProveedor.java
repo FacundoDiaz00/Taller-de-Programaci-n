@@ -11,9 +11,8 @@ public class DTProveedor extends DTUsuario {
     private String descrpicionGeneral;
     private String link;
 
-    public DTProveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
-            String descrpicionGeneral, String link) {
-        super(nickname, nombre, apellido, correo, fechaNac);
+    public DTProveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img, String descrpicionGeneral, String link) {
+        super(nickname, nombre, apellido, correo, fechaNac, img);
         this.descrpicionGeneral = descrpicionGeneral;
         this.link = link;
     }

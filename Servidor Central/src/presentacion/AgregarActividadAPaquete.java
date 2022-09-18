@@ -234,7 +234,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	}
 
 	private void actualizarComboPaquete() {
-		List<String> idsPaquetes = cp.obtenerNombrePaquetes();
+		List<String> idsPaquetes = cp.obtenerIdPaquetes();
 		comboPaquetes.setModel(new DefaultComboBoxModel(idsPaquetes.toArray()));
 		if(idsPaquetes.size() > 0){
 			comboPaquetes.setSelectedIndex(0);

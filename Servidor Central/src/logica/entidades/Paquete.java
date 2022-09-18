@@ -1,11 +1,15 @@
 package logica.entidades;
 
 import logica.datatypes.DTActividadTuristica;
+import logica.datatypes.DTCompra;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
+import logica.datatypes.Imagen;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,15 +25,20 @@ public class Paquete {
     private float descuento;
     private LocalDate fechaDeRegistro;
     private Map<String, ActividadTuristica> actividades;
+    private Imagen img;
+    private List<Compra> compras;
+    private List<Categoria> categorias;
 
-    public Paquete(String nombre, String descrpicion, int validez, float descuento, LocalDate fechaR) {
+    public Paquete(String nombre, String descrpicion, int validez, float descuento, LocalDate fechaR, Imagen img) {
         setNombre(nombre);
         setDescrpicion(descrpicion);
         setValidez(validez);
         setDescuento(descuento);
         setActividades(new HashMap<>());
         setFechaDeRegistro(fechaR);
-
+        setCompras(new ArrayList<Compra>());
+        setCategorias(new ArrayList<Categoria>());
+        setImagen(img);
     }
 
 
@@ -38,11 +47,29 @@ public class Paquete {
         for(ActividadTuristica act : actividades.values()){
             mapDtAct.put(act.getNombre(), act.obtenerDTActividadTuristica());
         }
-        return new DTPaqueteDetalles(getNombre(), getDescrpicion(), getValidez(), getDescuento(), mapDtAct);
+        List<String> categorias = new ArrayList<String>();
+        
+        for (var cat: this.categorias) {
+        	categorias.add(cat.getNombre());
+        }
+        
+        List<DTCompra> compras = new ArrayList<DTCompra>();
+        
+        for (var comp: this.compras) {
+        	compras.add(comp.obtenerDTCompra());
+        }
+       
+        return new DTPaqueteDetalles(nombre, descrpicion, descuento, validez, categorias, img, mapDtAct, compras);
     }
 
     public DTPaquete obtenerDTPaquete(){
-        return new DTPaquete(getNombre(), getDescrpicion(), getValidez(), getDescuento());
+    	List<String> cats = new ArrayList<String>();
+        
+        for (var cat: this.categorias) {
+        	cats .add(cat.getNombre());
+        }
+        
+    	return new DTPaquete(nombre, descrpicion, descuento, validez, cats, img);
     }
 
     @Override
@@ -103,5 +130,17 @@ public class Paquete {
 
     public void agregarActividad(ActividadTuristica actividad) {
         actividades.put(actividad.getNombre(), actividad);
+    }
+    
+    void setImagen(Imagen img) {
+    	this.img = img;
+    }
+    
+    void setCompras(List<Compra> compras) {
+    	this.compras = compras;
+    }
+    
+    void setCategorias(List<Categoria> cats) {
+    	this.categorias = cats;
     }
 }
