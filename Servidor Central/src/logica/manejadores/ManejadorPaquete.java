@@ -45,7 +45,7 @@ public class ManejadorPaquete {
 	}
 
 	public boolean existePaquete(String nombre) {
-		return (paquetes.containsKey(nombre));
+		return paquetes.containsKey(nombre);
 	}
 
 }

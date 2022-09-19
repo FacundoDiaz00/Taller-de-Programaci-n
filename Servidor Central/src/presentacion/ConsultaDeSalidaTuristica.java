@@ -296,25 +296,20 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 
 	private void mostrarDatosSalida() {
 		DTSalidaTuristicaDetalle salida = icat.obtenerDTSalidaTuristicaDetalle(seleccionSalida);
-		try {
 
-			nombre.setText(salida.getNombre());
-			fechaSalida.setText(salida.getFechaHoraSalida().toString());
-			horaSalida.setText(salida.getFechaHoraSalida().toString());
-			lugarSalida.setText(salida.getLugarSalida());
-			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
-			fechaAlta.setText(salida.getFechaAlta().toString());
-			DefaultListModel<String> listModel = new DefaultListModel<>();
+		nombre.setText(salida.getNombre());
+		fechaSalida.setText(salida.getFechaHoraSalida().toString());
+		horaSalida.setText(salida.getFechaHoraSalida().toString());
+		lugarSalida.setText(salida.getLugarSalida());
+		maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
+		fechaAlta.setText(salida.getFechaAlta().toString());
+		DefaultListModel<String> listModel = new DefaultListModel<>();
 
-			for (DTInscripcion insc : salida.getInscripciones()) {
-				listModel.addElement(insc.getTurista());
-			}
-			inscripcionList.setModel(listModel);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-
+		for (DTInscripcion insc : salida.getInscripciones()) {
+			listModel.addElement(insc.getTurista());
 		}
+		inscripcionList.setModel(listModel);
+
 	}
 
 	public void actualizarComboDepartamentos() {

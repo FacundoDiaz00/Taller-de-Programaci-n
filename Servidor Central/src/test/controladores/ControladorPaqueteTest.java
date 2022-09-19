@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.PaqueteYaRegistradoException;
+import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
@@ -62,7 +63,7 @@ class ControladorPaqueteTest {
 	}
 
 	// No es un test en sí.
-	static void generarPaquetes(int cant, String id) throws Exception {
+	static void generarPaquetes(int cant, String id) throws PaqueteYaRegistradoException {
 		if (cp == null)
 			preparacionPrevia();
 
@@ -82,7 +83,7 @@ class ControladorPaqueteTest {
 	final void testAltaPaqueteOK() {
 		try {
 			generarPaquetes(100, "testAltaPaqueteOK");
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -93,7 +94,7 @@ class ControladorPaqueteTest {
 
 		try {
 			generarPaquetes(1, "testAltaPaqueteRepetido");
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -109,7 +110,7 @@ class ControladorPaqueteTest {
 
 		try {
 			generarPaquetes(cant, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -141,28 +142,28 @@ class ControladorPaqueteTest {
 		// 10 paquetes
 		try {
 			generarPaquetes(10, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
 		// 100 proveedores
 		try {
 			ControladorUsuarioTest.generarProveedores(100, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
 		// 100 departamentos
 		try {
 			ControladorActividadTuristicaTest.generarDepartamentos(100, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
 		// 100 actividades
 		try {
 			ControladorActividadTuristicaTest.generarActividades(100, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -173,7 +174,7 @@ class ControladorPaqueteTest {
 				String nombreActString = "Actividad " + id + " i=" + (i * 10 + j);
 				try {
 					cp.agregarActividadAPaquete(nombreActString, nombrePaq);
-				} catch (Exception e) {
+				} catch (TurismoUyException e) {
 					fail(e.getMessage());
 				}
 			}
@@ -263,7 +264,7 @@ class ControladorPaqueteTest {
 
 				cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 			}
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -302,7 +303,7 @@ class ControladorPaqueteTest {
 					cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 				});
 			}
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -341,7 +342,7 @@ class ControladorPaqueteTest {
 					cp.agregarActividadAPaquete(nombreActividad, nombrePaq);
 				}
 			}
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 

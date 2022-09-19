@@ -34,7 +34,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private JTextField duracion;
 	private IControladorActividadTuristica icat;
 	private JTextField ciudad;
-	private JTextField FdeAlta;
+	private JTextField fDeAlta;
 
 	/**
 	 * Create the frame.
@@ -172,10 +172,10 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		getContentPane().add(ciudad);
 		ciudad.setEnabled(true);
 
-		FdeAlta = new JTextField();
-		FdeAlta.setColumns(10);
-		FdeAlta.setBounds(131, 189, 258, 20);
-		getContentPane().add(FdeAlta);
+		fDeAlta = new JTextField();
+		fDeAlta.setColumns(10);
+		fDeAlta.setBounds(131, 189, 258, 20);
+		getContentPane().add(fDeAlta);
 		btnNewButton.setBounds(272, 259, 117, 25);
 		getContentPane().add(btnNewButton);
 
@@ -218,7 +218,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 			float cost = Float.parseFloat(costo.getText().toString());
 			String ciu = ciudad.getText().toString();
 
-			String FAlta = FdeAlta.getText().toString();
+			String FAlta = fDeAlta.getText().toString();
 			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate fecha = LocalDate.parse(FAlta, JEFormatter);
 
@@ -246,10 +246,6 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Hay campos numéricos con datos inválido", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta la Actividad Turística", "Error",
-					JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
 		}
 
 	}
@@ -272,6 +268,6 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		duracion.setText("");
 		costo.setText("");
 		ciudad.setText("");
-		FdeAlta.setText("");
+		fDeAlta.setText("");
 	}
 }

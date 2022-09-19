@@ -7,7 +7,7 @@ package excepciones;
  * @author Equipo taller prog 16
  * 
  */
-public class SuperaElMaximoDeTuristasException extends Exception {
+public class SuperaElMaximoDeTuristasException extends TurismoUyException {
 	public SuperaElMaximoDeTuristasException(String message) {
 		super(message);
 	}

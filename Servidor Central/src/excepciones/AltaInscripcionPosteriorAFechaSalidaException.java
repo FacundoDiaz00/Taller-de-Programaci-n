@@ -7,7 +7,7 @@ package excepciones;
  * @author Equipo taller prog 16
  * 
  */
-public class AltaInscripcionPosteriorAFechaSalidaException extends Exception {
+public class AltaInscripcionPosteriorAFechaSalidaException extends TurismoUyException {
 	public AltaInscripcionPosteriorAFechaSalidaException(String texto) {
 		super(texto);
 	}

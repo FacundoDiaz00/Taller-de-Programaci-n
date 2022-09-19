@@ -5,7 +5,7 @@ package excepciones;
  * Usuario con el identificador seleccionado.
  *
  */
-public class UsuarioYaRegistradoException extends Exception {
+public class UsuarioYaRegistradoException extends TurismoUyException {
 	public UsuarioYaRegistradoException(String texto) {
 		super(texto);
 	}

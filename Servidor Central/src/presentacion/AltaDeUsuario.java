@@ -21,12 +21,12 @@ import logica.controladores.IControladorUsuario;
 
 public class AltaDeUsuario extends JInternalFrame {
 
-	private final String OPCION_PROVEEDOR = "Proveedor";
-	private final String OPCION_TURISTA = "Turista";
+	private final String opcionProveedor = "Proveedor";
+	private final String opcionTurista = "Turista";
 
 	private JTextField nombre;
 	private JTextField nickname;
-	private JTextField Fnacimiento;
+	private JTextField fechaNacimiento;
 	private JTextField apellido;
 	private JTextField correo;
 	private JComboBox tipoUsuario;
@@ -91,10 +91,10 @@ public class AltaDeUsuario extends JInternalFrame {
 		nickname.setBounds(131, 35, 258, 20);
 		getContentPane().add(nickname);
 
-		Fnacimiento = new JTextField();
-		Fnacimiento.setColumns(10);
-		Fnacimiento.setBounds(131, 137, 258, 20);
-		getContentPane().add(Fnacimiento);
+		fechaNacimiento = new JTextField();
+		fechaNacimiento.setColumns(10);
+		fechaNacimiento.setBounds(131, 137, 258, 20);
+		getContentPane().add(fechaNacimiento);
 
 		apellido = new JTextField();
 		apellido.setColumns(10);
@@ -109,8 +109,8 @@ public class AltaDeUsuario extends JInternalFrame {
 		tipoUsuario = new JComboBox();
 		tipoUsuario.setBounds(131, 7, 258, 24);
 		getContentPane().add(tipoUsuario);
-		tipoUsuario.addItem(OPCION_PROVEEDOR);
-		tipoUsuario.addItem(OPCION_TURISTA);
+		tipoUsuario.addItem(opcionProveedor);
+		tipoUsuario.addItem(opcionTurista);
 		tipoUsuario.setSelectedIndex(0);
 		this.tipoUsuario = tipoUsuario;
 
@@ -181,19 +181,19 @@ public class AltaDeUsuario extends JInternalFrame {
 	}
 
 	private void agregarUsuario(ActionEvent action) {
-		String fecha = Fnacimiento.getText();
+		String fecha = fechaNacimiento.getText();
 		LocalDate fechaNac;
 		try {
-			if (tipoUsuario.getSelectedItem().toString().equals(OPCION_TURISTA)
+			if (tipoUsuario.getSelectedItem().toString().equals(opcionTurista)
 					&& (nombre.getText().isBlank() || apellido.getText().isBlank() || nickname.getText().isBlank()
-							|| Fnacimiento.getText().isBlank() || nacionalidad.getText().isBlank())) {
+							|| fechaNacimiento.getText().isBlank() || nacionalidad.getText().isBlank())) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, apellido, nickname, correo, fecha de nacimiento y nacionalidad son obligatorios",
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
-			} else if (tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)
+			} else if (tipoUsuario.getSelectedItem().toString().equals(opcionProveedor)
 					&& (descripcion.getText().isBlank() || nombre.getText().isBlank() || apellido.getText().isBlank()
-							|| nickname.getText().isBlank() || Fnacimiento.getText().isBlank())) {
+							|| nickname.getText().isBlank() || fechaNacimiento.getText().isBlank())) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, apellido, nickname, correo, fecha de nacimiento y descripción son obligatorios",
 						"Error", JOptionPane.ERROR_MESSAGE);
@@ -202,7 +202,7 @@ public class AltaDeUsuario extends JInternalFrame {
 			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			fechaNac = LocalDate.parse(fecha, JEFormatter);
 			// Todo falta verificar los campos obligatorios
-			if (tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)) {
+			if (tipoUsuario.getSelectedItem().toString().equals(opcionProveedor)) {
 				icu.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac,
 						null, descripcion.getText(), url.getText());
 			} else {
@@ -224,10 +224,6 @@ public class AltaDeUsuario extends JInternalFrame {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Hay campos numéricos con datos inválidos", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al crear el usuario", "Error",
-					JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
 		}
 	}
 
@@ -236,7 +232,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		apellido.setText("");
 		nickname.setText("");
 		correo.setText("");
-		Fnacimiento.setText("");
+		fechaNacimiento.setText("");
 		nacionalidad.setText("");
 		url.setText("");
 		descripcion.setText("");

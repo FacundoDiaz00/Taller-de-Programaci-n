@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.TurismoUyException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
@@ -35,7 +36,7 @@ class ControladorUsuarioTest {
 	}
 
 	// No es un test en sí
-	static void generarProveedores(int cant, String id) throws Exception {
+	static void generarProveedores(int cant, String id) throws UsuarioYaRegistradoException {
 		if (cu == null)
 			preparacionPrevia();
 
@@ -55,7 +56,7 @@ class ControladorUsuarioTest {
 	}
 
 	// No es un test en sí
-	static void generarTuristas(int cant, String id) throws Exception {
+	static void generarTuristas(int cant, String id) throws UsuarioYaRegistradoException {
 		if (cu == null)
 			preparacionPrevia();
 
@@ -82,7 +83,7 @@ class ControladorUsuarioTest {
 		try {
 			generarProveedores(50, id);
 			generarTuristas(50, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -120,7 +121,7 @@ class ControladorUsuarioTest {
 
 		try {
 			generarProveedores(100, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -149,7 +150,7 @@ class ControladorUsuarioTest {
 
 		try {
 			generarTuristas(100, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -174,7 +175,7 @@ class ControladorUsuarioTest {
 	void testAltaTuristaOK() {
 		try {
 			generarTuristas(100, "testAltaTuristaOK");
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -185,7 +186,7 @@ class ControladorUsuarioTest {
 
 		try {
 			generarTuristas(50, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -209,7 +210,7 @@ class ControladorUsuarioTest {
 	void testAltaProveedorOK() {
 		try {
 			generarProveedores(100, "testAltaProveedorOK");
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -220,7 +221,7 @@ class ControladorUsuarioTest {
 
 		try {
 			generarProveedores(50, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -253,7 +254,7 @@ class ControladorUsuarioTest {
 			ControladorActividadTuristicaTest.generarDepartamentos(50, id);
 			ControladorActividadTuristicaTest.generarActividades(50, id);
 			ControladorActividadTuristicaTest.generarSalidas(50, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -263,7 +264,7 @@ class ControladorUsuarioTest {
 			String nickname = "Turista " + id + " i=" + i;
 			try {
 				cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
-			} catch (Exception e) {
+			} catch (TurismoUyException e) {
 				fail(e.getMessage());
 			}
 		}
@@ -275,7 +276,7 @@ class ControladorUsuarioTest {
 				String nombreSalida = "Salida " + id + " i=" + j;
 				try {
 					cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
-				} catch (Exception e) {
+				} catch (TurismoUyException e) {
 					fail(e.getMessage());
 				}
 			}
@@ -360,7 +361,7 @@ class ControladorUsuarioTest {
 		try {
 			generarProveedores(50, id);
 			generarTuristas(50, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -429,7 +430,7 @@ class ControladorUsuarioTest {
 		try {
 			generarProveedores(50, id);
 			generarTuristas(50, id);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			fail(e.getMessage());
 		}
 
@@ -444,7 +445,7 @@ class ControladorUsuarioTest {
 			try {
 				cu.modificarUsuario(dttur);
 				cu.modificarUsuario(dtprov);
-			} catch (Exception e) {
+			} catch (TurismoUyException e) {
 				fail(e.getMessage());
 			}
 
@@ -464,7 +465,7 @@ class ControladorUsuarioTest {
 			try {
 				cu.modificarUsuario(dtTurNuevo);
 				cu.modificarUsuario(dtProvNuevo);
-			} catch (Exception e) {
+			} catch (TurismoUyException e) {
 				fail(e.getMessage());
 			}
 
@@ -491,7 +492,7 @@ class ControladorUsuarioTest {
 			try {
 				cu.modificarUsuario(dtTurNuevo);
 				cu.modificarUsuario(dtProvNuevo);
-			} catch (Exception e) {
+			} catch (TurismoUyException e) {
 				fail(e.getMessage());
 			}
 

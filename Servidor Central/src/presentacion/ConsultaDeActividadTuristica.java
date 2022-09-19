@@ -237,34 +237,29 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	private void seSeleccionoUnaActividad() {
 		String seleccion = seleccionActividad;
 		mostrarOtrasConsultas = false;
-		try {
-			DTActividadTuristicaDetalle actividad = icat.obtenerDTActividadTuristicaDetalle(seleccion);
+		DTActividadTuristicaDetalle actividad = icat.obtenerDTActividadTuristicaDetalle(seleccion);
 
-			nombre.setText(actividad.getNombre());
-			ciudad.setText(actividad.getCuidad());
-			costo.setText(String.valueOf(actividad.getCostoPorTurista()));
-			descripcion.setText(actividad.getDescripcion());
-			fechaAlta.setText(actividad.getFechaAlta().toString());
-			proveedor.setText(actividad.getNicknameProveedor());
-			duracion.setText(String.valueOf(actividad.getDuracion()));
+		nombre.setText(actividad.getNombre());
+		ciudad.setText(actividad.getCuidad());
+		costo.setText(String.valueOf(actividad.getCostoPorTurista()));
+		descripcion.setText(actividad.getDescripcion());
+		fechaAlta.setText(actividad.getFechaAlta().toString());
+		proveedor.setText(actividad.getNicknameProveedor());
+		duracion.setText(String.valueOf(actividad.getDuracion()));
 
-			comboSalidas.removeAllItems();
-			comboPaquetes.removeAllItems();
+		comboSalidas.removeAllItems();
+		comboPaquetes.removeAllItems();
 
-			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
-			for (DTSalidaTuristica salida : salidas) {
-				comboSalidas.addItem(salida.getNombre());
-			}
-
-			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
-			for (DTPaquete paquete : paquetes) {
-				comboPaquetes.addItem(paquete.getNombre());
-			}
-
-		} catch (Exception ex) {
-			// Esta excepcion no debería ocurrir pero por las dudas la pongo
-
+		List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
+		for (DTSalidaTuristica salida : salidas) {
+			comboSalidas.addItem(salida.getNombre());
 		}
+
+		List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
+		for (DTPaquete paquete : paquetes) {
+			comboPaquetes.addItem(paquete.getNombre());
+		}
+
 		SwingUtilities.invokeLater(() -> mostrarOtrasConsultas = true);
 	}
 

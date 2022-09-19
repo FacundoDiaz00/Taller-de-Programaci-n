@@ -37,6 +37,7 @@ import javax.swing.event.PopupMenuListener;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.TurismoUyException;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTSalidaTuristica;
@@ -597,7 +598,7 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			JOptionPane.showMessageDialog(null,
 					"La fecha de inscripción no puede ser anterior a la fecha de alta de la salida turística.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			JOptionPane.showMessageDialog(null, "Error general al crear la inscripción.", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();

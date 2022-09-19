@@ -34,7 +34,7 @@ public class DTProveedor extends DTUsuario {
 					&& casted.getApellido().equals(this.getApellido()) && casted.getCorreo().equals(this.getCorreo())
 					&& casted.getFechaNac().equals(this.getFechaNac()) && casted.getLink().equals(this.getLink())
 					&& casted.getDescrpicionGeneral().equals(this.getDescrpicionGeneral());
-		} catch (Exception e2) {
+		} catch (ClassCastException e2) {
 			return false;
 		}
 	}
