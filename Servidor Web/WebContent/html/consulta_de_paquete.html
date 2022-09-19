@@ -29,11 +29,11 @@
 
                 <ul class="navbar-nav d-flex">
                     <form class="d-flex buscar" role="search" id="buscador">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
                     <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
+                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrarse</a>
                     </li>
                     <li class="iniciar_sesion">
                         <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
@@ -51,7 +51,6 @@
             <!--Acciones generales-->
             <div class="card list-group" id="opciones">
                 <h5 class="card-title">Acciones</h5>
-                <a href="index.html" class="list-group-item">Ver actividades & paquetes</a>
                 <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
                 <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
             </div>
@@ -83,10 +82,7 @@
             <div id="info">
                 <h2>Disfrutar Rocha</h2>
                 <h6>Creado el 10/08/2022</h6>
-                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
-                <ul>
-                    <li><a href="#">Comprar paquete</a></li>
-                </ul>
+
             </div>
 
             <div id="resto-de-la-info-actividad">
@@ -109,7 +105,25 @@
 
         </div>
 
-        <div id="actividades-turisticas">
+        <div id="actividades-compra-turisticas">
+            <div class="card" id="contenedor-compra">
+                <div class="header-card-with-button">
+                    <h2 class="card-title">Compra paquete</h2>
+                </div>
+                <div class="row g-0">
+                    <form action="" id="form-comprar">
+                        <div class="contenedorinput mb-3">
+                            <span class="input-label">Cantidad turistas</span></span>
+                            <input id="input-cantidad-turistas" type="number" required class="form-control" placeholder="Ingrese la cantidad de turistas para la compra" aria-label="" aria-describedby="basic-addon1">
+                        </div>
+                        <div id="div-comprar">
+                            <input type="submit" id="comprar-boton" class="btn btn-success" value="Comprar">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
             <div class="card" id="contenedor-actividades-turisticas">
                 <div class="header-card-with-button">
                     <h2 class="card-title">Actividades</h2>
