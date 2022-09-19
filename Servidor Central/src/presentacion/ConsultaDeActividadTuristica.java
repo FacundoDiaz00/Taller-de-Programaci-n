@@ -48,7 +48,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	public ConsultaDeActividadTuristica(Principal p, IControladorActividadTuristica icat) {
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
-			public void internalFrameClosing(InternalFrameEvent e) {
+			public void internalFrameClosing(InternalFrameEvent event) {
 				limpiarFormulario();
 			}
 		});
@@ -116,12 +116,12 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 
@@ -192,7 +192,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		getContentPane().add(proveedor);
 
 		comboDepartamentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				var dep = comboDepartamentos.getSelectedItem();
 				if (dep != null) {
 					List<String> actividades = icat.obtenerIdActividadesTuristicas((String) dep);
@@ -202,19 +202,19 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		});
 
 		comboActividades.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				consultaDeActividad(e);
+			public void actionPerformed(ActionEvent event) {
+				consultaDeActividad(event);
 			}
 		});
 
 		comboSalidas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				ejecutarCasoConsultaSalidaTuristca((String) comboSalidas.getSelectedItem());
 			}
 		});
 
 		comboPaquetes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				ejecutarCasoConsultaPaquete((String) comboPaquetes.getSelectedItem());
 			}
 		});

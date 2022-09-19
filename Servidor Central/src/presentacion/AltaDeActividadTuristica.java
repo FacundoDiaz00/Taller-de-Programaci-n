@@ -40,8 +40,8 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaDeActividadTuristica(IControladorActividadTuristica icat) {
-		Fabrica f = Fabrica.getInstancia();
-		this.icat = f.getIControladorActividadTuristica();
+		Fabrica fabrica = Fabrica.getInstancia();
+		this.icat = fabrica.getIControladorActividadTuristica();
 		setTitle("Alta de Actividad Turística");
 		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
@@ -98,18 +98,18 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		comboProveedores.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				// Esto es lo que actualiza la lista cada vez que se abre.
 				actualizarComboProveedores();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 
@@ -143,26 +143,26 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				// Esto es lo que actualiza la lista cada vez que se abre.
 				actualizarComboDepartamentos();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 		});
 
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				agregarAT(e);
+			public void actionPerformed(ActionEvent event) {
+				agregarAT(event);
 			}
 		});
 
@@ -181,7 +181,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				limpiarFormulario();
 				setVisible(false);
 			}

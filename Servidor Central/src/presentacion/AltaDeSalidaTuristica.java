@@ -27,7 +27,7 @@ import excepciones.SalidaYaRegistradaException;
 import logica.controladores.IControladorActividadTuristica;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
-	private IControladorActividadTuristica ca;
+	private IControladorActividadTuristica controladorAct;
 
 	private JSpinner dia;
 	private JSpinner mes;
@@ -46,11 +46,11 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaDeSalidaTuristica(IControladorActividadTuristica ca) {
-		this.ca = ca;
+	public AltaDeSalidaTuristica(IControladorActividadTuristica controladorAct) {
+		this.controladorAct = controladorAct;
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
-			public void internalFrameClosing(InternalFrameEvent e) {
+			public void internalFrameClosing(InternalFrameEvent event) {
 				limpiarForm();
 			}
 		});
@@ -74,13 +74,13 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 		departamento = new JComboBox();
 		departamento.addPopupMenuListener(new PopupMenuListener() {
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 			}
 
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 			}
 
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				actualizarDepartamentos();
 
 			}
@@ -103,13 +103,13 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 		actividadTuristica = new JComboBox();
 		actividadTuristica.addPopupMenuListener(new PopupMenuListener() {
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 			}
 
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 			}
 
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				actualizarActTur();
 			}
 		});
@@ -218,7 +218,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				aceptarAltaSalidaTuristica();
 			}
 		});
@@ -228,7 +228,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				limpiarForm();
 				setVisible(false);
 			}
@@ -273,7 +273,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	}
 
 	private void actualizarDepartamentos() {
-		List<String> deptos = ca.obtenerIdDepartamentos();
+		List<String> deptos = controladorAct.obtenerIdDepartamentos();
 		departamento.setModel(new DefaultComboBoxModel<>(deptos.toArray()));
 		if (deptos.size() > 0) {
 			departamento.setSelectedIndex(0);
@@ -281,7 +281,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	}
 
 	private void actualizarActTur() {
-		List<String> acts = ca.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
+		List<String> acts = controladorAct.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
 		actividadTuristica.setModel(new DefaultComboBoxModel<>(acts.toArray()));
 		if (acts.size() > 0) {
 			actividadTuristica.setSelectedIndex(0);
@@ -293,8 +293,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			LocalDate fechaR = LocalDate.of((int) anior.getValue(), (int) mesr.getValue(), (int) diar.getValue());
 			LocalDateTime fecha = LocalDateTime.of((int) anio.getValue(), (int) mes.getValue(), (int) dia.getValue(),
 					(int) hora.getSelectedItem(), 0);
-			ca.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(), nombre.getText().toString(), fecha,
-					fechaR, lugar.getText().toString(), (int) maxTuristas.getValue(), null);
+			controladorAct.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(),
+					nombre.getText().toString(), fecha, fechaR, lugar.getText().toString(),
+					(int) maxTuristas.getValue(), null);
 			JOptionPane.showMessageDialog(null, "Operacion realizada con exito.", "Registro de Salida",
 					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);

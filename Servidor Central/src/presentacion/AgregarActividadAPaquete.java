@@ -28,7 +28,7 @@ import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 
 public class AgregarActividadAPaquete extends JInternalFrame {
-	private IControladorPaquete cp;
+	private IControladorPaquete controladorPaq;
 	private IControladorActividadTuristica cat;
 
 	private JComboBox comboPaquetes;
@@ -38,13 +38,13 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarActividadAPaquete(IControladorPaquete cp, IControladorActividadTuristica cat) {
-		this.cp = cp;
+	public AgregarActividadAPaquete(IControladorPaquete controladorPaq, IControladorActividadTuristica cat) {
+		this.controladorPaq = controladorPaq;
 		this.cat = cat;
 
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
-			public void internalFrameClosing(InternalFrameEvent e) {
+			public void internalFrameClosing(InternalFrameEvent event) {
 				cancelar();
 			}
 		});
@@ -74,17 +74,17 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		comboPaquetes.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				actualizarComboPaquete();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 
@@ -100,7 +100,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		panelSeleccionPaquete.add(horizontalStrut);
 
 		comboPaquetes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				selecionarPaquete();
 			}
 		});
@@ -120,24 +120,24 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		comboDepartamentos.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				actualizarComboDepartamentos();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 
 		});
 
 		comboDepartamentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				seleccionDepartamento();
 			}
 		});
@@ -166,17 +166,17 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		comboActividades.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				actualizarComboActividades();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 
@@ -196,7 +196,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 		JButton botonCancelar = new JButton("Cancelar");
 		botonCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				cancelar();
 			}
 		});
@@ -204,7 +204,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 		JButton botonAgregar = new JButton("Agregar");
 		botonAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				agregarActividad();
 			}
 		});
@@ -236,7 +236,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	}
 
 	private void actualizarComboPaquete() {
-		List<String> idsPaquetes = cp.obtenerIdPaquetes();
+		List<String> idsPaquetes = controladorPaq.obtenerIdPaquetes();
 		comboPaquetes.setModel(new DefaultComboBoxModel(idsPaquetes.toArray()));
 		if (idsPaquetes.size() > 0) {
 			comboPaquetes.setSelectedIndex(0);
@@ -263,7 +263,8 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		String packId = (String) comboPaquetes.getSelectedItem();
 		// No va a estar habilitado el combo si no seleciono la actividad y el
 		// pack
-		List<String> idsActividades = cp.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId, packId);
+		List<String> idsActividades = controladorPaq.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId,
+				packId);
 		comboActividades.setModel(new DefaultComboBoxModel<>(idsActividades.toArray()));
 		if (idsActividades.size() > 0) {
 			comboActividades.setSelectedIndex(0);
@@ -285,12 +286,12 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 					JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
-				cp.agregarActividadAPaquete(act, pack);
+				controladorPaq.agregarActividadAPaquete(act, pack);
 				setVisible(false);
 				limpiarSelecciones();
 				JOptionPane.showMessageDialog(null, "Se agregó la actividad al paquete",
 						"Registro de asociación actividad a paquete", JOptionPane.INFORMATION_MESSAGE);
-			} catch (ActividadTuristicaYaRegistradaException e) {
+			} catch (ActividadTuristicaYaRegistradaException exception) {
 				JOptionPane.showMessageDialog(null,
 						"Se debe seleccionar una actividad que no esté ya dentro del paquete", "Error",
 						JOptionPane.ERROR_MESSAGE);

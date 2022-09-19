@@ -12,4 +12,17 @@ public class DTInscripcionDetalle extends DTInscripcion {
 		super(fechaInscripcion, cantidadTuristas, costo, salida, turista);
 		// TODO
 	}
+
+	public DTSalidaTuristica getDTSalidaTuristica() {
+		return salidaTuristica;
+	}
+
+	public DTCompra getDTCompra() {
+		return compra;
+	}
+
+	public DTTurista getDTTurista() {
+		return turista;
+	}
+
 }

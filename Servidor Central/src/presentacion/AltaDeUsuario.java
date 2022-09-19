@@ -40,8 +40,8 @@ public class AltaDeUsuario extends JInternalFrame {
 	 */
 	public AltaDeUsuario(IControladorUsuario icu) {
 
-		Fabrica f = Fabrica.getInstancia();
-		this.icu = f.getIControladorUsuario();
+		Fabrica fabrica = Fabrica.getInstancia();
+		this.icu = fabrica.getIControladorUsuario();
 		setTitle("Registrar Usuario");
 		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
@@ -116,8 +116,8 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				agregarUsuario(e);
+			public void actionPerformed(ActionEvent event) {
+				agregarUsuario(event);
 			}
 		});
 		btnAceptar.setBounds(272, 259, 117, 25);
@@ -125,7 +125,7 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				limpiarFormulario();
 				setVisible(false);
 			}
@@ -165,7 +165,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		getContentPane().add(url);
 
 		tipoUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				if (tipoUsuario.getSelectedItem().toString() == "Proveedor") {
 					nacionalidad.setEnabled(false);
 					url.setEnabled(true);

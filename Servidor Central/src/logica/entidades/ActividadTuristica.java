@@ -46,19 +46,19 @@ public class ActividadTuristica {
 		setCategorias(new HashMap<>());
 
 		// Se agrega a la coleccion de actividades:
-		ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
-		MAD.addActividad(this);
+		ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
+		manejadorAct.addActividad(this);
 
 		// Se agrega la relacion con el departamento:
-		ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
-		Departamento d = MD.getDepartamento(departamento);
-		d.asociarActividadTuristica(this);
+		ManejadorDepartamento manejadorDep = ManejadorDepartamento.getInstancia();
+		Departamento depObject = manejadorDep.getDepartamento(departamento);
+		depObject.asociarActividadTuristica(this);
 
 		// Se agrega la relacion con el proveedor:
-		ControladorUsuario CU = new ControladorUsuario();
-		Proveedor p = CU.obtenerProveedor(nombreProveedor);
-		p.asociarActividadTuristica(this);
-		proveedor = p;
+		ControladorUsuario contUsuario = new ControladorUsuario();
+		Proveedor prov = contUsuario.obtenerProveedor(nombreProveedor);
+		prov.asociarActividadTuristica(this);
+		proveedor = prov;
 	}
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
@@ -177,7 +177,7 @@ public class ActividadTuristica {
 		this.paquetes.put(paquete.getNombre(), paquete);
 	}
 
-	public void asociarSalidaAActividad(SalidaTuristica st) {
-		salidas.put(st.getNombre(), st);
+	public void asociarSalidaAActividad(SalidaTuristica salidaTur) {
+		salidas.put(salidaTur.getNombre(), salidaTur);
 	}
 }

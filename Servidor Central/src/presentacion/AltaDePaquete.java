@@ -19,7 +19,6 @@ import excepciones.PaqueteYaRegistradoException;
 import logica.controladores.IControladorPaquete;
 
 public class AltaDePaquete extends JInternalFrame {
-	private IControladorPaquete cp;
 
 	private JTextField txtNombre;
 	private JTextArea descrp;
@@ -29,9 +28,7 @@ public class AltaDePaquete extends JInternalFrame {
 	private JSpinner mesr;
 	private JSpinner diar;
 
-	public AltaDePaquete(IControladorPaquete cp) {
-		this.cp = cp;
-
+	public AltaDePaquete(IControladorPaquete controladorPaq) {
 		setTitle("Registrar Paquete de Actividades.");
 		setBounds(100, 100, 461, 415);
 		getContentPane().setLayout(null);
@@ -102,9 +99,10 @@ public class AltaDePaquete extends JInternalFrame {
 								"Registro de Paquete", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					LocalDate f = LocalDate.of((int) anior.getValue(), (int) mesr.getValue(), (int) diar.getValue());
-					cp.altaPaquete(txtNombre.getText().toString(), descrp.getText().toString(), (int) perVal.getValue(),
-							(int) desc.getValue(), f, null);
+					LocalDate fecha = LocalDate.of((int) anior.getValue(), (int) mesr.getValue(),
+							(int) diar.getValue());
+					controladorPaq.altaPaquete(txtNombre.getText().toString(), descrp.getText().toString(),
+							(int) perVal.getValue(), (int) desc.getValue(), fecha, null);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Registro de Paquete",
 							JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
