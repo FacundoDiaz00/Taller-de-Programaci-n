@@ -18,5 +18,6 @@
     margin-bottom: 10px
 }
 #botones{
+    display: flex;
     justify-content: space-between;
 }
