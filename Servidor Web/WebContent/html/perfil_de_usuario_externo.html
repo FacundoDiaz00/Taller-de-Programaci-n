@@ -30,23 +30,20 @@
 
 
                 <ul class="navbar-nav d-flex">
-                    <form class="d-flex buscar" role="search" id="buscador">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn" ><i class="fas fa-search"></i></button>
-                    </form>
-                    <div class="dropdown">
-
-                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rosa María Martínez
-                            <img  class="imagen_perfil " src="../img/la_chiqui.png">
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="perfil_de_usuario.html">Ver Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
-                        </ul>
-                    </div>
+                    <ul class="navbar-nav d-flex">
+                        <form class="d-flex buscar" role="search" id="buscador">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn" ><i class="fas fa-search"></i></button>
+                        </form>
+                        <li class="alta_de_usuario">
+                            <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
+                        </li>
+                        <li class="iniciar_sesion">
+                            <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                        </li>
+                    </ul>
                 </ul>
-            </div>
+                </div>
         </div>
 
     </nav>
@@ -97,84 +94,10 @@
                         <h5 class="card-title">Rosa María Martínez</h5>
                         <p class="text"><b>Rosa María / lachiqui</b></p>
                         <p class="card-text"><b>Nickname: lachiqui</b></p>
-                        <p class="card-text"><b>Nombre:</b> Rosa María<i class="fas fa-pencil-alt pencil"></i></p>
-                        <p class="card-text"><b>Apellido:</b> Martínez<i class="fas fa-pencil-alt pencil"></i></p>
+                        <p class="card-text"><b>Nombre: </b>Rosa María</p>
+                        <p class="card-text"><b>Apellido:</b> Martínez</p>
                         <p class="card-text"><b>Email: mirtha.legrand.ok@hotmail.com.ar</b></p>
-                        <p class="card-text"><b>Fecha de Nacimiento:</b> 23/2/1927<i class="fas fa-pencil-alt pencil"></i></p>
-                        <div class="bs-example">
-                            <!-- Button HTML (to Trigger Modal) -->
-                            <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
-
-                            <!-- Modal HTML -->
-                            <div id="myModal" class="modal fade" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Modificar Usuario</h5>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="contenedorinput mb-3">
-                                                <span class="input-label">Foto de Perfil:</span>
-                                                <img style="width: 160px; height: 120px; margin:20px" src="../img/la_chiqui.png">
-                                                <input id="input-imagen" type="file" accept="image/*"  class="form-control" placeholder="Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
-                                            </div>
-
-                                            <div class="popUp">
-                                                <div>
-                                                    <div class="contenedorinput mb-3">
-                                                        <span class="input-label" >Nickname:</span>
-                                                        <input id="input-nickname" type="text" required class="form-control" placeholder="lachiqui" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
-                                                    </div>
-
-                                                    <div class="contenedorinput mb-3">
-                                                        <span class="input-label">Nombre:</span>
-                                                        <input id="input-nombre" type="text" required class="form-control" placeholder="Rosa María" aria-label="Nombre" aria-describedby="basic-addon1">
-                                                    </div>
-
-                                                    <div class="contenedorinput mb-3">
-                                                        <span class="input-label">Apellido: </span>
-                                                        <input id="input-apellido" type="text" required class="form-control" placeholder="Martínez" aria-label="Apellido" aria-describedby="basic-addon1">
-                                                    </div>
-
-                                                </div>
-
-                                                <div>
-
-                                                    <div class="contenedorinput mb-3">
-                                                        <span class="input-label">Fecha de nacimiento:</span>
-                                                        <input id="input-fecha-nacimiento" type="date" required class="form-control" placeholder="23/2/1927" aria-label="Fecha nacimiento" aria-describedby="basic-addon1">
-                                                    </div>
-
-                                                    <div class="contenedorinput mb-3">
-                                                        <span class="input-label">Contraseña: </span>
-                                                        <input id="input-contraseña" type="password" required class="form-control" placeholder="Contraseña" aria-label="Nickname" aria-describedby="basic-addon1">
-                                                    </div>
-
-                                                    <div class="contenedorinput mb-3">
-                                                        <span class="input-label"> Correo electronico:</span>
-                                                        <input id="input-correo" type="password" required class="form-control" placeholder=" mirtha.legrand.ok@hotmail.com.ar" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="contenedorinput mb-3" id="nacionalidad-field">
-                                                <span class="input-label">Nacionalidad: </span>
-                                                <input id="input-nacionalidad" type="file" accept="image/*"  class="form-control" placeholder="Argentina" aria-label="Imagen" aria-describedby="basic-addon1">
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer" style="display: flex;justify-content: space-between;">
-                                            <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="card-text"><b>Fecha de Nacimiento:</b> 23/2/1927</p>
 
                     </div>
                 </div>
@@ -187,10 +110,6 @@
                                     <div class="col-md-8">
                                         <div class="card-body cards">
                                             <h5 class="card-title">Degusta Agosto</h5>
-                                            <p class="card-text"><b>Cantidad de Turistas:</b> 3</p>
-                                            <p class="card-text"><b>Costo:</b> 2400</p>
-                                            <p class="card-text"><b>Fecha de Inscripción:</b> 15/8/2022</p>
-                                            <p class="card-text"><b>Tipo:</b> General</p>
                                             <div class="botonera">
                                                 <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
                                             </div>
@@ -207,10 +126,7 @@
                                     <div class="col-md-8">
                                         <div class="card-body cards">
                                             <h5 class="card-title">Degusta Setiembre</h5>
-                                            <p class="card-text"><b>Cantidad de Turistas:</b> 3</p>
-                                            <p class="card-text"><b>Costo:</b> 1200</p>
-                                            <p class="card-text"><b>Fecha de Inscripción:</b> 18/8/2022</p>
-                                            <p class="card-text"><b>Tipo:</b> General</p>
+
                                             <div class="botonera">
                                                 <a href="#" class="btn btn-primary">Ver mas</a>
                                             </div>
@@ -231,8 +147,7 @@
                                 <div class="col-md-8">
                                     <div class="card-body cards">
                                         <h5 class="card-title">Disfrutar Rocha</h5>
-                                        <p class="card-text"><b>Cantidad de Turisticas:</b> 2</p>
-                                        <p class="card-text"><b>Fecha de Compra:</b> 15/8/2022</p>
+                                        <p class="card-text descripcion-paquete">Actividades para hacer en familia y disfrutar arte y gastronomía.</p>
                                         <div class="botonera">
                                             <a href="consulta_de_paquete.html" class="btn btn-primary">Ver mas</a>
                                         </div>
@@ -251,8 +166,7 @@
                                     <div class="card-body cards">
 
                                         <h5 class="card-title">Un día en Colonia</h5>
-                                        <p class="card-text"><b>Cantidad de Turisticas:</b> 5</p>
-                                        <p class="card-text"><b>Fecha de Compra:</b> 20/8/2022</p>
+                                        <p class="card-text descripcion-paquete">Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toros</p>
                                         <div class="botonera">
                                             <a href="#" class="btn btn-primary">Ver mas</a>
                                         </div>
