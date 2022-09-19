@@ -11,90 +11,86 @@ import logica.datatypes.Imagen;
 
 public abstract class Usuario {
 
-    private String nickname;
-    private String nombre;
-    private String apellido;
-    private String correo;
-    private LocalDate fechaNac;
-    private Imagen img;
+	private String nickname;
+	private String nombre;
+	private String apellido;
+	private String correo;
+	private LocalDate fechaNac;
+	private Imagen img;
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img) {
-        setNickname(nickname);
-        setNombre(nombre);
-        setApellido(apellido);
-        setCorreo(correo);
-        setFechaNac(fechaNac);
-        setImagen(img);
-    }
+	public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img) {
+		setNickname(nickname);
+		setNombre(nombre);
+		setApellido(apellido);
+		setCorreo(correo);
+		setFechaNac(fechaNac);
+		setImagen(img);
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        return this.getNickname().equals(((Usuario) obj).getNickname())
-                || this.getCorreo().equals(((Usuario) obj).getCorreo());
-    }
+	@Override
+	public boolean equals(Object obj) {
+		return this.getNickname().equals(((Usuario) obj).getNickname())
+				|| this.getCorreo().equals(((Usuario) obj).getCorreo());
+	}
 
-    public String getNickname() {
-        return nickname;
-    }
+	public String getNickname() {
+		return nickname;
+	}
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getApellido() {
-        return apellido;
-    }
+	public String getApellido() {
+		return apellido;
+	}
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 
-    public String getCorreo() {
-        return correo;
-    }
+	public String getCorreo() {
+		return correo;
+	}
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
 
-    public LocalDate getFechaNac() {
-        return fechaNac;
-    }
+	public LocalDate getFechaNac() {
+		return fechaNac;
+	}
 
-    public void setFechaNac(LocalDate fechaNac) {
-        this.fechaNac = fechaNac;
-    }
-    
-    public void setImagen(Imagen img) {
-        this.img = img;
-    }
-    
-    
-    public Imagen getImagen() {
-        return img;
-    }
-    
-    public abstract DTUsuario obtenerDTUsuario();
+	public void setFechaNac(LocalDate fechaNac) {
+		this.fechaNac = fechaNac;
+	}
 
-    public abstract DTUsuario obtenerDTUsuarioDetalle();
-    
+	public void setImagen(Imagen img) {
+		this.img = img;
+	}
+
+	public Imagen getImagen() {
+		return img;
+	}
+
+	public abstract DTUsuario obtenerDTUsuario();
+
+	public abstract DTUsuario obtenerDTUsuarioDetalle();
+
+	public abstract DTUsuario obtenerDTUsuarioDetallePrivado();
+
 	public void setearDatos(DTUsuario datosNuevos) {
 		this.setNombre(datosNuevos.getNombre());
 		this.setApellido(datosNuevos.getApellido());
 		this.setFechaNac(datosNuevos.getFechaNac());
-	}
-
-	public DTUsuario obtenerDTUsuarioDetallePrivado() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

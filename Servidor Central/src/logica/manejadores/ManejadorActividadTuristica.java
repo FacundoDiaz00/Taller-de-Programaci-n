@@ -1,6 +1,5 @@
 package logica.manejadores;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,43 +13,44 @@ import logica.entidades.ActividadTuristica;
  */
 
 public class ManejadorActividadTuristica {
-    private static ManejadorActividadTuristica instancia;
+	private static ManejadorActividadTuristica instancia;
 
-    private Map<String, ActividadTuristica> actividades;
-    
-    private ManejadorActividadTuristica() {
-    	actividades = new HashMap<String, ActividadTuristica>();
-    }
-    
-    public static ManejadorActividadTuristica getInstancia() {
-        if (instancia == null) {
-            instancia = new ManejadorActividadTuristica();
-            
-        }
-        return instancia;
-    }
+	private Map<String, ActividadTuristica> actividades;
 
-    public List<ActividadTuristica> getActividades() {
-        return new ArrayList<ActividadTuristica>(actividades.values());
-    }
+	private ManejadorActividadTuristica() {
+		actividades = new HashMap<String, ActividadTuristica>();
+	}
 
-    public Set<String> obtenerIdActividadesTuristicas(){
-        return actividades.keySet();
-    }
+	public static ManejadorActividadTuristica getInstancia() {
+		if (instancia == null) {
+			instancia = new ManejadorActividadTuristica();
 
-    public void addActividad(ActividadTuristica actividad) {
-        actividades.put(actividad.getNombre(), actividad);
-    }
+		}
+		return instancia;
+	}
 
-    public ActividadTuristica getActividad(String nombre) {
-        return actividades.get(nombre);
-    }
-    public boolean exists(String id){
-    	return actividades.containsKey(id);
-    	
-    }
+	public List<ActividadTuristica> getActividades() {
+		return new ArrayList<ActividadTuristica>(actividades.values());
+	}
 
-    public ActividadTuristica obtenerActividadTuristica(String IDActividad) {
-        return actividades.get(IDActividad);
-    }
+	public Set<String> obtenerIdActividadesTuristicas() {
+		return actividades.keySet();
+	}
+
+	public void addActividad(ActividadTuristica actividad) {
+		actividades.put(actividad.getNombre(), actividad);
+	}
+
+	public ActividadTuristica getActividad(String nombre) {
+		return actividades.get(nombre);
+	}
+
+	public boolean exists(String id) {
+		return actividades.containsKey(id);
+
+	}
+
+	public ActividadTuristica obtenerActividadTuristica(String IDActividad) {
+		return actividades.get(IDActividad);
+	}
 }

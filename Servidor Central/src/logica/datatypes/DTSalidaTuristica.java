@@ -1,25 +1,23 @@
 package logica.datatypes;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import logica.entidades.ActividadTuristica;
 
 /**
  * @author Equipo taller prog 16
  */
 
-public class  DTSalidaTuristica {
+public class DTSalidaTuristica {
 	private String nombre;
 	private LocalDateTime fechaHoraSalida;
 	private String lugarSalida;
 	private LocalDate fechaAlta;
 	private int cantMaxTuristas;
 	private Imagen img;
-    private String actividad;
+	private String actividad;
 
-	public DTSalidaTuristica(String nombre, LocalDateTime fechaHoraSalida, String lugarSalida, LocalDate fechaAlta, int cantMaxTuristas, Imagen img, String actividad) {
+	public DTSalidaTuristica(String nombre, LocalDateTime fechaHoraSalida, String lugarSalida, LocalDate fechaAlta,
+			int cantMaxTuristas, Imagen img, String actividad) {
 		this.nombre = nombre;
 		this.fechaHoraSalida = fechaHoraSalida;
 		this.lugarSalida = lugarSalida;

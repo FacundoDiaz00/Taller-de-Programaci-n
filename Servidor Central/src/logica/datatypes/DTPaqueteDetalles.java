@@ -8,20 +8,21 @@ import java.util.Map;
  */
 
 public class DTPaqueteDetalles extends DTPaquete {
-    private Map<String, DTActividadTuristica> actividades;
-    private List<DTCompra> compras;
+	private Map<String, DTActividadTuristica> actividades;
+	private List<DTCompra> compras;
 
-    public DTPaqueteDetalles(String nombre, String descrpicion, float descuento, int validez, List<String> categorias, Imagen img, Map<String, DTActividadTuristica> actividades, List<DTCompra> compras) {
-        super(nombre, descrpicion, descuento, validez, categorias, img);
-        this.actividades = actividades;
-        this.compras = compras;
-    }
+	public DTPaqueteDetalles(String nombre, String descrpicion, float descuento, int validez, List<String> categorias,
+			Imagen img, Map<String, DTActividadTuristica> actividades, List<DTCompra> compras) {
+		super(nombre, descrpicion, descuento, validez, categorias, img);
+		this.actividades = actividades;
+		this.compras = compras;
+	}
 
-    public Map<String, DTActividadTuristica> getActividades() {
-        return actividades;
-    }
+	public Map<String, DTActividadTuristica> getActividades() {
+		return actividades;
+	}
 
-    public List<DTCompra> getCompras() {
-        return compras;
-    }
+	public List<DTCompra> getCompras() {
+		return compras;
+	}
 }

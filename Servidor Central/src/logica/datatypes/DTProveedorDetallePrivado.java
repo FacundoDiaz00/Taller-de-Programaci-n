@@ -9,16 +9,16 @@ import java.util.Map;
  */
 
 public class DTProveedorDetallePrivado extends DTProveedorDetalle {
-    private Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas;
-    
-    public DTProveedorDetallePrivado(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
-			Imagen img, String desc, String url, List<DTActividadTuristicaDetalle> actividades, Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas) {
+	private Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas;
+
+	public DTProveedorDetallePrivado(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
+			Imagen img, String desc, String url, List<DTActividadTuristicaDetalle> actividades,
+			Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas) {
 		super(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades);
 		this.actividadesNoConfirmadas = actividadesNoConfirmadas;
 	}
-    
 
-    public Map<EstadoActividadTuristica, List<DTActividadTuristica>> getActividadesNoConfirmadas() {
-        return actividadesNoConfirmadas;
-    }
+	public Map<EstadoActividadTuristica, List<DTActividadTuristica>> getActividadesNoConfirmadas() {
+		return actividadesNoConfirmadas;
+	}
 }

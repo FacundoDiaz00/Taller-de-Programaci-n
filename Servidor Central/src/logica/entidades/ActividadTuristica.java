@@ -1,19 +1,18 @@
 package logica.entidades;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import logica.controladores.ControladorUsuario;
 import logica.datatypes.DTActividadTuristica;
-import logica.manejadores.ManejadorActividadTuristica;
-import logica.manejadores.ManejadorDepartamento;
-import logica.manejadores.ManejadorUsuario;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
-
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
+import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorDepartamento;
 
 /**
  * @author Equipo taller prog 16
@@ -21,142 +20,144 @@ import java.util.List;
 
 public class ActividadTuristica {
 
-    private String nombre;
-    private String descrpicion;
-    private int duracion;
-    private float costoPorTurista;
-    private String cuidad;
-    private LocalDate fechaAlta;
+	private String nombre;
+	private String descrpicion;
+	private int duracion;
+	private float costoPorTurista;
+	private String cuidad;
+	private LocalDate fechaAlta;
 
-    private Map<String, Paquete> paquetes;
-    private Map<String, SalidaTuristica> salidas;
+	private Map<String, Paquete> paquetes;
+	private Map<String, SalidaTuristica> salidas;
 
-    private Proveedor proveedor;
-    private Map<String, Categoria> categorias;
+	private Proveedor proveedor;
+	private Map<String, Categoria> categorias;
 
-    public ActividadTuristica(String nombreProveedor, String departamento,String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
-            LocalDate fechaAlta) {
-        setNombre(nombre);
-        setDescrpicion(descrpicion);
-        setDuracion(duracion);
-        setCostoPorTurista(costoPorTurista);
-        setCuidad(cuidad);
-        setFechaAlta(fechaAlta);
-        setPaquetes(new HashMap<>());
-        setSalidas(new HashMap<>());
-        setCategorias(new HashMap<>());
-        
-		//Se agrega a la coleccion de actividades:
+	public ActividadTuristica(String nombreProveedor, String departamento, String nombre, String descrpicion,
+			int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta) {
+		setNombre(nombre);
+		setDescrpicion(descrpicion);
+		setDuracion(duracion);
+		setCostoPorTurista(costoPorTurista);
+		setCuidad(cuidad);
+		setFechaAlta(fechaAlta);
+		setPaquetes(new HashMap<>());
+		setSalidas(new HashMap<>());
+		setCategorias(new HashMap<>());
+
+		// Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
 		MAD.addActividad(this);
-		
-		//Se agrega la relacion con el departamento:
+
+		// Se agrega la relacion con el departamento:
 		ManejadorDepartamento MD = ManejadorDepartamento.getInstancia();
 		Departamento d = MD.getDepartamento(departamento);
 		d.asociarActividadTuristica(this);
-		
-		//Se agrega la relacion con el proveedor:
+
+		// Se agrega la relacion con el proveedor:
 		ControladorUsuario CU = new ControladorUsuario();
 		Proveedor p = CU.obtenerProveedor(nombreProveedor);
 		p.asociarActividadTuristica(this);
-        proveedor = p;
-    }
+		proveedor = p;
+	}
 
-    public DTActividadTuristica obtenerDTActividadTuristica(){
-        return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname());
-    }
+	public DTActividadTuristica obtenerDTActividadTuristica() {
+		return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
+				getFechaAlta(), getProveedor().getNickname());
+	}
 
-    public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(){
-        HashMap<String, DTPaquete> packs = new HashMap<>();
-        for(Paquete pack : paquetes.values()){
-            packs.put(pack.getNombre(), pack.obtenerDTPaquete());
-        }
-        HashMap<String, DTSalidaTuristica> salid = new HashMap<>();
-        for(SalidaTuristica sal : salidas.values()){
-            salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
-        }
+	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
+		HashMap<String, DTPaquete> packs = new HashMap<>();
+		for (Paquete pack : paquetes.values()) {
+			packs.put(pack.getNombre(), pack.obtenerDTPaquete());
+		}
+		HashMap<String, DTSalidaTuristica> salid = new HashMap<>();
+		for (SalidaTuristica sal : salidas.values()) {
+			salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
+		}
 
-        return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname());
-    }
+		return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
+				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname());
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        return ((ActividadTuristica) obj).getNombre().equals(this.getNombre());
-    }
+	@Override
+	public boolean equals(Object obj) {
+		return ((ActividadTuristica) obj).getNombre().equals(this.getNombre());
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getDescrpicion() {
-        return descrpicion;
-    }
+	public String getDescrpicion() {
+		return descrpicion;
+	}
 
-    public void setDescrpicion(String descrpicion) {
-        this.descrpicion = descrpicion;
-    }
+	public void setDescrpicion(String descrpicion) {
+		this.descrpicion = descrpicion;
+	}
 
-    public int getDuracion() {
-        return duracion;
-    }
+	public int getDuracion() {
+		return duracion;
+	}
 
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
-    }
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+	}
 
-    public float getCostoPorTurista() {
-        return costoPorTurista;
-    }
+	public float getCostoPorTurista() {
+		return costoPorTurista;
+	}
 
-    public void setCostoPorTurista(float costoPorTurista) {
-        this.costoPorTurista = costoPorTurista;
-    }
+	public void setCostoPorTurista(float costoPorTurista) {
+		this.costoPorTurista = costoPorTurista;
+	}
 
-    public String getCuidad() {
-        return cuidad;
-    }
+	public String getCuidad() {
+		return cuidad;
+	}
 
-    public void setCuidad(String cuidad) {
-        this.cuidad = cuidad;
-    }
+	public void setCuidad(String cuidad) {
+		this.cuidad = cuidad;
+	}
 
-    public LocalDate getFechaAlta() {
-        return fechaAlta;
-    }
+	public LocalDate getFechaAlta() {
+		return fechaAlta;
+	}
 
-    public void setFechaAlta(LocalDate fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
+	public void setFechaAlta(LocalDate fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
 
-    public Map<String, Paquete> getPaquetes() {
-        return paquetes;
-    }
+	public Map<String, Paquete> getPaquetes() {
+		return paquetes;
+	}
 
-    public void setPaquetes(Map<String, Paquete> paquetes) {
-        this.paquetes = paquetes;
-    }
+	public void setPaquetes(Map<String, Paquete> paquetes) {
+		this.paquetes = paquetes;
+	}
 
-    public Map<String, SalidaTuristica> getSalidas() {
-        return salidas;
-    }
+	public Map<String, SalidaTuristica> getSalidas() {
+		return salidas;
+	}
 
-    public void setSalidas(Map<String, SalidaTuristica> salidas) {
-        this.salidas = salidas;
-    }
+	public void setSalidas(Map<String, SalidaTuristica> salidas) {
+		this.salidas = salidas;
+	}
 
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
 
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
-    }
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
 
-    public Map<String, Categoria> getCategorias() {
+	public Map<String, Categoria> getCategorias() {
 		return categorias;
 	}
 
@@ -165,17 +166,18 @@ public class ActividadTuristica {
 	}
 
 	public List<String> obtenerIdSalidasTuristicas() {
-        var listaSalidas = new ArrayList<String>();
-        for (var salida : salidas.values()) {
-            listaSalidas.add(salida.getNombre());
-        }
-        return listaSalidas;
-    }
+		var listaSalidas = new ArrayList<String>();
+		for (var salida : salidas.values()) {
+			listaSalidas.add(salida.getNombre());
+		}
+		return listaSalidas;
+	}
 
-    public void agregarPaquete(Paquete paquete) {
-        this.paquetes.put(paquete.getNombre(), paquete);
-    }
-    public void asociarSalidaAActividad(SalidaTuristica st){
-    	salidas.put(st.getNombre(),st);
-    }
+	public void agregarPaquete(Paquete paquete) {
+		this.paquetes.put(paquete.getNombre(), paquete);
+	}
+
+	public void asociarSalidaAActividad(SalidaTuristica st) {
+		salidas.put(st.getNombre(), st);
+	}
 }

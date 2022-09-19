@@ -1,21 +1,33 @@
 package test.controladores;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import excepciones.*;
-import logica.controladores.IControladorUsuario;
-import logica.controladores.IControladorPaquete;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.DeparamentoYaRegistradoException;
+import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
+import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
+import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import excepciones.InscripcionYaRegistradaException;
+import excepciones.SalidaYaRegistradaException;
+import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
-import logica.datatypes.DTActividadTuristica;
+import logica.controladores.IControladorPaquete;
+import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
@@ -28,44 +40,44 @@ class ControladorActividadTuristicaTest {
 	private static List<String> muestraCategorias;
 	private static LocalDate localDateNow;
 	private static LocalDateTime localDateTimeNow;
-	
+
 	private static LocalDate localDateVieja;
 	private static LocalDate localDateMuyVieja;
 	private static LocalDate localDateFuturo;
-	
+
 	@BeforeAll
 	static void preparacionPrevia() {
 		cat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		cu = Fabrica.getInstancia().getIControladorUsuario();
 		cp = Fabrica.getInstancia().getIControladorPaquete();
-		
+
 		try {
-			/*TODO descomentar cuando esté implementado
-			cat.altaCategoria("EXTREMO");
-			cat.altaCategoria("ARTE");
-			cat.altaCategoria("TRANQUILO");
-			*/
+			/*
+			 * TODO descomentar cuando esté implementado
+			 * cat.altaCategoria("EXTREMO"); cat.altaCategoria("ARTE");
+			 * cat.altaCategoria("TRANQUILO");
+			 */
 		} catch (Exception e) {
 			// Nada, las categorias ya fueron agregadas
 		}
-		
+
 		muestraCategorias = new ArrayList<String>();
 		muestraCategorias.add("EXTREMO");
 		muestraCategorias.add("ARTE");
-		muestraCategorias.add("TRANQUILO");				
-		
+		muestraCategorias.add("TRANQUILO");
+
 		localDateNow = LocalDate.now();
 		localDateTimeNow = LocalDateTime.now();
-		localDateVieja = LocalDate.of(2022,1,1);
-		localDateMuyVieja = LocalDate.of(2010,1,1);
-		localDateFuturo = LocalDate.of(2026,1,1);
+		localDateVieja = LocalDate.of(2022, 1, 1);
+		localDateMuyVieja = LocalDate.of(2010, 1, 1);
+		localDateFuturo = LocalDate.of(2026, 1, 1);
 	}
-	
+
 	// No es un test en sí
 	static void generarActividades(int cant, String id) throws Exception {
 		preparacionPrevia();
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < cant; i++) {
 			String nickProveedor = "Proveedor " + id + " i=" + i;
 			String departamento = "Departamento " + id + " i=" + i;
@@ -75,16 +87,17 @@ class ControladorActividadTuristicaTest {
 			float costo = (float) 10.85;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
-			
-			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
+
+			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, fechaAlta, null, muestraCategorias);
 		}
 	}
-	
+
 	// No es un test en sí
 	static void generarSalidas(int cant, String id) throws Exception {
 		preparacionPrevia();
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < cant; i++) {
 			String nombreActividad = "Actividad " + id + " i=" + i;
 			String nombreSalida = "Salida " + id + " i=" + i;
@@ -92,21 +105,22 @@ class ControladorActividadTuristicaTest {
 			LocalDate fechaAlta = localDateNow;
 			LocalDateTime fechaYHoraSalida = localDateTimeNow.plusDays(40);
 			int cantMaxTur = 50;
-			
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad, cantMaxTur, null);
+
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad, cantMaxTur,
+					null);
 		}
 	}
-	
+
 	// No es un test en sí
 	static void generarDepartamentos(int cant, String id) throws Exception {
 		preparacionPrevia();
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < cant; i++) {
 			String nom = "Departamento " + id + " i=" + i;
 			String descr = "Descripcion";
 			String url = "https://www.canelones-departamento.org.uy/inicio.html";
-			
+
 			cat.altaDepartamento(nom, descr, url);
 		}
 	}
@@ -114,54 +128,54 @@ class ControladorActividadTuristicaTest {
 	@Test
 	public void testAltaDepartamentoOK() {
 		try {
-			generarDepartamentos(100, "testAltaDepartamentoOK");			
-		} catch(Exception e) {
+			generarDepartamentos(100, "testAltaDepartamentoOK");
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-    }
-	
+	}
+
 	@Test
 	public void testAltaDepartamentoRepetido() {
 		assertTrue(cat != null);
-		
+
 		try {
-			generarDepartamentos(1, "testAltaDepartamentoRepetido");			
-		} catch(Exception e) {
+			generarDepartamentos(1, "testAltaDepartamentoRepetido");
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		
+
 		// Repito y debería tirar la excepcion
-		assertThrows(DeparamentoYaRegistradoException.class, ()->{
+		assertThrows(DeparamentoYaRegistradoException.class, () -> {
 			generarDepartamentos(1, "testAltaDepartamentoRepetido");
 		});
-    }
+	}
 
 	@Test
-	public void testObtenerIdDepartamentos(){
+	public void testObtenerIdDepartamentos() {
 		assertTrue(cat != null);
-		
-		
+
 		for (int i = 0; i < 100; i++) {
 			String nom = "Dep testObtenerIdDepartamentos" + i;
 			String descr = "Descripcion";
 			String url = "https://www.canelones-departamento.org.uy/inicio.html";
-			
+
 			try {
 				cat.altaDepartamento(nom, descr, url);
 			} catch (Exception e) {
 				fail(e.getMessage());
-			};			
-			
+			}
+			;
+
 			var ids_loop = cat.obtenerIdDepartamentos();
-						
+
 			// Ambos departamentos deberían estar una única vez
 			assertTrue(ids_loop.remove(nom));
-			
+
 			assertFalse(ids_loop.remove(nom));
 		}
-		
+
 		var ids = cat.obtenerIdDepartamentos();
-		for (int i = 0; i < 100; i++)  {
+		for (int i = 0; i < 100; i++) {
 			String nom = "Dep testObtenerIdDepartamentos" + i;
 			// Los paquetes deberían estar una única vez
 			assertTrue(ids.remove(nom));
@@ -172,9 +186,9 @@ class ControladorActividadTuristicaTest {
 	@Test
 	public void testAltaActividadTuristicaOK() {
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < 100; i++) {
-			
+
 			String nombreProveedor = "Proveedor testAltaActividadTuristicaOK i=" + (i % 10);
 			String departamento = "Departamento testAltaActividadTuristicaOK i=" + (i % 10);
 			String nombreActividad = "Actividad testAltaActividadTuristicaOK i=" + i;
@@ -183,7 +197,7 @@ class ControladorActividadTuristicaTest {
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
-			
+
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
@@ -192,43 +206,45 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
 			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-			} catch(Exception e) {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
-			//assertTrue(cat.existeActividadTuristica(nombreActividad));
+
+			// assertTrue(cat.existeActividadTuristica(nombreActividad));
 			assertTrue(cat.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
 
 			DTActividadTuristicaDetalle act = cat.obtenerDTActividadTuristicaDetalle(nombreActividad);
 			assertTrue(act != null);
-			
+
 			assertEquals(nombreActividad, act.getNombre());
 			assertEquals(descripcion, act.getDescripcion());
 			assertEquals(duracion, act.getDuracion());
 			assertEquals(costo, act.getCostoPorTurista());
 			assertEquals(ciudad, act.getCuidad());
 			assertEquals(fechaAlta, act.getFechaAlta());
-			
+
 			assertTrue(act.getPaquetes().isEmpty());
 			assertTrue(act.getSalidas().isEmpty());
 		}
 	}
-	
+
 	@Test
 	public void testAltaActividadTuristicaRepetida() {
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < 100; i++) {
-			
+
 			String nombreProveedor = "Proveedor testAltaActividadTuristicaRepetida i=" + (i % 10);
 			String departamento = "Departamento testAltaActividadTuristicaRepetida i=" + (i % 10);
 			String nombreActividad = "Actividad testAltaActividadTuristicaRepetida i=" + i;
@@ -237,55 +253,58 @@ class ControladorActividadTuristicaTest {
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
-			
+
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
 				// Esperable, no pasa nada.
-			} catch(Exception e) {
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
-			} catch(Exception e) {
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-			} catch(Exception e) {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			// Repito y debería tirar la excepcion
-			assertThrows(ActividadTuristicaYaRegistradaException.class, ()->{
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
+			assertThrows(ActividadTuristicaYaRegistradaException.class, () -> {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
 			});
-			
-			//assertTrue(cat.existeActividadTuristica(nombreActividad));
+
+			// assertTrue(cat.existeActividadTuristica(nombreActividad));
 			assertTrue(cat.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
 
 			DTActividadTuristicaDetalle act = cat.obtenerDTActividadTuristicaDetalle(nombreActividad);
 			assertTrue(act != null);
-			
+
 			assertEquals(nombreActividad, act.getNombre());
 			assertEquals(descripcion, act.getDescripcion());
 			assertEquals(duracion, act.getDuracion());
 			assertEquals(costo, act.getCostoPorTurista());
 			assertEquals(ciudad, act.getCuidad());
 			assertEquals(fechaAlta, act.getFechaAlta());
-			
+
 			assertTrue(act.getPaquetes().isEmpty());
 			assertTrue(act.getSalidas().isEmpty());
 		}
 	}
-	
+
 	@Test
-	public void testObtenerIdActividadesTuristicas(){
+	public void testObtenerIdActividadesTuristicas() {
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < 100; i++) {
 			String nombreProveedor = "Proveedor testObtenerIdActividadesTuristicas i=" + (i % 10);
 			String departamento = "Departamento testObtenerIdActividadesTuristicas i=" + (i % 10);
@@ -295,44 +314,46 @@ class ControladorActividadTuristicaTest {
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
-			
+
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
 				// Esperable, no pasa nada.
-			} catch(Exception e) {
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
-			} catch(Exception e) {
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-			} catch(Exception e) {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
+			} catch (Exception e) {
 				fail(e.getMessage());
-			}		
-			
+			}
+
 			var ids_loop = cat.obtenerIdActividadesTuristicas(departamento);
-						
+
 			// Ambos departamentos deberían estar una única vez
 			assertTrue(ids_loop.remove(nombreActividad));
-			
+
 			assertFalse(ids_loop.remove(nombreActividad));
 		}
 	}
-	
+
 	@Test
-	public void testObtenerIdSalidasTuristicas(){
+	public void testObtenerIdSalidasTuristicas() {
 		assertTrue(cat != null);
-		
+
 		String id = "testObtenerIdSalidasTuristicas";
-		
+
 		try {
 			ControladorUsuarioTest.generarProveedores(50, id);
 			ControladorActividadTuristicaTest.generarDepartamentos(50, id);
@@ -340,30 +361,30 @@ class ControladorActividadTuristicaTest {
 			ControladorActividadTuristicaTest.generarSalidas(50, id);
 		} catch (Exception e) {
 			fail(e.getMessage());
-		}	
-		
+		}
+
 		for (int j = 0; j < 50; j++) {
 			String nombreActividad = "Actividad " + id + " i=" + j;
 			String nombreSalida = "Salida " + id + " i=" + j;
 			var salidas = cat.obtenerIdSalidasTuristicas(nombreActividad);
-			
+
 			assertEquals(1, salidas.size());
 			assertEquals(nombreSalida, salidas.get(0));
 		}
 	}
-		
+
 	@Test
-    public void testObtenerDetallesActividadTuristica() {
+	public void testObtenerDetallesActividadTuristica() {
 		assertTrue(cat != null);
 		String descripcion = "Desc";
 
-		//paquetes:
+		// paquetes:
 		String nombre = "Paquete";
 		int periodovalidez = 15;
 		float descuento = (float) (1);
 		try {
-			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento, LocalDate.of(2022,1,1), null);
-		}catch (Exception e){
+			cp.altaPaquete(nombre, descripcion, periodovalidez, descuento, LocalDate.of(2022, 1, 1), null);
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
@@ -377,44 +398,47 @@ class ControladorActividadTuristicaTest {
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
 			LocalDateTime fechaConHoraAhora = localDateTimeNow;
-			
+
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
 				// Esperable, no pasa nada.
-			} catch(Exception e) {
-				fail(e.getMessage());
-			}
-			
-			try {
-				cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
-			} catch (UsuarioYaRegistradoException e) {
-				// Esperable, no pasa nada.
-			} catch(Exception e) {
-				fail(e.getMessage());
-			}
-			
-			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-			} catch(Exception e) {
-				fail(e.getMessage());
-			}
-			try {
-				if(i % 2 == 0){
-					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7) ,fechaAlta.plusYears(6), "lugar", 5, null);
-				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
 
 			try {
-				cp.agregarActividadAPaquete(nombreActividad,"Paquete");
-			}catch (Exception e){
+				cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null,
+						nombreProveedor, nombreProveedor);
+			} catch (UsuarioYaRegistradoException e) {
+				// Esperable, no pasa nada.
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+
+			try {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+			try {
+				if (i % 2 == 0) {
+					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7),
+							fechaAlta.plusYears(6), "lugar", 5, null);
+				}
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+
+			try {
+				cp.agregarActividadAPaquete(nombreActividad, "Paquete");
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
 			DTActividadTuristicaDetalle act = cat.obtenerDTActividadTuristicaDetalle(nombreActividad);
 			assertTrue(act != null);
-			
+
 			assertEquals(nombreActividad, act.getNombre());
 			assertEquals(descripcion, act.getDescripcion());
 			assertEquals(duracion, act.getDuracion());
@@ -423,32 +447,31 @@ class ControladorActividadTuristicaTest {
 			assertEquals(fechaAlta, act.getFechaAlta());
 			assertFalse(act.getPaquetes().isEmpty());
 
-			if(i % 2 == 0){
+			if (i % 2 == 0) {
 				assertNotEquals(0, act.getSalidas().size());
-				
+
 				var nombAct = ((DTSalidaTuristica) act.getSalidas().values().toArray()[0]).getActividad();
-				
+
 				DTSalidaTuristica salida = act.getSalida(nombreSalida);
-				
+
 				assertNotEquals(null, salida);
-				
+
 				assertEquals(nombreSalida, salida.getNombre());
 				assertEquals(5, salida.getCantMaxTuristas());
 				assertEquals(fechaAlta.plusYears(6), salida.getFechaAlta());
-				assertEquals(fechaConHoraAhora.plusYears(7), salida.getFechaHoraSalida());				
+				assertEquals(fechaConHoraAhora.plusYears(7), salida.getFechaHoraSalida());
 			} else {
 				assertTrue(act.getSalidas().isEmpty());
 			}
 			assertTrue(act.getPaquetes().containsKey("Paquete"));
 
 		}
-    }
-
+	}
 
 	@Test
 	public void testObtenerDTSalidasTuristicas() {
 		String id = "testObtenerDTSalidasTuristicas";
-		
+
 		try {
 			ControladorUsuarioTest.generarProveedores(100, id);
 			ControladorActividadTuristicaTest.generarDepartamentos(100, id);
@@ -457,7 +480,7 @@ class ControladorActividadTuristicaTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		for (int i = 0; i < 100; i++) {
 			String nombreActividad = "Actividad " + id + " i=" + i;
 			String nombreSalida = "Salida " + id + " i=" + i;
@@ -465,13 +488,12 @@ class ControladorActividadTuristicaTest {
 			LocalDate fechaAlta = localDateNow;
 			LocalDateTime fechaYHoraSalida = localDateTimeNow.plusDays(40);
 			int cantMaxTur = 50;
-			
-			
+
 			var salidas = cat.obtenerDTSalidasTuristicas(nombreActividad);
-			
+
 			assertEquals(1, salidas.size());
-			
-			for (var sal: salidas) {
+
+			for (var sal : salidas) {
 				assertEquals(nombreSalida, sal.getNombre());
 				assertEquals(ciudad, sal.getLugarSalida());
 				assertEquals(fechaAlta, sal.getFechaAlta());
@@ -491,7 +513,7 @@ class ControladorActividadTuristicaTest {
 		LocalDate FNacimiento = localDateNow;
 		try {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
-		}catch (Exception e){
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 		String nombreProveedor = "prov";
@@ -502,7 +524,6 @@ class ControladorActividadTuristicaTest {
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
 		LocalDate fechaAlta = localDateNow;
-
 
 		String nombreSalida = "salida";
 		LocalDate f = localDateNow;
@@ -517,7 +538,8 @@ class ControladorActividadTuristicaTest {
 			fail(e.getMessage());
 		}
 		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+					nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 		} catch (UsuarioYaRegistradoException e) {
 			// Esperable, no pasa nada.
 		} catch (Exception e) {
@@ -525,38 +547,39 @@ class ControladorActividadTuristicaTest {
 		}
 
 		try {
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-		} catch(Exception e) {
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, fechaAlta, null, muestraCategorias);
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
 		try {
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-		}catch(SalidaYaRegistradaException e) {
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+					cantMaxTuristas, null);
+		} catch (SalidaYaRegistradaException e) {
 			fail(e.getMessage());
 		} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
 			fail(e.getMessage());
 		} catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
 			fail(e.getMessage());
 		}
-		try{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,localDateNow.plusYears(5));
-		}catch (Exception e) {
+		try {
+			cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getFechaInscripcion(),localDateNow.plusYears(5));
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCantidadTuristas(), 1);
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getTurista(),nickname);
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getSalidaTuristica(),nombreSalida);
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCosto(), costo);
-		
+		assertEquals(cat.obtenerDTInscripcion(nickname, nombreSalida).getFechaInscripcion(), localDateNow.plusYears(5));
+		assertEquals(cat.obtenerDTInscripcion(nickname, nombreSalida).getCantidadTuristas(), 1);
+		assertEquals(cat.obtenerDTInscripcion(nickname, nombreSalida).getTurista(), nickname);
+		assertEquals(cat.obtenerDTInscripcion(nickname, nombreSalida).getSalidaTuristica(), nombreSalida);
+		assertEquals(cat.obtenerDTInscripcion(nickname, nombreSalida).getCosto(), costo);
+
 		// TODO: agregar test de compra cuando se implemente
 
 	}
-	
+
 	@Test
 	public void testAltaInscripcionSalidaTuristicaRepetida() {
-
 
 		String nickname = "testAltaInscripcionSalidaTuristicaRepetida Turista nickname";
 		String nombre = "testAltaInscripcionSalidaTuristicaRepetida NOMBRE TURISTA";
@@ -583,21 +606,24 @@ class ControladorActividadTuristicaTest {
 		try {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
-			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,localDateNow.plusYears(5));
-		}catch (Exception e){
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null,
+					nombreProveedor, nombreProveedor);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, fechaAlta, null, muestraCategorias);
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+					cantMaxTuristas, null);
+			cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
 		assertThrows(InscripcionYaRegistradaException.class, () -> {
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,localDateNow.plusYears(5));
+			cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.plusYears(5));
 		});
 	}
 
 	@Test
-	public void testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida(){
+	public void testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida() {
 		String nickname = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida Turista nickname";
 		String nombre = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida NOMBRE TURISTA";
 		String apellido = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida APELLIDO TURISTA";
@@ -618,22 +644,23 @@ class ControladorActividadTuristicaTest {
 		try {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
-			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, localDateNow, null, nombreProveedor, nombreProveedor);
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, localDateNow, null, muestraCategorias);
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, localDateTimeNow, localDateNow, lugar, cantMaxTuristas, null);
-		}catch (Exception e){
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, localDateNow, null,
+					nombreProveedor, nombreProveedor);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, localDateNow, null, muestraCategorias);
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, localDateTimeNow, localDateNow, lugar,
+					cantMaxTuristas, null);
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-		assertThrows(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class , ()->{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,localDateNow.minusDays(1));
+		assertThrows(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class, () -> {
+			cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.minusDays(1));
 		});
 	}
 
-
 	@Test
 	public void testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada() {
-
 
 		String nickname = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada Turista nickname";
 		String nombre = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada NOMBRE TURISTA";
@@ -660,26 +687,28 @@ class ControladorActividadTuristicaTest {
 		try {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
-			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,localDateNow.plusYears(5));
-		}catch (Exception e){
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null,
+					nombreProveedor, nombreProveedor);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, fechaAlta, null, muestraCategorias);
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+					cantMaxTuristas, null);
+			cat.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-		assertThrows(SuperaElMaximoDeTuristasException.class , ()->{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname + "2",2,localDateNow.plusYears(5));
+		assertThrows(SuperaElMaximoDeTuristasException.class, () -> {
+			cat.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow.plusYears(5));
 		});
 	}
-
 
 	@Test
 	public void testAltaSalidaTuristicaOK() {
 		assertTrue(cat != null);
-		
+
 		for (int i = 0; i < 100; i++) {
-			
+
 			String nombreProveedor = "Proveedor testAltaSalidaTuristicaOK i=" + (i % 10);
 			String departamento = "Departamento testAltaSalidaTuristicaOK i=" + (i % 10);
 			String nombreActividad = "Actividad testAltaSalidaTuristicaOK i=" + i;
@@ -688,14 +717,14 @@ class ControladorActividadTuristicaTest {
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
-	
+
 			String nombreSalida = "Salida testAltaSalidaTuristicaOK" + i;
 			LocalDate f = localDateNow;
 			LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 			LocalDate fechaAltaSalida = f;
 			String lugar = "lugar";
 			int cantMaxTuristas = 10;
-			
+
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
 			} catch (DeparamentoYaRegistradoException e) {
@@ -704,22 +733,25 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
 			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			
+
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-			} catch(Exception e) {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
 
 			try {
-				cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-			}catch(SalidaYaRegistradaException e) {
+				cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+						cantMaxTuristas, null);
+			} catch (SalidaYaRegistradaException e) {
 				fail(e.getMessage());
 			} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
 				fail(e.getMessage());
@@ -727,7 +759,7 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 
-			//assertTrue(cat.existeSalidaTuristica(nombreSalida));
+			// assertTrue(cat.existeSalidaTuristica(nombreSalida));
 
 			DTSalidaTuristica sal = cat.obtenerDTSalidaTuristica(nombreSalida);
 			assertTrue(sal != null);
@@ -743,7 +775,6 @@ class ControladorActividadTuristicaTest {
 		}
 	}
 
-	
 	@Test
 	public void testAltaSalidaTuristicaRepetida() {
 		assertTrue(cat != null);
@@ -774,7 +805,8 @@ class ControladorActividadTuristicaTest {
 				fail(e.getMessage());
 			}
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException e) {
 				// Esperable, no pasa nada.
 			} catch (Exception e) {
@@ -782,18 +814,21 @@ class ControladorActividadTuristicaTest {
 			}
 
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-			} catch(Exception e) {
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+						ciudad, fechaAlta, null, muestraCategorias);
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
-			if(i == 1){
-				assertThrows(SalidaYaRegistradaException.class, ()->{
-					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
+			if (i == 1) {
+				assertThrows(SalidaYaRegistradaException.class, () -> {
+					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+							cantMaxTuristas, null);
 				});
 			} else {
 				try {
-					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-				}catch(SalidaYaRegistradaException e) {
+					cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+							cantMaxTuristas, null);
+				} catch (SalidaYaRegistradaException e) {
 					fail(e.getMessage());
 				} catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
 					fail(e.getMessage());
@@ -832,7 +867,8 @@ class ControladorActividadTuristicaTest {
 			fail(e.getMessage());
 		}
 		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+					nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 		} catch (UsuarioYaRegistradoException e) {
 			// Esperable, no pasa nada.
 		} catch (Exception e) {
@@ -840,13 +876,15 @@ class ControladorActividadTuristicaTest {
 		}
 
 		try {
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-		} catch(Exception e) {
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, fechaAlta, null, muestraCategorias);
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-		assertThrows(FechaAltaSalidaPosteriorAFechaSalidaException.class, ()->{
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
+		assertThrows(FechaAltaSalidaPosteriorAFechaSalidaException.class, () -> {
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+					cantMaxTuristas, null);
 		});
 	}
 
@@ -876,7 +914,8 @@ class ControladorActividadTuristicaTest {
 			fail(e.getMessage());
 		}
 		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+					nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 		} catch (UsuarioYaRegistradoException e) {
 			// Esperable, no pasa nada.
 		} catch (Exception e) {
@@ -884,13 +923,15 @@ class ControladorActividadTuristicaTest {
 		}
 
 		try {
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
-		} catch(Exception e) {
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
+					ciudad, fechaAlta, null, muestraCategorias);
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-		assertThrows(FechaAltaActividadPosteriorAFechaAltaSalidaException.class, ()->{
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
+		assertThrows(FechaAltaActividadPosteriorAFechaAltaSalidaException.class, () -> {
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+					cantMaxTuristas, null);
 		});
 	}
 

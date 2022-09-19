@@ -6,5 +6,5 @@ package logica.datatypes;
  */
 
 public enum EstadoActividadTuristica {
-    AGREGADA, ACEPTADA, RECHAZADA
+	AGREGADA, ACEPTADA, RECHAZADA
 }

@@ -16,7 +16,11 @@ import excepciones.UsuarioYaRegistradoException;
  * @author Equipo taller prog 16
  */
 
-
 public interface IControladorMaestro {
-	void generarDatosDePrueba() throws DeparamentoYaRegistradoException, UsuarioYaRegistradoException, ActividadTuristicaYaRegistradaException, SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException, InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException, PaqueteYaRegistradoException;
+	void generarDatosDePrueba() throws DeparamentoYaRegistradoException, UsuarioYaRegistradoException,
+			ActividadTuristicaYaRegistradaException, SalidaYaRegistradaException,
+			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException,
+			InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
+			PaqueteYaRegistradoException;
 }

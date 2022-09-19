@@ -7,29 +7,27 @@ import java.time.LocalDate;
  */
 
 public class DTTurista extends DTUsuario {
-    private String nacionalidad;
+	private String nacionalidad;
 
-    public DTTurista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img, String nacionalidad) {
-        super(nickname, nombre, apellido, correo, fechaNac, img);
-        this.nacionalidad = nacionalidad;
-    }
+	public DTTurista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img,
+			String nacionalidad) {
+		super(nickname, nombre, apellido, correo, fechaNac, img);
+		this.nacionalidad = nacionalidad;
+	}
 
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-    
-    @Override
-    public boolean equals(Object e) {
-    	try {
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	@Override
+	public boolean equals(Object e) {
+		try {
 			var casted = (DTTurista) e;
-			return casted.getNacionalidad().equals(this.nacionalidad) 
-					&& casted.getNickname().equals(this.getNickname())
-					&& casted.getNombre().equals(this.getNombre())
-					&& casted.getApellido().equals(this.getApellido())
-					&& casted.getCorreo().equals(this.getCorreo())
-					&& casted.getFechaNac().equals(this.getFechaNac());
+			return casted.getNacionalidad().equals(this.nacionalidad) && casted.getNickname().equals(this.getNickname())
+					&& casted.getNombre().equals(this.getNombre()) && casted.getApellido().equals(this.getApellido())
+					&& casted.getCorreo().equals(this.getCorreo()) && casted.getFechaNac().equals(this.getFechaNac());
 		} catch (Exception e2) {
 			return false;
-		}    	
-    }
+		}
+	}
 }

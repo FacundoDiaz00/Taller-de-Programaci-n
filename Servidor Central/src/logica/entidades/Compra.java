@@ -2,7 +2,6 @@ package logica.entidades;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import logica.datatypes.DTCompra;
@@ -11,70 +10,68 @@ import logica.datatypes.DTCompra;
  * @author Equipo taller prog 16
  */
 
-
 public class Compra {
 
-    private LocalDate fechaCompra;
-    private int cantidadTuristas;
-    private LocalDate vencimiento;
+	private LocalDate fechaCompra;
+	private int cantidadTuristas;
+	private LocalDate vencimiento;
 
-    private Paquete paquete;
-    private Set<Inscripcion> inscripciones;
+	private Paquete paquete;
+	private Set<Inscripcion> inscripciones;
 
-    //ToDo Falta el campo calculado costoTotal
+	// ToDo Falta el campo calculado costoTotal
 
-    public Compra(LocalDate fechaCompra, int cantidadTuristas, LocalDate vencimiento, Paquete paquete) {
-        this.fechaCompra = fechaCompra;
-        this.cantidadTuristas = cantidadTuristas;
-        this.vencimiento = vencimiento;
-        this.paquete = paquete;
-        this.inscripciones = new HashSet<>();
-    }
+	public Compra(LocalDate fechaCompra, int cantidadTuristas, LocalDate vencimiento, Paquete paquete) {
+		this.fechaCompra = fechaCompra;
+		this.cantidadTuristas = cantidadTuristas;
+		this.vencimiento = vencimiento;
+		this.paquete = paquete;
+		this.inscripciones = new HashSet<>();
+	}
 
-    
-    public DTCompra obtenerDTCompra() {
-    	var costo = 0.0;
-    	// FIXME calcular bien el costo de la compra
-    	return new DTCompra(fechaCompra, cantidadTuristas, (float)costo, vencimiento, paquete.getNombre());
-    }
-    
-    public LocalDate getFechaCompra() {
-        return fechaCompra;
-    }
+	public DTCompra obtenerDTCompra() {
+		var costo = 0.0;
+		// FIXME calcular bien el costo de la compra
+		return new DTCompra(fechaCompra, cantidadTuristas, (float) costo, vencimiento, paquete.getNombre());
+	}
 
-    public void setFechaCompra(LocalDate fechaCompra) {
-        this.fechaCompra = fechaCompra;
-    }
+	public LocalDate getFechaCompra() {
+		return fechaCompra;
+	}
 
-    public int getCantidadTuristas() {
-        return cantidadTuristas;
-    }
+	public void setFechaCompra(LocalDate fechaCompra) {
+		this.fechaCompra = fechaCompra;
+	}
 
-    public void setCantidadTuristas(int cantidadTuristas) {
-        this.cantidadTuristas = cantidadTuristas;
-    }
+	public int getCantidadTuristas() {
+		return cantidadTuristas;
+	}
 
-    public LocalDate getVencimiento() {
-        return vencimiento;
-    }
+	public void setCantidadTuristas(int cantidadTuristas) {
+		this.cantidadTuristas = cantidadTuristas;
+	}
 
-    public void setVencimiento(LocalDate vencimiento) {
-        this.vencimiento = vencimiento;
-    }
+	public LocalDate getVencimiento() {
+		return vencimiento;
+	}
 
-    public Paquete getPaquete() {
-        return paquete;
-    }
+	public void setVencimiento(LocalDate vencimiento) {
+		this.vencimiento = vencimiento;
+	}
 
-    public void setPaquete(Paquete paquete) {
-        this.paquete = paquete;
-    }
+	public Paquete getPaquete() {
+		return paquete;
+	}
 
-    public Set<Inscripcion> getInscripciones() {
-        return inscripciones;
-    }
+	public void setPaquete(Paquete paquete) {
+		this.paquete = paquete;
+	}
 
-    public void setInscripciones(Set<Inscripcion> inscripciones) {
-        this.inscripciones = inscripciones;
-    }
+	public Set<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(Set<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
 }

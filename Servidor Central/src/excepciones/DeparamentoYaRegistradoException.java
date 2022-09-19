@@ -1,15 +1,14 @@
 package excepciones;
 
-
 /**
  * Excepcion utilizada para indicar que un Departamento ya existe en el sistema
  *
- *   @author Equipo taller prog 16
-
+ * @author Equipo taller prog 16
+ * 
  */
 public class DeparamentoYaRegistradoException extends Exception {
 
-    public DeparamentoYaRegistradoException(String texto){
-        super(texto);
-    }
+	public DeparamentoYaRegistradoException(String texto) {
+		super(texto);
+	}
 }

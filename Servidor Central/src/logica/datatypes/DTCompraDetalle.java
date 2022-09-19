@@ -1,9 +1,7 @@
 package logica.datatypes;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Equipo taller prog 16
@@ -11,22 +9,20 @@ import java.util.Map;
 
 public class DTCompraDetalle extends DTCompra {
 	private DTPaquete dtPaquete;
-    private List<DTInscripcion> inscripciones;
+	private List<DTInscripcion> inscripciones;
 
-
-    public DTCompraDetalle(LocalDate fechaCompra, int cantTuristas, float costo, LocalDate vencimiento,
-			String paquete, DTPaquete dtP, List<DTInscripcion> insc) {
+	public DTCompraDetalle(LocalDate fechaCompra, int cantTuristas, float costo, LocalDate vencimiento, String paquete,
+			DTPaquete dtP, List<DTInscripcion> insc) {
 		super(fechaCompra, cantTuristas, costo, vencimiento, paquete);
 		this.dtPaquete = dtP;
 		this.inscripciones = insc;
 	}
 
-    public DTPaquete getDtPaquete() {
-        return dtPaquete;
-    }
+	public DTPaquete getDtPaquete() {
+		return dtPaquete;
+	}
 
-
-    public List<DTInscripcion> getInscripciones() {
-        return inscripciones;
-    }
+	public List<DTInscripcion> getInscripciones() {
+		return inscripciones;
+	}
 }

@@ -2,9 +2,6 @@ package logica.datatypes;
 
 import java.time.LocalDate;
 
-import logica.entidades.Compra;
-import logica.entidades.SalidaTuristica;
-
 public class DTInscripcionDetalle extends DTInscripcion {
 	private DTSalidaTuristica salidaTuristica;
 	private DTCompra compra;
