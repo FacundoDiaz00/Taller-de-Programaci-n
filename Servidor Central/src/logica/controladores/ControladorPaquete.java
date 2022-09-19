@@ -109,7 +109,7 @@ public class ControladorPaquete implements IControladorPaquete {
 
 	@Override
 	public List<String> obtenerIdPaquetesSinComprar() {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
 	}
 

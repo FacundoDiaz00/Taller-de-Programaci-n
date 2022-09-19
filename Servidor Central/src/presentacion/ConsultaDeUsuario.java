@@ -241,13 +241,11 @@ public class ConsultaDeUsuario extends JInternalFrame {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent event) {
-				// TODO Auto-generated method stub
 
 			}
 
