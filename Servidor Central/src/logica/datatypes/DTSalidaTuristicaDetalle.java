@@ -1,24 +1,31 @@
 package logica.datatypes;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Equipo taller prog 16
  */
 
-public class DTSalidaTuristicaDetalle extends DTSalidaTuristica{
-	private Set<DTInscripcion> inscriptos;
+public class DTSalidaTuristicaDetalle extends DTSalidaTuristica {
+	private List<DTInscripcion> inscripciones;
+	private DTActividadTuristicaDetalle dtActividad;
 
-	public DTSalidaTuristicaDetalle(String nombre, int cantMaxTuristas, LocalDate fechaAlta, LocalDateTime fechaHoraSalida, String lugarSalida, DTActividadTuristica actividad, Set<DTInscripcion> inscriptos) {
-		super(nombre, cantMaxTuristas, fechaAlta, fechaHoraSalida, lugarSalida, actividad);
-		this.inscriptos = inscriptos;
+	public DTSalidaTuristicaDetalle(String nombre, LocalDateTime fechaHoraSalida, String lugarSalida,
+			LocalDate fechaAlta, int cantMaxTuristas, Imagen img, String actividad, List<DTInscripcion> inscripciones,
+			DTActividadTuristicaDetalle dtActividad) {
+		super(nombre, fechaHoraSalida, lugarSalida, fechaAlta, cantMaxTuristas, img, actividad);
+		this.inscripciones = inscripciones;
+		this.dtActividad = dtActividad;
 	}
-	public Set<DTInscripcion> getInscriptos(){
-		return this.inscriptos;
+
+	public List<DTInscripcion> getInscripciones() {
+		return inscripciones;
 	}
-	
+
+	public DTActividadTuristicaDetalle getDtActividad() {
+		return dtActividad;
+	}
+
 }

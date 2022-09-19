@@ -1,6 +1,10 @@
 package logica.manejadores;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import logica.entidades.Usuario;
 
@@ -9,50 +13,50 @@ import logica.entidades.Usuario;
  */
 
 public class ManejadorUsuario {
-    private static ManejadorUsuario instancia;
+	private static ManejadorUsuario instancia;
 
-    private Map<String, Usuario> usuariosPorNick;
-    private Map<String, Usuario> usuariosPorCorreo;
-    
-    private ManejadorUsuario() {
-    	usuariosPorCorreo = new HashMap<String, Usuario>();
-        usuariosPorNick = new HashMap<String, Usuario>();
-    }
+	private Map<String, Usuario> usuariosPorNick;
+	private Map<String, Usuario> usuariosPorCorreo;
 
-    public static ManejadorUsuario getInstancia() {
-        if (instancia == null) {
-            instancia = new ManejadorUsuario();
-        }
-        return instancia;
-    }
+	private ManejadorUsuario() {
+		usuariosPorCorreo = new HashMap<String, Usuario>();
+		usuariosPorNick = new HashMap<String, Usuario>();
+	}
 
-    public List<Usuario> getUsuarios() {
-        return new ArrayList<Usuario>(usuariosPorNick.values());
-    }
+	public static ManejadorUsuario getInstancia() {
+		if (instancia == null) {
+			instancia = new ManejadorUsuario();
+		}
+		return instancia;
+	}
 
-    public Set<String> obtenerCorreoUsuarios(){
-        return usuariosPorCorreo.keySet();
-    }
+	public List<Usuario> getUsuarios() {
+		return new ArrayList<Usuario>(usuariosPorNick.values());
+	}
 
-    public Set<String> obtenerNickUsuarios(){
-        return usuariosPorNick.keySet();
-    }
+	public Set<String> obtenerCorreoUsuarios() {
+		return usuariosPorCorreo.keySet();
+	}
 
-    public void addUsuario(Usuario usuario) {
-        usuariosPorNick.put(usuario.getNickname(), usuario);
-        usuariosPorCorreo.put(usuario.getCorreo(), usuario);
-    }
+	public Set<String> obtenerNickUsuarios() {
+		return usuariosPorNick.keySet();
+	}
 
-    public Usuario getUsuarioPorNick(String nickname) {
-        return usuariosPorNick.get(nickname);
-    }
-    public Usuario getUsuarioPorCorreo(String correo) {
-        return usuariosPorCorreo.get(correo);
-    }
+	public void addUsuario(Usuario usuario) {
+		usuariosPorNick.put(usuario.getNickname(), usuario);
+		usuariosPorCorreo.put(usuario.getCorreo(), usuario);
+	}
 
+	public Usuario getUsuarioPorNick(String nickname) {
+		return usuariosPorNick.get(nickname);
+	}
 
-    public boolean existeUsuario(String nickname, String correo) {
-    	return usuariosPorNick.containsKey(nickname) || usuariosPorCorreo.containsKey(correo);
-    }
-    
+	public Usuario getUsuarioPorCorreo(String correo) {
+		return usuariosPorCorreo.get(correo);
+	}
+
+	public boolean existeUsuario(String nickname, String correo) {
+		return usuariosPorNick.containsKey(nickname) || usuariosPorCorreo.containsKey(correo);
+	}
+
 }

@@ -5,29 +5,35 @@ package logica.controladores;
  */
 
 public class Fabrica {
-    private static Fabrica instancia;
+	private static Fabrica instancia;
 
-    private Fabrica() {
-    }
+	private Fabrica() {
+	}
 
-    public static Fabrica getInstancia(){
-        if(instancia == null){
-            instancia = new Fabrica();
-        }
-        return instancia;
-    }
+	public static Fabrica getInstancia() {
+		if (instancia == null) {
+			instancia = new Fabrica();
+		}
+		return instancia;
+	}
 
-    // Todo en el ejemplo crean una instancia por cada vez que la llaman, pero no le encuentro sentido ni a esto ni a que la fabrica sea un singleton, no tiene datos que mantener
+	// Todo en el ejemplo crean una instancia por cada vez que la llaman, pero
+	// no le encuentro sentido ni a esto ni a que la fabrica sea un singleton,
+	// no tiene datos que mantener
 
-    public IControladorActividadTuristica getIControladorActividadTuristica() {
-        return new ControladorActividadTuristica();
-    }
+	public IControladorActividadTuristica getIControladorActividadTuristica() {
+		return new ControladorActividadTuristica();
+	}
 
-    public IControladorPaquete getIControladorPaquete() {
-        return new ControladorPaquete();
-    }
+	public IControladorPaquete getIControladorPaquete() {
+		return new ControladorPaquete();
+	}
 
-    public IControladorUsuario getIControladorUsuario() {
-        return new ControladorUsuario();
-    }
+	public IControladorUsuario getIControladorUsuario() {
+		return new ControladorUsuario();
+	}
+
+	public IControladorMaestro getIControladorMaestro() {
+		return new ControladorMaestro();
+	}
 }

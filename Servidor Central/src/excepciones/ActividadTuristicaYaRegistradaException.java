@@ -1,13 +1,14 @@
 package excepciones;
 
 /**
- * Excepcion utilizada para indicar que una Actividad turistica ya existe en el sistema
+ * Excepcion utilizada para indicar que una Actividad turistica ya existe en el
+ * sistema
  *
- *   @author Equipo taller prog 16
-
+ * @author Equipo taller prog 16
+ * 
  */
-public class ActividadTuristicaYaRegistradaException extends Exception{
-    public ActividadTuristicaYaRegistradaException(String message) {
-        super(message);
-    }
+public class ActividadTuristicaYaRegistradaException extends TurismoUyException {
+	public ActividadTuristicaYaRegistradaException(String message) {
+		super(message);
+	}
 }
