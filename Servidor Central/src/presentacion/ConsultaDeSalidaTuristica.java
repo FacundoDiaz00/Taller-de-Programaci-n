@@ -33,7 +33,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	private final JComboBox comboSalidas;
 	private JComboBox comboActividades;
 	private JComboBox comboDepartamentos;
-	private IControladorActividadTuristica icat;
+	private IControladorActividadTuristica contrAct;
 	private JTextArea nombre;
 	private JTextArea fechaSalida;
 	private JTextArea horaSalida;
@@ -51,11 +51,11 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaDeSalidaTuristica(IControladorActividadTuristica icat) {
-		this.icat = icat;
+		this.contrAct = icat;
 
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
-			public void internalFrameClosing(InternalFrameEvent e) {
+			public void internalFrameClosing(InternalFrameEvent event) {
 				limpiarFormulario();
 			}
 		});
@@ -74,10 +74,10 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		departamentos.setBounds(7, 12, 120, 14);
 		getContentPane().add(departamentos);
 
-		JLabel Actividades = new JLabel("Actividades:");
-		Actividades.setHorizontalAlignment(SwingConstants.RIGHT);
-		Actividades.setBounds(7, 37, 120, 14);
-		getContentPane().add(Actividades);
+		JLabel actividades = new JLabel("Actividades:");
+		actividades.setHorizontalAlignment(SwingConstants.RIGHT);
+		actividades.setBounds(7, 37, 120, 14);
+		getContentPane().add(actividades);
 
 		JLabel nombreLabel = new JLabel("Nombre:");
 		nombreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -116,19 +116,19 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		comboDeps.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				// Esto es lo que actualiza la lista cada vez que se abre.
 				actualizarComboDepartamentos();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
+			public void popupMenuCanceled(PopupMenuEvent event) {
 				// TODO Auto-generated method stub
 
 			}
@@ -174,7 +174,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 
 		JComboBox comboSalidas = new JComboBox();
 		comboSalidas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent event) {
 				// salida fue seleccionada:
 				seleccionSalida = comboSalidas.getSelectedItem().toString();
 				mostrarDatosSalida();
@@ -265,7 +265,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		// getContentPane().add(proveedor);
 
 		comboDeps.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
 				limpiarFormularioSinDepartamento();
 				comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
@@ -274,7 +274,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 		});
 
 		comboActividades.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				// se cargan identificadores de salidas
 				String act = comboActividades.getSelectedItem().toString();
 				List<String> salidas = icat.obtenerIdSalidasTuristicas(act);
@@ -295,7 +295,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	}
 
 	private void mostrarDatosSalida() {
-		DTSalidaTuristicaDetalle salida = icat.obtenerDTSalidaTuristicaDetalle(seleccionSalida);
+		DTSalidaTuristicaDetalle salida = contrAct.obtenerDTSalidaTuristicaDetalle(seleccionSalida);
 
 		nombre.setText(salida.getNombre());
 		fechaSalida.setText(salida.getFechaHoraSalida().toString());
@@ -313,7 +313,7 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	}
 
 	public void actualizarComboDepartamentos() {
-		List<String> deps = icat.obtenerIdDepartamentos();
+		List<String> deps = contrAct.obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
 

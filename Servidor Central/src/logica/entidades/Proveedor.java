@@ -64,8 +64,8 @@ public class Proveedor extends Usuario {
 	public DTUsuario obtenerDTUsuarioDetalle() {
 		var dtActDetalles = new ArrayList<DTActividadTuristicaDetalle>();
 
-		for (ActividadTuristica a : actividadesTuristicas.values()) {
-			dtActDetalles.add(a.obtenerDTActividadTuristicaDetalle());
+		for (ActividadTuristica actividad : actividadesTuristicas.values()) {
+			dtActDetalles.add(actividad.obtenerDTActividadTuristicaDetalle());
 		}
 
 		return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(),

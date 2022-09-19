@@ -59,8 +59,8 @@ public class Departamento {
 		this.actividadTuristicas = actividadTuristicas;
 	}
 
-	public void asociarActividadTuristica(ActividadTuristica AT) {
-		actividadTuristicas.put(AT.getNombre(), AT);
+	public void asociarActividadTuristica(ActividadTuristica actTur) {
+		actividadTuristicas.put(actTur.getNombre(), actTur);
 	}
 
 }

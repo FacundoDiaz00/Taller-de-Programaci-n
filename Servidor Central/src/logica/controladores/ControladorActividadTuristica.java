@@ -40,10 +40,10 @@ import logica.manejadores.ManejadorUsuario;
 public class ControladorActividadTuristica implements IControladorActividadTuristica {
 
 	public void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException {
-		ManejadorDepartamento md = ManejadorDepartamento.getInstancia();
-		if (!md.exists(nom)) {
+		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
+		if (!manejadorDepartamento.exists(nom)) {
 			Departamento dep = new Departamento(nom, descr, URL);
-			md.addDepartamento(dep);
+			manejadorDepartamento.addDepartamento(dep);
 		} else {
 			throw new DeparamentoYaRegistradoException(
 					"El departamento con nombre " + nom + " ya existe en el sistema");
@@ -55,8 +55,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public List<String> obtenerIdDepartamentos() {
-		ManejadorDepartamento MU = ManejadorDepartamento.getInstancia();
-		return new ArrayList<String>(MU.obtenerIdDepartamentos());
+		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
+		return new ArrayList<String>(manejadorDepartamento.obtenerIdDepartamentos());
 	}
 
 	public List<String> obtenerIdCategorias() {
@@ -71,10 +71,10 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 		if (!existeActividadTuristica(nombreActividad)) {
 			// Se crea instancia:
-			ActividadTuristica AT = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
+			ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
 					duracion, costo, ciudad, fechaAlta);
 			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
-			MAD.addActividad(AT);
+			MAD.addActividad(actTuristica);
 		} else {
 			throw new ActividadTuristicaYaRegistradaException(
 					"Ya existe la actividad con el nombre " + nombreActividad);
@@ -140,8 +140,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
 			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
 			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
-		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		Turista turis = (Turista) mu.getUsuarioPorNick(nicknameTuris);
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
+		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
 		if (turis.estaInscriptoASalida(nomSalTurim)) {
 			throw new InscripcionYaRegistradaException(
 					"Ya exite una inscrpcion entre la salida " + nomSalTurim + " y el turista " + nicknameTuris);
@@ -164,15 +164,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		if (fechaAlta == null)
 			fechaAlta = LocalDate.now();
 
-		ManejadorSalidaTuristica ms = ManejadorSalidaTuristica.getInstancia();
-		ManejadorActividadTuristica ma = ManejadorActividadTuristica.getInstancia();
-		if (ms.existeSalidaTuristica(nombre)) {
+		ManejadorSalidaTuristica manejadorSalida = ManejadorSalidaTuristica.getInstancia();
+		ManejadorActividadTuristica manejadorActividad = ManejadorActividadTuristica.getInstancia();
+		if (manejadorSalida.existeSalidaTuristica(nombre)) {
 			throw new SalidaYaRegistradaException("La salida con nombre" + nombre + " ya existe en el sistema.");
 		}
 		// AltaActividad <= AltaSalida <= Salida, se chequean ambas
 		// desigualdades.
 
-		if (ma.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
+		if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
 			throw new FechaAltaActividadPosteriorAFechaAltaSalidaException(
 					"La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");
 		}
@@ -180,16 +180,16 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			throw new FechaAltaSalidaPosteriorAFechaSalidaException(
 					"La fecha de la Salida debe ser posterior a la fecha de su registro");
 		} else {
-			SalidaTuristica st = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar,
+			SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar,
 					img);
-			ms.addSalida(st);
+			manejadorSalida.addSalida(salidaTur);
 		}
 	}
 
 	public List<String> obtenerIdSalidasTuristicas(String act) {
 		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		ActividadTuristica at = MAT.getActividad(act);
-		Map<String, SalidaTuristica> salidas = at.getSalidas();
+		ActividadTuristica actTuristica = MAT.getActividad(act);
+		Map<String, SalidaTuristica> salidas = actTuristica.getSalidas();
 		List<String> res = new ArrayList<>();
 		for (String idSalida : salidas.keySet()) {
 			res.add(idSalida);
@@ -213,11 +213,11 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		var inscripciones = sal.getInscripciones();
-		Iterator<Inscripcion> it = inscripciones.iterator();
+		Iterator<Inscripcion> iteratorInscripciones = inscripciones.iterator();
 		Inscripcion insc = null;
 		boolean encontrado = false;
 		while (!encontrado) {
-			insc = it.next();
+			insc = iteratorInscripciones.next();
 			if (insc.getTurista().getNickname() == nick) {
 				encontrado = true;
 			}

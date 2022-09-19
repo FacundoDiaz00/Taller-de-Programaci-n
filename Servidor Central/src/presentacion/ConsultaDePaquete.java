@@ -21,7 +21,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 	private boolean desactivarMostrarConsultas = false;
 
 	private Principal principal;
-	private IControladorPaquete cp;
+	private IControladorPaquete contrPaquete;
 
 	private JComboBox paquete;
 	private JTextPane perVal;
@@ -32,9 +32,9 @@ public class ConsultaDePaquete extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDePaquete(Principal principal, IControladorPaquete cp) {
+	public ConsultaDePaquete(Principal principal, IControladorPaquete contrPaquete) {
 		setResizable(true);
-		this.cp = cp;
+		this.contrPaquete = contrPaquete;
 		this.principal = principal;
 
 		setTitle("Consulta de Paquete");
@@ -89,20 +89,20 @@ public class ConsultaDePaquete extends JInternalFrame {
 		getContentPane().add(actividad);
 
 		actividad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				ejecutarCasoConsultaActividadTuristca((String) actividad.getSelectedItem());
 			}
 		});
 
-		JTextPane descuento = new JTextPane();
-		descuento.setBounds(149, 126, 222, 21);
-		getContentPane().add(descuento);
-		this.descuento = descuento;
-		descuento.setEditable(false);
+		JTextPane descuentoPane = new JTextPane();
+		descuentoPane.setBounds(149, 126, 222, 21);
+		getContentPane().add(descuentoPane);
+		this.descuento = descuentoPane;
+		descuentoPane.setEditable(false);
 
 		JButton btnNewButton = new JButton("Consultar");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				paqueteSeleccionado = (String) paquete.getSelectedItem();
 				seSeleccionoUnPaquete();
 			}
@@ -135,33 +135,33 @@ public class ConsultaDePaquete extends JInternalFrame {
 		actividad.removeAllItems();
 
 		actividad.setEnabled(true);
-		DTPaqueteDetalles p = null;
+		DTPaqueteDetalles paqueteDetalles = null;
 		for (var dtpaquete : paquetesDetalles) {
 			if (dtpaquete.getNombre().equals(idPaquete)) {
-				p = dtpaquete;
+				paqueteDetalles = dtpaquete;
 				break;
 			}
 		}
-		if (p != null) {
-			perVal.setText(String.valueOf(p.getValidez()));
-			descr.setText(p.getDescrpicion());
-			descuento.setText(String.valueOf(p.getDescuento()));
+		if (paqueteDetalles != null) {
+			perVal.setText(String.valueOf(paqueteDetalles.getValidez()));
+			descr.setText(paqueteDetalles.getDescrpicion());
+			descuento.setText(String.valueOf(paqueteDetalles.getDescuento()));
 
-			var nombresAct = p.getActividades().keySet();
+			var nombresAct = paqueteDetalles.getActividades().keySet();
 			actividad.setModel(new DefaultComboBoxModel(nombresAct.toArray()));
 		}
 		SwingUtilities.invokeLater(() -> desactivarMostrarConsultas = false);
 	}
 
 	private void actualizarDTPaqueteDetalles() {
-		paquetesDetalles = cp.obtenerDTPaquetesDetalles();
+		paquetesDetalles = contrPaquete.obtenerDTPaquetesDetalles();
 	}
 
 	private void actualizarCamposFormulario() {
 		paquete.removeAllItems();
-		String[] ids;
-		for (var i : paquetesDetalles) {
-			paquete.addItem(i.getNombre());
+		String[] identificadores;
+		for (var iterador : paquetesDetalles) {
+			paquete.addItem(iterador.getNombre());
 		}
 	}
 
