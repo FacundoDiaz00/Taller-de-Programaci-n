@@ -30,4 +30,8 @@ public class Fabrica {
     public IControladorUsuario getIControladorUsuario() {
         return new ControladorUsuario();
     }
+    
+    public IControladorMaestro getIControladorMaestro() {
+        return new ControladorMaestro();
+    }
 }

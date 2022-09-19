@@ -25,8 +25,13 @@ class ControladorActividadTuristicaTest {
 	private static IControladorUsuario cu;
 	private static IControladorPaquete cp;
 
-	private static LocalDate nowLocalDate;
-	private static LocalDateTime nowLocalDateTime;
+	private static List<String> muestraCategorias;
+	private static LocalDate localDateNow;
+	private static LocalDateTime localDateTimeNow;
+	
+	private static LocalDate localDateVieja;
+	private static LocalDate localDateMuyVieja;
+	private static LocalDate localDateFuturo;
 	
 	@BeforeAll
 	static void preparacionPrevia() {
@@ -34,8 +39,26 @@ class ControladorActividadTuristicaTest {
 		cu = Fabrica.getInstancia().getIControladorUsuario();
 		cp = Fabrica.getInstancia().getIControladorPaquete();
 		
-		nowLocalDate = LocalDate.now();
-		nowLocalDateTime = LocalDateTime.now();
+		try {
+			/*TODO descomentar cuando esté implementado
+			cat.altaCategoria("EXTREMO");
+			cat.altaCategoria("ARTE");
+			cat.altaCategoria("TRANQUILO");
+			*/
+		} catch (Exception e) {
+			// Nada, las categorias ya fueron agregadas
+		}
+		
+		muestraCategorias = new ArrayList<String>();
+		muestraCategorias.add("EXTREMO");
+		muestraCategorias.add("ARTE");
+		muestraCategorias.add("TRANQUILO");				
+		
+		localDateNow = LocalDate.now();
+		localDateTimeNow = LocalDateTime.now();
+		localDateVieja = LocalDate.of(2022,1,1);
+		localDateMuyVieja = LocalDate.of(2010,1,1);
+		localDateFuturo = LocalDate.of(2026,1,1);
 	}
 	
 	// No es un test en sí
@@ -51,10 +74,9 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10.85;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = nowLocalDate;
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
 			
-			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+			cat.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 		}
 	}
 	
@@ -67,8 +89,8 @@ class ControladorActividadTuristicaTest {
 			String nombreActividad = "Actividad " + id + " i=" + i;
 			String nombreSalida = "Salida " + id + " i=" + i;
 			String ciudad = "Ciudad salida";
-			LocalDate fechaAlta = nowLocalDate;
-			LocalDateTime fechaYHoraSalida = nowLocalDateTime.plusDays(40);
+			LocalDate fechaAlta = localDateNow;
+			LocalDateTime fechaYHoraSalida = localDateTimeNow.plusDays(40);
 			int cantMaxTur = 50;
 			
 			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad, cantMaxTur, null);
@@ -160,8 +182,7 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
 			
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
@@ -179,7 +200,7 @@ class ControladorActividadTuristicaTest {
 			}
 			
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
@@ -215,8 +236,7 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
 			
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
@@ -234,14 +254,14 @@ class ControladorActividadTuristicaTest {
 			}
 			
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
 			
 			// Repito y debería tirar la excepcion
 			assertThrows(ActividadTuristicaYaRegistradaException.class, ()->{
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			});
 			
 			//assertTrue(cat.existeActividadTuristica(nombreActividad));
@@ -274,8 +294,7 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
 			
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
@@ -294,7 +313,7 @@ class ControladorActividadTuristicaTest {
 			}
 			
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}		
@@ -356,9 +375,8 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
-			LocalDateTime fechaConHoraAhora = LocalDateTime.now();
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
+			LocalDateTime fechaConHoraAhora = localDateTimeNow;
 			
 			try {
 				cat.altaDepartamento(departamento, descripcion, departamento);
@@ -377,7 +395,7 @@ class ControladorActividadTuristicaTest {
 			}
 			
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
@@ -444,8 +462,8 @@ class ControladorActividadTuristicaTest {
 			String nombreActividad = "Actividad " + id + " i=" + i;
 			String nombreSalida = "Salida " + id + " i=" + i;
 			String ciudad = "Ciudad salida";
-			LocalDate fechaAlta = nowLocalDate;
-			LocalDateTime fechaYHoraSalida = nowLocalDateTime.plusDays(40);
+			LocalDate fechaAlta = localDateNow;
+			LocalDateTime fechaYHoraSalida = localDateTimeNow.plusDays(40);
 			int cantMaxTur = 50;
 			
 			
@@ -470,7 +488,7 @@ class ControladorActividadTuristicaTest {
 		String apellido = "APELLIDO TURISTA";
 		String correo = "TURISTA ";
 		String nacionalidad = "CHINA";
-		LocalDate FNacimiento = LocalDate.now();
+		LocalDate FNacimiento = localDateNow;
 		try {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 		}catch (Exception e){
@@ -483,13 +501,12 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
-		LocalDate fechaAlta = LocalDate.now();
-		List<String> categorias = new ArrayList<String>();
+		LocalDate fechaAlta = localDateNow;
 
 
 		String nombreSalida = "salida";
-		LocalDate f = LocalDate.now();
-		LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+		LocalDate f = localDateNow;
+		LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 		LocalDate fechaAltaSalida = f;
 		String lugar = "lugar";
 		int cantMaxTuristas = 10;
@@ -508,7 +525,7 @@ class ControladorActividadTuristicaTest {
 		}
 
 		try {
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
 		} catch(Exception e) {
 			fail(e.getMessage());
 		}
@@ -523,11 +540,11 @@ class ControladorActividadTuristicaTest {
 			fail(e.getMessage());
 		}
 		try{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,LocalDate.now().plusYears(5));
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,localDateNow.plusYears(5));
 		}catch (Exception e) {
 			fail(e.getMessage());
 		}
-		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getFechaInscripcion(),LocalDate.now().plusYears(5));
+		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getFechaInscripcion(),localDateNow.plusYears(5));
 		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getCantidadTuristas(), 1);
 		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getTurista(),nickname);
 		assertEquals(cat.obtenerDTInscripcion(nickname,nombreSalida).getSalidaTuristica(),nombreSalida);
@@ -546,7 +563,7 @@ class ControladorActividadTuristicaTest {
 		String apellido = "testAltaInscripcionSalidaTuristicaRepetida APELLIDO TURISTA";
 		String correo = "testAltaInscripcionSalidaTuristicaRepetida TURISTA correo";
 		String nacionalidad = "CHINA";
-		LocalDate FNacimiento = LocalDate.now();
+		LocalDate FNacimiento = localDateNow;
 
 		String nombreProveedor = "testAltaInscripcionSalidaTuristicaRepetida prov";
 		String departamento = "testAltaInscripcionSalidaTuristicaRepetida deptoTest";
@@ -555,11 +572,10 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
-		LocalDate fechaAlta = LocalDate.now();
-		List<String> categorias = new ArrayList<String>();
+		LocalDate fechaAlta = localDateNow;
 		String nombreSalida = "testAltaInscripcionSalidaTuristicaRepetida salida";
-		LocalDate f = LocalDate.now();
-		LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+		LocalDate f = localDateNow;
+		LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 		LocalDate fechaAltaSalida = f;
 		String lugar = "lugar";
 		int cantMaxTuristas = 10;
@@ -568,15 +584,15 @@ class ControladorActividadTuristicaTest {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
 			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
 			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,LocalDate.now().plusYears(5));
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,localDateNow.plusYears(5));
 		}catch (Exception e){
 			fail(e.getMessage());
 		}
 
 		assertThrows(InscripcionYaRegistradaException.class, () -> {
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,LocalDate.now().plusYears(5));
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,localDateNow.plusYears(5));
 		});
 	}
 
@@ -587,11 +603,10 @@ class ControladorActividadTuristicaTest {
 		String apellido = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida APELLIDO TURISTA";
 		String correo = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida TURISTA correo";
 		String nacionalidad = "CHINA";
-		LocalDate FNacimiento = LocalDate.now();
+		LocalDate FNacimiento = localDateNow;
 		String nombreProveedor = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida prov";
 		String departamento = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida deptoTest";
 		String nombreActividad = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida actividad";
-		List<String> categorias = new ArrayList<String>();
 		String descripcion = "testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida Desc";
 		int duracion = 10;
 		float costo = (float) 10;
@@ -603,15 +618,15 @@ class ControladorActividadTuristicaTest {
 		try {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
-			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nowLocalDate, null, nombreProveedor, nombreProveedor);
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, nowLocalDate, null, categorias);
-			cat.altaSalidaTuristica(nombreActividad, nombreSalida, nowLocalDateTime, nowLocalDate, lugar, cantMaxTuristas, null);
+			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, localDateNow, null, nombreProveedor, nombreProveedor);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, localDateNow, null, muestraCategorias);
+			cat.altaSalidaTuristica(nombreActividad, nombreSalida, localDateTimeNow, localDateNow, lugar, cantMaxTuristas, null);
 		}catch (Exception e){
 			fail(e.getMessage());
 		}
 
 		assertThrows(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class , ()->{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,LocalDate.now().minusDays(1));
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,2,localDateNow.minusDays(1));
 		});
 	}
 
@@ -625,7 +640,7 @@ class ControladorActividadTuristicaTest {
 		String apellido = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada APELLIDO TURISTA";
 		String correo = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada TURISTA correo";
 		String nacionalidad = "CHINA";
-		LocalDate FNacimiento = LocalDate.now();
+		LocalDate FNacimiento = localDateNow;
 
 		String nombreProveedor = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada prov";
 		String departamento = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada deptoTest";
@@ -634,11 +649,10 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
-		List<String> categorias = new ArrayList<String>();
-		LocalDate fechaAlta = LocalDate.now();
+		LocalDate fechaAlta = localDateNow;
 		String nombreSalida = "testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada salida";
-		LocalDate f = LocalDate.now();
-		LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+		LocalDate f = localDateNow;
+		LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 		LocalDate fechaAltaSalida = f;
 		String lugar = "lugar";
 		int cantMaxTuristas = 3;
@@ -647,15 +661,15 @@ class ControladorActividadTuristicaTest {
 			cu.altaTurista(nickname, nombre, apellido, correo, FNacimiento, null, nacionalidad);
 			cat.altaDepartamento(departamento, descripcion, departamento);
 			cu.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
 			cat.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar, cantMaxTuristas, null);
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,LocalDate.now().plusYears(5));
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname,1,localDateNow.plusYears(5));
 		}catch (Exception e){
 			fail(e.getMessage());
 		}
 
 		assertThrows(SuperaElMaximoDeTuristasException.class , ()->{
-			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname + "2",2,LocalDate.now().plusYears(5));
+			cat.altaInscripcionSalidaTuristica(nombreSalida,nickname + "2",2,localDateNow.plusYears(5));
 		});
 	}
 
@@ -673,12 +687,11 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
 	
 			String nombreSalida = "Salida testAltaSalidaTuristicaOK" + i;
-			LocalDate f = LocalDate.now();
-			LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+			LocalDate f = localDateNow;
+			LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 			LocalDate fechaAltaSalida = f;
 			String lugar = "lugar";
 			int cantMaxTuristas = 10;
@@ -699,7 +712,7 @@ class ControladorActividadTuristicaTest {
 			}
 			
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
@@ -744,12 +757,11 @@ class ControladorActividadTuristicaTest {
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
-			LocalDate fechaAlta = LocalDate.now();
-			List<String> categorias = new ArrayList<String>();
+			LocalDate fechaAlta = localDateNow;
 
 			String nombreSalida = "Salida testAltaSalidaTuristicaRepetida";
-			LocalDate f = LocalDate.now();
-			LocalDateTime fechaHoraSalida = LocalDateTime.now().plusMonths(1);
+			LocalDate f = localDateNow;
+			LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 			LocalDate fechaAltaSalida = f;
 			String lugar = "lugar";
 			int cantMaxTuristas = 10;
@@ -770,7 +782,7 @@ class ControladorActividadTuristicaTest {
 			}
 
 			try {
-				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+				cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 			} catch(Exception e) {
 				fail(e.getMessage());
 			}
@@ -803,12 +815,11 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
-		LocalDate fechaAlta = LocalDate.now();
-		List<String> categorias = new ArrayList<String>();
+		LocalDate fechaAlta = localDateNow;
 
 		String nombreSalida = "Salida testAltaSalidaTuristicaAltaPosteriorASalida";
-		LocalDate f = LocalDate.now();
-		LocalDateTime fechaHoraSalida = LocalDateTime.now().minusMonths(1);
+		LocalDate f = localDateNow;
+		LocalDateTime fechaHoraSalida = localDateTimeNow.minusMonths(1);
 		LocalDate fechaAltaSalida = f;
 		String lugar = "lugar";
 		int cantMaxTuristas = 10;
@@ -829,7 +840,7 @@ class ControladorActividadTuristicaTest {
 		}
 
 		try {
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 		} catch(Exception e) {
 			fail(e.getMessage());
 		}
@@ -849,11 +860,10 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
-		LocalDate fechaAlta = LocalDate.now().plusMonths(1);
-		List<String> categorias = new ArrayList<String>();
+		LocalDate fechaAlta = localDateNow.plusMonths(1);
 
 		String nombreSalida = "Salida testAltaSalidaTuristicaFechaAltaSalidaPosteriorAFechaSalida";
-		LocalDateTime fechaHoraSalida = LocalDateTime.now();
+		LocalDateTime fechaHoraSalida = localDateTimeNow;
 		LocalDate fechaAltaSalida = fechaHoraSalida.toLocalDate();
 		String lugar = "lugar";
 		int cantMaxTuristas = 10;
@@ -874,7 +884,7 @@ class ControladorActividadTuristicaTest {
 		}
 
 		try {
-			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, categorias);	
+			cat.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo, ciudad, fechaAlta, null, muestraCategorias);	
 		} catch(Exception e) {
 			fail(e.getMessage());
 		}

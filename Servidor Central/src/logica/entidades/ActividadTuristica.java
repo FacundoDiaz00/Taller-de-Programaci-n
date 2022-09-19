@@ -32,6 +32,7 @@ public class ActividadTuristica {
     private Map<String, SalidaTuristica> salidas;
 
     private Proveedor proveedor;
+    private Map<String, Categoria> categorias;
 
     public ActividadTuristica(String nombreProveedor, String departamento,String nombre, String descrpicion, int duracion, float costoPorTurista, String cuidad,
             LocalDate fechaAlta) {
@@ -43,6 +44,7 @@ public class ActividadTuristica {
         setFechaAlta(fechaAlta);
         setPaquetes(new HashMap<>());
         setSalidas(new HashMap<>());
+        setCategorias(new HashMap<>());
         
 		//Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
@@ -154,7 +156,15 @@ public class ActividadTuristica {
         this.proveedor = proveedor;
     }
 
-    public List<String> obtenerIdSalidasTuristicas() {
+    public Map<String, Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Map<String, Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public List<String> obtenerIdSalidasTuristicas() {
         var listaSalidas = new ArrayList<String>();
         for (var salida : salidas.values()) {
             listaSalidas.add(salida.getNombre());
