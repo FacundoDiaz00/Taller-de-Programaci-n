@@ -1,6 +1,6 @@
 ## Navegavilidades
 
-- Categoria <==> Actividad 
-- Usuario ==> Compra
-- Compra <==> Paquetes
-- Paquete ==> Categoría
+- Categoria <==> Actividad [check]
+- Turista ==> Compra [check]
+- Compra <==> Paquetes [check]
+- Paquete ==> Categoría [check]
