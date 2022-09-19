@@ -24,7 +24,7 @@ import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
-	private IControladorActividadTuristica icat;
+	private IControladorActividadTuristica contrAct;
 	private Principal principal;
 
 	private String seleccionActividad;
@@ -45,15 +45,15 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaDeActividadTuristica(Principal p, IControladorActividadTuristica icat) {
+	public ConsultaDeActividadTuristica(Principal principal, IControladorActividadTuristica icat) {
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameClosing(InternalFrameEvent event) {
 				limpiarFormulario();
 			}
 		});
-		this.principal = p;
-		this.icat = icat;
+		this.principal = principal;
+		this.contrAct = icat;
 		setTitle("Consulta de Actividad Turística");
 		setBounds(100, 100, 409, 424);
 		getContentPane().setLayout(null);
@@ -68,10 +68,10 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		departamentos.setBounds(7, 12, 120, 14);
 		getContentPane().add(departamentos);
 
-		JLabel Actividades = new JLabel("Actividades:");
-		Actividades.setHorizontalAlignment(SwingConstants.RIGHT);
-		Actividades.setBounds(7, 37, 120, 14);
-		getContentPane().add(Actividades);
+		JLabel actividades = new JLabel("Actividades:");
+		actividades.setHorizontalAlignment(SwingConstants.RIGHT);
+		actividades.setBounds(7, 37, 120, 14);
+		getContentPane().add(actividades);
 
 		JLabel nombreLabel = new JLabel("Nombre:");
 		nombreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -110,7 +110,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		comboDepartamentos.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				// Esto es lo que actualiza la lista cada vez que se abre.
 				actualizarComboDepartamentos();
 			}
@@ -237,7 +237,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	private void seSeleccionoUnaActividad() {
 		String seleccion = seleccionActividad;
 		mostrarOtrasConsultas = false;
-		DTActividadTuristicaDetalle actividad = icat.obtenerDTActividadTuristicaDetalle(seleccion);
+		DTActividadTuristicaDetalle actividad = contrAct.obtenerDTActividadTuristicaDetalle(seleccion);
 
 		nombre.setText(actividad.getNombre());
 		ciudad.setText(actividad.getCuidad());
@@ -264,7 +264,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	}
 
 	public void actualizarComboDepartamentos() {
-		List<String> deps = icat.obtenerIdDepartamentos();
+		List<String> deps = contrAct.obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deps.toArray()));
 	}
 

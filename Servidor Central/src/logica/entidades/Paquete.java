@@ -112,8 +112,8 @@ public class Paquete {
 		return fechaDeRegistro;
 	}
 
-	public void setFechaDeRegistro(LocalDate fr) {
-		this.fechaDeRegistro = fr;
+	public void setFechaDeRegistro(LocalDate fechaReg) {
+		this.fechaDeRegistro = fechaReg;
 	}
 
 	public Map<String, ActividadTuristica> getActividades() {

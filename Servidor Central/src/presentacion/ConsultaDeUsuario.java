@@ -24,7 +24,7 @@ import logica.datatypes.DTUsuario;
 
 public class ConsultaDeUsuario extends JInternalFrame {
 	private Principal principal;
-	private IControladorUsuario icu;
+	private IControladorUsuario contrUsuario;
 
 	private String seleccionNickname;
 
@@ -63,7 +63,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	 */
 	public ConsultaDeUsuario(Principal principal, IControladorUsuario icu) {
 		this.principal = principal;
-		this.icu = icu;
+		this.contrUsuario = icu;
 
 		setResizable(true);
 		setIconifiable(true);
@@ -82,9 +82,9 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panelPrincipal.add(panelEleccion);
 		panelEleccion.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("Elija un usuario:");
-		lblNewLabel_1.setBounds(12, 10, 114, 15);
-		panelEleccion.add(lblNewLabel_1);
+		JLabel lblNewLabel1 = new JLabel("Elija un usuario:");
+		lblNewLabel1.setBounds(12, 10, 114, 15);
+		panelEleccion.add(lblNewLabel1);
 
 		comboBoxSeleccionUsr = new JComboBox<String>();
 		comboBoxSeleccionUsr.setBounds(133, 5, 245, 24);
@@ -102,17 +102,17 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panelIzquierda.add(panelMostrarDatos);
 		panelMostrarDatos.setLayout(new BoxLayout(panelMostrarDatos, BoxLayout.Y_AXIS));
 
-		JPanel panel_3 = new JPanel();
-		panelMostrarDatos.add(panel_3);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
+		JPanel panel3 = new JPanel();
+		panelMostrarDatos.add(panel3);
+		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel = new JLabel("Nickname: ");
-		panel_3.add(lblNewLabel);
+		panel3.add(lblNewLabel);
 
 		txtNickname = new JTextArea();
 		txtNickname.setEditable(false);
 		txtNickname.setText("...");
-		panel_3.add(txtNickname);
+		panel3.add(txtNickname);
 
 		JPanel panel_4 = new JPanel();
 		panelMostrarDatos.add(panel_4);
@@ -234,27 +234,25 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		comboBoxSeleccionUsr.addPopupMenuListener(new PopupMenuListener() {
 
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent event) {
 				// Esto es lo que actualiza la lista cada vez que se abre.
 				actualizarComboBox();
 			}
 
 			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent event) {
 
 			}
 
 			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
-				// TODO Auto-generated method stub
+			public void popupMenuCanceled(PopupMenuEvent event) {
 
 			}
 
 		});
 
 		comboBoxSeleccionUsr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				seleccionNickname = (String) comboBoxSeleccionUsr.getSelectedItem();
 				seSeleccionoUnUsuario();
 			}
@@ -264,7 +262,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	}
 
 	private void actualizarComboBox() {
-		List<String> usuarios = icu.obtenerIdUsuarios();
+		List<String> usuarios = contrUsuario.obtenerIdUsuarios();
 		comboBoxSeleccionUsr.setModel(new DefaultComboBoxModel(usuarios.toArray()));
 	}
 
@@ -295,7 +293,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		String seleccion = seleccionNickname;
 
 		try {
-			DTUsuario usr = icu.obtenerDTUsuarioDetalle(seleccion);
+			DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(seleccion);
 
 			txtNickname.setText(usr.getNickname());
 			txtNombre.setText(usr.getNombre());
@@ -315,7 +313,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				panelSalidasTurista.removeAll();
 				var inscripciones = tur.getInscripciones();
 
-				if (inscripciones.size() == 0) {
+				if (inscripciones.isEmpty()) {
 					lblSalidasTurista.setVisible(false);
 					panelSalidasTurista.setVisible(false);
 				} else {
@@ -329,7 +327,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 					txt.setEditable(false);
 					txt.addMouseListener(new MouseAdapter() {
 						@Override
-						public void mouseClicked(MouseEvent e) {
+						public void mouseClicked(MouseEvent event) {
 							ejecutarCasoConsultaSalidaTuristca(insc);
 						}
 					});
@@ -373,7 +371,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 					txt.setEditable(false);
 					txt.addMouseListener(new MouseAdapter() {
 						@Override
-						public void mouseClicked(MouseEvent e) {
+						public void mouseClicked(MouseEvent event) {
 							ejecutarCasoConsultaActividadTuristca(actividad.getNombre());
 						}
 					});
@@ -388,7 +386,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 						txt_sal.setEditable(false);
 						txt_sal.addMouseListener(new MouseAdapter() {
 							@Override
-							public void mouseClicked(MouseEvent e) {
+							public void mouseClicked(MouseEvent event) {
 								ejecutarCasoConsultaSalidaTuristca(salida.getNombre());
 							}
 						});

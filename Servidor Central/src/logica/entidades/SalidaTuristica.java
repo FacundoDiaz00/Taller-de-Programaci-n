@@ -27,7 +27,7 @@ public class SalidaTuristica {
 	private ActividadTuristica actividad;
 	private Set<Inscripcion> inscripciones;
 
-	public SalidaTuristica(String IDActividad, String nombre, int cantMaxTuristas, LocalDate fechaAlta,
+	public SalidaTuristica(String nombreActividad, String nombre, int cantMaxTuristas, LocalDate fechaAlta,
 			LocalDateTime fechaHoraSalida, String lugarSalida, Imagen img) {
 		setNombre(nombre);
 		setCantMaxTuristas(cantMaxTuristas);
@@ -39,9 +39,9 @@ public class SalidaTuristica {
 		setImagen(img);
 
 		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-		ActividadTuristica at = mat.obtenerActividadTuristica(IDActividad);
-		at.asociarSalidaAActividad(this);
-		asociarActividadASalida(at);
+		ActividadTuristica actTuristica = mat.obtenerActividadTuristica(nombreActividad);
+		actTuristica.asociarSalidaAActividad(this);
+		asociarActividadASalida(actTuristica);
 	}
 
 	public int obtenerCantidadInscriptos() {
@@ -59,8 +59,8 @@ public class SalidaTuristica {
 
 	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle() {
 		var insc = new ArrayList<DTInscripcion>();
-		for (Inscripcion i : inscripciones) {
-			insc.add(i.obtenerDTInscripcion());
+		for (Inscripcion inscr : inscripciones) {
+			insc.add(inscr.obtenerDTInscripcion());
 		}
 		return new DTSalidaTuristicaDetalle(nombre, fechaHoraSalida, lugarSalida, fechaAlta, cantMaxTuristas, img,
 				getActividad().getNombre(), insc, getActividad().obtenerDTActividadTuristicaDetalle());

@@ -20,9 +20,9 @@ public class DTTurista extends DTUsuario {
 	}
 
 	@Override
-	public boolean equals(Object e) {
+	public boolean equals(Object equalsObject) {
 		try {
-			var casted = (DTTurista) e;
+			var casted = (DTTurista) equalsObject;
 			return casted.getNacionalidad().equals(this.nacionalidad) && casted.getNickname().equals(this.getNickname())
 					&& casted.getNombre().equals(this.getNombre()) && casted.getApellido().equals(this.getApellido())
 					&& casted.getCorreo().equals(this.getCorreo()) && casted.getFechaNac().equals(this.getFechaNac());

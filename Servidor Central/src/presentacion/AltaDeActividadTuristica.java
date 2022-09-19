@@ -32,16 +32,16 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private JTextField costo;
 	private JTextField descripcion;
 	private JTextField duracion;
-	private IControladorActividadTuristica icat;
+	private IControladorActividadTuristica contrAct;
 	private JTextField ciudad;
 	private JTextField fDeAlta;
 
 	/**
 	 * Create the frame.
 	 */
-	public AltaDeActividadTuristica(IControladorActividadTuristica icat) {
+	public AltaDeActividadTuristica(IControladorActividadTuristica contrAct) {
 		Fabrica fabrica = Fabrica.getInstancia();
-		this.icat = fabrica.getIControladorActividadTuristica();
+		this.contrAct = fabrica.getIControladorActividadTuristica();
 		setTitle("Alta de Actividad Turística");
 		setBounds(100, 100, 409, 328);
 		getContentPane().setLayout(null);
@@ -51,45 +51,45 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 
-		JLabel lblNewLabel_2 = new JLabel("Proveedores:");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_2.setBounds(7, 12, 120, 14);
-		getContentPane().add(lblNewLabel_2);
+		JLabel lblNewLabel2 = new JLabel("Proveedores:");
+		lblNewLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel2.setBounds(7, 12, 120, 14);
+		getContentPane().add(lblNewLabel2);
 
 		JLabel lblNewLabel = new JLabel("Departamentos:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBounds(7, 37, 120, 14);
 		getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Nombre:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(6, 63, 121, 14);
-		getContentPane().add(lblNewLabel_1);
+		JLabel lblNewLabel1 = new JLabel("Nombre:");
+		lblNewLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel1.setBounds(6, 63, 121, 14);
+		getContentPane().add(lblNewLabel1);
 
-		JLabel lblNewLabel_1_1 = new JLabel("Descripción:");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1.setBounds(7, 89, 120, 14);
-		getContentPane().add(lblNewLabel_1_1);
+		JLabel lblNewLabel11 = new JLabel("Descripción:");
+		lblNewLabel11.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel11.setBounds(7, 89, 120, 14);
+		getContentPane().add(lblNewLabel11);
 
-		JLabel lblNewLabel_1_1_1 = new JLabel("Duración:");
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1.setBounds(7, 111, 120, 14);
-		getContentPane().add(lblNewLabel_1_1_1);
+		JLabel lblNewLabel111 = new JLabel("Duración:");
+		lblNewLabel111.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel111.setBounds(7, 111, 120, 14);
+		getContentPane().add(lblNewLabel111);
 
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Costo:");
-		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1.setBounds(0, 139, 121, 14);
-		getContentPane().add(lblNewLabel_1_1_1_1);
+		JLabel lblNewLabel1111 = new JLabel("Costo:");
+		lblNewLabel1111.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel1111.setBounds(0, 139, 121, 14);
+		getContentPane().add(lblNewLabel1111);
 
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Ciudad:");
-		lblNewLabel_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1_1.setBounds(7, 165, 120, 14);
-		getContentPane().add(lblNewLabel_1_1_1_1_1);
+		JLabel lblNewLabel11111 = new JLabel("Ciudad:");
+		lblNewLabel11111.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel11111.setBounds(7, 165, 120, 14);
+		getContentPane().add(lblNewLabel11111);
 
-		JLabel lblNewLabel_1_1_1_1_1_1_1 = new JLabel("Fecha de alta:");
-		lblNewLabel_1_1_1_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1_1_1_1.setBounds(7, 191, 120, 14);
-		getContentPane().add(lblNewLabel_1_1_1_1_1_1_1);
+		JLabel lblNewLabel1111111 = new JLabel("Fecha de alta:");
+		lblNewLabel1111111.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel1111111.setBounds(7, 191, 120, 14);
+		getContentPane().add(lblNewLabel1111111);
 
 		comboProveedores = new JComboBox<String>();
 		comboProveedores.setBounds(145, 7, 212, 24);
@@ -194,7 +194,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 
 		try {
 			// FIXME llenar esta list con las categorias
-			List<String> categorias = new ArrayList<String>();
+			List<String> categorias = new ArrayList<>();
 
 			String prov;
 			if (comboProveedores.getSelectedItem() == null) {
@@ -212,38 +212,38 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 			}
 			dpto = comboDepartamentos.getSelectedItem().toString();
 
-			String nom = nombre.getText().toString();
-			String desc = descripcion.getText().toString();
-			int dur = Integer.parseInt(duracion.getText().toString());
-			float cost = Float.parseFloat(costo.getText().toString());
-			String ciu = ciudad.getText().toString();
+			String nom = nombre.getText();
+			String desc = descripcion.getText();
+			int dur = Integer.parseInt(duracion.getText());
+			float cost = Float.parseFloat(costo.getText());
+			String ciu = ciudad.getText();
 
-			String FAlta = fDeAlta.getText().toString();
-			DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			LocalDate fecha = LocalDate.parse(FAlta, JEFormatter);
+			String fAlta = fDeAlta.getText();
+			DateTimeFormatter jeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate fecha = LocalDate.parse(fAlta, jeFormatter);
 
-			if (nom.isBlank() || desc.isBlank() || duracion.getText().toString().isBlank() || ciu.isBlank()
-					|| costo.getText().toString().isBlank()) {
+			if (nom.isBlank() || desc.isBlank() || duracion.getText().isBlank() || ciu.isBlank()
+					|| costo.getText().isBlank()) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, descripción, duración, ciudad y costo son obligatorios", "Error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
-			icat.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias);
+			contrAct.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias);
 			limpiarFormulario();
 			setVisible(false);
 			JOptionPane.showMessageDialog(null, "Se ha dado de alta la Actividad Turística con éxito", "Éxito",
 					JOptionPane.INFORMATION_MESSAGE);
-		} catch (ActividadTuristicaYaRegistradaException e) {
+		} catch (ActividadTuristicaYaRegistradaException exception) {
 			JOptionPane.showMessageDialog(null,
 					"Ya existe una actividad turística con este nombre registrada en el sistema", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (DateTimeParseException e) {
+		} catch (DateTimeParseException exception) {
 			JOptionPane.showMessageDialog(null,
 					"Fecha alta inválido, es un campo obligatorio y su formato es dd/mm/yyyy", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException exception) {
 			JOptionPane.showMessageDialog(null, "Hay campos numéricos con datos inválido", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}

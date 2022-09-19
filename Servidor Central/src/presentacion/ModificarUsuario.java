@@ -69,7 +69,7 @@ public class ModificarUsuario extends JInternalFrame {
 
 		usuariosList = new JList();
 		usuariosList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
+			public void valueChanged(ListSelectionEvent event) {
 				seleccionarUsuario();
 			}
 		});
@@ -174,7 +174,7 @@ public class ModificarUsuario extends JInternalFrame {
 
 		JButton aceptarButton = new JButton("Aceptar");
 		aceptarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				aceptar();
 			}
 		});
@@ -183,7 +183,7 @@ public class ModificarUsuario extends JInternalFrame {
 
 		JButton cancelarButton = new JButton("Cancelar");
 		cancelarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				cancelar();
 			}
 		});
@@ -192,7 +192,7 @@ public class ModificarUsuario extends JInternalFrame {
 
 		JButton recargarButton = new JButton("Recargar");
 		recargarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				actualizarUsuarios();
 			}
 		});
@@ -208,7 +208,7 @@ public class ModificarUsuario extends JInternalFrame {
 			listModel.addElement(id);
 		}
 		usuariosList.setModel(listModel);
-		if (idUsers.size() > 0) {
+		if (!idUsers.isEmpty()) {
 			usuariosList.setSelectedIndex(0);
 			// seleccionarUsuario();
 		} else {
@@ -299,7 +299,7 @@ public class ModificarUsuario extends JInternalFrame {
 			int mes = (int) mesSpinner.getValue();
 			int anio = (int) anioSprinner.getValue();
 			fechaNac = LocalDate.of(anio, mes, dia);
-		} catch (Exception e) { // TODO averiguar que excepcion tira localdate y
+		} catch (Exception exception) { // TODO averiguar que excepcion tira localdate y
 								// atrapar eso
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -342,12 +342,12 @@ public class ModificarUsuario extends JInternalFrame {
 			setVisible(false);
 			JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.", "Operación con éxito.",
 					JOptionPane.INFORMATION_MESSAGE);
-		} catch (ModificacionUsuarioNoPermitida e) {
+		} catch (ModificacionUsuarioNoPermitida exception) {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el usuario.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (TurismoUyException e) {
+		} catch (TurismoUyException exception) {
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
+			exception.printStackTrace();
 		}
 
 	}

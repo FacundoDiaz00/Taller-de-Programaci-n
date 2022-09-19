@@ -27,9 +27,9 @@ public class DTProveedor extends DTUsuario {
 	}
 
 	@Override
-	public boolean equals(Object e) {
+	public boolean equals(Object equalsObject) {
 		try {
-			var casted = (DTProveedor) e;
+			var casted = (DTProveedor) equalsObject;
 			return casted.getNickname().equals(this.getNickname()) && casted.getNombre().equals(this.getNombre())
 					&& casted.getApellido().equals(this.getApellido()) && casted.getCorreo().equals(this.getCorreo())
 					&& casted.getFechaNac().equals(this.getFechaNac()) && casted.getLink().equals(this.getLink())

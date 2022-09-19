@@ -101,13 +101,13 @@ public class AltaDePaquete extends JInternalFrame {
 					}
 					LocalDate fecha = LocalDate.of((int) anior.getValue(), (int) mesr.getValue(),
 							(int) diar.getValue());
-					controladorPaq.altaPaquete(txtNombre.getText().toString(), descrp.getText().toString(),
+					controladorPaq.altaPaquete(txtNombre.getText(), descrp.getText(),
 							(int) perVal.getValue(), (int) desc.getValue(), fecha, null);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Registro de Paquete",
 							JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
 					limpiarForm();
-				} catch (PaqueteYaRegistradoException e) {
+				} catch (PaqueteYaRegistradoException exception) {
 					JOptionPane.showMessageDialog(null,
 							"Error. Ya existe un Paquete de Actividades con el nombre elegido.", "Registro de Paquete",
 							JOptionPane.WARNING_MESSAGE);
@@ -133,13 +133,13 @@ public class AltaDePaquete extends JInternalFrame {
 		lblNewLabel.setBounds(12, 300, 134, 15);
 		getContentPane().add(lblNewLabel);
 
-		JLabel label_1 = new JLabel("/");
-		label_1.setBounds(206, 300, 11, 15);
-		getContentPane().add(label_1);
+		JLabel label1 = new JLabel("/");
+		label1.setBounds(206, 300, 11, 15);
+		getContentPane().add(label1);
 
-		JLabel label_2 = new JLabel("/");
-		label_2.setBounds(268, 300, 11, 15);
-		getContentPane().add(label_2);
+		JLabel label2 = new JLabel("/");
+		label2.setBounds(268, 300, 11, 15);
+		getContentPane().add(label2);
 
 		diar = new JSpinner();
 		diar.setBounds(153, 298, 47, 20);

@@ -172,9 +172,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		mes.setBounds(215, 153, 47, 19);
 		getContentPane().add(mes);
 
-		JLabel label_1 = new JLabel("/");
-		label_1.setBounds(265, 155, 4, 15);
-		getContentPane().add(label_1);
+		JLabel label1 = new JLabel("/");
+		label1.setBounds(265, 155, 4, 15);
+		getContentPane().add(label1);
 
 		anio = new JSpinner();
 		anio.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
@@ -246,9 +246,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		diar.setBounds(157, 293, 47, 19);
 		getContentPane().add(diar);
 
-		JLabel label_2 = new JLabel("/");
-		label_2.setBounds(208, 293, 13, 15);
-		getContentPane().add(label_2);
+		JLabel label2 = new JLabel("/");
+		label2.setBounds(208, 293, 13, 15);
+		getContentPane().add(label2);
 
 		mesr = new JSpinner();
 		mesr.setModel(new SpinnerNumberModel(1, 1, 12, 1));
@@ -256,9 +256,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		mesr.setBounds(215, 293, 47, 19);
 		getContentPane().add(mesr);
 
-		JLabel label_1_1 = new JLabel("/");
-		label_1_1.setBounds(265, 293, 4, 15);
-		getContentPane().add(label_1_1);
+		JLabel label11 = new JLabel("/");
+		label11.setBounds(265, 293, 4, 15);
+		getContentPane().add(label11);
 
 		anior = new JSpinner();
 		anior.setModel(new SpinnerNumberModel(2022, 1900, 2100, 1));
@@ -266,16 +266,16 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 		anior.setBounds(273, 293, 60, 19);
 		getContentPane().add(anior);
 
-		JLabel lblddmmyyyy_1 = new JLabel("(dd/mm/yyyy)");
-		lblddmmyyyy_1.setBounds(339, 293, 92, 15);
-		getContentPane().add(lblddmmyyyy_1);
+		JLabel lblddmmyyyy1 = new JLabel("(dd/mm/yyyy)");
+		lblddmmyyyy1.setBounds(339, 293, 92, 15);
+		getContentPane().add(lblddmmyyyy1);
 
 	}
 
 	private void actualizarDepartamentos() {
 		List<String> deptos = controladorAct.obtenerIdDepartamentos();
 		departamento.setModel(new DefaultComboBoxModel<>(deptos.toArray()));
-		if (deptos.size() > 0) {
+		if (!deptos.isEmpty()) {
 			departamento.setSelectedIndex(0);
 		}
 	}
@@ -283,7 +283,7 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	private void actualizarActTur() {
 		List<String> acts = controladorAct.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
 		actividadTuristica.setModel(new DefaultComboBoxModel<>(acts.toArray()));
-		if (acts.size() > 0) {
+		if (!acts.isEmpty()) {
 			actividadTuristica.setSelectedIndex(0);
 		}
 	}
@@ -294,13 +294,13 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			LocalDateTime fecha = LocalDateTime.of((int) anio.getValue(), (int) mes.getValue(), (int) dia.getValue(),
 					(int) hora.getSelectedItem(), 0);
 			controladorAct.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(),
-					nombre.getText().toString(), fecha, fechaR, lugar.getText().toString(),
+					nombre.getText(), fecha, fechaR, lugar.getText(),
 					(int) maxTuristas.getValue(), null);
 			JOptionPane.showMessageDialog(null, "Operacion realizada con exito.", "Registro de Salida",
 					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
 			limpiarForm();
-		} catch (SalidaYaRegistradaException e) {
+		} catch (SalidaYaRegistradaException exception) {
 			JOptionPane.showMessageDialog(null, "Error. Ya existe una Salida con el nombre elegido.",
 					"Registro de Salida", JOptionPane.WARNING_MESSAGE);
 		} catch (FechaAltaSalidaPosteriorAFechaSalidaException ee) {

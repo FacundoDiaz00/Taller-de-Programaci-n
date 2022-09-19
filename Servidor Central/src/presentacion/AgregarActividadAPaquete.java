@@ -29,7 +29,7 @@ import logica.controladores.IControladorPaquete;
 
 public class AgregarActividadAPaquete extends JInternalFrame {
 	private IControladorPaquete controladorPaq;
-	private IControladorActividadTuristica cat;
+	private IControladorActividadTuristica controladorAct;
 
 	private JComboBox comboPaquetes;
 	private JComboBox comboDepartamentos;
@@ -40,7 +40,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	 */
 	public AgregarActividadAPaquete(IControladorPaquete controladorPaq, IControladorActividadTuristica cat) {
 		this.controladorPaq = controladorPaq;
-		this.cat = cat;
+		this.controladorAct = cat;
 
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
@@ -68,7 +68,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		JPanel panelSeleccionPaquete = new JPanel();
 		selecciones.add(panelSeleccionPaquete);
 
-		JLabel lblNewLabel_2 = new JLabel(" Paquete:");
+		JLabel lblNewLabel2 = new JLabel(" Paquete:");
 
 		comboPaquetes = new JComboBox();
 		comboPaquetes.addPopupMenuListener(new PopupMenuListener() {
@@ -90,7 +90,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 		});
 		panelSeleccionPaquete.setLayout(new BoxLayout(panelSeleccionPaquete, BoxLayout.X_AXIS));
-		panelSeleccionPaquete.add(lblNewLabel_2);
+		panelSeleccionPaquete.add(lblNewLabel2);
 
 		Component gluePaquete = Box.createHorizontalStrut(120);
 		panelSeleccionPaquete.add(gluePaquete);
@@ -112,8 +112,8 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		selecciones.add(panelSeleccionDepartamento);
 		panelSeleccionDepartamento.setLayout(new BoxLayout(panelSeleccionDepartamento, BoxLayout.X_AXIS));
 
-		JLabel lblNewLabel_2_1 = new JLabel("Departamento de la Actividad:");
-		panelSeleccionDepartamento.add(lblNewLabel_2_1);
+		JLabel lblNewLabel21 = new JLabel("Departamento de la Actividad:");
+		panelSeleccionDepartamento.add(lblNewLabel21);
 
 		comboDepartamentos = new JComboBox();
 
@@ -142,24 +142,24 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 			}
 		});
 
-		Component glue_Departamento = Box.createHorizontalStrut(5);
-		panelSeleccionDepartamento.add(glue_Departamento);
+		Component glueDepartamento = Box.createHorizontalStrut(5);
+		panelSeleccionDepartamento.add(glueDepartamento);
 		panelSeleccionDepartamento.add(comboDepartamentos);
 
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		panelSeleccionDepartamento.add(horizontalStrut_1);
+		Component horizontalStrut1 = Box.createHorizontalStrut(20);
+		panelSeleccionDepartamento.add(horizontalStrut1);
 
-		Component verticalStrut_1 = Box.createVerticalStrut(10);
-		selecciones.add(verticalStrut_1);
+		Component verticalStrut1 = Box.createVerticalStrut(10);
+		selecciones.add(verticalStrut1);
 
 		JPanel panelSeleccionActividad = new JPanel();
 		selecciones.add(panelSeleccionActividad);
 		panelSeleccionActividad.setLayout(new BoxLayout(panelSeleccionActividad, BoxLayout.X_AXIS));
 
-		JLabel lblNewLabel_2_1_1 = new JLabel("Actividad:");
-		lblNewLabel_2_1_1.setMinimumSize(new Dimension(100, 14));
-		lblNewLabel_2_1_1.setMaximumSize(new Dimension(100, 14));
-		panelSeleccionActividad.add(lblNewLabel_2_1_1);
+		JLabel lblNewLabel211 = new JLabel("Actividad:");
+		lblNewLabel211.setMinimumSize(new Dimension(100, 14));
+		lblNewLabel211.setMaximumSize(new Dimension(100, 14));
+		panelSeleccionActividad.add(lblNewLabel211);
 
 		comboActividades = new JComboBox();
 		comboActividades.setEnabled(false);
@@ -187,12 +187,12 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 
 		panelSeleccionActividad.add(comboActividades);
 
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		panelSeleccionActividad.add(horizontalStrut_2);
+		Component horizontalStrut2 = Box.createHorizontalStrut(20);
+		panelSeleccionActividad.add(horizontalStrut2);
 
-		JPanel parte_inferior = new JPanel();
-		panel.add(parte_inferior, BorderLayout.SOUTH);
-		parte_inferior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel parteInferior = new JPanel();
+		panel.add(parteInferior, BorderLayout.SOUTH);
+		parteInferior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JButton botonCancelar = new JButton("Cancelar");
 		botonCancelar.addActionListener(new ActionListener() {
@@ -200,7 +200,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 				cancelar();
 			}
 		});
-		parte_inferior.add(botonCancelar);
+		parteInferior.add(botonCancelar);
 
 		JButton botonAgregar = new JButton("Agregar");
 		botonAgregar.addActionListener(new ActionListener() {
@@ -208,10 +208,11 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 				agregarActividad();
 			}
 		});
-		parte_inferior.add(botonAgregar);
+		parteInferior.add(botonAgregar);
 
 	}
 
+	@Override
 	public void setVisible(boolean visi) {
 		if (visi) {
 			limpiarSelecciones();
@@ -238,7 +239,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	private void actualizarComboPaquete() {
 		List<String> idsPaquetes = controladorPaq.obtenerIdPaquetes();
 		comboPaquetes.setModel(new DefaultComboBoxModel(idsPaquetes.toArray()));
-		if (idsPaquetes.size() > 0) {
+		if (!idsPaquetes.isEmpty()) {
 			comboPaquetes.setSelectedIndex(0);
 			if (comboDepartamentos.getSelectedItem() != null) {
 				actualizarComboActividades();
@@ -247,9 +248,9 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	}
 
 	private void actualizarComboDepartamentos() {
-		List<String> idsDepartamentos = cat.obtenerIdDepartamentos();
+		List<String> idsDepartamentos = controladorAct.obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(idsDepartamentos.toArray()));
-		if (idsDepartamentos.size() > 0) {
+		if (!idsDepartamentos.isEmpty()) {
 			comboDepartamentos.setSelectedIndex(0);
 			if (comboPaquetes.getSelectedItem() != null) {
 				actualizarComboActividades();
@@ -266,7 +267,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		List<String> idsActividades = controladorPaq.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId,
 				packId);
 		comboActividades.setModel(new DefaultComboBoxModel<>(idsActividades.toArray()));
-		if (idsActividades.size() > 0) {
+		if (!idsActividades.isEmpty()) {
 			comboActividades.setSelectedIndex(0);
 		}
 	}

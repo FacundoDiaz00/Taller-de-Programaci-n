@@ -21,9 +21,9 @@ import logica.controladores.IControladorPaquete;
 import logica.controladores.IControladorUsuario;
 
 public class Principal {
-	private IControladorUsuario CUS;
-	private IControladorActividadTuristica CAD;
-	private IControladorPaquete CP;
+	private IControladorUsuario contrUsuario;
+	private IControladorActividadTuristica contrActTur;
+	private IControladorPaquete contrPaquete;
 
 	private JFrame frmEstacionDeTrabajo;
 
@@ -39,7 +39,7 @@ public class Principal {
 	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
 	private ConsultaDeSalidaTuristica frmIntConsultaDeSalidaTuristica;
-	private InscribirseASalidaTurística frmInscribirseASalidaTurística;
+	private InscribirseASalidaTurística frmInscribirseASalidaTuristica;
 
 	private ModificarUsuario frmModificarUsuario;
 
@@ -54,8 +54,9 @@ public class Principal {
 				try {
 					Principal window = new Principal();
 					window.frmEstacionDeTrabajo.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (RuntimeException exception) { // Resolver qué captuar
+														// acá
+					exception.printStackTrace();
 				}
 			}
 		});
@@ -67,22 +68,22 @@ public class Principal {
 	public Principal() {
 		initialize();
 		Fabrica fabrica = Fabrica.getInstancia();
-		CUS = fabrica.getIControladorUsuario();
-		CAD = fabrica.getIControladorActividadTuristica();
-		CP = fabrica.getIControladorPaquete();
+		contrUsuario = fabrica.getIControladorUsuario();
+		contrActTur = fabrica.getIControladorActividadTuristica();
+		contrPaquete = fabrica.getIControladorPaquete();
 
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, CUS);
-		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica(CAD);
-		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(CAD);
-		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, CAD);
-		frmInscribirseASalidaTurística = new InscribirseASalidaTurística(CAD, CUS);
-		frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(CAD);
-		frmIntAltaUsuario = new AltaDeUsuario(CUS);
-		frmIntAltaPaquete = new AltaDePaquete(CP);
-		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(CP, CAD);
-		frmModificarUsuario = new ModificarUsuario(CUS);
+		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, contrUsuario);
+		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica(contrActTur);
+		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(contrActTur);
+		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, contrActTur);
+		frmInscribirseASalidaTuristica = new InscribirseASalidaTurística(contrActTur, contrUsuario);
+		frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(contrActTur);
+		frmIntAltaUsuario = new AltaDeUsuario(contrUsuario);
+		frmIntAltaPaquete = new AltaDePaquete(contrPaquete);
+		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(contrPaquete, contrActTur);
+		frmModificarUsuario = new ModificarUsuario(contrUsuario);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
-		frmIntConsultaDePaquete = new ConsultaDePaquete(this, CP);
+		frmIntConsultaDePaquete = new ConsultaDePaquete(this, contrPaquete);
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmIntAltaUsuario.setVisible(false);
@@ -91,7 +92,7 @@ public class Principal {
 		frmIntAltaActividadTuristica.setVisible(false);
 		frmIntConsultaDeActividadTuristica.setVisible(false);
 		frmIntAgregarActividadAPaquete.setVisible(false);
-		frmInscribirseASalidaTurística.setVisible(false);
+		frmInscribirseASalidaTuristica.setVisible(false);
 		frmIntAltaSalidaTuristica.setVisible(false);
 		frmIntConsultaDePaquete.setVisible(false);
 		frmIntConsultaDeSalidaTuristica.setVisible(false);
@@ -105,7 +106,7 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
-		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTurística);
+		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
@@ -138,7 +139,7 @@ public class Principal {
 
 		JMenuItem salirJMenuItem = new JMenuItem("Salir");
 		salirJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				frmEstacionDeTrabajo.setVisible(false);
 				frmEstacionDeTrabajo.dispose();
 			}
@@ -153,7 +154,7 @@ public class Principal {
 
 		JMenuItem registrarUsuarioJMenuItem = new JMenuItem("Registrar Usuario");
 		registrarUsuarioJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				frmIntAltaUsuario.setVisible(true);
 			}
 		});
@@ -161,7 +162,7 @@ public class Principal {
 
 		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
 		consultarUsuarioJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				frmIntConsultaDeUsuario.setVisible(true);
 			}
 
@@ -170,30 +171,30 @@ public class Principal {
 
 		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
 		modificarUsuarioJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				frmModificarUsuario.setVisible(true);
 			}
 		});
 		mnUsuario.add(modificarUsuarioJMenuItem);
 
-		JMenu mnNewMenu_3 = new JMenu("Actividades/Salidas turisticas");
-		menuBar.add(mnNewMenu_3);
+		JMenu mnNewMenu3 = new JMenu("Actividades/Salidas turisticas");
+		menuBar.add(mnNewMenu3);
 
 		JMenuItem registrarActividadJMenuItem = new JMenuItem("Registrar Actividad Turística");
 		registrarActividadJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent event) {
 				frmIntAltaActividadTuristica.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(registrarActividadJMenuItem);
+		mnNewMenu3.add(registrarActividadJMenuItem);
 
 		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
 		consultarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				frmIntConsultaDeActividadTuristica.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(consultarActividadTuristicaJMenuItem);
+		mnNewMenu3.add(consultarActividadTuristicaJMenuItem);
 
 		JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");
 		registrarSalidaJMenuItem.addActionListener(new ActionListener() {
@@ -201,57 +202,57 @@ public class Principal {
 				frmIntAltaSalidaTuristica.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(registrarSalidaJMenuItem);
+		mnNewMenu3.add(registrarSalidaJMenuItem);
 
 		JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
 		consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent event) {
 				frmIntConsultaDeSalidaTuristica.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(consultarSalidaTuristicaJMenuItem);
+		mnNewMenu3.add(consultarSalidaTuristicaJMenuItem);
 
 		JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
 		inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmInscribirseASalidaTurística.setVisible(true);
+			public void actionPerformed(ActionEvent event) {
+				frmInscribirseASalidaTuristica.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(inscribirseASalidaTuristicaJMenuItem);
+		mnNewMenu3.add(inscribirseASalidaTuristicaJMenuItem);
 
 		JMenu mnNewMenu = new JMenu("Paquetes");
 		menuBar.add(mnNewMenu);
 
 		JMenuItem altaPaqueteJMenuItem = new JMenuItem("Registrar Paquete");
 		altaPaqueteJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent event) {
 				frmIntAltaPaquete.setVisible(true);
 			}
 		});
 		mnNewMenu.add(altaPaqueteJMenuItem);
 
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Consulta de Paquete");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JMenuItem mntmNewMenuItem2 = new JMenuItem("Consulta de Paquete");
+		mntmNewMenuItem2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
 				frmIntConsultaDePaquete.setVisible(true);
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_2);
+		mnNewMenu.add(mntmNewMenuItem2);
 
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Agregar Actividad Turística a Paquete");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JMenuItem mntmNewMenuItem1 = new JMenuItem("Agregar Actividad Turística a Paquete");
+		mntmNewMenuItem1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
 				frmIntAgregarActividadAPaquete.setVisible(true);
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_1);
+		mnNewMenu.add(mntmNewMenuItem1);
 
 		JMenu datosInicoMenu = new JMenu("Datos de inicio");
 		menuBar.add(datosInicoMenu);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos de prueba");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				cargarDatosDePrueba();
 			}
 		});
@@ -296,12 +297,12 @@ public class Principal {
 			JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Éxito",
 					JOptionPane.INFORMATION_MESSAGE);
 
-		} catch (Exception e) {
+		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(null,
 					"Ha ocurrido un error a la hora de cargar los datos de prueba."
 							+ " Sugerimos que esta operación sea la primera que se haga cuando se ejecuta el sistema.",
 					"Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
+			exception.printStackTrace();
 		}
 
 	}

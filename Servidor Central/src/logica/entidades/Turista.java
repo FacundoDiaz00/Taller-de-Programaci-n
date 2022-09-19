@@ -96,7 +96,7 @@ public class Turista extends Usuario {
 
 	@Override
 	public DTUsuario obtenerDTUsuarioDetallePrivado() {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
 	}
 }

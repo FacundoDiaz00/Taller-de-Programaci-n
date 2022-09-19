@@ -45,8 +45,8 @@ public class ManejadorActividadTuristica {
 		return actividades.get(nombre);
 	}
 
-	public boolean exists(String id) {
-		return actividades.containsKey(id);
+	public boolean exists(String nombreAct) {
+		return actividades.containsKey(nombreAct);
 
 	}
 
