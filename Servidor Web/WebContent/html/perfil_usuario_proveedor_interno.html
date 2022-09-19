@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/estilosComun.css">
+    <link rel="stylesheet" href="../css/perfil_usuario_proveedor.css">
+    <link rel="stylesheet" href="../css/perfil_de_usuario.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+
+    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
+
+    <title>Turismo UY</title>
+</head>
+<body>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="index.html">Turismo UY</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-sm-between" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 l-flex barra_de_navegacion">
+                <li class="nav-item ">
+                    <a class="nav-link active" aria-current="page" href="index.html"><strong>Actividades y Paquetes</strong></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link active" aria-current="page" href="consulta_de_salida_turistica.html">Salidas</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link active" aria-current="page" href="consulta_de_usuario.html">Usuarios</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav d-flex">
+                <form class="d-flex buscar" role="search" id="buscador">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn" ><i class="fas fa-search"></i></button>
+                </form>
+                <div class="dropdown">
+
+                    <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Washington Rocha
+                        <img  class="imagen_perfil " src="../img/washington.png">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="perfil_usuario_proveedor_interno.html">Ver Perfil</a></li>
+                        <li><a class="dropdown-item" href="iniciar_sesion.html">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<section id="contenedor">
+    <div id="menu-lateral">
+        <!--Acciones generales-->
+        <div class="card list-group" id="opciones">
+            <h5 class="card-title">Acciones</h5>
+            <a href="index.html" class="list-group-item">Ver actividades & paquetes</a>
+            <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
+            <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
+        </div>
+
+        <!--Categoroias-->
+        <div class="card list-group" id="filtro-categoria">
+            <h5 class="card-title">Categorias</h5>
+            <a href="#" class="list-group-item active">Gastronomía</a>
+        </div>
+
+        <!--Departametos-->
+        <div class="card list-group" id="filtro-departamentos">
+            <h5 class="card-title">Departamentos</h5>
+            <a href="#" class="list-group-item">Rocha</a>
+        </div>
+    </div>
+    <div id="contenedor-items">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="boton-general-2" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Perfil</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="boton-actividades-2" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Actividades</button>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active cardPerfil" id="boton-general-pane-2" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div >
+                    <img src="../img/washington.png" class="perfil">
+                </div>
+                <div class="card-body cards">
+                    <h5 class="card-title">Washington Rocha</h5>
+                    <p class="text"><b>Washington / washington</b></p>
+                    <p class="card-text"><b>Nickname: washington</b></p>
+                    <p class="card-text">Nombre: Washington<i class="fas fa-pencil-alt pencil"></i></p>
+                    <p class="card-text">Apellido: Rocha<i class="fas fa-pencil-alt pencil"></i></p>
+                    <p class="card-text"><b>washington@turismorocha.gub.uy</b></p>
+                    <p class="card-text">Fecha de Nacimiento: 14/09/1970<i class="fas fa-pencil-alt pencil"></i></p>
+                    <div class="bs-example">
+                        <!-- Button HTML (to Trigger Modal) -->
+                        <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
+
+                        <!-- Modal HTML -->
+                        <div id="myModal" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="width: 700px; height: 765px">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modificar Usuario</h5>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="contenedorinput mb-3">
+                                            <span class="input-label">Foto de Perfil:</span>
+                                            <img style="width: 160px; height: 120px; margin:20px" src="../img/washington.png">
+                                            <input id="input-imagen" type="file" accept="image/*"  class="form-control" placeholder="Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
+                                        </div>
+
+                                        <div class="popUp">
+                                            <div>
+                                                <div class="contenedorinput mb-3">
+                                                    <span class="input-label" >Nickname:</span>
+                                                    <input id="input-nickname" type="text" required class="form-control" placeholder="washington" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
+                                                </div>
+
+                                                <div class="contenedorinput mb-3">
+                                                    <span class="input-label">Nombre:</span>
+                                                    <input id="input-nombre" type="text" required class="form-control" placeholder="Washington" aria-label="Nombre" aria-describedby="basic-addon1">
+                                                </div>
+
+                                                <div class="contenedorinput mb-3">
+                                                    <span class="input-label">Apellido: </span>
+                                                    <input id="input-apellido" type="text" required class="form-control" placeholder="Rocha" aria-label="Apellido" aria-describedby="basic-addon1">
+                                                </div>
+
+                                            </div>
+
+                                            <div>
+
+                                                <div class="contenedorinput mb-3">
+                                                    <span class="input-label">Fecha de nacimiento:</span>
+                                                    <input id="input-fecha-nacimiento" type="date" required class="form-control" placeholder="14/09/1970" aria-label="Fecha nacimiento" aria-describedby="basic-addon1">
+                                                </div>
+
+                                                <div class="contenedorinput mb-3">
+                                                    <span class="input-label">Contraseña: </span>
+                                                    <input id="input-contraseña" type="password" required class="form-control" placeholder="Contraseña" aria-label="Nickname" aria-describedby="basic-addon1">
+                                                </div>
+
+                                                <div class="contenedorinput mb-3">
+                                                    <span class="input-label"> Correo electronico:</span>
+                                                    <input id="input-correo" type="password" required class="form-control" placeholder="washington@turismorocha.gub.uy" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="contenedorinput mb-3" id="descripcion-general-field">
+                                            <span class="input-label">Descripcion general:</span>
+                                            <input id="input-descripcionGeneral" type="text" required class="form-control" placeholder="Ingrese una descripcion general" aria-label="Descripcion general" aria-describedby="basic-addon1">
+                                        </div>
+
+                                        <div class="contenedorinput mb-3" id="link-sito-web-field">
+                                            <span class="input-label">Link sito web:</span>
+                                            <input id="input-link" type="text" class="form-control" placeholder="ingrese un link al sitio web" aria-label="Link" aria-describedby="basic-addon1">
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer" style="display: flex;justify-content: space-between;">
+                                        <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade active" id="boton-actividades-pane-2" role="tabpanel" aria-labelledby="profile-tab" tabindex="1">
+                <div class="card mb-3" style="max-width: 800px; margin:10px">
+                    <div class="row g-0">
+                        <div class="col-md-4 img-contain">
+                            <img src="https://tinyurl.com/bdehz9bb" class="img-fluid rounded-start" style="margin:10px">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Degusta</h5>
+                                <p class="card-text">Cantidad de Turistas: 3</p>
+                                <p class="card-text">Costo: 800</p>
+                                <p class="card-text">Ciudad: Rocha</p>
+                                <p class="card-text">Referencia de Departamento: C</p>
+                                <p class="card-text">Fecha de Alta: 20/7/2022</p>
+                                <div class="botonera">
+                                    <a href="consulta_actividad_turistica.html" class="btn btn-primary">Ver mas</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 800px; margin:10px">
+                    <div class="row g-0">
+                        <div class="col-md-4 img-contain">
+                            <img src="https://tinyurl.com/58fnr5j7" class="img-fluid rounded-start" style="margin:10px">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Teatro con Sabores</h5>
+                                <p class="card-text">Cantidad de Turistas: 3</p>
+                                <p class="card-text">Costo: 500</p>
+                                <p class="card-text">Ciudad: Rocha</p>
+                                <p class="card-text">Referencia de Departamento: C</p>
+                                <p class="card-text">Fecha de Alta: 21/7/2022</p>
+                                <div class="botonera">
+                                    <a href="consulta_actividad_turistica.html" class="btn btn-primary">Ver mas</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+        <span class="" style="font-size: 25px; color: Grey;">
+          <i class="fas fa-route"></i>
+        </span>
+        <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
+    </div>
+</footer>
+
+<script src="../js/jquery-3.3.1.slim.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/perfil_de_usuario.js"></script>
+<script src="../js/popUp_modificar_usuario.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".btn").click(function(){
+            $("#myModal").modal('show');
+        });
+        $(".close").click(function(){
+            $("#myModal").modal('hide');
+        });
+    });
+</script>
+</body>
+</html>

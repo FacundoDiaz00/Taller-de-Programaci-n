@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../css/estilosComun.css">
@@ -8,11 +9,11 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
 
     <title>Turismo UY</title>
 </head>
 <body>
-<main>
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
         <div class="container-fluid">
@@ -32,14 +33,18 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
-                    <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrase</a>
-                    </li>
-                    <li class="iniciar_sesion">
-                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
-                    </li>
-                </ul>
+                    <div class="dropdown">
 
+                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Washington Rocha
+                            <img  class="imagen_perfil " src="../img/washington.png">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="perfil_usuario_proveedor_interno.html">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="iniciar_sesion.html">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </ul>
             </div>
         </div>
 
@@ -194,13 +199,10 @@
             <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
         </div>
     </footer>
-</main>
 
 
-<script src="../js/jquery-3.3.1.slim.min.js"></script>
-<script src="../js/popper.min.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>-->
-<script src="../js/bootstrap.min.js"></script>
-
+    <script src="../js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
