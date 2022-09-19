@@ -10,25 +10,34 @@
 + obtenerDTUsuario(String): DTTurista | DTProveedor
 + obtenerDTUsuarioDetalle(String): DTTuristaDetalle | DTProveedorDetalle
 + obtenerDTUsuarioDetallePrivado(String): DTTuristaDetallePrivado | DTProveedorDetallePrivado
+
++ validarUsuarioPorCorreo(correo: string, passwd : string)
++ validarUsuarioPorNickname(nickname: string, passwd : string)
++ modificarUsuario(DtUsuario)
 ```
 ### IControladorActividadTuristica
 ```
 + obtenerIdDepartamentos(): List<String>
-+ obtenerIdActividadesTuristicas(String): List<String>
-+ altaActividadTuristica(String, String, String, String, int, float, String, LocalDate): void
++ altaActividadTuristica(String, String, String, String, int, float, String, LocalDate, List<String>): void
 + existeActividadTuristica(String): boolean
-+ altaInscripcionSalidaTuristica(String, String, int, LocalDate): void
++ altaInscripcionSalidaTuristica(String, String, int, LocalDate, string): void
 + altaDepartamento(String, String, String): void
 + obtenerDTSalidasTuristicas(String): List<DTSalidaTuristica>
 + altaSalidaTuristica(String, String, LocalDateTime, LocalDate, String, int): void
 + obtenerIdSalidasTuristicas(String): List <String>
-+ obtenerIdActividadesTuristricasConfirmadasPorCategoria(nomCat: String) : set(String)
-+ obtenerDetallesActividadTuristica(nombreAct: String): DTActividadTuristicaDetalles
++ obtenerIdActividadesTuristricasConfirmadasPorCategoria(String) : List<String>
++ obtenerIdActividadesTuristricasConfirmadasPorDepartamento(string) : List<String>
++ obtenerDetallesActividadTuristica(nombreAct: String): DTActividadTuristicaDetalles 
 
 + obtenerDetallesActividadTuristica(String): DTActividadTuristicaDetalle
 + obtenerDTSalidaTuristica(String): DTSalidaTuristica
 + obtenerDTSalidaTuristicaDetalle(String): DTSalidaTuristicaDetalle
 + obtenerDTInscripcion(String, String): DTInscripcion
+
++ altaDeCategoria(String)
++ obtenerIdActividadesTuristicasAgregadas() : List<String>
++ aceptarORechasarActividadesTuristica(string, bool)
+
 
 ```
 
@@ -40,7 +49,9 @@
 + obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String, String): List<String>
 
 + obtenerDTPaqueteDetalles(): List<DTPaqueteDetalles>
-+ obtenerPaquetes(): List<DTPaquete> // listado web
++ obtenerPaquetes(): List< DTPaquete> // listado web
++ obtenerIdComprasDisponiblesParaInscripcion(string, string) : List<String>
++ comprarPaquete(string, string, int)
 ```
 ### IControladorMaestro
 ```
