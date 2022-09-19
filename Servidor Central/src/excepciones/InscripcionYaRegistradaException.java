@@ -8,7 +8,7 @@ package excepciones;
  * 
  */
 
-public class InscripcionYaRegistradaException extends Exception {
+public class InscripcionYaRegistradaException extends TurismoUyException {
 	public InscripcionYaRegistradaException(String message) {
 		super(message);
 	}

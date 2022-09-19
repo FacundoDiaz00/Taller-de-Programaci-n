@@ -6,7 +6,7 @@ package excepciones;
  * @author Equipo taller prog 16
  * 
  */
-public class FechaAltaSalidaPosteriorAFechaSalidaException extends Exception {
+public class FechaAltaSalidaPosteriorAFechaSalidaException extends TurismoUyException {
 	public FechaAltaSalidaPosteriorAFechaSalidaException(String message) {
 		super(message);
 	}

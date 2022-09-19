@@ -7,7 +7,7 @@ package excepciones;
  * @author Equipo taller prog 16
  * 
  */
-public class PaqueteYaRegistradoException extends Exception {
+public class PaqueteYaRegistradoException extends TurismoUyException {
 
 	public PaqueteYaRegistradoException(String texto) {
 		super(texto);
