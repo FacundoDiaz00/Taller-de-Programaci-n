@@ -17,6 +17,31 @@
     grid-row-end: 3;
 }
 
+#form-comprar{
+    padding: 10px;
+    display: grid;
+    grid-template-rows: auto auto;
+
+}
+
+#form-comprar > div{
+    display: flex;
+    align-items: center;
+}
+
+#form-comprar #div-comprar{
+    display: flex;
+    justify-content: center;
+}
+
+#form-comprar .input-label{
+    width: 200px;
+}
+
+#form-comprar input[type = "submit"]{
+    width: 200px;
+}
+
 #info-paquete{
     padding: 10px;
     display: grid;
@@ -43,7 +68,7 @@ h6{
     font-style: italic;
 }
 
-#actividades-turisticas{
+#actividades-compra-turisticas{
     grid-row-start: 1;
     grid-row-end: 3;
     grid-column-start: 3;
