@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.TurismoUyException;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
@@ -30,7 +31,7 @@ import logica.datatypes.DTUsuario;
 
 public class ModificarUsuario extends JInternalFrame {
 
-	DTUsuario dtUsuario;
+	private DTUsuario dtUsuario;
 
 	private JTextField nicknameTextField;
 	private JTextField nombreTextFIeld;
@@ -43,7 +44,7 @@ public class ModificarUsuario extends JInternalFrame {
 	private JSpinner mesSpinner;
 	private JSpinner anioSprinner;
 	private JTextArea descripcionTextArea;
-	IControladorUsuario icu;
+	private IControladorUsuario icu;
 
 	/**
 	 * Create the frame.
@@ -211,7 +212,7 @@ public class ModificarUsuario extends JInternalFrame {
 			usuariosList.setSelectedIndex(0);
 			// seleccionarUsuario();
 		} else {
-			enableCamposInfoUsuario(false, false);// No importa el valor de
+			enableCamposInfoUsuario(false, false); // No importa el valor de
 													// soyProveedor
 		}
 	}
@@ -298,7 +299,8 @@ public class ModificarUsuario extends JInternalFrame {
 			int mes = (int) mesSpinner.getValue();
 			int anio = (int) anioSprinner.getValue();
 			fechaNac = LocalDate.of(anio, mes, dia);
-		} catch (Exception e) {
+		} catch (Exception e) { // TODO averiguar que excepcion tira localdate y
+								// atrapar eso
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -343,7 +345,7 @@ public class ModificarUsuario extends JInternalFrame {
 		} catch (ModificacionUsuarioNoPermitida e) {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el usuario.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) {
+		} catch (TurismoUyException e) {
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}

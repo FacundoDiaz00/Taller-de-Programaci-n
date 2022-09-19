@@ -13,7 +13,7 @@ public class Departamento {
 	private String descripcion;
 	private String url;
 
-	Map<String, ActividadTuristica> actividadTuristicas;
+	private Map<String, ActividadTuristica> actividadTuristicas;
 
 	public Departamento(String nombre, String descripcion, String url) {
 		setNombre(nombre);

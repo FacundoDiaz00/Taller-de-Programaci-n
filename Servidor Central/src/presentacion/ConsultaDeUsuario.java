@@ -30,12 +30,12 @@ public class ConsultaDeUsuario extends JInternalFrame {
 
 	private JComboBox<String> comboBoxSeleccionUsr;
 
-	private JPanel panel_principal;
-	private JPanel panel_eleccion;
-	private JPanel panel_consulta;
+	private JPanel panelPrincipal;
+	private JPanel panelEleccion;
+	private JPanel panelConsulta;
 
-	private JPanel panel_izquierda;
-	private JPanel panel_mostrar_datos;
+	private JPanel panelIzquierda;
+	private JPanel panelMostrarDatos;
 
 	private JTextArea txtNickname;
 	private JTextArea txtNombre;
@@ -45,15 +45,15 @@ public class ConsultaDeUsuario extends JInternalFrame {
 	private JTextArea txtNacionalidad;
 	private JTextArea txtTipo;
 
-	private JPanel panel_derecha;
+	private JPanel panelDerecha;
 	private JPanel casos;
-	private JPanel proveedor_panel;
+	private JPanel proveedorPanel;
 	private JPanel panelActividadesYSalidasProveedor;
-	private JPanel turista_panel;
+	private JPanel turistaPanel;
 	private JPanel panelSalidasTurista;
-	private JLabel lblNewLabel_6_2;
+	private JLabel lblNewLabel62;
 	private JTextArea txtDescripcion;
-	private JLabel lblNewLabel_6_3;
+	private JLabel lblNewLabel63;
 	private JTextArea txtURL;
 	private JLabel lblSalidasTurista;
 	private JLabel lblActividadesProv;
@@ -74,36 +74,36 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		setBounds(30, 30, 400, 279);
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 
-		panel_principal = new JPanel();
-		getContentPane().add(panel_principal);
-		panel_principal.setLayout(new BoxLayout(panel_principal, BoxLayout.Y_AXIS));
+		panelPrincipal = new JPanel();
+		getContentPane().add(panelPrincipal);
+		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
 
-		panel_eleccion = new JPanel();
-		panel_principal.add(panel_eleccion);
-		panel_eleccion.setLayout(null);
+		panelEleccion = new JPanel();
+		panelPrincipal.add(panelEleccion);
+		panelEleccion.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel("Elija un usuario:");
 		lblNewLabel_1.setBounds(12, 10, 114, 15);
-		panel_eleccion.add(lblNewLabel_1);
+		panelEleccion.add(lblNewLabel_1);
 
 		comboBoxSeleccionUsr = new JComboBox<String>();
 		comboBoxSeleccionUsr.setBounds(133, 5, 245, 24);
-		panel_eleccion.add(comboBoxSeleccionUsr);
+		panelEleccion.add(comboBoxSeleccionUsr);
 
-		panel_consulta = new JPanel();
-		panel_principal.add(panel_consulta);
+		panelConsulta = new JPanel();
+		panelPrincipal.add(panelConsulta);
 
-		panel_izquierda = new JPanel();
-		panel_consulta.add(panel_izquierda);
-		panel_izquierda.setLayout(new BoxLayout(panel_izquierda, BoxLayout.Y_AXIS));
+		panelIzquierda = new JPanel();
+		panelConsulta.add(panelIzquierda);
+		panelIzquierda.setLayout(new BoxLayout(panelIzquierda, BoxLayout.Y_AXIS));
 
-		panel_mostrar_datos = new JPanel();
+		panelMostrarDatos = new JPanel();
 
-		panel_izquierda.add(panel_mostrar_datos);
-		panel_mostrar_datos.setLayout(new BoxLayout(panel_mostrar_datos, BoxLayout.Y_AXIS));
+		panelIzquierda.add(panelMostrarDatos);
+		panelMostrarDatos.setLayout(new BoxLayout(panelMostrarDatos, BoxLayout.Y_AXIS));
 
 		JPanel panel_3 = new JPanel();
-		panel_mostrar_datos.add(panel_3);
+		panelMostrarDatos.add(panel_3);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel = new JLabel("Nickname: ");
@@ -115,7 +115,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panel_3.add(txtNickname);
 
 		JPanel panel_4 = new JPanel();
-		panel_mostrar_datos.add(panel_4);
+		panelMostrarDatos.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel_2 = new JLabel("Nombre: ");
@@ -127,7 +127,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panel_4.add(txtNombre);
 
 		JPanel panel_5 = new JPanel();
-		panel_mostrar_datos.add(panel_5);
+		panelMostrarDatos.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel_2_1 = new JLabel("Apellido: ");
@@ -139,7 +139,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panel_5.add(txtApellido);
 
 		JPanel panel_6 = new JPanel();
-		panel_mostrar_datos.add(panel_6);
+		panelMostrarDatos.add(panel_6);
 		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel_3 = new JLabel("Correo: ");
@@ -151,7 +151,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panel_6.add(txtCorreo);
 
 		JPanel panel_7 = new JPanel();
-		panel_mostrar_datos.add(panel_7);
+		panelMostrarDatos.add(panel_7);
 		panel_7.setLayout(new BoxLayout(panel_7, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel_4 = new JLabel("Fecha de Nacimiento: ");
@@ -163,7 +163,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		panel_7.add(txtFechaDeNacimiento);
 
 		JPanel panel_3_1 = new JPanel();
-		panel_mostrar_datos.add(panel_3_1);
+		panelMostrarDatos.add(panel_3_1);
 		panel_3_1.setLayout(new BoxLayout(panel_3_1, BoxLayout.X_AXIS));
 
 		JLabel lblTipo = new JLabel("Tipo: ");
@@ -174,61 +174,61 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		txtTipo.setEditable(false);
 		panel_3_1.add(txtTipo);
 
-		panel_derecha = new JPanel();
-		panel_consulta.add(panel_derecha);
-		panel_derecha.setLayout(new BoxLayout(panel_derecha, BoxLayout.Y_AXIS));
+		panelDerecha = new JPanel();
+		panelConsulta.add(panelDerecha);
+		panelDerecha.setLayout(new BoxLayout(panelDerecha, BoxLayout.Y_AXIS));
 
 		casos = new JPanel();
-		panel_derecha.add(casos);
+		panelDerecha.add(casos);
 
 		casos.setLayout(new BoxLayout(casos, BoxLayout.Y_AXIS));
 
-		proveedor_panel = new JPanel();
-		casos.add(proveedor_panel);
-		proveedor_panel.setLayout(new BoxLayout(proveedor_panel, BoxLayout.Y_AXIS));
+		proveedorPanel = new JPanel();
+		casos.add(proveedorPanel);
+		proveedorPanel.setLayout(new BoxLayout(proveedorPanel, BoxLayout.Y_AXIS));
 
-		lblNewLabel_6_3 = new JLabel("URL: ");
-		proveedor_panel.add(lblNewLabel_6_3);
+		lblNewLabel63 = new JLabel("URL: ");
+		proveedorPanel.add(lblNewLabel63);
 
 		txtURL = new JTextArea();
 		txtURL.setText("...");
 		txtURL.setEditable(false);
-		proveedor_panel.add(txtURL);
+		proveedorPanel.add(txtURL);
 
-		lblNewLabel_6_2 = new JLabel("Descripcion general:");
-		proveedor_panel.add(lblNewLabel_6_2);
+		lblNewLabel62 = new JLabel("Descripcion general:");
+		proveedorPanel.add(lblNewLabel62);
 
 		txtDescripcion = new JTextArea();
 		txtDescripcion.setLineWrap(true);
 		txtDescripcion.setWrapStyleWord(true);
 		txtDescripcion.setText("...");
 		txtDescripcion.setEditable(false);
-		proveedor_panel.add(txtDescripcion);
+		proveedorPanel.add(txtDescripcion);
 
 		lblActividadesProv = new JLabel("Actividades y salidas: ");
-		proveedor_panel.add(lblActividadesProv);
+		proveedorPanel.add(lblActividadesProv);
 
 		panelActividadesYSalidasProveedor = new JPanel();
-		proveedor_panel.add(panelActividadesYSalidasProveedor);
+		proveedorPanel.add(panelActividadesYSalidasProveedor);
 		panelActividadesYSalidasProveedor.setLayout(new BoxLayout(panelActividadesYSalidasProveedor, BoxLayout.Y_AXIS));
 
-		turista_panel = new JPanel();
-		casos.add(turista_panel);
-		turista_panel.setLayout(new BoxLayout(turista_panel, BoxLayout.Y_AXIS));
+		turistaPanel = new JPanel();
+		casos.add(turistaPanel);
+		turistaPanel.setLayout(new BoxLayout(turistaPanel, BoxLayout.Y_AXIS));
 
 		JLabel lblNewLabel_6_1 = new JLabel("Nacionalidad: ");
-		turista_panel.add(lblNewLabel_6_1);
+		turistaPanel.add(lblNewLabel_6_1);
 
 		txtNacionalidad = new JTextArea();
 		txtNacionalidad.setEditable(false);
 		txtNacionalidad.setText("...");
-		turista_panel.add(txtNacionalidad);
+		turistaPanel.add(txtNacionalidad);
 
 		lblSalidasTurista = new JLabel("Salidas a las que se inscribió: ");
-		turista_panel.add(lblSalidasTurista);
+		turistaPanel.add(lblSalidasTurista);
 
 		panelSalidasTurista = new JPanel();
-		turista_panel.add(panelSalidasTurista);
+		turistaPanel.add(panelSalidasTurista);
 		panelSalidasTurista.setLayout(new BoxLayout(panelSalidasTurista, BoxLayout.Y_AXIS));
 
 		comboBoxSeleccionUsr.addPopupMenuListener(new PopupMenuListener() {
@@ -307,7 +307,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				DTTuristaDetalle tur = (DTTuristaDetalle) usr;
 
 				casos.removeAll();
-				casos.add(turista_panel);
+				casos.add(turistaPanel);
 
 				txtTipo.setText("Turista");
 				txtNacionalidad.setText(tur.getNacionalidad());
@@ -342,7 +342,7 @@ public class ConsultaDeUsuario extends JInternalFrame {
 				DTProveedorDetalle prov = (DTProveedorDetalle) usr;
 
 				casos.removeAll();
-				casos.add(proveedor_panel);
+				casos.add(proveedorPanel);
 
 				txtTipo.setText("Proveedor");
 				txtDescripcion.setText(prov.getDescrpicionGeneral());
@@ -398,10 +398,10 @@ public class ConsultaDeUsuario extends JInternalFrame {
 					panelActividadesYSalidasProveedor.add(panel);
 				}
 			} else {
-				throw new Exception("Se devolvió un tipo de DTUsuario no registado");
+				throw new IllegalArgumentException("Se devolvió un tipo de DTUsuario no registado");
 			}
 
-		} catch (Exception ex) {
+		} catch (IllegalArgumentException ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 
 		}

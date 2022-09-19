@@ -21,9 +21,9 @@ import logica.controladores.IControladorPaquete;
 import logica.controladores.IControladorUsuario;
 
 public class Principal {
-	IControladorUsuario CUS;
-	IControladorActividadTuristica CAD;
-	IControladorPaquete CP;
+	private IControladorUsuario CUS;
+	private IControladorActividadTuristica CAD;
+	private IControladorPaquete CP;
 
 	private JFrame frmEstacionDeTrabajo;
 
