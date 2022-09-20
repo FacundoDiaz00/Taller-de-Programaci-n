@@ -37,6 +37,8 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	private JComboBox comboPaquetes;
 	private JComboBox comboDepartamentos;
 	private JComboBox comboActividades;
+	
+	private String TestPMD;
 
 	/**
 	 * Create the frame.
