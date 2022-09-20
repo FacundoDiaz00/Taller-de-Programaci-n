@@ -25,6 +25,8 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 
 public class AltaDeActividadTuristica extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
 
 	private JComboBox<String> comboProveedores;
 	private JComboBox<String> comboDepartamentos;

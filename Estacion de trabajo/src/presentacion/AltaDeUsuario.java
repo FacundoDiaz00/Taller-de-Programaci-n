@@ -20,6 +20,8 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
 
 public class AltaDeUsuario extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
 
 	private final String opcionProveedor = "Proveedor";
 	private final String opcionTurista = "Turista";

@@ -38,7 +38,7 @@ import logica.manejadores.ManejadorUsuario;
  */
 
 public class ControladorActividadTuristica implements IControladorActividadTuristica {
-
+	
 	public void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException {
 		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
 		if (!manejadorDepartamento.exists(nom)) {
@@ -61,7 +61,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	public List<String> obtenerIdCategorias() {
 		// TODO
-		return null;
+		return new ArrayList<String>();
 	}
 
 	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad,
@@ -98,7 +98,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	public List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria) {
 		// TODO
-		return null;
+		return new ArrayList<String>();
 	}
 
 	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) {
@@ -108,7 +108,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
 		// TODO
-		return null;
+		return new ArrayList<DTActividadTuristica>();
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) {
 		// TODO
-		return null;
+		return new ArrayList<String>();
 	}
 
 	@Override

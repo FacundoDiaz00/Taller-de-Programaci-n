@@ -23,6 +23,9 @@ import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
 
 public class ConsultaDeUsuario extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Principal principal;
 	private IControladorUsuario contrUsuario;
 

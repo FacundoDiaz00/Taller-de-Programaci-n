@@ -27,6 +27,9 @@ import excepciones.SalidaYaRegistradaException;
 import logica.controladores.IControladorActividadTuristica;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private IControladorActividadTuristica controladorAct;
 
 	private JSpinner dia;

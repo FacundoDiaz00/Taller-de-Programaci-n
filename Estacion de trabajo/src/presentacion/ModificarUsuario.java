@@ -23,13 +23,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import excepciones.ModificacionUsuarioNoPermitida;
-import excepciones.TurismoUyException;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 
 public class ModificarUsuario extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
 
 	private DTUsuario dtUsuario;
 
@@ -39,7 +40,7 @@ public class ModificarUsuario extends JInternalFrame {
 	private JTextField correoTextFIeld;
 	private JTextField nacionalidadTextFIeld;
 	private JTextField urlTextField;
-	private JList usuariosList;
+	private JList<String> usuariosList;
 	private JSpinner diaSpinner;
 	private JSpinner mesSpinner;
 	private JSpinner anioSprinner;
@@ -67,7 +68,7 @@ public class ModificarUsuario extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 
-		usuariosList = new JList();
+		usuariosList = new JList<String>();
 		usuariosList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 				seleccionarUsuario();
@@ -345,7 +346,7 @@ public class ModificarUsuario extends JInternalFrame {
 		} catch (ModificacionUsuarioNoPermitida exception) {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el usuario.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (TurismoUyException exception) {
+		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
 			exception.printStackTrace();
 		}

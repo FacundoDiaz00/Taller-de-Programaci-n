@@ -24,6 +24,8 @@ import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
 	private IControladorActividadTuristica contrAct;
 	private Principal principal;
 

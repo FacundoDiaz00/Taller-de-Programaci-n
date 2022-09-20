@@ -16,6 +16,9 @@ import logica.controladores.IControladorPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 
 public class ConsultaDePaquete extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private List<DTPaqueteDetalles> paquetesDetalles;
 	private String paqueteSeleccionado;
 	private boolean desactivarMostrarConsultas = false;

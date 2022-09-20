@@ -28,6 +28,9 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.DTTuristaDetalle;
 
 public class ConsultaDeSalidaTuristica extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String seleccionSalida;
 
 	private final JComboBox comboSalidas;

@@ -43,6 +43,9 @@ import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTSalidaTuristica;
 
 public class InscribirseASalidaTurística extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private IControladorActividadTuristica contrActTur;
 	private IControladorUsuario contrUsuario;
 

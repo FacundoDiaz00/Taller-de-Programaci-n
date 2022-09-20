@@ -19,6 +19,8 @@ import excepciones.PaqueteYaRegistradoException;
 import logica.controladores.IControladorPaquete;
 
 public class AltaDePaquete extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
 
 	private JTextField txtNombre;
 	private JTextArea descrp;

@@ -28,6 +28,9 @@ import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 
 public class AgregarActividadAPaquete extends JInternalFrame {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private IControladorPaquete controladorPaq;
 	private IControladorActividadTuristica controladorAct;
 
