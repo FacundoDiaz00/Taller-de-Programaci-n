@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/alta_de_usuario.css">
+    <link rel="stylesheet" href="../css/estilosComun.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
+
+    <title>Turismo UY</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Turismo UY</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+
+                <ul class="navbar-nav d-flex">
+                    <form class="d-flex buscar" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn" ><i class="fas fa-search"></i></button>
+                    </form>
+                    <li class="alta_de_usuario">
+                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrarse</a>
+                    </li>
+                    <li class="iniciar_sesion">
+                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <section id="contenedor">
+        <div id="menu-lateral">
+
+            <!--Acciones generales-->
+            <div class="card list-group" id="opciones">
+                <h5 class="card-title">Acciones</h5>
+                <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
+                <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
+            </div>
+
+            <!--Categoroias-->
+            <div class="card list-group" id="filtro-categoria">
+                <h5 class="card-title">Categorias</h5>
+                <a href="index.html" class="list-group-item">Gastronomía</a>
+            </div>
+
+            <!--Departametos-->
+            <div class="card list-group" id="filtro-departamentos">
+                <h5 class="card-title">Departamentos</h5>
+                <a href="index.html" class="list-group-item">Rocha</a>
+            </div>
+        </div>
+        <div id="contenedorForm">
+            <form class="card" id="form-alta-usuario">
+                <div class="card-body">
+                    <h5 class="card-title">Registrar Usuario</h5>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Nickname:<span class="obligatorio"> *</span></span>
+                        <input id="input-nickname" type="text" required class="form-control" placeholder="Ingrese un nickname" aria-label="Nickname" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Nombre:<span class="obligatorio"> *</span></span>
+                        <input id="input-nombre" type="text" required class="form-control" placeholder="Ingrese un nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Apellido:<span class="obligatorio"> *</span></span>
+                        <input id="input-apellido" type="text" required class="form-control" placeholder="Ingrese un apellido" aria-label="Apellido" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
+                        <input id="input-contraseña" type="password" required class="form-control" placeholder="Ingrese una contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Confirmacion contraseña:<span class="obligatorio"> *</span></span>
+                        <input id="input-confirmacion-contraseña" type="password" required class="form-control" placeholder="Vuelva a ingresar la contraseña" aria-label="Nickname" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Correo electronico:<span class="obligatorio"> *</span></span>
+                        <input id="input-correo-electronico" type="email" required class="form-control" placeholder="Ingrese un correo" aria-label="Correo electronico" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Fecha de nacimiento:<span class="obligatorio"> *</span></span>
+                        <input id="input-fecha-nacimiento" type="date" required class="form-control" placeholder="Fecha nacimiento" aria-label="Fecha nacimiento" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3">
+                        <span class="input-label">Imagen:</span>
+                        <input id="input-imagen" type="file" accept="image/*"  class="form-control" placeholder="Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div  class="contenedorinput mb-3">
+                        <span class="input-label">Tipo de usuario<span class="obligatorio"> *</span></span>
+                        <div id="tipoUsuarioRadioButtonContainer">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoUsuario" id="checkTipoProveedor"  checked>
+                                <label class="form-check-label" for="checkTipoProveedor">
+                                    Proveedor
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoUsuario" id="checkTipoTurista" >
+                                <label class="form-check-label" for="checkTipoTurista">
+                                    Turista
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contenedorinput mb-3 eliminarElemento " id="nacionalidad-field">
+                        <span class="input-label">Nacionalidad:<span class="obligatorio"> *</span></span>
+                        <input id="input-nacionalidad" type="hidden" required class="form-control" placeholder="Ingrese una nacionalidad" aria-label="Nacionalidad" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3" id="descripcion-general-field">
+                        <span class="input-label">Descripcion general:<span class="obligatorio"> *</span></span>
+                        <input id="input-descripcionGeneral" type="text" required class="form-control" placeholder="Ingrese una descripcion general" aria-label="Descripcion general" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="contenedorinput mb-3" id="link-sito-web-field">
+                        <span class="input-label">Link sito web:</span>
+                        <input id="input-link" type="text" class="form-control" placeholder="ingrese un link al sitio web" aria-label="Link" aria-describedby="basic-addon1">
+                    </div>
+
+
+
+                    <div id="botonera">
+                        <a href="index.html" class="btn btn-danger">Cancelar</a>
+                        <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div></div>
+    </section>
+
+
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
+        <span class="" style="font-size: 25px; color: Grey;">
+          <i class="fas fa-route"></i>
+        </span>
+            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
+        </div>
+    </footer>
+
+
+    <script src="../js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/sweetalert2.all.min.js"></script>
+    <script src="../js/comportamientoComun.js"></script>
+    <script src="../js/alta_usuario.js"></script>
+
+
+</body>
+</html>
