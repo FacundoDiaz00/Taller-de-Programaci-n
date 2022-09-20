@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Daniel Padron/Documents/tpgr16/Estacion de trabajo/servidorCentral.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Servidor Central"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
