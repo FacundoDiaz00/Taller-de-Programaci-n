@@ -8,6 +8,7 @@ package excepciones;
  * 
  */
 public class PaqueteYaRegistradoException extends TurismoUyException {
+	private static final long serialVersionUID = 1L;
 
 	public PaqueteYaRegistradoException(String texto) {
 		super(texto);

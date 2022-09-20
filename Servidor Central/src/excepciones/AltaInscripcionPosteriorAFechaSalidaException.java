@@ -8,6 +8,8 @@ package excepciones;
  * 
  */
 public class AltaInscripcionPosteriorAFechaSalidaException extends TurismoUyException {
+	private static final long serialVersionUID = 1L;
+	
 	public AltaInscripcionPosteriorAFechaSalidaException(String texto) {
 		super(texto);
 	}
