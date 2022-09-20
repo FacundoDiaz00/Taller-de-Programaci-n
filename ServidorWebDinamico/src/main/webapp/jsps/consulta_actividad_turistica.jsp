@@ -1,14 +1,24 @@
+<%-- 
+
+# ATRIBUTOS QUE PRECISA LA PÁGINA
+
+
+
+ --%>
+<%@page import="logica.datatypes.DTActividadTuristica"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/estilosComun.css">
-    <link rel="stylesheet" href="../css/consulta_actividad_turistica.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilosComun.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_actividad_turistica.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/fontawesome-free-6.2.0-web/css/all.css">
 
     <title>Turismo UY</title>
 </head>
@@ -59,7 +69,7 @@
             <!--Categoroias-->
             <div class="card list-group" id="filtro-categoria">
                 <h5 class="card-title">Categorias</h5>
-                <a href="index.html" class="list-group-item">Gastronomía</a>
+                <a href="index.html" class="list-group-item">Gastronomí­a</a>
             </div>
 
             <!--Departametos-->
@@ -79,7 +89,7 @@
 
 
             <div id="info-general-imagen">
-                <img src="../img/actividad1.png" alt="">
+                <img src="${pageContext.request.contextPath}/img/actividad1.png" alt="">
             </div>
 
             <div id="info">
@@ -94,7 +104,7 @@
             <div id="resto-de-la-info-actividad">
                 <div id="descripcion">
                     <h5 class="">Descripcion</h5>
-                    <p>Festival gastronómico de productos locales en Rocha</p>
+                    <p>Festival gastronÃ³mico de productos locales en Rocha</p>
                 </div>
 
 
@@ -119,7 +129,7 @@
                 <div id="categorias">
                     <h5 class="">Categorias:</h5>
                     <ul>
-                        <li> Gastronomía</li>
+                        <li> GastronomÃ­a</li>
                     </ul>
                 </div>
             </div>
@@ -134,7 +144,7 @@
                     <div class="card mb-3" style="max-width: 800px;">
                         <div class="row g-0">
                             <div class="col-md-4 img-contain">
-                                <img src="../img/salida1.png" class="img-fluid rounded-start"  style="margin: 10px">
+                                <img src="${pageContext.request.contextPath}/img/salida1.png" class="img-fluid rounded-start"  style="margin: 10px">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -158,7 +168,7 @@
                     <div class="card mb-3" style="max-width: 800px;">
                         <div class="row g-0">
                             <div class="col-md-4 img-contain">
-                                <img src="../img/salida2.png" class="img-fluid rounded-start"  style="margin: 10px">
+                                <img src="${pageContext.request.contextPath}/img/salida2.png" class="img-fluid rounded-start"  style="margin: 10px">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -185,12 +195,12 @@
                     <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
                         <div class="row g-0">
                             <div class="col-md-4 img-contain">
-                                <img src="../img/pack1.png" class="img-fluid rounded-start paquetes" style="margin: 10px">
+                                <img src="${pageContext.request.contextPath}/img/pack1.png" class="img-fluid rounded-start paquetes" style="margin: 10px">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body cards">
                                     <h5 class="card-title">Disfrutar Rocha</h5>
-                                    <p>Actividades para hacer en familia y disfrutar arte y gastronomía</p>
+                                    <p>Actividades para hacer en familia y disfrutar arte y gastronomÃ­a</p>
                                     <div class="botonera">
                                         <a href="consulta_de_paquete.html" class="btn btn-primary">Ver mas</a>
                                     </div>
@@ -209,7 +219,7 @@
             <span class="" style="font-size: 25px; color: Grey;">
                 <i class="fas fa-route"></i>
             </span>
-            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
+            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín MartÃ­nez, Daniel Padrón y Agustín Recoba</small>
         </div>
     </footer>
 
@@ -219,9 +229,9 @@
 
 
 
-<script src="../js/jquery-3.3.1.slim.min.js"></script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.slim.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 </body>
 </html>

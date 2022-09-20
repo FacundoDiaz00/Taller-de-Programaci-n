@@ -3,10 +3,13 @@
 # ATTRIBUTOS QUE PRECISA LA PÁGINA
 
 - List<String> departamentos
+- List<DTActividadTuristica> actividades (ya deben estar filtradas)
+- List<DTPaquete> paquetes (ya deben estar filtradas)
 
  --%>
 
 
+<%@page import="logica.datatypes.DTActividadTuristica"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -102,6 +105,31 @@
 
             <div class="card" id="contenedor-actividades-turisticas">
                 <h2 class="card-title">Actividades</h2>
+                
+                	<% 
+					List<DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
+					
+					for(DTActividadTuristica actividad: actividades){
+						%>
+							<div class="card mb-3" style="max-width: 800px;">
+			                    <div class="row g-0">
+			                        <div class="col-md-4 img-contain">
+			                            <img src="${pageContext.request.contextPath}/img/actividad1.png" class="img-fluid rounded-start">
+			                        </div>
+			                        <div class="col-md-8">
+			                            <div class="card-body">
+			                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
+			                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
+			                                <div class="botonera">
+			                                    <a href="ConsultaActividadServlet?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver mas</a>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+						
+					<% } %>
+                
                 <div class="card mb-3" style="max-width: 800px;">
                     <div class="row g-0">
                         <div class="col-md-4 img-contain">
@@ -112,7 +140,7 @@
                                 <h5 class="card-title">Degusta</h5>
                                 <p class="card-text descripcion-actividad">Festival gastronómico de productos locales en Rocha</p>
                                 <div class="botonera">
-                                    <a href="consulta_actividad_turistica.html" class="btn btn-primary">Ver mas</a>
+                                    <a href="ConsultaActividadServlet?id=Degusta" class="btn btn-primary">Ver mas</a>
                                 </div>
                             </div>
                         </div>
