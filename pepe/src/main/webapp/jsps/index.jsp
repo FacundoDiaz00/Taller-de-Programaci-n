@@ -7,6 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%@ page import="java.util.List" %>
+
+<% 
+List<String> deps = (List<String>) request.getAttribute("departamentos");
+
+for(String dep: deps){
+	%>
+	<div class="dep">
+		<%= dep %>
+	</div>		
+<% } %>
+
 HOLA
 </body>
 </html>

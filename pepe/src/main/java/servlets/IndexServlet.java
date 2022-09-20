@@ -29,13 +29,17 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 * response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
 		} catch (TurismoUyException e) {
 			e.printStackTrace();
 		}
+		var departamentos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+
+		req.setAttribute("departamentos", departamentos);
+
+		req.getRequestDispatcher("/jsps/index.jsp").forward(req, resp);
 	}
 
 	/**
