@@ -104,8 +104,9 @@ class ControladorActividadTuristicaTest {
 	}
 
 	// No es un test en sí
-	static void generarSalidas(int cant, String idTest) throws SalidaYaRegistradaException,
-			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+	static void generarSalidas(int cant, String idTest)
+			throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
+			FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
 
@@ -340,7 +341,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testObtenerIdSalidasTuristicas() {
+	public void testObtenerIdSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy {
 		assertTrue(contrActTur != null);
 
 		String idTest = "testObtenerIdSalidasTuristicas";
@@ -765,7 +766,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testAltaSalidaTuristicaRepetida() {
+	public void testAltaSalidaTuristicaRepetida() throws ObjetoNoExisteEnTurismoUy {
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 2; i++) {

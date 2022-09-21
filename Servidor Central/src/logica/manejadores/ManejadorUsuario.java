@@ -56,8 +56,13 @@ public class ManejadorUsuario {
 		}
 	}
 
-	public Usuario getUsuarioPorCorreo(String correo) {
-		return usuariosPorCorreo.get(correo);
+	public Usuario getUsuarioPorCorreo(String correo) throws ObjetoNoExisteEnTurismoUy {
+		if (usuariosPorCorreo.containsKey(correo))
+			return usuariosPorCorreo.get(correo);
+		else {
+			throw new ObjetoNoExisteEnTurismoUy(Usuario.class);
+		}
+
 	}
 
 	public boolean existeUsuario(String nickname, String correo) {

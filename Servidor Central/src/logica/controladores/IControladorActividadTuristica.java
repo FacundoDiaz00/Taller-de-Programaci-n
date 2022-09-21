@@ -76,8 +76,9 @@ public interface IControladorActividadTuristica {
 	 * 
 	 * @param nombreAct
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct);
+	DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) throws ObjetoNoExisteEnTurismoUy;
 
 	List<DTActividadTuristica> obtenerDTActividadesTuristicas();
 
@@ -99,8 +100,9 @@ public interface IControladorActividadTuristica {
 	 * 
 	 * @param nombreActTuri identificador de la actividad turistica
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri);
+	List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) throws ObjetoNoExisteEnTurismoUy;
 
 	// Versión web
 	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, String nombrePaquete)
@@ -124,18 +126,21 @@ public interface IControladorActividadTuristica {
 	 * @throws SalidaYaRegistradaException
 	 * @throws FechaAltaActividadPosteriorAFechaAltaSalidaException
 	 * @throws FechaAltaSalidaPosteriorAFechaSalidaException
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
 	void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida, LocalDate fechaAlta,
-			String lugar, int cantMaxTur, Imagen img) throws SalidaYaRegistradaException,
-			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException;
+			String lugar, int cantMaxTur, Imagen img)
+			throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
+			FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Devuelve los nombres de todas las salidas registradas en el sistema.
 	 * 
 	 * @param act
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	List<String> obtenerIdSalidasTuristicas(String act);
+	List<String> obtenerIdSalidasTuristicas(String act) throws ObjetoNoExisteEnTurismoUy;
 
 	List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista);
 

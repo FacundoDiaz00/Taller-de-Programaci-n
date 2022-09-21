@@ -5,15 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.Imagen;
 import logica.entidades.ActividadTuristica;
+import logica.entidades.Compra;
 import logica.entidades.Paquete;
+import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorPaquete;
+import logica.manejadores.ManejadorUsuario;
 
 /**
  * @author Equipo taller prog 16
@@ -37,8 +41,16 @@ public class ControladorPaquete implements IControladorPaquete {
 		manejadosPaq.addPaquete(paq);
 	}
 
-	public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas) {
-		// TODO
+	public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
+			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException {
+		Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
+		Paquete paquete = ManejadorPaquete.getInstancia().getPaquete(nombrePaquete);
+		if (turista.existeCompra(nombrePaquete)) {
+			throw new CompraYaRegistradaException("Se intentó comprar dos veces el mismo paquete");
+		}
+		Compra compra = new Compra(paquete, cantTuristas);
+		turista.asociarCompra(compra);
+		paquete.asociarCompra(compra);
 	}
 
 	@Override
@@ -51,14 +63,16 @@ public class ControladorPaquete implements IControladorPaquete {
 		return dtsPacks;
 	}
 
-	public DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) {
-		// TODO
-		return null;
+	public DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) throws ObjetoNoExisteEnTurismoUy {
+		return ManejadorPaquete.getInstancia().getPaquete(nombrePaquete).obtenerDTPaqueteDetalle();
 	}
 
 	public List<DTPaquete> obtenerDTPaquetes() {
-		// TODO
-		return null;
+		List<DTPaquete> ret = new ArrayList<DTPaquete>();
+
+		ManejadorPaquete.getInstancia().getPaquetes().forEach((Paquete p) -> ret.add(p.obtenerDTPaquete()));
+
+		return ret;
 	}
 
 	@Override
@@ -93,7 +107,7 @@ public class ControladorPaquete implements IControladorPaquete {
 
 	@Override
 	public void agregarActividadAPaquete(String nombreAct, String nombrePaq)
-			throws ActividadTuristicaYaRegistradaException {
+			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 		// TODO: mirar DCOM
 
 		ManejadorPaquete manejadorPaq = ManejadorPaquete.getInstancia();
@@ -111,8 +125,14 @@ public class ControladorPaquete implements IControladorPaquete {
 
 	@Override
 	public List<String> obtenerIdPaquetesSinComprar() {
-		// TODO
-		return null;
+		List<String> ret = new ArrayList<String>();
+
+		ManejadorPaquete.getInstancia().getPaquetes().forEach((Paquete p) -> {
+			if (!p.estaComprado())
+				ret.add(p.getNombre());
+		});
+
+		return ret;
 	}
 
 }

@@ -1,7 +1,9 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import logica.datatypes.DTCompra;
@@ -18,6 +20,7 @@ public class Compra {
 
 	private Paquete paquete;
 	private Set<Inscripcion> inscripciones;
+	private Map<String, Integer> usosRestantesPorActividad;
 
 	// ToDo Falta el campo calculado costoTotal
 
@@ -27,6 +30,27 @@ public class Compra {
 		this.vencimiento = vencimiento;
 		this.paquete = paquete;
 		this.inscripciones = new HashSet<>();
+
+		calcularMapUsosRestantes();
+	}
+
+	public Compra(Paquete paquete, int cantTuristas) {
+		this.paquete = paquete;
+		this.cantidadTuristas = cantTuristas;
+		this.inscripciones = new HashSet<>();
+		this.fechaCompra = LocalDate.now();
+
+		// TODO verificar si la validez es en días
+		this.vencimiento = LocalDate.now().plusDays(paquete.getValidez());
+
+		calcularMapUsosRestantes();
+	}
+
+	private void calcularMapUsosRestantes() {
+		this.usosRestantesPorActividad = new HashMap<>();
+		for (var actividad : paquete.obtenerIdActividadesIncluidas()) {
+			usosRestantesPorActividad.put(actividad, this.cantidadTuristas);
+		}
 	}
 
 	public DTCompra obtenerDTCompra() {
@@ -73,5 +97,9 @@ public class Compra {
 
 	public void setInscripciones(Set<Inscripcion> inscripciones) {
 		this.inscripciones = inscripciones;
+	}
+
+	public boolean correspondeAPaquete(String nombrePaquete) {
+		return paquete.getNombre().equals(nombrePaquete);
 	}
 }

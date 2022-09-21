@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,30 +18,21 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
-import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTPaqueteDetalles;
 
 class ControladorPaqueteTest {
 	private static IControladorPaquete contrPaquete;
-	private static IControladorActividadTuristica contrActTur;
 
 	private static List<String> muestraCategorias;
 
-	// TODO: modificar todas las fechas
-	// puestas a mano por alguna de
-	// estas
 	private static LocalDate localDateNow;
-	private static LocalDateTime localDateTimeNow;
 	private static LocalDate localDateVieja;
-	private static LocalDate localDateMuyVieja;
-	private static LocalDate localDateFuturo;
 
 	@BeforeAll
 	static void preparacionPrevia() {
 		contrPaquete = Fabrica.getInstancia().getIControladorPaquete();
-		contrActTur = Fabrica.getInstancia().getIControladorActividadTuristica();
 
 		try {
 			/*
@@ -60,10 +50,7 @@ class ControladorPaqueteTest {
 		muestraCategorias.add("TRANQUILO");
 
 		localDateNow = LocalDate.now();
-		localDateTimeNow = LocalDateTime.now();
 		localDateVieja = LocalDate.of(2022, 1, 1);
-		localDateMuyVieja = LocalDate.of(2010, 1, 1);
-		localDateFuturo = LocalDate.of(2026, 1, 1);
 	}
 
 	// No es un test en sí.

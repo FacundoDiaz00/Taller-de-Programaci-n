@@ -107,9 +107,11 @@ public class ControladorUsuario implements IControladorUsuario {
 		return usuario.obtenerDTUsuario();
 	}
 
+	@Override
 	public List<DTUsuario> obtenerDTUsuarios() {
-		// TODO
-		return null;
+		var ret = new ArrayList<DTUsuario>();
+		ManejadorUsuario.getInstancia().getUsuarios().forEach((Usuario u) -> ret.add(u.obtenerDTUsuario()));
+		return ret;
 	}
 
 	@Override

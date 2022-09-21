@@ -301,7 +301,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 				limpiarSelecciones();
 				JOptionPane.showMessageDialog(null, "Se agregó la actividad al paquete",
 						"Registro de asociación actividad a paquete", JOptionPane.INFORMATION_MESSAGE);
-			} catch (ActividadTuristicaYaRegistradaException exception) {
+			} catch (ActividadTuristicaYaRegistradaException | ObjetoNoExisteEnTurismoUy exception) {
 				JOptionPane.showMessageDialog(null,
 						"Se debe seleccionar una actividad que no esté ya dentro del paquete", "Error",
 						JOptionPane.ERROR_MESSAGE);

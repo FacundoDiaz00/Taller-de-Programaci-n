@@ -319,6 +319,9 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			JOptionPane.showMessageDialog(null,
 					"Error. La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.",
 					"Registro de Salida", JOptionPane.WARNING_MESSAGE);
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

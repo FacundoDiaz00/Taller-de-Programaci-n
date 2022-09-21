@@ -245,27 +245,33 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 	private void seSeleccionoUnaActividad() {
 		String seleccion = seleccionActividad;
 		mostrarOtrasConsultas = false;
-		DTActividadTuristicaDetalle actividad = contrAct.obtenerDTActividadTuristicaDetalle(seleccion);
 
-		nombre.setText(actividad.getNombre());
-		ciudad.setText(actividad.getCuidad());
-		costo.setText(String.valueOf(actividad.getCostoPorTurista()));
-		descripcion.setText(actividad.getDescripcion());
-		fechaAlta.setText(actividad.getFechaAlta().toString());
-		proveedor.setText(actividad.getNicknameProveedor());
-		duracion.setText(String.valueOf(actividad.getDuracion()));
+		try {
+			DTActividadTuristicaDetalle actividad = contrAct.obtenerDTActividadTuristicaDetalle(seleccion);
 
-		comboSalidas.removeAllItems();
-		comboPaquetes.removeAllItems();
+			nombre.setText(actividad.getNombre());
+			ciudad.setText(actividad.getCuidad());
+			costo.setText(String.valueOf(actividad.getCostoPorTurista()));
+			descripcion.setText(actividad.getDescripcion());
+			fechaAlta.setText(actividad.getFechaAlta().toString());
+			proveedor.setText(actividad.getNicknameProveedor());
+			duracion.setText(String.valueOf(actividad.getDuracion()));
 
-		List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
-		for (DTSalidaTuristica salida : salidas) {
-			comboSalidas.addItem(salida.getNombre());
-		}
+			comboSalidas.removeAllItems();
+			comboPaquetes.removeAllItems();
 
-		List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
-		for (DTPaquete paquete : paquetes) {
-			comboPaquetes.addItem(paquete.getNombre());
+			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
+			for (DTSalidaTuristica salida : salidas) {
+				comboSalidas.addItem(salida.getNombre());
+			}
+
+			List<DTPaquete> paquetes = new ArrayList<DTPaquete>(actividad.getPaquetes().values());
+			for (DTPaquete paquete : paquetes) {
+				comboPaquetes.addItem(paquete.getNombre());
+			}
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		SwingUtilities.invokeLater(() -> mostrarOtrasConsultas = true);

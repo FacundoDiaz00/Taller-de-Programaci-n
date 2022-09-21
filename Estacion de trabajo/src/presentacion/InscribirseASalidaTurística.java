@@ -497,19 +497,25 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			DefaultListModel<String> listModel = new DefaultListModel<>();
 			salidaList.setModel(listModel);
 		} else {
-			List<DTSalidaTuristica> salidasLists = contrActTur.obtenerDTSalidasTuristicas(act);
-			dtSalidas = new HashMap<>();
-			for (DTSalidaTuristica salidaDtIter : salidasLists) {
-				dtSalidas.put(salidaDtIter.getNombre(), salidaDtIter);
-			}
-			DefaultListModel<String> listModel = new DefaultListModel<>();
-			for (DTSalidaTuristica ss : dtSalidas.values()) {
-				listModel.addElement(ss.getNombre());
-			}
-			salidaList.setModel(listModel);
+			List<DTSalidaTuristica> salidasLists;
+			try {
+				salidasLists = contrActTur.obtenerDTSalidasTuristicas(act);
+				dtSalidas = new HashMap<>();
+				for (DTSalidaTuristica salidaDtIter : salidasLists) {
+					dtSalidas.put(salidaDtIter.getNombre(), salidaDtIter);
+				}
+				DefaultListModel<String> listModel = new DefaultListModel<>();
+				for (DTSalidaTuristica ss : dtSalidas.values()) {
+					listModel.addElement(ss.getNombre());
+				}
+				salidaList.setModel(listModel);
 
-			if (dtSalidas.size() > 0) {
-				salidaList.setSelectedIndex(0);
+				if (dtSalidas.size() > 0) {
+					salidaList.setSelectedIndex(0);
+				}
+			} catch (ObjetoNoExisteEnTurismoUy e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 

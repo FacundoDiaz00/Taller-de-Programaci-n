@@ -154,4 +154,12 @@ public class Paquete {
 		ret *= 1 - this.descuento / 100.0f;
 		return ret;
 	}
+
+	public boolean estaComprado() {
+		return compras.size() != 0;
+	}
+
+	public void asociarCompra(Compra compra) {
+		compras.add(compra);
+	}
 }

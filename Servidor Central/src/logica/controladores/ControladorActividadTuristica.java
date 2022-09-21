@@ -100,7 +100,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return ManejadorCategoria.getInstancia().getCategoria(categoria).obtenerIdActividadesTuristicasConfirmadas();
 	}
 
-	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) {
+	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct)
+			throws ObjetoNoExisteEnTurismoUy {
 		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
 		return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
 	}
@@ -115,7 +116,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	@Override
-	public List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) {
+	public List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) throws ObjetoNoExisteEnTurismoUy {
 		ArrayList<DTSalidaTuristica> dtsSal = new ArrayList<>();
 
 		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
@@ -163,8 +164,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,
-			LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img) throws SalidaYaRegistradaException,
-			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
+			LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img)
+			throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
+			FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy {
 		if (fechaAlta == null)
 			fechaAlta = LocalDate.now();
 
@@ -190,7 +192,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 	}
 
-	public List<String> obtenerIdSalidasTuristicas(String act) {
+	public List<String> obtenerIdSalidasTuristicas(String act) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
 		ActividadTuristica actTuristica = MAT.getActividad(act);
 		Map<String, SalidaTuristica> salidas = actTuristica.getSalidas();

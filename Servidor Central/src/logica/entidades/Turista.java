@@ -119,4 +119,16 @@ public class Turista extends Usuario {
 		return new DTTuristaDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, nacionalidad,
 				inscripciones_salidas, compras, inscripciones);
 	}
+
+	public boolean existeCompra(String nombrePaquete) {
+		for (var compra : compras) {
+			if (compra.correspondeAPaquete(nombrePaquete))
+				return true;
+		}
+		return false;
+	}
+
+	public void asociarCompra(Compra compra) {
+		compras.add(compra);
+	}
 }

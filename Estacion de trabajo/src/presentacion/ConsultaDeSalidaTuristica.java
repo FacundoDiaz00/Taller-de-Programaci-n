@@ -290,9 +290,15 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			public void actionPerformed(ActionEvent event) {
 				// se cargan identificadores de salidas
 				String act = comboActividades.getSelectedItem().toString();
-				List<String> salidas = icat.obtenerIdSalidasTuristicas(act);
-				limpiarFormularioSinDepartamentoNiActividad();
-				comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
+				List<String> salidas;
+				try {
+					salidas = icat.obtenerIdSalidasTuristicas(act);
+					limpiarFormularioSinDepartamentoNiActividad();
+					comboSalidas.setModel(new DefaultComboBoxModel(salidas.toArray()));
+				} catch (ObjetoNoExisteEnTurismoUy e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 

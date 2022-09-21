@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import logica.datatypes.DTPaquete;
@@ -29,7 +30,8 @@ public interface IControladorPaquete {
 	void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR,
 			Imagen img) throws PaqueteYaRegistradoException;
 
-	void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas);
+	void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
+			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException;
 
 	/**
 	 * Debuelve de los nombres de todos los paquetes registrados en el sistema
@@ -63,8 +65,10 @@ public interface IControladorPaquete {
 	 * @param nombreAct
 	 * @param nombrePaq
 	 * @throws ActividadTuristicaYaRegistradaException
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	void agregarActividadAPaquete(String nombreAct, String nombrePaq) throws ActividadTuristicaYaRegistradaException;
+	void agregarActividadAPaquete(String nombreAct, String nombrePaq)
+			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Devuelve todos los DTPaqueteDetalles de todos los paquetes registrados en
@@ -77,5 +81,5 @@ public interface IControladorPaquete {
 
 	List<DTPaquete> obtenerDTPaquetes();
 
-	DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete);
+	DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) throws ObjetoNoExisteEnTurismoUy;
 }
