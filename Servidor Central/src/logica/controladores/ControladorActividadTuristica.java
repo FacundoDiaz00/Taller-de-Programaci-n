@@ -22,12 +22,14 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Departamento;
 import logica.entidades.Inscripcion;
 import logica.entidades.SalidaTuristica;
 import logica.entidades.Turista;
+import logica.entidades.estadoActividadTuristica;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorDepartamento;
 import logica.manejadores.ManejadorSalidaTuristica;
@@ -225,4 +227,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return insc.obtenerDTInscripcion();
 	}
 
+	public List<String> obtenerIdActividadesTuristicasAgregadas(){
+		List<String> idActividades = new ArrayList<>();
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+
+		for (ActividadTuristica act : MAT.getActividades()) {
+			if(act.getEstado() == EstadoActividadTuristica.AGREGADA)
+			idActividades.add(act.getNombre());
+		}
+		return idActividades;
+	}
 }

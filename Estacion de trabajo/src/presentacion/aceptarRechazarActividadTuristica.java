@@ -67,35 +67,6 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 				actualizarActTur();
 			}
 		});
-		actividadTuristica.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (actividadTuristica.getSelectedItem() != null) {
-					nombre.setEnabled(true);
-					dia.setEnabled(true);
-					mes.setEnabled(true);
-					anio.setEnabled(true);
-					hora.setEnabled(true);
-					lugar.setEnabled(true);
-					maxTuristas.setEnabled(true);
-					btnAceptar.setEnabled(true);
-					diar.setEnabled(true);
-					mesr.setEnabled(true);
-					anior.setEnabled(true);
-
-				}
-			}
-		});
-		actividadTuristica.setEnabled(false);
-		actividadTuristica.setBounds(197, 25, 242, 32);
-
-		getContentPane().add(actividadTuristica);
-		List<Integer> aux = new ArrayList<Integer>();
-		for (int i = 0; i <= 23; i++) {
-			aux.add(i);
-		}
-		for (int i = 0; i < aux.size(); i++) {
-			hora.addItem(aux.get(i));
-		}
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -126,7 +97,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 	}
 
 	private void actualizarActTur() {
-		List<String> acts = controladorAct.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
+		List<String> acts = controladorAct.obtenerIdActividadesTuristicasAgregadas();
 		actividadTuristica.setModel(new DefaultComboBoxModel<>(acts.toArray()));
 		if (!acts.isEmpty()) {
 			actividadTuristica.setSelectedIndex(0);
@@ -134,18 +105,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 	}
 
 	private void limpiarForm() {
-		nombre.setText("");
-		departamento.setModel(new DefaultComboBoxModel<>(new String[0]));
-		actividadTuristica.setModel(new DefaultComboBoxModel<>(new String[0]));
-		dia.setValue(1);
-		mes.setValue(1);
-		anio.setValue(2022);
-		hora.setSelectedIndex(0);
-		lugar.setText("");
-		maxTuristas.setValue(1);
-		diar.setValue(1);
-		mesr.setValue(1);
-		anior.setValue(2022);
+
 
 	}
 }

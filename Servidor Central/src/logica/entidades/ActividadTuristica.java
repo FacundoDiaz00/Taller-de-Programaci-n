@@ -11,6 +11,7 @@ import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorDepartamento;
 
@@ -26,6 +27,7 @@ public class ActividadTuristica {
 	private float costoPorTurista;
 	private String cuidad;
 	private LocalDate fechaAlta;
+	private EstadoActividadTuristica estado;
 
 	private Map<String, Paquete> paquetes;
 	private Map<String, SalidaTuristica> salidas;
@@ -44,6 +46,7 @@ public class ActividadTuristica {
 		setPaquetes(new HashMap<>());
 		setSalidas(new HashMap<>());
 		setCategorias(new HashMap<>());
+		estado = EstadoActividadTuristica.AGREGADA;
 
 		// Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
@@ -163,6 +166,14 @@ public class ActividadTuristica {
 
 	public void setCategorias(Map<String, Categoria> categorias) {
 		this.categorias = categorias;
+	}
+	
+	public EstadoActividadTuristica getEstado(){
+		return estado;
+	}
+	
+	public void setEstado(EstadoActividadTuristica est){
+		estado = est;
 	}
 
 	public List<String> obtenerIdSalidasTuristicas() {

@@ -161,4 +161,6 @@ public interface IControladorActividadTuristica {
 	 */
 	DTInscripcion obtenerDTInscripcion(String nick, String nomSal);
 
+	List<String> obtenerIdActividadesTuristicasAgregadas();
+
 }
