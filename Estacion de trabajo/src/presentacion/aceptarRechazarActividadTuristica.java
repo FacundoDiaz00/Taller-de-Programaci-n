@@ -100,6 +100,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		btnAceptar.setEnabled(false);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnAceptar.setBounds(309, 83, 117, 25);
