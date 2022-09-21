@@ -48,8 +48,8 @@ public class ManejadorCategoria {
 			throw new ObjetoNoExisteEnTurismoUy(Categoria.class);
 	}
 
-	public boolean exists(String nomDep) {
-		return categorias.containsKey(nomDep);
+	public boolean exists(String nomCat) {
+		return categorias.containsKey(nomCat);
 	}
 
 }
