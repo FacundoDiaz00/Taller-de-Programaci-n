@@ -32,6 +32,8 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 	
 	private IControladorActividadTuristica controladorAct;
 	private JComboBox actividadTuristica;
+	private JButton aceptar;
+	private JButton rechazar;
 
 	/**
 	 * Create the frame.
@@ -56,6 +58,8 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		getContentPane().add(lblActividadTurisica);
 
 		actividadTuristica = new JComboBox();
+		actividadTuristica.setBounds(212, 25, 214, 32);
+		getContentPane().add(actividadTuristica);
 		actividadTuristica.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent event) {
 			}
@@ -67,7 +71,16 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 				actualizarActTur();
 			}
 		});
-
+		
+		actividadTuristica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (actividadTuristica.getSelectedItem() != null) {
+					aceptar.setEnabled(true);
+					rechazar.setEnabled(true);
+				}
+			}
+		});
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -83,6 +96,8 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		getContentPane().add(lblenEstadoagregada);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		aceptar = btnAceptar;
+		btnAceptar.setEnabled(false);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -91,6 +106,8 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		getContentPane().add(btnAceptar);
 		
 		JButton btnRechazar = new JButton("Rechazar");
+		rechazar = btnRechazar;
+		btnRechazar.setEnabled(false);
 		btnRechazar.setBounds(167, 83, 117, 25);
 		getContentPane().add(btnRechazar);
 
@@ -105,7 +122,9 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 	}
 
 	private void limpiarForm() {
-
+		actividadTuristica.setModel(new DefaultComboBoxModel<>(new String[0]));
+		aceptar.setEnabled(false);
+		rechazar.setEnabled(false);
 
 	}
 }
