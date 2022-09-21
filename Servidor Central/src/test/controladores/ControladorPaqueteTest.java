@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
@@ -262,8 +263,8 @@ class ControladorPaqueteTest {
 				float costo = (float) 10.85;
 				String ciudad = "Ciudad";
 
-				controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad,
-						localDateNow, null, muestraCategorias);
+				controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion,
+						costo, ciudad, localDateNow, null, muestraCategorias);
 
 				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 			}
@@ -297,8 +298,8 @@ class ControladorPaqueteTest {
 				float costo = (float) 10.85;
 				String ciudad = "Ciudad";
 
-				controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo, ciudad,
-						localDateNow, null, muestraCategorias);
+				controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion,
+						costo, ciudad, localDateNow, null, muestraCategorias);
 
 				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 
@@ -312,7 +313,7 @@ class ControladorPaqueteTest {
 	}
 
 	@Test
-	final void testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete() {
+	final void testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete() throws ObjetoNoExisteEnTurismoUy {
 		String idTest = "testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete";
 
 		String nombreDep = "Departamento " + idTest + " i=" + 0;
@@ -337,8 +338,8 @@ class ControladorPaqueteTest {
 				float costo = (float) 10.85;
 				String ciudad = "Ciudad";
 
-				controladorAct.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion, costo,
-						ciudad, localDateNow, null, muestraCategorias);
+				controladorAct.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion,
+						costo, ciudad, localDateNow, null, muestraCategorias);
 
 				// 10 actividades de cada provedor en un pquete
 				if (i % 2 == 0) {

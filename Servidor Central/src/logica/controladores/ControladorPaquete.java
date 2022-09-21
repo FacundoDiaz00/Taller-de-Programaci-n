@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
@@ -67,7 +68,8 @@ public class ControladorPaquete implements IControladorPaquete {
 	}
 
 	@Override
-	public List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq) {
+	public List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq)
+			throws ObjetoNoExisteEnTurismoUy {
 		var cat = new ControladorActividadTuristica();
 
 		// TODO: filtrar las no aceptadas

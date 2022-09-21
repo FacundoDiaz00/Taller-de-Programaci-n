@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.entidades.Departamento;
 
 /**
@@ -40,8 +41,11 @@ public class ManejadorDepartamento {
 		departamentos.put(departamento.getNombre(), departamento);
 	}
 
-	public Departamento getDepartamento(String nombre) {
-		return departamentos.get(nombre);
+	public Departamento getDepartamento(String nombre) throws ObjetoNoExisteEnTurismoUy {
+		if (departamentos.containsKey(nombre))
+			return departamentos.get(nombre);
+		else
+			throw new ObjetoNoExisteEnTurismoUy(Departamento.class);
 	}
 
 	public boolean exists(String nomDep) {

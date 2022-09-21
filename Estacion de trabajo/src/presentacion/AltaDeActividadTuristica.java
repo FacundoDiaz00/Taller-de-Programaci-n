@@ -21,11 +21,12 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 
 public class AltaDeActividadTuristica extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private JComboBox<String> comboProveedores;
@@ -232,7 +233,12 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 				return;
 			}
 
-			contrAct.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias);
+			try {
+				contrAct.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias);
+			} catch (ObjetoNoExisteEnTurismoUy e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			limpiarFormulario();
 			setVisible(false);
 			JOptionPane.showMessageDialog(null, "Se ha dado de alta la Actividad Turística con éxito", "Éxito",

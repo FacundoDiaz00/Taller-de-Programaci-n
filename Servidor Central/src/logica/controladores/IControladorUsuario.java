@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
@@ -39,8 +40,9 @@ public interface IControladorUsuario {
 	 * 
 	 * @param nickname
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTUsuario obtenerDTUsuario(String nickname);
+	DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy;
 
 	List<DTUsuario> obtenerDTUsuarios();
 
@@ -49,10 +51,11 @@ public interface IControladorUsuario {
 	 * 
 	 * @param nickname
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTUsuario obtenerDTUsuarioDetalle(String nickname);
+	DTUsuario obtenerDTUsuarioDetalle(String nickname) throws ObjetoNoExisteEnTurismoUy;
 
-	DTUsuario obtenerDTUsuarioDetallePrivado(String nickname);
+	DTUsuario obtenerDTUsuarioDetallePrivado(String nickname) throws ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Crea un Turista con los parámetros enviados.
@@ -89,7 +92,8 @@ public interface IControladorUsuario {
 	 * 
 	 * @param datosNuevos
 	 * @throws ModificacionUsuarioNoPermitida
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida;
+	void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
 
 }

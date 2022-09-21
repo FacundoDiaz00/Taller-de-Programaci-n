@@ -1,26 +1,11 @@
 package logica.controladores;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.PaqueteYaRegistradoException;
-import excepciones.SalidaYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
-import excepciones.UsuarioYaRegistradoException;
+import excepciones.TurismoUyException;
 
 /**
  * @author Equipo taller prog 16
  */
 
 public interface IControladorMaestro {
-	void generarDatosDePrueba() throws DeparamentoYaRegistradoException, UsuarioYaRegistradoException,
-			ActividadTuristicaYaRegistradaException, SalidaYaRegistradaException,
-			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException,
-			InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
-			PaqueteYaRegistradoException;
+	void generarDatosDePrueba() throws TurismoUyException;
 }

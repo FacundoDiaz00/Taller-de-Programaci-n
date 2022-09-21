@@ -11,6 +11,7 @@ import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import logica.datatypes.DTActividadTuristica;
@@ -62,10 +63,12 @@ public interface IControladorActividadTuristica {
 	 * @param ciudad
 	 * @param fechaAlta
 	 * @throws ActividadTuristicaYaRegistradaException
+	 * @throws DeparamentoNoRegistradoException
+	 * @throws CategoriaNoRegistradaException
 	 */
 	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion,
 			int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img, List<String> categorias)
-			throws ActividadTuristicaYaRegistradaException;
+			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Obtiene los detalles de la actividad turística identificada por
@@ -83,10 +86,12 @@ public interface IControladorActividadTuristica {
 	 * 
 	 * @param departamento
 	 * @return
+	 * @throws DeparamentoNoRegistradoException
 	 */
-	List<String> obtenerIdActividadesTuristicas(String departamento);
+	List<String> obtenerIdActividadesTuristicas(String departamento) throws ObjetoNoExisteEnTurismoUy;
 
-	List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria);
+	List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria)
+			throws ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Devueve los DtSalidasTuristas de todas las salidas asociadas con la
@@ -105,7 +110,8 @@ public interface IControladorActividadTuristica {
 	// Versión estacion de trabajo
 	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
 			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException;
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
+			ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 *
@@ -139,8 +145,9 @@ public interface IControladorActividadTuristica {
 	 * 
 	 * @param nomSal
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal);
+	DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) throws ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Devuelve los detalles de los datos de la salida identificada por el
@@ -148,8 +155,9 @@ public interface IControladorActividadTuristica {
 	 * 
 	 * @param nomSal
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal);
+	DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) throws ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Devuelve los datos de la inscripción que tiene un link entre la salida
@@ -158,7 +166,8 @@ public interface IControladorActividadTuristica {
 	 * @param nick
 	 * @param nomSal
 	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTInscripcion obtenerDTInscripcion(String nick, String nomSal);
+	DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy;
 
 }

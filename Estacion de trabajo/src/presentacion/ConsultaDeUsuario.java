@@ -17,15 +17,16 @@ import javax.swing.JTextArea;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedorDetalle;
 import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
 
 public class ConsultaDeUsuario extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Principal principal;
 	private IControladorUsuario contrUsuario;
 
@@ -296,112 +297,118 @@ public class ConsultaDeUsuario extends JInternalFrame {
 		String seleccion = seleccionNickname;
 
 		try {
-			DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(seleccion);
+			DTUsuario usr;
+			try {
+				usr = contrUsuario.obtenerDTUsuarioDetalle(seleccion);
 
-			txtNickname.setText(usr.getNickname());
-			txtNombre.setText(usr.getNombre());
-			txtApellido.setText(usr.getApellido());
-			txtCorreo.setText(usr.getCorreo());
-			txtFechaDeNacimiento.setText(usr.getFechaNac().toString());
+				txtNickname.setText(usr.getNickname());
+				txtNombre.setText(usr.getNombre());
+				txtApellido.setText(usr.getApellido());
+				txtCorreo.setText(usr.getCorreo());
+				txtFechaDeNacimiento.setText(usr.getFechaNac().toString());
 
-			if (usr instanceof DTTuristaDetalle) {
-				DTTuristaDetalle tur = (DTTuristaDetalle) usr;
+				if (usr instanceof DTTuristaDetalle) {
+					DTTuristaDetalle tur = (DTTuristaDetalle) usr;
 
-				casos.removeAll();
-				casos.add(turistaPanel);
+					casos.removeAll();
+					casos.add(turistaPanel);
 
-				txtTipo.setText("Turista");
-				txtNacionalidad.setText(tur.getNacionalidad());
+					txtTipo.setText("Turista");
+					txtNacionalidad.setText(tur.getNacionalidad());
 
-				panelSalidasTurista.removeAll();
-				var inscripciones = tur.getInscripciones();
+					panelSalidasTurista.removeAll();
+					var inscripciones = tur.getInscripciones();
 
-				if (inscripciones.isEmpty()) {
-					lblSalidasTurista.setVisible(false);
-					panelSalidasTurista.setVisible(false);
-				} else {
-					lblSalidasTurista.setVisible(true);
-					panelSalidasTurista.setVisible(true);
-				}
-
-				for (var insc : inscripciones) {
-					JTextArea txt = new JTextArea();
-					txt.setText(insc);
-					txt.setEditable(false);
-					txt.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent event) {
-							ejecutarCasoConsultaSalidaTuristca(insc);
-						}
-					});
-
-					panelSalidasTurista.add(txt);
-				}
-
-				panelSalidasTurista.add(panelSalidasTurista);
-			} else if (usr instanceof DTProveedorDetalle) {
-				DTProveedorDetalle prov = (DTProveedorDetalle) usr;
-
-				casos.removeAll();
-				casos.add(proveedorPanel);
-
-				txtTipo.setText("Proveedor");
-				txtDescripcion.setText(prov.getDescrpicionGeneral());
-				txtURL.setText(prov.getLink());
-
-				panelActividadesYSalidasProveedor.removeAll();
-
-				var actividades = prov.getActividades();
-
-				if (actividades.size() == 0) {
-					lblActividadesProv.setVisible(false);
-					panelActividadesYSalidasProveedor.setVisible(false);
-				} else {
-					lblActividadesProv.setVisible(true);
-					panelActividadesYSalidasProveedor.setVisible(true);
-				}
-
-				for (var actividad : actividades) {
-
-					JPanel panel = new JPanel();
-					panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-					JLabel titulo = new JLabel("Actividad: ");
-					panel.add(titulo);
-
-					JTextArea txt = new JTextArea();
-					txt.setText(actividad.getNombre());
-					txt.setEditable(false);
-					txt.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent event) {
-							ejecutarCasoConsultaActividadTuristca(actividad.getNombre());
-						}
-					});
-
-					panel.add(txt);
-
-					var salidas_de_la_actividad = actividad.getSalidas();
-
-					for (var salida : salidas_de_la_actividad.values()) {
-						JTextArea txt_sal = new JTextArea();
-						txt_sal.setText("   Salida: " + salida.getNombre());
-						txt_sal.setEditable(false);
-						txt_sal.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent event) {
-								ejecutarCasoConsultaSalidaTuristca(salida.getNombre());
-							}
-						});
-						panel.add(txt_sal);
+					if (inscripciones.isEmpty()) {
+						lblSalidasTurista.setVisible(false);
+						panelSalidasTurista.setVisible(false);
+					} else {
+						lblSalidasTurista.setVisible(true);
+						panelSalidasTurista.setVisible(true);
 					}
 
-					panelActividadesYSalidasProveedor.add(panel);
-				}
-			} else {
-				throw new IllegalArgumentException("Se devolvió un tipo de DTUsuario no registado");
-			}
+					for (var insc : inscripciones) {
+						JTextArea txt = new JTextArea();
+						txt.setText(insc);
+						txt.setEditable(false);
+						txt.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent event) {
+								ejecutarCasoConsultaSalidaTuristca(insc);
+							}
+						});
 
+						panelSalidasTurista.add(txt);
+					}
+
+					panelSalidasTurista.add(panelSalidasTurista);
+				} else if (usr instanceof DTProveedorDetalle) {
+					DTProveedorDetalle prov = (DTProveedorDetalle) usr;
+
+					casos.removeAll();
+					casos.add(proveedorPanel);
+
+					txtTipo.setText("Proveedor");
+					txtDescripcion.setText(prov.getDescrpicionGeneral());
+					txtURL.setText(prov.getLink());
+
+					panelActividadesYSalidasProveedor.removeAll();
+
+					var actividades = prov.getActividades();
+
+					if (actividades.size() == 0) {
+						lblActividadesProv.setVisible(false);
+						panelActividadesYSalidasProveedor.setVisible(false);
+					} else {
+						lblActividadesProv.setVisible(true);
+						panelActividadesYSalidasProveedor.setVisible(true);
+					}
+
+					for (var actividad : actividades) {
+
+						JPanel panel = new JPanel();
+						panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+						JLabel titulo = new JLabel("Actividad: ");
+						panel.add(titulo);
+
+						JTextArea txt = new JTextArea();
+						txt.setText(actividad.getNombre());
+						txt.setEditable(false);
+						txt.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent event) {
+								ejecutarCasoConsultaActividadTuristca(actividad.getNombre());
+							}
+						});
+
+						panel.add(txt);
+
+						var salidas_de_la_actividad = actividad.getSalidas();
+
+						for (var salida : salidas_de_la_actividad.values()) {
+							JTextArea txt_sal = new JTextArea();
+							txt_sal.setText("   Salida: " + salida.getNombre());
+							txt_sal.setEditable(false);
+							txt_sal.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent event) {
+									ejecutarCasoConsultaSalidaTuristca(salida.getNombre());
+								}
+							});
+							panel.add(txt_sal);
+						}
+
+						panelActividadesYSalidasProveedor.add(panel);
+					}
+				} else {
+					throw new IllegalArgumentException("Se devolvió un tipo de DTUsuario no registado");
+				}
+
+			} catch (ObjetoNoExisteEnTurismoUy e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IllegalArgumentException ex) {
 			// Esta excepcion no debería ocurrir pero por las dudas la pongo
 

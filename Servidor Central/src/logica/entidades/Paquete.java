@@ -132,15 +132,26 @@ public class Paquete {
 		actividades.put(actividad.getNombre(), actividad);
 	}
 
-	void setImagen(Imagen img) {
+	public void setImagen(Imagen img) {
 		this.img = img;
 	}
 
-	void setCompras(List<Compra> compras) {
+	public void setCompras(List<Compra> compras) {
 		this.compras = compras;
 	}
 
-	void setCategorias(List<Categoria> cats) {
+	public void setCategorias(List<Categoria> cats) {
 		this.categorias = cats;
+	}
+
+	public float getCostoPorTurista() {
+		float ret = 0.0f;
+
+		for (var act : actividades.values()) {
+			ret += act.getCostoPorTurista();
+		}
+
+		ret *= 1 - this.descuento / 100.0f;
+		return ret;
 	}
 }

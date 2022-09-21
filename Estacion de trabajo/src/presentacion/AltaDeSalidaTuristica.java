@@ -23,13 +23,14 @@ import javax.swing.event.PopupMenuListener;
 
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.SalidaYaRegistradaException;
 import logica.controladores.IControladorActividadTuristica;
 
 public class AltaDeSalidaTuristica extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private IControladorActividadTuristica controladorAct;
 
 	private JSpinner dia;
@@ -284,10 +285,16 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 	}
 
 	private void actualizarActTur() {
-		List<String> acts = controladorAct.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
-		actividadTuristica.setModel(new DefaultComboBoxModel<>(acts.toArray()));
-		if (!acts.isEmpty()) {
-			actividadTuristica.setSelectedIndex(0);
+		List<String> acts;
+		try {
+			acts = controladorAct.obtenerIdActividadesTuristicas(departamento.getSelectedItem().toString());
+			actividadTuristica.setModel(new DefaultComboBoxModel<>(acts.toArray()));
+			if (!acts.isEmpty()) {
+				actividadTuristica.setSelectedIndex(0);
+			}
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -296,9 +303,8 @@ public class AltaDeSalidaTuristica extends JInternalFrame {
 			LocalDate fechaR = LocalDate.of((int) anior.getValue(), (int) mesr.getValue(), (int) diar.getValue());
 			LocalDateTime fecha = LocalDateTime.of((int) anio.getValue(), (int) mes.getValue(), (int) dia.getValue(),
 					(int) hora.getSelectedItem(), 0);
-			controladorAct.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(),
-					nombre.getText(), fecha, fechaR, lugar.getText(),
-					(int) maxTuristas.getValue(), null);
+			controladorAct.altaSalidaTuristica(actividadTuristica.getSelectedItem().toString(), nombre.getText(), fecha,
+					fechaR, lugar.getText(), (int) maxTuristas.getValue(), null);
 			JOptionPane.showMessageDialog(null, "Operacion realizada con exito.", "Registro de Salida",
 					JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);

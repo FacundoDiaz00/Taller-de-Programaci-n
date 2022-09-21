@@ -4,17 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.PaqueteYaRegistradoException;
-import excepciones.SalidaYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
-import excepciones.UsuarioYaRegistradoException;
+import excepciones.TurismoUyException;
 import logica.datatypes.Imagen;
 
 /**
@@ -22,12 +12,7 @@ import logica.datatypes.Imagen;
  */
 
 public class ControladorMaestro implements IControladorMaestro {
-	public void generarDatosDePrueba() throws DeparamentoYaRegistradoException, UsuarioYaRegistradoException,
-			ActividadTuristicaYaRegistradaException, SalidaYaRegistradaException,
-			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException,
-			InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
-			PaqueteYaRegistradoException {
+	public void generarDatosDePrueba() throws TurismoUyException {
 		IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
 		IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
 		IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();

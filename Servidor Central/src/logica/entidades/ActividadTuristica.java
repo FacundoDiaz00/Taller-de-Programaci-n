@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.ControladorUsuario;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.EstadoActividadTuristica;
+import logica.datatypes.Imagen;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
 
 /**
@@ -26,6 +30,8 @@ public class ActividadTuristica {
 	private float costoPorTurista;
 	private String cuidad;
 	private LocalDate fechaAlta;
+	private EstadoActividadTuristica estado;
+	private Imagen img;
 
 	private Map<String, Paquete> paquetes;
 	private Map<String, SalidaTuristica> salidas;
@@ -34,7 +40,8 @@ public class ActividadTuristica {
 	private Map<String, Categoria> categorias;
 
 	public ActividadTuristica(String nombreProveedor, String departamento, String nombre, String descrpicion,
-			int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta) {
+			int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta, Imagen img,
+			List<String> categorias) throws ObjetoNoExisteEnTurismoUy {
 		setNombre(nombre);
 		setDescrpicion(descrpicion);
 		setDuracion(duracion);
@@ -44,6 +51,7 @@ public class ActividadTuristica {
 		setPaquetes(new HashMap<>());
 		setSalidas(new HashMap<>());
 		setCategorias(new HashMap<>());
+		setImagen(img);
 
 		// Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
@@ -59,6 +67,14 @@ public class ActividadTuristica {
 		Proveedor prov = contUsuario.obtenerProveedor(nombreProveedor);
 		prov.asociarActividadTuristica(this);
 		proveedor = prov;
+
+		// Se agrega la relacion con las categorias:
+		ManejadorCategoria manejCat = ManejadorCategoria.getInstancia();
+		for (var categoria : categorias) {
+			Categoria catInstancia = manejCat.getCategoria(categoria);
+			catInstancia.addActividad(this);
+			this.categorias.put(categoria, catInstancia);
+		}
 	}
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
@@ -179,5 +195,17 @@ public class ActividadTuristica {
 
 	public void asociarSalidaAActividad(SalidaTuristica salidaTur) {
 		salidas.put(salidaTur.getNombre(), salidaTur);
+	}
+
+	public boolean estaAceptada() {
+		return estado == EstadoActividadTuristica.ACEPTADA;
+	}
+
+	public Imagen getImagen() {
+		return img;
+	}
+
+	public void setImagen(Imagen img) {
+		this.img = img;
 	}
 }

@@ -15,6 +15,7 @@ import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import logica.datatypes.DTActividadTuristica;
@@ -29,6 +30,7 @@ import logica.entidades.Inscripcion;
 import logica.entidades.SalidaTuristica;
 import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
 import logica.manejadores.ManejadorSalidaTuristica;
 import logica.manejadores.ManejadorUsuario;
@@ -38,7 +40,7 @@ import logica.manejadores.ManejadorUsuario;
  */
 
 public class ControladorActividadTuristica implements IControladorActividadTuristica {
-	
+
 	public void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException {
 		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
 		if (!manejadorDepartamento.exists(nom)) {
@@ -55,24 +57,21 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public List<String> obtenerIdDepartamentos() {
-		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
-		return new ArrayList<String>(manejadorDepartamento.obtenerIdDepartamentos());
+		return new ArrayList<String>(ManejadorDepartamento.getInstancia().obtenerIdDepartamentos());
 	}
 
 	public List<String> obtenerIdCategorias() {
-		// TODO
-		return new ArrayList<String>();
+		return new ArrayList<String>(ManejadorCategoria.getInstancia().obtenerIdCategorias());
 	}
 
 	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad,
 			String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img,
-			List<String> categorias) throws ActividadTuristicaYaRegistradaException {
-		// TODO: hacer algo con la img y categorias
+			List<String> categorias) throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 
 		if (!existeActividadTuristica(nombreActividad)) {
 			// Se crea instancia:
-			ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-					duracion, costo, ciudad, fechaAlta);
+			ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
+					descripcion, duracion, costo, ciudad, fechaAlta, img, categorias);
 			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
 			MAD.addActividad(actTuristica);
 		} else {
@@ -86,7 +85,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return MAT.exists(nomActividad);
 	}
 
-	public List<String> obtenerIdActividadesTuristicas(String departamento) {
+	public List<String> obtenerIdActividadesTuristicas(String departamento) throws ObjetoNoExisteEnTurismoUy {
 		List<String> idActividades = new ArrayList<>();
 		ManejadorDepartamento mdep = ManejadorDepartamento.getInstancia();
 		Departamento dep = mdep.getDepartamento(departamento);
@@ -96,9 +95,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return idActividades;
 	}
 
-	public List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria) {
-		// TODO
-		return new ArrayList<String>();
+	public List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria)
+			throws ObjetoNoExisteEnTurismoUy {
+		return ManejadorCategoria.getInstancia().getCategoria(categoria).obtenerIdActividadesTuristicasConfirmadas();
 	}
 
 	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) {
@@ -107,8 +106,12 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
-		// TODO
-		return new ArrayList<DTActividadTuristica>();
+		var ret = new ArrayList<DTActividadTuristica>();
+		for (var activ : ManejadorActividadTuristica.getInstancia().getActividades()) {
+			if (activ.estaAceptada())
+				ret.add(activ.obtenerDTActividadTuristica());
+		}
+		return ret;
 	}
 
 	@Override
@@ -124,7 +127,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) {
-		// TODO
+		// TODO ver DCOM
 		return new ArrayList<String>();
 	}
 
@@ -139,7 +142,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	@Override
 	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
 			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
+			ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
 		if (turis.estaInscriptoASalida(nomSalTurim)) {
@@ -180,8 +184,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			throw new FechaAltaSalidaPosteriorAFechaSalidaException(
 					"La fecha de la Salida debe ser posterior a la fecha de su registro");
 		} else {
-			SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar,
-					img);
+			SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida,
+					lugar, img);
 			manejadorSalida.addSalida(salidaTur);
 		}
 	}
@@ -197,19 +201,19 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return res;
 	}
 
-	public DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) {
+	public DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristica();
 	}
 
-	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) {
+	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristicaDetalle();
 	}
 
-	public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) {
+	public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = MST.getSalida(nomSal);
 		var inscripciones = sal.getInscripciones();

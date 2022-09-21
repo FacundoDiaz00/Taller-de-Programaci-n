@@ -22,6 +22,7 @@ import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
@@ -82,7 +83,8 @@ class ControladorActividadTuristicaTest {
 	}
 
 	// No es un test en sí
-	static void generarActividades(int cant, String idTest) throws ActividadTuristicaYaRegistradaException {
+	static void generarActividades(int cant, String idTest)
+			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
 
@@ -192,7 +194,8 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testAltaActividadTuristicaOK() {
+	public void testAltaActividadTuristicaOK()
+			throws ObjetoNoExisteEnTurismoUy, ActividadTuristicaYaRegistradaException {
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 100; i++) {
@@ -219,12 +222,8 @@ class ControladorActividadTuristicaTest {
 				// Esperable, no pasa nada.
 			}
 
-			try {
-				contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-						duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-			} catch (ActividadTuristicaYaRegistradaException exception) {
-				fail(exception.getMessage());
-			}
+			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
+					costo, ciudad, fechaAlta, null, muestraCategorias);
 
 			// assertTrue(cat.existeActividadTuristica(nombreActividad));
 			assertTrue(contrActTur.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
@@ -245,7 +244,8 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testAltaActividadTuristicaRepetida() {
+	public void testAltaActividadTuristicaRepetida()
+			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 100; i++) {
@@ -272,12 +272,8 @@ class ControladorActividadTuristicaTest {
 				// Esperable, no pasa nada.
 			}
 
-			try {
-				contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-						duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-			} catch (ActividadTuristicaYaRegistradaException exception) {
-				fail(exception.getMessage());
-			}
+			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
+					costo, ciudad, fechaAlta, null, muestraCategorias);
 
 			// Repito y debería tirar la excepcion
 			assertThrows(ActividadTuristicaYaRegistradaException.class, () -> {
@@ -304,7 +300,8 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testObtenerIdActividadesTuristicas() {
+	public void testObtenerIdActividadesTuristicas()
+			throws ObjetoNoExisteEnTurismoUy, ActividadTuristicaYaRegistradaException {
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 100; i++) {
@@ -330,12 +327,8 @@ class ControladorActividadTuristicaTest {
 				// Esperable, no pasa nada.
 			}
 
-			try {
-				contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-						duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-			} catch (ActividadTuristicaYaRegistradaException exception) {
-				fail(exception.getMessage());
-			}
+			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
+					costo, ciudad, fechaAlta, null, muestraCategorias);
 
 			var ids_loop = contrActTur.obtenerIdActividadesTuristicas(departamento);
 
@@ -372,7 +365,8 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testObtenerDetallesActividadTuristica() {
+	public void testObtenerDetallesActividadTuristica()
+			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 		assertTrue(contrActTur != null);
 		String descripcion = "Desc";
 
@@ -411,12 +405,8 @@ class ControladorActividadTuristicaTest {
 				// Esperable, no pasa nada.
 			}
 
-			try {
-				contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-						duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
-			} catch (ActividadTuristicaYaRegistradaException exception) {
-				fail(exception.getMessage());
-			}
+			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
+					costo, ciudad, fechaAlta, null, muestraCategorias);
 			if (i % 2 == 0) {
 				try {
 					contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7),
@@ -466,7 +456,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testObtenerDTSalidasTuristicas() {
+	public void testObtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy {
 		String idTest = "testObtenerDTSalidasTuristicas";
 
 		try {
@@ -504,7 +494,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testAltaInscripcionSalidaTuristicaOK() {
+	public void testAltaInscripcionSalidaTuristicaOK() throws ObjetoNoExisteEnTurismoUy {
 		String nickname = "Turista ";
 		String nombre = "NOMBRE TURISTA";
 		String apellido = "APELLIDO TURISTA";
@@ -707,7 +697,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void testAltaSalidaTuristicaOK() {
+	public void testAltaSalidaTuristicaOK() throws ObjetoNoExisteEnTurismoUy {
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 100; i++) {

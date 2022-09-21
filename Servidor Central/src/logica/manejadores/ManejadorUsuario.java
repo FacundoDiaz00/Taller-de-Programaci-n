@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.entidades.Usuario;
 
 /**
@@ -47,8 +48,12 @@ public class ManejadorUsuario {
 		usuariosPorCorreo.put(usuario.getCorreo(), usuario);
 	}
 
-	public Usuario getUsuarioPorNick(String nickname) {
-		return usuariosPorNick.get(nickname);
+	public Usuario getUsuarioPorNick(String nickname) throws ObjetoNoExisteEnTurismoUy {
+		if (usuariosPorNick.containsKey(nickname))
+			return usuariosPorNick.get(nickname);
+		else {
+			throw new ObjetoNoExisteEnTurismoUy(Usuario.class);
+		}
 	}
 
 	public Usuario getUsuarioPorCorreo(String correo) {

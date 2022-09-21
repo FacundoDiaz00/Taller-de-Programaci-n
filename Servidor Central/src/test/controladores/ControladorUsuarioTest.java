@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.TurismoUyException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
@@ -245,7 +246,7 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerDTUsuarioDetalle() {
+	void testObtenerDTUsuarioDetalle() throws ObjetoNoExisteEnTurismoUy {
 		String idTest = "testObtenerDTUsuarioDetalle";
 
 		try {
@@ -355,7 +356,7 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerDTUsuario() {
+	void testObtenerDTUsuario() throws ObjetoNoExisteEnTurismoUy {
 		String idTest = "testObtenerDTUsuario";
 
 		try {
@@ -424,7 +425,7 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testModificarUsuarioCaso() {
+	void testModificarUsuarioCaso() throws ObjetoNoExisteEnTurismoUy {
 		String idTest = "testModificarUsuario";
 
 		try {

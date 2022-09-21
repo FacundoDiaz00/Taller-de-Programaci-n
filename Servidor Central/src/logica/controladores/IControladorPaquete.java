@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
@@ -49,8 +50,11 @@ public interface IControladorPaquete {
 	 * @param nombreDep
 	 * @param nombrePaq
 	 * @return
+	 * @throws DeparamentoNoRegistradoException
+	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq);
+	List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq)
+			throws ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Agrega una actividad turística identificada por 'nombreAct' al paquete

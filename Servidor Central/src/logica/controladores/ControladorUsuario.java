@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
@@ -21,12 +22,12 @@ public class ControladorUsuario implements IControladorUsuario {
 	public ControladorUsuario() {
 	}
 
-	public Turista obtenerTurista(String nickTur) {
+	public Turista obtenerTurista(String nickTur) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
 		return (Turista) manUsr.getUsuarioPorNick(nickTur);
 	}
 
-	public Proveedor obtenerProveedor(String nickProv) {
+	public Proveedor obtenerProveedor(String nickProv) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
 		return (Proveedor) manUsr.getUsuarioPorNick(nickProv);
 	}
@@ -86,21 +87,21 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public DTUsuario obtenerDTUsuarioDetalle(String nickname) {
+	public DTUsuario obtenerDTUsuarioDetalle(String nickname) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorNick(nickname);
 		return usuario.obtenerDTUsuarioDetalle();
 	}
 
 	@Override
-	public DTUsuario obtenerDTUsuarioDetallePrivado(String nickname) {
+	public DTUsuario obtenerDTUsuarioDetallePrivado(String nickname) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorNick(nickname);
 		return usuario.obtenerDTUsuarioDetallePrivado();
 	}
 
 	@Override
-	public DTUsuario obtenerDTUsuario(String nickname) {
+	public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorNick(nickname);
 		return usuario.obtenerDTUsuario();
@@ -112,7 +113,8 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida {
+	public void modificarUsuario(DTUsuario datosNuevos)
+			throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy {
 
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 

@@ -30,8 +30,8 @@ public class Compra {
 	}
 
 	public DTCompra obtenerDTCompra() {
-		var costo = 0.0;
-		// FIXME calcular bien el costo de la compra
+		var costo = paquete.getCostoPorTurista() * cantidadTuristas;
+
 		return new DTCompra(fechaCompra, cantidadTuristas, (float) costo, vencimiento, paquete.getNombre());
 	}
 

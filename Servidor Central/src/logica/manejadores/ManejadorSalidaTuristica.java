@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.entidades.SalidaTuristica;
 
 /**
@@ -40,8 +41,11 @@ public class ManejadorSalidaTuristica {
 		salidas.put(salida.getNombre(), salida);
 	}
 
-	public SalidaTuristica getSalida(String nombre) {
-		return salidas.get(nombre);
+	public SalidaTuristica getSalida(String nombre) throws ObjetoNoExisteEnTurismoUy {
+		if (salidas.containsKey(nombre))
+			return salidas.get(nombre);
+		else
+			throw new ObjetoNoExisteEnTurismoUy(SalidaTuristica.class);
 	}
 
 	public Boolean existeSalidaTuristica(String nombre) {

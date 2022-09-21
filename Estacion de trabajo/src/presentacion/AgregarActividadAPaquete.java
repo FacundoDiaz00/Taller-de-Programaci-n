@@ -24,6 +24,7 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 
@@ -267,11 +268,16 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 		String packId = (String) comboPaquetes.getSelectedItem();
 		// No va a estar habilitado el combo si no seleciono la actividad y el
 		// pack
-		List<String> idsActividades = controladorPaq.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId,
-				packId);
-		comboActividades.setModel(new DefaultComboBoxModel<>(idsActividades.toArray()));
-		if (!idsActividades.isEmpty()) {
-			comboActividades.setSelectedIndex(0);
+		List<String> idsActividades;
+		try {
+			idsActividades = controladorPaq.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId, packId);
+			comboActividades.setModel(new DefaultComboBoxModel<>(idsActividades.toArray()));
+			if (!idsActividades.isEmpty()) {
+				comboActividades.setSelectedIndex(0);
+			}
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

@@ -18,13 +18,14 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 	private IControladorActividadTuristica contrAct;
 	private Principal principal;
@@ -197,8 +198,13 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			public void actionPerformed(ActionEvent event) {
 				var dep = comboDepartamentos.getSelectedItem();
 				if (dep != null) {
-					List<String> actividades = icat.obtenerIdActividadesTuristicas((String) dep);
-					comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
+					try {
+						List<String> actividades = icat.obtenerIdActividadesTuristicas((String) dep);
+						comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
+					} catch (ObjetoNoExisteEnTurismoUy e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});

@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
@@ -28,9 +29,9 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.DTTuristaDetalle;
 
 public class ConsultaDeSalidaTuristica extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private String seleccionSalida;
 
 	private final JComboBox comboSalidas;
@@ -213,15 +214,20 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 			}
 
 			private void turistaSeleccionado(String tur) {
-				IControladorUsuario icu = Fabrica.getInstancia().getIControladorUsuario();
-				DTTuristaDetalle datosTur = (DTTuristaDetalle) icu.obtenerDTUsuarioDetalle(tur);
-				String nomSal = seleccionSalida;
-				DTInscripcion datosInsc = icat.obtenerDTInscripcion(datosTur.getNickname(), nomSal);
-
-				nombreInscripto.setText(datosTur.getNombre());
-				fechaInscripto.setText(datosInsc.getFechaInscripcion().toString());
-				cantTuristasInscripto.setText(String.valueOf(datosInsc.getCantidadTuristas()));
-				costoInsc.setText(String.valueOf(datosInsc.getCosto()));
+				try {
+					IControladorUsuario icu = Fabrica.getInstancia().getIControladorUsuario();
+					DTTuristaDetalle datosTur = (DTTuristaDetalle) icu.obtenerDTUsuarioDetalle(tur);
+					String nomSal = seleccionSalida;
+					DTInscripcion datosInsc;
+					datosInsc = icat.obtenerDTInscripcion(datosTur.getNickname(), nomSal);
+					nombreInscripto.setText(datosTur.getNombre());
+					fechaInscripto.setText(datosInsc.getFechaInscripcion().toString());
+					cantTuristasInscripto.setText(String.valueOf(datosInsc.getCantidadTuristas()));
+					costoInsc.setText(String.valueOf(datosInsc.getCosto()));
+				} catch (ObjetoNoExisteEnTurismoUy e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		inscripcionList.setBounds(17, 279, 137, 133);
@@ -267,9 +273,15 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 
 		comboDeps.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				List<String> actividades = icat.obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
-				limpiarFormularioSinDepartamento();
-				comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
+				try {
+					List<String> actividades = icat
+							.obtenerIdActividadesTuristicas(comboDeps.getSelectedItem().toString());
+					limpiarFormularioSinDepartamento();
+					comboActividades.setModel(new DefaultComboBoxModel(actividades.toArray()));
+				} catch (ObjetoNoExisteEnTurismoUy e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -296,20 +308,25 @@ public class ConsultaDeSalidaTuristica extends JInternalFrame {
 	}
 
 	private void mostrarDatosSalida() {
-		DTSalidaTuristicaDetalle salida = contrAct.obtenerDTSalidaTuristicaDetalle(seleccionSalida);
+		DTSalidaTuristicaDetalle salida;
+		try {
+			salida = contrAct.obtenerDTSalidaTuristicaDetalle(seleccionSalida);
+			nombre.setText(salida.getNombre());
+			fechaSalida.setText(salida.getFechaHoraSalida().toString());
+			horaSalida.setText(salida.getFechaHoraSalida().toString());
+			lugarSalida.setText(salida.getLugarSalida());
+			maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
+			fechaAlta.setText(salida.getFechaAlta().toString());
+			DefaultListModel<String> listModel = new DefaultListModel<>();
 
-		nombre.setText(salida.getNombre());
-		fechaSalida.setText(salida.getFechaHoraSalida().toString());
-		horaSalida.setText(salida.getFechaHoraSalida().toString());
-		lugarSalida.setText(salida.getLugarSalida());
-		maxCantTuristas.setText(String.valueOf(salida.getCantMaxTuristas()));
-		fechaAlta.setText(salida.getFechaAlta().toString());
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-
-		for (DTInscripcion insc : salida.getInscripciones()) {
-			listModel.addElement(insc.getTurista());
+			for (DTInscripcion insc : salida.getInscripciones()) {
+				listModel.addElement(insc.getTurista());
+			}
+			inscripcionList.setModel(listModel);
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		inscripcionList.setModel(listModel);
 
 	}
 
