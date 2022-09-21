@@ -44,6 +44,8 @@ public class Principal {
 	private ModificarUsuario frmModificarUsuario;
 
 	private ConsultaDePaquete frmIntConsultaDePaquete;
+	
+	private aceptarRechazarActividadTuristica frmAceptarRechazarActividadTuristica;
 
 	/**
 	 * Launch the application.
@@ -84,6 +86,7 @@ public class Principal {
 		frmModificarUsuario = new ModificarUsuario(contrUsuario);
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 		frmIntConsultaDePaquete = new ConsultaDePaquete(this, contrPaquete);
+		frmAceptarRechazarActividadTuristica = new aceptarRechazarActividadTuristica(contrActTur);
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmIntAltaUsuario.setVisible(false);
@@ -97,6 +100,7 @@ public class Principal {
 		frmIntConsultaDePaquete.setVisible(false);
 		frmIntConsultaDeSalidaTuristica.setVisible(false);
 		frmModificarUsuario.setVisible(false);
+		frmAceptarRechazarActividadTuristica.setVisible(false);
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
@@ -111,6 +115,7 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmModificarUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmAceptarRechazarActividadTuristica);
 
 		frmIntAltaUsuario.setVisible(false);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -219,6 +224,17 @@ public class Principal {
 			}
 		});
 		mnNewMenu3.add(inscribirseASalidaTuristicaJMenuItem);
+		
+
+		JMenuItem aceptarRechazarActividadTuristicaJMenuItem = new JMenuItem("Aceptar/Rechazar Actividad Turística");
+		aceptarRechazarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				frmAceptarRechazarActividadTuristica.setVisible(true);
+			}
+		});
+		mnNewMenu3.add(aceptarRechazarActividadTuristicaJMenuItem);
+			
+		
 
 		JMenu mnNewMenu = new JMenu("Paquetes");
 		menuBar.add(mnNewMenu);
