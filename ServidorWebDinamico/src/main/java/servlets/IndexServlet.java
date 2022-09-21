@@ -14,7 +14,7 @@ import logica.controladores.IControladorActividadTuristica;
 /**
  * Servlet implementation class IndexServlet
  */
-@WebServlet("/")
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IControladorActividadTuristica contrAct;
@@ -31,7 +31,7 @@ public class IndexServlet extends HttpServlet {
 		req.setAttribute("departamentos", departamentos);
 		req.setAttribute("actividades", actividades);
 
-		req.getRequestDispatcher("/jsps/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 	}
 
 }
