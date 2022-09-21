@@ -23,13 +23,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 
 public class ModificarUsuario extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private DTUsuario dtUsuario;
@@ -231,26 +232,31 @@ public class ModificarUsuario extends JInternalFrame {
 		if (nicknameUser == null) {
 			return;
 		}
-		DTUsuario dtsUsuarios = icu.obtenerDTUsuario(nicknameUser);
-		this.dtUsuario = dtsUsuarios;
-		nicknameTextField.setText(dtsUsuarios.getNickname());
-		nombreTextFIeld.setText(dtsUsuarios.getNombre());
-		apellidoTextFIeld.setText(dtsUsuarios.getApellido());
-		correoTextFIeld.setText(dtsUsuarios.getCorreo());
-		diaSpinner.setValue(dtsUsuarios.getFechaNac().getDayOfMonth());
-		mesSpinner.setValue(dtsUsuarios.getFechaNac().getMonthValue());
-		anioSprinner.setValue(dtsUsuarios.getFechaNac().getYear());
-		if (dtsUsuarios instanceof DTProveedor) {
-			DTProveedor dtProveedor = (DTProveedor) dtsUsuarios;
-			descripcionTextArea.setText(dtProveedor.getDescrpicionGeneral());
-			urlTextField.setText(dtProveedor.getLink());
-			enableCamposInfoUsuario(true, true);
-		} else {
-			DTTurista dtTurista = (DTTurista) dtsUsuarios;
-			nacionalidadTextFIeld.setText(dtTurista.getNacionalidad());
-			enableCamposInfoUsuario(true, false);
-		}
+		try {
+			DTUsuario dtsUsuarios = icu.obtenerDTUsuario(nicknameUser);
 
+			this.dtUsuario = dtsUsuarios;
+			nicknameTextField.setText(dtsUsuarios.getNickname());
+			nombreTextFIeld.setText(dtsUsuarios.getNombre());
+			apellidoTextFIeld.setText(dtsUsuarios.getApellido());
+			correoTextFIeld.setText(dtsUsuarios.getCorreo());
+			diaSpinner.setValue(dtsUsuarios.getFechaNac().getDayOfMonth());
+			mesSpinner.setValue(dtsUsuarios.getFechaNac().getMonthValue());
+			anioSprinner.setValue(dtsUsuarios.getFechaNac().getYear());
+			if (dtsUsuarios instanceof DTProveedor) {
+				DTProveedor dtProveedor = (DTProveedor) dtsUsuarios;
+				descripcionTextArea.setText(dtProveedor.getDescrpicionGeneral());
+				urlTextField.setText(dtProveedor.getLink());
+				enableCamposInfoUsuario(true, true);
+			} else {
+				DTTurista dtTurista = (DTTurista) dtsUsuarios;
+				nacionalidadTextFIeld.setText(dtTurista.getNacionalidad());
+				enableCamposInfoUsuario(true, false);
+			}
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void enableCamposInfoUsuario(boolean estado, boolean soyProveedor) {
@@ -300,8 +306,9 @@ public class ModificarUsuario extends JInternalFrame {
 			int mes = (int) mesSpinner.getValue();
 			int anio = (int) anioSprinner.getValue();
 			fechaNac = LocalDate.of(anio, mes, dia);
-		} catch (Exception exception) { // TODO averiguar que excepcion tira localdate y
-								// atrapar eso
+		} catch (Exception exception) { // TODO averiguar que excepcion tira
+										// localdate y
+			// atrapar eso
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}

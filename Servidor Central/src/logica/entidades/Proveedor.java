@@ -3,12 +3,16 @@ package logica.entidades;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTProveedorDetalle;
+import logica.datatypes.DTProveedorDetallePrivado;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 
 /**
@@ -86,8 +90,41 @@ public class Proveedor extends Usuario {
 
 	@Override
 	public DTUsuario obtenerDTUsuarioDetallePrivado() {
-		// TODO
-		return null;
+		String nickname = this.getNickname();
+		String nombre = this.getNombre();
+		String apellido = this.getApellido();
+		String correo = this.getCorreo();
+		LocalDate fechaNac = this.getFechaNac();
+		Imagen img = this.getImagen();
+		String desc = this.getDescrpicionGeneral();
+		String url = this.getLink();
+
+		List<DTActividadTuristicaDetalle> actividades = new ArrayList<>();
+		List<DTActividadTuristica> estadoAgregada = new ArrayList<>();
+		List<DTActividadTuristica> estadoRechazada = new ArrayList<>();
+
+		for (var act : this.actividadesTuristicas.values()) {
+			switch (act.getEstado()) {
+			case ACEPTADA:
+				actividades.add(act.obtenerDTActividadTuristicaDetalle());
+				break;
+			case RECHAZADA:
+				estadoRechazada.add(act.obtenerDTActividadTuristica());
+				break;
+			case AGREGADA:
+				estadoAgregada.add(act.obtenerDTActividadTuristica());
+				break;
+			default:
+				break;
+			}
+		}
+
+		Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas = new HashMap<>();
+		actividadesNoConfirmadas.put(EstadoActividadTuristica.RECHAZADA, estadoRechazada);
+		actividadesNoConfirmadas.put(EstadoActividadTuristica.AGREGADA, estadoAgregada);
+
+		return new DTProveedorDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades,
+				actividadesNoConfirmadas);
 	}
 
 }

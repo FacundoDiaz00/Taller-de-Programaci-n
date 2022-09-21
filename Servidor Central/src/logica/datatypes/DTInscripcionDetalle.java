@@ -8,9 +8,11 @@ public class DTInscripcionDetalle extends DTInscripcion {
 	private DTTurista turista;
 
 	public DTInscripcionDetalle(LocalDate fechaInscripcion, int cantidadTuristas, float costo, String salida,
-			String turista) {
+			String turista, DTSalidaTuristica salidaTuristica, DTCompra compra, DTTurista dtTurista) {
 		super(fechaInscripcion, cantidadTuristas, costo, salida, turista);
-		// TODO
+		this.salidaTuristica = salidaTuristica;
+		this.compra = compra;
+		this.turista = dtTurista;
 	}
 
 	public DTSalidaTuristica getDTSalidaTuristica() {

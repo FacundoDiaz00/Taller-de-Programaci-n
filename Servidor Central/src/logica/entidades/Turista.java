@@ -8,8 +8,11 @@ import java.util.Set;
 
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import logica.datatypes.DTCompra;
+import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTTuristaDetalle;
+import logica.datatypes.DTTuristaDetallePrivado;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 
@@ -96,7 +99,24 @@ public class Turista extends Usuario {
 
 	@Override
 	public DTUsuario obtenerDTUsuarioDetallePrivado() {
-		// TODO
-		return null;
+		String nickname = this.getNickname();
+		String nombre = this.getNombre();
+		String apellido = this.getApellido();
+		String correo = this.getCorreo();
+		LocalDate fechaNac = this.getFechaNac();
+		Imagen img = this.getImagen();
+		String nacionalidad = this.getNacionalidad();
+
+		List<String> inscripciones_salidas = new ArrayList<>();
+		this.getInscripciones().forEach((Inscripcion x) -> inscripciones_salidas.add(x.getNombreSalida()));
+
+		List<DTCompra> compras = new ArrayList<>();
+		this.getCompras().forEach((Compra x) -> compras.add(x.obtenerDTCompra()));
+
+		List<DTInscripcion> inscripciones = new ArrayList<>();
+		this.getInscripciones().forEach((Inscripcion x) -> inscripciones.add(x.obtenerDTInscripcion()));
+
+		return new DTTuristaDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, nacionalidad,
+				inscripciones_salidas, compras, inscripciones);
 	}
 }

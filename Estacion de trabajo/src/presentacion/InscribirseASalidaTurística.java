@@ -36,6 +36,7 @@ import javax.swing.event.PopupMenuListener;
 
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.SuperaElMaximoDeTuristasException;
 import excepciones.TurismoUyException;
 import logica.controladores.IControladorActividadTuristica;
@@ -43,9 +44,9 @@ import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTSalidaTuristica;
 
 public class InscribirseASalidaTurística extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private IControladorActividadTuristica contrActTur;
 	private IControladorUsuario contrUsuario;
 
@@ -470,13 +471,19 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 
 	private void actualizarActividadesTuristicas() {
 		String dep = (String) comboDepartamento.getSelectedItem();
-		List<String> idActs = contrActTur.obtenerIdActividadesTuristicas(dep);
-		comboActividad.setModel(new DefaultComboBoxModel<>(idActs.toArray()));
-		if (!idActs.isEmpty()) {
-			comboActividad.setSelectedIndex(0);
-			seleccionarActividadesTuristicas();
+
+		try {
+			List<String> idActs = contrActTur.obtenerIdActividadesTuristicas(dep);
+			comboActividad.setModel(new DefaultComboBoxModel<>(idActs.toArray()));
+			if (!idActs.isEmpty()) {
+				comboActividad.setSelectedIndex(0);
+				seleccionarActividadesTuristicas();
+			}
+			actualizarSalidaTuristicas();
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		actualizarSalidaTuristicas();
 	}
 
 	private void seleccionarActividadesTuristicas() {
