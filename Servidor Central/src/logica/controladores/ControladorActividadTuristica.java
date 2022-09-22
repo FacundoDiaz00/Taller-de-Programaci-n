@@ -111,9 +111,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		Categoria cat = ManejadorCategoria.getInstancia().getCategoria(nomCat);
 		List<DTActividadTuristica> dtActis = new ArrayList<>();
 		for (ActividadTuristica act : cat.getActividades().values()){
-			if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+			//if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){ //todo agregar cuando es se deje el CU aceptar/rechasar actividad turistica
 				dtActis.add(act.obtenerDTActividadTuristica());
-			}
+			//}
 		}
 		return dtActis;
 	}
@@ -123,9 +123,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		Departamento dep = ManejadorDepartamento.getInstancia().getDepartamento(nomDep);
 		List<DTActividadTuristica> dtActis = new ArrayList<>();
 		for (ActividadTuristica act : dep.getActividadTuristicas().values()){
-			if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+			//if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){ //todo agregar cuando es se deje el CU aceptar/rechasar actividad turistica
 				dtActis.add(act.obtenerDTActividadTuristica());
-			}
+			//}
 		}
 		return dtActis;
 	}

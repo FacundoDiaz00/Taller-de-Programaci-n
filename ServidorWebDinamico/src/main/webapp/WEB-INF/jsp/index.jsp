@@ -9,6 +9,7 @@
  --%>
 
 
+<%@page import="logica.datatypes.DTPaquete"%>
 <%@page import="logica.datatypes.DTActividadTuristica"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -135,7 +136,8 @@
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0">
 			                        <div class="col-md-4 img-contain">
-			                            <img src="${pageContext.request.contextPath}/img/actividad1.png" class="img-fluid rounded-start">
+			                            <img src="${pageContext.request.contextPath}/img/noFoto.png" class="img-fluid rounded-start">
+			                            <!-- Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
@@ -151,41 +153,6 @@
 						
 					<% } %>
                 
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="${pageContext.request.contextPath}/img/actividad1.png" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Degusta</h5>
-                                <p class="card-text descripcion-actividad">Festival gastronómico de productos locales en Rocha</p>
-                                <div class="botonera">
-                                    <a href="ConsultaActividadServlet?id=Degusta" class="btn btn-primary">Ver mas</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="${pageContext.request.contextPath}/img/actividad2.png" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Teatro con Sabores</h5>
-                                <p class="card-text descripcion-actividad">En el mes aniversario del Club Deportivo Unión de Rocha te invitamos a una merienda deliciosa.
-                                </p>
-                                <div class="botonera">
-                                    <a href="consulta_actividad_turistica.html" class="btn btn-primary">Ver mas</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
 
@@ -195,15 +162,23 @@
             <div class="card" id="contenedor-paquetes">
                 <h2 class="card-title">Paquetes</h2>
 
+			<% 
+				List<DTPaquete> paquetes = (List<DTPaquete>) request.getAttribute("paquetes");
+					
+				for(DTPaquete pack: paquetes){
+			%>
+
+
                 <div class="card mb-3" style="max-width: 800px;">
                     <div class="row g-0">
                         <div class="col-md-4 img-contain">
-                            <img src="${pageContext.request.contextPath}/img/pack1.png" class="img-fluid rounded-start">
+                            <img src="${pageContext.request.contextPath}/img/noFoto.png" class="img-fluid rounded-start">
+                            <!-- Falta el manejo de foto de la verdadero paquete-->
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Disfrutar Rocha</h5>
-                                <p class="card-text descripcion-paquete">Actividades para hacer en familia y disfrutar arte y gastronomí­a.</p>
+                                <h5 class="card-title"><%= pack.getNombre()%> </h5>
+                                <p class="card-text descripcion-paquete"><%= pack.getDescrpicion()%> </p>
                                 <div class="botonera">
                                     <a href="consulta_de_paquete.html" class="btn btn-primary">Ver mas</a>
                                 </div>
@@ -212,42 +187,8 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="${pageContext.request.contextPath}/img/pack2.png" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Un dí­a en Colonia</h5>
-                                <p class="card-text descripcion-paquete">Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toros</p>
-                                <div class="botonera">
-                                    <a href="consulta_de_paquete.html" class="btn btn-primary">Ver mas</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                            <img src="${pageContext.request.contextPath}/img/pack3.png" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Valle Del Lunarejo</h5>
-                                <p class="card-text descripcion-paquete">Visite un área protegida con un paisaje natural hermoso.</p>
-                                <div class="botonera">
-                                    <a href="consulta_de_paquete.html" class="btn btn-primary">Ver mas</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+           <% } %>
 
             </div>
         </div>
