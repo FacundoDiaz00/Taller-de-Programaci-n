@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/serversContext/InicioServidorDinamico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/serversContext/InicioServidorDinamico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/IndexServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/IndexServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/servidorCentral.jar" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/servidorCentral.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/actividad1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/actividad2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/actividad3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/anibal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/harry_estilos.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/isabela.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/la_chiqui.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/mercedes.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/pablo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/pack1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/pack2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/pack3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/salida1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/salida1Actividad1.jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/salida2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/salida2actividad1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/washington.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../servidorCentral.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../servidorCentral.jar" afterDir="false" />
-    </list>
+    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,17 +19,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Daniel Padron/Documents/tpgr16/Servidor Central",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Daniel Padron/Documents/tpgr16/Servidor Central&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -76,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663796621648</updated>
       <workItem from="1663796622840" duration="270000" />
-      <workItem from="1663797093722" duration="1694000" />
+      <workItem from="1663797093722" duration="2879000" />
     </task>
     <servers />
   </component>
@@ -99,7 +75,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java</url>
-          <line>46</line>
+          <line>37</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
