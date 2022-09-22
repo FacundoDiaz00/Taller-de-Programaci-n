@@ -82,22 +82,25 @@ public interface IControladorActividadTuristica {
 	DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) throws ObjetoNoExisteEnTurismoUy;
 
 	/**
-	 * Obteiene el DTActividad turistica de todas las actividades turisticas confirmadas que estan asociadas con la categoria
-	 * identificado por nomCat
+	 * Obteiene el DTActividad turistica de todas las actividades turisticas
+	 * confirmadas que estan asociadas con la categoria identificado por nomCat
+	 * 
 	 * @param nomCat
 	 * @return
 	 */
-	List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorCategoria(String nomCat) throws ObjetoNoExisteEnTurismoUy;
-
+	List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorCategoria(String nomCat)
+			throws ObjetoNoExisteEnTurismoUy;
 
 	/**
-	 * Obteiene el DTActividad turistica de todas las actividades turisticas confirmadas que estan asociadas con el departamento
-	 * identificado por nomDep
+	 * Obteiene el DTActividad turistica de todas las actividades turisticas
+	 * confirmadas que estan asociadas con el departamento identificado por
+	 * nomDep
+	 * 
 	 * @param nomDep
 	 * @return
 	 */
-	List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorDepartamento(String nomDep) throws ObjetoNoExisteEnTurismoUy;
-
+	List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorDepartamento(String nomDep)
+			throws ObjetoNoExisteEnTurismoUy;
 
 	List<DTActividadTuristica> obtenerDTActividadesTuristicas();
 
@@ -198,6 +201,6 @@ public interface IControladorActividadTuristica {
 
 	List<String> obtenerIdActividadesTuristicasAgregadas();
 
-	void aceptarORechazarActividadTuristica(String idActividad, boolean b);
+	void aceptarORechazarActividadTuristica(String idActividad, boolean b) throws ObjetoNoExisteEnTurismoUy;
 
 }

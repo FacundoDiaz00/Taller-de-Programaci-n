@@ -254,17 +254,18 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return insc.obtenerDTInscripcion();
 	}
 
-	public List<String> obtenerIdActividadesTuristicasAgregadas(){
+	public List<String> obtenerIdActividadesTuristicasAgregadas() {
 		List<String> idActividades = new ArrayList<>();
 		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		for (ActividadTuristica act : MAT.getActividades()){
+		for (ActividadTuristica act : MAT.getActividades()) {
 			if (act.getEstado() == EstadoActividadTuristica.AGREGADA)
 				idActividades.add(act.getNombre());
 		}
 		return idActividades;
 	}
-	
-	public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada){
+
+	public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada)
+			throws ObjetoNoExisteEnTurismoUy {
 		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
 		ActividadTuristica act = MAT.getActividad(idActividad);
 		EstadoActividadTuristica est;

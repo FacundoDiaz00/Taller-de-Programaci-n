@@ -2,9 +2,6 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -13,23 +10,18 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.SalidaYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorActividadTuristica;
 
 public class aceptarRechazarActividadTuristica extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private IControladorActividadTuristica controladorAct;
 	private JComboBox actividadTuristica;
 	private JButton aceptar;
@@ -71,7 +63,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 				actualizarActTur();
 			}
 		});
-		
+
 		actividadTuristica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (actividadTuristica.getSelectedItem() != null) {
@@ -80,7 +72,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 				}
 			}
 		});
-		
+
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -90,26 +82,32 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		});
 		btnCancelar.setBounds(25, 83, 117, 25);
 		getContentPane().add(btnCancelar);
-		
+
 		JLabel lblenEstadoagregada = new JLabel("(en estado \"Agregada\")");
 		lblenEstadoagregada.setBounds(12, 42, 167, 15);
 		getContentPane().add(lblenEstadoagregada);
-		
+
 		JButton btnAceptar = new JButton("Aceptar");
 		aceptar = btnAceptar;
 		btnAceptar.setEnabled(false);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idActividad = actividadTuristica.getSelectedItem().toString();
-				controladorAct.aceptarORechazarActividadTuristica(idActividad, true);
-				JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Aceptar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
+				try {
+					controladorAct.aceptarORechazarActividadTuristica(idActividad, true);
+					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Aceptar Actividad Turística",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (ObjetoNoExisteEnTurismoUy e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				limpiarForm();
 			}
 		});
-		
+
 		btnAceptar.setBounds(309, 83, 117, 25);
 		getContentPane().add(btnAceptar);
-		
+
 		JButton btnRechazar = new JButton("Rechazar");
 		rechazar = btnRechazar;
 		btnRechazar.setEnabled(false);
@@ -118,12 +116,17 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		btnRechazar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idActividad = actividadTuristica.getSelectedItem().toString();
-				controladorAct.aceptarORechazarActividadTuristica(idActividad, false);
-				JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Rechazar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
+				try {
+					controladorAct.aceptarORechazarActividadTuristica(idActividad, false);
+					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.",
+							"Rechazar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
+				} catch (ObjetoNoExisteEnTurismoUy e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				limpiarForm();
 			}
 		});
-		
 
 	}
 

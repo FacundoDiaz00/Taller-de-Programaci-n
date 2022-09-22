@@ -19,10 +19,8 @@ public class ConsultaActividadServlet extends HttpServlet {
 		super();
 	}
 
-	
 	/**
-	 * parametros posibles:
-	 * 	- idActividad
+	 * parametros posibles: - idActividad
 	 * 
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
@@ -32,5 +30,4 @@ public class ConsultaActividadServlet extends HttpServlet {
 
 		req.getRequestDispatcher("/jsps/consulta_actividad_turistica.jsp").forward(req, response);
 	}
-
 }
