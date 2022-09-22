@@ -9,11 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
   <listener>
-   <listener-class>
-      serversContext.InicioServidorDinamico 
-   </listener-class>
-</listener>
-  
+	<listener-class>serversContext.InicioServidorDinamico</listener-class>
+  </listener>
 </web-app>
