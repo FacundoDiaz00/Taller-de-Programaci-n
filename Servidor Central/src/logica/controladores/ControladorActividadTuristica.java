@@ -18,17 +18,8 @@ import excepciones.InscripcionYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTInscripcion;
-import logica.datatypes.DTSalidaTuristica;
-import logica.datatypes.DTSalidaTuristicaDetalle;
-import logica.datatypes.Imagen;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.Departamento;
-import logica.entidades.Inscripcion;
-import logica.entidades.SalidaTuristica;
-import logica.entidades.Turista;
+import logica.datatypes.*;
+import logica.entidades.*;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
@@ -113,6 +104,30 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 				ret.add(activ.obtenerDTActividadTuristica());
 		}
 		return ret;
+	}
+
+	@Override
+	public List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorCategoria(String nomCat) throws ObjetoNoExisteEnTurismoUy {
+		Categoria cat = ManejadorCategoria.getInstancia().getCategoria(nomCat);
+		List<DTActividadTuristica> dtActis = new ArrayList<>();
+		for (ActividadTuristica act : cat.getActividades().values()){
+			if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+				dtActis.add(act.obtenerDTActividadTuristica());
+			}
+		}
+		return dtActis;
+	}
+
+	@Override
+	public List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorDepartamento(String nomDep) throws ObjetoNoExisteEnTurismoUy{
+		Departamento dep = ManejadorDepartamento.getInstancia().getDepartamento(nomDep);
+		List<DTActividadTuristica> dtActis = new ArrayList<>();
+		for (ActividadTuristica act : dep.getActividadTuristicas().values()){
+			if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+				dtActis.add(act.obtenerDTActividadTuristica());
+			}
+		}
+		return dtActis;
 	}
 
 	@Override
