@@ -193,4 +193,8 @@ public interface IControladorActividadTuristica {
 	 */
 	DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy;
 
+	List<String> obtenerIdActividadesTuristicasAgregadas();
+
+	void aceptarORechazarActividadTuristica(String idActividad, boolean b);
+
 }

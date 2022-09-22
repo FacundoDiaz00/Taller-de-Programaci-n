@@ -52,6 +52,7 @@ public class ActividadTuristica {
 		setSalidas(new HashMap<>());
 		setCategorias(new HashMap<>());
 		setImagen(img);
+		estado = EstadoActividadTuristica.AGREGADA;
 
 		// Se agrega a la coleccion de actividades:
 		ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
@@ -179,6 +180,14 @@ public class ActividadTuristica {
 
 	public void setCategorias(Map<String, Categoria> categorias) {
 		this.categorias = categorias;
+	}
+	
+	public EstadoActividadTuristica getEstado(){
+		return estado;
+	}
+	
+	public void setEstado(EstadoActividadTuristica est){
+		estado = est;
 	}
 
 	public List<String> obtenerIdSalidasTuristicas() {

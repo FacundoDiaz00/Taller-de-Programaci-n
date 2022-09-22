@@ -23,6 +23,7 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Categoria;
@@ -262,4 +263,24 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return insc.obtenerDTInscripcion();
 	}
 
+	public List<String> obtenerIdActividadesTuristicasAgregadas(){
+		List<String> idActividades = new ArrayList<>();
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+		for (ActividadTuristica act : MAT.getActividades()){
+			if (act.getEstado() == EstadoActividadTuristica.AGREGADA)
+				idActividades.add(act.getNombre());
+		}
+		return idActividades;
+	}
+	
+	public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada){
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+		ActividadTuristica act = MAT.getActividad(idActividad);
+		EstadoActividadTuristica est;
+		if (esAceptada)
+			est = EstadoActividadTuristica.ACEPTADA;
+		else
+			est = EstadoActividadTuristica.RECHAZADA;
+		act.setEstado(est);
+	}
 }
