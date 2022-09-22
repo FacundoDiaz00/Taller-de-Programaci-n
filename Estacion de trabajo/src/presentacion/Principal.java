@@ -40,6 +40,7 @@ public class Principal {
 	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
 	private ConsultaDeSalidaTuristica frmIntConsultaDeSalidaTuristica;
 	private InscribirseASalidaTurística frmInscribirseASalidaTuristica;
+	private AltaCategoria frmAltaCategoria;
 
 	private ModificarUsuario frmModificarUsuario;
 
@@ -87,6 +88,7 @@ public class Principal {
 		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
 		frmIntConsultaDePaquete = new ConsultaDePaquete(this, contrPaquete);
 		frmAceptarRechazarActividadTuristica = new aceptarRechazarActividadTuristica(contrActTur);
+		frmAltaCategoria = new AltaCategoria(contrActTur);
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
 		frmIntAltaUsuario.setVisible(false);
@@ -100,6 +102,7 @@ public class Principal {
 		frmIntConsultaDePaquete.setVisible(false);
 		frmIntConsultaDeSalidaTuristica.setVisible(false);
 		frmModificarUsuario.setVisible(false);
+		frmAltaCategoria.setVisible(false);
 		frmAceptarRechazarActividadTuristica.setVisible(false);
 
 		frmEstacionDeTrabajo.getContentPane().setLayout(null);
@@ -115,6 +118,7 @@ public class Principal {
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
 		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
 		frmEstacionDeTrabajo.getContentPane().add(frmModificarUsuario);
+		frmEstacionDeTrabajo.getContentPane().add(frmAltaCategoria);
 		frmEstacionDeTrabajo.getContentPane().add(frmAceptarRechazarActividadTuristica);
 
 		frmIntAltaUsuario.setVisible(false);
@@ -191,7 +195,20 @@ public class Principal {
 				frmIntAltaActividadTuristica.setVisible(true);
 			}
 		});
+		
 		mnNewMenu3.add(registrarActividadJMenuItem);
+		
+		JMenuItem mnNewMenuAltaCategoria = new JMenuItem("Registrar Categoría");
+
+		mnNewMenuAltaCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				System.out.print("entré a alta categoria");
+				frmAltaCategoria.setVisible(true);
+			}
+		});
+		
+		mnNewMenu3.add(mnNewMenuAltaCategoria);
+
 
 		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
 		consultarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {

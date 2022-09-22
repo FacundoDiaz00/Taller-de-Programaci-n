@@ -8,16 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.SalidaYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.*;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -283,4 +274,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			est = EstadoActividadTuristica.RECHAZADA;
 		act.setEstado(est);
 	}
+	public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {
+		ManejadorCategoria mc = ManejadorCategoria.getInstancia();
+		if(!mc.exists(nombre)){
+			Categoria cat = new Categoria(nombre);
+			mc.addCategoria(cat);
+		} else {
+			throw new CategoriaYaRegistradaException("La categoria " + nombre + " ya existe en el sistema.");
+		}
+	}
+
 }
