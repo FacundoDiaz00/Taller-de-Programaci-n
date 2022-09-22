@@ -6,6 +6,7 @@ import java.util.List;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
+import excepciones.CategoriaYaRegistradaException;
 import excepciones.DeparamentoYaRegistradoException;
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
@@ -169,5 +170,7 @@ public interface IControladorActividadTuristica {
 	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
 	DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy;
+	
+	public void altaCategoria(String nombre) throws CategoriaYaRegistradaException;
 
 }
