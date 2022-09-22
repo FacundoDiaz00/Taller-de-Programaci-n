@@ -80,7 +80,7 @@ public class IndexServlet extends HttpServlet {
 				actividades = contrAct.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida);
 			}
 		} catch (ObjetoNoExisteEnTurismoUy e){
-			req.setAttribute("motivoDeError", "El nombre de la categoria7departamento no existe en el sistema");
+			req.setAttribute("motivoDeError", "El nombre de la categoria/departamento no existe en el sistema");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 			return;
 		}

@@ -19,6 +19,12 @@ public class ConsultaActividadServlet extends HttpServlet {
 		super();
 	}
 
+	
+	/**
+	 * parametros posibles:
+	 * 	- idActividad
+	 * 
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		var id = req.getParameter("id");
 
