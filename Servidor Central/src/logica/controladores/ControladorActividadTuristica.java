@@ -235,4 +235,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		}
 		return idActividades;
 	}
+	
+	public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada){
+		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+		ActividadTuristica act = MAT.getActividad(idActividad);
+		EstadoActividadTuristica est;
+		if (esAceptada)
+			est = EstadoActividadTuristica.ACEPTADA;
+		else
+			est = EstadoActividadTuristica.RECHAZADA;
+		act.setEstado(est);
+	}
 }

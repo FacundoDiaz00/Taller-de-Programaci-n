@@ -100,9 +100,13 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		btnAceptar.setEnabled(false);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String idActividad = actividadTuristica.getSelectedItem().toString();
+				controladorAct.aceptarORechazarActividadTuristica(idActividad, true);
+				JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Aceptar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
+				limpiarForm();
 			}
 		});
+		
 		btnAceptar.setBounds(309, 83, 117, 25);
 		getContentPane().add(btnAceptar);
 		
@@ -111,6 +115,15 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		btnRechazar.setEnabled(false);
 		btnRechazar.setBounds(167, 83, 117, 25);
 		getContentPane().add(btnRechazar);
+		btnRechazar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String idActividad = actividadTuristica.getSelectedItem().toString();
+				controladorAct.aceptarORechazarActividadTuristica(idActividad, false);
+				JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Rechazar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
+				limpiarForm();
+			}
+		});
+		
 
 	}
 
