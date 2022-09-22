@@ -210,10 +210,6 @@ public class ActividadTuristica {
 		return estado == EstadoActividadTuristica.ACEPTADA;
 	}
 
-	public EstadoActividadTuristica getEstado() {
-		return estado;
-	}
-
 	public Imagen getImagen() {
 		return img;
 	}
