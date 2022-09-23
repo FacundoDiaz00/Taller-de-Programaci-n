@@ -64,11 +64,13 @@ public interface IControladorUsuario {
 	 * @param nombre
 	 * @param apellido
 	 * @param correo
+	 * @param  
+	 * @param contra 
 	 * @param FNacimiento
 	 * @param nacionalidad
 	 * @throws UsuarioYaRegistradoException
 	 */
-	void altaTurista(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento, Imagen img,
+	void altaTurista(String nickname, String nombre, String apellido, String correo, String contra, LocalDate FNacimiento, Imagen img,
 			String nacionalidad) throws UsuarioYaRegistradoException;
 
 	/**
@@ -78,12 +80,13 @@ public interface IControladorUsuario {
 	 * @param nombre
 	 * @param apellido
 	 * @param correo
+	 * @param contra 
 	 * @param descripcion
 	 * @param link
 	 * @param FNacimiento
 	 * @throws UsuarioYaRegistradoException
 	 */
-	void altaProveedor(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento,
+	void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra, LocalDate FNacimiento,
 			Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException;
 
 	/**

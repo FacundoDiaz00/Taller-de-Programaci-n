@@ -15,16 +15,22 @@ public abstract class Usuario {
 	private String nombre;
 	private String apellido;
 	private String correo;
+	private String contrasenia;
 	private LocalDate fechaNac;
 	private Imagen img;
 
-	public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img) {
+	public Usuario(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac, Imagen img) {
 		setNickname(nickname);
 		setNombre(nombre);
 		setApellido(apellido);
 		setCorreo(correo);
+		setContrasenia(contra);
 		setFechaNac(fechaNac);
 		setImagen(img);
+	}
+
+	public void setContrasenia(String contra) {
+		contrasenia = contra;
 	}
 
 	@Override

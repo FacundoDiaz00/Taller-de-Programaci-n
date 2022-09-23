@@ -36,6 +36,8 @@ public class AltaDeUsuario extends JInternalFrame {
 	private JTextField nacionalidad;
 	private JTextField descripcion;
 	private JTextField url;
+	private JTextField contra;
+	private JTextField confirmarContra;
 
 	/**
 	 * Create the frame.
@@ -45,7 +47,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		Fabrica fabrica = Fabrica.getInstancia();
 		this.contrUsuario = fabrica.getIControladorUsuario();
 		setTitle("Registrar Usuario");
-		setBounds(100, 100, 409, 328);
+		setBounds(100, 100, 450, 409);
 		getContentPane().setLayout(null);
 		setResizable(true);
 		setIconifiable(true);
@@ -55,12 +57,12 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		JLabel lblNewLabel = new JLabel("Nickname:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(40, 40, 77, 14);
+		lblNewLabel.setBounds(40, 38, 77, 14);
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel1 = new JLabel("Nombre:");
 		lblNewLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel1.setBounds(53, 65, 64, 14);
+		lblNewLabel1.setBounds(53, 64, 64, 14);
 		getContentPane().add(lblNewLabel1);
 
 		JLabel lblNewLabel11 = new JLabel("Apellido:");
@@ -69,18 +71,18 @@ public class AltaDeUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel11);
 
 		nombre = new JTextField();
-		nombre.setBounds(131, 61, 258, 20);
+		nombre.setBounds(131, 62, 258, 20);
 		getContentPane().add(nombre);
 		nombre.setColumns(10);
 
 		JLabel lblNewLabel111 = new JLabel("Correo:");
 		lblNewLabel111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel111.setBounds(64, 115, 53, 14);
+		lblNewLabel111.setBounds(64, 118, 53, 14);
 		getContentPane().add(lblNewLabel111);
 
 		JLabel lblNewLabel1111 = new JLabel("Fecha nacimiento:");
 		lblNewLabel1111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel1111.setBounds(7, 140, 110, 14);
+		lblNewLabel1111.setBounds(7, 199, 110, 14);
 		getContentPane().add(lblNewLabel1111);
 
 		JLabel lblNewLabel2 = new JLabel("Tipo de Usuario:");
@@ -95,17 +97,17 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		fechaNacimiento = new JTextField();
 		fechaNacimiento.setColumns(10);
-		fechaNacimiento.setBounds(131, 137, 258, 20);
+		fechaNacimiento.setBounds(131, 197, 258, 20);
 		getContentPane().add(fechaNacimiento);
 
 		apellido = new JTextField();
 		apellido.setColumns(10);
-		apellido.setBounds(131, 87, 258, 20);
+		apellido.setBounds(131, 89, 258, 20);
 		getContentPane().add(apellido);
 
 		correo = new JTextField();
 		correo.setColumns(10);
-		correo.setBounds(131, 109, 258, 20);
+		correo.setBounds(131, 116, 258, 20);
 		getContentPane().add(correo);
 
 		tipoUsuario = new JComboBox();
@@ -122,7 +124,7 @@ public class AltaDeUsuario extends JInternalFrame {
 				agregarUsuario(event);
 			}
 		});
-		btnAceptar.setBounds(272, 259, 117, 25);
+		btnAceptar.setBounds(272, 340, 117, 25);
 		getContentPane().add(btnAceptar);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -132,39 +134,59 @@ public class AltaDeUsuario extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(20, 259, 117, 25);
+		btnCancelar.setBounds(17, 340, 117, 25);
 		getContentPane().add(btnCancelar);
 
 		JLabel lblNewLabel11111 = new JLabel("Nacionalidad:");
 		lblNewLabel11111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel11111.setBounds(17, 165, 97, 14);
+		lblNewLabel11111.setBounds(20, 225, 97, 14);
 		getContentPane().add(lblNewLabel11111);
 
 		nacionalidad = new JTextField();
 		nacionalidad.setColumns(10);
-		nacionalidad.setBounds(131, 163, 258, 20);
+		nacionalidad.setBounds(131, 224, 258, 20);
 		getContentPane().add(nacionalidad);
 		nacionalidad.setEnabled(false);
 
 		JLabel lblNewLabel111111 = new JLabel("URL:");
 		lblNewLabel111111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel111111.setBounds(20, 218, 97, 14);
+		lblNewLabel111111.setBounds(20, 280, 97, 14);
 		getContentPane().add(lblNewLabel111111);
 
 		descripcion = new JTextField();
 		descripcion.setColumns(10);
-		descripcion.setBounds(131, 189, 258, 20);
+		descripcion.setBounds(131, 251, 258, 20);
 		getContentPane().add(descripcion);
 
 		JLabel lblNewLabel1111111 = new JLabel("Descripción:");
 		lblNewLabel1111111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel1111111.setBounds(20, 192, 97, 14);
+		lblNewLabel1111111.setBounds(20, 251, 97, 14);
 		getContentPane().add(lblNewLabel1111111);
 
 		url = new JTextField();
 		url.setColumns(10);
-		url.setBounds(131, 215, 258, 20);
+		url.setBounds(131, 278, 258, 20);
 		getContentPane().add(url);
+		
+		contra = new JTextField();
+		contra.setBounds(131, 143, 258, 20);
+		getContentPane().add(contra);
+		contra.setColumns(10);
+		
+		confirmarContra = new JTextField();
+		confirmarContra.setColumns(10);
+		confirmarContra.setBounds(131, 170, 258, 20);
+		getContentPane().add(confirmarContra);
+		
+		JLabel lblContrasea = new JLabel("Contraseña:");
+		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblContrasea.setBounds(17, 144, 100, 14);
+		getContentPane().add(lblContrasea);
+		
+		JLabel lblConfirmarContrasea = new JLabel("Confirmar Contraseña:");
+		lblConfirmarContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConfirmarContrasea.setBounds(17, 172, 100, 14);
+		getContentPane().add(lblConfirmarContrasea);
 
 		tipoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -197,18 +219,24 @@ public class AltaDeUsuario extends JInternalFrame {
 					&& (descripcion.getText().isBlank() || nombre.getText().isBlank() || apellido.getText().isBlank()
 							|| nickname.getText().isBlank() || fechaNacimiento.getText().isBlank())) {
 				JOptionPane.showMessageDialog(null,
-						"Los campos nombre, apellido, nickname, correo, fecha de nacimiento y descripción son obligatorios",
+						"Los campos nombre, apellido, nickname, correo, contaseña, confirmar contraseña, fecha de nacimiento y descripción son obligatorios",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}			
+			if (contra.getText().toString().compareTo(confirmarContra.getText().toString()) != 0) {
+				JOptionPane.showMessageDialog(null, "La confirmación debe coincidir con la contraseña",
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			
 			DateTimeFormatter jeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			fechaNac = LocalDate.parse(fecha, jeFormatter);
 			// Todo falta verificar los campos obligatorios
 			if (tipoUsuario.getSelectedItem().toString().equals(opcionProveedor)) {
-				contrUsuario.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac,
+				contrUsuario.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), contra.getText(), fechaNac,
 						null, descripcion.getText(), url.getText());
 			} else {
-				contrUsuario.altaTurista(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), fechaNac,
+				contrUsuario.altaTurista(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), contra.getText(), fechaNac,
 						null, nacionalidad.getText());
 			}
 			limpiarFormulario();
@@ -234,6 +262,8 @@ public class AltaDeUsuario extends JInternalFrame {
 		apellido.setText("");
 		nickname.setText("");
 		correo.setText("");
+		contra.setText("");
+		confirmarContra.setText("");
 		fechaNacimiento.setText("");
 		nacionalidad.setText("");
 		url.setText("");

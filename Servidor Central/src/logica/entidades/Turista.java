@@ -25,9 +25,9 @@ public class Turista extends Usuario {
 	private Set<Compra> compras;
 	private Set<Inscripcion> inscripciones;
 
-	public Turista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img,
+	public Turista(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac, Imagen img,
 			String nacionalidad) {
-		super(nickname, nombre, apellido, correo, fechaNac, img);
+		super(nickname, nombre, apellido, correo, contra, fechaNac, img);
 		setNacionalidad(nacionalidad);
 		setCompras(new HashSet<>());
 		setInscripciones(new HashSet<>());
