@@ -165,5 +165,10 @@ public class ControladorMaestro implements IControladorMaestro {
 		ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
 		ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
 		ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
+		
+		// Agregar Categorias tentativas
+		icat.altaCategoria("Gastronomía");
+		icat.altaCategoria("Hotelería");
+		icat.altaCategoria("Recorrida");
 	}
 }
