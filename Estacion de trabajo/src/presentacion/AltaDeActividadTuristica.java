@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -31,6 +32,8 @@ import logica.datatypes.DTInscripcion;
 import javax.swing.JList;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class AltaDeActividadTuristica extends JInternalFrame {
 
@@ -46,6 +49,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private JTextField ciudad;
 	private JTextField fDeAlta;
 	private JList<String> categoriasList;
+	private List<Integer> categoriasSeleccionadas = new ArrayList<Integer>();
 
 	/**
 	 * Create the frame.
@@ -212,9 +216,20 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		getContentPane().add(lblCategorias);
 		
 		JList listCategorias = new JList();
+		listCategorias.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				int indice = categoriasList.getSelectedIndex();
+				categoriasSeleccionadas.add(indice);
+				//Se castea la lista a un array de int primivitos
+				//int[] ints = Arrays.stream(categoriasSeleccionadas.toArray()).mapToInt(o -> (int) o).toArray();
+				//categoriasList.setSelectedIndices(ints);
+			}
+		});
 		listCategorias.setBounds(131, 216, 256, 110);
 		getContentPane().add(listCategorias);
 		categoriasList = listCategorias;
+		categoriasList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		listCategorias.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 	}
 
 	private void agregarAT(ActionEvent action) {
@@ -305,6 +320,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		descripcion.setText("");
 		comboProveedores.setModel(new DefaultComboBoxModel<>(new String[0]));
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
+		
 		duracion.setText("");
 		costo.setText("");
 		ciudad.setText("");
