@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -24,6 +26,11 @@ import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTInscripcion;
+
+import javax.swing.JList;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class AltaDeActividadTuristica extends JInternalFrame {
 
@@ -38,15 +45,22 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private IControladorActividadTuristica contrAct;
 	private JTextField ciudad;
 	private JTextField fDeAlta;
+	private JList<String> categoriasList;
 
 	/**
 	 * Create the frame.
 	 */
 	public AltaDeActividadTuristica(IControladorActividadTuristica contrAct) {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				actualizarListaCategorias();
+			}
+		});
 		Fabrica fabrica = Fabrica.getInstancia();
 		this.contrAct = fabrica.getIControladorActividadTuristica();
 		setTitle("Alta de Actividad Turística");
-		setBounds(100, 100, 409, 328);
+		setBounds(100, 100, 409, 409);
 		getContentPane().setLayout(null);
 		setResizable(true);
 		setIconifiable(true);
@@ -179,7 +193,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		fDeAlta.setColumns(10);
 		fDeAlta.setBounds(131, 189, 258, 20);
 		getContentPane().add(fDeAlta);
-		btnNewButton.setBounds(272, 259, 117, 25);
+		btnNewButton.setBounds(270, 340, 117, 25);
 		getContentPane().add(btnNewButton);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -189,8 +203,18 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 259, 117, 25);
+		btnCancelar.setBounds(7, 340, 117, 25);
 		getContentPane().add(btnCancelar);
+		
+		JLabel lblCategorias = new JLabel("Categorías:");
+		lblCategorias.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCategorias.setBounds(17, 217, 110, 15);
+		getContentPane().add(lblCategorias);
+		
+		JList listCategorias = new JList();
+		listCategorias.setBounds(131, 216, 256, 110);
+		getContentPane().add(listCategorias);
+		categoriasList = listCategorias;
 	}
 
 	private void agregarAT(ActionEvent action) {
@@ -266,6 +290,14 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	public void actualizarComboDepartamentos() {
 		List<String> deptos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deptos.toArray()));
+	}
+	
+	public void actualizarListaCategorias() {
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for (String idCat : contrAct.obtenerIdCategorias()) {
+			listModel.addElement(idCat);
+		}
+		categoriasList.setModel(listModel);
 	}
 
 	private void limpiarFormulario() {

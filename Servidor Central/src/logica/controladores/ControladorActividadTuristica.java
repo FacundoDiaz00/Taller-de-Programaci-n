@@ -284,5 +284,4 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			throw new CategoriaYaRegistradaException("La categoria " + nombre + " ya existe en el sistema.");
 		}
 	}
-
 }
