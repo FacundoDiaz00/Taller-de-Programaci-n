@@ -39,6 +39,7 @@
 	
         <div id="titulo">
             <h1>Consulta de Paquete </h1>
+        </div>
         
 
 	        <div id="info-paquete">
@@ -138,7 +139,7 @@
                
             </div>
         </div>
-		</div>
+		
     </section>
 </main>
 
