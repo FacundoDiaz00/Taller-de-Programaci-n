@@ -48,7 +48,7 @@ public class DTActividadTuristica {
 	}
 
 	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
-			LocalDate fechaAlta, String nicknameProveedor) {
+			LocalDate fechaAlta, String nicknameProveedor, String departamento) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.costoPorTurista = costoPorTurista;
@@ -56,6 +56,7 @@ public class DTActividadTuristica {
 		this.duracion = duracion;
 		this.fechaAlta = fechaAlta;
 		this.nicknameProveedor = nicknameProveedor;
+		this.departamento = departamento;
 	}
 
 	public String getDepartamento() {

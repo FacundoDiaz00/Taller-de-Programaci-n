@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="" />
+    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/datatypes/DTActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/datatypes/DTActividadTuristica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/datatypes/DTActividadTuristicaDetalle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/datatypes/DTActividadTuristicaDetalle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/ActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/ActividadTuristica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,23 +20,27 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2F5zEZRHoSNIoqrCw2VrguXjnEB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Daniel Padron/Documents/tpgr16/Servidor Central&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Daniel Padron/Documents/tpgr16/Servidor Central",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -53,6 +64,7 @@
       <updated>1663796621648</updated>
       <workItem from="1663796622840" duration="270000" />
       <workItem from="1663797093722" duration="5584000" />
+      <workItem from="1664002947512" duration="161000" />
     </task>
     <servers />
   </component>
@@ -75,7 +87,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java</url>
-          <line>37</line>
+          <line>39</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
