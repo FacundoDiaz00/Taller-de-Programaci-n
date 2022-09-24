@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.datatypes.DTPaqueteDetalles;
-import serversContext.Utiles;
+import utils.Utiles;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
  */
-@WebServlet("/ConsultaPaqueteServlet")
+@WebServlet("/ConsultaPaquete")
 public class ConsultaPaqueteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

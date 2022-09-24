@@ -53,7 +53,7 @@
 			                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
 			                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
 			                                <div class="botonera">
-			                                    <a href="ConsultaActividadServlet?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver mas</a>
+			                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver mas</a>
 			                                </div>
 			                            </div>
 			                        </div>
@@ -89,7 +89,7 @@
                                 <h5 class="card-title"><%= pack.getNombre()%> </h5>
                                 <p class="card-text descripcion-paquete"><%= pack.getDescrpicion()%> </p>
                                 <div class="botonera">
-                                    <a href="ConsultaPaqueteServlet?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver mas</a>
+                                    <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver mas</a>
                                 </div>
 
                             </div>
