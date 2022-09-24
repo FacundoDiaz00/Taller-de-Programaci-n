@@ -19,7 +19,7 @@ public class ControladorMaestro implements IControladorMaestro {
 
 		// FIXME
 		var categorias = new ArrayList<String>();
-		var img = new Imagen(null, null);
+		Imagen img = null;
 
 		// Cargo Departamentos
 		icat.altaDepartamento("Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es");
@@ -158,7 +158,7 @@ public class ControladorMaestro implements IControladorMaestro {
 				LocalDate.of(2022, 8, 10), img); // todo falta la fecha de alta
 		ipack.altaPaquete("Un día en Colonia",
 				"Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15,
-				LocalDate.of(2022, 8, 10), img); // todo falta la fecha de alta
+				LocalDate.of(2022, 10, 10), img); // todo falta la fecha de alta
 
 		// Agregar Actividad a Paquete
 		ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");

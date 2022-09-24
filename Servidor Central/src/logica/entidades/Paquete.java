@@ -35,6 +35,8 @@ public class Paquete {
 		setValidez(validez);
 		setDescuento(descuento);
 		setActividades(new HashMap<>());
+		if (fechaR == null)
+			fechaR = LocalDate.now();
 		setFechaDeRegistro(fechaR);
 		setCompras(new ArrayList<Compra>());
 		setCategorias(new ArrayList<Categoria>());
@@ -58,7 +60,8 @@ public class Paquete {
 			compras.add(comp.obtenerDTCompra());
 		}
 
-		return new DTPaqueteDetalles(nombre, descrpicion, descuento, validez, categorias, img, mapDtAct, compras);
+		return new DTPaqueteDetalles(nombre, descrpicion, descuento, validez, categorias, fechaDeRegistro, img,
+				mapDtAct, compras);
 	}
 
 	public DTPaquete obtenerDTPaquete() {
@@ -68,7 +71,7 @@ public class Paquete {
 			cats.add(cat.getNombre());
 		}
 
-		return new DTPaquete(nombre, descrpicion, descuento, validez, cats, img);
+		return new DTPaquete(nombre, descrpicion, descuento, validez, cats, fechaDeRegistro, img);
 	}
 
 	@Override
