@@ -2,7 +2,8 @@ package logica.controladores;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import excepciones.TurismoUyException;
 import logica.datatypes.Imagen;
@@ -18,7 +19,14 @@ public class ControladorMaestro implements IControladorMaestro {
 		IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();
 
 		// FIXME
-		var categorias = new ArrayList<String>();
+		String[] categoriasArray = { "Gastronomía", "Hotelería", "Recorrida" };
+
+		List<String> categorias = Arrays.asList(categoriasArray);
+
+		for (var cat : categorias) {
+			icat.altaCategoria(cat);
+		}
+
 		Imagen img = null;
 
 		// Cargo Departamentos
@@ -165,5 +173,6 @@ public class ControladorMaestro implements IControladorMaestro {
 		ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
 		ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
 		ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
+
 	}
 }
