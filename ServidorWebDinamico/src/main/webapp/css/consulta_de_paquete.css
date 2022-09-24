@@ -12,6 +12,10 @@
     margin-left: 5px;
 }
 
+#contenedor-actividades-turisticas , #contenedor-compra{
+	padding: 10px;
+}
+
 #menu-lateral{
     grid-row-start: 1;
     grid-row-end: 3;
