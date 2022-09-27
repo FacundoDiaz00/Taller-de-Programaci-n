@@ -39,10 +39,8 @@ public class ConsultaPaqueteServlet extends HttpServlet {
 
 			req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_paquete.jsp").forward(req, resp);
 		} catch (ObjetoNoExisteEnTurismoUy e) {
-			req.setAttribute("motivoDeError",
-					"No se puede ingresar el parametro idDepartamento y idCategoria a la vez");
+			req.setAttribute("motivoDeError", "No existe un paquete con ese nombre");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-			return;
 		}
 
 	}

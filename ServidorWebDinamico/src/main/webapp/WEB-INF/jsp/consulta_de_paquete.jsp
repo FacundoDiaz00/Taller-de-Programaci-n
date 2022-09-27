@@ -84,24 +84,33 @@
 	
 	        </div>
 	
+			
 	        <div id="actividades-compra-turisticas">
-	            <div class="card" id="contenedor-compra">
-	                <div class="header-card-with-button">
-	                    <h2 class="card-title">Compra paquete</h2>
-	                </div>
-	                <div class="row g-0">
-	                    <form action="" id="form-comprar">
-	                        <div class="contenedorinput mb-3">
-	                            <span class="input-label">Cantidad turistas</span> </span>
-	                            <input id="input-cantidad-turistas" type="number" required class="form-control" placeholder="Ingrese la cantidad de turistas para la compra" aria-label="" aria-describedby="basic-addon1">
-	                        </div>
-	                        <div id="div-comprar">
-	                            <input type="submit" id="comprar-boton" class="btn btn-success" value="Comprar">
-	                        </div>
-	
-	                    </form>
-	                </div>
-	            </div>
+	        	<% 
+	        		boolean usuarioLogueado = true; // FIXME cuando haya sesiónes
+	        		
+	        		// Muestro el form de compra solo si estoy logueado
+	        		if (usuarioLogueado) { %>
+			            <div class="card" id="contenedor-compra">
+			                <div class="header-card-with-button">
+			                    <h2 class="card-title">Compra paquete</h2>
+			                </div>
+			                <div class="row g-0">
+			                    <form id="form-comprar" action="CompraPaquete" method="post">
+			                        <div class="contenedorinput mb-3">
+			                            <span class="input-label">Cantidad turistas</span> </span>
+			                            <input name="cant_turistas" type="number" required class="form-control" placeholder="Ingrese la cantidad de turistas para la compra" aria-label="" aria-describedby="basic-addon1">
+			                        </div>
+				                    <div id="invisible_div" style="display: none;">
+				                    	<input type="text" name="nombre_paquete" value="<%=paquete.getNombre()%>">
+				                    </div>
+			                        <div id="div-comprar">
+			                            <input type="submit" id="comprar-boton" class="btn btn-success" value="Comprar">
+			                        </div>
+			                    </form>
+			                </div>
+			            </div>
+	        		<% } %>
 
 	            <div class="card" id="contenedor-actividades-turisticas">
 	                <div class="header-card-with-button">
