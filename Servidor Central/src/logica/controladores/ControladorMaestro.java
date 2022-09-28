@@ -175,8 +175,8 @@ public class ControladorMaestro implements IControladorMaestro {
 		ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
 		
 		// Agregar Categorias tentativas
-		icat.altaCategoria("Gastronomía");
-		icat.altaCategoria("Hotelería");
-		icat.altaCategoria("Recorrida");
+		//icat.altaCategoria("Gastronomía");
+		//icat.altaCategoria("Hotelería");
+		//icat.altaCategoria("Recorrida");
 	}
 }

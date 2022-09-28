@@ -49,8 +49,10 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private JTextField ciudad;
 	private JTextField fDeAlta;
 	private JList<String> categoriasList;
-	private List<Integer> categoriasSeleccionadas = new ArrayList<Integer>();
-
+	private JList<String> seleccionList;
+	private DefaultListModel<String> listModelSeleccion = new DefaultListModel<>();
+	private DefaultListModel<String> listModelCategorias;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -210,26 +212,63 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		btnCancelar.setBounds(7, 340, 117, 25);
 		getContentPane().add(btnCancelar);
 		
-		JLabel lblCategorias = new JLabel("Categorías:");
-		lblCategorias.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCategorias.setBounds(17, 217, 110, 15);
+		JLabel lblCategorias = new JLabel("Categorías");
+		lblCategorias.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCategorias.setBounds(7, 217, 151, 15);
 		getContentPane().add(lblCategorias);
 		
 		JList listCategorias = new JList();
-		listCategorias.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				int indice = categoriasList.getSelectedIndex();
-				categoriasSeleccionadas.add(indice);
-				//Se castea la lista a un array de int primivitos
-				//int[] ints = Arrays.stream(categoriasSeleccionadas.toArray()).mapToInt(o -> (int) o).toArray();
-				//categoriasList.setSelectedIndices(ints);
-			}
-		});
-		listCategorias.setBounds(131, 216, 256, 110);
+		listCategorias.setBounds(12, 233, 139, 95);
 		getContentPane().add(listCategorias);
 		categoriasList = listCategorias;
-		categoriasList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		listCategorias.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		
+		JLabel lblSeleccion = new JLabel("Selección");
+		lblSeleccion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeleccion.setBounds(250, 217, 137, 15);
+		getContentPane().add(lblSeleccion);
+		
+		JList listSeleccion = new JList();
+		listSeleccion.setBounds(250, 233, 139, 95);
+		getContentPane().add(listSeleccion);
+		seleccionList = listSeleccion;
+		seleccionList.setModel(listModelSeleccion);
+		
+		JButton btnDerecha = new JButton(">");
+		btnDerecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String elem = categoriasList.getSelectedValue();
+				if (elem != null) {
+					listModelSeleccion.addElement(elem);
+					listModelCategorias.removeElement(elem);
+				}
+					
+			}
+		});
+		btnDerecha.setBounds(171, 233, 59, 25);
+		getContentPane().add(btnDerecha);
+		
+		JButton btnIzquierda = new JButton("<");
+		btnIzquierda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String elem = seleccionList.getSelectedValue();
+				if (elem != null) {
+					listModelCategorias.addElement(elem);
+					listModelSeleccion.removeElement(elem);
+				}
+			}
+		});
+		btnIzquierda.setBounds(171, 303, 59, 25);
+		getContentPane().add(btnIzquierda);
+		
+		JButton btnClear = new JButton("CLR");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listModelSeleccion.clear();
+				actualizarListaCategorias();
+			}
+		});
+		btnClear.setBounds(163, 266, 75, 25);
+		getContentPane().add(btnClear);
 	}
 
 	private void agregarAT(ActionEvent action) {
@@ -308,11 +347,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	}
 	
 	public void actualizarListaCategorias() {
-		DefaultListModel<String> listModel = new DefaultListModel<>();
+		listModelCategorias = new DefaultListModel<>();
 		for (String idCat : contrAct.obtenerIdCategorias()) {
-			listModel.addElement(idCat);
+			listModelCategorias.addElement(idCat);
 		}
-		categoriasList.setModel(listModel);
+		categoriasList.setModel(listModelCategorias);
 	}
 
 	private void limpiarFormulario() {

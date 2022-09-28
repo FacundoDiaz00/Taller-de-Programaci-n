@@ -277,7 +277,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 	public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {
 		ManejadorCategoria mc = ManejadorCategoria.getInstancia();
-		if(!mc.exists(nombre)){
+		if (!mc.exists(nombre)){
 			Categoria cat = new Categoria(nombre);
 			mc.addCategoria(cat);
 		} else {
