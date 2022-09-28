@@ -201,6 +201,6 @@ public interface IControladorActividadTuristica {
 
 	List<String> obtenerIdActividadesTuristicasAgregadas();
 
-	void aceptarORechazarActividadTuristica(String idActividad, boolean b) throws ObjetoNoExisteEnTurismoUy;
+	void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada) throws ObjetoNoExisteEnTurismoUy;
 
 }

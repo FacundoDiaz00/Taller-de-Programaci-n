@@ -82,8 +82,13 @@ public class ActividadTuristica {
 	}
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
+		List<String> listaIdCats = new ArrayList<>();
+		for (String idCat : categorias.keySet()) {
+			listaIdCats.add(idCat);
+		}
+		
 		return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
-				getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre());
+				getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre(), listaIdCats);
 	}
 
 	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
@@ -95,9 +100,13 @@ public class ActividadTuristica {
 		for (SalidaTuristica sal : salidas.values()) {
 			salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
 		}
+		List<String> listaIdCats = new ArrayList<>();
+		for (String idCat : categorias.keySet()) {
+			listaIdCats.add(idCat);
+		}
 
 		return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
-				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre());
+				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre(), listaIdCats);
 	}
 
 	@Override
