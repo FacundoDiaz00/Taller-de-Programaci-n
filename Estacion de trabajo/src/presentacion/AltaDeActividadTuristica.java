@@ -274,8 +274,11 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private void agregarAT(ActionEvent action) {
 
 		try {
-			// FIXME llenar esta list con las categorias
 			List<String> categorias = new ArrayList<>();
+			for (int i = 0; i< seleccionList.getModel().getSize(); i++){
+				categorias.add(seleccionList.getModel().getElementAt(i));
+			}
+			categorias.sort(null);
 
 			String prov;
 			if (comboProveedores.getSelectedItem() == null) {
@@ -307,6 +310,12 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 					|| costo.getText().isBlank()) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, descripción, duración, ciudad y costo son obligatorios", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (categorias.isEmpty()) {
+				JOptionPane.showMessageDialog(null,
+						"Se debe seleccionar por lo menos una categoría", "Error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
@@ -359,7 +368,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		descripcion.setText("");
 		comboProveedores.setModel(new DefaultComboBoxModel<>(new String[0]));
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
-		
+		listModelSeleccion.clear();
 		duracion.setText("");
 		costo.setText("");
 		ciudad.setText("");
