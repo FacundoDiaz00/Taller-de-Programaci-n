@@ -2,7 +2,8 @@ package logica.controladores;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import excepciones.TurismoUyException;
 import logica.datatypes.Imagen;
@@ -18,8 +19,15 @@ public class ControladorMaestro implements IControladorMaestro {
 		IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();
 
 		// FIXME
-		var categorias = new ArrayList<String>();
-		var img = new Imagen(null, null);
+		String[] categoriasArray = { "Gastronomía", "Hotelería", "Recorrida" };
+
+		List<String> categorias = Arrays.asList(categoriasArray);
+
+		for (var cat : categorias) {
+			icat.altaCategoria(cat);
+		}
+
+		Imagen img = null;
 
 		// Cargo Departamentos
 		icat.altaDepartamento("Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es");
@@ -158,7 +166,7 @@ public class ControladorMaestro implements IControladorMaestro {
 				LocalDate.of(2022, 8, 10), img); // todo falta la fecha de alta
 		ipack.altaPaquete("Un día en Colonia",
 				"Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15,
-				LocalDate.of(2022, 8, 10), img); // todo falta la fecha de alta
+				LocalDate.of(2022, 10, 10), img); // todo falta la fecha de alta
 
 		// Agregar Actividad a Paquete
 		ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");

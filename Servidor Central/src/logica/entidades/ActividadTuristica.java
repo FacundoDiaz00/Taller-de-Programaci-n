@@ -39,6 +39,8 @@ public class ActividadTuristica {
 	private Proveedor proveedor;
 	private Map<String, Categoria> categorias;
 
+	private Departamento departamento;
+
 	public ActividadTuristica(String nombreProveedor, String departamento, String nombre, String descrpicion,
 			int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta, Imagen img,
 			List<String> categorias) throws ObjetoNoExisteEnTurismoUy {
@@ -61,6 +63,7 @@ public class ActividadTuristica {
 		// Se agrega la relacion con el departamento:
 		ManejadorDepartamento manejadorDep = ManejadorDepartamento.getInstancia();
 		Departamento depObject = manejadorDep.getDepartamento(departamento);
+		this.departamento = depObject;
 		depObject.asociarActividadTuristica(this);
 
 		// Se agrega la relacion con el proveedor:
@@ -80,7 +83,7 @@ public class ActividadTuristica {
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
 		return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
-				getFechaAlta(), getProveedor().getNickname());
+				getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre());
 	}
 
 	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
@@ -94,7 +97,7 @@ public class ActividadTuristica {
 		}
 
 		return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
-				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname());
+				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre());
 	}
 
 	@Override
@@ -216,5 +219,13 @@ public class ActividadTuristica {
 
 	public void setImagen(Imagen img) {
 		this.img = img;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 }

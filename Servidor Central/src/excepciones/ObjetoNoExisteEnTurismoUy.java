@@ -10,4 +10,8 @@ public class ObjetoNoExisteEnTurismoUy extends TurismoUyException {
 		this.claseNombre = clase.getSimpleName();
 	}
 
+	public String getClaseObjetoFaltante() {
+		return claseNombre;
+	}
+
 }
