@@ -14,6 +14,8 @@ import javax.swing.SwingUtilities;
 
 import logica.controladores.IControladorPaquete;
 import logica.datatypes.DTPaqueteDetalles;
+import javax.swing.SwingConstants;
+import javax.swing.JList;
 
 public class ConsultaDePaquete extends JInternalFrame {
 	
@@ -44,51 +46,57 @@ public class ConsultaDePaquete extends JInternalFrame {
 		setClosable(true);
 		setIconifiable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 450, 382);
+		setBounds(100, 100, 450, 450);
 		getContentPane().setLayout(null);
 
-		JLabel lblPaqueteAConsultar = new JLabel("Paquete a consultar:");
-		lblPaqueteAConsultar.setBounds(12, 40, 154, 15);
+		JLabel lblPaqueteAConsultar = new JLabel("Paquete:");
+		lblPaqueteAConsultar.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPaqueteAConsultar.setBounds(64, 35, 81, 15);
 		getContentPane().add(lblPaqueteAConsultar);
 
 		paquete = new JComboBox();
 
-		paquete.setBounds(163, 35, 239, 24);
+		paquete.setBounds(163, 30, 239, 24);
 		getContentPane().add(paquete);
 
 		JLabel lblPeriodoDeValidez = new JLabel("Período de validez:");
-		lblPeriodoDeValidez.setBounds(11, 102, 136, 15);
+		lblPeriodoDeValidez.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPeriodoDeValidez.setBounds(12, 96, 136, 15);
 		getContentPane().add(lblPeriodoDeValidez);
 
 		JLabel lblNewLabel = new JLabel("Descuento:");
-		lblNewLabel.setBounds(11, 132, 81, 15);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(67, 129, 81, 15);
 		getContentPane().add(lblNewLabel);
 
 		perVal = new JTextPane();
-		perVal.setBounds(150, 96, 221, 21);
+		perVal.setBounds(163, 96, 239, 21);
 		getContentPane().add(perVal);
 		perVal.setEditable(false);
 
 		JLabel label = new JLabel("%");
-		label.setBounds(376, 132, 24, 15);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(390, 129, 12, 15);
 		getContentPane().add(label);
 
 		JLabel lblDescripcion = new JLabel("Descripción:");
-		lblDescripcion.setBounds(12, 150, 115, 15);
+		lblDescripcion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDescripcion.setBounds(26, 162, 122, 15);
 		getContentPane().add(lblDescripcion);
 
 		descr = new JTextPane();
-		descr.setBounds(12, 174, 401, 107);
+		descr.setBounds(163, 162, 239, 89);
 		getContentPane().add(descr);
 		descr.setEditable(false);
 
 		JLabel lblActividadTurisitica = new JLabel("Actividad Turística:");
-		lblActividadTurisitica.setBounds(12, 300, 154, 15);
+		lblActividadTurisitica.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblActividadTurisitica.setBounds(12, 268, 136, 15);
 		getContentPane().add(lblActividadTurisitica);
 
 		actividad = new JComboBox();
 		actividad.setEnabled(false);
-		actividad.setBounds(152, 295, 261, 24);
+		actividad.setBounds(163, 263, 239, 24);
 		getContentPane().add(actividad);
 
 		actividad.addActionListener(new ActionListener() {
@@ -98,7 +106,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 		});
 
 		JTextPane descuentoPane = new JTextPane();
-		descuentoPane.setBounds(149, 126, 222, 21);
+		descuentoPane.setBounds(163, 129, 220, 21);
 		getContentPane().add(descuentoPane);
 		this.descuento = descuentoPane;
 		descuentoPane.setEditable(false);
@@ -110,8 +118,17 @@ public class ConsultaDePaquete extends JInternalFrame {
 				seSeleccionoUnPaquete();
 			}
 		});
-		btnNewButton.setBounds(313, 69, 115, 21);
+		btnNewButton.setBounds(287, 63, 115, 21);
 		getContentPane().add(btnNewButton);
+		
+		JLabel lblCategorias = new JLabel("Categorías");
+		lblCategorias.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCategorias.setBounds(41, 295, 107, 15);
+		getContentPane().add(lblCategorias);
+		
+		JList list = new JList();
+		list.setBounds(163, 295, 239, 89);
+		getContentPane().add(list);
 	}
 
 	@Override
