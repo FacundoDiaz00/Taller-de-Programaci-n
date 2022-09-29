@@ -12,5 +12,7 @@
     
     <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.slim.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>    
+    <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/sweetalert2.all.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/comportamientoComun.js"></script>      
     
