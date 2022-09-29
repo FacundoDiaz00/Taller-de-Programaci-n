@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -33,6 +34,7 @@ public class ConsultaDePaquete extends JInternalFrame {
 	private JTextPane descr;
 	private JTextPane descuento;
 	private JComboBox actividad;
+	private JList listCategorias;
 
 	/**
 	 * Create the frame.
@@ -126,9 +128,9 @@ public class ConsultaDePaquete extends JInternalFrame {
 		lblCategorias.setBounds(41, 295, 107, 15);
 		getContentPane().add(lblCategorias);
 		
-		JList list = new JList();
-		list.setBounds(163, 295, 239, 89);
-		getContentPane().add(list);
+		listCategorias = new JList();
+		listCategorias.setBounds(163, 295, 239, 89);
+		getContentPane().add(listCategorias);
 	}
 
 	@Override
@@ -169,8 +171,19 @@ public class ConsultaDePaquete extends JInternalFrame {
 
 			var nombresAct = paqueteDetalles.getActividades().keySet();
 			actividad.setModel(new DefaultComboBoxModel(nombresAct.toArray()));
+			
+			//mostrar categorias del paquete:
+			DefaultListModel<String> listModelCategorias = new DefaultListModel<>();
+			for (String idCat : paqueteDetalles.getCategorias()) {
+				listModelCategorias.addElement(idCat);
+			}
+			listCategorias.setModel(listModelCategorias);
+		
 		}
 		SwingUtilities.invokeLater(() -> desactivarMostrarConsultas = false);
+		
+		
+		
 	}
 
 	private void actualizarDTPaqueteDetalles() {
