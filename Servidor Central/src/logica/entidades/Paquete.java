@@ -133,6 +133,10 @@ public class Paquete {
 
 	public void agregarActividad(ActividadTuristica actividad) {
 		actividades.put(actividad.getNombre(), actividad);
+		for (Categoria cat : actividad.getCategorias().values()) {
+			if (!categorias.contains(cat))
+				categorias.add(cat);	
+		}
 	}
 
 	public void setImagen(Imagen img) {
