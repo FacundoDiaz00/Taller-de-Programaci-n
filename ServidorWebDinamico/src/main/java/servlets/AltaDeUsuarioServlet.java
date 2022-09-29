@@ -141,6 +141,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 				
 		req = Utiles.insertarLoDeSiempre(req);
 
+		req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 
 	}
 
