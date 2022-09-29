@@ -65,36 +65,36 @@ public class ControladorMaestro implements IControladorMaestro {
 				"https://montevideo.gub.uy/areas-tematicas/turismo");
 
 		// Cargo Turistas
-		iuser.altaTurista("lachiqui", "Rosa María", "Martínez", "mirtha.legrand.ok@hotmail.com.ar",
+		iuser.altaTurista("lachiqui", "Rosa María", "Martínez", "mirtha.legrand.ok@hotmail.com.ar", "1234",
 				LocalDate.of(1927, 2, 23), img, "argentina");
-		iuser.altaTurista("isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", LocalDate.of(1926, 4, 21),
+		iuser.altaTurista("isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", "1234", LocalDate.of(1926, 4, 21),
 				img, "inglesa");
-		iuser.altaTurista("anibal", "Aníbal", "Lecter", "anibal@fing.edu.uy", LocalDate.of(1937, 12, 31), img,
+		iuser.altaTurista("anibal", "Aníbal", "Lecter", "anibal@fing.edu.uy", "1234", LocalDate.of(1937, 12, 31), img,
 				"lituana");
-		iuser.altaTurista("waston", "Emma", "Waston", "e.waston@gmail.com", LocalDate.of(1990, 4, 15), img, "inglesa");
-		iuser.altaTurista("elelvis", "Elvis", "Lacio", "suavemente@hotmail.com", LocalDate.of(1971, 7, 30), img,
+		iuser.altaTurista("waston", "Emma", "Waston", "e.waston@gmail.com", "1234", LocalDate.of(1990, 4, 15), img, "inglesa");
+		iuser.altaTurista("elelvis", "Elvis", "Lacio", "suavemente@hotmail.com","1234", LocalDate.of(1971, 7, 30), img,
 				"estadounidense");
-		iuser.altaTurista("eleven11", "Eleven", "Once", "eleven11@gmail.com", LocalDate.of(2004, 2, 19), img,
+		iuser.altaTurista("eleven11", "Eleven", "Once", "eleven11@gmail.com", "1234",LocalDate.of(2004, 2, 19), img,
 				"española");
-		iuser.altaTurista("bobesponja", "Bob", "Esponja", "bobesponja@nickelodeon.com", LocalDate.of(1999, 5, 1), img,
+		iuser.altaTurista("bobesponja", "Bob", "Esponja", "bobesponja@nickelodeon.com","1234", LocalDate.of(1999, 5, 1), img,
 				"japonesa");
-		iuser.altaTurista("tony", "Antonio", "Pacheco", "eltony@manya.org.uy", LocalDate.of(1976, 4, 11), img,
+		iuser.altaTurista("tony", "Antonio", "Pacheco", "eltony@manya.org.uy","1234", LocalDate.of(1976, 4, 11), img,
 				"uruguaya");
-		iuser.altaTurista("chino", "Álvaro", "Recoba", "chino@trico.org.uy", LocalDate.of(1976, 3, 17), img,
+		iuser.altaTurista("chino", "Álvaro", "Recoba", "chino@trico.org.uy","1234", LocalDate.of(1976, 3, 17), img,
 				"uruguaya");
-		iuser.altaTurista("mastropiero", "Johann Sebastian", "Mastropiero", "johann.sebastian@gmail.com",
+		iuser.altaTurista("mastropiero", "Johann Sebastian", "Mastropiero", "johann.sebastian@gmail.com","1234",
 				LocalDate.of(1922, 2, 7), img, "austríaca");
 
 		// Cargo Proveedores
-		iuser.altaProveedor("washington", "Washington", "Rocha", "washington@turismorocha.gub.uy",
+		iuser.altaProveedor("washington", "Washington", "Rocha", "washington@turismorocha.gub.uy","1234",
 				LocalDate.of(1970, 9, 14), img,
 				"Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha Uruguay",
 				"http://turismorocha.gub.uy/");
-		iuser.altaProveedor("eldiez", "Pablo", "Bengoechea", "eldiez@socfomturriv.org.uy", LocalDate.of(1965, 6, 27),
+		iuser.altaProveedor("eldiez", "Pablo", "Bengoechea", "eldiez@socfomturriv.org.uy", "1234", LocalDate.of(1965, 6, 27),
 				img,
 				"Pablo es el presidente de la Sociedad de Fomento Turístico de Rivera (conocida como Socfomturriv)",
 				"http://wwww.socfomturriv.org.uy/");
-		iuser.altaProveedor("meche", "Mercedes", "Venn", "meche@colonia.gub.uy", LocalDate.of(1990, 12, 31), img,
+		iuser.altaProveedor("meche", "Mercedes", "Venn", "meche@colonia.gub.uy", "1234", LocalDate.of(1990, 12, 31), img,
 				"Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
 
 		// Actividades
@@ -173,6 +173,10 @@ public class ControladorMaestro implements IControladorMaestro {
 		ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
 		ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
 		ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
-
+		
+		// Agregar Categorias tentativas
+		//icat.altaCategoria("Gastronomía");
+		//icat.altaCategoria("Hotelería");
+		//icat.altaCategoria("Recorrida");
 	}
 }

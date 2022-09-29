@@ -64,25 +64,25 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaTurista(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento,
+	public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra, LocalDate FNacimiento,
 			Imagen img, String nacionalidad) throws UsuarioYaRegistradoException {
 		ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
 		if (manUsr.existeUsuario(nickname, correo)) {
 			throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
 		}
 
-		Turista turista = new Turista(nickname, nombre, apellido, correo, FNacimiento, img, nacionalidad);
+		Turista turista = new Turista(nickname, nombre, apellido, correo, contra, FNacimiento, img, nacionalidad);
 		manUsr.addUsuario(turista);
 	}
 
 	@Override
-	public void altaProveedor(String nickname, String nombre, String apellido, String correo, LocalDate FNacimiento,
+	public void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra, LocalDate FNacimiento,
 			Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException {
 		ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
 		if (manUsr.existeUsuario(nickname, correo)) {
 			throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
 		}
-		Proveedor proveedor = new Proveedor(nickname, nombre, apellido, correo, FNacimiento, img, descripcion, link);
+		Proveedor proveedor = new Proveedor(nickname, nombre, apellido, correo, contra, FNacimiento, img, descripcion, link);
 		manUsr.addUsuario(proveedor);
 	}
 

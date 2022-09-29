@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -24,6 +27,13 @@ import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTInscripcion;
+
+import javax.swing.JList;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class AltaDeActividadTuristica extends JInternalFrame {
 
@@ -38,15 +48,25 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	private IControladorActividadTuristica contrAct;
 	private JTextField ciudad;
 	private JTextField fDeAlta;
-
+	private JList<String> categoriasList;
+	private JList<String> seleccionList;
+	private DefaultListModel<String> listModelSeleccion = new DefaultListModel<>();
+	private DefaultListModel<String> listModelCategorias;
+	
 	/**
 	 * Create the frame.
 	 */
 	public AltaDeActividadTuristica(IControladorActividadTuristica contrAct) {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				actualizarListaCategorias();
+			}
+		});
 		Fabrica fabrica = Fabrica.getInstancia();
 		this.contrAct = fabrica.getIControladorActividadTuristica();
 		setTitle("Alta de Actividad Turística");
-		setBounds(100, 100, 409, 328);
+		setBounds(100, 100, 409, 409);
 		getContentPane().setLayout(null);
 		setResizable(true);
 		setIconifiable(true);
@@ -179,7 +199,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		fDeAlta.setColumns(10);
 		fDeAlta.setBounds(131, 189, 258, 20);
 		getContentPane().add(fDeAlta);
-		btnNewButton.setBounds(272, 259, 117, 25);
+		btnNewButton.setBounds(270, 340, 117, 25);
 		getContentPane().add(btnNewButton);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -189,15 +209,76 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 259, 117, 25);
+		btnCancelar.setBounds(7, 340, 117, 25);
 		getContentPane().add(btnCancelar);
+		
+		JLabel lblCategorias = new JLabel("Categorías");
+		lblCategorias.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCategorias.setBounds(7, 217, 151, 15);
+		getContentPane().add(lblCategorias);
+		
+		JList listCategorias = new JList();
+		listCategorias.setBounds(12, 233, 139, 95);
+		getContentPane().add(listCategorias);
+		categoriasList = listCategorias;
+		
+		JLabel lblSeleccion = new JLabel("Selección");
+		lblSeleccion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeleccion.setBounds(250, 217, 137, 15);
+		getContentPane().add(lblSeleccion);
+		
+		JList listSeleccion = new JList();
+		listSeleccion.setBounds(250, 233, 139, 95);
+		getContentPane().add(listSeleccion);
+		seleccionList = listSeleccion;
+		seleccionList.setModel(listModelSeleccion);
+		
+		JButton btnDerecha = new JButton(">");
+		btnDerecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String elem = categoriasList.getSelectedValue();
+				if (elem != null) {
+					listModelSeleccion.addElement(elem);
+					listModelCategorias.removeElement(elem);
+				}
+					
+			}
+		});
+		btnDerecha.setBounds(171, 233, 59, 25);
+		getContentPane().add(btnDerecha);
+		
+		JButton btnIzquierda = new JButton("<");
+		btnIzquierda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String elem = seleccionList.getSelectedValue();
+				if (elem != null) {
+					listModelCategorias.addElement(elem);
+					listModelSeleccion.removeElement(elem);
+				}
+			}
+		});
+		btnIzquierda.setBounds(171, 303, 59, 25);
+		getContentPane().add(btnIzquierda);
+		
+		JButton btnClear = new JButton("CLR");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listModelSeleccion.clear();
+				actualizarListaCategorias();
+			}
+		});
+		btnClear.setBounds(163, 266, 75, 25);
+		getContentPane().add(btnClear);
 	}
 
 	private void agregarAT(ActionEvent action) {
 
 		try {
-			// FIXME llenar esta list con las categorias
 			List<String> categorias = new ArrayList<>();
+			for (int i = 0; i< seleccionList.getModel().getSize(); i++){
+				categorias.add(seleccionList.getModel().getElementAt(i));
+			}
+			categorias.sort(null);
 
 			String prov;
 			if (comboProveedores.getSelectedItem() == null) {
@@ -229,6 +310,12 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 					|| costo.getText().isBlank()) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, descripción, duración, ciudad y costo son obligatorios", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (categorias.isEmpty()) {
+				JOptionPane.showMessageDialog(null,
+						"Se debe seleccionar por lo menos una categoría", "Error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
@@ -267,12 +354,21 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 		List<String> deptos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
 		comboDepartamentos.setModel(new DefaultComboBoxModel(deptos.toArray()));
 	}
+	
+	public void actualizarListaCategorias() {
+		listModelCategorias = new DefaultListModel<>();
+		for (String idCat : contrAct.obtenerIdCategorias()) {
+			listModelCategorias.addElement(idCat);
+		}
+		categoriasList.setModel(listModelCategorias);
+	}
 
 	private void limpiarFormulario() {
 		nombre.setText("");
 		descripcion.setText("");
 		comboProveedores.setModel(new DefaultComboBoxModel<>(new String[0]));
 		comboDepartamentos.setModel(new DefaultComboBoxModel<>(new String[0]));
+		listModelSeleccion.clear();
 		duracion.setText("");
 		costo.setText("");
 		ciudad.setText("");

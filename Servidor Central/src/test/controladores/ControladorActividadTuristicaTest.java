@@ -218,7 +218,7 @@ class ControladorActividadTuristicaTest {
 
 			try {
 				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
-						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
+						nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException exception) {
 				// Esperable, no pasa nada.
 			}
@@ -267,7 +267,7 @@ class ControladorActividadTuristicaTest {
 			}
 
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException exception) {
 				// Esperable, no pasa nada.
@@ -322,7 +322,7 @@ class ControladorActividadTuristicaTest {
 			}
 
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException exception) {
 				// Esperable, no pasa nada.
@@ -400,7 +400,7 @@ class ControladorActividadTuristicaTest {
 			}
 
 			try {
-				contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
+				contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
 						fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException exception) {
 				// Esperable, no pasa nada.
@@ -503,7 +503,7 @@ class ControladorActividadTuristicaTest {
 		String nacionalidad = "CHINA";
 		LocalDate fNacimiento = localDateNow;
 		try {
-			contrUsuario.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
+			contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
 		} catch (UsuarioYaRegistradoException exception) {
 			fail(exception.getMessage());
 		}
@@ -529,7 +529,7 @@ class ControladorActividadTuristicaTest {
 			fail(exception.getMessage());
 		}
 		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 					nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 		} catch (UsuarioYaRegistradoException exception) {
 			// Esperable, no pasa nada.
@@ -598,9 +598,9 @@ class ControladorActividadTuristicaTest {
 		int cantMaxTuristas = 10;
 
 		try {
-			contrUsuario.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
+			contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
 			contrActTur.altaDepartamento(departamento, descripcion, departamento);
-			contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta,
+			contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta,
 					null, nombreProveedor, nombreProveedor);
 			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
 					costo, ciudad, fechaAlta, null, muestraCategorias);
@@ -636,9 +636,9 @@ class ControladorActividadTuristicaTest {
 		int cantMaxTuristas = 3;
 
 		try {
-			contrUsuario.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
+			contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
 			contrActTur.altaDepartamento(departamento, descripcion, departamento);
-			contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, localDateNow,
+			contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, localDateNow,
 					null, nombreProveedor, nombreProveedor);
 			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
 					costo, ciudad, localDateNow, null, muestraCategorias);
@@ -679,9 +679,9 @@ class ControladorActividadTuristicaTest {
 		int cantMaxTuristas = 3;
 
 		try {
-			contrUsuario.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
+			contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234",fNacimiento, null, nacionalidad);
 			contrActTur.altaDepartamento(departamento, descripcion, departamento);
-			contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta,
+			contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta,
 					null, nombreProveedor, nombreProveedor);
 			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
 					costo, ciudad, fechaAlta, null, muestraCategorias);
@@ -725,7 +725,7 @@ class ControladorActividadTuristicaTest {
 				// Esperable, no pasa nada.
 			}
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException exception) {
 				// Esperable, no pasa nada.
@@ -793,7 +793,7 @@ class ControladorActividadTuristicaTest {
 				// Esperable, no pasa nada.
 			}
 			try {
-				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+				Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 						nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 			} catch (UsuarioYaRegistradoException exception) {
 				// Esperable, no pasa nada.
@@ -851,7 +851,7 @@ class ControladorActividadTuristicaTest {
 			// Esperable, no pasa nada.
 		}
 		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 					nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 		} catch (UsuarioYaRegistradoException exception) {
 			// Esperable, no pasa nada.
@@ -894,7 +894,7 @@ class ControladorActividadTuristicaTest {
 			// Esperable, no pasa nada.
 		}
 		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor,
 					nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor, nombreProveedor);
 		} catch (UsuarioYaRegistradoException exception) {
 			// Esperable, no pasa nada.

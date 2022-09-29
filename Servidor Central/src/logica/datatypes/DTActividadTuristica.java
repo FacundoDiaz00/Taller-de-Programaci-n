@@ -48,7 +48,7 @@ public class DTActividadTuristica {
 	}
 
 	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
-			LocalDate fechaAlta, String nicknameProveedor, String departamento) {
+			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.costoPorTurista = costoPorTurista;
@@ -57,6 +57,7 @@ public class DTActividadTuristica {
 		this.fechaAlta = fechaAlta;
 		this.nicknameProveedor = nicknameProveedor;
 		this.departamento = departamento;
+		this.categorias = cats;
 	}
 
 	public String getDepartamento() {

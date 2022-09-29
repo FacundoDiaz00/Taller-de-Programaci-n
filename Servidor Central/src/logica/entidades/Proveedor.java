@@ -26,9 +26,9 @@ public class Proveedor extends Usuario {
 
 	private Map<String, ActividadTuristica> actividadesTuristicas;
 
-	public Proveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img,
+	public Proveedor(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac, Imagen img,
 			String descrpicionGeneral, String link) {
-		super(nickname, nombre, apellido, correo, fechaNac, img);
+		super(nickname, nombre, apellido, correo, contra, fechaNac, img);
 		setDescrpicionGeneral(descrpicionGeneral);
 		setLink(link);
 		setActividadesTuristicas(new HashMap<>());
