@@ -20,7 +20,7 @@
     <section id="contenedor">
         <jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         <div id="contenedorForm">
-            <form class="card" id="form-alta-usuario" name="altaUsuarioForm" method="post" action="${pageContext.request.contextPath}/AltaDeUsuario">
+            <form class="card" id="form-alta-usuario" name="altaUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeUsuario">
                 <div class="card-body">
                     <h5 class="card-title">Registrar Usuario</h5>
 
