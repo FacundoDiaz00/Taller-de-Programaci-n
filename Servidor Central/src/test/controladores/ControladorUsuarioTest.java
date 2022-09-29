@@ -52,7 +52,7 @@ class ControladorUsuarioTest {
 			String link = "www.google.com.provedoor";
 			LocalDate fNacimiento = localDateNow.minusYears(30);
 
-			contrUsr.altaProveedor(nickname, nombre, apellido, correo, fNacimiento, null, descripcion, link);
+			contrUsr.altaProveedor(nickname, nombre, apellido, correo, "1234", fNacimiento, null, descripcion, link);
 		}
 	}
 
@@ -71,7 +71,7 @@ class ControladorUsuarioTest {
 			String nacionalidad = "CHINA";
 			LocalDate fNacimiento = localDateNow.minusYears(15);
 
-			contrUsr.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
+			contrUsr.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
 		}
 	}
 
@@ -203,7 +203,7 @@ class ControladorUsuarioTest {
 		LocalDate fNacimiento = LocalDate.now().minusYears(15);
 
 		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			contrUsr.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
+			contrUsr.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
 		});
 	}
 
@@ -241,7 +241,7 @@ class ControladorUsuarioTest {
 		LocalDate fNacimiento = LocalDate.now().minusYears(30);
 
 		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			contrUsr.altaProveedor(nickname, nombre, apellido, correo, fNacimiento, null, descripcion, link);
+			contrUsr.altaProveedor(nickname, nombre, apellido, correo, "1234", fNacimiento, null, descripcion, link);
 		});
 	}
 
