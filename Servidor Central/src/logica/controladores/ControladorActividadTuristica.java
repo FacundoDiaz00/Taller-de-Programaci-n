@@ -8,7 +8,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import excepciones.*;
+import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
+import excepciones.CategoriaYaRegistradaException;
+import excepciones.DeparamentoYaRegistradoException;
+import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
+import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
+import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import excepciones.InscripcionYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.SalidaYaRegistradaException;
+import excepciones.SuperaElMaximoDeTuristasException;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -60,6 +70,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad,
 			String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img,
 			List<String> categorias) throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
+		if (fechaAlta == null)
+			fechaAlta = LocalDate.now();
 
 		if (!existeActividadTuristica(nombreActividad)) {
 			// Se crea instancia:
@@ -275,9 +287,10 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			est = EstadoActividadTuristica.RECHAZADA;
 		act.setEstado(est);
 	}
+
 	public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {
 		ManejadorCategoria mc = ManejadorCategoria.getInstancia();
-		if (!mc.exists(nombre)){
+		if (!mc.exists(nombre)) {
 			Categoria cat = new Categoria(nombre);
 			mc.addCategoria(cat);
 		} else {
