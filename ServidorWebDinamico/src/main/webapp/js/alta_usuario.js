@@ -25,8 +25,14 @@ const onProveedorClick = (e) =>{
 }
 
 const onSubmit = (e) =>{
-    generarMensaje(MENSAJE_TIPO_ERROR, "Mensaje de prueba", "Esto seria un mensaje de error", 0)
-    e.preventDefault(); //Esto cancela el submit
+	const passwordOriginal = $("#input-contrasenia")[0].value;
+	const passwordverificar = $("#input-confirmacion-contrasenia")[0].value;
+	if(passwordOriginal !== passwordverificar){
+		e.preventDefault();
+		generarMensaje('error', "Error" , "Las contraseñas no son identicas. Haga que coinsidan y luego vuelva a enviar" , 0);	
+	}
+    
+	
 }
 
 

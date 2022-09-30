@@ -55,7 +55,7 @@ form[role="search"] input{
 }
 
 .eliminarElemento{
-    display: none;
+    position: absolute;  left: -999999px;
 }
 
 

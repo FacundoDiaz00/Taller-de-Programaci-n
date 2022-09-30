@@ -8,7 +8,7 @@
 const MENSAJE_TIPO_EXITO = 'success'
 const MENSAJE_TIPO_ERROR = 'error'
 
-const generarMensaje = (tipoMensaje, titulo, mensaje, temporizadorParaDesplegar) =>{
+const generarMensaje = (tipoMensaje, titulo, mensaje, temporizadorParaDesplegar ) =>{
     setTimeout(() => {
         Swal.fire({
             icon: tipoMensaje,

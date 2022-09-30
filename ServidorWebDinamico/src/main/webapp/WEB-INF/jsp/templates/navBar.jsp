@@ -33,10 +33,10 @@
                     
                     <% if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
-	                        <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrarse</a>
+	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
 	                    </li>
 	                    <li class="iniciar_sesion">
-	                        <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
+	                        <a class="nav-link active" href="IniciarSesion">Iniciar Sesión</a>
 	                    </li>
                     
                     <% }else{ %>
