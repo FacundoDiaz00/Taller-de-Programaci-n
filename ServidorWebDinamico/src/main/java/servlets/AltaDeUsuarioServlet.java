@@ -2,6 +2,7 @@ package servlets;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -60,6 +61,8 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
+		
 		String tipoUsuario = (String) req.getParameter("tipoUsuario");
 		
 		String nickname = (String) req.getParameter("nickname");
@@ -77,19 +80,14 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 		try {
 			
 			 
-			filePart.getSize();
-			String nombreImg = filePart.getSubmittedFileName();
-			InputStream imgContent = filePart.getInputStream();
-			String tipo = filePart.getContentType();
-			
-			String futuroNombreDelPath = "../../webapp/img/usuarios/" + nickname;
-			
-			int read = imgContent.read(); //Leo antisipadamente para saber si esta o no el archivo vacio
-			
-			boolean hayImagen = read != -1; //Si recivo -1 es que lei todo el archivo, por ende si en este punto no hay nada es que no viajo nada 
-			
+			boolean hayImagen = filePart.getSize() > 0;
+			String ext = "";
+			String futuroNombreDelPath = "";			
 			Imagen imgDt = null;
-			if(hayImagen) {
+			if (hayImagen) {
+				ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+				
+				futuroNombreDelPath = "/usuarios/" + nickname + ext; //Esto es la ruta relativa
 				imgDt = new Imagen(futuroNombreDelPath);
 			}
 			
@@ -103,10 +101,25 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 				req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 				return;
 			}
+						
+			if (hayImagen){
+				//Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
+				InputStream imgInputStream = filePart.getInputStream();
+				String servidorPath = getServletContext().getRealPath("/");
+				File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
+				imgFile.createNewFile();
+				FileOutputStream imgFileStream = new FileOutputStream(imgFile);
+				
+				byte[] buffer = new byte[8192];
+				
+				int readLength = imgInputStream.read(buffer);
+				while (readLength != -1) {
+					imgFileStream.write(buffer, 0, readLength);
+					readLength = imgInputStream.read(buffer);
+				}
+				imgFileStream.close();
+			}
 			
-//			if(hayImagen){
-//				File img = new File()
-//			}
 			
 						
 			DTUsuario dtUsuario = this.contUsuario.obtenerDTUsuario(nickname);
