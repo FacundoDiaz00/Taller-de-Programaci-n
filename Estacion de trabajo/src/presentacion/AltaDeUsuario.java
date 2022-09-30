@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -168,12 +169,12 @@ public class AltaDeUsuario extends JInternalFrame {
 		url.setBounds(131, 278, 258, 20);
 		getContentPane().add(url);
 		
-		contra = new JTextField();
+		contra = new JPasswordField();
 		contra.setBounds(131, 143, 258, 20);
 		getContentPane().add(contra);
 		contra.setColumns(10);
 		
-		confirmarContra = new JTextField();
+		confirmarContra = new JPasswordField();
 		confirmarContra.setColumns(10);
 		confirmarContra.setBounds(131, 170, 258, 20);
 		getContentPane().add(confirmarContra);
