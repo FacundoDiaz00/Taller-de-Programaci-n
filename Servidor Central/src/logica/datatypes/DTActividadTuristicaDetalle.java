@@ -1,6 +1,7 @@
 package logica.datatypes;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,8 +14,8 @@ public class DTActividadTuristicaDetalle extends DTActividadTuristica {
 
 	public DTActividadTuristicaDetalle(Map<String, DTSalidaTuristica> salidas, Map<String, DTPaquete> paquetes,
 			String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion, LocalDate fechaAlta,
-			String nickProveedor, String departamento) {
-		super(nombre, descripcion, costoPorTurista, cuidad, duracion, fechaAlta, nickProveedor, departamento);
+			String nickProveedor, String departamento, List<String> categorias) {
+		super(nombre, descripcion, costoPorTurista, cuidad, duracion, fechaAlta, nickProveedor, departamento, categorias);
 		this.salidas = salidas;
 		this.paquetes = paquetes;
 	}
