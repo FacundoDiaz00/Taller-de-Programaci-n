@@ -23,7 +23,7 @@
             <!--Acciones generales-->
             <div class="card list-group" id="opciones">
                 <h5 class="card-title">Acciones</h5>
-                <a href="ConsultaDeUsuarioServlet" class="list-group-item">Ver usuarios</a>
+                <a href="ConsultaDeUsuario" class="list-group-item">Ver usuarios</a>
                 <a href="INSERTAR_NOMBRE_SERVLET_A_REDIRECCIONAR" class="list-group-item">Crear Actividad turistica</a>
             </div>
 
