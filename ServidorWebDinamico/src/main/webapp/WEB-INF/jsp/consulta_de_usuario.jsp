@@ -55,7 +55,7 @@
 				                                <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 				                                <p class="card-text"><b>Nickname:</b> <%= usr.getNickname()%></p>
 				                                <div class="botonera">
-				                                    <a href="perfil_de_usuario_externo.html" class="btn btn-primary">Ver mas</a>
+				                                    <a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false" class="btn btn-primary">Ver mas</a>
 				                                </div>
 				                            </div>
 				                        </div>
