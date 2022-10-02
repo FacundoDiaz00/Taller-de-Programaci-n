@@ -44,7 +44,6 @@
 				                        }
 														                        
 				                        %>
-				                        <%System.out.println(imgpath); %>
 				                        <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
 				                    </div>
 				                    <div class="col-md-8">

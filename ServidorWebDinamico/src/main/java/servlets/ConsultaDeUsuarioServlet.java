@@ -33,7 +33,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
     /**
 	 * parametros posibles:
-	 * 	- listar : se listan los usuarios/
+	 * 	- listar : indica si se listan los usuarios
 	 * 	- id : nombre del usuario cuando se accede a la informacion del perfil
 	 * 
 	 * 
@@ -41,11 +41,18 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	 * 	- Si listar = false debera haber una id para dar la info del usuario.
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
-		List<DTUsuario> usuarios =  cu.obtenerDTUsuarios();
-		req.setAttribute("usuarios", usuarios);
-		req = Utiles.insertarLoDeSiempre(req);
-		req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
+		String debelistar = (String)req.getParameter("listar");
+		System.out.println("debelistar:"+debelistar);
+		if(debelistar == "false") {
+			System.out.println("dio false");
+			req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
+		}else {
+			List<DTUsuario> usuarios =  cu.obtenerDTUsuarios();
+			req.setAttribute("usuarios", usuarios);
+			req = Utiles.insertarLoDeSiempre(req);
+			System.out.println("no false");
+			req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
+		}
 
 	}
 
