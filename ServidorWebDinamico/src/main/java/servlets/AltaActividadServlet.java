@@ -51,17 +51,11 @@ public class AltaActividadServlet extends HttpServlet {
 		// de la
 		// sesión
 		String departamento = (String) req.getParameter("departamento");
-		System.out.println("departamento " + departamento);
 		String nombre = (String) req.getParameter("nombre");
-		System.out.println("nombre " + nombre);
 		String descripcion = (String) req.getParameter("descripcion");
-		System.out.println("descripcion " + descripcion);
 		String duracion = (String) req.getParameter("duracion");
-		System.out.println("duracion " + duracion);
 		String costo = (String) req.getParameter("costo");
-		System.out.println("costo " + costo);
 		String ciudad = (String) req.getParameter("ciudad");
-		System.out.println("ciudad " + ciudad);
 		List<String> categorias = Arrays.asList((String[]) req.getParameterValues("categorias"));
 
 		Part filePart = req.getPart("img");
@@ -102,6 +96,7 @@ public class AltaActividadServlet extends HttpServlet {
 			}
 
 			System.out.println("Actividad creada con exito");
+			req.setAttribute("exito", "exito");
 
 			resp.sendRedirect("AltaDeActividad");
 			return;

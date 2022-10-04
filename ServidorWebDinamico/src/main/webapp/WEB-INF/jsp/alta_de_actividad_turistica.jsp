@@ -195,7 +195,23 @@
     </section>
 
    	<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
-
+	<script src="${pageContext.request.contextPath}/js/alta_de_actividad_turistica.js"></script>
+    
+    <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error al crear la actividad turística" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+    <%if(request.getAttribute("exito") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('Exito', "Operacion completada" , "Se ha realizado un alta de actividad satisfactoriamente" , 500);
+    </script>
+    <%} %>
     
 </body>
 </html>

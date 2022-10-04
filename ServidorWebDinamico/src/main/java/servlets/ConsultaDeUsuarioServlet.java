@@ -21,33 +21,32 @@ import utils.Utiles;
 @WebServlet("/ConsultaDeUsuario")
 public class ConsultaDeUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private IControladorUsuario cu;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ConsultaDeUsuarioServlet() {
-        super();
-        cu = Fabrica.getInstancia().getIControladorUsuario();
-    }
+	private IControladorUsuario contrUsuario;
 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ConsultaDeUsuarioServlet() {
+		super();
+		contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
+	}
 
-    /**
-	 * parametros posibles:
-	 * 	- listar : indica si se listan los usuarios
-	 * 	- id : nombre del usuario cuando se accede a la informacion del perfil
+	/**
+	 * parametros posibles: - listar : indica si se listan los usuarios - id :
+	 * nombre del usuario cuando se accede a la informacion del perfil
 	 * 
 	 * 
-	 * Observacion: 
-	 * 	- Si listar = false debera haber una id para dar la info del usuario.
+	 * Observacion: - Si listar = false debera haber una id para dar la info del
+	 * usuario.
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String debelistar = (String)req.getParameter("listar");
-		System.out.println("debelistar:"+debelistar);
-		if(debelistar == "false") {
+		String debelistar = (String) req.getParameter("listar");
+		System.out.println("debelistar:" + debelistar);
+		if (debelistar == "false") {
 			System.out.println("dio false");
 			req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
-		}else {
-			List<DTUsuario> usuarios =  cu.obtenerDTUsuarios();
+		} else {
+			List<DTUsuario> usuarios = contrUsuario.obtenerDTUsuarios();
 			req.setAttribute("usuarios", usuarios);
 			req = Utiles.insertarLoDeSiempre(req);
 			System.out.println("no false");
@@ -57,9 +56,11 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 * response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
