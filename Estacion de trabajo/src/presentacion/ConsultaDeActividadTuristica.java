@@ -11,11 +11,14 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -24,11 +27,6 @@ import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
-import javax.swing.JList;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
 
 public class ConsultaDeActividadTuristica extends JInternalFrame {
 
@@ -201,21 +199,20 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 		proveedor.setEditable(false);
 		proveedor.setBounds(145, 270, 212, 15);
 		getContentPane().add(proveedor);
-		
+
 		lblCatecogr = new JLabel("Categorías:");
 		lblCatecogr.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCatecogr.setBounds(33, 345, 94, 15);
 		getContentPane().add(lblCatecogr);
-		
+
 		listCategorias = new JList();
 		listCategorias.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
+			public void valueChanged(ListSelectionEvent event) {
 				listCategorias.clearSelection();
 			}
 		});
 		listCategorias.setBounds(145, 350, 212, 88);
 		getContentPane().add(listCategorias);
-		
 
 		comboDepartamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -282,7 +279,7 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 
 			comboSalidas.removeAllItems();
 			comboPaquetes.removeAllItems();
-			
+
 			List<DTSalidaTuristica> salidas = new ArrayList<DTSalidaTuristica>(actividad.getSalidas().values());
 			for (DTSalidaTuristica salida : salidas) {
 				comboSalidas.addItem(salida.getNombre());
@@ -292,13 +289,13 @@ public class ConsultaDeActividadTuristica extends JInternalFrame {
 			for (DTPaquete paquete : paquetes) {
 				comboPaquetes.addItem(paquete.getNombre());
 			}
-			
+
 			DefaultListModel<String> listModelCategorias = new DefaultListModel<>();
 			for (String idCat : actividad.getCategorias()) {
 				listModelCategorias.addElement(idCat);
 			}
 			listCategorias.setModel(listModelCategorias);
-			
+
 		} catch (ObjetoNoExisteEnTurismoUy e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
