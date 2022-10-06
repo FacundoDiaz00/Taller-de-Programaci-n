@@ -31,7 +31,7 @@ public class ConsultaPaqueteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			String identificador = (String) req.getParameter("id");
+			var identificador = (String) req.getParameter("id");
 			DTPaqueteDetalles paquete = Fabrica.getInstancia().getIControladorPaquete().obtenerDTPaqueteDetalle(identificador);
 			req.setAttribute("paquete", paquete);
 
