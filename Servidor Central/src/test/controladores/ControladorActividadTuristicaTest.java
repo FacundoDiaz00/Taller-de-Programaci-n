@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
+import excepciones.CategoriaYaRegistradaException;
 import excepciones.DeparamentoYaRegistradoException;
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
@@ -45,41 +46,26 @@ class ControladorActividadTuristicaTest {
 	private static LocalDate localDateNow;
 	private static LocalDateTime localDateTimeNow;
 
-	// TODO: modificar todas las fechas
-	// puestas a mano por alguna de
-	// estas
-	private static LocalDate localDateVieja;
-	private static LocalDate localDateMuyVieja;
-	private static LocalDate localDateFuturo;
-
 	@BeforeAll
 	static void preparacionPrevia() {
 		contrActTur = Fabrica.getInstancia().getIControladorActividadTuristica();
 		contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
 		controladorPaquete = Fabrica.getInstancia().getIControladorPaquete();
 
-		try {
-			/*
-			 * TODO descomentar cuando esté implementado
-			 * cat.altaCategoria("EXTREMO"); cat.altaCategoria("ARTE");
-			 * cat.altaCategoria("TRANQUILO");
-			 */
-		} catch (Exception exception) { // TODO: cambiar Exception a el tipo
-										// específico
-			// que tira altaCategoria
-			// Nada, las categorias ya fueron agregadas
-		}
-
 		muestraCategorias = new ArrayList<String>();
 		muestraCategorias.add("EXTREMO");
 		muestraCategorias.add("ARTE");
 		muestraCategorias.add("TRANQUILO");
 
+		for (var cat : muestraCategorias)
+			try {
+				contrActTur.altaCategoria(cat);
+			} catch (CategoriaYaRegistradaException e) {
+				// No pasa nada, es esperado
+			}
+
 		localDateNow = LocalDate.now();
 		localDateTimeNow = LocalDateTime.now();
-		localDateVieja = LocalDate.of(2022, 1, 1);
-		localDateMuyVieja = LocalDate.of(2010, 1, 1);
-		localDateFuturo = LocalDate.of(2026, 1, 1);
 	}
 
 	// No es un test en sí
@@ -134,6 +120,16 @@ class ControladorActividadTuristicaTest {
 			String url = "https://www.canelones-departamento.org.uy/inicio.html";
 
 			contrActTur.altaDepartamento(nom, descr, url);
+		}
+	}
+
+	private void generarCategorias(int cant, String idTest) throws CategoriaYaRegistradaException {
+		preparacionPrevia();
+		assertTrue(contrActTur != null);
+
+		for (int i = 0; i < cant; i++) {
+			String nom = "Categoria " + idTest + " i=" + i;
+			contrActTur.altaCategoria(nom);
 		}
 	}
 
@@ -919,6 +915,21 @@ class ControladorActividadTuristicaTest {
 			contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 					cantMaxTuristas, null);
 		});
+	}
+
+	@Test
+	public void testCategorias() throws CategoriaYaRegistradaException {
+		generarCategorias(100, "testCategorias");
+
+		var categorias = contrActTur.obtenerIdCategorias();
+
+		var categoriasTest = new ArrayList<String>();
+		for (int i = 0; i < 100; i++) {
+			String nom = "Categoria testCategorias i=" + i;
+			categoriasTest.add(nom);
+		}
+
+		categoriasTest.forEach((var cat) -> assertTrue(categorias.contains(cat)));
 	}
 
 }

@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -33,21 +32,6 @@ class ControladorPaqueteTest {
 	@BeforeAll
 	static void preparacionPrevia() {
 		contrPaquete = Fabrica.getInstancia().getIControladorPaquete();
-
-		try {
-			/*
-			 * TODO descomentar cuando esté implementado
-			 * cat.altaCategoria("EXTREMO"); cat.altaCategoria("ARTE");
-			 * cat.altaCategoria("TRANQUILO");
-			 */
-		} catch (Exception exception) {
-			// Nada, las categorias ya fueron agregadas
-		}
-
-		muestraCategorias = new ArrayList<String>();
-		muestraCategorias.add("EXTREMO");
-		muestraCategorias.add("ARTE");
-		muestraCategorias.add("TRANQUILO");
 
 		localDateNow = LocalDate.now();
 		localDateVieja = LocalDate.of(2022, 1, 1);

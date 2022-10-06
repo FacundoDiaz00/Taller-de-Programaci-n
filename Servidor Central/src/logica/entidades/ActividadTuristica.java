@@ -74,11 +74,13 @@ public class ActividadTuristica {
 
 		// Se agrega la relacion con las categorias:
 		ManejadorCategoria manejCat = ManejadorCategoria.getInstancia();
-		for (var categoria : categorias) {
-			Categoria catInstancia = manejCat.getCategoria(categoria);
-			catInstancia.addActividad(this);
-			this.categorias.put(categoria, catInstancia);
-		}
+
+		if (categorias != null)
+			for (var categoria : categorias) {
+				Categoria catInstancia = manejCat.getCategoria(categoria);
+				catInstancia.addActividad(this);
+				this.categorias.put(categoria, catInstancia);
+			}
 	}
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
