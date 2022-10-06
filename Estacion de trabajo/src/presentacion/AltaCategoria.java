@@ -2,12 +2,8 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -18,17 +14,13 @@ import javax.swing.SwingConstants;
 import excepciones.CategoriaYaRegistradaException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
-import javax.swing.JPanel;
 
 public class AltaCategoria extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 	private IControladorActividadTuristica contrActividad;
-	private JTextField nombre_categoria;
+	private JTextField nombreCategoria;
 
-	/**
-	 * Create the frame.
-	 */
 	public AltaCategoria(IControladorActividadTuristica contrActividad) {
 
 		Fabrica fabrica = Fabrica.getInstancia();
@@ -65,22 +57,21 @@ public class AltaCategoria extends JInternalFrame {
 		});
 		btnCancelar.setBounds(10, 49, 117, 25);
 		getContentPane().add(btnCancelar);
-		
+
 		JTextField nombreCategoria = new JTextField();
 		nombreCategoria.setBounds(152, 16, 235, 23);
 		getContentPane().add(nombreCategoria);
-		this.nombre_categoria = nombreCategoria;
+		this.nombreCategoria = nombreCategoria;
 
 	}
 
 	private void agregarCategoria(ActionEvent action) {
 		try {
-			if(nombre_categoria.getText().toString().isEmpty()){
-				JOptionPane.showMessageDialog(null,
-						"El campo Nombre de Categoría es obligatorio",
-						"Error", JOptionPane.ERROR_MESSAGE);
-			}else {
-				this.contrActividad.altaCategoria(nombre_categoria.getText().toString());
+			if (nombreCategoria.getText().toString().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "El campo Nombre de Categoría es obligatorio", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				this.contrActividad.altaCategoria(nombreCategoria.getText().toString());
 				this.limpiarFormulario();
 				setVisible(false);
 				JOptionPane.showMessageDialog(null, "La categoría se ha creado con éxito", "Éxito",
@@ -93,6 +84,6 @@ public class AltaCategoria extends JInternalFrame {
 	}
 
 	private void limpiarFormulario() {
-		nombre_categoria.setText("");
+		nombreCategoria.setText("");
 	}
 }

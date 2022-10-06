@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTUsuario;
 import utils.Utiles;
-
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -33,26 +31,25 @@ public class IniciarSesionServlet extends HttpServlet {
 		System.out.printf("req: ", req.getParameter("email"), "\n resp: ", resp);
 		req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
 	}
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String password = (String) req.getParameter("password");
 		String email = (String) req.getParameter("email");
-		
+
 		try {
 			DTUsuario usuario = contrU.obtenerDTUsuario(email);
 			req.setAttribute("usuarioLogeado", usuario);
 			req = Utiles.insertarLoDeSiempre(req);
 			resp.sendRedirect("index");
 			return;
-			
-		}catch(ObjetoNoExisteEnTurismoUy e){
-			
-		}
-		
-		//req = Utiles.insertarLoDeSiempre(req);
-		//req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
-	}
 
-		
+		} catch (ObjetoNoExisteEnTurismoUy e) {
+			// TODO HACER ALGO
+		}
+
+		// req = Utiles.insertarLoDeSiempre(req);
+		// req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req,
+		// resp);
+	}
 
 }

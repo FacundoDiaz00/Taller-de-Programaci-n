@@ -20,8 +20,7 @@ import utils.Utiles;
 @WebServlet("/ConsultaActividad")
 public class ConsultaActividadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	IControladorActividadTuristica contAct;
-	
+	private IControladorActividadTuristica contAct;
 
 	public ConsultaActividadServlet() {
 		super();
@@ -34,22 +33,22 @@ public class ConsultaActividadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String idActividad = (String) req.getParameter("id");
-		
-		
+
 		DTActividadTuristicaDetalle infoActividadTuristica;
 		try {
-			 infoActividadTuristica = this.contAct.obtenerDTActividadTuristicaDetalle(idActividad);
-			 
+			infoActividadTuristica = this.contAct.obtenerDTActividadTuristicaDetalle(idActividad);
+
 		} catch (ObjetoNoExisteEnTurismoUy e) {
-			req.setAttribute("motivoDeError", "id de actividad invalido. No existe una actividad turistica con este nombre en el sistema");
+			req.setAttribute("motivoDeError",
+					"id de actividad invalido. No existe una actividad turistica con este nombre en el sistema");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 			return;
 		}
-		
+
 		req = Utiles.insertarLoDeSiempre(req);
-		
+
 		req.setAttribute("datosActividad", infoActividadTuristica);
 		req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
-		
+
 	}
 }

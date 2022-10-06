@@ -74,11 +74,13 @@ public class ActividadTuristica {
 
 		// Se agrega la relacion con las categorias:
 		ManejadorCategoria manejCat = ManejadorCategoria.getInstancia();
-		for (var categoria : categorias) {
-			Categoria catInstancia = manejCat.getCategoria(categoria);
-			catInstancia.addActividad(this);
-			this.categorias.put(categoria, catInstancia);
-		}
+
+		if (categorias != null)
+			for (var categoria : categorias) {
+				Categoria catInstancia = manejCat.getCategoria(categoria);
+				catInstancia.addActividad(this);
+				this.categorias.put(categoria, catInstancia);
+			}
 	}
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
@@ -86,9 +88,10 @@ public class ActividadTuristica {
 		for (String idCat : categorias.keySet()) {
 			listaIdCats.add(idCat);
 		}
-		
+
 		return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
-				getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre(), listaIdCats);
+				getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre(), listaIdCats,
+				getImagen());
 	}
 
 	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
@@ -106,7 +109,8 @@ public class ActividadTuristica {
 		}
 
 		return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
-				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre(), listaIdCats);
+				getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre(),
+				listaIdCats, getImagen());
 	}
 
 	@Override
@@ -193,12 +197,12 @@ public class ActividadTuristica {
 	public void setCategorias(Map<String, Categoria> categorias) {
 		this.categorias = categorias;
 	}
-	
-	public EstadoActividadTuristica getEstado(){
+
+	public EstadoActividadTuristica getEstado() {
 		return estado;
 	}
-	
-	public void setEstado(EstadoActividadTuristica est){
+
+	public void setEstado(EstadoActividadTuristica est) {
 		estado = est;
 	}
 

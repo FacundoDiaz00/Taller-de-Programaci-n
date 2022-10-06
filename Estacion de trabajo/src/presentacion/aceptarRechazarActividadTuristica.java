@@ -91,7 +91,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		aceptar = btnAceptar;
 		btnAceptar.setEnabled(false);
 		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				String idActividad = actividadTuristica.getSelectedItem().toString();
 				try {
 					controladorAct.aceptarORechazarActividadTuristica(idActividad, true);
@@ -114,7 +114,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 		btnRechazar.setBounds(167, 83, 117, 25);
 		getContentPane().add(btnRechazar);
 		btnRechazar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				String idActividad = actividadTuristica.getSelectedItem().toString();
 				try {
 					controladorAct.aceptarORechazarActividadTuristica(idActividad, false);

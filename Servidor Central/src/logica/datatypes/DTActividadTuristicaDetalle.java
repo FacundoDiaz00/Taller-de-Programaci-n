@@ -14,8 +14,9 @@ public class DTActividadTuristicaDetalle extends DTActividadTuristica {
 
 	public DTActividadTuristicaDetalle(Map<String, DTSalidaTuristica> salidas, Map<String, DTPaquete> paquetes,
 			String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion, LocalDate fechaAlta,
-			String nickProveedor, String departamento, List<String> categorias) {
-		super(nombre, descripcion, costoPorTurista, cuidad, duracion, fechaAlta, nickProveedor, departamento, categorias);
+			String nickProveedor, String departamento, List<String> categorias, Imagen img) {
+		super(nombre, descripcion, costoPorTurista, cuidad, duracion, fechaAlta, nickProveedor, departamento,
+				categorias, img);
 		this.salidas = salidas;
 		this.paquetes = paquetes;
 	}

@@ -1,77 +1,24 @@
+<%-- 
+
+# ATTRIBUTOS QUE PRECISA LA PÁGINA
+
+ --%>
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/estilosComun.css">
-    <link rel="stylesheet" href="../css/perfil_de_usuario.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/8b5fee613e.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="../fontawesome-free-6.2.0-web/js/all.js">
-
+	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_usuario.css">
     <title>Turismo UY</title>
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="index.html">Turismo UY</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-
-
-
-                <ul class="navbar-nav d-flex">
-                    <ul class="navbar-nav d-flex">
-                        <form class="d-flex buscar" role="search" id="buscador">
-                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                            <button class="btn" ><i class="fas fa-search"></i></button>
-                        </form>
-                        <li class="alta_de_usuario">
-                            <a class="nav-link active" aria-current="page" href="alta_de_usuario.html">Registrarse</a>
-                        </li>
-                        <li class="iniciar_sesion">
-                            <a class="nav-link active" href="iniciar_sesion.html">Iniciar Sesión</a>
-                        </li>
-                    </ul>
-                </ul>
-                </div>
-        </div>
-
-    </nav>
-
-
-    <section id="contenedor">
-        <div id="menu-lateral">
-
-            <!--Acciones generales-->
-            <div class="card list-group" id="opciones">
-                <h5 class="card-title">Acciones</h5>
-                <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
-                <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
-            </div>
-
-            <!--Categoroias-->
-            <div class="card list-group" id="filtro-categoria">
-                <h5 class="card-title">Categorias</h5>
-                <a href="index.html" class="list-group-item">Gastronomía</a>
-            </div>
-
-            <!--Departametos-->
-            <div class="card list-group" id="filtro-departamentos">
-                <h5 class="card-title">Departamentos</h5>
-                <a href="index.html" class="list-group-item">Rocha</a>
-            </div>
-        </div>
-        <div id="contenedor-items">
+    <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
+	<section id="contenedor">
+		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
+		<div id="contenedor-items">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="boton-general" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Perfil</button>
@@ -178,21 +125,15 @@
         </div>
 
     </section>
+	    <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
+	
+ 
 
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        <div class="container text-center">
-        <span class="" style="font-size: 25px; color: Grey;">
-          <i class="fas fa-route"></i>
-        </span>
-            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
-        </div>
-    </footer>
-
-<script src="../js/jquery-3.3.1.slim.min.js"></script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/perfil_de_usuario.js"></script>
-<script src="../js/popUp_modificar_usuario.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.slim.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/perfil_de_usuario.js"></script>
+<script src="${pageContext.request.contextPath}/js/popUp_modificar_usuario.js"></script>
     <script>
         $(document).ready(function(){
             $(".btn").click(function(){

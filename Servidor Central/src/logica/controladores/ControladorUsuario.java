@@ -64,8 +64,8 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra, LocalDate FNacimiento,
-			Imagen img, String nacionalidad) throws UsuarioYaRegistradoException {
+	public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra,
+			LocalDate FNacimiento, Imagen img, String nacionalidad) throws UsuarioYaRegistradoException {
 		ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
 		if (manUsr.existeUsuario(nickname, correo)) {
 			throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
@@ -76,13 +76,14 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra, LocalDate FNacimiento,
-			Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException {
+	public void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra,
+			LocalDate FNacimiento, Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException {
 		ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
 		if (manUsr.existeUsuario(nickname, correo)) {
 			throw new UsuarioYaRegistradoException("El usuario " + nickname + " ya esta registrado");
 		}
-		Proveedor proveedor = new Proveedor(nickname, nombre, apellido, correo, contra, FNacimiento, img, descripcion, link);
+		Proveedor proveedor = new Proveedor(nickname, nombre, apellido, correo, contra, FNacimiento, img, descripcion,
+				link);
 		manUsr.addUsuario(proveedor);
 	}
 
@@ -120,15 +121,20 @@ public class ControladorUsuario implements IControladorUsuario {
 
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 
-		Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());
-		Usuario u_correo = ins.getUsuarioPorCorreo(datosNuevos.getCorreo());
-
-		if (u_nick != null && u_correo != null && u_nick.equals(u_correo)) {
-			u_nick.setearDatos(datosNuevos);
-		} else {
+		try {
+			Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());
+			Usuario u_correo = ins.getUsuarioPorCorreo(datosNuevos.getCorreo());
+			if (u_nick != null && u_correo != null && u_nick.equals(u_correo)) {
+				u_nick.setearDatos(datosNuevos);
+			} else {
+				throw new ModificacionUsuarioNoPermitida(
+						"No coincide el nickname con el correo de este usuario. Estos dos valores no debe ser modificados.");
+			}
+		} catch (ObjetoNoExisteEnTurismoUy except) {
 			throw new ModificacionUsuarioNoPermitida(
-					"No coincide el nickname con el correo de este usuario. Estos dos valores no debe ser modificados.");
+					"No hay usuarios con ese nick o correo. Estos dos valores no debe ser modificados.");
 		}
+
 	}
 
 }

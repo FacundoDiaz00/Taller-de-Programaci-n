@@ -50,12 +50,12 @@
 	            			<% 
 	            			String path = "";
 							if (paquete.getImg() == null) {
-								path += "noFoto.png";
+								path += "/noFoto.png";
 							} else {
 								path += paquete.getImg().getPath();
 							}							
 							%>
-			                <img src="${pageContext.request.contextPath}/img/<%=path%>" alt="">
+			                <img src="${pageContext.request.contextPath}/img<%=path%>" alt="">
 	            </div>
 	
 	            <div id="info">
