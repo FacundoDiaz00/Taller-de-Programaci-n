@@ -27,7 +27,7 @@ public class ControladorMaestro implements IControladorMaestro {
 			icat.altaCategoria(cat);
 		}
 
-		Imagen img = new Imagen("/harry_estilos.png");
+		Imagen img = new Imagen("/harry_estilos.png", "Una imagen del famoso cantante Harry Styles");
 
 		// Cargo Departamentos
 		icat.altaDepartamento("Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es");
@@ -66,7 +66,8 @@ public class ControladorMaestro implements IControladorMaestro {
 
 		// Cargo Turistas
 		iuser.altaTurista("lachiqui", "Rosa María", "Martínez", "mirtha.legrand.ok@hotmail.com.ar", "1234",
-				LocalDate.of(1927, 2, 23), new Imagen("lachiqui.png"), "argentina");
+				LocalDate.of(1927, 2, 23), new Imagen("lachiqui.png", "Foto de perfil de Rosa Maria Martinez"),
+				"argentina");
 		iuser.altaTurista("isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", "1234",
 				LocalDate.of(1926, 4, 21), new Imagen("/usuarios/isabelita.png"), "inglesa");
 		iuser.altaTurista("anibal", "Aníbal", "Lecter", "anibal@fing.edu.uy", "1234", LocalDate.of(1937, 12, 31),

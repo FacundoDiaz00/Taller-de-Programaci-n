@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
@@ -38,7 +36,7 @@ class ControladorPaqueteTest {
 	}
 
 	// No es un test en sí.
-	static void generarPaquetes(int cant, String idTest) throws PaqueteYaRegistradoException {
+	static void generarPaquetes(int cant, String idTest) throws TurismoUyException {
 		if (contrPaquete == null)
 			preparacionPrevia();
 
@@ -55,23 +53,15 @@ class ControladorPaqueteTest {
 	}
 
 	@Test
-	final void testAltaPaqueteOK() {
-		try {
-			generarPaquetes(100, "testAltaPaqueteOK");
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+	final void testAltaPaqueteOK() throws TurismoUyException {
+		generarPaquetes(100, "testAltaPaqueteOK");
 	}
 
 	@Test
-	final void testAltaPaqueteRepetido() {
+	final void testAltaPaqueteRepetido() throws TurismoUyException {
 		assertTrue(contrPaquete != null);
 
-		try {
-			generarPaquetes(1, "testAltaPaqueteRepetido");
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarPaquetes(1, "testAltaPaqueteRepetido");
 
 		assertThrows(PaqueteYaRegistradoException.class, () -> {
 			generarPaquetes(1, "testAltaPaqueteRepetido");
@@ -79,15 +69,11 @@ class ControladorPaqueteTest {
 	}
 
 	@Test
-	final void testObtenerIdPaquetes() {
+	final void testObtenerIdPaquetes() throws TurismoUyException {
 		String idTest = "testObtenerIdPaquetes";
 		int cant = 100;
 
-		try {
-			generarPaquetes(cant, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarPaquetes(cant, idTest);
 
 		var ids = contrPaquete.obtenerIdPaquetes();
 
@@ -109,49 +95,29 @@ class ControladorPaqueteTest {
 	}
 
 	@Test
-	final void testObtenerDetallesPaquetes() {
+	final void testObtenerDetallesPaquetes() throws TurismoUyException {
 		String idTest = "testObtenerDetallesPaquetes";
 
 		assertTrue(contrPaquete != null);
 
 		// 10 paquetes
-		try {
-			generarPaquetes(10, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarPaquetes(10, idTest);
 
 		// 100 proveedores
-		try {
-			ControladorUsuarioTest.generarProveedores(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		ControladorUsuarioTest.generarProveedores(100, idTest);
 
 		// 100 departamentos
-		try {
-			ControladorActividadTuristicaTest.generarDepartamentos(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		ControladorActividadTuristicaTest.generarDepartamentos(100, idTest);
 
 		// 100 actividades
-		try {
-			ControladorActividadTuristicaTest.generarActividades(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		ControladorActividadTuristicaTest.generarActividades(100, idTest);
 
 		// reparto 10 actividades a cada paquete
 		for (int i = 0; i < 10; i++) {
 			String nombrePaq = "Paquete " + idTest + " i=" + i;
 			for (int j = 0; j < 10; j++) {
 				String nombreActString = "Actividad " + idTest + " i=" + (i * 10 + j);
-				try {
-					contrPaquete.agregarActividadAPaquete(nombreActString, nombrePaq);
-				} catch (TurismoUyException exception) {
-					fail(exception.getMessage());
-				}
+				contrPaquete.agregarActividadAPaquete(nombreActString, nombrePaq);
 			}
 		}
 
@@ -210,115 +176,104 @@ class ControladorPaqueteTest {
 	}
 
 	@Test
-	final void testAgregarActividadAPaqueteOK() {
+	final void testAgregarActividadAPaqueteOK() throws TurismoUyException {
 		String idTest = "testAgregarActividadAPaqueteOK";
 
 		String nombreDep = "Departamento " + idTest + " i=" + 0;
 		String nombrePaq = "Paquete " + idTest + " i=" + 0;
 		String nickProv = "Proveedor " + idTest + " i=" + 0;
 
-		try {
-			// 1 proveedor
-			ControladorUsuarioTest.generarProveedores(1, idTest);
-			// 1 departamento
-			ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
-			// 1 paquete
-			generarPaquetes(1, idTest);
+		// 1 proveedor
+		ControladorUsuarioTest.generarProveedores(1, idTest);
+		// 1 departamento
+		ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
+		// 1 paquete
+		generarPaquetes(1, idTest);
 
-			// 80 actividades en un mismo departamento, de un mismo provedor
-			var controladorAct = Fabrica.getInstancia().getIControladorActividadTuristica();
-			for (int i = 0; i < 80; i++) {
-				String nombreActividad = "Actividad " + idTest + " i=" + i;
-				String descripcion = "Desc";
-				int duracion = 10;
-				float costo = (float) 10.85;
-				String ciudad = "Ciudad";
+		// 80 actividades en un mismo departamento, de un mismo provedor
+		var controladorAct = Fabrica.getInstancia().getIControladorActividadTuristica();
+		for (int i = 0; i < 80; i++) {
+			String nombreActividad = "Actividad " + idTest + " i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10.85;
+			String ciudad = "Ciudad";
 
-				controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion,
-						costo, ciudad, localDateNow, null, muestraCategorias);
+			controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo,
+					ciudad, localDateNow, null, muestraCategorias);
 
-				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
-			}
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
+			contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 		}
+
 	}
 
 	@Test
-	final void testAgregarActividadAPaqueteRepetida() {
+	final void testAgregarActividadAPaqueteRepetida() throws TurismoUyException {
 		String idTest = "testAgregarActividadAPaqueteRepetida";
 
 		String nombreDep = "Departamento " + idTest + " i=" + 0;
 		String nombrePaq = "Paquete " + idTest + " i=" + 0;
 		String nickProv = "Proveedor " + idTest + " i=" + 0;
 
-		try {
-			// 1 proveedor
-			ControladorUsuarioTest.generarProveedores(1, idTest);
-			// 1 departamento
-			ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
-			// 1 paquete
-			generarPaquetes(1, idTest);
+		// 1 proveedor
+		ControladorUsuarioTest.generarProveedores(1, idTest);
+		// 1 departamento
+		ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
+		// 1 paquete
+		generarPaquetes(1, idTest);
 
-			// 80 actividades en un mismo departamento, de un mismo provedor
-			var controladorAct = Fabrica.getInstancia().getIControladorActividadTuristica();
-			for (int i = 0; i < 80; i++) {
-				String nombreActividad = "Actividad " + idTest + " i=" + i;
-				String descripcion = "Desc";
-				int duracion = 10;
-				float costo = (float) 10.85;
-				String ciudad = "Ciudad";
+		// 80 actividades en un mismo departamento, de un mismo provedor
+		var controladorAct = Fabrica.getInstancia().getIControladorActividadTuristica();
+		for (int i = 0; i < 80; i++) {
+			String nombreActividad = "Actividad " + idTest + " i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10.85;
+			String ciudad = "Ciudad";
 
-				controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion,
-						costo, ciudad, localDateNow, null, muestraCategorias);
+			controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo,
+					ciudad, localDateNow, null, muestraCategorias);
 
+			contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
+
+			assertThrows(ActividadTuristicaYaRegistradaException.class, () -> {
 				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
-
-				assertThrows(ActividadTuristicaYaRegistradaException.class, () -> {
-					contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
-				});
-			}
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
+			});
 		}
 	}
 
 	@Test
-	final void testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete() throws ObjetoNoExisteEnTurismoUy {
+	final void testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete() throws TurismoUyException {
 		String idTest = "testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete";
 
 		String nombreDep = "Departamento " + idTest + " i=" + 0;
 		String nombrePaq = "Paquete " + idTest + " i=" + 0;
 		String nickProvBase = "Proveedor " + idTest + " i=";
 
-		try {
-			// 4 proveedores
-			ControladorUsuarioTest.generarProveedores(4, idTest);
-			// 1 departamento
-			ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
-			// 1 paquete
-			generarPaquetes(1, idTest);
+		// 4 proveedores
+		ControladorUsuarioTest.generarProveedores(4, idTest);
+		// 1 departamento
+		ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
+		// 1 paquete
+		generarPaquetes(1, idTest);
 
-			// 80 actividades en un mismo departamento, 20 por cada proveedor
-			var controladorAct = Fabrica.getInstancia().getIControladorActividadTuristica();
-			for (int i = 0; i < 80; i++) {
-				String nickProveedor = nickProvBase + (i % 4);
-				String nombreActividad = "Actividad " + idTest + " i=" + i;
-				String descripcion = "Desc";
-				int duracion = 10;
-				float costo = (float) 10.85;
-				String ciudad = "Ciudad";
+		// 80 actividades en un mismo departamento, 20 por cada proveedor
+		var controladorAct = Fabrica.getInstancia().getIControladorActividadTuristica();
+		for (int i = 0; i < 80; i++) {
+			String nickProveedor = nickProvBase + (i % 4);
+			String nombreActividad = "Actividad " + idTest + " i=" + i;
+			String descripcion = "Desc";
+			int duracion = 10;
+			float costo = (float) 10.85;
+			String ciudad = "Ciudad";
 
-				controladorAct.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion,
-						costo, ciudad, localDateNow, null, muestraCategorias);
+			controladorAct.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion,
+					costo, ciudad, localDateNow, null, muestraCategorias);
 
-				// 10 actividades de cada provedor en un pquete
-				if (i % 2 == 0) {
-					contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
-				}
+			// 10 actividades de cada provedor en un pquete
+			if (i % 2 == 0) {
+				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 			}
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
 		}
 
 		// El resto NO deberían estar en el paquete

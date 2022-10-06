@@ -40,7 +40,6 @@ public class Compra {
 		this.inscripciones = new HashSet<>();
 		this.fechaCompra = LocalDate.now();
 
-		// TODO verificar si la validez es en días
 		this.vencimiento = LocalDate.now().plusDays(paquete.getValidez());
 
 		calcularMapUsosRestantes();

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ModificacionUsuarioNoPermitida;
-import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.TurismoUyException;
 import excepciones.UsuarioYaRegistradoException;
 import logica.controladores.Fabrica;
@@ -37,7 +35,7 @@ class ControladorUsuarioTest {
 	}
 
 	// No es un test en sí
-	static void generarProveedores(int cant, String idTest) throws UsuarioYaRegistradoException {
+	static void generarProveedores(int cant, String idTest) throws TurismoUyException {
 		if (contrUsr == null)
 			preparacionPrevia();
 
@@ -57,7 +55,7 @@ class ControladorUsuarioTest {
 	}
 
 	// No es un test en sí
-	static void generarTuristas(int cant, String idTest) throws UsuarioYaRegistradoException {
+	static void generarTuristas(int cant, String idTest) throws TurismoUyException {
 		if (contrUsr == null)
 			preparacionPrevia();
 
@@ -76,17 +74,13 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerIdUsuarios() {
+	void testObtenerIdUsuarios() throws TurismoUyException {
 		assertTrue(contrUsr != null);
 
 		String idTest = "testObtenerIdUsuarios";
 
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarProveedores(50, idTest);
+		generarTuristas(50, idTest);
 
 		var ids = contrUsr.obtenerIdUsuarios();
 		assertTrue(ids != null);
@@ -115,16 +109,12 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerIdProveedores() {
+	void testObtenerIdProveedores() throws TurismoUyException {
 		assertTrue(contrUsr != null);
 
 		String idTest = "testObtenerIdProveedores";
 
-		try {
-			generarProveedores(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarProveedores(100, idTest);
 
 		var ids = contrUsr.obtenerIdProveedores();
 		assertTrue(ids != null);
@@ -144,16 +134,12 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerIdTuristas() {
+	void testObtenerIdTuristas() throws TurismoUyException {
 		assertTrue(contrUsr != null);
 
 		String idTest = "testObtenerIdTuristas";
 
-		try {
-			generarTuristas(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarTuristas(100, idTest);
 
 		var ids = contrUsr.obtenerIdTuristas();
 		assertTrue(ids != null);
@@ -173,23 +159,15 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testAltaTuristaOK() {
-		try {
-			generarTuristas(100, "testAltaTuristaOK");
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+	void testAltaTuristaOK() throws TurismoUyException {
+		generarTuristas(100, "testAltaTuristaOK");
 	}
 
 	@Test
-	void testAltaTuristaRepetido() {
+	void testAltaTuristaRepetido() throws TurismoUyException {
 		String idTest = "testAltaTuristaRepetido";
 
-		try {
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarTuristas(50, idTest);
 
 		assertThrows(UsuarioYaRegistradoException.class, () -> {
 			generarTuristas(1, idTest);
@@ -208,23 +186,15 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testAltaProveedorOK() {
-		try {
-			generarProveedores(100, "testAltaProveedorOK");
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+	void testAltaProveedorOK() throws TurismoUyException {
+		generarProveedores(100, "testAltaProveedorOK");
 	}
 
 	@Test
-	void testAltaProveedorRepetido() {
+	void testAltaProveedorRepetido() throws TurismoUyException {
 		String idTest = "testAltaProveedorRepetido";
 
-		try {
-			generarProveedores(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarProveedores(50, idTest);
 
 		assertThrows(UsuarioYaRegistradoException.class, () -> {
 			generarProveedores(1, idTest);
@@ -246,28 +216,20 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerDTUsuarioDetalle() throws ObjetoNoExisteEnTurismoUy {
+	void testObtenerDTUsuarioDetalle() throws TurismoUyException {
 		String idTest = "testObtenerDTUsuarioDetalle";
 
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-			ControladorActividadTuristicaTest.generarDepartamentos(50, idTest);
-			ControladorActividadTuristicaTest.generarActividades(50, idTest);
-			ControladorActividadTuristicaTest.generarSalidas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarProveedores(50, idTest);
+		generarTuristas(50, idTest);
+		ControladorActividadTuristicaTest.generarDepartamentos(50, idTest);
+		ControladorActividadTuristicaTest.generarActividades(50, idTest);
+		ControladorActividadTuristicaTest.generarSalidas(50, idTest);
 
 		// A los primeros 40 les asigno una sola salida
 		for (int i = 0; i < 40; i++) {
 			String nombreSalida = "Salida " + idTest + " i=" + i;
 			String nickname = "Turista " + idTest + " i=" + i;
-			try {
-				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
 		}
 
 		// A los ultimos 10 les asigno una todas las salidas
@@ -275,11 +237,7 @@ class ControladorUsuarioTest {
 			String nickname = "Turista " + idTest + " i=" + i;
 			for (int j = 0; j < 40; j++) {
 				String nombreSalida = "Salida " + idTest + " i=" + j;
-				try {
-					contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
-				} catch (TurismoUyException exception) {
-					fail(exception.getMessage());
-				}
+				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
 			}
 		}
 
@@ -356,15 +314,11 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testObtenerDTUsuario() throws ObjetoNoExisteEnTurismoUy {
+	void testObtenerDTUsuario() throws TurismoUyException {
 		String idTest = "testObtenerDTUsuario";
 
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarProveedores(50, idTest);
+		generarTuristas(50, idTest);
 
 		// Verifico para los proveedores
 		for (int i = 0; i < 50; i++) {
@@ -425,15 +379,11 @@ class ControladorUsuarioTest {
 	}
 
 	@Test
-	void testModificarUsuarioCaso() throws ObjetoNoExisteEnTurismoUy {
+	void testModificarUsuarioCaso() throws TurismoUyException {
 		String idTest = "testModificarUsuario";
 
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
+		generarProveedores(50, idTest);
+		generarTuristas(50, idTest);
 
 		for (int i = 0; i < 50; i++) {
 			String nicknameTur = "Turista " + idTest + " i=" + i;
@@ -442,13 +392,8 @@ class ControladorUsuarioTest {
 			DTTurista dttur = (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur);
 			DTProveedor dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv);
 
-			// Si no modifico nada:
-			try {
-				contrUsr.modificarUsuario(dttur);
-				contrUsr.modificarUsuario(dtprov);
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
+			contrUsr.modificarUsuario(dttur);
+			contrUsr.modificarUsuario(dtprov);
 
 			assertEquals(dttur, (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur));
 			assertEquals(dtprov, (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv));
@@ -463,12 +408,8 @@ class ControladorUsuarioTest {
 					dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), null,
 					dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
 
-			try {
-				contrUsr.modificarUsuario(dtTurNuevo);
-				contrUsr.modificarUsuario(dtProvNuevo);
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
+			contrUsr.modificarUsuario(dtTurNuevo);
+			contrUsr.modificarUsuario(dtProvNuevo);
 
 			dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
 			dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
@@ -490,12 +431,8 @@ class ControladorUsuarioTest {
 				contrUsr.modificarUsuario(dtProvNuevo2);
 			});
 
-			try {
-				contrUsr.modificarUsuario(dtTurNuevo);
-				contrUsr.modificarUsuario(dtProvNuevo);
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
+			contrUsr.modificarUsuario(dtTurNuevo);
+			contrUsr.modificarUsuario(dtProvNuevo);
 
 			dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
 			dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
