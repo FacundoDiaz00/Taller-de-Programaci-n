@@ -40,16 +40,13 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	 * usuario.
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String debelistar = (String) req.getParameter("listar");
-		System.out.println("debelistar:" + debelistar);
-		if (debelistar == "false") {
-			System.out.println("dio false");
+		String debelistar = (String)req.getParameter("listar");
+		if(debelistar != null && debelistar.toString().equals("false")) {
 			req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 		} else {
 			List<DTUsuario> usuarios = contrUsuario.obtenerDTUsuarios();
 			req.setAttribute("usuarios", usuarios);
 			req = Utiles.insertarLoDeSiempre(req);
-			System.out.println("no false");
 			req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
 		}
 
