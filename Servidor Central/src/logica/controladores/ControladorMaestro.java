@@ -27,7 +27,7 @@ public class ControladorMaestro implements IControladorMaestro {
 			icat.altaCategoria(cat);
 		}
 
-		Imagen img = null;
+		Imagen img = new Imagen("/harry_estilos.png");
 
 		// Cargo Departamentos
 		icat.altaDepartamento("Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es");
@@ -66,11 +66,11 @@ public class ControladorMaestro implements IControladorMaestro {
 
 		// Cargo Turistas
 		iuser.altaTurista("lachiqui", "Rosa María", "Martínez", "mirtha.legrand.ok@hotmail.com.ar", "1234",
-				LocalDate.of(1927, 2, 23), img, "argentina");
+				LocalDate.of(1927, 2, 23), new Imagen("lachiqui.png"), "argentina");
 		iuser.altaTurista("isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", "1234",
-				LocalDate.of(1926, 4, 21), img, "inglesa");
-		iuser.altaTurista("anibal", "Aníbal", "Lecter", "anibal@fing.edu.uy", "1234", LocalDate.of(1937, 12, 31), img,
-				"lituana");
+				LocalDate.of(1926, 4, 21), new Imagen("/usuarios/isabelita.png"), "inglesa");
+		iuser.altaTurista("anibal", "Aníbal", "Lecter", "anibal@fing.edu.uy", "1234", LocalDate.of(1937, 12, 31),
+				new Imagen("/usuarios/anibal.png"), "lituana");
 		iuser.altaTurista("waston", "Emma", "Waston", "e.waston@gmail.com", "1234", LocalDate.of(1990, 4, 15), img,
 				"inglesa");
 		iuser.altaTurista("elelvis", "Elvis", "Lacio", "suavemente@hotmail.com", "1234", LocalDate.of(1971, 7, 30), img,
@@ -88,29 +88,30 @@ public class ControladorMaestro implements IControladorMaestro {
 
 		// Cargo Proveedores
 		iuser.altaProveedor("washington", "Washington", "Rocha", "washington@turismorocha.gub.uy", "1234",
-				LocalDate.of(1970, 9, 14), img,
+				LocalDate.of(1970, 9, 14), new Imagen("/usuarios/washington.png"),
 				"Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha Uruguay",
 				"http://turismorocha.gub.uy/");
 		iuser.altaProveedor("eldiez", "Pablo", "Bengoechea", "eldiez@socfomturriv.org.uy", "1234",
-				LocalDate.of(1965, 6, 27), img,
+				LocalDate.of(1965, 6, 27), new Imagen("/usuarios/eldiez.png"),
 				"Pablo es el presidente de la Sociedad de Fomento Turístico de Rivera (conocida como Socfomturriv)",
 				"http://wwww.socfomturriv.org.uy/");
 		iuser.altaProveedor("meche", "Mercedes", "Venn", "meche@colonia.gub.uy", "1234", LocalDate.of(1990, 12, 31),
-				img, "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
+				new Imagen("/usuarios/meche.png"), "Departamento de Turismo del Departamento de Colonia",
+				"https://colonia.gub.uy/turismo/");
 
 		// Actividades
 		icat.altaActividadTuristica("washington", "Rocha", "Degusta",
-				"Festival gastronómico de productos locales en Rocha", 3, 800, "Rocha", LocalDate.of(2022, 7, 20), img,
-				categorias);
+				"Festival gastronómico de productos locales en Rocha", 3, 800, "Rocha", LocalDate.of(2022, 7, 20),
+				new Imagen("/actividades/Degusta.png"), categorias);
 		icat.altaActividadTuristica("washington", "Rocha", "Teatro con Sabores",
 				"En el mes aniversario del Club Deportivo Unión de Rocha te invitamos a una merienda deliciosa.", 3,
-				500, "Rocha", LocalDate.of(2022, 7, 21), img, categorias);
+				500, "Rocha", LocalDate.of(2022, 7, 21), new Imagen("/actividades/Teatro con Sabores.png"), categorias);
 		icat.altaActividadTuristica("meche", "Colonia", "Tour por Colonia del Sacramento",
 				"Con guía especializado y en varios idiomas. Varios circuitos posibles.", 2, 400,
 				"Colonia del Sacramento", LocalDate.of(2022, 8, 1), img, categorias);
 		icat.altaActividadTuristica("meche", "Colonia", "Almuerzo en el Real de San Carlos",
 				"Restaurante en la renovada Plaza de Toros con men´u internacional", 2, 800, "Colonia del Sacramento",
-				LocalDate.of(2022, 8, 1), img, categorias);
+				LocalDate.of(2022, 8, 1), new Imagen("/actividades/Almuerzo en el Real de San Carlos.jpg"), categorias);
 		icat.altaActividadTuristica("eldiez", "Rivera", "Almuerzo en Valle del Lunarejo",
 				"Almuerzo en la Posada con ticket fijo. Menú que incluye bebida y postre casero.", 2, 300, "Tranqueras",
 				LocalDate.of(2022, 8, 1), img, categorias);
@@ -164,10 +165,12 @@ public class ControladorMaestro implements IControladorMaestro {
 
 		// Paquete
 		ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20,
-				LocalDate.of(2022, 8, 10), img); // todo falta la fecha de alta
+				LocalDate.of(2022, 8, 10), new Imagen("/paquetes/Disfrutar Rocha.png"));
+		// TODO falta la fecha de alta
 		ipack.altaPaquete("Un día en Colonia",
 				"Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toro", 45, 15,
-				LocalDate.of(2022, 10, 10), img); // todo falta la fecha de alta
+				LocalDate.of(2022, 10, 10), new Imagen("/paquetes/Un día en Colonia.png"));
+		// TODO falta la fecha de alta
 
 		// Agregar Actividad a Paquete
 		ipack.agregarActividadAPaquete("Degusta", "Disfrutar Rocha");

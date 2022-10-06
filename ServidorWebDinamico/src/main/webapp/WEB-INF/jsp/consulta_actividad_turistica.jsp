@@ -42,14 +42,14 @@
 
             <div id="info-general-imagen">
                 <% 
-	            			String path = "";
-							if (datosActividad.getImg() == null) {
-								path += "noFoto.png";
-							} else {
-								path += datosActividad.getImg().getPath();
-							}							
-							%>
-			                <img src="${pageContext.request.contextPath}/img/<%=path%>" alt="">
+        		String path = "";
+				if (datosActividad.getImg() == null) {
+					path += "/noFoto.png";
+				} else {
+					path += datosActividad.getImg().getPath();
+				}							
+				%>
+                <img src="${pageContext.request.contextPath}/img<%=path%>" alt="">
             </div>
 
             <div id="info">
@@ -121,15 +121,15 @@
                     <div class="card mb-3" style="max-width: 800px;">
                         <div class="row g-0">
                             <div class="col-md-4 img-contain">
-                                                <% 
-						            			String pathSalida = "";
-												if (salida.getImg() == null) {
-													pathSalida += "noFoto.png";
-												} else {
-													pathSalida += salida.getImg().getPath();
-												}							
-												%>
-								                <img src="${pageContext.request.contextPath}/img/<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
+                                 <% 
+		            			String pathSalida = "";
+								if (salida.getImg() == null) {
+									pathSalida += "/noFoto.png";
+								} else {
+									pathSalida += salida.getImg().getPath();
+								}							
+								%>
+				                <img src="${pageContext.request.contextPath}/img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -174,15 +174,15 @@
                             <div class="col-md-4 img-contain">
 
                            
-                                 <% 
-						            			String pathPack = "";
-												if (pack.getImg() == null) {
-													pathPack += "noFoto.png";
-												} else {
-													pathPack += pack.getImg().getPath();
-												}							
-												%>
-								                <img src="${pageContext.request.contextPath}/img/<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+                                <% 
+		            			String pathPack = "";
+								if (pack.getImg() == null) {
+									pathPack += "/noFoto.png";
+								} else {
+									pathPack += pack.getImg().getPath();
+								}							
+								%>
+				                <img src="${pageContext.request.contextPath}/img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
                                 
                             </div>
                             <div class="col-md-8">

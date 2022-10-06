@@ -45,7 +45,15 @@
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0">
 			                        <div class="col-md-4 img-contain">
-			                            <img src="${pageContext.request.contextPath}/img/noFoto.png" class="img-fluid rounded-start">
+			                        	<% 
+				            			String path = "";
+										if (actividad.getImg() == null) {
+											path += "/noFoto.png";
+										} else {
+											path += actividad.getImg().getPath();
+										}							
+										%>
+			                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
 			                            <!-- Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
@@ -81,7 +89,15 @@
                 <div class="card mb-3" style="max-width: 800px;">
                     <div class="row g-0">
                         <div class="col-md-4 img-contain">
-                            <img src="${pageContext.request.contextPath}/img/noFoto.png" class="img-fluid rounded-start">
+                        	<% 
+	            			String path = "";
+							if (pack.getImg() == null) {
+								path += "/noFoto.png";
+							} else {
+								path += pack.getImg().getPath();
+							}							
+							%>
+                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
                             <!-- Falta el manejo de foto de la verdadero paquete-->
                         </div>
                         <div class="col-md-8">
