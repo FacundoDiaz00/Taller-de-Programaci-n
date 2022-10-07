@@ -39,8 +39,11 @@ public class IniciarSesionServlet extends HttpServlet {
 		String tipoID = (String) req.getParameter("idForm");
 
 		try {
+			DTUsuario usuario;
 			if (tipoID == "1") {
-				DTUsuario usuario = contrU.obtenerDTUsuarioPorCorreo(email, password);
+				usuario = contrU.obtenerDTUsuarioPorEmail(email, password);
+			}else {
+				usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
 			}
 			
 			req.setAttribute("usuarioLogeado", usuario);
@@ -50,6 +53,7 @@ public class IniciarSesionServlet extends HttpServlet {
 
 		} catch (ObjetoNoExisteEnTurismoUy e) {
 			// TODO HACER ALGO
+			System.out.print("Usuario no existe");
 		}
 
 		// req = Utiles.insertarLoDeSiempre(req);

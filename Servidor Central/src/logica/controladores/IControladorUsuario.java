@@ -44,7 +44,7 @@ public interface IControladorUsuario {
 	 */
 	DTUsuario obtenerDTUsuarioPorNickname(String nickname, String contrasenia) throws ObjetoNoExisteEnTurismoUy;
 	
-	DTUsuario obtenerDTUsuarioPorCorreo(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy;
+	DTUsuario obtenerDTUsuarioPorEmail(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy;
 
 	List<DTUsuario> obtenerDTUsuarios();
 

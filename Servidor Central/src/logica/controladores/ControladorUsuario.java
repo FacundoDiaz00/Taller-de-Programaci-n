@@ -115,7 +115,7 @@ public class ControladorUsuario implements IControladorUsuario {
 		}
 	}
 	
-	public DTUsuario obtenerDTUsuarioPorCorreo(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy{
+	public DTUsuario obtenerDTUsuarioPorEmail(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy{
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorCorreo(correo);
 		if (usuario.usuarioValido(correo, contrasenia)){
