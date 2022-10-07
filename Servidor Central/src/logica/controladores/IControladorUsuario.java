@@ -42,7 +42,9 @@ public interface IControladorUsuario {
 	 * @return
 	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
-	DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy;
+	DTUsuario obtenerDTUsuarioPorNickname(String nickname, String contrasenia) throws ObjetoNoExisteEnTurismoUy;
+	
+	DTUsuario obtenerDTUsuarioPorCorreo(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy;
 
 	List<DTUsuario> obtenerDTUsuarios();
 

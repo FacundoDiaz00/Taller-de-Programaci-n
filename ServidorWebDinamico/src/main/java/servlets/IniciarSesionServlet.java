@@ -35,9 +35,14 @@ public class IniciarSesionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String password = (String) req.getParameter("password");
 		String email = (String) req.getParameter("email");
+		String nickname = (String) req.getParameter("nickname");
+		String tipoID = (String) req.getParameter("idForm");
 
 		try {
-			DTUsuario usuario = contrU.obtenerDTUsuario(email);
+			if (tipoID == "1") {
+				DTUsuario usuario = contrU.obtenerDTUsuarioPorCorreo(email, password);
+			}
+			
 			req.setAttribute("usuarioLogeado", usuario);
 			req = Utiles.insertarLoDeSiempre(req);
 			resp.sendRedirect("index");

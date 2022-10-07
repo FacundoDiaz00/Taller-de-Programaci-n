@@ -13,6 +13,9 @@ import logica.entidades.Proveedor;
 import logica.entidades.Turista;
 import logica.entidades.Usuario;
 import logica.manejadores.ManejadorUsuario;
+import logica.datatypes.DTTuristaDetallePrivado;
+import logica.datatypes.DTProveedorDetallePrivado;
+
 
 /**
  * @author Equipo taller prog 16
@@ -102,10 +105,24 @@ public class ControladorUsuario implements IControladorUsuario {
 	}
 
 	@Override
-	public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy {
+	public DTUsuario obtenerDTUsuarioPorNickname(String nickname, String contrasenia) throws ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorNick(nickname);
-		return usuario.obtenerDTUsuario();
+		if (usuario.usuarioValido(nickname, contrasenia)){
+			return usuario.obtenerDTUsuario();
+		}else {
+			throw new ObjetoNoExisteEnTurismoUy(null);
+		}
+	}
+	
+	public DTUsuario obtenerDTUsuarioPorCorreo(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy{
+		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+		Usuario usuario = ins.getUsuarioPorCorreo(correo);
+		if (usuario.usuarioValido(correo, contrasenia)){
+			return usuario.obtenerDTUsuario();
+		}else {
+			throw new ObjetoNoExisteEnTurismoUy(null); 
+		}
 	}
 
 	@Override

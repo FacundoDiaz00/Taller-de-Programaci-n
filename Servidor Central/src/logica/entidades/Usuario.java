@@ -2,6 +2,7 @@ package logica.entidades;
 
 import java.time.LocalDate;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 
@@ -97,6 +98,10 @@ public abstract class Usuario {
 		this.setNombre(datosNuevos.getNombre());
 		this.setApellido(datosNuevos.getApellido());
 		this.setFechaNac(datosNuevos.getFechaNac());
+	}
+	
+	public boolean usuarioValido(String _correo, String _contrasenia){
+		return _correo == this.correo && _contrasenia == this.contrasenia;
 	}
 
 }
