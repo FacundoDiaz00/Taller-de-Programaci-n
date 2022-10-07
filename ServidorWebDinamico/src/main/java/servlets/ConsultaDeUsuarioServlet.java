@@ -13,6 +13,10 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.DTTuristaDetalle;
+import logica.datatypes.DTProveedorDetalle;
+
+
 import utils.Utiles;
 
 /**
