@@ -54,11 +54,6 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 			}else {
 				try {
 					DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id").toString());
-					System.out.println("___");
-					System.out.println(usr == null);
-					System.out.println(usr instanceof DTProveedorDetalle);
-					System.out.println(usr instanceof DTTuristaDetalle);
-					System.out.println("AAAAAAAAAA");
 					req.setAttribute("usuario", usr);
 					req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 

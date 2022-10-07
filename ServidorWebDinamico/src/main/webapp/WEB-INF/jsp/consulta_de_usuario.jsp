@@ -27,10 +27,9 @@
             	</div>
                 
                 	<% 
-                	List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
-					
-					for(DTUsuario usr: usuarios){
-						%>
+                		List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
+						for(DTUsuario usr: usuarios){
+					%>
 							<div class="card mb-3" style="max-width: 800px; margin-left: 15px">
 				                <div class="row g-0">
 				                    <div class="col-md-4 img-contain">
