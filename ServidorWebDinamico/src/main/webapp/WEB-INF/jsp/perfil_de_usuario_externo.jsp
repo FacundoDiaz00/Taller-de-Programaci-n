@@ -1,8 +1,13 @@
 <%-- 
 
 # ATTRIBUTOS QUE PRECISA LA PÁGINA
+	DTUsuario "usr"
 
  --%>
+<%@page import="logica.datatypes.DTUsuario"%>
+<%@page import="logica.datatypes.DTProveedorDetalle"%>
+<%@page import="logica.datatypes.DTTuristaDetalle"%>
+
  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,6 +20,21 @@
     <title>Turismo UY</title>
 </head>
 <body>
+	<%
+	DTUsuario usr = (DTUsuario)request.getAttribute("usuario");
+	if(usr != null){
+		boolean esProveedor = usr instanceof DTProveedorDetalle;
+		if(esProveedor){
+			System.out.println("esProveedor");
+			
+			
+		}else{
+			
+		}
+	}
+
+	
+	%>
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 	<section id="contenedor">
 		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
@@ -34,16 +54,24 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                     <div >
-                        <img src="../img/la_chiqui.png" class="perfil">
+                    	<%
+				        	String imgpath;
+				            if(usr.getImg() != null){
+					        	imgpath = "/img" + usr.getImg().getPath();
+							}else{
+				            	imgpath = "/img/noFoto.png";
+							}								                        
+						%>
+                        <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
                     </div>
                     <div class="card-body cards">
-                        <h5 class="card-title">Rosa María Martínez</h5>
-                        <p class="text"><b>Rosa María / lachiqui</b></p>
-                        <p class="card-text"><b>Nickname: lachiqui</b></p>
-                        <p class="card-text"><b>Nombre: </b>Rosa María</p>
-                        <p class="card-text"><b>Apellido:</b> Martínez</p>
-                        <p class="card-text"><b>Email: mirtha.legrand.ok@hotmail.com.ar</b></p>
-                        <p class="card-text"><b>Fecha de Nacimiento:</b> 23/2/1927</p>
+                        <h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
+                        <p class="text"><b><%= usr.getNombre()%> / <%= usr.getNickname()%></b></p>
+                        <p class="card-text"><b>Nickname: <%= usr.getNickname()%></b></p>
+                        <p class="card-text"><b>Nombre: </b><%= usr.getNombre()%></p>
+                        <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
+                        <p class="card-text"><b>Email: <%= usr.getCorreo()%></b></p>
+                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%= usr.getFechaNac()%></p>
 
                     </div>
                 </div>
