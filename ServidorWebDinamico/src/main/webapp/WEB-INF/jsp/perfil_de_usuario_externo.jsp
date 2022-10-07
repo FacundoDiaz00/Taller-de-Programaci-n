@@ -32,6 +32,7 @@
 		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 		<%if(usr!= null){%>
 			<div id="contenedor-items">
+				
 				<%
 				String imgpath;
 				if(usr.getImg() != null){
@@ -40,7 +41,20 @@
 					imgpath = "/img/noFoto.png";
 				}								                        
 				%>
-
+				
+            			<div class="card mb-3" style="max-width: 540px;">
+						  <div class="row g-0">
+						    <div class="col-md-4">
+						    <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
+						    </div>
+						    <div class="col-md-8">
+						      <div class="card-body">
+						    	<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
+						        <p class="card-text"><small class="text-muted"><%= usr.getNickname()%> / <%= usr.getCorreo()%></small></p>
+						      </div>	
+						    </div>
+						  </div>
+						</div>
 	            <ul class="nav nav-tabs" id="myTab" role="tablist">
 	                <li class="nav-item" role="presentation">
 	                    <button class="nav-link active" id="boton-general" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Perfil</button>
@@ -67,17 +81,7 @@
 		    	</ul>
 		    	<div class="tab-content" id="myTabContent">
 		    		<div class="tab-pane fade show active cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-	                    <div >
-	                    	<%
-					        	//String imgpath;
-					            if(usr.getImg() != null){
-						        	imgpath = "/img" + usr.getImg().getPath();
-								}else{
-					            	imgpath = "/img/noFoto.png";
-								}								                        
-							%>
-	                        <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
-	                    </div>
+
 	                    <div class="card-body cards">
 	                        <h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 	                        <p class="text"><b><%= usr.getNombre()%> / <%= usr.getNickname()%></b></p>
@@ -95,19 +99,6 @@
             			DTTuristaDetalle tur = (DTTuristaDetalle) usr;
             		%>
 						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
-            			<div class="card mb-3" style="max-width: 540px;">
-						  <div class="row g-0">
-						    <div class="col-md-4">
-						    <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
-						    </div>
-						    <div class="col-md-8">
-						      <div class="card-body">
-						    	<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
-						        <p class="card-text"><small class="text-muted"><%= usr.getNickname()%></small></p>
-						      </div>	
-						    </div>
-						  </div>
-						</div>
             			<%
             			for(String sal: tur.getInscripciones()){
             			%>	
@@ -133,19 +124,7 @@
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
             		%>
             			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
-            			<div class="card mb-3" style="max-width: 540px;">
-						  <div class="row g-0">
-						    <div class="col-md-4">
-						    <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
-						    </div>
-						    <div class="col-md-8">
-						      <div class="card-body">
-						    	<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
-						        <p class="card-text"><small class="text-muted"><%= usr.getNickname()%></small></p>
-						      </div>	
-						    </div>
-						  </div>
-						</div>
+            			
 						<h5>ACTIVIDADES:</h5>
             			<%-- <%
             			for(DTActividadTuristicaDetalle act: prv.getActividades()){
@@ -187,11 +166,17 @@
 		                            <div class="card-body">
 		                                <h5 class="card-title"><%=act.getNombre()%></h5>
 		                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
-		                                <a href="ConsultaActividadServlet?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                                <div style="align-items: right;display: flex;justify-content: flex-end;">
+		                                	<a href="ConsultaActividadServlet?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                                </div>
+		                                
+		                            	<div id="salidas" style=";margin-left: 10px">
+		                            		<h6>Salidas:</h6>
+		                            		<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
+												<p><%=sal.getNombre() %></p>
+											<% } %>
+		                            	</div>
 		                            </div>
-		                            <% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
-										<p><%=sal.getNombre() %></p>
-									<% } %>
 		                        </div>
 		                    </div>
 		                </div>
