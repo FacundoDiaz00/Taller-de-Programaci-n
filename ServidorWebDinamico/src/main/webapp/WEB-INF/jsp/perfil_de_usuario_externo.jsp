@@ -30,6 +30,15 @@
 		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 		<%if(usr!= null){%>
 			<div id="contenedor-items">
+				<%
+				String imgpath;
+				if(usr.getImg() != null){
+					imgpath = "/img" + usr.getImg().getPath();
+				}else{
+					imgpath = "/img/noFoto.png";
+				}								                        
+				%>
+
 	            <ul class="nav nav-tabs" id="myTab" role="tablist">
 	                <li class="nav-item" role="presentation">
 	                    <button class="nav-link active" id="boton-general" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Perfil</button>
@@ -58,7 +67,7 @@
 		    		<div class="tab-pane fade show active cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 	                    <div >
 	                    	<%
-					        	String imgpath;
+					        	//String imgpath;
 					            if(usr.getImg() != null){
 						        	imgpath = "/img" + usr.getImg().getPath();
 								}else{
@@ -84,6 +93,19 @@
             			DTTuristaDetalle tur = (DTTuristaDetalle) usr;
             		%>
 						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
+            			<div class="card mb-3" style="max-width: 540px;">
+						  <div class="row g-0">
+						    <div class="col-md-4">
+						    <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
+						    </div>
+						    <div class="col-md-8">
+						      <div class="card-body">
+						    	<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
+						        <p class="card-text"><small class="text-muted"><%= usr.getNickname()%></small></p>
+						      </div>	
+						    </div>
+						  </div>
+						</div>
             			<%
             			for(String sal: tur.getInscripciones()){
             			%>	
@@ -109,6 +131,19 @@
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
             		%>
             			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
+            			<div class="card mb-3" style="max-width: 540px;">
+						  <div class="row g-0">
+						    <div class="col-md-4">
+						    <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
+						    </div>
+						    <div class="col-md-8">
+						      <div class="card-body">
+						    	<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
+						        <p class="card-text"><small class="text-muted"><%= usr.getNickname()%></small></p>
+						      </div>	
+						    </div>
+						  </div>
+						</div>
             			<%
             			for(DTActividadTuristicaDetalle act: prv.getActividades()){
             				System.out.println(act.getNombre());
