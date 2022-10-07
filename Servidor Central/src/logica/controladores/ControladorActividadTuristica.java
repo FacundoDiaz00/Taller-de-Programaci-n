@@ -126,7 +126,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		Categoria cat = ManejadorCategoria.getInstancia().getCategoria(nomCat);
 		List<DTActividadTuristica> dtActis = new ArrayList<>();
 		for (ActividadTuristica act : cat.getActividades().values()) {
-			// if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){ //todo
+			// if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){ // TODO
 			// agregar cuando es se deje el CU aceptar/rechasar actividad
 			// turistica
 			dtActis.add(act.obtenerDTActividadTuristica());
@@ -225,8 +225,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public List<String> obtenerIdSalidasTuristicas(String act) throws ObjetoNoExisteEnTurismoUy {
-		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		ActividadTuristica actTuristica = MAT.getActividad(act);
+		ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+		ActividadTuristica actTuristica = manejActTur.getActividad(act);
 		Map<String, SalidaTuristica> salidas = actTuristica.getSalidas();
 		List<String> res = new ArrayList<>();
 		for (String idSalida : salidas.keySet()) {
@@ -236,27 +236,27 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) throws ObjetoNoExisteEnTurismoUy {
-		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = MST.getSalida(nomSal);
+		ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+		SalidaTuristica sal = manejSalTur.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristica();
 	}
 
 	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) throws ObjetoNoExisteEnTurismoUy {
-		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = MST.getSalida(nomSal);
+		ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+		SalidaTuristica sal = manejSalTur.getSalida(nomSal);
 		return sal.obtenerDTSalidaTuristicaDetalle();
 	}
 
 	public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy {
-		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = MST.getSalida(nomSal);
+		ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+		SalidaTuristica sal = manejSalTur.getSalida(nomSal);
 		var inscripciones = sal.getInscripciones();
 		Iterator<Inscripcion> iteratorInscripciones = inscripciones.iterator();
 		Inscripcion insc = null;
 		boolean encontrado = false;
 		while (!encontrado) {
 			insc = iteratorInscripciones.next();
-			if (insc.getTurista().getNickname() == nick) {
+			if (insc.getTurista().getNickname().equals(nick)) {
 				encontrado = true;
 			}
 		}
@@ -265,8 +265,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	public List<String> obtenerIdActividadesTuristicasAgregadas() {
 		List<String> idActividades = new ArrayList<>();
-		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		for (ActividadTuristica act : MAT.getActividades()) {
+		ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+		for (ActividadTuristica act : manejActTur.getActividades()) {
 			if (act.getEstado() == EstadoActividadTuristica.AGREGADA)
 				idActividades.add(act.getNombre());
 		}
@@ -275,8 +275,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada)
 			throws ObjetoNoExisteEnTurismoUy {
-		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		ActividadTuristica act = MAT.getActividad(idActividad);
+		ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+		ActividadTuristica act = manejActTur.getActividad(idActividad);
 		EstadoActividadTuristica est;
 		if (esAceptada)
 			est = EstadoActividadTuristica.ACEPTADA;

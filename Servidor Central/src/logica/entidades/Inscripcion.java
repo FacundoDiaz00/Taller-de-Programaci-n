@@ -40,7 +40,7 @@ public class Inscripcion {
 		setTurista(tur);
 	}
 
-	// Todo falta el calculo de costoInscripcion
+	// TODO falta el calculo de costoInscripcion
 
 	public boolean estaInscriptoASalida(String nomSalTuri) {
 		return salidaTuristica.getNombre().equals(nomSalTuri);
@@ -91,8 +91,7 @@ public class Inscripcion {
 	}
 
 	public DTInscripcion obtenerDTInscripcion() {
-		var costo = 0.0;
-		costo = cantidadTuristas * getSalidaTuristica().getActividad().getCostoPorTurista();
+		var costo = cantidadTuristas * getSalidaTuristica().getActividad().getCostoPorTurista();
 
 		if (compra != null)
 			costo = costo * (1 - compra.getPaquete().getDescuento() / 100);

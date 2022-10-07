@@ -40,16 +40,17 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	 * Observacion: - Si listar = false debera haber una id para dar la info del
 	 * usuario.
 	 */
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String debelistar = (String)req.getParameter("listar");
+		String debelistar = req.getParameter("listar");
 		req = Utiles.insertarLoDeSiempre(req);
 
-		if(debelistar != null && debelistar.toString().equals("false")) {
+		if(debelistar != null && debelistar.equals("false")) {
 			if(false) {
 				
 			}else {
 				try {
-					DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id").toString());
+					DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
 					req.setAttribute("usuario", usr);
 					req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
@@ -71,6 +72,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 * response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

@@ -22,7 +22,7 @@ public class Compra {
 	private Set<Inscripcion> inscripciones;
 	private Map<String, Integer> usosRestantesPorActividad;
 
-	// ToDo Falta el campo calculado costoTotal
+	// TODO Falta el campo calculado costoTotal
 
 	public Compra(LocalDate fechaCompra, int cantidadTuristas, LocalDate vencimiento, Paquete paquete) {
 		this.fechaCompra = fechaCompra;
