@@ -8,6 +8,8 @@
 <%@page import="logica.datatypes.DTProveedorDetalle"%>
 <%@page import="logica.datatypes.DTTuristaDetalle"%>
 <%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
+<%@page import="logica.datatypes.DTSalidaTuristica"%>
+
 <%@ page import="java.util.List" %>
 
  
@@ -144,7 +146,8 @@
 						    </div>
 						  </div>
 						</div>
-            			<%
+						<h5>ACTIVIDADES:</h5>
+            			<%-- <%
             			for(DTActividadTuristicaDetalle act: prv.getActividades()){
             				System.out.println(act.getNombre());
             			%>	
@@ -156,7 +159,6 @@
                                     <div class="col-md-8">
                                         <div class="card-body cards">
                                             <h5 class="card-title"><%=act.getNombre()%></h5>
-                                            <h5>AAAAAAAAAAa</h5>
                                             <div class="botonera">
                                                 <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
                                             </div>
@@ -164,7 +166,37 @@
                                     </div>
                                 </div>
                             </div>
-            			<%}%>
+            			<%}%> --%>
+            			<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
+						
+		                <div class="card mb-3" style="max-width: 850px;">
+		                    <div class="row g-0">
+		                        <div class="col-md-4 img-contain">
+		              
+		                        	<% 
+			            			String pathImagen = "";
+									if (act.getImg() == null) {
+										pathImagen += "noFoto.png";
+									} else {
+										pathImagen += act.getImg().getPath();
+									}							
+									%>
+					                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+		                        </div>
+		                        <div class="col-md-8">
+		                            <div class="card-body">
+		                                <h5 class="card-title"><%=act.getNombre()%></h5>
+		                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+		                                <a href="ConsultaActividadServlet?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                            </div>
+		                            <% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
+										<p><%=sal.getNombre() %></p>
+									<% } %>
+		                        </div>
+		                    </div>
+		                </div>
+						
+					<% } %>
             			</div>
 					<%}%>
 				</div><!-- cierra tabcontent -->
