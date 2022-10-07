@@ -1,3 +1,7 @@
+console.log("entre a js: ", $("#boton-actividades"))
+$("#boton-actividades").addClass("active");
+$("#boton-actividades").addClass("show");
+
 function cambiarSeleccionado($botonSeleccionado, $botonOtro1, $botonOtro2) {
     console.log("cambiarSeleccionado");
     $botonSeleccionado.addClass("active");
@@ -10,17 +14,18 @@ function cambiarSeleccionado($botonSeleccionado, $botonOtro1, $botonOtro2) {
     $botonOtro2?.removeClass("cardPerfil");
 }
 
-$("#boton-paquetes")[0]?.addEventListener("click", function() {
-    cambiarSeleccionado($("#boton-paquetes-pane"), $("#boton-general-pane"), $("#boton-salidas-pane"));
+$("#boton-actividades")[0]?.addEventListener("click", function() {
+	console.log("soy boton actividades: ", $("#boton-actividades"))
+    cambiarSeleccionado($("#boton-actividades-pane"), $("#boton-general-pane"), $("#boton-salidas-pane"));
 })
 
 $("#boton-general")[0]?.addEventListener("click", function() {
     $("#boton-general-pane").addClass("cardPerfil");
-    cambiarSeleccionado($("#boton-general-pane"), $("#boton-paquetes-pane"), $("#boton-salidas-pane"));
+    cambiarSeleccionado($("#boton-general-pane"), $("#boton-actividades-pane"), $("#boton-salidas-pane"));
 })
 
 $("#boton-salidas")[0]?.addEventListener("click", function() {
-    cambiarSeleccionado($("#boton-salidas-pane"), $("#boton-paquetes-pane"), $("#boton-general-pane"));
+    cambiarSeleccionado($("#boton-salidas-pane"), $("#boton-actividades-pane"), $("#boton-general-pane"));
 })
 
 

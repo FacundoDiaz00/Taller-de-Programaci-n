@@ -83,7 +83,7 @@
 						System.out.println("esTurista");
             			DTTuristaDetalle tur = (DTTuristaDetalle) usr;
             		%>
-						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="1">
+						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			<%
             			for(String sal: tur.getInscripciones()){
             			%>	
@@ -108,7 +108,7 @@
             			System.out.println("esProveedor");
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
             		%>
-            			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="2">
+            			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			<%
             			for(DTActividadTuristicaDetalle act: prv.getActividades()){
             				System.out.println(act.getNombre());
