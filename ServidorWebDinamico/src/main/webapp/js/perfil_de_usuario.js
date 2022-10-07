@@ -1,6 +1,3 @@
-console.log("entre a js: ", $("#boton-actividades"))
-$("#boton-actividades").addClass("active");
-$("#boton-actividades").addClass("show");
 
 function cambiarSeleccionado($botonSeleccionado, $botonOtro1, $botonOtro2) {
     console.log("cambiarSeleccionado");
@@ -29,7 +26,7 @@ $("#boton-salidas")[0]?.addEventListener("click", function() {
 })
 
 
-$("#boton-general-2")[0]?.addEventListener("click", function() {
+$("#boton-general-2")[0]?.addEventListener("click", function() {sss
     console.log("boton-general-2: ", $("#boton-general-2"));
     $("#boton-general-pane-2").addClass("cardPerfil");
     cambiarSeleccionado($("#boton-general-pane-2"), $("#boton-actividades-pane-2"), null);
