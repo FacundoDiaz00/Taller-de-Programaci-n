@@ -2,25 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Servidor Central/src/excepciones/PaqueteSinActividadesExcepcion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorMaestro.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorMaestro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorPaquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorPaquete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorActividadTuristica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorPaquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorPaquete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Compra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Paquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Paquete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorPaqueteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorPaqueteTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorUsuarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorUsuarioTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,15 +52,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.All in Servidor Central (2)">
-    <configuration name="All in Servidor Central (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Servidor Central" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.ControladorPaqueteTest.testCompraConPaqueteSinActividades">
     <configuration name="All in Servidor Central (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
@@ -78,10 +61,58 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in Servidor Central" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Servidor Central (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControladorPaqueteTest.testCompraConPaqueteSinActividades" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Servidor Central" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.controladores.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.controladores" />
+      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorPaqueteTest" />
+      <option name="METHOD_NAME" value="testCompraConPaqueteSinActividades" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControladorPaqueteTest.testCompraRepetida" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Servidor Central" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.controladores.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.controladores" />
+      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorPaqueteTest" />
+      <option name="METHOD_NAME" value="testCompraRepetida" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControladorPaqueteTest.testComprarPaqueteOK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Servidor Central" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.controladores.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.controladores" />
+      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorPaqueteTest" />
+      <option name="METHOD_NAME" value="testComprarPaqueteOK" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,9 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControladorPaqueteTest.testCompraConPaqueteSinActividades" />
+        <item itemvalue="JUnit.ControladorPaqueteTest.testCompraRepetida" />
+        <item itemvalue="JUnit.ControladorPaqueteTest.testComprarPaqueteOK" />
+        <item itemvalue="JUnit.All in Servidor Central (3)" />
         <item itemvalue="JUnit.All in Servidor Central (2)" />
-        <item itemvalue="JUnit.All in Servidor Central (1)" />
-        <item itemvalue="JUnit.All in Servidor Central" />
       </list>
     </recent_temporary>
   </component>
@@ -119,7 +152,7 @@
       <workItem from="1664400235251" duration="20000" />
       <workItem from="1664400267134" duration="671000" />
       <workItem from="1664578491723" duration="67000" />
-      <workItem from="1665175927652" duration="15769000" />
+      <workItem from="1665175927652" duration="17559000" />
     </task>
     <servers />
   </component>
@@ -151,5 +184,9 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__1_.ic" NAME="All in Servidor Central (1) Coverage Results" MODIFIED="1665175982201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__2_.ic" NAME="All in Servidor Central (2) Coverage Results" MODIFIED="1665204723214" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testComprarPaqueteOK.ic" NAME="ControladorPaqueteTest.testComprarPaqueteOK Coverage Results" MODIFIED="1665210900263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__3_.ic" NAME="All in Servidor Central (3) Coverage Results" MODIFIED="1665210695922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

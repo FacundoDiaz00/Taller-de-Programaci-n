@@ -28,7 +28,7 @@ public interface IControladorPaquete {
 			Imagen img) throws PaqueteYaRegistradoException;
 
 	void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
-			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, NoExisteConsumoParaLaActividadExcepcion;
+			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, PaquetesSinActividadesExcepcion;
 
 	/**
 	 * Debuelve de los nombres de todos los paquetes registrados en el sistema

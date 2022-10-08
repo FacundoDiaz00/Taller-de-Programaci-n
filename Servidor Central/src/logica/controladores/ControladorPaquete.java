@@ -39,11 +39,11 @@ public class ControladorPaquete implements IControladorPaquete {
 	}
 
 	public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
-			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, NoExisteConsumoParaLaActividadExcepcion {
+			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, PaquetesSinActividadesExcepcion {
 		Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
 		Paquete paquete = ManejadorPaquete.getInstancia().getPaquete(nombrePaquete);
 		if(!paquete.hayActividades()){
-			throw new NoExisteConsumoParaLaActividadExcepcion("Este paquete no tiene ninguna actividad vinculada");
+			throw new PaquetesSinActividadesExcepcion("Este paquete no tiene ninguna actividad vinculada");
 		}
 		if (turista.existeCompra(nombrePaquete)) {
 			throw new CompraYaRegistradaException("Se intentó comprar dos veces el mismo paquete");
