@@ -173,7 +173,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		String nombreActividad = sal.getActividad().getNombre();
 		if(nombrePaquete != null){
 			compraUtilizadaEnInscrpicon = turis.obtenerCompraParaNombrePaquete(nombrePaquete);
-			if(compraUtilizadaEnInscrpicon.getVencimiento().isAfter(LocalDate.now())){
+			if(fechaInscripcion.isAfter(compraUtilizadaEnInscrpicon.getVencimiento())){
 				throw new CompraPaqueteVencidoExcepcion("La compra de este paquete esta vencida");
 			}
 			if(canTuris > compraUtilizadaEnInscrpicon.obtenerConsumosRestantesParaActividad(nombreActividad)){
