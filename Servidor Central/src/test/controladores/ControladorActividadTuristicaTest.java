@@ -67,10 +67,12 @@ class ControladorActividadTuristicaTest {
 	}
 
 	// No es un test en sí
-	static void generarActividades(int cant, String idTest)
+	static List<String> generarActividades(int cant, String idTest)
 			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+
+		List<String> nombresActividades = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nickProveedor = "Proveedor " + idTest + " i=" + i;
@@ -84,15 +86,20 @@ class ControladorActividadTuristicaTest {
 
 			contrActTur.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion,
 					costo, ciudad, fechaAlta, null, muestraCategorias);
+
+			nombresActividades.add(nombreActividad);
 		}
+		return nombresActividades;
 	}
 
 	// No es un test en sí
-	static void generarSalidas(int cant, String idTest)
+	static List<String> generarSalidas(int cant, String idTest)
 			throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
 			FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+
+		List<String> nombresSalidas = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nombreActividad = "Actividad " + idTest + " i=" + i;
@@ -104,13 +111,18 @@ class ControladorActividadTuristicaTest {
 
 			contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad,
 					cantMaxTur, null);
+
+			nombresSalidas.add(nombreSalida);
 		}
+		return nombresSalidas;
 	}
 
 	// No es un test en sí
-	static void generarDepartamentos(int cant, String idTest) throws DeparamentoYaRegistradoException {
+	static List<String> generarDepartamentos(int cant, String idTest) throws DeparamentoYaRegistradoException {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+
+		List<String> nombreDepartamentos = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nom = "Departamento " + idTest + " i=" + i;
@@ -118,17 +130,22 @@ class ControladorActividadTuristicaTest {
 			String url = "https://www.canelones-departamento.org.uy/inicio.html";
 
 			contrActTur.altaDepartamento(nom, descr, url);
+			nombreDepartamentos.add(nom);
 		}
+		return nombreDepartamentos;
 	}
 
-	private void generarCategorias(int cant, String idTest) throws CategoriaYaRegistradaException {
+	private List<String> generarCategorias(int cant, String idTest) throws CategoriaYaRegistradaException {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+		List<String> nombreCategorias = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nom = "Categoria " + idTest + " i=" + i;
 			contrActTur.altaCategoria(nom);
+			nombreCategorias.add(nom);
 		}
+		return nombreCategorias;
 	}
 
 	@Test
@@ -539,7 +556,7 @@ class ControladorActividadTuristicaTest {
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
 
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5), null);
 
 		assertEquals(contrActTur.obtenerDTInscripcion(nickname, nombreSalida).getFechaInscripcion(),
 				localDateNow.plusYears(5));
@@ -585,10 +602,10 @@ class ControladorActividadTuristicaTest {
 				ciudad, fechaAlta, null, muestraCategorias);
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5), null);
 
 		assertThrows(InscripcionYaRegistradaException.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.plusYears(5));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.plusYears(5), null);
 		});
 	}
 
@@ -622,7 +639,7 @@ class ControladorActividadTuristicaTest {
 				cantMaxTuristas, null);
 
 		assertThrows(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.minusDays(1));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.minusDays(1), null);
 		});
 	}
 
@@ -659,10 +676,10 @@ class ControladorActividadTuristicaTest {
 				ciudad, fechaAlta, null, muestraCategorias);
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5), null);
 
 		assertThrows(SuperaElMaximoDeTuristasException.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow.plusYears(5));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow.plusYears(5), null);
 		});
 	}
 

@@ -3,10 +3,7 @@ package logica.controladores;
 import java.time.LocalDate;
 import java.util.List;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.CompraYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.PaqueteYaRegistradoException;
+import excepciones.*;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.Imagen;
@@ -31,7 +28,7 @@ public interface IControladorPaquete {
 			Imagen img) throws PaqueteYaRegistradoException;
 
 	void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
-			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException;
+			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, NoExisteConsumoParaLaActividadExcepcion;
 
 	/**
 	 * Debuelve de los nombres de todos los paquetes registrados en el sistema
@@ -52,7 +49,6 @@ public interface IControladorPaquete {
 	 * @param nombreDep
 	 * @param nombrePaq
 	 * @return
-	 * @throws DeparamentoNoRegistradoException
 	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
 	List<String> obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(String nombreDep, String nombrePaq)

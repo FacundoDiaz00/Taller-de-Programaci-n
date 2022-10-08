@@ -8,17 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
-import excepciones.CategoriaYaRegistradaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.SalidaYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.*;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -26,12 +16,7 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.Categoria;
-import logica.entidades.Departamento;
-import logica.entidades.Inscripcion;
-import logica.entidades.SalidaTuristica;
-import logica.entidades.Turista;
+import logica.entidades.*;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
@@ -159,29 +144,22 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		return dtsSal;
 	}
 
-	public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) {
-		// TODO ver DCOM
-		return new ArrayList<String>();
+	public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) throws ObjetoNoExisteEnTurismoUy {
+		ControladorUsuario contUser = new ControladorUsuario();
+		Turista turi = contUser.obtenerTurista(nickTurista);
+		return turi.obtenerIdPaquetesConConsumoDisponibleParaActividad(nombreActividad);
 	}
 
 	@Override
-	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
-			String nombrePaquete) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
-		// TODO hacer algo con el nombrePaquete y calcular la fecha de insc
-
-	}
-
-	@Override
-	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
-			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
-			ObjetoNoExisteEnTurismoUy {
+	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscripcion, String nombrePaquete)
+			throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException
+			, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion, NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
 		if (turis.estaInscriptoASalida(nomSalTurim)) {
 			throw new InscripcionYaRegistradaException(
-					"Ya exite una inscrpcion entre la salida " + nomSalTurim + " y el turista " + nicknameTuris);
+					"Ya exite una inscrpcion para la salida " + nomSalTurim + " del turista " + nicknameTuris);
 		}
 		ManejadorSalidaTuristica msal = ManejadorSalidaTuristica.getInstancia();
 		SalidaTuristica sal = msal.getSalida(nomSalTurim);
@@ -191,7 +169,18 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 					+ " con las inscripcion ya realizada no tiene la capacidad suficiente para soportar esta inscrpcion");
 		}
 
-		turis.altaInscripcionSalidaTuristica(sal, canTuris, fechaInscripcion);
+		Compra compraUtilizadaEnInscrpicon = null;
+		String nombreActividad = sal.getActividad().getNombre();
+		if(nombrePaquete != null){
+			compraUtilizadaEnInscrpicon = turis.obtenerCompraParaNombrePaquete(nombrePaquete);
+			if(compraUtilizadaEnInscrpicon.getVencimiento().isAfter(LocalDate.now())){
+				throw new CompraPaqueteVencidoExcepcion("La compra de este paquete esta vencida");
+			}
+			if(canTuris > compraUtilizadaEnInscrpicon.obtenerConsumosRestantesParaActividad(nombreActividad)){
+				throw new CompraConConsumosInsuficientesExcepcion("La compra no tiene un numero suficiente de consumos disponibles para realizar esta inscripcion");
+			}
+		}
+		turis.altaInscripcionSalidaTuristica(sal, canTuris, fechaInscripcion, compraUtilizadaEnInscrpicon, nombreActividad);
 
 	}
 

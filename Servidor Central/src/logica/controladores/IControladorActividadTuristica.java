@@ -4,17 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
-import excepciones.CategoriaYaRegistradaException;
-import excepciones.DeparamentoYaRegistradoException;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import excepciones.InscripcionYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.SalidaYaRegistradaException;
-import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.*;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -64,8 +54,7 @@ public interface IControladorActividadTuristica {
 	 * @param ciudad
 	 * @param fechaAlta
 	 * @throws ActividadTuristicaYaRegistradaException
-	 * @throws DeparamentoNoRegistradoException
-	 * @throws CategoriaNoRegistradaException
+
 	 */
 	void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion,
 			int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img, List<String> categorias)
@@ -109,7 +98,7 @@ public interface IControladorActividadTuristica {
 	 * 
 	 * @param departamento
 	 * @return
-	 * @throws DeparamentoNoRegistradoException
+
 	 */
 	List<String> obtenerIdActividadesTuristicas(String departamento) throws ObjetoNoExisteEnTurismoUy;
 
@@ -126,16 +115,21 @@ public interface IControladorActividadTuristica {
 	 */
 	List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) throws ObjetoNoExisteEnTurismoUy;
 
-	// Versión web
-	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, String nombrePaquete)
-			throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException;
 
-	// Versión estacion de trabajo
-	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
-			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
-			ObjetoNoExisteEnTurismoUy;
+	/**
+	 * Crea la inscrpicon de un turistia a una salida turistica
+	 * Notar que en la estacion de trabajo este ultimo parametro siempre tiene que ir en null
+	 *
+	 * @param nomSalTurim
+	 * @param nicknameTuris
+	 * @param canTuris
+	 * @param fechaInscripcion
+	 * @param nombrePaquete
+	 */
+	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscripcion, String nombrePaquete)
+			throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException
+			, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion,NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 *
@@ -164,7 +158,14 @@ public interface IControladorActividadTuristica {
 	 */
 	List<String> obtenerIdSalidasTuristicas(String act) throws ObjetoNoExisteEnTurismoUy;
 
-	List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista);
+	/**
+	 * Devuelve los id paquete disponibles para esa actividad y ese turista
+	 * @param nombreActividad
+	 * @param nickTurista
+	 * @return
+	 * @throws ObjetoNoExisteEnTurismoUy
+	 */
+	List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) throws ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 * Devuelve los datos de la salida identificada por el nombre pasada por

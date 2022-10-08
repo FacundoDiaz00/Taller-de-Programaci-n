@@ -151,18 +151,18 @@ public class ControladorMaestro implements IControladorMaestro {
 				LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, img);
 
 		// Inscripciones
-		icat.altaInscripcionSalidaTuristica("Degusta Agosto", "lachiqui", 3, LocalDate.of(2022, 8, 15));
-		icat.altaInscripcionSalidaTuristica("Degusta Agosto", "elelvis", 5, LocalDate.of(2022, 8, 16));
+		icat.altaInscripcionSalidaTuristica("Degusta Agosto", "lachiqui", 3, LocalDate.of(2022, 8, 15), null);
+		icat.altaInscripcionSalidaTuristica("Degusta Agosto", "elelvis", 5, LocalDate.of(2022, 8, 16), null);
 		icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3,
-				LocalDate.of(2022, 8, 18));
+				LocalDate.of(2022, 8, 18), null);
 		icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita", 1,
-				LocalDate.of(2022, 8, 19));
-		icat.altaInscripcionSalidaTuristica("Almuerzo 2", "mastropiero", 2, LocalDate.of(2022, 8, 19));
-		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 1", "anibal", 1, LocalDate.of(2022, 8, 19));
-		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "chino", 10, LocalDate.of(2022, 8, 20));
-		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, LocalDate.of(2022, 8, 20));
-		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal", 1, LocalDate.of(2022, 8, 21));
-		icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony", 11, LocalDate.of(2022, 8, 21));
+				LocalDate.of(2022, 8, 19), null);
+		icat.altaInscripcionSalidaTuristica("Almuerzo 2", "mastropiero", 2, LocalDate.of(2022, 8, 19), null);
+		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 1", "anibal", 1, LocalDate.of(2022, 8, 19), null);
+		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "chino", 10, LocalDate.of(2022, 8, 20), null);
+		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, LocalDate.of(2022, 8, 20), null);
+		icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal", 1, LocalDate.of(2022, 8, 21), null);
+		icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony", 11, LocalDate.of(2022, 8, 21), null);
 
 		// Paquete
 		ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20,

@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.CompraYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.PaqueteYaRegistradoException;
+import excepciones.*;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.Imagen;
@@ -42,9 +39,12 @@ public class ControladorPaquete implements IControladorPaquete {
 	}
 
 	public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
-			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException {
+			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, NoExisteConsumoParaLaActividadExcepcion {
 		Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
 		Paquete paquete = ManejadorPaquete.getInstancia().getPaquete(nombrePaquete);
+		if(!paquete.hayActividades()){
+			throw new NoExisteConsumoParaLaActividadExcepcion("Este paquete no tiene ninguna actividad vinculada");
+		}
 		if (turista.existeCompra(nombrePaquete)) {
 			throw new CompraYaRegistradaException("Se intentó comprar dos veces el mismo paquete");
 		}

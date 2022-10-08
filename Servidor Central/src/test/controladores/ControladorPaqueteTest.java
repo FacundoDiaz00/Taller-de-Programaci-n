@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import logica.controladores.IControladorActividadTuristica;
+import logica.controladores.IControladorUsuario;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +24,8 @@ import logica.datatypes.DTPaqueteDetalles;
 
 class ControladorPaqueteTest {
 	private static IControladorPaquete contrPaquete;
+	private static IControladorUsuario contrUsuario;
+	private static IControladorActividadTuristica contrActividad;
 
 	private static List<String> muestraCategorias;
 
@@ -30,17 +35,20 @@ class ControladorPaqueteTest {
 	@BeforeAll
 	static void preparacionPrevia() {
 		contrPaquete = Fabrica.getInstancia().getIControladorPaquete();
+		contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
+		contrActividad = Fabrica.getInstancia().getIControladorActividadTuristica();
 
 		localDateNow = LocalDate.now();
 		localDateVieja = LocalDate.of(2022, 1, 1);
 	}
 
 	// No es un test en sí.
-	static void generarPaquetes(int cant, String idTest) throws TurismoUyException {
+	static List<String> generarPaquetes(int cant, String idTest) throws TurismoUyException {
 		if (contrPaquete == null)
 			preparacionPrevia();
 
 		assertTrue(contrPaquete != null);
+		List<String> nombrePaquetes = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nombre = "Paquete " + idTest + " i=" + i;
@@ -49,8 +57,53 @@ class ControladorPaqueteTest {
 			float descuento = (float) (i + 0.025);
 
 			contrPaquete.altaPaquete(nombre, descripcion, periodovalidez, descuento, localDateVieja, null);
+			nombrePaquetes.add(nombre);
 		}
+		return nombrePaquetes;
 	}
+
+	static void generarTurista(String id) throws TurismoUyException{
+		String nicknameTurista = id + "nickname-turista";
+		String nombreTurista = id + "nombre-turista";
+		String apellidoTurista = id + "apellido-turista";
+		String correoTurista = id + "correo-turista";
+		String password = "123";
+		String nacionalidad = "uy";
+
+		contrUsuario.altaTurista(nicknameTurista, nombreTurista, apellidoTurista, correoTurista, password, localDateNow, null, nacionalidad);
+	}
+
+	static void generarPaquete(String id, int valides) throws TurismoUyException{
+		String nombrePaquete = id + "nombre-paquete";
+		String descripcionPaquete = id + "descripcion-paquete";
+		float descuento = 10;
+
+		contrPaquete.altaPaquete(nombrePaquete, descripcionPaquete, valides, descuento, localDateNow,null);
+	}
+
+	static void generarProveedor(String id) throws TurismoUyException{
+		String nicknameProveedor = id + "nickname-proveedor";
+		String nombreProveedor = id + "nombre-proveedor";
+		String apellidoProveedor = id + "apellido-proveedor";
+		String correoProveedor = id + "correo-proveedor";
+		String password = "123";
+		String descripcionProveedor = id + "descripcion-proveedor";
+		String urlProveedor = id + "url-proveedor";
+
+		contrUsuario.altaProveedor(nicknameProveedor, nombreProveedor, apellidoProveedor, correoProveedor, password, localDateNow, null,descripcionProveedor, urlProveedor );
+	}
+
+	static void generarActividad(String id, String departamento, String nicknameProveedor) throws TurismoUyException{
+		String nombreActividad = id + "nombre-actividad";
+		String descripcionActividad = id + "descripcion-actividad";
+		int duracion = 2;
+		float costo = (float) 2.0;
+		String cuidad = id + "cuidad-actividad";
+
+		contrActividad.altaActividadTuristica(nicknameProveedor, departamento,nombreActividad, descripcionActividad,duracion,costo, cuidad, localDateNow.minusDays(5), null , new ArrayList<>());
+	}
+
+
 
 	@Test
 	final void testAltaPaqueteOK() throws TurismoUyException {
@@ -287,6 +340,27 @@ class ControladorPaqueteTest {
 				assertTrue(actList.contains(nombreActividad));
 			}
 		}
+
+	}
+
+	@Test
+	final void testComprarPaqueteOK() throws TurismoUyException{
+
+		String idTest = "testComprarPaqueteOK";
+
+
+		List<String> nomPaquetes = generarPaquetes(1, idTest);
+		ControladorActividadTuristicaTest.generarDepartamentos(1, idTest);
+		ControladorUsuarioTest.generarProveedores(1, idTest);
+		List<String> nomTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		List<String> nomActividades = ControladorActividadTuristicaTest.generarActividades(1, idTest);
+
+		contrActividad.aceptarORechazarActividadTuristica(nomActividades.get(0), true);
+		contrPaquete.agregarActividadAPaquete(nomActividades.get(0), nomPaquetes.get(0));
+
+		
+
+
 
 	}
 
