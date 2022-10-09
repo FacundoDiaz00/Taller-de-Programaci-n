@@ -557,7 +557,7 @@ class ControladorActividadTuristicaTest {
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
 
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nicknameTurista, 1, localDateNow, null);
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nicknameTurista, 1, null, null);
 
 		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getFechaInscripcion(), localDateNow);
 		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getCantidadTuristas(), 1);
@@ -712,7 +712,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void altaInscripcionConConsumosInsuficientes() throws TurismoUyException {
+	public void testAltaInscripcionConConsumosInsuficientes() throws TurismoUyException {
 		String idTest = "altaInscripcionConConsumosInsuficientes";
 
 		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
@@ -729,12 +729,12 @@ class ControladorActividadTuristicaTest {
 		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(0), nombresPaquetes.get(0));
 		controladorPaquete.comprarPaquete(nombresTuristas.get(0), nombresPaquetes.get(0), 3);
 
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida1, nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0));
-		assertThrows(CompraConConsumosInsuficientesExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalida2, nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida1, nombresTuristas.get(0), 2, null, nombresPaquetes.get(0));
+		assertThrows(CompraConConsumosInsuficientesExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalida2, nombresTuristas.get(0), 2, null, nombresPaquetes.get(0)));
 	}
 
 	@Test
-	public void altaInscripcionConCompraVencida() throws TurismoUyException {
+	public void testAltaInscripcionConCompraVencida() throws TurismoUyException {
 		String idTest = "altaInscripcionConCompraVencida";
 
 		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(2, idTest);
@@ -754,7 +754,7 @@ class ControladorActividadTuristicaTest {
 	}
 
 	@Test
-	public void altaInscripcionConPaqueteNoComprado() throws TurismoUyException{
+	public void testAltaInscripcionConPaqueteNoComprado() throws TurismoUyException{
 		String idTest = "altaInscripcionConPaqueteNoComprado";
 		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
 		generarDepartamentos(1, idTest);
@@ -763,11 +763,11 @@ class ControladorActividadTuristicaTest {
 		List<String> nombreSalidas = generarSalidas(1, idTest);
 		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
 		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(0), nombresPaquetes.get(0));
-		assertThrows(PaqueteNoCompradoExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+		assertThrows(PaqueteNoCompradoExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, null, nombresPaquetes.get(0)));
 	}
 
 	@Test
-	public void altaInscripcionConPaqueteSinActividad() throws TurismoUyException{
+	public void testAltaInscripcionConPaqueteSinActividad() throws TurismoUyException{
 		String idTest = "altaInscripcionConPaqueteSinActividad";
 		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
 		generarDepartamentos(2, idTest);
@@ -777,7 +777,7 @@ class ControladorActividadTuristicaTest {
 		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
 		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(1), nombresPaquetes.get(0));
 		controladorPaquete.comprarPaquete(nombresTuristas.get(0), nombresPaquetes.get(0), 2);
-		assertThrows(NoExisteConsumoParaLaActividadExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+		assertThrows(NoExisteConsumoParaLaActividadExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, null, nombresPaquetes.get(0)));
 	}
 
 

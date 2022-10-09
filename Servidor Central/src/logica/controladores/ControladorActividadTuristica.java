@@ -175,6 +175,11 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 			throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
 			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException, PaqueteNoCompradoExcepcion
 			, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion, NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy {
+
+		if(fechaInscripcion == null){
+			fechaInscripcion = LocalDate.now();
+		}
+
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
 		if (turis.estaInscriptoASalida(nomSalTurim)) {
