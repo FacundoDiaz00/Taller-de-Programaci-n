@@ -19,8 +19,8 @@ public class Inscripcion {
 	private SalidaTuristica salidaTuristica;
 	private Turista turista;
 
-	public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, Compra compra, SalidaTuristica salidaTuristica,
-			Turista tur)
+	public Inscripcion(LocalDate fechaInscrpicion, int cantidadTuristas, SalidaTuristica salidaTuristica,
+			Turista tur, Compra compra, String nombreActividad)
 			throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
 		// alta salida <= alta inscripcion <= fecha salida, se controlan ambas
 		// desigualdades.
@@ -38,6 +38,12 @@ public class Inscripcion {
 		salidaTuristica.agregarInscripcionASalida(this);
 		setSalidaTuristica(salidaTuristica);
 		setTurista(tur);
+
+		if (compra != null){
+			compra.descontarConsumos(nombreActividad, cantidadTuristas);
+			compra.agregarInscripcion(this);
+		}
+
 	}
 
 	// TODO falta el calculo de costoInscripcion
@@ -90,13 +96,17 @@ public class Inscripcion {
 		return this.turista;
 	}
 
-	public DTInscripcion obtenerDTInscripcion() {
+	public float getCostoInscripcion(){
 		var costo = cantidadTuristas * getSalidaTuristica().getActividad().getCostoPorTurista();
 
 		if (compra != null)
 			costo = costo * (1 - compra.getPaquete().getDescuento() / 100);
 
-		return new DTInscripcion(fechaInscrpicion, cantidadTuristas, (float) costo, getNombreSalida(),
+		return (float) costo;
+	}
+
+	public DTInscripcion obtenerDTInscripcion() {
+		return new DTInscripcion(fechaInscrpicion, cantidadTuristas,  getCostoInscripcion(), getNombreSalida(),
 				getTurista().getNickname());
 	}
 }

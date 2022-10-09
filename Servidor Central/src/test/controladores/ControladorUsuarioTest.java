@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,11 +37,13 @@ class ControladorUsuarioTest {
 	}
 
 	// No es un test en sí
-	static void generarProveedores(int cant, String idTest) throws TurismoUyException {
+	static List<String> generarProveedores(int cant, String idTest) throws TurismoUyException {
 		if (contrUsr == null)
 			preparacionPrevia();
 
 		assertTrue(contrUsr != null);
+
+		List<String> nicknameProveedores = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nickname = "Proveedor " + idTest + " i=" + i;
@@ -51,15 +55,19 @@ class ControladorUsuarioTest {
 			LocalDate fNacimiento = localDateNow.minusYears(30);
 
 			contrUsr.altaProveedor(nickname, nombre, apellido, correo, "1234", fNacimiento, null, descripcion, link);
+			nicknameProveedores.add(nickname);
 		}
+		return nicknameProveedores;
 	}
 
 	// No es un test en sí
-	static void generarTuristas(int cant, String idTest) throws TurismoUyException {
+	static List<String> generarTuristas(int cant, String idTest) throws TurismoUyException {
 		if (contrUsr == null)
 			preparacionPrevia();
 
 		assertTrue(contrUsr != null);
+
+		List<String> nicknameTuristas = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nickname = "Turista " + idTest + " i=" + i;
@@ -70,7 +78,9 @@ class ControladorUsuarioTest {
 			LocalDate fNacimiento = localDateNow.minusYears(15);
 
 			contrUsr.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+			nicknameTuristas.add(nickname);
 		}
+		return nicknameTuristas;
 	}
 
 	@Test
@@ -229,7 +239,7 @@ class ControladorUsuarioTest {
 		for (int i = 0; i < 40; i++) {
 			String nombreSalida = "Salida " + idTest + " i=" + i;
 			String nickname = "Turista " + idTest + " i=" + i;
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now(), null);
 		}
 
 		// A los ultimos 10 les asigno una todas las salidas
@@ -237,7 +247,7 @@ class ControladorUsuarioTest {
 			String nickname = "Turista " + idTest + " i=" + i;
 			for (int j = 0; j < 40; j++) {
 				String nombreSalida = "Salida " + idTest + " i=" + j;
-				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
+				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now(), null);
 			}
 		}
 

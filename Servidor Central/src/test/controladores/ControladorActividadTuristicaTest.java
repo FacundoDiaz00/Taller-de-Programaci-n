@@ -10,18 +10,21 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.CategoriaYaRegistradaException;
+import excepciones.CompraConConsumosInsuficientesExcepcion;
+import excepciones.CompraPaqueteVencidoExcepcion;
 import excepciones.DeparamentoYaRegistradoException;
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.NoExisteConsumoParaLaActividadExcepcion;
 import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import excepciones.TurismoUyException;
@@ -67,10 +70,12 @@ class ControladorActividadTuristicaTest {
 	}
 
 	// No es un test en sí
-	static void generarActividades(int cant, String idTest)
+	static List<String> generarActividades(int cant, String idTest)
 			throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+
+		List<String> nombresActividades = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nickProveedor = "Proveedor " + idTest + " i=" + i;
@@ -84,15 +89,20 @@ class ControladorActividadTuristicaTest {
 
 			contrActTur.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion,
 					costo, ciudad, fechaAlta, null, muestraCategorias);
+
+			nombresActividades.add(nombreActividad);
 		}
+		return nombresActividades;
 	}
 
 	// No es un test en sí
-	static void generarSalidas(int cant, String idTest)
+	static List<String> generarSalidas(int cant, String idTest)
 			throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
 			FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+
+		List<String> nombresSalidas = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nombreActividad = "Actividad " + idTest + " i=" + i;
@@ -104,13 +114,18 @@ class ControladorActividadTuristicaTest {
 
 			contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAlta, ciudad,
 					cantMaxTur, null);
+
+			nombresSalidas.add(nombreSalida);
 		}
+		return nombresSalidas;
 	}
 
 	// No es un test en sí
-	static void generarDepartamentos(int cant, String idTest) throws DeparamentoYaRegistradoException {
+	static List<String> generarDepartamentos(int cant, String idTest) throws DeparamentoYaRegistradoException {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+
+		List<String> nombreDepartamentos = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nom = "Departamento " + idTest + " i=" + i;
@@ -118,17 +133,22 @@ class ControladorActividadTuristicaTest {
 			String url = "https://www.canelones-departamento.org.uy/inicio.html";
 
 			contrActTur.altaDepartamento(nom, descr, url);
+			nombreDepartamentos.add(nom);
 		}
+		return nombreDepartamentos;
 	}
 
-	private void generarCategorias(int cant, String idTest) throws CategoriaYaRegistradaException {
+	private List<String> generarCategorias(int cant, String idTest) throws CategoriaYaRegistradaException {
 		preparacionPrevia();
 		assertTrue(contrActTur != null);
+		List<String> nombreCategorias = new ArrayList<>();
 
 		for (int i = 0; i < cant; i++) {
 			String nom = "Categoria " + idTest + " i=" + i;
 			contrActTur.altaCategoria(nom);
+			nombreCategorias.add(nom);
 		}
+		return nombreCategorias;
 	}
 
 	@Test
@@ -501,13 +521,14 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaOK() throws TurismoUyException {
-		String nickname = "Turista ";
+		String nicknameTurista = "Turista ";
 		String nombre = "NOMBRE TURISTA";
 		String apellido = "APELLIDO TURISTA";
 		String correo = "TURISTA ";
 		String nacionalidad = "CHINA";
-		LocalDate fNacimiento = localDateNow;
-		contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+		LocalDate fNacimiento = localDateNow.minusDays(30);
+		contrUsuario.altaTurista(nicknameTurista, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+
 		String nombreProveedor = "prov";
 		String departamento = "deptoTest";
 		String nombreActividad = "actividad";
@@ -515,23 +536,20 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10;
 		String ciudad = "Ciudad";
-		LocalDate fechaAlta = localDateNow;
+		LocalDate fechaAlta = localDateNow.minusDays(30);
 
 		String nombreSalida = "salida";
-		LocalDate fecha = localDateNow;
-		LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
-		LocalDate fechaAltaSalida = fecha;
+		LocalDateTime fechaHoraSalida = localDateTimeNow.plusDays(2);
+		LocalDate fechaAltaSalida = localDateNow.minusDays(10);;
 		String lugar = "lugar";
 		int cantMaxTuristas = 10;
 
 		contrActTur.altaDepartamento(departamento, descripcion, departamento);
-		try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+
+		contrUsuario.altaProveedor(nombreProveedor, nombreProveedor,
 					nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor,
 					nombreProveedor);
-		} catch (UsuarioYaRegistradoException exception) {
-			// Esperable, no pasa nada.
-		}
+
 
 		contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
 				ciudad, fechaAlta, null, muestraCategorias);
@@ -539,18 +557,41 @@ class ControladorActividadTuristicaTest {
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
 
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nicknameTurista, 1, localDateNow, null);
 
-		assertEquals(contrActTur.obtenerDTInscripcion(nickname, nombreSalida).getFechaInscripcion(),
-				localDateNow.plusYears(5));
-		assertEquals(contrActTur.obtenerDTInscripcion(nickname, nombreSalida).getCantidadTuristas(), 1);
-		assertEquals(contrActTur.obtenerDTInscripcion(nickname, nombreSalida).getTurista(), nickname);
-		assertEquals(contrActTur.obtenerDTInscripcion(nickname, nombreSalida).getSalidaTuristica(), nombreSalida);
-		assertEquals(contrActTur.obtenerDTInscripcion(nickname, nombreSalida).getCosto(), costo);
+		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getFechaInscripcion(), localDateNow);
+		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getCantidadTuristas(), 1);
+		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getTurista(), nicknameTurista);
+		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getSalidaTuristica(), nombreSalida);
+		assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getCosto(), costo);
 
-		// TODO: agregar test de compra cuando se implemente
+		nombreSalida = "salida2";
+		fechaHoraSalida = localDateTimeNow.plusDays(2);
+		fechaAltaSalida = localDateNow.minusDays(10);
+		lugar = "lugar";
+		cantMaxTuristas = 10;
 
+		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
+				cantMaxTuristas, null);
+
+		String nombrePaquete = "nomPaquete-altaInscrpiconOK";
+		String descripcionPaquete = "desc";
+		int periodoValides = 2;
+		float descuento = (float) 50.0;
+		LocalDate fechaAltaPaquete = localDateNow.minusDays(20);
+
+		controladorPaquete.altaPaquete(nombrePaquete, descripcionPaquete, periodoValides, descuento, fechaAltaPaquete, null);
+
+		contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+		controladorPaquete.agregarActividadAPaquete(nombreActividad, nombrePaquete);
+
+		controladorPaquete.comprarPaquete(nicknameTurista, nombrePaquete, 1);
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nicknameTurista, 1, localDateNow, nombrePaquete);
 	}
+
+
+
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaRepetida() throws TurismoUyException {
@@ -585,12 +626,15 @@ class ControladorActividadTuristicaTest {
 				ciudad, fechaAlta, null, muestraCategorias);
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
 
 		assertThrows(InscripcionYaRegistradaException.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.plusYears(5));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.plusYears(5), null);
 		});
 	}
+
+
+
 
 	@Test
 	public void testAltaInscripcionSalidaTuristicaInscripcionConFechaInscripcionPosteriorAFechaAltaSalida()
@@ -622,7 +666,7 @@ class ControladorActividadTuristicaTest {
 				cantMaxTuristas, null);
 
 		assertThrows(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.minusDays(1));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.minusDays(1), null);
 		});
 	}
 
@@ -649,9 +693,10 @@ class ControladorActividadTuristicaTest {
 		LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 		LocalDate fechaAltaSalida = fecha;
 		String lugar = "lugar";
-		int cantMaxTuristas = 3;
+		int cantMaxTuristas = 2;
 
 		contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+		contrUsuario.altaTurista(nickname + "2", nombre, apellido, correo + "2", "1234", fNacimiento, null, nacionalidad);
 		contrActTur.altaDepartamento(departamento, descripcion, departamento);
 		contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
 				fechaAlta, null, nombreProveedor, nombreProveedor);
@@ -659,31 +704,102 @@ class ControladorActividadTuristicaTest {
 				ciudad, fechaAlta, null, muestraCategorias);
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5));
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
 
 		assertThrows(SuperaElMaximoDeTuristasException.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow.plusYears(5));
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow, null);
 		});
 	}
 
 	@Test
+	public void altaInscripcionConConsumosInsuficientes() throws TurismoUyException {
+		String idTest = "altaInscripcionConConsumosInsuficientes";
+
+		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		ControladorUsuarioTest.generarProveedores(1, idTest);
+		generarDepartamentos(1, idTest);
+		List<String> nombresActividades = generarActividades(1, idTest);
+		String nombreSalida1 = "salida1-altaInscripcionConConsumosInsuficientes";
+		String nombreSalida2 = "salida2-altaInscripcionConConsumosInsuficientes";
+		contrActTur.altaSalidaTuristica(nombresActividades.get(0), nombreSalida1,
+				localDateTimeNow.plusDays(20), localDateNow , "lugar", 10, null );
+		contrActTur.altaSalidaTuristica(nombresActividades.get(0), nombreSalida2,
+				localDateTimeNow.plusDays(20), localDateNow , "lugar", 10, null );
+		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(0), nombresPaquetes.get(0));
+		controladorPaquete.comprarPaquete(nombresTuristas.get(0), nombresPaquetes.get(0), 3);
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida1, nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0));
+		assertThrows(CompraConConsumosInsuficientesExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalida2, nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+	}
+
+	@Test
+	public void altaInscripcionConCompraVencida() throws TurismoUyException {
+		String idTest = "altaInscripcionConCompraVencida";
+
+		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(2, idTest);
+		generarDepartamentos(2, idTest);
+		ControladorUsuarioTest.generarProveedores(2, idTest);
+		List<String> nombresActividades = generarActividades(2, idTest);
+		List<String> nombreSalidas = generarSalidas(2, idTest);
+		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(2, idTest);
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(0), nombresPaquetes.get(0));
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(1), nombresPaquetes.get(1));
+		controladorPaquete.comprarPaquete(nombresTuristas.get(0), nombresPaquetes.get(0), 10);
+		controladorPaquete.comprarPaquete(nombresTuristas.get(1), nombresPaquetes.get(1), 10);
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow.plusDays(15), nombresPaquetes.get(0)); //Con 15 dias de mas esta apunto de excederse de la fecha de vencimiento
+		assertThrows(CompraPaqueteVencidoExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(1), nombresTuristas.get(1), 2, localDateNow.plusDays(16), nombresPaquetes.get(1)));
+			//Con 16 dias de mas directamente se excede
+	}
+
+	@Test
+	public void altaInscripcionConPaqueteNoComprado() throws TurismoUyException{
+		String idTest = "altaInscripcionConPaqueteNoComprado";
+		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		generarDepartamentos(1, idTest);
+		ControladorUsuarioTest.generarProveedores(1, idTest);
+		List<String> nombresActividades = generarActividades(1, idTest);
+		List<String> nombreSalidas = generarSalidas(1, idTest);
+		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(0), nombresPaquetes.get(0));
+		assertThrows(PaqueteNoCompradoExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+	}
+
+	@Test
+	public void altaInscripcionConPaqueteSinActividad() throws TurismoUyException{
+		String idTest = "altaInscripcionConPaqueteSinActividad";
+		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		generarDepartamentos(2, idTest);
+		ControladorUsuarioTest.generarProveedores(2, idTest);
+		List<String> nombresActividades = generarActividades(2, idTest);
+		List<String> nombreSalidas = generarSalidas(1, idTest);
+		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(1), nombresPaquetes.get(0));
+		controladorPaquete.comprarPaquete(nombresTuristas.get(0), nombresPaquetes.get(0), 2);
+		assertThrows(NoExisteConsumoParaLaActividadExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+	}
+
+
+
+	@Test
 	public void testAltaSalidaTuristicaOK() throws TurismoUyException {
-		String id = "testAltaSalidaTuristicaOK";
+		String idTest = "testAltaSalidaTuristicaOK";
 
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 100; i++) {
 
-			String nombreProveedor = "Proveedor " + id + " i=" + (i % 10);
-			String departamento = "Departamento " + id + " i=" + (i % 10);
-			String nombreActividad = "Actividad " + id + " i=" + i;
+			String nombreProveedor = "Proveedor " + idTest + " i=" + (i % 10);
+			String departamento = "Departamento " + idTest + " i=" + (i % 10);
+			String nombreActividad = "Actividad " + idTest + " i=" + i;
 			String descripcion = "Desc";
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
 
-			String nombreSalida = "Salida " + id + i;
+			String nombreSalida = "Salida " + idTest + i;
 			LocalDate fecha = localDateNow;
 			LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 			LocalDate fechaAltaSalida = fecha;
@@ -727,22 +843,22 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testAltaSalidaTuristicaSinFecha() throws TurismoUyException {
-		String id = "testAltaSalidaTuristicaSinFecha";
+		String idTest = "testAltaSalidaTuristicaSinFecha";
 
 		assertTrue(contrActTur != null);
 
 		for (int i = 0; i < 100; i++) {
 
-			String nombreProveedor = "Proveedor " + id + " i=" + (i % 10);
-			String departamento = "Departamento " + id + " i=" + (i % 10);
-			String nombreActividad = "Actividad " + id + " i=" + i;
+			String nombreProveedor = "Proveedor " + idTest + " i=" + (i % 10);
+			String departamento = "Departamento " + idTest + " i=" + (i % 10);
+			String nombreActividad = "Actividad " + idTest + " i=" + i;
 			String descripcion = "Desc";
 			int duracion = 10;
 			float costo = (float) 10;
 			String ciudad = "Ciudad";
 			LocalDate fechaAlta = localDateNow;
 
-			String nombreSalida = "Salida " + id + i;
+			String nombreSalida = "Salida " + idTest + i;
 			LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 			LocalDate fechaAltaSalida = null;
 			String lugar = "lugar";
@@ -921,40 +1037,40 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testObtenerIdActividadesTuristicasConfirmadasPorCategoria() throws TurismoUyException {
-		String id = "testObtenerIdActividadesTuristicasConfirmadasPorCategoria";
-		generarDepartamentos(2, id);
-		ControladorUsuarioTest.generarProveedores(2, id);
-		generarActividades(2, id);
+		String idTest = "testObtenerIdActividadesTuristicasConfirmadasPorCategoria";
+		generarDepartamentos(2, idTest);
+		ControladorUsuarioTest.generarProveedores(2, idTest);
+		generarActividades(2, idTest);
 
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=0", true);
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=1", false);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
 
 		for (int i = 0; i < muestraCategorias.size(); i++) {
 			var actividades = contrActTur
 					.obtenerIdActividadesTuristicasConfirmadasPorCategoria(muestraCategorias.get(i));
-			assertTrue(actividades.contains("Actividad " + id + " i=0"));
-			assertFalse(actividades.contains("Actividad " + id + " i=1"));
+			assertTrue(actividades.contains("Actividad " + idTest + " i=0"));
+			assertFalse(actividades.contains("Actividad " + idTest + " i=1"));
 		}
 	}
 
 	@Test
 	public void testObtenerDTActividadesTuristicas() throws TurismoUyException {
-		String id = "testObtenerDTActividadesTuristicas";
-		generarDepartamentos(2, id);
-		ControladorUsuarioTest.generarProveedores(2, id);
-		generarActividades(2, id);
+		String idTest = "testObtenerDTActividadesTuristicas";
+		generarDepartamentos(2, idTest);
+		ControladorUsuarioTest.generarProveedores(2, idTest);
+		generarActividades(2, idTest);
 
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=0", true);
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=1", false);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
 
 		var actividades = contrActTur.obtenerDTActividadesTuristicas();
 
 		boolean esta0 = false;
 		boolean esta1 = false;
 		for (DTActividadTuristica dtActividadTuristica : actividades) {
-			if (dtActividadTuristica.getNombre().equals("Actividad " + id + " i=0"))
+			if (dtActividadTuristica.getNombre().equals("Actividad " + idTest + " i=0"))
 				esta0 = true;
-			if (dtActividadTuristica.getNombre().equals("Actividad " + id + " i=1"))
+			if (dtActividadTuristica.getNombre().equals("Actividad " + idTest + " i=1"))
 				esta1 = true;
 		}
 
@@ -964,32 +1080,32 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testObtenerDTActividadesTuristicasConfirmadasPorDepartamento() throws TurismoUyException {
-		String id = "testObtenerDTActividadesTuristicasConfirmadasPorDepartamento";
-		generarDepartamentos(5, id);
-		ControladorUsuarioTest.generarProveedores(5, id);
-		generarActividades(5, id);
+		String idTest = "testObtenerDTActividadesTuristicasConfirmadasPorDepartamento";
+		generarDepartamentos(5, idTest);
+		ControladorUsuarioTest.generarProveedores(5, idTest);
+		generarActividades(5, idTest);
 
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=0", true);
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=1", false);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
 
-		String dep = "Departamento " + id + " i=0";
+		String dep = "Departamento " + idTest + " i=0";
 		var actividades = contrActTur.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(dep);
 
 		boolean[] esta = new boolean[1];
 		esta[0] = false;
 
 		actividades.forEach((var actividad) -> {
-			esta[0] = esta[0] || actividad.getNombre().equals("Actividad " + id + " i=0");
+			esta[0] = esta[0] || actividad.getNombre().equals("Actividad " + idTest + " i=0");
 		});
 		assertTrue(esta[0]);
 
-		dep = "Departamento " + id + " i=1";
+		dep = "Departamento " + idTest + " i=1";
 		actividades = contrActTur.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(dep);
 
 		esta[0] = false;
 
 		actividades.forEach((var actividad) -> {
-			esta[0] = esta[0] || actividad.getNombre().equals("Actividad " + id + " i=1");
+			esta[0] = esta[0] || actividad.getNombre().equals("Actividad " + idTest + " i=1");
 		});
 		assertFalse(esta[0]);
 
@@ -997,21 +1113,56 @@ class ControladorActividadTuristicaTest {
 
 	@Test
 	public void testObtenerIdActividadesTuristicasAgregadas() throws TurismoUyException {
-		String id = "testObtenerIdActividadesTuristicasAgregadas";
-		generarDepartamentos(3, id);
-		ControladorUsuarioTest.generarProveedores(3, id);
-		generarActividades(3, id);
+		String idTest = "testObtenerIdActividadesTuristicasAgregadas";
+		generarDepartamentos(3, idTest);
+		ControladorUsuarioTest.generarProveedores(3, idTest);
+		generarActividades(3, idTest);
 
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=0", true);
-		contrActTur.aceptarORechazarActividadTuristica("Actividad " + id + " i=1", false);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
+		contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
 
 		var actividades = contrActTur.obtenerIdActividadesTuristicasAgregadas();
 
-		assertTrue(actividades.contains("Actividad " + id + " i=2"));
+		assertTrue(actividades.contains("Actividad " + idTest + " i=2"));
 
-		assertFalse(actividades.contains("Actividad " + id + " i=0"));
-		assertFalse(actividades.contains("Actividad " + id + " i=1"));
+		assertFalse(actividades.contains("Actividad " + idTest + " i=0"));
+		assertFalse(actividades.contains("Actividad " + idTest + " i=1"));
 
 	}
 
+	@Test
+	public void testObtenerIdComprasDisponiblesParaInscripcionOK() throws TurismoUyException{
+
+		String idTest = "testObtenerIdComprasDisponiblesParaInscripcionOK";
+
+		List<String> nombreTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		ControladorUsuarioTest.generarProveedores(2, idTest);
+		generarDepartamentos(2 , idTest);
+		List<String> nombreActividades = generarActividades(2, idTest);
+		List<String> nombreSalidas = generarSalidas(2, idTest);
+
+		List<String> nombrePaquetes = ControladorPaqueteTest.generarPaquetes(2, idTest);
+
+		controladorPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(0));
+		controladorPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(1));
+		controladorPaquete.agregarActividadAPaquete(nombreActividades.get(1), nombrePaquetes.get(1));
+
+		List<String> comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(0 , comprasDisponibles.size());
+
+		controladorPaquete.comprarPaquete(nombreTuristas.get(0), nombrePaquetes.get(0), 1);
+		controladorPaquete.comprarPaquete(nombreTuristas.get(0), nombrePaquetes.get(1), 1);
+
+		comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(2 , comprasDisponibles.size());
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombreTuristas.get(0), 1, localDateNow, nombrePaquetes.get(0));
+		comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(1 , comprasDisponibles.size());
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(1), nombreTuristas.get(0), 1, localDateNow, nombrePaquetes.get(1));
+
+		comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(1 , comprasDisponibles.size());
+	}
 }
