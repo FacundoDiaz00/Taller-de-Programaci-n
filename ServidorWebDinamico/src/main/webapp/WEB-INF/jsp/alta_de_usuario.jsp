@@ -244,6 +244,23 @@
     	generarMensaje('error', "Error al crear el usuario" , mensajeError , 200);
     </script>
     <%} %>
-
+    
+    
+    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
+    <script>
+    
+	    setTimeout(() => {
+	        Swal.fire({
+	            icon: "success",
+	            title: "Usuario creado con exito",
+	            text: "Su usuario ha sido creado con éxito. Al cerrar este popup sea redirigido a la ventana de inicio de sección con el fin que se autentifique y pueda comenzar a usar su perfil. ",
+	            confirmButtonText: 'Entendido'  
+	        }).then((res) => {
+	        	window.location.href = "IniciarSesion";
+	        })
+	    }, 200)
+    
+	</script>
+	<%} %>
 </body>
 </html>

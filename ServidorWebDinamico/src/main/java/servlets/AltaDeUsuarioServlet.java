@@ -85,10 +85,10 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 
 			LocalDate fechaNac = LocalDate.parse(fechaNacStr);
 			if (tipoUsuario.equals(tipoUsuarioProveedor)) {
-				this.contUsuario.altaProveedor(nickname, nombre, apellido, password, email, fechaNac, imgDt,
+				this.contUsuario.altaProveedor(nickname, nombre, apellido, email, password, fechaNac, imgDt,
 						descripcionGeneral, link);
 			} else if (tipoUsuario.equals(tipoUsuarioTurista)) {
-				this.contUsuario.altaTurista(nickname, nombre, apellido, password, email, fechaNac, imgDt,
+				this.contUsuario.altaTurista(nickname, nombre, apellido, email,  password, fechaNac, imgDt,
 						nacionalidad);
 			} else {
 				req.setAttribute("motivoDeError", "No se soporta el alta de este tipo de usuario");
@@ -118,7 +118,9 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 
 			System.out.println("Usuario " + dtUsuario.getNickname() + " creado con exito");
 
-			resp.sendRedirect("IniciarSesion");
+			req.setAttribute("exito", Boolean.TRUE);
+			req = Utiles.insertarLoDeSiempre(req);
+			req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 			return;
 		} catch (UsuarioYaRegistradoException e) {
 			System.out.println("El usuario con nickname " + nickname + "y correo " + email
@@ -142,8 +144,9 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 		req.setAttribute("nacionalidad", nacionalidad);
 		req.setAttribute("descripcionGeneral", descripcionGeneral);
 		req.setAttribute("link", link);
-
+		
 		req = Utiles.insertarLoDeSiempre(req);
+		
 
 		req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 
