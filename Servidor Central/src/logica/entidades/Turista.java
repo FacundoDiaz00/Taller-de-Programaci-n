@@ -140,7 +140,7 @@ public class Turista extends Usuario {
 	public List<String> obtenerIdPaquetesConConsumoDisponibleParaActividad(String nombreActividad){
 		List<String> paquetes = new ArrayList<>();
 		for(Compra comp : this.compras){
-			if(comp.tieneConsumoDisponibleParaActividad(nombreActividad) && !LocalDate.now().isBefore(comp.getVencimiento())){
+			if(comp.tieneConsumoDisponibleParaActividad(nombreActividad) && !LocalDate.now().isAfter(comp.getVencimiento())){
 				paquetes.add(comp.getPaquete().getNombre());
 			}
 		}

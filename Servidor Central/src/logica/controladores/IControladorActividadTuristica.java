@@ -129,7 +129,8 @@ public interface IControladorActividadTuristica {
 	void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscripcion, String nombrePaquete)
 			throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
 			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException
-			, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion,NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy;
+			, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion, PaqueteNoCompradoExcepcion,
+			NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy;
 
 	/**
 	 *

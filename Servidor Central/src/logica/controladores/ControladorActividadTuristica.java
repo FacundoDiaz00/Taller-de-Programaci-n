@@ -153,7 +153,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	@Override
 	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris, LocalDate fechaInscripcion, String nombrePaquete)
 			throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException
+			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException, PaqueteNoCompradoExcepcion
 			, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion, NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy {
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
@@ -173,6 +173,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		String nombreActividad = sal.getActividad().getNombre();
 		if(nombrePaquete != null){
 			compraUtilizadaEnInscrpicon = turis.obtenerCompraParaNombrePaquete(nombrePaquete);
+			if(compraUtilizadaEnInscrpicon == null){
+				throw new PaqueteNoCompradoExcepcion("El paquete " + nombrePaquete + " no fue comprado por el turista " + nicknameTuris);
+			}
 			if(fechaInscripcion.isAfter(compraUtilizadaEnInscrpicon.getVencimiento())){
 				throw new CompraPaqueteVencidoExcepcion("La compra de este paquete esta vencida");
 			}

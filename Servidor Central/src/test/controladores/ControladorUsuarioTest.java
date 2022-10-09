@@ -239,7 +239,7 @@ class ControladorUsuarioTest {
 		for (int i = 0; i < 40; i++) {
 			String nombreSalida = "Salida " + idTest + " i=" + i;
 			String nickname = "Turista " + idTest + " i=" + i;
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5), null);
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now(), null);
 		}
 
 		// A los ultimos 10 les asigno una todas las salidas
@@ -247,7 +247,7 @@ class ControladorUsuarioTest {
 			String nickname = "Turista " + idTest + " i=" + i;
 			for (int j = 0; j < 40; j++) {
 				String nombreSalida = "Salida " + idTest + " i=" + j;
-				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5), null);
+				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now(), null);
 			}
 		}
 

@@ -10,14 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import excepciones.*;
-import logica.controladores.IControladorActividadTuristica;
-import logica.controladores.IControladorUsuario;
+import logica.controladores.*;
 import logica.datatypes.DTTuristaDetallePrivado;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorPaquete;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTPaqueteDetalles;
 
@@ -360,6 +357,68 @@ class ControladorPaqueteTest {
 		List<String> nomTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
 
 		assertThrows(PaquetesSinActividadesExcepcion.class, () -> contrPaquete.comprarPaquete(nomTuristas.get(0),nomPaquetes.get(0),3));
+
+	}
+
+
+	@Test
+	final void obtenerIdPaquetesSinComprarOK() throws TurismoUyException{
+		String id = "obtenerIdPaquetesSinComprarOK";
+		List<String> nombrePaquetes = generarPaquetes(2, id);
+		ControladorActividadTuristicaTest.generarDepartamentos(1, id);
+		ControladorUsuarioTest.generarProveedores(1, id);
+		List<String> nombreTurista = ControladorUsuarioTest.generarTuristas(1, id);
+		List<String> nombreActividades = ControladorActividadTuristicaTest.generarActividades(1, id);
+
+		contrPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(0));
+		contrPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(1));
+
+		List<String> paquetesNoComprados = contrPaquete.obtenerIdPaquetesSinComprar();
+
+		assertEquals(true, paquetesNoComprados.contains(nombrePaquetes.get(0)));
+		assertEquals(true, paquetesNoComprados.contains(nombrePaquetes.get(1)));
+
+		contrPaquete.comprarPaquete(nombreTurista.get(0), nombrePaquetes.get(0),1);
+		paquetesNoComprados = contrPaquete.obtenerIdPaquetesSinComprar();
+		assertEquals(false, paquetesNoComprados.contains(nombrePaquetes.get(0)));
+		assertEquals(true, paquetesNoComprados.contains(nombrePaquetes.get(1)));
+
+		contrPaquete.comprarPaquete(nombreTurista.get(0), nombrePaquetes.get(1),1);
+		paquetesNoComprados = contrPaquete.obtenerIdPaquetesSinComprar();
+		assertEquals(false, paquetesNoComprados.contains(nombrePaquetes.get(0)));
+		assertEquals(false, paquetesNoComprados.contains(nombrePaquetes.get(1)));
+	}
+
+	@Test
+	final void obtenerDTPaqueteDetalleOK() throws TurismoUyException{
+		String id = "obtenerDTPaqueteDetalleOK";
+
+		List<String> nombreTuristias = ControladorUsuarioTest.generarTuristas(1, id);
+		ControladorUsuarioTest.generarProveedores(2, id);
+		ControladorActividadTuristicaTest.generarDepartamentos(2, id);
+		List<String> nombreActividades = ControladorActividadTuristicaTest.generarActividades(2, id);
+		List<String> nombrePaquetes = ControladorPaqueteTest.generarPaquetes(1, id);
+
+		contrPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(0));
+		contrPaquete.agregarActividadAPaquete(nombreActividades.get(1), nombrePaquetes.get(0));
+
+		contrPaquete.comprarPaquete(nombreTuristias.get(0), nombrePaquetes.get(0), 2);
+
+		DTPaqueteDetalles dtPaqueteDetalles = contrPaquete.obtenerDTPaqueteDetalle(nombrePaquetes.get(0));
+
+
+		assertEquals(nombrePaquetes.get(0), dtPaqueteDetalles.getNombre());
+		assertEquals(15, dtPaqueteDetalles.getValidez());
+		assertEquals( 2 , dtPaqueteDetalles.getActividades().size());
+		assertEquals( 2 , dtPaqueteDetalles.getActividades().size());
+		assertEquals( true , dtPaqueteDetalles.getActividades().containsKey(nombreActividades.get(0)));
+		assertEquals( nombreActividades.get(0) , dtPaqueteDetalles.getActividades().get(nombreActividades.get(0)).getNombre());
+		assertEquals( true , dtPaqueteDetalles.getActividades().containsKey(nombreActividades.get(1)));
+		assertEquals( nombreActividades.get(1) , dtPaqueteDetalles.getActividades().get(nombreActividades.get(1)).getNombre());
+
+		assertEquals( 1 , dtPaqueteDetalles.getCompras().size());
+		assertEquals( localDateNow.plusDays(15) , dtPaqueteDetalles.getCompras().get(0).getVencimiento());
+
 
 	}
 

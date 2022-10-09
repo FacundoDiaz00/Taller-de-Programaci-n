@@ -609,7 +609,7 @@ class ControladorActividadTuristicaTest {
 				ciudad, fechaAlta, null, muestraCategorias);
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5), null);
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
 
 		assertThrows(InscripcionYaRegistradaException.class, () -> {
 			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 2, localDateNow.plusYears(5), null);
@@ -676,9 +676,10 @@ class ControladorActividadTuristicaTest {
 		LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
 		LocalDate fechaAltaSalida = fecha;
 		String lugar = "lugar";
-		int cantMaxTuristas = 3;
+		int cantMaxTuristas = 2;
 
 		contrUsuario.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+		contrUsuario.altaTurista(nickname + "2", nombre, apellido, correo + "2", "1234", fNacimiento, null, nacionalidad);
 		contrActTur.altaDepartamento(departamento, descripcion, departamento);
 		contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
 				fechaAlta, null, nombreProveedor, nombreProveedor);
@@ -686,10 +687,10 @@ class ControladorActividadTuristicaTest {
 				ciudad, fechaAlta, null, muestraCategorias);
 		contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
 				cantMaxTuristas, null);
-		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow.plusYears(5), null);
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
 
 		assertThrows(SuperaElMaximoDeTuristasException.class, () -> {
-			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow.plusYears(5), null);
+			contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname + "2", 2, localDateNow, null);
 		});
 	}
 
@@ -734,6 +735,35 @@ class ControladorActividadTuristicaTest {
 		assertThrows(CompraPaqueteVencidoExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(1), nombresTuristas.get(1), 2, localDateNow.plusDays(16), nombresPaquetes.get(1)));
 			//Con 16 dias de mas directamente se excede
 	}
+
+	@Test
+	public void altaInscripcionConPaqueteNoComprado() throws TurismoUyException{
+		String idTest = "altaInscripcionConPaqueteNoComprado";
+		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		generarDepartamentos(1, idTest);
+		ControladorUsuarioTest.generarProveedores(1,idTest);
+		List<String> nombresActividades = generarActividades(1, idTest);
+		List<String> nombreSalidas = generarSalidas(1, idTest);
+		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(0), nombresPaquetes.get(0));
+		assertThrows(PaqueteNoCompradoExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+	}
+
+	@Test
+	public void altaInscripcionConPaqueteSinActividad() throws TurismoUyException{
+		String idTest = "altaInscripcionConPaqueteSinActividad";
+		List<String> nombresTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
+		generarDepartamentos(2, idTest);
+		ControladorUsuarioTest.generarProveedores(2,idTest);
+		List<String> nombresActividades = generarActividades(2, idTest);
+		List<String> nombreSalidas = generarSalidas(1, idTest);
+		List<String> nombresPaquetes = ControladorPaqueteTest.generarPaquetes(1, idTest);
+		controladorPaquete.agregarActividadAPaquete(nombresActividades.get(1), nombresPaquetes.get(0));
+		controladorPaquete.comprarPaquete(nombresTuristas.get(0), nombresPaquetes.get(0), 2);
+		assertThrows(NoExisteConsumoParaLaActividadExcepcion.class, () -> contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombresTuristas.get(0), 2, localDateNow, nombresPaquetes.get(0)));
+	}
+
+
 
 	@Test
 	public void testAltaSalidaTuristicaOK() throws TurismoUyException {
@@ -1083,4 +1113,39 @@ class ControladorActividadTuristicaTest {
 
 	}
 
+	@Test
+	public void testObtenerIdComprasDisponiblesParaInscripcionOK() throws TurismoUyException{
+
+		String id = "testObtenerIdComprasDisponiblesParaInscripcionOK";
+
+		List<String> nombreTuristas = ControladorUsuarioTest.generarTuristas(1, id);
+		ControladorUsuarioTest.generarProveedores(2, id);
+		generarDepartamentos(2,id);
+		List<String> nombreActividades = generarActividades(2, id);
+		List<String> nombreSalidas = generarSalidas(2, id);
+
+		List<String> nombrePaquetes = ControladorPaqueteTest.generarPaquetes(2, id);
+
+		controladorPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(0));
+		controladorPaquete.agregarActividadAPaquete(nombreActividades.get(0), nombrePaquetes.get(1));
+		controladorPaquete.agregarActividadAPaquete(nombreActividades.get(1), nombrePaquetes.get(1));
+
+		List<String> comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(0 , comprasDisponibles.size());
+
+		controladorPaquete.comprarPaquete(nombreTuristas.get(0), nombrePaquetes.get(0), 1);
+		controladorPaquete.comprarPaquete(nombreTuristas.get(0), nombrePaquetes.get(1), 1);
+
+		comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(2 , comprasDisponibles.size());
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(0), nombreTuristas.get(0), 1, localDateNow, nombrePaquetes.get(0));
+		comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(1 , comprasDisponibles.size());
+
+		contrActTur.altaInscripcionSalidaTuristica(nombreSalidas.get(1), nombreTuristas.get(0), 1, localDateNow, nombrePaquetes.get(1));
+
+		comprasDisponibles = contrActTur.obtenerIdComprasDisponiblesParaInscripcion(nombreActividades.get(0), nombreTuristas.get(0));
+		assertEquals(1 , comprasDisponibles.size());
+	}
 }

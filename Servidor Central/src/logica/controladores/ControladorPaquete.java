@@ -63,10 +63,11 @@ public class ControladorPaquete implements IControladorPaquete {
 		return dtsPacks;
 	}
 
+	@Override
 	public DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) throws ObjetoNoExisteEnTurismoUy {
 		return ManejadorPaquete.getInstancia().getPaquete(nombrePaquete).obtenerDTPaqueteDetalle();
 	}
-
+	@Override
 	public List<DTPaquete> obtenerDTPaquetes() {
 		List<DTPaquete> ret = new ArrayList<DTPaquete>();
 

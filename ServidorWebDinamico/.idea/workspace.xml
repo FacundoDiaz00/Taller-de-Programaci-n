@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Servidor Central/src/excepciones/PaqueteNoCompradoExcepcion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/excepciones/PaqueteSinActividadesExcepcion.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorPaquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorPaquete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorActividadTuristica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Compra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorPaqueteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorPaqueteTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorUsuarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorUsuarioTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +62,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.All in Servidor Central (2)">
+  <component name="RunManager" selected="JUnit.All in Servidor Central (1)">
     <configuration name="All in Servidor Central (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
@@ -78,7 +87,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControladorActividadTuristicaTest.altaInscripcionConCompraVencida" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControladorPaqueteTest.obtenerDTPaqueteDetalleOK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <extension name="coverage">
         <pattern>
@@ -87,14 +96,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test.controladores" />
-      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorActividadTuristicaTest" />
-      <option name="METHOD_NAME" value="altaInscripcionConCompraVencida" />
+      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorPaqueteTest" />
+      <option name="METHOD_NAME" value="obtenerDTPaqueteDetalleOK" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControladorActividadTuristicaTest.altaInscripcionConConsumosInsuficientes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControladorPaqueteTest.obtenerIdPaquetesSinComprarOK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <extension name="coverage">
         <pattern>
@@ -103,8 +112,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test.controladores" />
-      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorActividadTuristicaTest" />
-      <option name="METHOD_NAME" value="altaInscripcionConConsumosInsuficientes" />
+      <option name="MAIN_CLASS_NAME" value="test.controladores.ControladorPaqueteTest" />
+      <option name="METHOD_NAME" value="obtenerIdPaquetesSinComprarOK" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -123,11 +132,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in Servidor Central (2)" />
-        <item itemvalue="JUnit.ControladorActividadTuristicaTest.altaInscripcionConCompraVencida" />
         <item itemvalue="JUnit.All in Servidor Central (1)" />
-        <item itemvalue="JUnit.ControladorActividadTuristicaTest.altaInscripcionConConsumosInsuficientes" />
+        <item itemvalue="JUnit.ControladorPaqueteTest.obtenerDTPaqueteDetalleOK" />
         <item itemvalue="JUnit.All in Servidor Central" />
+        <item itemvalue="JUnit.ControladorPaqueteTest.obtenerIdPaquetesSinComprarOK" />
+        <item itemvalue="JUnit.All in Servidor Central (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +154,8 @@
       <workItem from="1664400235251" duration="20000" />
       <workItem from="1664400267134" duration="671000" />
       <workItem from="1664578491723" duration="67000" />
-      <workItem from="1665175927652" duration="21062000" />
+      <workItem from="1665175927652" duration="21256000" />
+      <workItem from="1665277579990" duration="6465000" />
     </task>
     <servers />
   </component>
@@ -174,11 +184,37 @@
       </map>
     </option>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__1_.ic" NAME="All in Servidor Central (1) Coverage Results" MODIFIED="1665214304576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__2_.ic" NAME="All in Servidor Central (2) Coverage Results" MODIFIED="1665204723214" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central.ic" NAME="All in Servidor Central Coverage Results" MODIFIED="1665212807974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConCompraVencida.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConCompraVencida Coverage Results" MODIFIED="1665214544877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__1_.ic" NAME="All in Servidor Central (1) Coverage Results" MODIFIED="1665291608277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central.ic" NAME="All in Servidor Central Coverage Results" MODIFIED="1665293800384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testCompraConPaqueteSinActividades.ic" NAME="ControladorPaqueteTest.testCompraConPaqueteSinActividades Coverage Results" MODIFIED="1665211231791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testAltaInscripcionSalidaTuristicaOK.ic" NAME="ControladorActividadTuristicaTest.testAltaInscripcionSalidaTuristicaOK Coverage Results" MODIFIED="1665212789911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConConsumosInsuficientes.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConConsumosInsuficientes Coverage Results" MODIFIED="1665214281190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada.ic" NAME="ControladorActividadTuristicaTest.testAltaInscripcionSalidaTuristicaInscripcionConCapacidadSuperada Coverage Results" MODIFIED="1665289478807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorUsuarioTest_testObtenerDTUsuarioDetalle.ic" NAME="ControladorUsuarioTest.testObtenerDTUsuarioDetalle Coverage Results" MODIFIED="1665291581969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__2_.ic" NAME="All in Servidor Central (2) Coverage Results" MODIFIED="1665293040155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConCompraVencida.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConCompraVencida Coverage Results" MODIFIED="1665214703790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testComprarPaqueteOK.ic" NAME="ControladorPaqueteTest.testComprarPaqueteOK Coverage Results" MODIFIED="1665210900263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -187,14 +223,23 @@
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testCompraRepetida.ic" NAME="ControladorPaqueteTest.testCompraRepetida Coverage Results" MODIFIED="1665211024907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__3_.ic" NAME="All in Servidor Central (3) Coverage Results" MODIFIED="1665210695922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testCompraConPaqueteSinActividades.ic" NAME="ControladorPaqueteTest.testCompraConPaqueteSinActividades Coverage Results" MODIFIED="1665211231791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testObtenerIdComprasDisponiblesParaInscripcion.ic" NAME="ControladorActividadTuristicaTest.testObtenerIdComprasDisponiblesParaInscripcion Coverage Results" MODIFIED="1665292701109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testAltaInscripcionSalidaTuristicaOK.ic" NAME="ControladorActividadTuristicaTest.testAltaInscripcionSalidaTuristicaOK Coverage Results" MODIFIED="1665212789911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__3_.ic" NAME="All in Servidor Central (3) Coverage Results" MODIFIED="1665288827332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testObtenerIdComprasDisponiblesParaInscripcionOK.ic" NAME="ControladorActividadTuristicaTest.testObtenerIdComprasDisponiblesParaInscripcionOK Coverage Results" MODIFIED="1665292995026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConConsumosInsuficientes.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConConsumosInsuficientes Coverage Results" MODIFIED="1665214281190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConPaqueteSinActividadDeseada.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConPaqueteSinActividadDeseada Coverage Results" MODIFIED="1665290931262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConPaqueteSinActividad.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConPaqueteSinActividad Coverage Results" MODIFIED="1665291452486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_altaInscripcionConPaqueteNoComprado.ic" NAME="ControladorActividadTuristicaTest.altaInscripcionConPaqueteNoComprado Coverage Results" MODIFIED="1665291229146" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_obtenerIdPaquetesSinComprarOK.ic" NAME="ControladorPaqueteTest.obtenerIdPaquetesSinComprarOK Coverage Results" MODIFIED="1665293789755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
   </component>
