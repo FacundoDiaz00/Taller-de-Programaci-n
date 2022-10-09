@@ -8,7 +8,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import excepciones.*;
+import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
+import excepciones.CategoriaYaRegistradaException;
+import excepciones.CompraConConsumosInsuficientesExcepcion;
+import excepciones.CompraPaqueteVencidoExcepcion;
+import excepciones.DeparamentoYaRegistradoException;
+import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
+import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
+import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import excepciones.InscripcionYaRegistradaException;
+import excepciones.NoExisteConsumoParaLaActividadExcepcion;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaqueteNoCompradoExcepcion;
+import excepciones.SalidaYaRegistradaException;
+import excepciones.SuperaElMaximoDeTuristasException;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -16,7 +30,13 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
-import logica.entidades.*;
+import logica.entidades.ActividadTuristica;
+import logica.entidades.Categoria;
+import logica.entidades.Compra;
+import logica.entidades.Departamento;
+import logica.entidades.Inscripcion;
+import logica.entidades.SalidaTuristica;
+import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
@@ -171,15 +191,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 		Compra compraUtilizadaEnInscrpicon = null;
 		String nombreActividad = sal.getActividad().getNombre();
-		if(nombrePaquete != null){
+		if (nombrePaquete != null){
 			compraUtilizadaEnInscrpicon = turis.obtenerCompraParaNombrePaquete(nombrePaquete);
-			if(compraUtilizadaEnInscrpicon == null){
+			if (compraUtilizadaEnInscrpicon == null){
 				throw new PaqueteNoCompradoExcepcion("El paquete " + nombrePaquete + " no fue comprado por el turista " + nicknameTuris);
 			}
-			if(fechaInscripcion.isAfter(compraUtilizadaEnInscrpicon.getVencimiento())){
+			if (fechaInscripcion.isAfter(compraUtilizadaEnInscrpicon.getVencimiento())){
 				throw new CompraPaqueteVencidoExcepcion("La compra de este paquete esta vencida");
 			}
-			if(canTuris > compraUtilizadaEnInscrpicon.obtenerConsumosRestantesParaActividad(nombreActividad)){
+			if (canTuris > compraUtilizadaEnInscrpicon.obtenerConsumosRestantesParaActividad(nombreActividad)){
 				throw new CompraConConsumosInsuficientesExcepcion("La compra no tiene un numero suficiente de consumos disponibles para realizar esta inscripcion");
 			}
 		}
@@ -278,10 +298,10 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 
 	public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {
-		ManejadorCategoria mc = ManejadorCategoria.getInstancia();
-		if (!mc.exists(nombre)) {
+		ManejadorCategoria manejadorcAt = ManejadorCategoria.getInstancia();
+		if (!manejadorcAt.exists(nombre)) {
 			Categoria cat = new Categoria(nombre);
-			mc.addCategoria(cat);
+			manejadorcAt.addCategoria(cat);
 		} else {
 			throw new CategoriaYaRegistradaException("La categoria " + nombre + " ya existe en el sistema.");
 		}

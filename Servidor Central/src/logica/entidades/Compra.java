@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import excepciones.NoExisteConsumoParaLaActividadExcepcion;
-import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.datatypes.DTCompra;
 
 /**
@@ -66,7 +65,7 @@ public class Compra {
 	}
 
 	public int obtenerConsumosRestantesParaActividad(String nombreActividad) throws NoExisteConsumoParaLaActividadExcepcion{
-		if(this.usosRestantesPorActividad.containsKey(nombreActividad)){
+		if (this.usosRestantesPorActividad.containsKey(nombreActividad)){
 			return usosRestantesPorActividad.get(nombreActividad);
 		} else {
 			throw new NoExisteConsumoParaLaActividadExcepcion("El paquete utilizado no incluye a la actividad");

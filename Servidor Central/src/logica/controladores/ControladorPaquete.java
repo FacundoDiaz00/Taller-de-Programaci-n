@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import excepciones.*;
+import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.CompraYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaqueteYaRegistradoException;
+import excepciones.PaquetesSinActividadesExcepcion;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.Imagen;
@@ -42,7 +46,7 @@ public class ControladorPaquete implements IControladorPaquete {
 			throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, PaquetesSinActividadesExcepcion {
 		Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
 		Paquete paquete = ManejadorPaquete.getInstancia().getPaquete(nombrePaquete);
-		if(!paquete.hayActividades()){
+		if (!paquete.hayActividades()){
 			throw new PaquetesSinActividadesExcepcion("Este paquete no tiene ninguna actividad vinculada");
 		}
 		if (turista.existeCompra(nombrePaquete)) {

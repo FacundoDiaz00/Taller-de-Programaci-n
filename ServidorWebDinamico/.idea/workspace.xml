@@ -2,18 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Servidor Central/src/excepciones/PaqueteNoCompradoExcepcion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/excepciones/PaqueteSinActividadesExcepcion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Estacion de trabajo/src/presentacion/InscribirseASalidaTurística.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Estacion de trabajo/src/presentacion/InscribirseASalidaTurística.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Estacion de trabajo/src/presentacion/ModificarUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Estacion de trabajo/src/presentacion/ModificarUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Estacion de trabajo/src/presentacion/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Estacion de trabajo/src/presentacion/Principal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorMaestro.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorMaestro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorPaquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorPaquete.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorActividadTuristica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorPaquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/IControladorPaquete.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Compra.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorPaqueteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorPaqueteTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorUsuarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorUsuarioTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/ConsultaDeUsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/ConsultaDeUsuarioServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/IndexServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/IndexServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +41,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2F5zEZRHoSNIoqrCw2VrguXjnEB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -62,7 +66,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.All in Servidor Central (1)">
+  <component name="RunManager" selected="JUnit.All in Servidor Central (3)">
     <configuration name="All in Servidor Central (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
@@ -71,7 +75,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in Servidor Central (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Servidor Central (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -132,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Servidor Central (3)" />
         <item itemvalue="JUnit.All in Servidor Central (1)" />
         <item itemvalue="JUnit.ControladorPaqueteTest.obtenerDTPaqueteDetalleOK" />
         <item itemvalue="JUnit.All in Servidor Central" />
         <item itemvalue="JUnit.ControladorPaqueteTest.obtenerIdPaquetesSinComprarOK" />
-        <item itemvalue="JUnit.All in Servidor Central (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -155,7 +159,9 @@
       <workItem from="1664400267134" duration="671000" />
       <workItem from="1664578491723" duration="67000" />
       <workItem from="1665175927652" duration="21256000" />
-      <workItem from="1665277579990" duration="6465000" />
+      <workItem from="1665277579990" duration="6688000" />
+      <workItem from="1665296306100" duration="147000" />
+      <workItem from="1665296978613" duration="1328000" />
     </task>
     <servers />
   </component>
@@ -196,8 +202,11 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__1_.ic" NAME="All in Servidor Central (1) Coverage Results" MODIFIED="1665291608277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__1_.ic" NAME="All in Servidor Central (1) Coverage Results" MODIFIED="1665294945398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central.ic" NAME="All in Servidor Central Coverage Results" MODIFIED="1665293800384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_obtenerDTPaqueteDetalleOK.ic" NAME="ControladorPaqueteTest.obtenerDTPaqueteDetalleOK Coverage Results" MODIFIED="1665294937061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.controladores.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testCompraConPaqueteSinActividades.ic" NAME="ControladorPaqueteTest.testCompraConPaqueteSinActividades Coverage Results" MODIFIED="1665211231791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
@@ -226,7 +235,7 @@
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testObtenerIdComprasDisponiblesParaInscripcion.ic" NAME="ControladorActividadTuristicaTest.testObtenerIdComprasDisponiblesParaInscripcion Coverage Results" MODIFIED="1665292701109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__3_.ic" NAME="All in Servidor Central (3) Coverage Results" MODIFIED="1665288827332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__3_.ic" NAME="All in Servidor Central (3) Coverage Results" MODIFIED="1665297669808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorActividadTuristicaTest_testObtenerIdComprasDisponiblesParaInscripcionOK.ic" NAME="ControladorActividadTuristicaTest.testObtenerIdComprasDisponiblesParaInscripcionOK Coverage Results" MODIFIED="1665292995026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>

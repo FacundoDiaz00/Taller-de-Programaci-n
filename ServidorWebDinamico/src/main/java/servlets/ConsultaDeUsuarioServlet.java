@@ -13,8 +13,6 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTUsuario;
-import logica.datatypes.DTTuristaDetalle;
-import logica.datatypes.DTProveedorDetalle;
 
 
 import utils.Utiles;
@@ -49,8 +47,8 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 		String debelistar = req.getParameter("listar");
 		req = Utiles.insertarLoDeSiempre(req);
 
-		if(debelistar != null && debelistar.equals("false")) {
-			if(false) {
+		if (debelistar != null && debelistar.equals("false")) {
+			if (false) {
 				
 			}else {
 				try {

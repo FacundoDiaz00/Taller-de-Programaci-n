@@ -50,7 +50,7 @@ public class Turista extends Usuario {
 
 	public Compra obtenerCompraParaNombrePaquete(String nombrePaquete){
 		for (Compra com : this.compras){
-			if(com.correspondeAPaquete(nombrePaquete)){
+			if (com.correspondeAPaquete(nombrePaquete)){
 				return com;
 			}
 		}
@@ -139,8 +139,8 @@ public class Turista extends Usuario {
 
 	public List<String> obtenerIdPaquetesConConsumoDisponibleParaActividad(String nombreActividad){
 		List<String> paquetes = new ArrayList<>();
-		for(Compra comp : this.compras){
-			if(comp.tieneConsumoDisponibleParaActividad(nombreActividad) && !LocalDate.now().isAfter(comp.getVencimiento())){
+		for (Compra comp : this.compras){
+			if (comp.tieneConsumoDisponibleParaActividad(nombreActividad) && !LocalDate.now().isAfter(comp.getVencimiento())){
 				paquetes.add(comp.getPaquete().getNombre());
 			}
 		}

@@ -3,7 +3,12 @@ package logica.controladores;
 import java.time.LocalDate;
 import java.util.List;
 
-import excepciones.*;
+
+import excepciones.CompraYaRegistradaException;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaqueteYaRegistradoException;
+import excepciones.PaquetesSinActividadesExcepcion;
+import excepciones.ActividadTuristicaYaRegistradaException;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.Imagen;

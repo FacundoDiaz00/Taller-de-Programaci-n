@@ -39,7 +39,7 @@ public class Inscripcion {
 		setSalidaTuristica(salidaTuristica);
 		setTurista(tur);
 
-		if(compra != null){
+		if (compra != null){
 			compra.descontarConsumos(nombreActividad, cantidadTuristas);
 			compra.agregarInscripcion(this);
 		}

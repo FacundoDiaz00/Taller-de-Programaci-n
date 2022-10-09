@@ -120,6 +120,14 @@ public class ControladorMaestro implements IControladorMaestro {
 				"Cabalgata por el área protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras",
 				LocalDate.of(2022, 8, 1), img, categorias);
 
+		// ---- Todo esto es para ver datos ---
+
+		icat.aceptarORechazarActividadTuristica("Degusta", true);
+		icat.aceptarORechazarActividadTuristica("Teatro con Sabores", true);
+
+
+		// ------------------------
+
 		// Salidas
 		icat.altaSalidaTuristica("Degusta", "Degusta Agosto", LocalDateTime.of(2022, 8, 20, 17, 0),
 				LocalDate.of(2022, 7, 21), "Sociedad Agropecuaria de Rocha", 20, img);

@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -591,15 +592,14 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			int mouth = (int) mesSpinner.getValue();
 			int year = (int) anioSpinner.getValue();
 			fechaInscripcion = LocalDate.of(year, mouth, day);
-		} catch (Exception exception) { // TODO: averiguar qué excepcion tira
-										// LocalDate
+		} catch (DateTimeException exception) {
 			JOptionPane.showMessageDialog(null, "La fecha de inscripción elegida inválida.", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		int cantidadTurista = (int) cantTuristasSprinner.getValue();
 		try {
-			contrActTur.altaInscripcionSalidaTuristica(idSalida, idTuristas, cantidadTurista, fechaInscripcion);
+			contrActTur.altaInscripcionSalidaTuristica(idSalida, idTuristas, cantidadTurista, fechaInscripcion, null);
 			setVisible(false);
 			limpiarFormulario();
 			JOptionPane.showMessageDialog(null, "Inscripción creada con éxito.", "Error",
