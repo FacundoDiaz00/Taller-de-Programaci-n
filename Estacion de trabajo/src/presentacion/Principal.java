@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
@@ -330,7 +331,7 @@ public class Principal {
 			JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Éxito",
 					JOptionPane.INFORMATION_MESSAGE);
 
-		} catch (Exception exception) {
+		} catch (TurismoUyException exception) {
 			JOptionPane.showMessageDialog(null,
 					"Ha ocurrido un error a la hora de cargar los datos de prueba."
 							+ " Sugerimos que esta operación sea la primera que se haga cuando se ejecuta el sistema.",

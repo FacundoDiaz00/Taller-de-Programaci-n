@@ -21,7 +21,7 @@
     padding: 10px;
     display: grid;
     grid-template-rows: auto 1fr;
-    grid-row-gap: 10px;
+    grid-gap: 10px;
     grid-template-columns: 300px 1fr;
     background-color: #FAFAFA;
     grid-column-start: 2;
@@ -31,6 +31,20 @@
 #info-general-imagen img{
     width: 100%;
 }
+
+.card-actividad{
+	display: flex;
+	flex-direction:column;
+	justify-content: space-between;
+	height: 100%
+}
+
+.botonera{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 #titulo{
     padding: 10px;
@@ -49,7 +63,7 @@ h6{
 }
 
 #info{
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
 #info h2{
@@ -70,6 +84,21 @@ h6{
 .div-doble h5{
     margin-right: 10px;
 
+}
+
+#contenedor-actividades{
+	grid-row-start : 1;
+	grid-row-end : 3;
+	grid-column-start: 3;
+	grid-column-end: 4;
+}
+
+#contenedor-actividad h2{
+	margin-left: 10px
+}
+
+.card-actividad{
+	margin: 0 10px 0 10px
 }
 
 

@@ -85,13 +85,13 @@
 	        </div>
 	
 			
-	        <div id="actividades-compra-turisticas">
+	        <div id="actividades-compra-turisticas" style="max-width: 800px;">
 	        	<% 
 	        		boolean usuarioLogueado = true; // FIXME cuando haya sesiónes
 	        		
 	        		// Muestro el form de compra solo si estoy logueado
 	        		if (usuarioLogueado) { %>
-			            <div class="card" id="contenedor-compra">
+			            <div class="card" id="contenedor-compra" style="max-width: 800px;">
 			                <div class="header-card-with-button">
 			                    <h2 class="card-title">Compra paquete</h2>
 			                </div>
@@ -134,10 +134,15 @@
 					                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 		                        </div>
 		                        <div class="col-md-8">
-		                            <div class="card-body">
-		                                <h5 class="card-title"><%=act.getNombre()%></h5>
-		                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
-		                                <a href="ConsultaActividadServlet?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                            <div class="card-body card-actividad">
+		                            	<div>
+		                            		<h5 class="card-title"><%=act.getNombre()%></h5>
+		                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+		                            	</div>
+		                            	<div class="botonera">
+		                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                            	</div>		                           
+		                                
 		                            </div>
 		                        </div>
 		                    </div>

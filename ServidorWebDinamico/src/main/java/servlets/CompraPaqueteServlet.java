@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaquetesSinActividadesExcepcion;
 import logica.controladores.Fabrica;
 
 /**
@@ -43,6 +44,9 @@ public class CompraPaqueteServlet extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 		} catch (CompraYaRegistradaException e) {
 			req.setAttribute("motivoDeError", "El usuario logueado ya ha comprado este mismo paquete.");
+			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+		} catch (PaquetesSinActividadesExcepcion e) {
+			req.setAttribute("motivoDeError", "El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 		}
 

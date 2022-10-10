@@ -17,15 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import excepciones.UsuarioYaRegistradoException;
-import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
 
 public class AltaDeUsuario extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final String opcionProveedor = "Proveedor";
-	private final String opcionTurista = "Turista";
+	private static final String OPCION_PROVEEDOR = "Proveedor";
+	private static final String OPCION_TURISTA = "Turista";
 
 	private JTextField nombre;
 	private JTextField nickname;
@@ -33,20 +32,18 @@ public class AltaDeUsuario extends JInternalFrame {
 	private JTextField apellido;
 	private JTextField correo;
 	private JComboBox tipoUsuario;
-	private IControladorUsuario contrUsuario;
 	private JTextField nacionalidad;
 	private JTextField descripcion;
 	private JTextField url;
 	private JTextField contra;
 	private JTextField confirmarContra;
-
+	
+	private IControladorUsuario contrUsuario;
 	/**
 	 * Create the frame.
 	 */
 	public AltaDeUsuario(IControladorUsuario contrUsuario) {
-
-		Fabrica fabrica = Fabrica.getInstancia();
-		this.contrUsuario = fabrica.getIControladorUsuario();
+		this.contrUsuario = contrUsuario;
 		setTitle("Registrar Usuario");
 		setBounds(100, 100, 450, 409);
 		getContentPane().setLayout(null);
@@ -114,10 +111,9 @@ public class AltaDeUsuario extends JInternalFrame {
 		tipoUsuario = new JComboBox();
 		tipoUsuario.setBounds(131, 7, 258, 24);
 		getContentPane().add(tipoUsuario);
-		tipoUsuario.addItem(opcionProveedor);
-		tipoUsuario.addItem(opcionTurista);
+		tipoUsuario.addItem(OPCION_PROVEEDOR);
+		tipoUsuario.addItem(OPCION_TURISTA);
 		tipoUsuario.setSelectedIndex(0);
-		this.tipoUsuario = tipoUsuario;
 
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
@@ -191,7 +187,7 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		tipoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				if ("Proveedor".equals(tipoUsuario.getSelectedItem().toString())) {
+				if (OPCION_PROVEEDOR.equals(tipoUsuario.getSelectedItem().toString())) {
 					nacionalidad.setEnabled(false);
 					url.setEnabled(true);
 					descripcion.setEnabled(true);
@@ -209,14 +205,14 @@ public class AltaDeUsuario extends JInternalFrame {
 		String fecha = fechaNacimiento.getText();
 		LocalDate fechaNac;
 		try {
-			if (tipoUsuario.getSelectedItem().toString().equals(opcionTurista)
+			if (tipoUsuario.getSelectedItem().toString().equals(OPCION_TURISTA)
 					&& (nombre.getText().isBlank() || apellido.getText().isBlank() || nickname.getText().isBlank()
 							|| fechaNacimiento.getText().isBlank() || nacionalidad.getText().isBlank())) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, apellido, nickname, correo, fecha de nacimiento y nacionalidad son obligatorios",
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
-			} else if (tipoUsuario.getSelectedItem().toString().equals(opcionProveedor)
+			} else if (tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)
 					&& (descripcion.getText().isBlank() || nombre.getText().isBlank() || apellido.getText().isBlank()
 							|| nickname.getText().isBlank() || fechaNacimiento.getText().isBlank())) {
 				JOptionPane.showMessageDialog(null,
@@ -224,7 +220,7 @@ public class AltaDeUsuario extends JInternalFrame {
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}			
-			if (contra.getText().toString().compareTo(confirmarContra.getText().toString()) != 0) {
+			if (contra.getText().compareTo(confirmarContra.getText()) != 0) {
 				JOptionPane.showMessageDialog(null, "La confirmación debe coincidir con la contraseña",
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
@@ -232,8 +228,8 @@ public class AltaDeUsuario extends JInternalFrame {
 			
 			DateTimeFormatter jeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			fechaNac = LocalDate.parse(fecha, jeFormatter);
-			// Todo falta verificar los campos obligatorios
-			if (tipoUsuario.getSelectedItem().toString().equals(opcionProveedor)) {
+			// TODO falta verificar los campos obligatorios
+			if (tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)) {
 				contrUsuario.altaProveedor(nickname.getText(), nombre.getText(), apellido.getText(), correo.getText(), contra.getText(), fechaNac,
 						null, descripcion.getText(), url.getText());
 			} else {
@@ -247,7 +243,7 @@ public class AltaDeUsuario extends JInternalFrame {
 		} catch (UsuarioYaRegistradoException exception) {
 			JOptionPane.showMessageDialog(null, "Ya existe un usuario con este nickname o con este correo", "Error",
 					JOptionPane.ERROR_MESSAGE);
-			// throw new RuntimeException(e); //Todo ¿porque ponen esto?
+			// throw new RuntimeException(e); // TODO ¿porque ponen esto?
 		} catch (DateTimeParseException exception) {
 			JOptionPane.showMessageDialog(null,
 					"Fecha nacimiento inválida, es un campo obligatorio y su formato es dd/mm/yyyy", "Error",

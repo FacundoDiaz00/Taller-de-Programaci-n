@@ -35,12 +35,14 @@ public class AltaActividadServlet extends HttpServlet {
 		this.contActividad = Fabrica.getInstancia().getIControladorActividadTuristica();
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req = Utiles.insertarLoDeSiempre(req);
 		req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);
 
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (req.getCharacterEncoding() == null) {
 			req.setCharacterEncoding("UTF-8");
@@ -50,13 +52,13 @@ public class AltaActividadServlet extends HttpServlet {
 		// TODO: generar este dato a partir
 		// de la
 		// sesión
-		String departamento = (String) req.getParameter("departamento");
-		String nombre = (String) req.getParameter("nombre");
-		String descripcion = (String) req.getParameter("descripcion");
-		String duracion = (String) req.getParameter("duracion");
-		String costo = (String) req.getParameter("costo");
-		String ciudad = (String) req.getParameter("ciudad");
-		List<String> categorias = Arrays.asList((String[]) req.getParameterValues("categorias"));
+		String departamento = req.getParameter("departamento");
+		String nombre = req.getParameter("nombre");
+		String descripcion = req.getParameter("descripcion");
+		String duracion = req.getParameter("duracion");
+		String costo = req.getParameter("costo");
+		String ciudad = req.getParameter("ciudad");
+		List<String> categorias = Arrays.asList(req.getParameterValues("categorias"));
 
 		Part filePart = req.getPart("img");
 

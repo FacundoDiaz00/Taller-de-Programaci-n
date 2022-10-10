@@ -74,6 +74,10 @@ public class Paquete {
 		return new DTPaquete(nombre, descrpicion, descuento, validez, cats, fechaDeRegistro, img);
 	}
 
+	public boolean hayActividades(){
+		return actividades.size() > 0;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		return this.getNombre().equals(((Paquete) obj).getNombre());

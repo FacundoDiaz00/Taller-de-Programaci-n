@@ -33,9 +33,9 @@ public class Turista extends Usuario {
 		setInscripciones(new HashSet<>());
 	}
 
-	public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp)
+	public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp, Compra comp, String nomActividad)
 			throws FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
-		Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, null, sal, this);
+		Inscripcion insc = new Inscripcion(fechaInscrp, canTuris, sal, this, comp, nomActividad);
 		inscripciones.add(insc);
 	}
 
@@ -46,6 +46,15 @@ public class Turista extends Usuario {
 			}
 		}
 		return false;
+	}
+
+	public Compra obtenerCompraParaNombrePaquete(String nombrePaquete){
+		for (Compra com : this.compras){
+			if (com.correspondeAPaquete(nombrePaquete)){
+				return com;
+			}
+		}
+		return null;
 	}
 
 	public String getNacionalidad() {
@@ -126,6 +135,16 @@ public class Turista extends Usuario {
 				return true;
 		}
 		return false;
+	}
+
+	public List<String> obtenerIdPaquetesConConsumoDisponibleParaActividad(String nombreActividad){
+		List<String> paquetes = new ArrayList<>();
+		for (Compra comp : this.compras){
+			if (comp.tieneConsumoDisponibleParaActividad(nombreActividad) && !LocalDate.now().isAfter(comp.getVencimiento())){
+				paquetes.add(comp.getPaquete().getNombre());
+			}
+		}
+		return paquetes;
 	}
 
 	public void asociarCompra(Compra compra) {

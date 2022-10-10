@@ -18,10 +18,11 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 #contenedor form{
+	margin-top: 20px;
     width: 700px;
 }
 

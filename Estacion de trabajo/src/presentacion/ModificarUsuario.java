@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -306,7 +307,7 @@ public class ModificarUsuario extends JInternalFrame {
 			int mes = (int) mesSpinner.getValue();
 			int anio = (int) anioSprinner.getValue();
 			fechaNac = LocalDate.of(anio, mes, dia);
-		} catch (Exception exception) { // TODO averiguar que excepcion tira
+		} catch (DateTimeException exception) { // TODO averiguar que excepcion tira
 										// localdate y
 			// atrapar eso
 			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
@@ -351,11 +352,11 @@ public class ModificarUsuario extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.", "Operación con éxito.",
 					JOptionPane.INFORMATION_MESSAGE);
 		} catch (ModificacionUsuarioNoPermitida exception) {
+			JOptionPane.showMessageDialog(null, "No se puede modificar el nickname o el correo .", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (ObjetoNoExisteEnTurismoUy exception) {
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el usuario.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (Exception exception) {
-			JOptionPane.showMessageDialog(null, "La Fecha nacimiento es invalida", "Error", JOptionPane.ERROR_MESSAGE);
-			exception.printStackTrace();
 		}
 
 	}

@@ -16,7 +16,7 @@ public class InicioServidorDinamico implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
-			// Todo hay veces que esto en el tiempo se ejecuta mas de una vez
+			// TODO hay veces que esto en el tiempo se ejecuta mas de una vez
 			Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
 			System.out.println("Datos de prueba cargados");
 		} catch (TurismoUyException e) {
