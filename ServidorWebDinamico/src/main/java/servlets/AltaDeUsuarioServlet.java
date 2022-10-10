@@ -114,10 +114,6 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 				imgFileStream.close();
 			}
 
-			DTUsuario dtUsuario = this.contUsuario.obtenerDTUsuario(nickname);
-
-			System.out.println("Usuario " + dtUsuario.getNickname() + " creado con exito");
-
 			req.setAttribute("exito", Boolean.TRUE);
 			req = Utiles.insertarLoDeSiempre(req);
 			req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
@@ -127,8 +123,6 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 					+ " no se puede crear ya que tiene alguna de sus dos claves repetidas");
 			req.setAttribute("motivoDeError",
 					"Ya existe un usuario con este nickname o con ese correo, cambie alguno de estos y pruebe nuevamente");
-		} catch (ObjetoNoExisteEnTurismoUy e) {
-			// Esto caso no puede ocurrir
 		}
 
 		// En este punto si o si hay error
