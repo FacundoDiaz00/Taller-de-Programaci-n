@@ -37,7 +37,6 @@
                     <% 
                     System.out.println(session);
                 	DTUsuario usuario = (DTUsuario)request.getAttribute("usuarioLogeado");
-                	System.out.println(usuario.getNickname());
                 	session.setAttribute("usuarioLogeado", request.getAttribute("usuarioLogeado")); 
               
                     if(session.getAttribute("usuarioLogeado") == null){ %>

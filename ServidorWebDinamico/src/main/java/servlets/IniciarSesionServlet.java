@@ -52,6 +52,7 @@ public class IniciarSesionServlet extends HttpServlet {
 				usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
 			}
 			req.setAttribute("usuarioLogeado", usuario);
+			req = Utiles.insertarLoDeSiempre(req);
 			req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 			return;
 
