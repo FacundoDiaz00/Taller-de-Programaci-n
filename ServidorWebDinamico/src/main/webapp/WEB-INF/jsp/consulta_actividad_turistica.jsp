@@ -106,7 +106,7 @@
 
         </div>
 
-        <div id="contenedor-salidas-paquetes" style="max-width: 800px;">
+        <div id="contenedor-salidas-paquetes">
             <div id="contenedor-items">
                 <div class="card" id="contenedor-salidas-turisticas">
                     <h2 class="card-title">Salidas Turisticas:</h2>
@@ -158,7 +158,7 @@
                     
                 </div>
 
-                <div class="card" id="contenedor-paquetes" style="max-width: 800px;">
+                <div class="card" id="contenedor-paquetes">
                 
                 
                     <h2 class="card-title">Paquetes:</h2>

@@ -34,10 +34,10 @@
 			                <option value="2">Nickname</option>
 			            </select>
 			            
-			            <% String email = (String)request.getAttribute("email");%>
+			            <% String email = "";%>
 			            
                         <input id="input-correo-electronico" 
-                         	   type="text" 
+                         	   type="email" 
                          	   name="email" 
                          	   class="form-control" 
                          	   placeholder="Ingrese un correo" 
@@ -45,9 +45,9 @@
                          	   aria-describedby="basic-addon1"
                          	   value="<%=email%>">
                         	
-                      	<% String nickname = (String)request.getAttribute("nickname");%>
+                      	<% String nickname = "";%>
                       	<input id="input-nickname" 
-                          	   type="text" 
+                          	   type="hidden" 
                           	   name="nickname" 
                           	   class="form-control" 
                           	   placeholder="Ingrese un nickname" 
@@ -57,7 +57,7 @@
 			        </div>
 
                     <div class="contenedorinput mb-3">
-                    <% String password =(String)request.getAttribute("password"); %>
+                    <% String password = ""; %>
                         <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
                         <input id="input-contrasenia" 
                         	   type="password" 
@@ -90,27 +90,34 @@
 <script src="../js/comportamientoComun.js"></script>
 
 <script>
-		$("#input-nickname").hide();
-		$("#input-correo-electronico").show();
         $(function(){
         $('#idForm').bind('change', function () {
         var valor = $(this).val(); // get selected value
         console.log("cambia el idForm: ", valor);
+       	nickname = null;
+    	email = null;
         if(valor == 1){
         	console.log("entre a 1");
-        	nickname = null;
-        	email = null;
-        	$("#input-nickname").hide();
-        	$("#input-correo-electronico").show();
+        	$("#input-nickname")[0].type = "hidden";
+        	$("#input-correo-electronico")[0].type = "email";
         }else{
-        	email= null;
-        	nickname = null;
-        	$("#input-correo-electronico").hide();
-        	$("#input-nickname").show();
+        	$("#input-correo-electronico")[0].type = "hidden";
+        	$("#input-nickname")[0].type = "text";
         }
          });
        });
-   </script>
+</script>
+
+    <script src="${pageContext.request.contextPath}/js/alta_usuario.js"></script>
+    
+    <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error al iniciar sesión" , mensajeError , 200);
+    </script>
+    <%} %>
+
 
 </body>
 </html>

@@ -10,6 +10,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="logica.datatypes.DTUsuario" %>
+
+
 
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
@@ -31,7 +34,13 @@
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
                     
-                    <% if(session.getAttribute("usuarioLogeado") == null){ %>
+                    <% 
+                    System.out.println(session);
+                	DTUsuario usuario = (DTUsuario)request.getAttribute("usuarioLogeado");
+                	System.out.println(usuario.getNickname());
+                	session.setAttribute("usuarioLogeado", request.getAttribute("usuarioLogeado")); 
+              
+                    if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
 	                    </li>

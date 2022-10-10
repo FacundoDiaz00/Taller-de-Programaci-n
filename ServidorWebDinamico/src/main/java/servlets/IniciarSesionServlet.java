@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.Session;
+
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
@@ -39,21 +41,25 @@ public class IniciarSesionServlet extends HttpServlet {
 		String tipoID = (String) req.getParameter("idForm");
 
 		try {
+			System.out.print(email);
+			System.out.print(password);
+			System.out.print(nickname);
+			System.out.print(tipoID);
 			DTUsuario usuario;
-			if (tipoID == "1") {
+			if (tipoID.equals("1")) {
 				usuario = contrU.obtenerDTUsuarioPorEmail(email, password);
 			}else {
 				usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
 			}
-			
 			req.setAttribute("usuarioLogeado", usuario);
-			req = Utiles.insertarLoDeSiempre(req);
-			resp.sendRedirect("index");
+			req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 			return;
 
 		} catch (ObjetoNoExisteEnTurismoUy e) {
 			// TODO HACER ALGO
 			System.out.print("Usuario no existe");
+			req.setAttribute("motivoDeError", "El usuario o la contraseña son incorrectos");
+			req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
 		}
 
 		// req = Utiles.insertarLoDeSiempre(req);
