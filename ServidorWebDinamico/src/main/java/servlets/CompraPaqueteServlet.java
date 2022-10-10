@@ -12,6 +12,8 @@ import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaquetesSinActividadesExcepcion;
 import logica.controladores.Fabrica;
+import logica.datatypes.DTUsuario;
+import logica.datatypes.DTTurista;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -32,15 +34,20 @@ public class CompraPaqueteServlet extends HttpServlet {
 
 		int cant_turistas = Integer.valueOf(req.getParameter("cant_turistas"));
 		String nombre_paquete = (String) req.getParameter("nombre_paquete");
-
-		String nickUsuarioLogueado = ""; // TODO: obtener este dato
+		DTUsuario turi = (DTTurista) req.getAttribute("usuarioLogeado");
+		String nickTuri = "";
+		if (turi != null)
+			 nickTuri = turi.getNickname();
 
 		try {
-			Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickUsuarioLogueado, nombre_paquete,
+			Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickTuri, nombre_paquete,
 					cant_turistas);
 		} catch (ObjetoNoExisteEnTurismoUy e) {
 			String objetoFaltante = e.getClaseObjetoFaltante();
-			req.setAttribute("motivoDeError", "No existe un " + objetoFaltante + " con ese nombre.");
+			//if (objetoFaltante == "Usuario")
+				req.setAttribute("motivoDeError", "Para comprar un paquete es necesario estar loggeado con un Turista");
+			//else
+				//req.setAttribute("motivoDeError", "No existe un " + objetoFaltante + " con ese nombre.");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 		} catch (CompraYaRegistradaException e) {
 			req.setAttribute("motivoDeError", "El usuario logueado ya ha comprado este mismo paquete.");
@@ -49,6 +56,7 @@ public class CompraPaqueteServlet extends HttpServlet {
 			req.setAttribute("motivoDeError", "El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 		}
+		
 
 		resp.sendRedirect("index");
 	}
