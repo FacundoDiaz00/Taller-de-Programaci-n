@@ -50,7 +50,7 @@
 	                    <div class="dropdown">
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            <% usuario.getNombre(); %>
+	                            <%=usuario.getNombre() %>
 	                            <img  class="imagen_perfil " src="${pageContext.request.contextPath}/img/washington.png">
 	                        </a>
 	                        <ul class="dropdown-menu">
