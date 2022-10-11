@@ -101,9 +101,6 @@ public abstract class Usuario {
 	}
 	
 	public boolean usuarioValido(String _correo, String _contrasenia) {
-		//TODO: Eliminar print
-		System.out.println(this.correo);
-		System.out.println(this.contrasenia);
 		return _correo.equals(this.correo) && _contrasenia.equals(this.contrasenia);
 	}
 
