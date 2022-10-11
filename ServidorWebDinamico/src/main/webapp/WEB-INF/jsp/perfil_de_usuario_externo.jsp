@@ -39,7 +39,7 @@
 					imgpath = "/img" + usr.getImg().getPath();
 				}else{
 					imgpath = "/img/noFoto.png";
-				}								                        
+				}
 				%>
 				
             			<div class="card mb-3" style="max-width: 540px;">
@@ -55,6 +55,7 @@
 						    </div>
 						  </div>
 						</div>
+						
 	            <ul class="nav nav-tabs" id="myTab" role="tablist">
 	                <li class="nav-item" role="presentation">
 	                    <button class="nav-link active" id="boton-general" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Perfil</button>
@@ -76,6 +77,10 @@
 						<!--"Si es proveedor/a se muestra información de las actividades turísticas que ofrece (en estado “Confirmada”) y salidas asociadas."-->
 			            <li class="nav-item" role="presentation">
 			                <button class="nav-link active" id="boton-actividades" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Actividades</button>
+			            </li>
+			            
+			            <li class="nav-item" role="presentation">
+			                <button class="nav-link active" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas</button>
 			            </li>
 				    <%}%>
 		    	</ul>
@@ -125,27 +130,6 @@
             		%>
             			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			
-						<h5>ACTIVIDADES:</h5>
-            			<%-- <%
-            			for(DTActividadTuristicaDetalle act: prv.getActividades()){
-            				System.out.println(act.getNombre());
-            			%>	
-                            <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4 img-contain">
-                                        <img src="../img/salida1.png" class="img-fluid rounded-start imagenSalidas"> <!-- TODO: imagenes de actividad -->
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body cards">
-                                            <h5 class="card-title"><%=act.getNombre()%></h5>
-                                            <div class="botonera">
-                                                <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-            			<%}%> --%>
             			<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
 						
 		                <div class="card mb-3" style="max-width: 850px;">
@@ -182,6 +166,28 @@
 		                </div>
 						
 					<% } %>
+            			</div>
+            			<div class="tab-pane fade" id="boton-salidasprov-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="3">
+            				<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
+								
+								<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>
+									<div class="card mb-3 imagenSalidas" style="max-width: 800px;">
+		                                <div class="row g-0">
+		                                    <div class="col-md-4 img-contain">
+		                                        <img src="../img/salida1.png" class="img-fluid rounded-start imagenSalidas"> <!-- TODO: imagenes de salidas -->
+		                                    </div>
+		                                    <div class="col-md-8">
+		                                        <div class="card-body cards">
+		                                            <h5 class="card-title"><%="aaaaaasdsaddsa"/* sal.getNombre() */%></h5>
+		                                            <div class="botonera">
+		                                                <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+								<% } %>
+							<% } %>
             			</div>
 					<%}%>
 				</div><!-- cierra tabcontent -->

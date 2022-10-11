@@ -11,8 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
+import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTProveedorDetalle;
+import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.DTSalidaTuristica;
 
 
 import utils.Utiles;
@@ -25,6 +30,7 @@ import utils.Utiles;
 public class ConsultaDeUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IControladorUsuario contrUsuario;
+	private IControladorActividadTuristica contrAct;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -32,6 +38,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	public ConsultaDeUsuarioServlet() {
 		super();
 		contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
+		contrAct = Fabrica.getInstancia().getIControladorActividadTuristica();
 	}
 
 	/**
@@ -49,14 +56,22 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
 		if (debelistar != null && debelistar.equals("false")) {
 			if (false) {
-				
+//				Sesion iniciada
 			}else {
 				try {
 					DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
 					req.setAttribute("usuario", usr);
+//					boolean esProveedor = usr instanceof DTProveedorDetalle;
+//				    if(!esProveedor){
+//				        DTTuristaDetalle tur = (DTTuristaDetalle) usr;
+//				        List<DTSalidaTuristica> dtsSalidas = null;
+//				        for(String sal: tur.getInscripciones()){
+//				        	dtsSalidas.add(contrAct.obtenerDTSalidaTuristica(sal));
+//				        }
+//				        req.setAttribute("salidasInscriptasTur", dtsSalidas);
+//				    }
 					req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
-					
 				} catch (ObjetoNoExisteEnTurismoUy e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
