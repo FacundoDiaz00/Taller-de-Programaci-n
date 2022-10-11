@@ -56,6 +56,8 @@ public interface IControladorUsuario {
 	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
 	DTUsuario obtenerDTUsuarioDetalle(String nickname) throws ObjetoNoExisteEnTurismoUy;
+	
+	public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy;
 
 	DTUsuario obtenerDTUsuarioDetallePrivado(String nickname) throws ObjetoNoExisteEnTurismoUy;
 

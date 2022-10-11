@@ -30,7 +30,8 @@
             <!--Categoroias-->
             <div class="card list-group" id="filtro-categoria">
                 <h5 class="card-title">Categorias</h5>
-                <%
+                <%	
+                	System.out.println(request.getAttribute("categorias"));
                 	List<String> categoiras = (List<String>) request.getAttribute("categorias"); 
                     for(String cat : categoiras){
                     	if( idCategoriaMarcada != null && idCategoriaMarcada.equals(cat) ){   	

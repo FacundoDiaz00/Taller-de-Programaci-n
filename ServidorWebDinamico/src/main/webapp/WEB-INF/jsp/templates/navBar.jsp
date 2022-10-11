@@ -36,9 +36,7 @@
                     
                     <% 
                     System.out.println(session);
-                	DTUsuario usuario = (DTUsuario)request.getAttribute("usuarioLogeado");
-                	session.setAttribute("usuarioLogeado", request.getAttribute("usuarioLogeado")); 
-              
+                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
                     if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
@@ -52,7 +50,7 @@
 	                    <div class="dropdown">
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            Washington Rocha
+	                            <%=usuario.getNombre() %>
 	                            <img  class="imagen_perfil " src="${pageContext.request.contextPath}/img/washington.png">
 	                        </a>
 	                        <ul class="dropdown-menu">

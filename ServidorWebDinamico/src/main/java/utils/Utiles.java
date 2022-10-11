@@ -19,7 +19,9 @@ public class Utiles {
 		req.setAttribute("departamentos", departamentos);
 		req.setAttribute("categorias", categorias);
 
-		// TODO: agregar los datos del usuario logueado
+		if (!req.getSession().equals(null)) {
+			req.setAttribute("usuarioLogeado", req);
+		}
 
 		return req;
 	}

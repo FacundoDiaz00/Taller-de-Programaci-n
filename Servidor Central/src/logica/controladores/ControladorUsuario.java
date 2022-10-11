@@ -13,8 +13,6 @@ import logica.entidades.Proveedor;
 import logica.entidades.Turista;
 import logica.entidades.Usuario;
 import logica.manejadores.ManejadorUsuario;
-import logica.datatypes.DTTuristaDetallePrivado;
-import logica.datatypes.DTProveedorDetallePrivado;
 
 
 /**
@@ -119,10 +117,17 @@ public class ControladorUsuario implements IControladorUsuario {
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorCorreo(correo);
 		if (usuario.usuarioValido(correo, contrasenia)){
+			System.out.println("Usuario es valido");
 			return usuario.obtenerDTUsuario();
 		}else {
 			throw new ObjetoNoExisteEnTurismoUy(null); 
 		}
+	}
+	
+	public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy{
+		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
+		Usuario usuario = ins.getUsuarioPorCorreo(nickname);
+		return usuario.obtenerDTUsuario();
 	}
 
 	@Override
