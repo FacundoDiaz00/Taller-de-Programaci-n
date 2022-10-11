@@ -116,7 +116,12 @@ public class ControladorUsuario implements IControladorUsuario {
 	public DTUsuario obtenerDTUsuarioPorEmail(String correo, String contrasenia) throws ObjetoNoExisteEnTurismoUy{
 		ManejadorUsuario ins = ManejadorUsuario.getInstancia();
 		Usuario usuario = ins.getUsuarioPorCorreo(correo);
+		//TODO: Eliminar logs
+		System.out.println(correo + " ControladorUsuario");
+		System.out.println(contrasenia);
+		
 		if (usuario.usuarioValido(correo, contrasenia)){
+			System.out.println("Usuario es valido");
 			return usuario.obtenerDTUsuario();
 		}else {
 			throw new ObjetoNoExisteEnTurismoUy(null); 

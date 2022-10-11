@@ -100,8 +100,11 @@ public abstract class Usuario {
 		this.setFechaNac(datosNuevos.getFechaNac());
 	}
 	
-	public boolean usuarioValido(String _correo, String _contrasenia){
-		return _correo == this.correo && _contrasenia == this.contrasenia;
+	public boolean usuarioValido(String _correo, String _contrasenia) {
+		//TODO: Eliminar print
+		System.out.println(this.correo);
+		System.out.println(this.contrasenia);
+		return _correo.equals(this.correo) && _contrasenia.equals(this.contrasenia);
 	}
 
 }

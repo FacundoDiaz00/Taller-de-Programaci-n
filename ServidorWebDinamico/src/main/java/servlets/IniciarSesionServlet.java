@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 
@@ -30,7 +31,8 @@ public class IniciarSesionServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if (req.getAttribute("usuarioLogeado") != null) {
+		String usr = (String) req.getAttribute("usuarioLogeado");
+		if (usr != null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 		}else {
 			req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
@@ -48,12 +50,17 @@ public class IniciarSesionServlet extends HttpServlet {
 			
 			DTUsuario usuario;
 			if (tipoID.equals("1")) {
+				//TODO: Borrar print
+				System.out.print("tipoID = 1");
 				usuario = contrU.obtenerDTUsuarioPorEmail(email, password);
 			}else {
 				usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
 			}
 			req.setAttribute("usuarioLogeado", usuario);
 			req = Utiles.insertarLoDeSiempre(req);
+			
+			HttpSession sesion = req.getSession(true);
+			sesion.setAttribute("usuarioLogeado", usuario);
 			req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
 
 		} catch (ObjetoNoExisteEnTurismoUy e) {
