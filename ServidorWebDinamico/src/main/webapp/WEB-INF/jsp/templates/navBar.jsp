@@ -36,9 +36,7 @@
                     
                     <% 
                     System.out.println(session);
-                	DTUsuario usuario = (DTUsuario)request.getAttribute("usuarioLogeado");
-                	session.setAttribute("usuarioLogeado", request.getAttribute("usuarioLogeado")); 
-              
+                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
                     if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
