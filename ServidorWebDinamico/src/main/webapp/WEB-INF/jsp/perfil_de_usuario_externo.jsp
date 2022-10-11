@@ -150,9 +150,9 @@
 		                            <div class="card-body">
 		                                <h5 class="card-title"><%=act.getNombre()%></h5>
 		                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
-		                                <div style="align-items: right;display: flex;justify-content: flex-end;">
-		                                	<a href="ConsultaActividadServlet?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
-		                                </div>
+		                                <div class="botonera">
+		                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                            	</div>
 		                                
 		                            	<div id="salidas" style=";margin-left: 10px">
 		                            		<h6>Salidas:</h6>
@@ -191,8 +191,8 @@
 		                                            <h5 class="card-title"><%= sal.getNombre() %></h5>
 		                                            <p>Actividad: <%=sal.getActividad() %></p>
 		                                            <div class="botonera">
-		                                                <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
-		                                            </div>
+				                                        <a href="ConsultaSalida?id=<%=sal.getNombre()%>" class="btn btn-primary">Ver mas</a>
+				                                    </div>
 		                                        </div>
 		                                    </div>
 		                                </div>
