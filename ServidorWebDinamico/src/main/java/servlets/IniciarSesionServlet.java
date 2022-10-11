@@ -31,7 +31,8 @@ public class IniciarSesionServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String usr = (String) req.getAttribute("usuarioLogeado");
+		HttpSession sesion = req.getSession(false);
+		Object usr = sesion.getAttribute("usuarioLogeado");
 		if (usr != null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 		}else {
@@ -50,19 +51,16 @@ public class IniciarSesionServlet extends HttpServlet {
 			
 			DTUsuario usuario;
 			if (tipoID.equals("1")) {
-				//TODO: Borrar print
-				System.out.print("tipoID = 1");
 				usuario = contrU.obtenerDTUsuarioPorEmail(email, password);
 			}else {
 				usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
 			}
 			req.setAttribute("usuarioLogeado", usuario);
-			req = Utiles.insertarLoDeSiempre(req);
 			
 			HttpSession sesion = req.getSession(true);
 			sesion.setAttribute("usuarioLogeado", usuario);
-			req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
-
+			req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
+			
 		} catch (ObjetoNoExisteEnTurismoUy e) {
 			req.setAttribute("motivoDeError", "El usuario o la contraseña son incorrectos");
 			req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
