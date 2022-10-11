@@ -174,11 +174,22 @@
 									<div class="card mb-3 imagenSalidas" style="max-width: 800px;">
 		                                <div class="row g-0">
 		                                    <div class="col-md-4 img-contain">
-		                                        <img src="../img/salida1.png" class="img-fluid rounded-start imagenSalidas"> <!-- TODO: imagenes de salidas -->
+		                                        <div id="info-general-imagen">            
+								                 	<% 
+										            String pathSalida = "";
+													if (sal.getImg() == null) {
+														pathSalida += "/noFoto.png";
+													} else {
+														pathSalida += sal.getImg().getPath();
+													}							
+													%>
+												    <img src="${pageContext.request.contextPath}/img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+												</div>
 		                                    </div>
 		                                    <div class="col-md-8">
 		                                        <div class="card-body cards">
-		                                            <h5 class="card-title"><%="aaaaaasdsaddsa"/* sal.getNombre() */%></h5>
+		                                            <h5 class="card-title"><%= sal.getNombre() %></h5>
+		                                            <p>Actividad: <%=sal.getActividad() %></p>
 		                                            <div class="botonera">
 		                                                <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
 		                                            </div>
