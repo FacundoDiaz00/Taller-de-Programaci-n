@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import excepciones.ContraseniaInvalidaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
