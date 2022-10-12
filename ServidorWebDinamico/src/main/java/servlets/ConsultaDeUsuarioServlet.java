@@ -11,15 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
-import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorUsuario;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTProveedorDetalle;
-import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTUsuario;
-import logica.datatypes.DTSalidaTuristica;
-
-
 import utils.Utiles;
 
 /**
@@ -28,39 +21,37 @@ import utils.Utiles;
 
 @WebServlet("/ConsultaDeUsuario")
 public class ConsultaDeUsuarioServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private IControladorUsuario contrUsuario;
-	private IControladorActividadTuristica contrAct;
+    private static final long serialVersionUID = 1L;
+    private IControladorUsuario contrUsuario;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ConsultaDeUsuarioServlet() {
-		super();
-		contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
-		contrAct = Fabrica.getInstancia().getIControladorActividadTuristica();
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ConsultaDeUsuarioServlet() {
+        super();
+        contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
+    }
 
-	/**
-	 * parametros posibles: - listar : indica si se listan los usuarios - id :
-	 * nombre del usuario cuando se accede a la informacion del perfil
-	 * 
-	 * 
-	 * Observacion: - Si listar = false debera haber una id para dar la info del
-	 * usuario.
-	 */
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String debelistar = req.getParameter("listar");
-		req = Utiles.insertarLoDeSiempre(req);
+    /**
+     * parametros posibles: - listar : indica si se listan los usuarios - id :
+     * nombre del usuario cuando se accede a la informacion del perfil
+     * 
+     * 
+     * Observacion: - Si listar = false debera haber una id para dar la info del
+     * usuario.
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String debelistar = req.getParameter("listar");
+        req = Utiles.insertarLoDeSiempre(req);
 
-		if (debelistar != null && debelistar.equals("false")) {
-			if (false) {
+        if (debelistar != null && debelistar.equals("false")) {
+            if (false) {
 //				Sesion iniciada
-			}else {
-				try {
-					DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
-					req.setAttribute("usuario", usr);
+            } else {
+                try {
+                    DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
+                    req.setAttribute("usuario", usr);
 //					boolean esProveedor = usr instanceof DTProveedorDetalle;
 //				    if(!esProveedor){
 //				        DTTuristaDetalle tur = (DTTuristaDetalle) usr;
@@ -70,30 +61,29 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 //				        }
 //				        req.setAttribute("salidasInscriptasTur", dtsSalidas);
 //				    }
-					req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
+                    req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
-				} catch (ObjetoNoExisteEnTurismoUy e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}else {
-			List<DTUsuario> usuarios = contrUsuario.obtenerDTUsuarios();
-			req.setAttribute("usuarios", usuarios);
-			req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
-		}
-	}
-		
+                } catch (ObjetoNoExisteEnTurismoUy e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            List<DTUsuario> usuarios = contrUsuario.obtenerDTUsuarios();
+            req.setAttribute("usuarios", usuarios);
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 * response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

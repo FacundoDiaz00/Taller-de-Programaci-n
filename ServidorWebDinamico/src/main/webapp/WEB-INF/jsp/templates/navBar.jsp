@@ -35,7 +35,6 @@
                     </form>
                     
                     <% 
-                    System.out.println(session);
                 	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
                     if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
@@ -51,7 +50,17 @@
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <%=usuario.getNombre() %>
-	                            <img  class="imagen_perfil " src="${pageContext.request.contextPath}/img/washington.png">
+	                            
+	                            <% 
+				        		String path = "";
+								if (usuario.getImg() == null) {
+									path += "/noFoto.png";
+								} else {
+									path += usuario.getImg().getPath();
+								}							
+								%>
+				                <img class="imagen_perfil " src="${pageContext.request.contextPath}/img<%=path%>" alt="">
+	                            
 	                        </a>
 	                        <ul class="dropdown-menu">
 	                            <li><a class="dropdown-item" href="perfil_usuario_proveedor_interno.html">Ver Perfil</a></li>

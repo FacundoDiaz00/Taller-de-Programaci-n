@@ -21,110 +21,111 @@ import logica.datatypes.Imagen;
 
 public class Proveedor extends Usuario {
 
-	private String descrpicionGeneral;
-	private String link;
+    private String descrpicionGeneral;
+    private String link;
 
-	private Map<String, ActividadTuristica> actividadesTuristicas;
+    private Map<String, ActividadTuristica> actividadesTuristicas;
 
-	public Proveedor(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac, Imagen img,
-			String descrpicionGeneral, String link) {
-		super(nickname, nombre, apellido, correo, contra, fechaNac, img);
-		setDescrpicionGeneral(descrpicionGeneral);
-		setLink(link);
-		setActividadesTuristicas(new HashMap<>());
-	}
+    public Proveedor(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac,
+            Imagen img,
+            String descrpicionGeneral, String link) {
+        super(nickname, nombre, apellido, correo, contra, fechaNac, img);
+        setDescrpicionGeneral(descrpicionGeneral);
+        setLink(link);
+        setActividadesTuristicas(new HashMap<>());
+    }
 
-	public String getDescrpicionGeneral() {
-		return descrpicionGeneral;
-	}
+    public String getDescrpicionGeneral() {
+        return descrpicionGeneral;
+    }
 
-	public void setDescrpicionGeneral(String descrpicionGeneral) {
-		this.descrpicionGeneral = descrpicionGeneral;
-	}
+    public void setDescrpicionGeneral(String descrpicionGeneral) {
+        this.descrpicionGeneral = descrpicionGeneral;
+    }
 
-	public String getLink() {
-		return link;
-	}
+    public String getLink() {
+        return link;
+    }
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+    public void setLink(String link) {
+        this.link = link;
+    }
 
-	public Map<String, ActividadTuristica> getActividadesTuristicas() {
-		return actividadesTuristicas;
-	}
+    public Map<String, ActividadTuristica> getActividadesTuristicas() {
+        return actividadesTuristicas;
+    }
 
-	public void setActividadesTuristicas(Map<String, ActividadTuristica> actividadesTuristicas) {
-		this.actividadesTuristicas = actividadesTuristicas;
-	}
+    public void setActividadesTuristicas(Map<String, ActividadTuristica> actividadesTuristicas) {
+        this.actividadesTuristicas = actividadesTuristicas;
+    }
 
-	@Override
-	public DTUsuario obtenerDTUsuario() {
-		return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(),
-				getDescrpicionGeneral(), getLink());
-	}
+    @Override
+    public DTUsuario obtenerDTUsuario() {
+        return new DTProveedor(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(),
+                getDescrpicionGeneral(), getLink());
+    }
 
-	@Override
-	public DTUsuario obtenerDTUsuarioDetalle() {
-		var dtActDetalles = new ArrayList<DTActividadTuristicaDetalle>();
+    @Override
+    public DTUsuario obtenerDTUsuarioDetalle() {
+        var dtActDetalles = new ArrayList<DTActividadTuristicaDetalle>();
 
-		for (ActividadTuristica actividad : actividadesTuristicas.values()) {
-			dtActDetalles.add(actividad.obtenerDTActividadTuristicaDetalle());
-		}
+        for (ActividadTuristica actividad : actividadesTuristicas.values()) {
+            dtActDetalles.add(actividad.obtenerDTActividadTuristicaDetalle());
+        }
 
-		return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(),
-				getImagen(), getDescrpicionGeneral(), getLink(), dtActDetalles);
-	}
+        return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(),
+                getImagen(), getDescrpicionGeneral(), getLink(), dtActDetalles);
+    }
 
-	public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {
-		actividadesTuristicas.put(actividadTuristica.getNombre(), actividadTuristica);
-	}
+    public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {
+        actividadesTuristicas.put(actividadTuristica.getNombre(), actividadTuristica);
+    }
 
-	@Override
-	public void setearDatos(DTUsuario datosNuevos) {
-		super.setearDatos(datosNuevos);
-		DTProveedor prov = (DTProveedor) datosNuevos;
-		this.setDescrpicionGeneral(prov.getDescrpicionGeneral());
-		this.setLink(prov.getLink());
-	}
+    @Override
+    public void setearDatos(DTUsuario datosNuevos) {
+        super.setearDatos(datosNuevos);
+        DTProveedor prov = (DTProveedor) datosNuevos;
+        this.setDescrpicionGeneral(prov.getDescrpicionGeneral());
+        this.setLink(prov.getLink());
+    }
 
-	@Override
-	public DTUsuario obtenerDTUsuarioDetallePrivado() {
-		String nickname = this.getNickname();
-		String nombre = this.getNombre();
-		String apellido = this.getApellido();
-		String correo = this.getCorreo();
-		LocalDate fechaNac = this.getFechaNac();
-		Imagen img = this.getImagen();
-		String desc = this.getDescrpicionGeneral();
-		String url = this.getLink();
+    @Override
+    public DTUsuario obtenerDTUsuarioDetallePrivado() {
+        String nickname = this.getNickname();
+        String nombre = this.getNombre();
+        String apellido = this.getApellido();
+        String correo = this.getCorreo();
+        LocalDate fechaNac = this.getFechaNac();
+        Imagen img = this.getImagen();
+        String desc = this.getDescrpicionGeneral();
+        String url = this.getLink();
 
-		List<DTActividadTuristicaDetalle> actividades = new ArrayList<>();
-		List<DTActividadTuristica> estadoAgregada = new ArrayList<>();
-		List<DTActividadTuristica> estadoRechazada = new ArrayList<>();
+        List<DTActividadTuristicaDetalle> actividades = new ArrayList<>();
+        List<DTActividadTuristica> estadoAgregada = new ArrayList<>();
+        List<DTActividadTuristica> estadoRechazada = new ArrayList<>();
 
-		for (var act : this.actividadesTuristicas.values()) {
-			switch (act.getEstado()) {
-			case ACEPTADA:
-				actividades.add(act.obtenerDTActividadTuristicaDetalle());
-				break;
-			case RECHAZADA:
-				estadoRechazada.add(act.obtenerDTActividadTuristica());
-				break;
-			case AGREGADA:
-				estadoAgregada.add(act.obtenerDTActividadTuristica());
-				break;
-			default:
-				break;
-			}
-		}
+        for (var act : this.actividadesTuristicas.values()) {
+            switch (act.getEstado()) {
+                case ACEPTADA:
+                    actividades.add(act.obtenerDTActividadTuristicaDetalle());
+                    break;
+                case RECHAZADA:
+                    estadoRechazada.add(act.obtenerDTActividadTuristica());
+                    break;
+                case AGREGADA:
+                    estadoAgregada.add(act.obtenerDTActividadTuristica());
+                    break;
+                default:
+                    break;
+            }
+        }
 
-		Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas = new HashMap<>();
-		actividadesNoConfirmadas.put(EstadoActividadTuristica.RECHAZADA, estadoRechazada);
-		actividadesNoConfirmadas.put(EstadoActividadTuristica.AGREGADA, estadoAgregada);
+        Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas = new HashMap<>();
+        actividadesNoConfirmadas.put(EstadoActividadTuristica.RECHAZADA, estadoRechazada);
+        actividadesNoConfirmadas.put(EstadoActividadTuristica.AGREGADA, estadoAgregada);
 
-		return new DTProveedorDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades,
-				actividadesNoConfirmadas);
-	}
+        return new DTProveedorDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades,
+                actividadesNoConfirmadas);
+    }
 
 }
