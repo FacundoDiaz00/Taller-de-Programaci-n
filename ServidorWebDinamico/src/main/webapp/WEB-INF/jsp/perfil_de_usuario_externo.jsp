@@ -30,7 +30,10 @@
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 	<section id="contenedor">
 		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
-		<%if(usr!= null){%>
+		
+		<%
+		DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
+		if(usr!= null){%>
 			<div id="contenedor-items">
 				
 				<%
@@ -66,10 +69,18 @@
 				        System.out.println("esTurista");
 				        DTTuristaDetalle tur = (DTTuristaDetalle) usr;
 				    %>
+				    	 
 						<!--"Si es turista se muestra la información de las salidas a las que se inscribió."-->
 			            <li class="nav-item" role="presentation">
 			                <button class="nav-link active" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Salidas</button>
-			            </li>					
+			            </li>
+			            <% 
+
+	                    if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){ %>
+			               <li class="nav-item" role="presentation">
+				                <button class="nav-link active" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Paquetes</button>
+				            </li>
+	                    <% }%>		
 				    <%}else{
 				        System.out.println("esProveedor");
 				        DTProveedorDetalle prv = (DTProveedorDetalle) usr;
@@ -124,6 +135,13 @@
                             </div>
             			<%}%>
             			</div>
+            			<div class="tab-pane fade show active cardPerfil" id="boton-paquetes-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="2">
+
+	                    <div class="card-body cards">
+	                        <h5 class="card-title">PAQUETES</h5>
+
+	                    </div>
+	                </div>
             		<%}else{
             			System.out.println("esProveedor");
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
