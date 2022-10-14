@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
@@ -44,14 +45,24 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String debelistar = req.getParameter("listar");
         req = Utiles.insertarLoDeSiempre(req);
-
+        HttpSession sesion = req.getSession(false);
+        Object usr = sesion.getAttribute("usuarioLogeado");
         if (debelistar != null && debelistar.equals("false")) {
-            if (false) {
-//				Sesion iniciada
+            if (usr != null) {
+				DTUsuario DTusr = null;
+				try {
+					DTusr = contrUsuario.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
+				} catch (ObjetoNoExisteEnTurismoUy e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                req.setAttribute("usuario", DTusr);
+                req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
+
             } else {
                 try {
-                    DTUsuario usr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
-                    req.setAttribute("usuario", usr);
+                    DTUsuario DTusr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
+                    req.setAttribute("usuario", DTusr);
 //					boolean esProveedor = usr instanceof DTProveedorDetalle;
 //				    if(!esProveedor){
 //				        DTTuristaDetalle tur = (DTTuristaDetalle) usr;

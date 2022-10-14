@@ -5,10 +5,14 @@
 
  --%>
 <%@page import="logica.datatypes.DTUsuario"%>
+<%@page import="logica.datatypes.DTCompra"%>
+
 <%@page import="logica.datatypes.DTProveedorDetalle"%>
 <%@page import="logica.datatypes.DTTuristaDetalle"%>
 <%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
 <%@page import="logica.datatypes.DTSalidaTuristica"%>
+<%@page import="logica.datatypes.DTTuristaDetallePrivado"%>
+<%@page import="logica.datatypes.DTProveedorDetallePrivado"%>
 
 <%@ page import="java.util.List" %>
 
@@ -113,6 +117,7 @@
 					if(!esProveedor){
 						System.out.println("esTurista");
             			DTTuristaDetalle tur = (DTTuristaDetalle) usr;
+            	
             		%>
 						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			<%
@@ -138,9 +143,28 @@
             			<div class="tab-pane fade show active cardPerfil" id="boton-paquetes-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="2">
 
 	                    <div class="card-body cards">
-	                        <h5 class="card-title">PAQUETES</h5>
-
-	                    </div>
+	                        <h5 class="card-title"></h5>
+								<%
+								if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){
+		            				DTTuristaDetallePrivado turpriv = (DTTuristaDetallePrivado) usr;
+		            				for(DTCompra cmp : turpriv.getCompras()){%>
+		            					</div>
+					                        <div class="col-md-8">
+					                            <div class="card-body">
+					                                <h5 class="card-title"><%= cmp.getPaquete()%> </h5>
+					                                <p class="card-text descripcion-paquete">AAAAAAAAAAA</p>
+					                                <div class="botonera">
+					                                    <a href="ConsultaPaquete?id=" class="btn btn-primary">Ver mas</a>
+					                                </div>
+					
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+		            				<%} %>
+								<%} %>
+								
+	                    </div>	
 	                </div>
             		<%}else{
             			System.out.println("esProveedor");
