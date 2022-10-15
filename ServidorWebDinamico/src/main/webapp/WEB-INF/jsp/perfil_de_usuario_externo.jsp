@@ -211,31 +211,32 @@
 		                </div>
 						<% } %>
 						<%
-						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){
-            				DTProveedorDetallePrivado prvPriv = (DTProveedorDetallePrivado) usr;
+						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){%>
+    						<h4>Actividades Sin confirmar:</h4>
+
+            				<% DTProveedorDetallePrivado prvPriv = (DTProveedorDetallePrivado) usr;
             				for(List<DTActividadTuristica> ListAct: prvPriv.getActividadesNoConfirmadas().values()){
-            					for(DTActividadTuristica act:ListAct)%>
-            					
+            					for(DTActividadTuristica acti:ListAct){%>
 	            					<div class="card mb-3" style="max-width: 850px;">
 					                    <div class="row g-0">
 					                        <div class="col-md-4 img-contain">
 					              
 					                        	<% 
 						            			String pathImagen = "";
-												if (act.getImg() == null) {
+												if (acti.getImg() == null) {
 													pathImagen += "noFoto.png";
 												} else {
-													pathImagen += act.getImg().getPath();
+													pathImagen += acti.getImg().getPath();
 												}							
 												%>
 								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 					                        </div>
 					                        <div class="col-md-8">
 					                            <div class="card-body">
-					                                <h5 class="card-title"><%=act.getNombre()%></h5>
-					                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+					                                <h5 class="card-title"><%=acti.getNombre()%></h5>
+					                                <p class="card-text descripcion-actividad"><%=acti.getDescripcion()%></p>
 					                                <div class="botonera">
-					                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+					                            		<a href="ConsultaActividad?id=<%=acti.getNombre()%>" class="btn btn-primary">Ver más</a>
 					                            	</div>
 					                            </div>
 					                        </div>
