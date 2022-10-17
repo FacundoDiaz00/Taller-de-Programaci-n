@@ -1,16 +1,4 @@
 
-<%-- 
-
-# ATTRIBUTOS QUE PRECISA LA PÁGINA
-
-- List<String> departamentos
-- List<String> categorias
-- List<DTActividadTuristica> actividades (ya deben estar filtradas)
-- List<DTPaquete> paquetes (ya deben estar filtradas)[Falta filtrar por ambos criterios]
-
- --%>
-
-
 <%@page import="logica.datatypes.DTUsuario"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,28 +23,41 @@
           <form class="card" id="form-iniciar-sesion" name="iniciarSesionForm" method="post" action="${pageContext.request.contextPath}/IniciarSesion">
                 <div class="card-body">
                     <h5 class="card-title">Iniciar Sesión</h5>
+                    
 
                     <span class="input-label">Identificador:<span class="obligatorio"> *</span></span>
 			        <div class="input-group mb-3 contenedorinput">
+			   
 			        
-			            <select class="form-select" aria-label="Default select example">
-			                <option selected>Email</option>
+			            <select id="idForm" name="idForm" class="form-select" aria-label="Default select example">
+			                <option selected value="1">Email</option>
 			                <option value="2">Nickname</option>
 			            </select>
-			            <% String email = (String)request.getAttribute("email"); %>
+			            
+			            <% String email = "";%>
+			            
                         <input id="input-correo-electronico" 
                          	   type="email" 
-                         	   required 
                          	   name="email" 
                          	   class="form-control" 
                          	   placeholder="Ingrese un correo" 
                          	   aria-label="Correo electronico" 
                          	   aria-describedby="basic-addon1"
-                         	   value="<%= email %>">
+                         	   value="<%=email%>">
+                        	
+                      	<% String nickname = "";%>
+                      	<input id="input-nickname" 
+                          	   type="hidden" 
+                          	   name="nickname" 
+                          	   class="form-control" 
+                          	   placeholder="Ingrese un nickname" 
+                          	   aria-label="nickname" 
+                          	   aria-describedby="basic-addon1"
+                          	   value="<%=nickname%>">
 			        </div>
 
                     <div class="contenedorinput mb-3">
-                    <% String password =(String)request.getAttribute("password"); %>
+                    <% String password = ""; %>
                         <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
                         <input id="input-contrasenia" 
                         	   type="password" 
@@ -87,6 +88,36 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/sweetalert2.all.min.js"></script>
 <script src="../js/comportamientoComun.js"></script>
+
+<script>
+        $(function(){
+        $('#idForm').bind('change', function () {
+        var valor = $(this).val(); // get selected value
+        console.log("cambia el idForm: ", valor);
+       	nickname = null;
+    	email = null;
+        if(valor == 1){
+        	console.log("entre a 1");
+        	$("#input-nickname")[0].type = "hidden";
+        	$("#input-correo-electronico")[0].type = "email";
+        }else{
+        	$("#input-correo-electronico")[0].type = "hidden";
+        	$("#input-nickname")[0].type = "text";
+        }
+         });
+       });
+</script>
+
+    <script src="${pageContext.request.contextPath}/js/alta_usuario.js"></script>
+    
+    <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error al iniciar sesión" , mensajeError , 200);
+    </script>
+    <%} %>
+
 
 </body>
 </html>

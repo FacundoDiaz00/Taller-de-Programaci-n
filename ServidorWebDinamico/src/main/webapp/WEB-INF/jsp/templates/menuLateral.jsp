@@ -9,9 +9,13 @@
 
  --%>
 
+<%@page import="logica.datatypes.DTProveedor"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="logica.datatypes.DTUsuario" %>
+<%@ page import="logica.datatypes.DTProveedor" %>
 
  		<div id="menu-lateral">
  		
@@ -24,13 +28,19 @@
             <div class="card list-group" id="opciones">
                 <h5 class="card-title">Acciones</h5>
                 <a href="ConsultaDeUsuario" class="list-group-item">Ver usuarios</a>
-                <a href="AltaDeActividad" class="list-group-item">Crear Actividad turistica</a>
+                
+                <% 
+                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
+                	if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DTProveedor){%>
+		                <a href="AltaDeActividad" class="list-group-item">Crear Actividad turistica</a>
+                	<%}%>
+                
             </div>
 
             <!--Categoroias-->
             <div class="card list-group" id="filtro-categoria">
                 <h5 class="card-title">Categorias</h5>
-                <%
+                <%	
                 	List<String> categoiras = (List<String>) request.getAttribute("categorias"); 
                     for(String cat : categoiras){
                     	if( idCategoriaMarcada != null && idCategoriaMarcada.equals(cat) ){   	

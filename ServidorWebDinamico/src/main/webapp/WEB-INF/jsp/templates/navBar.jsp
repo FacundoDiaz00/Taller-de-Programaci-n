@@ -10,6 +10,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="logica.datatypes.DTUsuario" %>
+
+
 
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
@@ -31,7 +34,9 @@
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
                     
-                    <% if(session.getAttribute("usuarioLogeado") == null){ %>
+                    <% 
+                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
+                    if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
 	                    </li>
@@ -44,8 +49,18 @@
 	                    <div class="dropdown">
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            Washington Rocha
-	                            <img  class="imagen_perfil " src="${pageContext.request.contextPath}/img/washington.png">
+	                            <%=usuario.getNombre() %>
+	                            
+	                            <% 
+				        		String path = "";
+								if (usuario.getImg() == null) {
+									path += "/noFoto.png";
+								} else {
+									path += usuario.getImg().getPath();
+								}							
+								%>
+				                <img class="imagen_perfil " src="${pageContext.request.contextPath}/img<%=path%>" alt="">
+	                            
 	                        </a>
 	                        <ul class="dropdown-menu">
 	                            <li><a class="dropdown-item" href="perfil_usuario_proveedor_interno.html">Ver Perfil</a></li>

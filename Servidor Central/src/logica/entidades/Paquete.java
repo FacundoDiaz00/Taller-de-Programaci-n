@@ -19,158 +19,158 @@ import logica.datatypes.Imagen;
 
 public class Paquete {
 
-	private String nombre;
-	private String descrpicion;
-	private int validez;
-	private float descuento;
-	private LocalDate fechaDeRegistro;
-	private Map<String, ActividadTuristica> actividades;
-	private Imagen img;
-	private List<Compra> compras;
-	private List<Categoria> categorias;
+    private String nombre;
+    private String descrpicion;
+    private int validez;
+    private float descuento;
+    private LocalDate fechaDeRegistro;
+    private Map<String, ActividadTuristica> actividades;
+    private Imagen img;
+    private List<Compra> compras;
+    private List<Categoria> categorias;
 
-	public Paquete(String nombre, String descrpicion, int validez, float descuento, LocalDate fechaR, Imagen img) {
-		setNombre(nombre);
-		setDescrpicion(descrpicion);
-		setValidez(validez);
-		setDescuento(descuento);
-		setActividades(new HashMap<>());
-		if (fechaR == null)
-			fechaR = LocalDate.now();
-		setFechaDeRegistro(fechaR);
-		setCompras(new ArrayList<Compra>());
-		setCategorias(new ArrayList<Categoria>());
-		setImagen(img);
-	}
+    public Paquete(String nombre, String descrpicion, int validez, float descuento, LocalDate fechaR, Imagen img) {
+        setNombre(nombre);
+        setDescrpicion(descrpicion);
+        setValidez(validez);
+        setDescuento(descuento);
+        setActividades(new HashMap<>());
+        if (fechaR == null)
+            fechaR = LocalDate.now();
+        setFechaDeRegistro(fechaR);
+        setCompras(new ArrayList<Compra>());
+        setCategorias(new ArrayList<Categoria>());
+        setImagen(img);
+    }
 
-	public DTPaqueteDetalles obtenerDTPaqueteDetalle() {
-		Map<String, DTActividadTuristica> mapDtAct = new HashMap<>();
-		for (ActividadTuristica act : actividades.values()) {
-			mapDtAct.put(act.getNombre(), act.obtenerDTActividadTuristica());
-		}
-		List<String> categorias = new ArrayList<String>();
+    public DTPaqueteDetalles obtenerDTPaqueteDetalle() {
+        Map<String, DTActividadTuristica> mapDtAct = new HashMap<>();
+        for (ActividadTuristica act : actividades.values()) {
+            mapDtAct.put(act.getNombre(), act.obtenerDTActividadTuristica());
+        }
+        List<String> categorias = new ArrayList<String>();
 
-		for (var cat : this.categorias) {
-			categorias.add(cat.getNombre());
-		}
+        for (var cat : this.categorias) {
+            categorias.add(cat.getNombre());
+        }
 
-		List<DTCompra> compras = new ArrayList<DTCompra>();
+        List<DTCompra> compras = new ArrayList<DTCompra>();
 
-		for (var comp : this.compras) {
-			compras.add(comp.obtenerDTCompra());
-		}
+        for (var comp : this.compras) {
+            compras.add(comp.obtenerDTCompra());
+        }
 
-		return new DTPaqueteDetalles(nombre, descrpicion, descuento, validez, categorias, fechaDeRegistro, img,
-				mapDtAct, compras);
-	}
+        return new DTPaqueteDetalles(nombre, descrpicion, descuento, validez, categorias, fechaDeRegistro, img,
+                mapDtAct, compras);
+    }
 
-	public DTPaquete obtenerDTPaquete() {
-		List<String> cats = new ArrayList<String>();
+    public DTPaquete obtenerDTPaquete() {
+        List<String> cats = new ArrayList<String>();
 
-		for (var cat : this.categorias) {
-			cats.add(cat.getNombre());
-		}
+        for (var cat : this.categorias) {
+            cats.add(cat.getNombre());
+        }
 
-		return new DTPaquete(nombre, descrpicion, descuento, validez, cats, fechaDeRegistro, img);
-	}
+        return new DTPaquete(nombre, descrpicion, descuento, validez, cats, fechaDeRegistro, img);
+    }
 
-	public boolean hayActividades(){
-		return actividades.size() > 0;
-	}
+    public boolean hayActividades() {
+        return actividades.size() > 0;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		return this.getNombre().equals(((Paquete) obj).getNombre());
-	}
+    @Override
+    public boolean equals(Object obj) {
+        return this.getNombre().equals(((Paquete) obj).getNombre());
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getDescrpicion() {
-		return descrpicion;
-	}
+    public String getDescrpicion() {
+        return descrpicion;
+    }
 
-	public void setDescrpicion(String descrpicion) {
-		this.descrpicion = descrpicion;
-	}
+    public void setDescrpicion(String descrpicion) {
+        this.descrpicion = descrpicion;
+    }
 
-	public int getValidez() {
-		return validez;
-	}
+    public int getValidez() {
+        return validez;
+    }
 
-	public void setValidez(int validez) {
-		this.validez = validez;
-	}
+    public void setValidez(int validez) {
+        this.validez = validez;
+    }
 
-	public float getDescuento() {
-		return descuento;
-	}
+    public float getDescuento() {
+        return descuento;
+    }
 
-	public void setDescuento(float descuento) {
-		this.descuento = descuento;
-	}
+    public void setDescuento(float descuento) {
+        this.descuento = descuento;
+    }
 
-	public LocalDate fechaDeRegistro() {
-		return fechaDeRegistro;
-	}
+    public LocalDate fechaDeRegistro() {
+        return fechaDeRegistro;
+    }
 
-	public void setFechaDeRegistro(LocalDate fechaReg) {
-		this.fechaDeRegistro = fechaReg;
-	}
+    public void setFechaDeRegistro(LocalDate fechaReg) {
+        this.fechaDeRegistro = fechaReg;
+    }
 
-	public Map<String, ActividadTuristica> getActividades() {
-		return actividades;
-	}
+    public Map<String, ActividadTuristica> getActividades() {
+        return actividades;
+    }
 
-	public void setActividades(Map<String, ActividadTuristica> actividades) {
-		this.actividades = actividades;
-	}
+    public void setActividades(Map<String, ActividadTuristica> actividades) {
+        this.actividades = actividades;
+    }
 
-	public Set<String> obtenerIdActividadesIncluidas() {
-		return actividades.keySet();
-	}
+    public Set<String> obtenerIdActividadesIncluidas() {
+        return actividades.keySet();
+    }
 
-	public void agregarActividad(ActividadTuristica actividad) {
-		actividades.put(actividad.getNombre(), actividad);
-		for (Categoria cat : actividad.getCategorias().values()) {
-			if (!categorias.contains(cat))
-				categorias.add(cat);	
-		}
-	}
+    public void agregarActividad(ActividadTuristica actividad) {
+        actividades.put(actividad.getNombre(), actividad);
+        for (Categoria cat : actividad.getCategorias().values()) {
+            if (!categorias.contains(cat))
+                categorias.add(cat);
+        }
+    }
 
-	public void setImagen(Imagen img) {
-		this.img = img;
-	}
+    public void setImagen(Imagen img) {
+        this.img = img;
+    }
 
-	public void setCompras(List<Compra> compras) {
-		this.compras = compras;
-	}
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }
 
-	public void setCategorias(List<Categoria> cats) {
-		this.categorias = cats;
-	}
+    public void setCategorias(List<Categoria> cats) {
+        this.categorias = cats;
+    }
 
-	public float getCostoPorTurista() {
-		float ret = 0.0f;
+    public float getCostoPorTurista() {
+        float ret = 0.0f;
 
-		for (var act : actividades.values()) {
-			ret += act.getCostoPorTurista();
-		}
+        for (var act : actividades.values()) {
+            ret += act.getCostoPorTurista();
+        }
 
-		ret *= 1 - this.descuento / 100.0f;
-		return ret;
-	}
+        ret *= 1 - this.descuento / 100.0f;
+        return ret;
+    }
 
-	public boolean estaComprado() {
-		return compras.size() != 0;
-	}
+    public boolean estaComprado() {
+        return compras.size() != 0;
+    }
 
-	public void asociarCompra(Compra compra) {
-		compras.add(compra);
-	}
+    public void asociarCompra(Compra compra) {
+        compras.add(compra);
+    }
 }
