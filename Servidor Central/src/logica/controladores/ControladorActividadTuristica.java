@@ -131,11 +131,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         Categoria cat = ManejadorCategoria.getInstancia().getCategoria(nomCat);
         List<DTActividadTuristica> dtActis = new ArrayList<>();
         for (ActividadTuristica act : cat.getActividades().values()) {
-            // if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){ // TODO
-            // agregar cuando es se deje el CU aceptar/rechasar actividad
-            // turistica
-            dtActis.add(act.obtenerDTActividadTuristica());
-            // }
+            if (act.getEstado() == EstadoActividadTuristica.ACEPTADA) {
+                dtActis.add(act.obtenerDTActividadTuristica());
+            }
         }
         return dtActis;
     }

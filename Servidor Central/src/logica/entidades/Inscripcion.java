@@ -46,8 +46,6 @@ public class Inscripcion {
 
     }
 
-    // TODO falta el calculo de costoInscripcion
-
     public boolean estaInscriptoASalida(String nomSalTuri) {
         return salidaTuristica.getNombre().equals(nomSalTuri);
     }
