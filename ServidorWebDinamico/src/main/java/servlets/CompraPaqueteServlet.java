@@ -34,7 +34,7 @@ public class CompraPaqueteServlet extends HttpServlet {
 
 		int cant_turistas = Integer.valueOf(req.getParameter("cant_turistas"));
 		String nombre_paquete = (String) req.getParameter("nombre_paquete");
-		DTUsuario turi = (DTTurista) req.getAttribute("usuarioLogeado");
+		DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
 		String nickTuri = "";
 		if (turi != null)
 			 nickTuri = turi.getNickname();
