@@ -1,5 +1,6 @@
 
 <%@ page import="java.util.List" %>
+<%@page import="logica.datatypes.DTSalidaTuristica"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -14,86 +15,101 @@
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
 <section id="contenedor">
-    <div id="menu-lateral">
-
-        <!--Acciones generales-->
-        <div class="card list-group" id="opciones">
-            <h5 class="card-title">Acciones</h5>
-            <a href="consulta_de_usuario.html" class="list-group-item">Ver usuarios</a>
-            <a href="alta_de_actividad_turistica.html" class="list-group-item">Crear Actividad turistica</a>
-        </div>
-
-        <!--Categoroias-->
-        <div class="card list-group" id="filtro-categoria">
-            <h5 class="card-title">Categorias</h5>
-            <a href="index.html" class="list-group-item">Gastronomía</a>
-        </div>
-
-        <!--Departametos-->
-        <div class="card list-group" id="filtro-departamentos">
-            <h5 class="card-title">Departamentos</h5>
-            <a href="index.html" class="list-group-item">Rocha</a>
-        </div>
-    </div>
+	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
     <div id="contenedorForm">
-        <form class="card" id="form-inscribirse-a-salida" style="margin: 10px">
+         
             <div class="card-body">
+            
                 <h5 class="card-title" id ="tituloPagina">Inscrbirse a Salida.</h5>
+                
+          
+            
+            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="${pageContext.request.contextPath}/InscribiseASalida"> 
 
                 <div class="contenedorinput mb-3">
                     <span class="input-label">Cantidad De Turistas:<span class="obligatorio"> *</span></span>
-                    <input id="input-cantTur" type="number" required class="form-control" placeholder="Cantidad de turistas a Inscribir" aria-label="Cantidad de Turistas" aria-describedby="basic-addon1">
+                     <% 
+                     
+                   	 String nomSalida = (String)request.getAttribute("nomSalida");
+                     System.out.println(nomSalida);
+                     String cantTuristas = "";
+                     %>
+                    <input 
+                    	id="input-cantTur" 
+                    	type="number" 
+                    	name="cantTuristas"
+                    	required class="form-control" 
+                    	placeholder="Cantidad de turistas a Inscribir" 
+                    	aria-label="Cantidad de Turistas" 
+                    	aria-describedby="basic-addon1"
+                    	value="<%=cantTuristas%>"
+                    	>
                 </div>
 
-
+			    
+			      
                 <div class="contenedorinput mb-3">
                     <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
+                    
+	                 <div class="form-check">
+	                        <input class="form-check-input" value="0" type="radio" name="formaPago" id="checkGeneral" checked>
+	                        <label class="form-check-label" for="checkGeneral">
+	                            General
+	                        </label>
+	                </div>
+	                
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="formaPago" id="checkGeneral" checked>
-                        <label class="form-check-label" for="checkGeneral">
-                            General
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="formaPago" id="checkPaquete">
+                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
                         <label class="form-check-label" for="checkPaquete">
                             Por Paquete
                         </label>
-                    </div>
-                </div>
-                <div class="contenedorinput mb-3 eliminarElemento" id="comboPaquetes">
-                    <div class="form-group">
-                        <label>Paquete:</label>
-                        <select class="combobox input-large form-control" name="normal">
-                            <option value="" selected="selected">Disfrutar Rocha</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="botonera">
-                    <a href="index.html" class="btn btn-danger ">Cancelar</a>
-                    <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
-                </div>
+                    </div> 
+                    
+	           </div>
+	                
+	                <div class="contenedorinput mb-3 eliminarElemento" id="comboPaquetes">
+	                    <div class="form-group">
+	                        <label>Paquete:</label>
+	                        <select class="combobox input-large form-control" name="normal">
+	                            <option value="" selected="selected">Disfrutar Rocha</option>
+	                        </select>
+	                    </div>
+	                </div>
+	                <div id="botonera">
+	                    <a href="index.html" class="btn btn-danger ">Cancelar</a>
+	                    <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
+	                </div>
+           
 
-
-            </div>
         </form>
+        
+      </div>
     </div>
     <div id="contenedorDer">
         <div class="card" style="width: 18rem;">
-            <img src="../img/salida2.png" class="card-img-top" alt="..." style="margin: 10px;width: 267px;">
+		    <% DTSalidaTuristica salida = (DTSalidaTuristica) request.getAttribute("salida");
+	   			String path = "";
+				if (salida.getImg() == null) {
+					path += "/noFoto.png";
+				} else {
+					path += salida.getImg().getPath();
+				}							
+				%>
+        	
+            <img src="${pageContext.request.contextPath}/img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">
                     <h5 class="label">Fecha y hora de partida: </h5>
-                    <p>03/09/2022 17:00</p>
+                    <p><%=salida.getFechaHoraSalida()%></p>
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="label">Capacidad de turistas: </h5>
-                    <p>20</p>
+                    <p><%=salida.getCantMaxTuristas()%></p>
                 </div>
                 <div class="div-doble" id="Cuidad">
                     <h5 class="label">Lugar: </h5>
-                    <p>Sociedad Agropecuaria de Rocha</p>
+                    <p><%=salida.getLugarSalida()%></p>
                 </div>
             </div>
         </div>

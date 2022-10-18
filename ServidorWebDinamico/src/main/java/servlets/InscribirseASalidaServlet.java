@@ -12,59 +12,57 @@ import javax.servlet.http.HttpSession;
 import excepciones.ContraseniaInvalidaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
-import logica.controladores.IControladorUsuario;
-import logica.datatypes.DTUsuario;
+import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTSalidaTuristica;
+import utils.Utiles;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
  */
-@WebServlet("/IniciarSesion")
+@WebServlet("/InscribiseASalida")
 public class InscribirseASalidaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorUsuario contrU;
+    private IControladorActividadTuristica contrAT;
 
     public InscribirseASalidaServlet() {
         super();
-        contrU = Fabrica.getInstancia().getIControladorUsuario();
+        contrAT = Fabrica.getInstancia().getIControladorActividadTuristica();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession sesion = req.getSession(false);
-        Object usr = sesion.getAttribute("usuarioLogeado");
-        if (usr != null) {
-            req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
-        } else {
-            req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
-        }
-
+    	String nombSalida = (String) req.getParameter("id");
+    	
+    	try {
+    		DTSalidaTuristica salidaTuristica = this.contrAT.obtenerDTSalidaTuristica(nombSalida);
+    		req.setAttribute("salida", salidaTuristica);
+    	} catch (ObjetoNoExisteEnTurismoUy e) {
+            req.setAttribute("motivoDeError", "No existe la salida turistica");
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
+        } 
+    	
+    	
+    	System.out.println("Nombre salida:" + nombSalida);
+    	req = Utiles.insertarLoDeSiempre(req);
+        req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String password = (String) req.getParameter("password");
-        String email = (String) req.getParameter("email");
-        String nickname = (String) req.getParameter("nickname");
-        String tipoID = (String) req.getParameter("idForm");
-
-        try {
-
-            DTUsuario usuario;
-            if (tipoID.equals("1")) {
-                usuario = contrU.obtenerDTUsuarioPorEmail(email, password);
-            } else {
-                usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
-            }
-            req.setAttribute("usuarioLogeado", usuario);
-            HttpSession sesion = req.getSession(true);
-            sesion.setAttribute("usuarioLogeado", usuario);
-            resp.sendRedirect("index");
-
-        } catch (ObjetoNoExisteEnTurismoUy e) {
-            req.setAttribute("motivoDeError", "El usuario es incorrecto");
-            req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
-        } catch (ContraseniaInvalidaException e) {
-            req.setAttribute("motivoDeError", "La contrasenia es incorrecta");
-            req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
-        }
+    	System.out.println("Entré al post");
+        String formaDePago = (String) req.getParameter("formaPago");
+        
+	    //try {
+	    	if(formaDePago.equals("0")) {
+	    		//this.contrAT.altaInscripcionSalidaTuristica(formaDePago, formaDePago, 0, null, formaDePago);
+	    	}else {
+	    		
+	    	}
+//	    }catch(){
+//	    	
+//	    }
+	    //resp.sendRedirect("index");
+	    //req.setAttribute("motivoDeError", "La contrasenia es incorrecta");
+	    //req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
+       
     }
 
 }
