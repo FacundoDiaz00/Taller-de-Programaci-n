@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,15 +29,15 @@ import utils.Utiles;
 /**
  * Servlet implementation class AltaDeUsuario
  */
-@WebServlet("/AltaDeActividad")
+@WebServlet("/AltaDeSalida")
 @MultipartConfig
-public class AltaActividadServlet extends HttpServlet {
+public class AltaSalidaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorActividadTuristica contActividad;
+    private IControladorActividadTuristica cat;
 
-    public AltaActividadServlet() {
+    public AltaSalidaServlet() {
         super();
-        this.contActividad = Fabrica.getInstancia().getIControladorActividadTuristica();
+        this.cat = Fabrica.getInstancia().getIControladorActividadTuristica();
     }
 
     @Override
@@ -50,7 +52,7 @@ public class AltaActividadServlet extends HttpServlet {
         }
 
         req = Utiles.insertarLoDeSiempre(req);
-        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
 
     }
 
@@ -69,16 +71,12 @@ public class AltaActividadServlet extends HttpServlet {
         }
 
         String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
-        // TODO: generar este dato a partir
-        // de la
-        // sesión
-        String departamento = req.getParameter("departamento");
+        
+        String actividad = req.getParameter("departamento");
         String nombre = req.getParameter("nombre");
-        String descripcion = req.getParameter("descripcion");
-        String duracion = req.getParameter("duracion");
-        String costo = req.getParameter("costo");
-        String ciudad = req.getParameter("ciudad");
-        List<String> categorias = Arrays.asList(req.getParameterValues("categorias"));
+        String fechaYHoraSalida = req.getParameter("descripcion");
+        String lugar = req.getParameter("duracion");
+        String cantMaxTur = req.getParameter("costo");
 
         Part filePart = req.getPart("img");
 
@@ -90,13 +88,13 @@ public class AltaActividadServlet extends HttpServlet {
             ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
 
             // Esto es la ruta relativa
-            futuroNombreDelPath = "/actividades/" + nombre + ext;
+            futuroNombreDelPath = "/salidas/" + nombre + ext;
             imgDt = new Imagen(futuroNombreDelPath);
         }
 
         try {
-            contActividad.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
-                    Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias);
+            cat.altaSalidaTuristica(actividad, nombre, LocalDateTime.parse(fechaYHoraSalida), LocalDate.parse(null), lugar,
+                    Integer.valueOf(cantMaxTur), imgDt);
             if (hayImagen) {
                 // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
                 InputStream imgInputStream = filePart.getInputStream();
@@ -115,10 +113,10 @@ public class AltaActividadServlet extends HttpServlet {
                 imgFileStream.close();
             }
 
-            System.out.println("Actividad creada con exito");
+            System.out.println("Salida creada con exito");
             req.setAttribute("exito", "exito");
 
-            resp.sendRedirect("AltaDeActividad");
+            resp.sendRedirect("AltaDeSalida");
             return;
         } catch (NumberFormatException e) {
             System.out.println("No se ingresaron los números de duracion o costo correctamente");
