@@ -126,7 +126,7 @@
             		%>
 						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			<%
-            			for(String sal: tur.getInscripciones()){
+            			for(DTSalidaTuristica sal: tur.getInscripciones()){
             			%>	
                             <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
                                 <div class="row g-0">
@@ -134,10 +134,10 @@
                                     
                                     	<% 
 				            			String pathImagen = "";
-										if (/*sal.getImg() == null*/ true) {
+										if (sal.getImg() == null) {
 											pathImagen += "noFoto.png";
-										//} else {
-										//	pathImagen += sal.getImg().getPath();
+										} else {
+											pathImagen += sal.getImg().getPath();
 										}							
 										%>
 						                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body cards">
-                                            <h5 class="card-title"><%=sal%></h5>
+                                            <h5 class="card-title"><%=sal.getNombre()%></h5>
                                             <div class="botonera">
                                                 <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
                                             </div>

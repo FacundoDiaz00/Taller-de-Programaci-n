@@ -27,9 +27,7 @@ public class ControladorMaestro implements IControladorMaestro {
             icat.altaCategoria(cat);
         }
 
-        Imagen imgSalidas = new Imagen("/salidas/harry_estilos.png", "Una imagen del famoso cantante Harry Styles");
-        Imagen imgActi = new Imagen("/actividades/harry_estilos.png", "Una imagen del famoso cantante Harry Styles");
-        Imagen imgUsuario = new Imagen("/usuarios/harry_estilos.png", "Una imagen del famoso cantante Harry Styles");
+        Imagen img = new Imagen("/harry_estilos.png", "Una imagen del famoso cantante Harry Styles");
 
         // Cargo Departamentos
         icat.altaDepartamento("Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es");
@@ -74,17 +72,17 @@ public class ControladorMaestro implements IControladorMaestro {
                 LocalDate.of(1926, 4, 21), new Imagen("/usuarios/isabelita.png"), "inglesa");
         iuser.altaTurista("anibal", "Aníbal", "Lecter", "anibal@fing.edu.uy", "1234", LocalDate.of(1937, 12, 31),
                 new Imagen("/usuarios/anibal.png"), "lituana");
-        iuser.altaTurista("waston", "Emma", "Waston", "e.waston@gmail.com", "1234", LocalDate.of(1990, 4, 15), imgUsuario,
+        iuser.altaTurista("waston", "Emma", "Waston", "e.waston@gmail.com", "1234", LocalDate.of(1990, 4, 15), img,
                 "inglesa");
-        iuser.altaTurista("elelvis", "Elvis", "Lacio", "suavemente@hotmail.com", "1234", LocalDate.of(1971, 7, 30), imgUsuario,
+        iuser.altaTurista("elelvis", "Elvis", "Lacio", "suavemente@hotmail.com", "1234", LocalDate.of(1971, 7, 30), img,
                 "estadounidense");
-        iuser.altaTurista("eleven11", "Eleven", "Once", "eleven11@gmail.com", "1234", LocalDate.of(2004, 2, 19), imgUsuario,
+        iuser.altaTurista("eleven11", "Eleven", "Once", "eleven11@gmail.com", "1234", LocalDate.of(2004, 2, 19), img,
                 "española");
         iuser.altaTurista("bobesponja", "Bob", "Esponja", "bobesponja@nickelodeon.com", "1234",
                 LocalDate.of(1999, 5, 1), null, "japonesa");
-        iuser.altaTurista("tony", "Antonio", "Pacheco", "eltony@manya.org.uy", "1234", LocalDate.of(1976, 4, 11), imgUsuario,
+        iuser.altaTurista("tony", "Antonio", "Pacheco", "eltony@manya.org.uy", "1234", LocalDate.of(1976, 4, 11), img,
                 "uruguaya");
-        iuser.altaTurista("chino", "Álvaro", "Recoba", "chino@trico.org.uy", "1234", LocalDate.of(1976, 3, 17), imgUsuario,
+        iuser.altaTurista("chino", "Álvaro", "Recoba", "chino@trico.org.uy", "1234", LocalDate.of(1976, 3, 17), img,
                 "uruguaya");
         iuser.altaTurista("mastropiero", "Johann Sebastian", "Mastropiero", "johann.sebastian@gmail.com", "1234",
                 LocalDate.of(1922, 2, 7), null, "austríaca");
@@ -111,16 +109,16 @@ public class ControladorMaestro implements IControladorMaestro {
                 500, "Rocha", LocalDate.of(2022, 7, 21), new Imagen("/actividades/Teatro con Sabores.png"), categorias);
         icat.altaActividadTuristica("meche", "Colonia", "Tour por Colonia del Sacramento",
                 "Con guía especializado y en varios idiomas. Varios circuitos posibles.", 2, 400,
-                "Colonia del Sacramento", LocalDate.of(2022, 8, 1), imgActi, categorias);
+                "Colonia del Sacramento", LocalDate.of(2022, 8, 1), img, categorias);
         icat.altaActividadTuristica("meche", "Colonia", "Almuerzo en el Real de San Carlos",
                 "Restaurante en la renovada Plaza de Toros con men´u internacional", 2, 800, "Colonia del Sacramento",
                 LocalDate.of(2022, 8, 1), new Imagen("/actividades/Almuerzo en el Real de San Carlos.jpg"), categorias);
         icat.altaActividadTuristica("eldiez", "Rivera", "Almuerzo en Valle del Lunarejo",
                 "Almuerzo en la Posada con ticket fijo. Menú que incluye bebida y postre casero.", 2, 300, "Tranqueras",
-                LocalDate.of(2022, 8, 1), imgActi, categorias);
+                LocalDate.of(2022, 8, 1), img, categorias);
         icat.altaActividadTuristica("eldiez", "Rivera", "Cabalgata en Valle del Lunarejo",
                 "Cabalgata por el área protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras",
-                LocalDate.of(2022, 8, 1), imgActi, categorias);
+                LocalDate.of(2022, 8, 1), img, categorias);
 
         // ---- Todo esto es para ver datos ESTOY HAY QUE BORRARLO CON LOS DATOS DE VERDAD ---
 
@@ -134,33 +132,33 @@ public class ControladorMaestro implements IControladorMaestro {
 
         // Salidas
         icat.altaSalidaTuristica("Degusta", "Degusta Agosto", LocalDateTime.of(2022, 8, 20, 17, 0),
-                LocalDate.of(2022, 7, 21), "Sociedad Agropecuaria de Rocha", 20, imgSalidas);
+                LocalDate.of(2022, 7, 21), "Sociedad Agropecuaria de Rocha", 20, img);
         icat.altaSalidaTuristica("Degusta", "Degusta Setiembre", LocalDateTime.of(2022, 9, 3, 17, 0),
-                LocalDate.of(2022, 7, 22), "Sociedad Agropecuaria de Rocha", 20, imgSalidas);
+                LocalDate.of(2022, 7, 22), "Sociedad Agropecuaria de Rocha", 20, img);
         icat.altaSalidaTuristica("Teatro con Sabores", "Teatro con Sabores 1", LocalDateTime.of(2022, 9, 4, 18, 0),
-                LocalDate.of(2022, 7, 23), "Club Deportivo Unión", 30, imgSalidas);
+                LocalDate.of(2022, 7, 23), "Club Deportivo Unión", 30, img);
         icat.altaSalidaTuristica("Teatro con Sabores", "Teatro con Sabores 2", LocalDateTime.of(2022, 9, 11, 18, 0),
-                LocalDate.of(2022, 7, 23), "Club Deportivo Unión", 30, imgSalidas);
+                LocalDate.of(2022, 7, 23), "Club Deportivo Unión", 30, img);
         icat.altaSalidaTuristica("Tour por Colonia del Sacramento", "Tour Colonia del Sacramento 11-09",
                 LocalDateTime.of(2022, 9, 11, 10, 0), LocalDate.of(2022, 8, 5), "Encuentro en la base del Faro", 5,
-                imgSalidas);
+                img);
         icat.altaSalidaTuristica("Tour por Colonia del Sacramento", "Tour Colonia del Sacramento 18-09",
                 LocalDateTime.of(2022, 9, 18, 10, 0), LocalDate.of(2022, 8, 5), "Encuentro en la base del Faro", 5,
-                imgSalidas);
+                img);
         icat.altaSalidaTuristica("Almuerzo en el Real de San Carlos", "Almuerzo 1",
                 LocalDateTime.of(2022, 9, 18, 12, 0), LocalDate.of(2022, 8, 4), "Restaurante de la Plaza de Toros", 5,
-                imgSalidas);
+                img);
         icat.altaSalidaTuristica("Almuerzo en el Real de San Carlos", "Almuerzo 2",
                 LocalDateTime.of(2022, 9, 25, 12, 0), LocalDate.of(2022, 8, 4), "Restaurante de la Plaza de Toros", 5,
-                imgSalidas);
+                img);
         icat.altaSalidaTuristica("Almuerzo en Valle del Lunarejo", "Almuerzo 3", LocalDateTime.of(2022, 9, 10, 12, 0),
-                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, imgSalidas);
+                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, img);
         icat.altaSalidaTuristica("Almuerzo en Valle del Lunarejo", "Almuerzo 4", LocalDateTime.of(2022, 9, 11, 12, 0),
-                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, imgSalidas);
+                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, img);
         icat.altaSalidaTuristica("Cabalgata en Valle del Lunarejo", "Cabalgata 1", LocalDateTime.of(2022, 9, 10, 16, 0),
-                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, imgSalidas);
+                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, img);
         icat.altaSalidaTuristica("Cabalgata en Valle del Lunarejo", "Cabalgata 2", LocalDateTime.of(2022, 9, 11, 16, 0),
-                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, imgSalidas);
+                LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, img);
 
         // Paquete
         ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20,
