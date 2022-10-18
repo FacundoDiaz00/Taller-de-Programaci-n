@@ -218,30 +218,6 @@ public class Principal {
 			}
 		});
 		mnNewMenu3.add(consultarActividadTuristicaJMenuItem);
-
-		JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");
-		registrarSalidaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frmIntAltaSalidaTuristica.setVisible(true);
-			}
-		});
-		mnNewMenu3.add(registrarSalidaJMenuItem);
-
-		JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
-		consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntConsultaDeSalidaTuristica.setVisible(true);
-			}
-		});
-		mnNewMenu3.add(consultarSalidaTuristicaJMenuItem);
-
-		JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
-		inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmInscribirseASalidaTuristica.setVisible(true);
-			}
-		});
-		mnNewMenu3.add(inscribirseASalidaTuristicaJMenuItem);
 		
 
 		JMenuItem aceptarRechazarActividadTuristicaJMenuItem = new JMenuItem("Aceptar/Rechazar Actividad Turística");
@@ -251,6 +227,33 @@ public class Principal {
 			}
 		});
 		mnNewMenu3.add(aceptarRechazarActividadTuristicaJMenuItem);
+		
+		JMenu mnNewMenu_1 = new JMenu("Salidas");
+		menuBar.add(mnNewMenu_1);
+				
+						JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
+						mnNewMenu_1.add(consultarSalidaTuristicaJMenuItem);
+						consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent event) {
+								frmIntConsultaDeSalidaTuristica.setVisible(true);
+							}
+						});
+		
+				JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");
+				mnNewMenu_1.add(registrarSalidaJMenuItem);
+				
+						JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
+						mnNewMenu_1.add(inscribirseASalidaTuristicaJMenuItem);
+						inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent event) {
+								frmInscribirseASalidaTuristica.setVisible(true);
+							}
+						});
+				registrarSalidaJMenuItem.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						frmIntAltaSalidaTuristica.setVisible(true);
+					}
+				});
 			
 		
 
