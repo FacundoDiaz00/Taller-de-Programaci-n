@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
+import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
+import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.SalidaYaRegistradaException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.DTProveedor;
@@ -122,10 +124,18 @@ public class AltaSalidaServlet extends HttpServlet {
             System.out.println("No se ingresaron los números de duracion o costo correctamente");
             req.setAttribute("motivoDeError",
                     "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
-            //} catch (SalidaTuristicaYaRegistradaException e) {
-            //System.out.println("La actividad con nombre '" + nombre
-              //      + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
-            //req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
+        } catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
+            System.out.println("excepcion: Fecha de alta actividad es posterior a fecha alta de salida");
+            req.setAttribute("motivoDeError",
+                    "La fecha de la salida debe ser posterior a la fecha de alta de la actividad");
+        } catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
+            System.out.println("excepcion: Fecha del alta salida es posterior a fecha alta de la salida");
+            req.setAttribute("motivoDeError",
+                    "La fecha de la salida debe ser posterior a la fecha actual");
+        } catch (SalidaYaRegistradaException e) {
+            System.out.println("La actividad con nombre '" + nombre
+                   + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
+            req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Categoria")) {
                 System.out.println("No existe una de las categorias selecionadas");

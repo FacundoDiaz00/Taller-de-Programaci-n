@@ -41,9 +41,9 @@
     	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         
         <div id="contenedorForm">
-            <form class="card" id="form-alta-actividad" name="altaActividadForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeActividad">
+            <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeSalida">
                 <div class="card-body">
-                    <h5 class="card-title">Crear Actividad Turistica</h5>
+                    <h5 class="card-title">Alta de Salida Turistica</h5>
 
                     <div class="contenedorinput mb-3">
                     	<% String departamento = getTextWithoutNull((String)request.getAttribute("departamento")); %>
@@ -80,19 +80,25 @@
                         	   	value="<%= nombre %>">
                     </div>
 
-					<div class="contenedorinput mb-3">
-						<% String descripcion = getTextWithoutNull((String)request.getAttribute("descripcion")); %>
-                        <span class="input-label">Descripcion:<span class="obligatorio"> *</span></span>
-                        <textarea  	id="descripcion"
-                        	   		name="descripcion" 
-                        	   	 	type="text" 
-                        	   	 	value="<%= descripcion %>"
-                        			required
-                        			class="form-control" 
-                        			placeholder="Ingrese una descripcion" 
-                        			aria-label="Descripcion" 
-                        			aria-describedby="basic-addon1"
-                       	></textarea>
+                    <div class="contenedorinput mb-3">
+                    	<% String actividad = getTextWithoutNull((String)request.getAttribute("actividad")); %>
+                        <span class="input-label" id="labelDepartamento">Departamento:<span class="obligatorio"> *</span></span>
+                        <select 
+                        	id="actividad"
+                       	   	name="actividad" 
+                        	required 
+                        	class="form-select" 
+                        	aria-label="Actividades">
+                        
+                        <%for (String act: (List<String>) request.getAttribute("actividades")) { 
+                        	if (act.equals(actividad)) { %>
+                        		<option selected value="<%=act%>"><%=act%></option>
+                        	<%} else {%>
+                            	<option value="<%=act%>"><%=act%></option>
+                        	<%}%>
+						<%}%>
+						
+                        </select>
                     </div>
 
                     <div class="contenedorinput mb-3">
