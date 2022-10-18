@@ -66,7 +66,7 @@ public class ControladorMaestro implements IControladorMaestro {
 
         // Cargo Turistas
         iuser.altaTurista("lachiqui", "Rosa María", "Martínez", "mirtha.legrand.ok@hotmail.com.ar", "1234",
-                LocalDate.of(1927, 2, 23), new Imagen("lachiqui.png", "Foto de perfil de Rosa Maria Martinez"),
+                LocalDate.of(1927, 2, 23), new Imagen("/usuarios/lachiqui.png", "Foto de perfil de Rosa Maria Martinez"),
                 "argentina");
         iuser.altaTurista("isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", "1234",
                 LocalDate.of(1926, 4, 21), new Imagen("/usuarios/isabelita.png"), "inglesa");

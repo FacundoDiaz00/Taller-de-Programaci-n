@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="" />
+    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorMaestro.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorMaestro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,6 +142,7 @@
       <workItem from="1665296978613" duration="1924000" />
       <workItem from="1665358175294" duration="633000" />
       <workItem from="1665520675507" duration="800000" />
+      <workItem from="1666121689340" duration="269000" />
     </task>
     <servers />
   </component>
@@ -172,7 +176,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Turista.java</url>
-          <line>140</line>
+          <line>142</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
