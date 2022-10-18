@@ -15,6 +15,7 @@
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
 <section id="contenedor">
+		
 	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
     <div id="contenedorForm">
          
@@ -28,12 +29,7 @@
 
                 <div class="contenedorinput mb-3">
                     <span class="input-label">Cantidad De Turistas:<span class="obligatorio"> *</span></span>
-                     <% 
-                     
-                   	 String nomSalida = (String)request.getAttribute("nomSalida");
-                     System.out.println(nomSalida);
-                     String cantTuristas = "";
-                     %>
+                     <%String cantTuristas = "";%>
                     <input 
                     	id="input-cantTur" 
                     	type="number" 
@@ -86,16 +82,15 @@
       </div>
     </div>
     <div id="contenedorDer">
-        <div class="card" style="width: 18rem;">
-		    <% DTSalidaTuristica salida = (DTSalidaTuristica) request.getAttribute("salida");
-	   			String path = "";
-				if (salida.getImg() == null) {
-					path += "/noFoto.png";
-				} else {
-					path += salida.getImg().getPath();
-				}							
-				%>
-        	
+        <div class="card" style="width: 18rem;">  
+            <% DTSalidaTuristica salida = (DTSalidaTuristica) request.getAttribute("salida");
+  			String path = "";
+		if (salida.getImg() == null) {
+			path += "/noFoto.png";
+		} else {
+			path += salida.getImg().getPath();
+		}							
+		%>	
             <img src="${pageContext.request.contextPath}/img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
@@ -124,7 +119,31 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/sweetalert2.all.min.js"></script>
 <script src="../js/comportamientoComun.js"></script>
-
+    <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error inscribirse a salida turística" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+    
+    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
+    <script>
+    
+	    setTimeout(() => {
+	        Swal.fire({
+	            icon: "success",
+	            title: "Éxito",
+	            text: "La inscripción ha sido realizada con éxito",
+	            confirmButtonText: 'Entendido'  
+	        }).then((res) => {
+	        	window.location.href = "ConsultaSalida";
+	        })
+	    }, 200)
+    
+	</script>
+	<%} %>
 
 </body>
 </html>
