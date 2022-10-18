@@ -126,6 +126,7 @@ public class ControladorMaestro implements IControladorMaestro {
         icat.aceptarORechazarActividadTuristica("Teatro con Sabores", true);
         icat.aceptarORechazarActividadTuristica("Tour por Colonia del Sacramento", true);
         icat.aceptarORechazarActividadTuristica("Almuerzo en el Real de San Carlos", true);
+        icat.aceptarORechazarActividadTuristica("Cabalgata en Valle del Lunarejo", false);
 
         // ------------------------
 

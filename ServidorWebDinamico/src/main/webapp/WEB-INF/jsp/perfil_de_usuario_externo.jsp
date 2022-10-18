@@ -16,6 +16,7 @@
 <%@page import="logica.datatypes.DTTuristaDetallePrivado"%>
 <%@page import="logica.datatypes.DTProveedorDetallePrivado"%>
 <%@page import="logica.datatypes.DTProveedorDetallePrivado"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 
 <%@ page import="java.util.List" %>
 
@@ -108,11 +109,11 @@
 	                    <div class="card-body cards">
 	                        <h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 	                        <p class="text"><b><%= usr.getNombre()%> / <%= usr.getNickname()%></b></p>
-	                        <p class="card-text"><b>Nickname: <%= usr.getNickname()%></b></p>
+	                        <p class="card-text"><b>Nickname:</b> <%= usr.getNickname()%></p>
 	                        <p class="card-text"><b>Nombre: </b><%= usr.getNombre()%></p>
 	                        <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
-	                        <p class="card-text"><b>Email: <%= usr.getCorreo()%></b></p>
-	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%= usr.getFechaNac()%></p>
+	                        <p class="card-text"><b>Email:</b> <%= usr.getCorreo()%></p>
+	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%= usr.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
 	
 	                    </div>
 	                </div><!-- Cierra perfil -->
@@ -143,7 +144,7 @@
                             </div>
             			<%}%>
             			</div>
-            			<div class="tab-pane fade show active cardPerfil" id="boton-paquetes-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="2">
+            			<div class="tab-pane fade cardPerfil" id="boton-paquetes-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="2">
 
 	                    <div class="card-body cards">
 	                        <h5 class="card-title"></h5>
