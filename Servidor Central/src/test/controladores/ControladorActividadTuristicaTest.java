@@ -869,9 +869,13 @@ class ControladorActividadTuristicaTest {
 			} catch (TurismoUyException exception) {
 				// OK, falla porque creamos repetidos a propósito
 			}
+			try {
 			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
 					nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor,
 					nombreProveedor);
+			} catch (TurismoUyException exception) {
+				// OK, falla porque creamos repetidos a propósito
+			}
 
 			contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
 					costo, ciudad, fechaAlta, null, muestraCategorias);

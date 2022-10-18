@@ -285,6 +285,7 @@ class ControladorPaqueteTest {
 					costo, ciudad, localDateNow, null, muestraCategorias);
 
 			// 10 actividades de cada provedor en un pquete
+			controladorAct.aceptarORechazarActividadTuristica(nombreActividad, true);
 			if (i % 2 == 0) {
 				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 			}

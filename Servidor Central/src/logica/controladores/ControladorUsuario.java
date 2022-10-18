@@ -127,7 +127,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
-        Usuario usuario = ins.getUsuarioPorCorreo(nickname);
+        Usuario usuario = ins.getUsuarioPorNick(nickname);
         return usuario.obtenerDTUsuario();
     }
 

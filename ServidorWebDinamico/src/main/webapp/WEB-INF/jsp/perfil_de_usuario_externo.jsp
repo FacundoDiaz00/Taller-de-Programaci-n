@@ -130,7 +130,17 @@
                             <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
                                 <div class="row g-0">
                                     <div class="col-md-4 img-contain">
-                                        <img src="../img/salida1.png" class="img-fluid rounded-start imagenSalidas"> <!-- TODO: imagenes de salidas -->
+                                    
+                                    	<% 
+				            			String pathImagen = "";
+										if (/*sal.getImg() == null*/ true) {
+											pathImagen += "noFoto.png";
+										//} else {
+										//	pathImagen += sal.getImg().getPath();
+										}							
+										%>
+						                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+                                    
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body cards">
@@ -144,10 +154,12 @@
                             </div>
             			<%}%>
             			</div>
+            			
+            			
             			<div class="tab-pane fade cardPerfil" id="boton-paquetes-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="2">
 
-	                    <div class="card-body cards">
-	                        <h5 class="card-title"></h5>
+		                    <div class="card-body cards">
+		                        <h5 class="card-title"></h5>
 								<%
 								if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){
 		            				DTTuristaDetallePrivado turpriv = (DTTuristaDetallePrivado) usr;
@@ -168,9 +180,13 @@
 		            				<%} %>
 								<%} %>
 								
-	                    </div>	
-	                </div>
-            		<%}else{
+	                    	</div>	
+	                	</div>
+            		<%}
+	                
+	                
+	                
+	                if(esProveedor){
             			System.out.println("esProveedor");
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
             		%>
