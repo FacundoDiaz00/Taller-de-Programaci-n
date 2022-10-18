@@ -8,13 +8,7 @@ import java.util.Set;
 
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import logica.datatypes.DTCompra;
-import logica.datatypes.DTInscripcion;
-import logica.datatypes.DTTurista;
-import logica.datatypes.DTTuristaDetalle;
-import logica.datatypes.DTTuristaDetallePrivado;
-import logica.datatypes.DTUsuario;
-import logica.datatypes.Imagen;
+import logica.datatypes.*;
 
 /**
  * @author Equipo taller prog 16
@@ -91,10 +85,10 @@ public class Turista extends Usuario {
 
     @Override
     public DTUsuario obtenerDTUsuarioDetalle() {
-        List<String> salidas = new ArrayList<>();
+        List<DTSalidaTuristica> salidas = new ArrayList<>();
 
         for (Inscripcion inscripcion : inscripciones) {
-            salidas.add(inscripcion.getNombreSalida());
+            salidas.add(inscripcion.getSalidaTuristica().obtenerDTSalidaTuristica());
         }
 
         return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(),
@@ -118,8 +112,8 @@ public class Turista extends Usuario {
         Imagen img = this.getImagen();
         String nacionalidad = this.getNacionalidad();
 
-        List<String> inscripciones_salidas = new ArrayList<>();
-        this.getInscripciones().forEach((Inscripcion x) -> inscripciones_salidas.add(x.getNombreSalida()));
+        List<DTSalidaTuristica> inscripciones_salidas = new ArrayList<>();
+        this.getInscripciones().forEach((Inscripcion x) -> inscripciones_salidas.add(x.getSalidaTuristica().obtenerDTSalidaTuristica()));
 
         List<DTCompra> compras = new ArrayList<>();
         this.getCompras().forEach((Compra x) -> compras.add(x.obtenerDTCompra()));
