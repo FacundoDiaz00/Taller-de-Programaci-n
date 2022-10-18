@@ -72,11 +72,11 @@ public class AltaSalidaServlet extends HttpServlet {
 
         String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
         
-        String actividad = req.getParameter("departamento");
+        String actividad = req.getParameter("actividad");
         String nombre = req.getParameter("nombre");
-        String fechaYHoraSalida = req.getParameter("descripcion");
-        String lugar = req.getParameter("duracion");
-        String cantMaxTur = req.getParameter("costo");
+        String fechaYHoraSalida = req.getParameter("fechaYHoraSalida");
+        String lugar = req.getParameter("lugar");
+        String cantMaxTur = req.getParameter("cantMaxTur");
 
         Part filePart = req.getPart("img");
 
@@ -122,10 +122,10 @@ public class AltaSalidaServlet extends HttpServlet {
             System.out.println("No se ingresaron los números de duracion o costo correctamente");
             req.setAttribute("motivoDeError",
                     "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
-        } catch (ActividadTuristicaYaRegistradaException e) {
-            System.out.println("La actividad con nombre '" + nombre
-                    + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
-            req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
+            //} catch (SalidaTuristicaYaRegistradaException e) {
+            //System.out.println("La actividad con nombre '" + nombre
+              //      + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
+            //req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Categoria")) {
                 System.out.println("No existe una de las categorias selecionadas");
@@ -140,12 +140,11 @@ public class AltaSalidaServlet extends HttpServlet {
 
         // En este punto si o si hay error
 
-        req.setAttribute("departamento", departamento);
+        req.setAttribute("actividad", actividad);
         req.setAttribute("nombre", nombre);
-        req.setAttribute("descripcion", descripcion);
-        req.setAttribute("duracion", duracion);
-        req.setAttribute("costo", costo);
-        req.setAttribute("ciudad", ciudad);
+        req.setAttribute("fechaYHoraSalida", fechaYHoraSalida);
+        req.setAttribute("lugar", lugar);
+        req.setAttribute("cantMaxTur", cantMaxTur);
 
         req = Utiles.insertarLoDeSiempre(req);
 

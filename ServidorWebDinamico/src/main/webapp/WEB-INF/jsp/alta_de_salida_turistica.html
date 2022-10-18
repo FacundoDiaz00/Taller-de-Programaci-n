@@ -72,22 +72,63 @@
     <div id="contenedorForm">
         <form class="card" id="form-alta-actividad">
             <div class="card-body">
-                <h5 class="card-title">Crear Salida Turistica</h5>
+                <h5 class="card-title">Alta de Salida Turistica</h5>
 
                 <div class="contenedorinput mb-3">
-                    <span class="input-label" id="labelDepartamento">Departamento:</span>
-                    <input class="form-control" type="text" placeholder="Rocha" readonly>
-                </div>
+                    	<% String departamento = getTextWithoutNull((String)request.getAttribute("departamento")); %>
+                        <span class="input-label" id="labelDepartamento">Departamento:<span class="obligatorio"> *</span></span>
+                        <select 
+                        	id="departamento"
+                       	   	name="departamento" 
+                        	required 
+                        	class="form-select" 
+                        	aria-label="Departamentos">
+                        
+                        <%for (String dep: (List<String>) request.getAttribute("departamentos")) { 
+                        	if (dep.equals(departamento)) { %>
+                        		<option selected value="<%=dep%>"><%=dep%></option>
+                        	<%} else {%>
+                            	<option value="<%=dep%>"><%=dep%></option>
+                        	<%}%>
+						<%}%>
+						
+                        </select>
+                    </div>
 
                 <div class="contenedorinput mb-3">
-                    <span class="input-label" id="labelDepartamento">Actividad:</span>
-                    <input class="form-control" type="text" placeholder="Degusta" readonly>
-                </div>
+                    	<% String departamento = getTextWithoutNull((String)request.getAttribute("departamento")); %>
+                        <span class="input-label" id="labelDepartamento">Departamento:<span class="obligatorio"> *</span></span>
+                        <select 
+                        	id="departamento"
+                       	   	name="departamento" 
+                        	required 
+                        	class="form-select" 
+                        	aria-label="Departamentos">
+                        
+                        <%for (String act: (List<String>) request.getAttribute("actividades")) { 
+                        	if (act.equals(actividad)) { %>
+                        		<option selected value="<%=act%>"><%=act%></option>
+                        	<%} else {%>
+                            	<option value="<%=act%>"><%=act%></option>
+                        	<%}%>
+						<%}%>
+						
+                        </select>
+                    </div>
 
-                <div class="contenedorinput mb-3">
-                    <span class="input-label">Nombre:<span class="obligatorio"> *</span></span>
-                    <input type="text" required class="form-control" placeholder="Ingrese un nombre" aria-label="Nickname" aria-describedby="basic-addon1">
-                </div>
+                    <div class="contenedorinput mb-3">
+                    	<% String nombre = getTextWithoutNull((String)request.getAttribute("nombre")); %>
+                        <span class="input-label">Nombre:<span class="obligatorio"> *</span></span>
+                        <input  id="nombre"
+                        	   	name="nombre" 
+                        		type="text" 
+                        		required 
+                        		class="form-control" 
+                        		placeholder="Ingrese un nombre" 
+                        		aria-label="Nombre" 
+                        		aria-describedby="basic-addon1"
+                        	   	value="<%= nombre %>">
+                    </div>
 
                 <div class="contenedorinput mb-3">
                     <span class="input-label">Fecha:<span class="obligatorio"> *</span></span>
