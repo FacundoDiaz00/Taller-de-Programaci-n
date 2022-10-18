@@ -16,6 +16,7 @@
 <%@page import="logica.datatypes.DTTuristaDetallePrivado"%>
 <%@page import="logica.datatypes.DTProveedorDetallePrivado"%>
 <%@page import="logica.datatypes.DTProveedorDetallePrivado"%>
+<%@page import="logica.datatypes.EstadoActividadTuristica"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 
 <%@ page import="java.util.List" %>
@@ -125,7 +126,7 @@
             		%>
 						<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			<%
-            			for(String sal: tur.getInscripciones()){
+            			for(DTSalidaTuristica sal: tur.getInscripciones()){
             			%>	
                             <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
                                 <div class="row g-0">
@@ -133,10 +134,10 @@
                                     
                                     	<% 
 				            			String pathImagen = "";
-										if (/*sal.getImg() == null*/ true) {
+										if (sal.getImg() == null) {
 											pathImagen += "noFoto.png";
-										//} else {
-										//	pathImagen += sal.getImg().getPath();
+										} else {
+											pathImagen += sal.getImg().getPath();
 										}							
 										%>
 						                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
@@ -144,7 +145,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body cards">
-                                            <h5 class="card-title"><%=sal%></h5>
+                                            <h5 class="card-title"><%=sal.getNombre()%></h5>
                                             <div class="botonera">
                                                 <a href="consulta_de_salida_turistica.html" class="btn btn-primary">Ver mas</a>
                                             </div>
@@ -168,7 +169,7 @@
 					                        <div class="col-md-8">
 					                            <div class="card-body">
 					                                <h5 class="card-title"><%= cmp.getPaquete()%> </h5>
-					                                <p class="card-text descripcion-paquete">AAAAAAAAAAA</p>
+					                                <p class="card-text descripcion-paquete"></p>
 					                                <div class="botonera">
 					                                    <a href="ConsultaPaquete?id=" class="btn btn-primary">Ver mas</a>
 					                                </div>
@@ -191,48 +192,116 @@
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
             		%>
             			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
-            			
-            			<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
-						
-		                <div class="card mb-3" style="max-width: 850px;">
-		                    <div class="row g-0">
-		                        <div class="col-md-4 img-contain">
-		              
-		                        	<% 
-			            			String pathImagen = "";
-									if (act.getImg() == null) {
-										pathImagen += "noFoto.png";
-									} else {
-										pathImagen += act.getImg().getPath();
-									}							
-									%>
-					                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
-		                        </div>
-		                        <div class="col-md-8">
-		                            <div class="card-body">
-		                                <h5 class="card-title"><%=act.getNombre()%></h5>
-		                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
-		                                <div class="botonera">
-		                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
-		                            	</div>
-		                                
-		                            	<div id="salidas" style=";margin-left: 10px">
-		                            		<h6>Salidas:</h6>
-		                            		<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
-												<p><%=sal.getNombre() %></p>
-											<% } %>
-		                            	</div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-						<% } %>
+            			<h4>Actividades Confirmadas:</h4>
+            			<%if(!prv.getActividades().isEmpty()){ %>
+	            			<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
+							
+			                <div class="card mb-3" style="max-width: 850px;">
+			                    <div class="row g-0">
+			                        <div class="col-md-4 img-contain">
+			              
+			                        	<% 
+				            			String pathImagen = "";
+										if (act.getImg() == null) {
+											pathImagen += "noFoto.png";
+										} else {
+											pathImagen += act.getImg().getPath();
+										}							
+										%>
+						                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+			                        </div>
+			                        <div class="col-md-8">
+			                            <div class="card-body">
+			                                <h5 class="card-title"><%=act.getNombre()%></h5>
+			                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+			                                <div class="botonera">
+			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+			                            	</div>
+			                                
+			                            	<div id="salidas" style=";margin-left: 10px">
+			                            		<h6>Salidas:</h6>
+			                            		<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
+													<p><%=sal.getNombre() %></p>
+												<% } %>
+			                            	</div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+							<% } %>
+            			<%}else{ %>
+            				<p>No hay información.</p>
+            				
+            			<%} %>
 						<%
 						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){%>
-    						<h4>Actividades Sin confirmar:</h4>
+            				<% DTProveedorDetallePrivado prvPriv = (DTProveedorDetallePrivado) usr;%>
+    						<h4>Actividades agregadas sin confirmar:</h4>            				
+            				<%if(!prvPriv.getActividadesNoConfirmadas().get(EstadoActividadTuristica.AGREGADA).isEmpty()){ %>
+		        				<% for(DTActividadTuristica acti: prvPriv.getActividadesNoConfirmadas().get(EstadoActividadTuristica.AGREGADA)){%>
+		        					<div class="card mb-3" style="max-width: 850px;">
+					                    <div class="row g-0">
+					                        <div class="col-md-4 img-contain">
+					              
+					                        	<% 
+						            			String pathImagen = "";
+												if (acti.getImg() == null) {
+													pathImagen += "noFoto.png";
+												} else {
+													pathImagen += acti.getImg().getPath();
+												}							
+												%>
+								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+					                        </div>
+					                        <div class="col-md-8">
+					                            <div class="card-body">
+					                                <h5 class="card-title"><%=acti.getNombre()%></h5>
+					                                <p class="card-text descripcion-actividad"><%=acti.getDescripcion()%></p>
+					                                <div class="botonera">
+					                            		<a href="ConsultaActividad?id=<%=acti.getNombre()%>" class="btn btn-primary">Ver más</a>
+					                            	</div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+		        				<%} %>
+        				<%}else{ %>
+            				<p>No hay información.</p>
 
-            				<% DTProveedorDetallePrivado prvPriv = (DTProveedorDetallePrivado) usr;
-            				for(List<DTActividadTuristica> ListAct: prvPriv.getActividadesNoConfirmadas().values()){
+            			<%} %>
+            			<h4>Actividades Rechazadas:</h4>
+        				<%if(!prvPriv.getActividadesNoConfirmadas().get(EstadoActividadTuristica.RECHAZADA).isEmpty()){ %>
+		        			<% for(DTActividadTuristica acti: prvPriv.getActividadesNoConfirmadas().get(EstadoActividadTuristica.RECHAZADA)){%>
+		        					<div class="card mb-3" style="max-width: 850px;">
+					                    <div class="row g-0">
+					                        <div class="col-md-4 img-contain">
+					              
+					                        	<% 
+						            			String pathImagen = "";
+												if (acti.getImg() == null) {
+													pathImagen += "noFoto.png";
+												} else {
+													pathImagen += acti.getImg().getPath();
+												}							
+												%>
+								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+					                        </div>
+					                        <div class="col-md-8">
+					                            <div class="card-body">
+					                                <h5 class="card-title"><%=acti.getNombre()%></h5>
+					                                <p class="card-text descripcion-actividad"><%=acti.getDescripcion()%></p>
+					                                <div class="botonera">
+					                            		<a href="ConsultaActividad?id=<%=acti.getNombre()%>" class="btn btn-primary">Ver más</a>
+					                            	</div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+		        				<%} %>
+        				<%}else{ %>
+            				<p>No hay información.</p>
+            			<%} %>
+            				<%-- for(List<DTActividadTuristica> ListAct: prvPriv.getActividadesNoConfirmadas().values()){
             					for(DTActividadTuristica acti:ListAct){%>
 	            					<div class="card mb-3" style="max-width: 850px;">
 					                    <div class="row g-0">
@@ -260,7 +329,7 @@
 					                    </div>
 					                </div>
 	            				<%} %>
-	            			<%} %>
+	            			<%} %> --%>
 						<%} %>
             			</div>
             			<div class="tab-pane fade" id="boton-salidasprov-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="3">
