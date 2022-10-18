@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/controladores/ControladorActividadTuristica.java" afterDir="false" />
-    </list>
+    <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,6 +138,7 @@
       <workItem from="1665296306100" duration="147000" />
       <workItem from="1665296978613" duration="1924000" />
       <workItem from="1665358175294" duration="633000" />
+      <workItem from="1665520675507" duration="800000" />
     </task>
     <servers />
   </component>

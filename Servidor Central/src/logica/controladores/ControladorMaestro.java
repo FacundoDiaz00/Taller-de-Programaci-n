@@ -120,10 +120,12 @@ public class ControladorMaestro implements IControladorMaestro {
                 "Cabalgata por el área protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras",
                 LocalDate.of(2022, 8, 1), img, categorias);
 
-        // ---- Todo esto es para ver datos ---
+        // ---- Todo esto es para ver datos ESTOY HAY QUE BORRARLO CON LOS DATOS DE VERDAD ---
 
         icat.aceptarORechazarActividadTuristica("Degusta", true);
         icat.aceptarORechazarActividadTuristica("Teatro con Sabores", true);
+        icat.aceptarORechazarActividadTuristica("Tour por Colonia del Sacramento", true);
+        icat.aceptarORechazarActividadTuristica("Almuerzo en el Real de San Carlos", true);
 
         // ------------------------
 
@@ -157,20 +159,6 @@ public class ControladorMaestro implements IControladorMaestro {
         icat.altaSalidaTuristica("Cabalgata en Valle del Lunarejo", "Cabalgata 2", LocalDateTime.of(2022, 9, 11, 16, 0),
                 LocalDate.of(2022, 8, 15), "Posada Del Lunarejo", 4, img);
 
-        // Inscripciones
-        icat.altaInscripcionSalidaTuristica("Degusta Agosto", "lachiqui", 3, LocalDate.of(2022, 8, 15), null);
-        icat.altaInscripcionSalidaTuristica("Degusta Agosto", "elelvis", 5, LocalDate.of(2022, 8, 16), null);
-        icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3,
-                LocalDate.of(2022, 8, 18), null);
-        icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita", 1,
-                LocalDate.of(2022, 8, 19), null);
-        icat.altaInscripcionSalidaTuristica("Almuerzo 2", "mastropiero", 2, LocalDate.of(2022, 8, 19), null);
-        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 1", "anibal", 1, LocalDate.of(2022, 8, 19), null);
-        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "chino", 10, LocalDate.of(2022, 8, 20), null);
-        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, LocalDate.of(2022, 8, 20), null);
-        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal", 1, LocalDate.of(2022, 8, 21), null);
-        icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony", 11, LocalDate.of(2022, 8, 21), null);
-
         // Paquete
         ipack.altaPaquete("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía", 60, 20,
                 LocalDate.of(2022, 8, 10), new Imagen("/paquetes/Disfrutar Rocha.png"));
@@ -185,6 +173,27 @@ public class ControladorMaestro implements IControladorMaestro {
         ipack.agregarActividadAPaquete("Teatro con Sabores", "Disfrutar Rocha");
         ipack.agregarActividadAPaquete("Tour por Colonia del Sacramento", "Un día en Colonia");
         ipack.agregarActividadAPaquete("Almuerzo en el Real de San Carlos", "Un día en Colonia");
+        
+        // ---- Todo esto es para ver datos ESTOY HAY QUE BORRARLO CON LOS DATOS DE VERDAD ---
+        ipack.comprarPaquete("lachiqui", "Disfrutar Rocha", 5);
+        // ------------------------
+        
+        
+        // Inscripciones
+        icat.altaInscripcionSalidaTuristica("Degusta Agosto", "lachiqui", 3, LocalDate.of(2022, 8, 15), null);
+        icat.altaInscripcionSalidaTuristica("Degusta Agosto", "elelvis", 5, LocalDate.of(2022, 8, 16), null);
+        icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3,
+                LocalDate.of(2022, 8, 18), null);
+        icat.altaInscripcionSalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita", 1,
+                LocalDate.of(2022, 8, 19), null);
+        icat.altaInscripcionSalidaTuristica("Almuerzo 2", "mastropiero", 2, LocalDate.of(2022, 8, 19), null);
+        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 1", "anibal", 1, LocalDate.of(2022, 8, 19), null);
+        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "chino", 10, LocalDate.of(2022, 8, 20), null);
+        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, LocalDate.of(2022, 8, 20), null);
+        icat.altaInscripcionSalidaTuristica("Teatro con Sabores 2", "anibal", 1, LocalDate.of(2022, 8, 21), null);
+        icat.altaInscripcionSalidaTuristica("Degusta Setiembre", "tony", 11, LocalDate.of(2022, 8, 21), null);
+
+       
 
         // Agregar Categorias tentativas
         // icat.altaCategoria("Gastronomía");

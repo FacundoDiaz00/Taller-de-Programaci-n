@@ -93,7 +93,7 @@ public class ControladorPaquete implements IControladorPaquete {
             throws ObjetoNoExisteEnTurismoUy {
         var cat = new ControladorActividadTuristica();
 
-        // Traigo dt y me quedo solo con los nombres
+ 
         var dtActividadesDep = cat.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(nombreDep);
         var actividadesDep = new ArrayList<String>();
         dtActividadesDep.forEach((DTActividadTuristica act) -> actividadesDep.add(act.getNombre()));

@@ -241,7 +241,7 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	}
 
 	private void actualizarComboPaquete() {
-		List<String> idsPaquetes = controladorPaq.obtenerIdPaquetes();
+		List<String> idsPaquetes = controladorPaq.obtenerIdPaquetesSinComprar();
 		comboPaquetes.setModel(new DefaultComboBoxModel(idsPaquetes.toArray()));
 		if (!idsPaquetes.isEmpty()) {
 			comboPaquetes.setSelectedIndex(0);
@@ -266,8 +266,6 @@ public class AgregarActividadAPaquete extends JInternalFrame {
 	private void actualizarComboActividades() {
 		String depId = (String) comboDepartamentos.getSelectedItem();
 		String packId = (String) comboPaquetes.getSelectedItem();
-		// No va a estar habilitado el combo si no seleciono la actividad y el
-		// pack
 		List<String> idsActividades;
 		try {
 			idsActividades = controladorPaq.obtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete(depId, packId);
