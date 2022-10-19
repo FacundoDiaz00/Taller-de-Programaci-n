@@ -62,9 +62,9 @@
 				                <img class="imagen_perfil " src="${pageContext.request.contextPath}/img<%=path%>" alt="">
 	                            
 	                        </a>
-	                        <ul class="dropdown-menu">
+	                        <ul class="dropdown-menu" id="dropDown">
 	                            <li><a class="dropdown-item" href="TODO XXXXXXXXXXXXXXXX">Ver Perfil</a></li>
-	                            <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
+	                            <li><a class="dropdown-item" href="index?sesionCerrada=<%=true%>">Cerrar Sesión</a></li>
 	                        </ul>
 	                    </div>
                     

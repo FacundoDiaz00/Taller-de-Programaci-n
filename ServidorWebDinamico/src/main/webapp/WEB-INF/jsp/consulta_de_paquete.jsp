@@ -96,7 +96,7 @@
 	        			// nada
 	        		}
 	        		// Muestro el form de compra solo si estoy logueado
-	        		if (proveedorLogueado) { %>
+	        		if (!proveedorLogueado) { %>
 			            <div class="card" id="contenedor-compra" style="max-width: 800px;">
 			                <div class="header-card-with-button">
 			                    <h2 class="card-title">Compra paquete</h2>

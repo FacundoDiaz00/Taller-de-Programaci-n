@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +50,12 @@ public class InscribirseASalidaServlet extends HttpServlet {
     		salida = this.contrAT.obtenerDTSalidaTuristica(nombSalida);
     		req.setAttribute("salida", salida);
     		req = Utiles.insertarLoDeSiempre(req);
+    		DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
+    		String nickTuri = "";
+    		if (turi != null)
+    			 nickTuri = turi.getNickname();
+    		List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(), nickTuri);
+    		req.setAttribute("paquetes", paquetes);
     		
     	} catch (ObjetoNoExisteEnTurismoUy e) {
             req.setAttribute("motivoDeError", "No existe la salida turistica");
@@ -71,16 +78,24 @@ public class InscribirseASalidaServlet extends HttpServlet {
 		if(formaDePago.equals("1")) {
     		nombrePaquete = (String) req.getParameter("paquete");
     	}
-
+		
+		try {
+	   		List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(), nickTuri);
+			req.setAttribute("paquetes", paquetes);
+		}catch(ObjetoNoExisteEnTurismoUy e){
+	    	req.setAttribute("motivoDeError", "El paquete ingresado para la inscripción no existe");
+            req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
+	    }   
+		
 		req = Utiles.insertarLoDeSiempre(req);
 		req.setAttribute("salida", this.salida);
 
 	    try {
 	    	contrAT.altaInscripcionSalidaTuristica(salida.getNombre(),nickTuri,cantTuristas ,fechaInscripcion,nombrePaquete);
-
+			
 	        req.setAttribute("exito", Boolean.TRUE);
             req = Utiles.insertarLoDeSiempre(req);
-            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
 	    }catch(InscripcionYaRegistradaException e){
 	    	req.setAttribute("motivoDeError", "Usuario ya inscripto para esta salida turística");
             req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
