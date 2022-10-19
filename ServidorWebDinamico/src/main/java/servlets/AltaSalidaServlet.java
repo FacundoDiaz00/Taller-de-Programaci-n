@@ -154,10 +154,10 @@ public class AltaSalidaServlet extends HttpServlet {
                    + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
         } catch (ObjetoNoExisteEnTurismoUy e) {
-            if (e.getClaseObjetoFaltante().equals("Categoria")) {
-                System.out.println("No existe una de las categorias selecionadas");
+            if (e.getClaseObjetoFaltante().equals("Actividad")) {
+                System.out.println("No existe la actividad seleccionada");
                 req.setAttribute("motivoDeError",
-                        "No existe una de las categorias selecionadas, cambielo y pruebe nuevamente");
+                        "No existe la actividad seleccionada, cambielo y pruebe nuevamente");
             } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
                 System.out.println("No existe el departamento seleccionado");
                 req.setAttribute("motivoDeError",
@@ -166,16 +166,15 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         // En este punto si o si hay error
-
         req.setAttribute("actividad", actividad);
         req.setAttribute("nombre", nombre);
-        req.setAttribute("fechaYHoraSalida", fechaYHoraSalida);
+        //req.setAttribute("fechaYHoraSalida", fechaYHoraSalida);
         req.setAttribute("lugar", lugar);
         req.setAttribute("cantMaxTur", cantMaxTur);
 
         req = Utiles.insertarLoDeSiempre(req);
 
-        //req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida.jsp").forward(req, resp);
 
     }
 
