@@ -166,16 +166,31 @@
 		            				DTTuristaDetallePrivado turpriv = (DTTuristaDetallePrivado) usr;
 		            				for(DTCompra cmp : turpriv.getCompras()){%>
 		            					</div>
-					                        <div class="col-md-8">
-					                            <div class="card-body">
-					                                <h5 class="card-title"><%= cmp.getPaquete()%> </h5>
-					                                <p class="card-text descripcion-paquete"></p>
-					                                <div class="botonera">
-					                                    <a href="ConsultaPaquete?id=" class="btn btn-primary">Ver mas</a>
-					                                </div>
-					
-					                            </div>
-					                        </div>
+						 					<div class="card mb-3" style="max-width: 800px;">
+							                    <div class="row g-0">
+							                        <div class="col-md-4 img-contain">
+							                        	<% 
+								            			String path = "";
+														if (cmp.getPaquete().getImg() == null) {
+															path += "/noFoto.png";
+														} else {
+															path += cmp.getPaquete().getImg().getPath();
+														}							
+														%>
+							                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
+							                            <!-- Falta el manejo de foto de la verdadero paquete-->
+							                        </div>
+							                        <div class="col-md-8">
+							                            <div class="card-body">
+							                                <h5 class="card-title"><%= cmp.getPaquete().getNombre()%> </h5>
+							                                <div class="botonera">
+							                                    <a href="ConsultaPaquete?id=<%=cmp.getPaquete().getNombre()%>" class="btn btn-primary">Ver mas</a>
+							                                </div>
+							
+							                            </div>
+							                        </div>
+							                    </div>
+							                </div>
 					                    </div>
 					                </div>
 		            				<%} %>
@@ -208,7 +223,7 @@
 											pathImagen += act.getImg().getPath();
 										}							
 										%>
-						                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+						                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
