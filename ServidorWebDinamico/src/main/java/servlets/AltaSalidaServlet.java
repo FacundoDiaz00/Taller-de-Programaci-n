@@ -44,6 +44,7 @@ public class AltaSalidaServlet extends HttpServlet {
         this.cat = Fabrica.getInstancia().getIControladorActividadTuristica();
     }
 
+    String nomActividad;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Solo muestro el form si es un proveedor:
@@ -54,7 +55,7 @@ public class AltaSalidaServlet extends HttpServlet {
             resp.sendRedirect("/index");
             return;
         }
-        String nomActividad = (String) req.getParameter("id");
+        nomActividad = (String) req.getParameter("id");
         try {
         	DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
         	req.setAttribute("datosActividad", datosActividad);
@@ -85,13 +86,20 @@ public class AltaSalidaServlet extends HttpServlet {
 
         String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
         
-        String actividad = req.getParameter("actividad");
+        String actividad = req.getParameter("id");
         String nombre = req.getParameter("nombre");
         String fechaSalida = req.getParameter("fechaSalida");
         String horaSalida = req.getParameter("horaSalida");
         String lugar = req.getParameter("lugar");
         String cantMaxTur = req.getParameter("cantMaxTur");
-        
+        System.out.println(nomActividad);
+        System.out.println(nombre);
+        System.out.println(fechaSalida);
+        System.out.println(horaSalida);
+        System.out.println(lugar);
+        System.out.println(cantMaxTur);
+
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime fechaYHoraSalida = LocalDateTime.parse(fechaSalida + " " + horaSalida, formatter);
         LocalDate fechaDeAlta = null;
@@ -112,7 +120,7 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         try {
-            cat.altaSalidaTuristica(actividad, nombre, fechaYHoraSalida , fechaDeAlta, lugar,
+            cat.altaSalidaTuristica(nomActividad, nombre, fechaYHoraSalida , fechaDeAlta, lugar,
                     Integer.valueOf(cantMaxTur), imgDt);
             if (hayImagen) {
                 // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);

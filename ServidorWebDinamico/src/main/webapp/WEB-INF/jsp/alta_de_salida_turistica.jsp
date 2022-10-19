@@ -65,7 +65,7 @@
                     <div class="contenedorinput mb-3">
                     	<% String actividad = datosActividad.getNombre(); %>
                     	
-                        <span class="input-label">Nombre:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Actividad<span class="obligatorio"> *</span></span>
                         <input  id="actividad"
                         	   	name="actividad" 
                         		type="text" 
