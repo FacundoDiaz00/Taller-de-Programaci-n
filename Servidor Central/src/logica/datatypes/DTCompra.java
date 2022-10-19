@@ -11,9 +11,9 @@ public class DTCompra {
 	private int cantTuristas;
 	private float costo;
 	private LocalDate vencimiento;
-	private String paquete;
+	private DTPaquete paquete;
 
-	public DTCompra(LocalDate fechaCompra, int cantTuristas, float costo, LocalDate vencimiento, String paquete) {
+	public DTCompra(LocalDate fechaCompra, int cantTuristas, float costo, LocalDate vencimiento, DTPaquete paquete) {
 		this.fechaCompra = fechaCompra;
 		this.cantTuristas = cantTuristas;
 		this.costo = costo;
@@ -37,7 +37,7 @@ public class DTCompra {
 		return vencimiento;
 	}
 
-	public String getPaquete() {
+	public DTPaquete getPaquete() {
 		return paquete;
 	}
 }

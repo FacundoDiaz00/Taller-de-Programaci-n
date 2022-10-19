@@ -265,6 +265,8 @@ class ControladorUsuarioTest {
 			String nombreActividad = "Actividad " + idTest + " i=" + i;
 
 			assertThrows(ClassCastException.class, () -> {
+				
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTTuristaDetalle) dtdet;
 			});
 
@@ -300,6 +302,7 @@ class ControladorUsuarioTest {
 			var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
 
 			assertThrows(ClassCastException.class, () -> {
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTProveedorDetalle) dtdet;
 			});
 
@@ -314,8 +317,8 @@ class ControladorUsuarioTest {
 
 			if (i < 40) {
 				assertEquals(1, dtCasteado.getInscripciones().size());
-				var nombreSalObtenida = dtCasteado.getInscripciones().get(0);
-				assertEquals(nombreSalida, nombreSalObtenida);
+				var SalObtenida = dtCasteado.getInscripciones().get(0);
+				assertEquals(nombreSalida, SalObtenida.getNombre());
 			} else {
 				assertEquals(40, dtCasteado.getInscripciones().size());
 			}
@@ -327,12 +330,12 @@ class ControladorUsuarioTest {
 	void testObtenerDTUsuario() throws TurismoUyException {
 		String idTest = "testObtenerDTUsuario";
 
-		generarProveedores(50, idTest);
-		generarTuristas(50, idTest);
+		List<String> nombreProveedores = generarProveedores(50, idTest);
+		List<String> nombreTuristas = generarTuristas(50, idTest);
 
 		// Verifico para los proveedores
 		for (int i = 0; i < 50; i++) {
-			String nickname = "Proveedor " + idTest + " i=" + i;
+			String nickname = nombreProveedores.get(i);
 			String nombre = "NOMBRE PROV";
 			String apellido = "APELLIDO PROV";
 			String correo = "Proveedor " + idTest + " i=" + i;
@@ -343,6 +346,7 @@ class ControladorUsuarioTest {
 			var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
 
 			assertThrows(ClassCastException.class, () -> {
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTTurista) dtUsuario;
 			});
 
@@ -359,7 +363,7 @@ class ControladorUsuarioTest {
 
 		// Verifico para los turistas
 		for (int i = 0; i < 50; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
+			String nickname = nombreTuristas.get(i);
 			String nombre = "NOMBRE TURISTA";
 			String apellido = "APELLIDO TURISTA";
 			String correo = "TURISTA " + idTest + " i=" + i;
@@ -369,6 +373,7 @@ class ControladorUsuarioTest {
 			var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
 
 			assertThrows(ClassCastException.class, () -> {
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTProveedor) dtUsuario;
 			});
 

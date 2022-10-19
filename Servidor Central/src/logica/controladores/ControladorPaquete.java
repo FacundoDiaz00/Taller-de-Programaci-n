@@ -43,7 +43,7 @@ public class ControladorPaquete implements IControladorPaquete {
         manejadosPaq.addPaquete(paq);
     }
 
-    public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas)
+    public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas, LocalDate fechaCompra)
             throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, PaquetesSinActividadesExcepcion {
         Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
         Paquete paquete = ManejadorPaquete.getInstancia().getPaquete(nombrePaquete);
@@ -53,7 +53,11 @@ public class ControladorPaquete implements IControladorPaquete {
         if (turista.existeCompra(nombrePaquete)) {
             throw new CompraYaRegistradaException("Se intentó comprar dos veces el mismo paquete");
         }
-        Compra compra = new Compra(paquete, cantTuristas);
+
+        if (fechaCompra == null) {
+            fechaCompra = LocalDate.now();
+        }
+        Compra compra = new Compra(paquete, cantTuristas, fechaCompra);
         turista.asociarCompra(compra);
         paquete.asociarCompra(compra);
     }
@@ -93,7 +97,6 @@ public class ControladorPaquete implements IControladorPaquete {
             throws ObjetoNoExisteEnTurismoUy {
         var cat = new ControladorActividadTuristica();
 
- 
         var dtActividadesDep = cat.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(nombreDep);
         var actividadesDep = new ArrayList<String>();
         dtActividadesDep.forEach((DTActividadTuristica act) -> actividadesDep.add(act.getNombre()));

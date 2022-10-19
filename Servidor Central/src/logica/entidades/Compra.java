@@ -31,11 +31,11 @@ public class Compra {
         calcularMapUsosRestantes();
     }
 
-    public Compra(Paquete paquete, int cantTuristas) {
+    public Compra(Paquete paquete, int cantTuristas, LocalDate fechaCompra) {
         this.paquete = paquete;
         this.cantidadTuristas = cantTuristas;
         this.inscripciones = new HashSet<>();
-        this.fechaCompra = LocalDate.now();
+        this.fechaCompra = fechaCompra;
         calcularMapUsosRestantes();
     }
 
@@ -56,7 +56,7 @@ public class Compra {
 
     public DTCompra obtenerDTCompra() {
         return new DTCompra(getFechaCompra(), getCantidadTuristas(), getCostoTotal(), getVencimiento(),
-                paquete.getNombre());
+                paquete.obtenerDTPaquete());
     }
 
     public boolean tieneConsumoDisponibleParaActividad(String nombreActividad) {

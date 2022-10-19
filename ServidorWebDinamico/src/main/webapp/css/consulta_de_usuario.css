@@ -8,7 +8,7 @@
 
 .cardPerfil{
     display: grid !important;
-    grid-template-columns: 0.3fr 1fr;
+    grid-template-columns: 0.8fr 1fr;
     grid-column-gap: 20px;
     padding: 20px;
 }
