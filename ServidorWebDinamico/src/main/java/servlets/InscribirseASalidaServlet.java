@@ -56,7 +56,7 @@ public class InscribirseASalidaServlet extends HttpServlet {
     			 nickTuri = turi.getNickname();
     		List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(), nickTuri);
     		req.setAttribute("paquetes", paquetes);
-    		System.out.println(" largo: "+ paquetes.toArray().length);
+    		
     	} catch (ObjetoNoExisteEnTurismoUy e) {
             req.setAttribute("motivoDeError", "No existe la salida turistica");
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
@@ -78,13 +78,21 @@ public class InscribirseASalidaServlet extends HttpServlet {
 		if(formaDePago.equals("1")) {
     		nombrePaquete = (String) req.getParameter("paquete");
     	}
-
+		
+		try {
+	   		List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(), nickTuri);
+			req.setAttribute("paquetes", paquetes);
+		}catch(ObjetoNoExisteEnTurismoUy e){
+	    	req.setAttribute("motivoDeError", "El paquete ingresado para la inscripción no existe");
+            req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
+	    }   
+		
 		req = Utiles.insertarLoDeSiempre(req);
 		req.setAttribute("salida", this.salida);
 
 	    try {
 	    	contrAT.altaInscripcionSalidaTuristica(salida.getNombre(),nickTuri,cantTuristas ,fechaInscripcion,nombrePaquete);
-
+			
 	        req.setAttribute("exito", Boolean.TRUE);
             req = Utiles.insertarLoDeSiempre(req);
             req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
