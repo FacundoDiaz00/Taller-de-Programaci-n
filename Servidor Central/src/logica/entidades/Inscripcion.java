@@ -25,8 +25,10 @@ public class Inscripcion {
         // alta salida <= alta inscripcion <= fecha salida, se controlan ambas
         // desigualdades.
         if (salidaTuristica.getFechaAlta().isAfter(fechaInscrpicion)) {
-            throw new FechaAltaSalidaTuristicaPosteriorAFechaInscripcion(
-                    "La fecha de inscripción es previa a la fecha de registro de la salida turística elegida. Modifique la fecha e inténtenlo de nuevo.");
+            throw new FechaAltaSalidaTuristicaPosteriorAFechaInscripcion("La fecha de inscripcion: " +
+                    fechaInscrpicion.toString() + " es anterior a la fecha de alta de la salida turística: "
+                    + salidaTuristica.getFechaAlta() + ". Turista: " + tur.getNickname() + ". Salida: "
+                    + salidaTuristica.getNombre());
         }
         if (fechaInscrpicion.isAfter(salidaTuristica.getFechaHoraSalida().toLocalDate())) {
             throw new AltaInscripcionPosteriorAFechaSalidaException(

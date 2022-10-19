@@ -192,7 +192,8 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         int cantidadInscrptos = sal.obtenerCantidadInscriptos();
         if (cantidadInscrptos + canTuris > sal.getCantMaxTuristas()) {
             throw new SuperaElMaximoDeTuristasException("La salida " + nomSalTurim
-                    + " con las inscripcion ya realizada no tiene la capacidad suficiente para soportar esta inscrpcion");
+                    + " no tiene la capacidad suficiente para soportar esta inscrpcion. El maximo es "
+                    + sal.getCantMaxTuristas());
         }
 
         Compra compraUtilizadaEnInscrpicon = null;
