@@ -265,6 +265,8 @@ class ControladorUsuarioTest {
 			String nombreActividad = "Actividad " + idTest + " i=" + i;
 
 			assertThrows(ClassCastException.class, () -> {
+				
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTTuristaDetalle) dtdet;
 			});
 
@@ -300,6 +302,7 @@ class ControladorUsuarioTest {
 			var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
 
 			assertThrows(ClassCastException.class, () -> {
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTProveedorDetalle) dtdet;
 			});
 
@@ -343,6 +346,7 @@ class ControladorUsuarioTest {
 			var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
 
 			assertThrows(ClassCastException.class, () -> {
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTTurista) dtUsuario;
 			});
 
@@ -369,6 +373,7 @@ class ControladorUsuarioTest {
 			var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
 
 			assertThrows(ClassCastException.class, () -> {
+				@SuppressWarnings("unused")
 				var dtErrorCasteado = (DTProveedor) dtUsuario;
 			});
 

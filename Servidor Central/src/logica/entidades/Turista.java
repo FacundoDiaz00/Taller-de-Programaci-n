@@ -8,7 +8,15 @@ import java.util.Set;
 
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
-import logica.datatypes.*;
+import logica.datatypes.DTCompra;
+import logica.datatypes.DTInscripcion;
+import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTTuristaDetalle;
+import logica.datatypes.DTTuristaDetallePrivado;
+import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
+
 
 /**
  * @author Equipo taller prog 16

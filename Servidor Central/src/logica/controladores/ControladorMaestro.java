@@ -393,7 +393,8 @@ public class ControladorMaestro implements IControladorMaestro {
             try {
                 icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
                         LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
-            } catch (Exception e) {
+            } catch (TurismoUyException e) {
+            	//nada
             }
         }
     }

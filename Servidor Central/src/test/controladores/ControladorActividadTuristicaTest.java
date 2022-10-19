@@ -471,8 +471,6 @@ class ControladorActividadTuristicaTest {
             if (i % 2 == 0) {
                 assertNotEquals(0, act.getSalidas().size());
 
-                var nombAct = ((DTSalidaTuristica) act.getSalidas().values().toArray()[0]).getActividad();
-
                 DTSalidaTuristica salida = act.getSalida(nombreSalida);
 
                 assertNotEquals(null, salida);
@@ -877,9 +875,13 @@ class ControladorActividadTuristicaTest {
             } catch (TurismoUyException exception) {
                 // OK, falla porque creamos repetidos a propósito
             }
-            Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
-                    nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor,
-                    nombreProveedor);
+            try {
+                Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+                        nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor,
+                        nombreProveedor);
+            } catch (TurismoUyException exception) {
+                // OK, falla porque creamos repetidos a propósito
+            }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
                     costo, ciudad, fechaAlta, null, muestraCategorias);
@@ -902,19 +904,9 @@ class ControladorActividadTuristicaTest {
 
             String nombreProveedor = "Proveedor " + identif + " i=" + (i % 10);
             String departamento = "Departamento " + identif + " i=" + (i % 10);
-            String nombreActividad = "Actividad " + identif + " i=" + i;
             String descripcion = "Desc";
-            int duracion = 10;
-            float costo = (float) 10;
-            String ciudad = "Ciudad";
             LocalDate fechaAlta = localDateNow;
 
-            String nombreSalida = "Salida " + identif;
-            LocalDate fecha = localDateNow;
-            LocalDateTime fechaHoraSalida = localDateTimeNow.plusMonths(1);
-            LocalDate fechaAltaSalida = fecha;
-            String lugar = "lugar";
-            int cantMaxTuristas = 10;
 
             try {
                 contrActTur.altaDepartamento(departamento, descripcion, departamento);
