@@ -57,7 +57,7 @@
                 <h6>Creado el <%= datosActividad.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
                 <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
                 <ul>
-                    <li><a href="AltaDeSalida">Crear una salida turistica</a></li>
+                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turistica</a></li>
                 </ul>
             </div>
 

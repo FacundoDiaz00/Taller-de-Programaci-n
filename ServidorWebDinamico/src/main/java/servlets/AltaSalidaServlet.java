@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.SalidaYaRegistradaException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
@@ -52,6 +54,15 @@ public class AltaSalidaServlet extends HttpServlet {
             resp.sendRedirect("/index");
             return;
         }
+        String nomActividad = (String) req.getParameter("id");
+        try {
+        	DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
+        	req.setAttribute("datosActividad", datosActividad);
+        
+        } catch (ObjetoNoExisteEnTurismoUy e){
+        	req.setAttribute("motivoDeError", "No existe la actividad turistica");
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_actividad.jsp").forward(req, resp);
+        }
 
         req = Utiles.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
@@ -76,10 +87,16 @@ public class AltaSalidaServlet extends HttpServlet {
         
         String actividad = req.getParameter("actividad");
         String nombre = req.getParameter("nombre");
-        String fechaYHoraSalida = req.getParameter("fechaYHoraSalida");
+        String fechaSalida = req.getParameter("fechaSalida");
+        String horaSalida = req.getParameter("horaSalida");
         String lugar = req.getParameter("lugar");
         String cantMaxTur = req.getParameter("cantMaxTur");
-
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime fechaYHoraSalida = LocalDateTime.parse(fechaSalida + " " + horaSalida, formatter);
+        LocalDate fechaDeAlta = null;
+        
+        
         Part filePart = req.getPart("img");
 
         boolean hayImagen = filePart.getSize() > 0;
@@ -95,7 +112,7 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         try {
-            cat.altaSalidaTuristica(actividad, nombre, LocalDateTime.parse(fechaYHoraSalida), LocalDate.parse(null), lugar,
+            cat.altaSalidaTuristica(actividad, nombre, fechaYHoraSalida , fechaDeAlta, lugar,
                     Integer.valueOf(cantMaxTur), imgDt);
             if (hayImagen) {
                 // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
@@ -158,7 +175,7 @@ public class AltaSalidaServlet extends HttpServlet {
 
         req = Utiles.insertarLoDeSiempre(req);
 
-        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
 
     }
 
