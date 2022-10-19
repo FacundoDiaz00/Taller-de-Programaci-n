@@ -175,7 +175,7 @@ public class AltaSalidaServlet extends HttpServlet {
 
         req = Utiles.insertarLoDeSiempre(req);
 
-        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
+        //req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 
     }
 
