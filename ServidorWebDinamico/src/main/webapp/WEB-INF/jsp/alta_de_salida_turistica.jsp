@@ -180,7 +180,6 @@
     </section>
 
    	<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
-	<script src="${pageContext.request.contextPath}/js/alta_de_salida_turistica.js"></script>
     
     <%if(request.getAttribute("motivoDeError") != null){ %>
     

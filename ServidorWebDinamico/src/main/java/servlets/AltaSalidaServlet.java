@@ -142,9 +142,10 @@ public class AltaSalidaServlet extends HttpServlet {
 
             System.out.println("Salida creada con exito");
             req.setAttribute("exito", "exito");
-
-            resp.sendRedirect("AltaDeSalida");
+            req = Utiles.insertarLoDeSiempre(req);
+            req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
             return;
+            
         } catch (NumberFormatException e) {
             System.out.println("No se ingresaron los números de duracion o costo correctamente");
             req.setAttribute("motivoDeError",
