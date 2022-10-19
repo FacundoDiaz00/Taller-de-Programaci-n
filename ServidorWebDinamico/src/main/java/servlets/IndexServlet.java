@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
@@ -46,6 +47,15 @@ public class IndexServlet extends HttpServlet {
      * - No se pueden pasar en simultanio el idDepartamento ni el idCategoria
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	
+    	var sessionClosed = req.getParameter("sesionCerrada");
+    	System.out.println("Sesion :"+ sessionClosed);
+    	if(sessionClosed != null && sessionClosed.equals("true")) {
+    		System.out.print("cerrando...");
+    		HttpSession sesion = req.getSession(false);
+            sesion.setAttribute("usuarioLogeado", null);
+            sesion.invalidate();
+    	}
 
         var departamentos = contrAct.obtenerIdDepartamentos();
         var categorias = contrAct.obtenerIdCategorias();

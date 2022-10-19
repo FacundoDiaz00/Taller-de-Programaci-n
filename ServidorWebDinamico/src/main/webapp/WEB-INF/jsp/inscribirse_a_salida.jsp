@@ -63,8 +63,9 @@
 	                    </div> 
 	                    
 		           </div>
+		           
 		                
-		                <div class="contenedorinput mb-3 eliminarElemento" id="comboPaquetes">
+		                <div class="contenedorinput mb-3" id="comboPaquetes">
 		                    <div class="form-group">
 		                        <label>Paquete:</label>
 		                        <select class="combobox input-large form-control" name="normal">
@@ -72,6 +73,8 @@
 		                        </select>
 		                    </div>
 		                </div>
+		                
+		                
 		                <div id="botonera">
 		                    <a href="index.html" class="btn btn-danger ">Cancelar</a>
 		                    <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
@@ -148,5 +151,17 @@
 	</script>
 	<%} %>
 
+    <script>
+
+    $("#checkGeneral")[0].addEventListener("click", ()=>{
+    	var element = document.getElementById("comboPaquetes");
+        element.style.display = "none";
+    })
+    
+    $("#checkPaquetes")[0].addEventListener("click", ()=>{
+    	var element = document.getElementById("comboPaquetes");
+        element.style.display = "block";
+    })
+    </script>
 </body>
 </html>
