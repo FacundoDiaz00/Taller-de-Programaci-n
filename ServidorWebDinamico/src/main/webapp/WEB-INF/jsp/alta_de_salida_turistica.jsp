@@ -2,6 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,25 +46,18 @@
             <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeSalida">
                 <div class="card-body">
                     <h5 class="card-title">Alta de Salida Turistica</h5>
+                    
+                    <% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
 
                     <div class="contenedorinput mb-3">
-                    	<% String departamento = getTextWithoutNull((String)request.getAttribute("departamento")); %>
+                    	<% String departamento = datosActividad.getDepartamento(); %>
                         <span class="input-label" id="labelDepartamento">Departamento:<span class="obligatorio"> *</span></span>
                         <select 
                         	id="departamento"
                        	   	name="departamento" 
                         	required 
                         	class="form-select" 
-                        	aria-label="Departamentos">
-                        
-                        <%for (String dep: (List<String>) request.getAttribute("departamentos")) { 
-                        	if (dep.equals(departamento)) { %>
-                        		<option selected value="<%=dep%>"><%=dep%></option>
-                        	<%} else {%>
-                            	<option value="<%=dep%>"><%=dep%></option>
-                        	<%}%>
-						<%}%>
-						
+                        	aria-label="Departamentos">		
                         </select>
                     </div>
 
