@@ -49,9 +49,7 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	
     	var sessionClosed = req.getParameter("sesionCerrada");
-    	System.out.println("Sesion :"+ sessionClosed);
     	if(sessionClosed != null && sessionClosed.equals("true")) {
-    		System.out.print("cerrando...");
     		HttpSession sesion = req.getSession(false);
             sesion.setAttribute("usuarioLogeado", null);
             sesion.invalidate();

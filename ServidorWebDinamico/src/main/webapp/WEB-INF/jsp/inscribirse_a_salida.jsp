@@ -63,13 +63,20 @@
 	                    </div> 
 	                    
 		           </div>
-		           
+	           
 		                
 		                <div class="contenedorinput mb-3" id="comboPaquetes">
 		                    <div class="form-group">
 		                        <label>Paquete:</label>
-		                        <select class="combobox input-large form-control" name="normal">
-		                            <option value="" selected="selected">Disfrutar Rocha</option>
+		                         <select class="combobox input-large form-control" name="normal">
+		                         <%	
+					                List<String> paquetes = (List<String>) request.getAttribute("paquetes"); 
+					                    for(String paq : paquetes){ 
+					                    	System.out.println("paq: "+ paq);
+					                %>
+		                            <option value="" selected="selected"><%=paq%></option>
+		                            
+		                            <% }%>
 		                        </select>
 		                    </div>
 		                </div>
@@ -152,13 +159,16 @@
 	<%} %>
 
     <script>
+    
+    var element = document.getElementById("comboPaquetes");
+    element.style.display = "none";
 
     $("#checkGeneral")[0].addEventListener("click", ()=>{
     	var element = document.getElementById("comboPaquetes");
         element.style.display = "none";
     })
     
-    $("#checkPaquetes")[0].addEventListener("click", ()=>{
+    $("#checkPaquete")[0].addEventListener("click", ()=>{
     	var element = document.getElementById("comboPaquetes");
         element.style.display = "block";
     })

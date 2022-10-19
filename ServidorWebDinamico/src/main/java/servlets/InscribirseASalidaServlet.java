@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +50,13 @@ public class InscribirseASalidaServlet extends HttpServlet {
     		salida = this.contrAT.obtenerDTSalidaTuristica(nombSalida);
     		req.setAttribute("salida", salida);
     		req = Utiles.insertarLoDeSiempre(req);
-    		
+    		DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
+    		String nickTuri = "";
+    		if (turi != null)
+    			 nickTuri = turi.getNickname();
+    		List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(), nickTuri);
+    		req.setAttribute("paquetes", paquetes);
+    		System.out.println(" largo: "+ paquetes.toArray().length);
     	} catch (ObjetoNoExisteEnTurismoUy e) {
             req.setAttribute("motivoDeError", "No existe la salida turistica");
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
