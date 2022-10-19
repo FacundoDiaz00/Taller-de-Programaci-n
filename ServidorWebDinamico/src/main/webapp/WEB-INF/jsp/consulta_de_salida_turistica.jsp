@@ -47,7 +47,7 @@
                 <h6>Creado el <%= infoSalida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
                 <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
                 <ul>
-                    <li><a href="inscribirse_a_salida.html">Inscribirse a la salida</a></li>
+                    <li><a href="AltaDeSalida">Inscribirse a la salida</a></li>
                 </ul>
             </div>
 

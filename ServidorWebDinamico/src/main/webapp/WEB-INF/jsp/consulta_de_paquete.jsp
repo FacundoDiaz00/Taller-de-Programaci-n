@@ -8,6 +8,7 @@
  --%>
 
 
+<%@page import="logica.datatypes.DTTurista"%>
 <%@page import="logica.datatypes.DTActividadTuristica"%>
 <%@page import="logica.datatypes.DTPaqueteDetalles"%>
 <%@page import="logica.datatypes.Imagen"%>
@@ -86,11 +87,16 @@
 	
 			
 	        <div id="actividades-compra-turisticas" style="max-width: 800px;">
-	        	<% 
-	        		boolean usuarioLogueado = true; // FIXME cuando haya sesiónes
-	        		
+	        	<% 	
+	        		boolean proveedorLogueado = true; // FIXME cuando haya sesiónes
+	        		try {
+		        		DTTurista tur = (DTTurista)session.getAttribute("usuarioLogeado");
+		        		proveedorLogueado = false;
+	        		} catch (Exception e) {
+	        			// nada
+	        		}
 	        		// Muestro el form de compra solo si estoy logueado
-	        		if (usuarioLogueado) { %>
+	        		if (proveedorLogueado) { %>
 			            <div class="card" id="contenedor-compra" style="max-width: 800px;">
 			                <div class="header-card-with-button">
 			                    <h2 class="card-title">Compra paquete</h2>
