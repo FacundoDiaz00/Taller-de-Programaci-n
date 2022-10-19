@@ -147,7 +147,7 @@
                                         <div class="card-body cards">
                                             <h5 class="card-title"><%=sal.getNombre()%></h5>
                                             <div class="botonera">
-                                                <a href="ConsultaSalida" class="btn btn-primary">Ver mas</a>
+                                                <a href="ConsultaSalida?id=<%=sal.getNombre() %>" class="btn btn-primary">Ver mas</a>
                                             </div>
                                         </div>
                                     </div>

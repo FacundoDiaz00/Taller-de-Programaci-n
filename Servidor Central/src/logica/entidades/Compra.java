@@ -56,7 +56,7 @@ public class Compra {
 
     public DTCompra obtenerDTCompra() {
         return new DTCompra(getFechaCompra(), getCantidadTuristas(), getCostoTotal(), getVencimiento(),
-                paquete.getNombre());
+                paquete.obtenerDTPaquete());
     }
 
     public boolean tieneConsumoDisponibleParaActividad(String nombreActividad) {

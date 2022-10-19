@@ -328,7 +328,7 @@ class ControladorPaqueteTest {
                 .obtenerDTUsuarioDetallePrivado(nomTuristas.get(1));
 
         assertEquals(1, dtTuristaDetallePrivado.getCompras().size());
-        assertEquals(nomPaquetes.get(0), dtTuristaDetallePrivado.getCompras().get(0).getPaquete());
+        assertEquals(nomPaquetes.get(0), dtTuristaDetallePrivado.getCompras().get(0).getPaquete().getNombre());
         assertEquals(2, dtTuristaDetallePrivado.getCompras().get(0).getCantTuristas());
         assertEquals((int) (43.183 * 100), (int) (dtTuristaDetallePrivado.getCompras().get(0).getCosto() * 100)); // calcule
                                                                                                                   // por
