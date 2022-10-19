@@ -61,20 +61,33 @@
 								%>
 				                <img class="imagen_perfil " src="${pageContext.request.contextPath}/img<%=path%>" alt="">
 	                            
+	                            
 	                        </a>
-	                        <ul class="dropdown-menu">
-	                            <li><a class="dropdown-item" href="TODO XXXXXXXXXXXXXXXX">Ver Perfil</a></li>
-	                            <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
-	                        </ul>
+	                        <select class="dropdown-menu" id="dropDown">
+	                            <option  class="dropdown-item" href="TODO XXXXXXXXXXXXXXXX">Ver Perfil</option>
+	                            <option class="dropdown-item" value="1" href="index.html" >Cerrar Sesión</option>
+	                        </select>
 	                    </div>
                     
-                    <% } %>
                     
                 </ul>
             </div>
         </div>
 
     </nav>
+    
+	<script>
+	        $(function(){
+	        $('#dropDown').bind('change', function () {
+	        var valor = $(this).val(); // get selected value
+	        if(valor == 1){
+	        	System.out.println("");
+	        	session.invalidate();
+	        	session.setAttribute("usuarioLogeado", null);
+	        }
+	         });
+	       });
+	</script>
 
 
 

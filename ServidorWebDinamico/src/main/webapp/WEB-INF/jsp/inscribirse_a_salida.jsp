@@ -25,7 +25,7 @@
                 
           
             
-            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" style="margin: 10px" action="${pageContext.request.contextPath}/InscribiseASalida"> 
+            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="${pageContext.request.contextPath}/InscribiseASalida"> 
 					<div style="margin: 10px">
 					
 					<div class="contenedorinput mb-3">
@@ -141,7 +141,7 @@
 	            text: "La inscripción ha sido realizada con éxito",
 	            confirmButtonText: 'Entendido'  
 	        }).then((res) => {
-	        	window.location.href = "ConsultaSalida";
+	        	window.location.href = "index";
 	        })
 	    }, 200)
     

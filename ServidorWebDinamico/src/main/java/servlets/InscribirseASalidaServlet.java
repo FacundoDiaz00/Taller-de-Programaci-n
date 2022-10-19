@@ -80,7 +80,7 @@ public class InscribirseASalidaServlet extends HttpServlet {
 
 	        req.setAttribute("exito", Boolean.TRUE);
             req = Utiles.insertarLoDeSiempre(req);
-            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
 	    }catch(InscripcionYaRegistradaException e){
 	    	req.setAttribute("motivoDeError", "Usuario ya inscripto para esta salida turística");
             req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
