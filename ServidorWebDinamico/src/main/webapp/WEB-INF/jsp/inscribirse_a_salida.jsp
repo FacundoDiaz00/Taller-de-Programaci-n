@@ -25,57 +25,60 @@
                 
           
             
-            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="${pageContext.request.contextPath}/InscribiseASalida"> 
-
-                <div class="contenedorinput mb-3">
-                    <span class="input-label">Cantidad De Turistas:<span class="obligatorio"> *</span></span>
-                     <%String cantTuristas = "";%>
-                    <input 
-                    	id="input-cantTur" 
-                    	type="number" 
-                    	name="cantTuristas"
-                    	required class="form-control" 
-                    	placeholder="Cantidad de turistas a Inscribir" 
-                    	aria-label="Cantidad de Turistas" 
-                    	aria-describedby="basic-addon1"
-                    	value="<%=cantTuristas%>"
-                    	>
-                </div>
-
-			    
-			      
-                <div class="contenedorinput mb-3">
-                    <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
-                    
-	                 <div class="form-check">
-	                        <input class="form-check-input" value="0" type="radio" name="formaPago" id="checkGeneral" checked>
-	                        <label class="form-check-label" for="checkGeneral">
-	                            General
+            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" style="margin: 10px" action="${pageContext.request.contextPath}/InscribiseASalida"> 
+					<div style="margin: 10px">
+					
+					<div class="contenedorinput mb-3">
+	                    <span class="input-label">Cantidad De Turistas:<span class="obligatorio"> *</span></span>
+	                     <%String cantTuristas = "";%>
+	                    <input 
+	                    	id="input-cantTur" 
+	                    	type="number" 
+	                    	name="cantTuristas"
+	                    	required class="form-control" 
+	                    	placeholder="Cantidad de turistas a Inscribir" 
+	                    	aria-label="Cantidad de Turistas" 
+	                    	aria-describedby="basic-addon1"
+	                    	value="<%=cantTuristas%>"
+	                    	>
+	                </div>
+	
+				    
+				      
+	                <div class="contenedorinput mb-3">
+	                    <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
+	                    
+		                 <div class="form-check">
+		                        <input class="form-check-input" value="0" type="radio" name="formaPago" id="checkGeneral" checked>
+		                        <label class="form-check-label" for="checkGeneral">
+		                            General
+		                        </label>
+		                </div>
+		                
+	                    <div class="form-check">
+	                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
+	                        <label class="form-check-label" for="checkPaquete">
+	                            Por Paquete
 	                        </label>
-	                </div>
-	                
-                    <div class="form-check">
-                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
-                        <label class="form-check-label" for="checkPaquete">
-                            Por Paquete
-                        </label>
-                    </div> 
-                    
-	           </div>
-	                
-	                <div class="contenedorinput mb-3 eliminarElemento" id="comboPaquetes">
-	                    <div class="form-group">
-	                        <label>Paquete:</label>
-	                        <select class="combobox input-large form-control" name="normal">
-	                            <option value="" selected="selected">Disfrutar Rocha</option>
-	                        </select>
-	                    </div>
-	                </div>
-	                <div id="botonera">
-	                    <a href="index.html" class="btn btn-danger ">Cancelar</a>
-	                    <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
-	                </div>
+	                    </div> 
+	                    
+		           </div>
+		                
+		                <div class="contenedorinput mb-3 eliminarElemento" id="comboPaquetes">
+		                    <div class="form-group">
+		                        <label>Paquete:</label>
+		                        <select class="combobox input-large form-control" name="normal">
+		                            <option value="" selected="selected">Disfrutar Rocha</option>
+		                        </select>
+		                    </div>
+		                </div>
+		                <div id="botonera">
+		                    <a href="index.html" class="btn btn-danger ">Cancelar</a>
+		                    <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
+		                </div>
            
+				</div>
+                
 
         </form>
         
