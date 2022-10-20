@@ -293,8 +293,8 @@ public class ControladorMaestro implements IControladorMaestro {
             { 2, 1000, 20, 8, 2022 },
             { 1, 500, 21, 8, 2022 },
             { 11, 8800, 21, 8, 2022 },
-            { 2, 1280, 15, 9, 2022 },
-            { 2, 800, 15, 9, 2022 },
+            { 2, 1280, 3, 10, 2022 },
+            { 2, 800, 3, 10, 2022 },
             { 5, 3200, 2, 9, 2022 },
             { 5, 2000, 2, 9, 2022 },
             { 5, 1700, 3, 9, 2022 },
@@ -303,8 +303,8 @@ public class ControladorMaestro implements IControladorMaestro {
             { 1, 680, 5, 9, 2022 },
             { 2, 680, 2, 10, 2022 },
             { 2, 1360, 2, 10, 2022 },
-            { 4, 1360, 5, 10, 2022 },
-            { 4, 2720, 5, 10, 2022 },
+            { 4, 1360, 12, 10, 2022 },
+            { 4, 2720, 12, 10, 2022 },
 
     };
 
@@ -313,10 +313,12 @@ public class ControladorMaestro implements IControladorMaestro {
         IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
         IControladorPaquete ipack = Fabrica.getInstancia().getIControladorPaquete();
 
+        // Carga de Categorias
         for (String cat : datosCategorias) {
             icat.altaCategoria(cat);
         }
 
+        // Carga de departamentos
         for (String[] dep : datosDepartamentos) {
             icat.altaDepartamento(dep[0], dep[1], dep[2]);
         }
@@ -337,6 +339,7 @@ public class ControladorMaestro implements IControladorMaestro {
             }
         }
 
+        // Altas de actividades
         for (int i = 0; i < datosActividadesStrings.length; i++) {
             String[] datosAct = datosActividadesStrings[i];
             int[] datosInt = datosActividadesInteger[i];
@@ -347,12 +350,14 @@ public class ControladorMaestro implements IControladorMaestro {
                     new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias));
         }
 
+        // Clasificacion de actividades
         for (String act : actividadesConfirmadas)
             icat.aceptarORechazarActividadTuristica(act, true);
 
         for (String act : actividadesRechazadas)
             icat.aceptarORechazarActividadTuristica(act, false);
 
+        // Altas de salidas
         for (int i = 0; i < datosSalidasStrings.length; i++) {
             var salStr = datosSalidasStrings[i];
             var salInt = datosSalidasInteger[i];
@@ -366,6 +371,7 @@ public class ControladorMaestro implements IControladorMaestro {
                     LocalDate.of(salInt[7], salInt[6], salInt[5]), salStr[2], salInt[4], img);
         }
 
+        // Altas de paquetes
         for (int i = 0; i < datosPaquetesString.length; i++) {
             String[] datosPaq = datosPaquetesString[i];
             int[] datosPaqInt = datosPaquetesInteger[i];
@@ -380,21 +386,22 @@ public class ControladorMaestro implements IControladorMaestro {
             ipack.agregarActividadAPaquete(asigPaqueteAct[i][1], asigPaqueteAct[i][0]);
         }
 
+        // Compras de paquetes
         for (int i = 0; i < asigPaqueteTurista.length; i++) {
             var datos = datosCompras[i];
             ipack.comprarPaquete(asigPaqueteTurista[i][0], asigPaqueteTurista[i][1], datos[0],
                     LocalDate.of(datos[3], datos[2], datos[1]));
         }
 
+        // Inscripciones
         for (int i = 0; i < datosInscripcion.length; i++) {
             var datosStr = datosInscripcion[i];
             var datosInt = datosIntegerInscripcion[i];
-            // Inscripciones
             try {
                 icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
                         LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
             } catch (TurismoUyException e) {
-            	//nada
+                // nada
             }
         }
     }
