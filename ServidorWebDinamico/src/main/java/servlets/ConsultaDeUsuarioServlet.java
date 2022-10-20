@@ -48,34 +48,31 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         HttpSession sesion = req.getSession(false);
         Object usr = sesion.getAttribute("usuarioLogeado");
         if (debelistar != null && debelistar.equals("false")) {
-            if (usr != null) {
-				DTUsuario DTusr = null;
+            if (usr != null && ((DTUsuario) usr).getNickname().equals(req.getParameter("id"))) {
+				DTUsuario DUser = null;
 				try {
-					DTusr = contrUsuario.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
+					DUser = contrUsuario.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
 				} catch (ObjetoNoExisteEnTurismoUy e) {
-					// TODO Auto-generated catch block
+					req.setAttribute("motivoDeError",
+							"id de usuario invalido. No existe un usuario con ese nickname");
+					req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
 					e.printStackTrace();
+					return;
+					
 				}
-                req.setAttribute("usuario", DTusr);
+                req.setAttribute("usuario", DUser);
                 req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
             } else {
                 try {
                     DTUsuario DTusr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
                     req.setAttribute("usuario", DTusr);
-//					boolean esProveedor = usr instanceof DTProveedorDetalle;
-//				    if(!esProveedor){
-//				        DTTuristaDetalle tur = (DTTuristaDetalle) usr;
-//				        List<DTSalidaTuristica> dtsSalidas = null;
-//				        for(String sal: tur.getInscripciones()){
-//				        	dtsSalidas.add(contrAct.obtenerDTSalidaTuristica(sal));
-//				        }
-//				        req.setAttribute("salidasInscriptasTur", dtsSalidas);
-//				    }
                     req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
                 } catch (ObjetoNoExisteEnTurismoUy e) {
-                    // TODO Auto-generated catch block
+                	req.setAttribute("motivoDeError",
+							"id de usuario invalido. No existe un usuario con ese nickname");
+					req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
                     e.printStackTrace();
                 }
             }

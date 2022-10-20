@@ -562,7 +562,7 @@ class ControladorActividadTuristicaTest {
                 localDateNow);
         assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getCantidadTuristas(), 1);
         assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getTurista(), nicknameTurista);
-        assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getSalidaTuristica(),
+        assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getSalidaTuristica().getNombre(),
                 nombreSalida);
         assertEquals(contrActTur.obtenerDTInscripcion(nicknameTurista, nombreSalida).getCosto(), costo);
 

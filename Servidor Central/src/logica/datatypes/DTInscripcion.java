@@ -6,10 +6,10 @@ public class DTInscripcion {
 	private LocalDate fechaInscripcion;
 	private int cantidadTuristas;
 	private float costo;
-	private String salida;
+	private DTSalidaTuristica salida;
 	private String turista;
 
-	public DTInscripcion(LocalDate fechaInscripcion, int cantidadTuristas, float costo, String salida, String turista) {
+	public DTInscripcion(LocalDate fechaInscripcion, int cantidadTuristas, float costo, DTSalidaTuristica salida, String turista) {
 		this.fechaInscripcion = fechaInscripcion;
 		this.cantidadTuristas = cantidadTuristas;
 		this.costo = costo;
@@ -25,7 +25,7 @@ public class DTInscripcion {
 		return this.cantidadTuristas;
 	}
 
-	public String getSalidaTuristica() {
+	public DTSalidaTuristica getSalidaTuristica() {
 		return this.salida;
 	}
 

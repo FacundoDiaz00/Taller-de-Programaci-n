@@ -106,7 +106,7 @@ public class Inscripcion {
     }
 
     public DTInscripcion obtenerDTInscripcion() {
-        return new DTInscripcion(fechaInscrpicion, cantidadTuristas, getCostoInscripcion(), getNombreSalida(),
+        return new DTInscripcion(fechaInscrpicion, cantidadTuristas, getCostoInscripcion(), getSalidaTuristica().obtenerDTSalidaTuristica(),
                 getTurista().getNickname());
     }
 }
