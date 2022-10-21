@@ -120,8 +120,6 @@ public class ControladorPaquete implements IControladorPaquete {
     @Override
     public void agregarActividadAPaquete(String nombreAct, String nombrePaq)
             throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
-        // TODO: mirar DCOM
-
         ManejadorPaquete manejadorPaq = ManejadorPaquete.getInstancia();
         Paquete paq = manejadorPaq.getPaquete(nombrePaq);
 
