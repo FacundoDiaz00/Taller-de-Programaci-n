@@ -63,7 +63,7 @@
 	                            
 	                        </a>
 	                        <ul class="dropdown-menu" id="dropDown">
-	                            <li><a class="dropdown-item" href="TODO XXXXXXXXXXXXXXXX">Ver Perfil</a></li>
+	                            <li><a class="dropdown-item" href="ConsultaDeUsuario?id=<%=usuario.getNickname()%>&listar=false">Ver Perfil</a></li>
 	                            <li><a class="dropdown-item" href="index?sesionCerrada=<%=true%>">Cerrar Sesión</a></li>
 	                        </ul>
 	                    </div>
