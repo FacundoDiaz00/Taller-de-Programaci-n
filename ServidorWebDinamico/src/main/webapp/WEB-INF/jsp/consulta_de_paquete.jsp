@@ -77,7 +77,7 @@
 	                    <p><%=paquete.getDescuento()%>%</p>
 	                </div>
 	                <div class="div-doble" id="descripcion">
-	                    <h5 class="label">Descripcion: </h5>
+	                    <h5 class="label">Descripción: </h5>
 	                    <p><%=paquete.getDescrpicion()%></p>
 	                </div>
 	

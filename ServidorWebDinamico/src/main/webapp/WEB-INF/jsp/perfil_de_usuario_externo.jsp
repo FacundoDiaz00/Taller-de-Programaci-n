@@ -195,8 +195,8 @@
 	                                        <div class="card-body cards">
 	                                             <h5 class="card-title"><%=insc.getSalidaTuristica().getNombre()%></h5>
 	                                             <p class="card-text"><b>Cantidad turistas:</b> <%= insc.getCantidadTuristas()%></p>
-	                                             <p class="card-text"><b>Costo de la inscripcion:</b> <%= insc.getCosto()%></p> 
-	                                             <p class="card-text"><b>Fecha de inscripcion:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
+	                                             <p class="card-text"><b>Costo de la inscripción:</b> <%= insc.getCosto()%></p> 
+	                                             <p class="card-text"><b>Fecha de inscripción:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
 	                                             <%if(insc.getCompra() != null) {%>
 		                                             <p class="card-text"><b>Tipo de compra:</b> Con paquete</p>
 	                                             	 <p class="card-text"><b>Comprada con paquete:</b> <%= insc.getCompra().getPaquete().getNombre()%></p>
@@ -242,7 +242,7 @@
 	                                            <h5 class="card-title"><%=sal.getNombre()%></h5>
 	                                            
 	                                            <div class="botonera">
-	                                                <a href="ConsultaSalida?id=<%=sal.getNombre() %>" class="btn btn-primary">Ver mas</a>
+	                                                <a href="ConsultaSalida?id=<%=sal.getNombre() %>" class="btn btn-primary">Ver más</a>
 	                                            </div>
 	                                        </div>
 	                                    </div>
@@ -407,7 +407,7 @@
 		                                            <h5 class="card-title"><%= sal.getNombre() %></h5>
 		                                            <p>Actividad: <%=sal.getActividad() %></p>
 		                                            <div class="botonera">
-				                                        <a href="ConsultaSalida?id=<%=sal.getNombre()%>" class="btn btn-primary">Ver mas</a>
+				                                        <a href="ConsultaSalida?id=<%=sal.getNombre()%>" class="btn btn-primary">Ver más</a>
 				                                    </div>
 		                                        </div>
 		                                    </div>

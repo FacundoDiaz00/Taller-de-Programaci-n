@@ -69,7 +69,7 @@
         		if (proveedorLogueado) { %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
-	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turistica</a></li>
+	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
 	                </ul>	                
         		<% } %>
                 
@@ -77,14 +77,14 @@
 
             <div id="resto-de-la-info-actividad">
                 <div id="descripcion">
-                    <h5 class="">Descripcion</h5>
+                    <h5 class="">Descripción</h5>
                     <p><%= datosActividad.getDescripcion() %>a</p>
                 </div>
 
 
 
                 <div class="div-doble" id="Duracion">
-                    <h5 class="">Duracion: </h5>
+                    <h5 class="">Duración: </h5>
                     <p><%= datosActividad.getDuracion() %> horas</p>
                 </div>
                 <div class="div-doble" id="Costo">
@@ -101,7 +101,7 @@
                 </div>
 
                 <div id="categorias">
-                    <h5 class="">Categorias:</h5>
+                    <h5 class="">Categorías:</h5>
                     <ul>
                         <% if(datosActividad.getCategorias() != null ){
                         		for(String cat : datosActividad.getCategorias() ) { %>
@@ -110,7 +110,7 @@
                         
                             } else {
                         %>
-							<span>Sin categorias</span>                        
+							<span>Sin categorías</span>                        
                         <%
                         	}%>
                        
@@ -123,7 +123,7 @@
         <div id="contenedor-salidas-paquetes">
             <div id="contenedor-items">
                 <div class="card" id="contenedor-salidas-turisticas">
-                    <h2 class="card-title">Salidas Turisticas:</h2>
+                    <h2 class="card-title">Salidas Turísticas:</h2>
 
 					<%
 					
@@ -152,13 +152,13 @@
                                         <div><strong>Lugar salida: </strong><%=salida.getLugarSalida() %> </div>
                                         <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")) %> </div>
                                         <div><strong>Capacidad de turistas: </strong><%=salida.getCantMaxTuristas()%></div>
-                                        <div><strong>Fecha de creacion: </strong><%=salida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></div>
+                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></div>
 
                                     </div>
 
 
                                     <div class="botonera">
-                                        <a href="ConsultaSalida?id=<%=salida.getNombre()%>" class="btn btn-primary">Ver mas</a>
+                                        <a href="ConsultaSalida?id=<%=salida.getNombre()%>" class="btn btn-primary">Ver más</a>
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                                 	</div>
                                     
                                     <div class="botonera">
-                                        <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver mas</a>
+                                        <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
                                     </div>
                                 </div>
                             </div>

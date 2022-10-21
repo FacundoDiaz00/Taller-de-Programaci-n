@@ -25,7 +25,7 @@
 		<% DTSalidaTuristicaDetalle infoSalida = (DTSalidaTuristicaDetalle)request.getAttribute("datosSalida");%>
 
         <div id="titulo">
-            <h1>Consulta de Salida turistica</h1>
+            <h1>Consulta de Salida turística</h1>
         </div>
 
         <div id="info-salida">

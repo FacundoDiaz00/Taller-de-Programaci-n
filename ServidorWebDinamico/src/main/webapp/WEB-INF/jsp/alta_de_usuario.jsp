@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="contenedorinput mb-3">
-                        <span class="input-label">Confirmacion contraseña:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Confirmación contraseña:<span class="obligatorio"> *</span></span>
                         <input id="input-confirmacion-contrasenia" 
                         	   type="password" 
                         	   required 
@@ -95,7 +95,7 @@
 
                     <div class="contenedorinput mb-3">
                     	<% String email = getTextWithoutNull((String)request.getAttribute("email")); %>
-                        <span class="input-label">Correo electronico:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Correo electrónico:<span class="obligatorio"> *</span></span>
                         <input id="input-correo-electronico" 
                          	   type="email" 
                          	   required 
@@ -194,7 +194,7 @@
 
                     <div class="contenedorinput mb-3 <%= tipoUsuario.equals("proveedor") ? "" : "eliminarElemento" %>" id="descripcion-general-field">
                     	<% String descripcionGeneral = getTextWithoutNull((String)request.getAttribute("descripcionGeneral")); %>
-                        <span class="input-label">Descripcion general:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Descripción general:<span class="obligatorio"> *</span></span>
                         <input id="input-descripcionGeneral" 
                         	   type="<%= tipoUsuario.equals("proveedor") ? "text" : "hidden"%>" 
                         	   name="descripcionGeneral" 
