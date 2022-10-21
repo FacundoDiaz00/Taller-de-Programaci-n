@@ -385,7 +385,7 @@
             			</div>
             			<div class="tab-pane fade" id="boton-salidasprov-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="3">
             				<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
-								
+								<h4>Actividad: <%=act.getNombre() %></h4>
 								<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>
 									<div class="card mb-3 imagenSalidas" style="max-width: 800px;">
 		                                <div class="row g-0">
@@ -405,7 +405,7 @@
 		                                    <div class="col-md-8">
 		                                        <div class="card-body cards">
 		                                            <h5 class="card-title"><%= sal.getNombre() %></h5>
-		                                            <p>Actividad: <%=sal.getActividad() %></p>
+ 		                                            <p>Actividad: <%=sal.getActividad() %></p> 
 		                                            <div class="botonera">
 				                                        <a href="ConsultaSalida?id=<%=sal.getNombre()%>" class="btn btn-primary">Ver más</a>
 				                                    </div>

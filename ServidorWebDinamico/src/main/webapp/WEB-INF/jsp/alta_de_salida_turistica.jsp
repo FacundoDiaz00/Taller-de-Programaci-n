@@ -45,7 +45,7 @@
         <div id="contenedorForm">
             <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeSalida">
                 <div class="card-body">
-                    <h5 class="card-title">Alta de Salida Turistica</h5>
+                    <h5 class="card-title">Alta de Salida Turística</h5>
                     
                     <% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
 

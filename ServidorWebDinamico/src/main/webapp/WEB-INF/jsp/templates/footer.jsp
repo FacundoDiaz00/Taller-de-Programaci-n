@@ -6,7 +6,7 @@
          <span class="" style="font-size: 25px; color: Grey;">
          <i class="fas fa-route"></i>
          </span>
-         <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martí­nez, Daniel Padrón y Agustí­n Recoba</small>
+         <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Díaz, Agustín Martí­nez, Daniel Padrón y Agustí­n Recoba</small>
       </div>
     </footer>
     

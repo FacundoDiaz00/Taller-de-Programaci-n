@@ -32,14 +32,14 @@
                 <% 
                 	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
                 	if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DTProveedor){%>
-		                <a href="AltaDeActividad" class="list-group-item">Crear Actividad turistica</a>
+		                <a href="AltaDeActividad" class="list-group-item">Crear Actividad turística</a>
                 	<%}%>
                 
             </div>
 
             <!--Categoroias-->
             <div class="card list-group" id="filtro-categoria">
-                <h5 class="card-title">Categorias</h5>
+                <h5 class="card-title">Categorías</h5>
                 <%	
                 	List<String> categoiras = (List<String>) request.getAttribute("categorias"); 
                     for(String cat : categoiras){
