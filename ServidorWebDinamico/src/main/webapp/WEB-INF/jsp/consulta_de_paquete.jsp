@@ -105,7 +105,7 @@
 			                    <form id="form-comprar" action="CompraPaquete" method="post">
 			                        <div class="contenedorinput mb-3">
 			                            <span class="input-label">Cantidad turistas</span> </span>
-			                            <input name="cant_turistas" type="number" required class="form-control" placeholder="Ingrese la cantidad de turistas para la compra" aria-label="" aria-describedby="basic-addon1">
+			                            <input name="cant_turistas" type="number" min="0" required class="form-control" placeholder="Ingrese la cantidad de turistas para la compra" aria-label="" aria-describedby="basic-addon1">
 			                        </div>
 				                    <div id="invisible_div" style="display: none;">
 				                    	<input type="text" name="nombre_paquete" value="<%=paquete.getNombre()%>">
