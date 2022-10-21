@@ -197,8 +197,13 @@
 	                                             <p class="card-text"><b>Cantidad turistas:</b> <%= insc.getCantidadTuristas()%></p>
 	                                             <p class="card-text"><b>Costo de la inscripcion:</b> <%= insc.getCosto()%></p> 
 	                                             <p class="card-text"><b>Fecha de inscripcion:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
+	                                             <%if(insc.getCompra() != null) {%>
+		                                             <p class="card-text"><b>Tipo de compra:</b> Con paquete</p>
+	                                             	 <p class="card-text"><b>Comprada con paquete:</b> <%= insc.getCompra().getPaquete().getNombre()%></p>
 	                                             
-	                                             
+	                                             <%} else {%>
+													<p class="card-text"><b>Tipo de compra:</b> General</p>                                             
+	                                             <%} %>
 	                                            <div class="botonera">
 	                                                <a href="ConsultaSalida?id=<%=insc.getSalidaTuristica().getNombre() %>" class="btn btn-primary">Ver mas</a>
 	                                            </div>
