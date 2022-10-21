@@ -12,7 +12,7 @@ import logica.datatypes.Imagen;
  */
 
 public class ControladorMaestro implements IControladorMaestro {
-    private static String[][] datosDepartamentos = {
+    public static String[][] datosDepartamentos = {
             { "Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es" },
             { "Maldonado", "División Turismo de la Intendencia", "https://www.maldonado.gub.uy/" },
             { "Rocha",
@@ -40,7 +40,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Montevideo", "División Turismo de la Intendencia", "https://montevideo.gub.uy/areas-tematicas/turismo" }
     };
 
-    private static int[][] fechasNacUsuarios = new int[][] {
+    public static int[][] fechasNacUsuarios = new int[][] {
             { 23, 2, 1927 },
             { 21, 04, 1926 },
             { 31, 12, 1937 },
@@ -56,7 +56,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { 31, 12, 1990 }
     };
 
-    private static String[][] datosUsuarios = new String[][] {
+    public static String[][] datosUsuarios = new String[][] {
             { "lachiqui", "Rosa María", "Martínez", "mirtha.legrand.ok@hotmail.com.ar", "awdrg543", "argentina", null,
                     null },
             { "isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", "r5t6y7u8", "inglesa", null, null },
@@ -80,7 +80,7 @@ public class ControladorMaestro implements IControladorMaestro {
 
     };
 
-    private static String[][] datosActividadesStrings = new String[][] {
+    public static String[][] datosActividadesStrings = new String[][] {
             { "Degusta", "Festival gastronómico de productos locales en Rocha", "Rocha", "Rocha", "washington", },
             { "Teatro con Sabores",
                     "En el mes aniversario del Club Deportivo Unión de Rocha te invitamos a una merienda deliciosa.",
@@ -106,7 +106,7 @@ public class ControladorMaestro implements IControladorMaestro {
                     "Rivera", "Rivera", "eldiez", }
     };
 
-    private static int[][] datosActividadesInteger = new int[][] {
+    public static int[][] datosActividadesInteger = new int[][] {
             { 3, 800, 20, 7, 2022 },
             { 3, 500, 21, 7, 2022 },
             { 2, 400, 1, 8, 2022 },
@@ -120,7 +120,7 @@ public class ControladorMaestro implements IControladorMaestro {
 
     };
 
-    private static String[] datosCategorias = {
+    public static String[] datosCategorias = {
             "Aventura y Deporte",
             "Campo y Naturaleza",
             "Cultura y Patrimonio",
@@ -128,7 +128,7 @@ public class ControladorMaestro implements IControladorMaestro {
             "Turismo Playas"
     };
 
-    private static String[][] actividadesCategorias = new String[][] {
+    public static String[][] actividadesCategorias = new String[][] {
             { "Gastronomia" }, // A1
             { "Cultura y Patrimonio", "Gastronomia" }, // A2
             { "Cultura y Patrimonio" }, // A3
@@ -141,7 +141,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Cultura y Patrimonio" } // A10
     };
 
-    private static String[] actividadesConfirmadas = new String[] {
+    public static String[] actividadesConfirmadas = new String[] {
             "Degusta",
             "Teatro con Sabores",
             "Tour por Colonia del Sacramento",
@@ -150,11 +150,11 @@ public class ControladorMaestro implements IControladorMaestro {
             "Cabalgata en Valle del Lunarejo"
     };
 
-    private static String[] actividadesRechazadas = new String[] {
+    public static String[] actividadesRechazadas = new String[] {
             "Colonia Premium Tour",
             "Descubre Rivera"
     };
-    private static String[][] datosSalidasStrings = new String[][] {
+    public static String[][] datosSalidasStrings = new String[][] {
             { "Degusta", "Degusta Agosto", "Sociedad Agropecuaria de Rocha" },
             { "Degusta", "Degusta Setiembre", "Sociedad Agropecuaria de Rocha" },
             { "Teatro con Sabores", "Teatro con Sabores 1", "Club Deportivo Unión" },
@@ -175,7 +175,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Almuerzo en el Real de San Carlos", "Almuerzo en el Real 1", "Restaurante de la Plaza de Toros" }
     };
 
-    private static int[][] datosSalidasInteger = new int[][] {
+    public static int[][] datosSalidasInteger = new int[][] {
             { 20, 8, 2022, 17, 20, 21, 07, 2022 },
             { 03, 9, 2022, 17, 20, 22, 07, 2022 },
             { 04, 9, 2022, 18, 30, 23, 07, 2022 },
@@ -196,7 +196,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { 30, 10, 2022, 12, 10, 10, 10, 2022 }
     };
 
-    private static boolean[] salidaTieneImg = new boolean[] {
+    public static boolean[] salidaTieneImg = new boolean[] {
             true,
             true,
             true,
@@ -217,20 +217,20 @@ public class ControladorMaestro implements IControladorMaestro {
             true
     };
 
-    private static String[][] datosPaquetesString = new String[][] {
+    public static String[][] datosPaquetesString = new String[][] {
             { "Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía" },
             { "Un día en Colonia",
                     "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toros" },
             { "Valle Del Lunarejo", "Visite un área protegida con un paisaje natural hermoso" }
     };
 
-    private static int[][] datosPaquetesInteger = new int[][] {
+    public static int[][] datosPaquetesInteger = new int[][] {
             { 60, 20, 10, 8, 2022 },
             { 45, 15, 01, 8, 2022 },
             { 60, 15, 15, 9, 2022 }
     };
 
-    private static String[][] asigPaqueteAct = new String[][] {
+    public static String[][] asigPaqueteAct = new String[][] {
             { "Disfrutar Rocha", "Degusta" },
             { "Disfrutar Rocha", "Teatro con Sabores" },
             { "Un día en Colonia", "Tour por Colonia del Sacramento" },
@@ -239,7 +239,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Valle Del Lunarejo", "Cabalgata en Valle del Lunarejo" }
     };
 
-    private static int[][] datosCompras = new int[][] {
+    public static int[][] datosCompras = new int[][] {
             { 2, 15, 8, 2022, 14, 10, 2022, 2080 },
             { 5, 20, 8, 2022, 04, 10, 2022, 5100 },
             { 1, 15, 9, 2022, 30, 10, 2022, 1020 },
@@ -248,7 +248,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { 6, 2, 9, 2022, 17, 10, 2022, 6120 }
     };
 
-    private static String[][] asigPaqueteTurista = new String[][] {
+    public static String[][] asigPaqueteTurista = new String[][] {
             { "lachiqui", "Disfrutar Rocha" },
             { "lachiqui", "Un día en Colonia" },
             { "waston", "Un día en Colonia" },
@@ -257,7 +257,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { "mastropiero", "Un día en Colonia" }
     };
 
-    private static String[][] datosInscripcion = new String[][] {
+    public static String[][] datosInscripcion = new String[][] {
             { "Degusta Agosto", "lachiqui", null },
             { "Degusta Agosto", "elelvis", null },
             { "Tour Colonia del Sacramento 18-09", "lachiqui", null },
@@ -282,7 +282,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Almuerzo en el Real 1", "mastropiero", "Un día en Colonia" }
     };
 
-    private static int[][] datosIntegerInscripcion = new int[][] {
+    public static int[][] datosIntegerInscripcion = new int[][] {
             { 3, 2400, 15, 8, 2022 },
             { 5, 4000, 16, 8, 2022 },
             { 3, 1200, 18, 8, 2022 },
