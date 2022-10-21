@@ -37,10 +37,9 @@ public class AltaActividadServlet extends HttpServlet {
         super();
         this.contActividad = Fabrica.getInstancia().getIControladorActividadTuristica();
     }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getCharacterEncoding() == null) {
+    
+    void accionDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    	if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
 
@@ -55,6 +54,11 @@ public class AltaActividadServlet extends HttpServlet {
 
         req = Utiles.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	this.accionDoGet(req, resp);
 
     }
 
@@ -122,7 +126,7 @@ public class AltaActividadServlet extends HttpServlet {
             System.out.println("Actividad creada con exito");
             req.setAttribute("exito", "exito");
 
-            resp.sendRedirect("AltaDeActividad");
+            this.accionDoGet(req, resp);
             return;
         } catch (NumberFormatException e) {
             System.out.println("No se ingresaron los números de duracion o costo correctamente");

@@ -1,6 +1,7 @@
 
 <%@ page import="java.util.List" %>
 <%@page import="logica.datatypes.DTSalidaTuristica"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -68,13 +69,13 @@
 		                <div class="contenedorinput mb-3" id="comboPaquetes">
 		                    <div class="form-group">
 		                        <label>Paquete:</label>
-		                         <select class="combobox input-large form-control" name="normal">
+		                         <select class="combobox input-large form-control" name="paquete">
 		                         <%	
 					                List<String> paquetes = (List<String>) request.getAttribute("paquetes"); 
 					                    for(String paq : paquetes){ 
 					                    	System.out.println("paq: "+ paq);
 					                %>
-		                            <option value="" selected="selected"><%=paq%></option>
+		                            <option value="<%=paq%>" selected="selected"><%=paq%></option>
 		                            
 		                            <% }%>
 		                        </select>
@@ -109,7 +110,7 @@
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">
                     <h5 class="label">Fecha y hora de partida: </h5>
-                    <p><%=salida.getFechaHoraSalida()%></p>
+                    <p><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm"))%></p>
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="label">Capacidad de turistas: </h5>

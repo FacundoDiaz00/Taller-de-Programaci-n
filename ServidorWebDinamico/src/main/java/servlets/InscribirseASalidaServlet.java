@@ -46,6 +46,11 @@ public class InscribirseASalidaServlet extends HttpServlet {
         }
 
         String nombSalida = (String) req.getParameter("id");
+        
+        if(nombSalida == null) {
+        	req.setAttribute("motivoDeError", "No se ha incluido el id de la salida en los parámetros");
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
+        }
 
         try {
 
@@ -56,13 +61,15 @@ public class InscribirseASalidaServlet extends HttpServlet {
             String nickTuri = "";
             if (turi != null)
                 nickTuri = turi.getNickname();
+            //Todo en un else no hay que sacarlo de la pagina?
             List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(),
                     nickTuri);
             req.setAttribute("paquetes", paquetes);
 
         } catch (ObjetoNoExisteEnTurismoUy e) {
-            req.setAttribute("motivoDeError", "No existe la salida turistica");
+        	req.setAttribute("motivoDeError", "No existe la salida turistica");
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
+            return;
         }
 
         req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);

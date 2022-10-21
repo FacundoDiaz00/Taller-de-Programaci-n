@@ -198,6 +198,7 @@
 	                                             <p class="card-text"><b>Costo de la inscripcion:</b> <%= insc.getCosto()%></p> 
 	                                             <p class="card-text"><b>Fecha de inscripcion:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
 	                                             
+	                                             
 	                                            <div class="botonera">
 	                                                <a href="ConsultaSalida?id=<%=insc.getSalidaTuristica().getNombre() %>" class="btn btn-primary">Ver mas</a>
 	                                            </div>
@@ -419,12 +420,8 @@
 	    <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 	
  
-
-<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.slim.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/perfil_de_usuario.js"></script>
-<script src="${pageContext.request.contextPath}/js/popUp_modificar_usuario.js"></script>
+	<script src="${pageContext.request.contextPath}/js/perfil_de_usuario.js"></script>
+	<script src="${pageContext.request.contextPath}/js/popUp_modificar_usuario.js"></script>
     <script>
         $(document).ready(function(){
             $(".btn").click(function(){
