@@ -41,6 +41,8 @@
 	                    	aria-label="Cantidad de Turistas" 
 	                    	aria-describedby="basic-addon1"
 	                    	value="<%=cantTuristas%>"
+	                    	min="1" 
+	                    	max="999"
 	                    	>
 	                </div>
 	
