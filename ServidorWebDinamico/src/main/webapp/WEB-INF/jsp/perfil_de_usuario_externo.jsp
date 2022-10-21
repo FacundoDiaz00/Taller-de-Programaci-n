@@ -82,13 +82,13 @@
 				    	 
 						<!--"Si es turista se muestra la información de las salidas a las que se inscribió."-->
 			            <li class="nav-item" role="presentation">
-			                <button class="nav-link active" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Salidas</button>
+			                <button class="nav-link active" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Inscripciones a salidas</button>
 			            </li>
 			            <% 
 
 	                    if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){ %>
 			               <li class="nav-item" role="presentation">
-				                <button class="nav-link active" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Paquetes</button>
+				                <button class="nav-link active" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Compras de paquetes</button>
 				            </li>
 	                    <% }%>		
 				    <%}else{
@@ -97,11 +97,11 @@
 				    %>
 						<!--"Si es proveedor/a se muestra información de las actividades turísticas que ofrece (en estado “Confirmada”) y salidas asociadas."-->
 			            <li class="nav-item" role="presentation">
-			                <button class="nav-link active" id="boton-actividades" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Actividades</button>
+			                <button class="nav-link active" id="boton-actividades" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Actividades ofrecidas</button>
 			            </li>
 			            
 			            <li class="nav-item" role="presentation">
-			                <button class="nav-link active" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas</button>
+			                <button class="nav-link active" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas que se proveen</button>
 			            </li>
 				    <%}%>
 		    	</ul>
@@ -288,9 +288,13 @@
 			                            	</div>
 			                                
 			                            	<div id="salidas" style=";margin-left: 10px">
-			                            		<h6>Salidas:</h6>
-			                            		<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
-													<p><%=sal.getNombre() %></p>
+			                            		<% if(! act.getSalidas().isEmpty()) {%>
+				                            		<h6>Salidas:</h6>
+				                            		<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>	
+				                            			<li><a href="ConsultaSalida?id=<%=sal.getNombre() %>"><%=sal.getNombre() %></a></li>
+													<% } %>
+												<% } else {%>
+													<h6>Todavía no hay salidas creadas.</h6>
 												<% } %>
 			                            	</div>
 			                            </div>
