@@ -204,17 +204,17 @@ public class ControladorMaestro implements IControladorMaestro {
             true,
             true,
             false,
-            true,
-            true,
-            true,
-            false,
-            false,
             false,
             false,
             false,
             true,
             false,
-            true
+            true,
+            true,
+            false,
+            true,
+            true,
+            false
     };
 
     private static String[][] datosPaquetesString = new String[][] {
