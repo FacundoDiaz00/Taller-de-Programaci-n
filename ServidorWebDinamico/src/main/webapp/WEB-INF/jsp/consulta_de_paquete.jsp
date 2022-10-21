@@ -88,15 +88,15 @@
 			
 	        <div id="actividades-compra-turisticas" style="max-width: 800px;">
 	        	<% 	
-	        		boolean proveedorLogueado = true; // FIXME cuando haya sesiónes
+		        	boolean turistaLogueado = false;
 	        		try {
-		        		DTTurista tur = (DTTurista)session.getAttribute("usuarioLogeado");
-		        		proveedorLogueado = false;
+		        		DTTurista tur = (DTTurista) session.getAttribute("usuarioLogeado");
+		        		turistaLogueado = tur != null;
 	        		} catch (Exception e) {
 	        			// nada
 	        		}
 	        		// Muestro el form de compra solo si estoy logueado
-	        		if (!proveedorLogueado) { %>
+	        		if (turistaLogueado) { %>	
 			            <div class="card" id="contenedor-compra" style="max-width: 800px;">
 			                <div class="header-card-with-button">
 			                    <h2 class="card-title">Compra paquete</h2>

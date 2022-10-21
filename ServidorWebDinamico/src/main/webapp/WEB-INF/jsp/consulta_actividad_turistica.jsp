@@ -5,6 +5,7 @@
 
 
  --%>
+<%@page import="logica.datatypes.DTProveedor"%>
 <%@page import="logica.datatypes.DTPaquete"%>
 <%@page import="logica.datatypes.DTSalidaTuristica"%>
 <%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
@@ -55,10 +56,23 @@
             <div id="info">
                 <h2><%= datosActividad.getNombre() %></h2>
                 <h6>Creado el <%= datosActividad.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
-                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
-                <ul>
-                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turistica</a></li>
-                </ul>
+                
+                <% 
+                boolean proveedorLogueado = false;
+        		try {
+	        		DTProveedor tur = (DTProveedor) session.getAttribute("usuarioLogeado");
+	        		proveedorLogueado = tur != null;
+        		} catch (Exception e) {
+        			// nada
+        		}
+        		// Muestro el boton si soy turista
+        		if (proveedorLogueado) { %>		            
+	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
+	                <ul>
+	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turistica</a></li>
+	                </ul>	                
+        		<% } %>
+                
             </div>
 
             <div id="resto-de-la-info-actividad">

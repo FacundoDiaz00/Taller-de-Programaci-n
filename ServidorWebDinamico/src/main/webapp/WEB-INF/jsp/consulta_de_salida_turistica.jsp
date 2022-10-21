@@ -1,4 +1,5 @@
 
+<%@page import="logica.datatypes.DTTurista"%>
 <%@page import="logica.datatypes.DTSalidaTuristicaDetalle"%>
 <%@page import="logica.datatypes.DTSalidaTuristica"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -45,10 +46,21 @@
             <div id="info">
                 <h2><%= infoSalida.getNombre() %></h2>
                 <h6>Creado el <%= infoSalida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
-                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
-                <ul>
-                    <li><a href="InscribiseASalida?id=<%=infoSalida.getNombre()%>">Inscribirse a la salida</a></li>
-                </ul>
+                <% 
+                boolean turistaLogueado = false;
+        		try {
+	        		DTTurista tur = (DTTurista) session.getAttribute("usuarioLogeado");
+	        		turistaLogueado = tur != null;
+        		} catch (Exception e) {
+        			// nada
+        		}
+        		// Muestro el boton si soy turista
+        		if (turistaLogueado) { %>		            
+	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
+	                <ul>
+	                    <li><a href="InscribiseASalida?id=<%=infoSalida.getNombre()%>">Inscribirse a la salida</a></li>
+	                </ul>
+        		<% } %>
             </div>
 
             <div id="resto-de-la-info-actividad">
