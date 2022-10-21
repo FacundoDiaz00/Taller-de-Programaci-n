@@ -40,6 +40,10 @@ public class AltaActividadServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+
         // Solo muestro el form si es un proveedor:
 
         DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");

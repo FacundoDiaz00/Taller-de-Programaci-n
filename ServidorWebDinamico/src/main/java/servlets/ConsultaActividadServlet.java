@@ -19,36 +19,40 @@ import utils.Utiles;
  */
 @WebServlet("/ConsultaActividad")
 public class ConsultaActividadServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private IControladorActividadTuristica contAct;
+    private static final long serialVersionUID = 1L;
+    private IControladorActividadTuristica contAct;
 
-	public ConsultaActividadServlet() {
-		super();
-		this.contAct = Fabrica.getInstancia().getIControladorActividadTuristica();
-	}
+    public ConsultaActividadServlet() {
+        super();
+        this.contAct = Fabrica.getInstancia().getIControladorActividadTuristica();
+    }
 
-	/**
-	 * parametros posibles: - id = identificador de la actividad a mostrar
-	 * 
-	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String idActividad = (String) req.getParameter("id");
+    /**
+     * parametros posibles: - id = identificador de la actividad a mostrar
+     * 
+     */
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
 
-		DTActividadTuristicaDetalle infoActividadTuristica;
-		try {
-			infoActividadTuristica = this.contAct.obtenerDTActividadTuristicaDetalle(idActividad);
+        String idActividad = (String) req.getParameter("id");
 
-		} catch (ObjetoNoExisteEnTurismoUy e) {
-			req.setAttribute("motivoDeError",
-					"id de actividad invalido. No existe una actividad turistica con este nombre en el sistema");
-			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-			return;
-		}
+        DTActividadTuristicaDetalle infoActividadTuristica;
+        try {
+            infoActividadTuristica = this.contAct.obtenerDTActividadTuristicaDetalle(idActividad);
 
-		req = Utiles.insertarLoDeSiempre(req);
+        } catch (ObjetoNoExisteEnTurismoUy e) {
+            req.setAttribute("motivoDeError",
+                    "id de actividad invalido. No existe una actividad turistica con este nombre en el sistema");
+            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+            return;
+        }
 
-		req.setAttribute("datosActividad", infoActividadTuristica);
-		req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
+        req = Utiles.insertarLoDeSiempre(req);
 
-	}
+        req.setAttribute("datosActividad", infoActividadTuristica);
+        req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
+
+    }
 }

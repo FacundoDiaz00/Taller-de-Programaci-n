@@ -47,13 +47,16 @@ public class IndexServlet extends HttpServlet {
      * - No se pueden pasar en simultanio el idDepartamento ni el idCategoria
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	
-    	var sessionClosed = req.getParameter("sesionCerrada");
-    	if(sessionClosed != null && sessionClosed.equals("true")) {
-    		HttpSession sesion = req.getSession(false);
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+
+        var sessionClosed = req.getParameter("sesionCerrada");
+        if (sessionClosed != null && sessionClosed.equals("true")) {
+            HttpSession sesion = req.getSession(false);
             sesion.setAttribute("usuarioLogeado", null);
             sesion.invalidate();
-    	}
+        }
 
         var departamentos = contrAct.obtenerIdDepartamentos();
         var categorias = contrAct.obtenerIdCategorias();

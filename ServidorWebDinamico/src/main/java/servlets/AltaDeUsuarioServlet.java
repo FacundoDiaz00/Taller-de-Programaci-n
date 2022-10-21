@@ -45,6 +45,9 @@ public class AltaDeUsuarioServlet extends HttpServlet {
      */
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
 
         req = Utiles.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);

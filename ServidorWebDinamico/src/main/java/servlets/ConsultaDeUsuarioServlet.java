@@ -43,23 +43,27 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+
         String debelistar = req.getParameter("listar");
         req = Utiles.insertarLoDeSiempre(req);
         HttpSession sesion = req.getSession(false);
         Object usr = sesion.getAttribute("usuarioLogeado");
         if (debelistar != null && debelistar.equals("false")) {
             if (usr != null && ((DTUsuario) usr).getNickname().equals(req.getParameter("id"))) {
-				DTUsuario DUser = null;
-				try {
-					DUser = contrUsuario.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
-				} catch (ObjetoNoExisteEnTurismoUy e) {
-					req.setAttribute("motivoDeError",
-							"id de usuario invalido. No existe un usuario con ese nickname");
-					req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
-					e.printStackTrace();
-					return;
-					
-				}
+                DTUsuario DUser = null;
+                try {
+                    DUser = contrUsuario.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
+                } catch (ObjetoNoExisteEnTurismoUy e) {
+                    req.setAttribute("motivoDeError",
+                            "id de usuario invalido. No existe un usuario con ese nickname");
+                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                    e.printStackTrace();
+                    return;
+
+                }
                 req.setAttribute("usuario", DUser);
                 req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
@@ -70,9 +74,9 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
                     req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
 
                 } catch (ObjetoNoExisteEnTurismoUy e) {
-                	req.setAttribute("motivoDeError",
-							"id de usuario invalido. No existe un usuario con ese nickname");
-					req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                    req.setAttribute("motivoDeError",
+                            "id de usuario invalido. No existe un usuario con ese nickname");
+                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
                     e.printStackTrace();
                 }
             }
@@ -90,6 +94,10 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getCharacterEncoding() == null) {
+            request.setCharacterEncoding("UTF-8");
+        }
+
         // TODO Auto-generated method stub
         doGet(request, response);
     }

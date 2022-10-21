@@ -29,6 +29,10 @@ public class IniciarSesionServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+
         HttpSession sesion = req.getSession(false);
         Object usr = sesion.getAttribute("usuarioLogeado");
         if (usr != null) {
@@ -40,6 +44,10 @@ public class IniciarSesionServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+
         String password = (String) req.getParameter("password");
         String email = (String) req.getParameter("email");
         String nickname = (String) req.getParameter("nickname");

@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -45,8 +43,13 @@ public class AltaSalidaServlet extends HttpServlet {
     }
 
     String nomActividad;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+
         // Solo muestro el form si es un proveedor:
 
         DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
@@ -57,11 +60,11 @@ public class AltaSalidaServlet extends HttpServlet {
         }
         nomActividad = (String) req.getParameter("id");
         try {
-        	DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
-        	req.setAttribute("datosActividad", datosActividad);
-        
-        } catch (ObjetoNoExisteEnTurismoUy e){
-        	req.setAttribute("motivoDeError", "No existe la actividad turistica");
+            DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
+            req.setAttribute("datosActividad", datosActividad);
+
+        } catch (ObjetoNoExisteEnTurismoUy e) {
+            req.setAttribute("motivoDeError", "No existe la actividad turistica");
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_actividad.jsp").forward(req, resp);
         }
 
@@ -85,7 +88,7 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
-        
+
         String actividad = req.getParameter("id");
         String nombre = req.getParameter("nombre");
         String fechaSalida = req.getParameter("fechaSalida");
@@ -99,12 +102,10 @@ public class AltaSalidaServlet extends HttpServlet {
         System.out.println(lugar);
         System.out.println(cantMaxTur);
 
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime fechaYHoraSalida = LocalDateTime.parse(fechaSalida + " " + horaSalida, formatter);
         LocalDate fechaDeAlta = null;
-        
-        
+
         Part filePart = req.getPart("img");
 
         boolean hayImagen = filePart.getSize() > 0;
@@ -120,7 +121,7 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         try {
-            cat.altaSalidaTuristica(nomActividad, nombre, fechaYHoraSalida , fechaDeAlta, lugar,
+            cat.altaSalidaTuristica(nomActividad, nombre, fechaYHoraSalida, fechaDeAlta, lugar,
                     Integer.valueOf(cantMaxTur), imgDt);
             if (hayImagen) {
                 // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
@@ -143,9 +144,9 @@ public class AltaSalidaServlet extends HttpServlet {
             System.out.println("Salida creada con exito");
             req.setAttribute("exito", "exito");
             req = Utiles.insertarLoDeSiempre(req);
-            resp.sendRedirect("ConsultaActividad?id="+nomActividad);
+            resp.sendRedirect("ConsultaActividad?id=" + nomActividad);
             return;
-            
+
         } catch (NumberFormatException e) {
             System.out.println("No se ingresaron los números de duracion o costo correctamente");
             req.setAttribute("motivoDeError",
@@ -160,7 +161,7 @@ public class AltaSalidaServlet extends HttpServlet {
                     "La fecha de la salida debe ser posterior a la fecha actual");
         } catch (SalidaYaRegistradaException e) {
             System.out.println("La actividad con nombre '" + nombre
-                   + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
+                    + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Actividad")) {
@@ -177,7 +178,7 @@ public class AltaSalidaServlet extends HttpServlet {
         // En este punto si o si hay error
         req.setAttribute("actividad", actividad);
         req.setAttribute("nombre", nombre);
-        //req.setAttribute("fechaYHoraSalida", fechaYHoraSalida);
+        // req.setAttribute("fechaYHoraSalida", fechaYHoraSalida);
         req.setAttribute("lugar", lugar);
         req.setAttribute("cantMaxTur", cantMaxTur);
 

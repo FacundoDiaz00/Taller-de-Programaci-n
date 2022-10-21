@@ -31,6 +31,9 @@ public class CompraPaqueteServlet extends HttpServlet {
      * 
      */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
 
         int cant_turistas = Integer.valueOf(req.getParameter("cant_turistas"));
         String nombre_paquete = (String) req.getParameter("nombre_paquete");
