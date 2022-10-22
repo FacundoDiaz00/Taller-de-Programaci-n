@@ -51,6 +51,8 @@
 	                <div class="contenedorinput mb-3">
 	                    <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
 	                    
+	                    <%	List<String> paquetes = (List<String>) request.getAttribute("paquetes"); %>
+	                    
 		                 <div class="form-check">
 		                        <input class="form-check-input" value="0" type="radio" name="formaPago" id="checkGeneral" checked>
 		                        <label class="form-check-label" for="checkGeneral">
@@ -58,11 +60,23 @@
 		                        </label>
 		                </div>
 		                
-	                    <div class="form-check">
-	                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
-	                        <label class="form-check-label" for="checkPaquete">
+	                    <div class="form-check" >
+	                    	<label class="form-check-label" for="checkPaquete">
 	                            Por Paquete
 	                        </label>
+	                        <%
+	                        if(paquetes.toArray().length > 0){
+	                        %>
+	                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
+	                       <%
+	                        }else{
+	                        %>
+	                        <input class="form-check-input"type="radio" disabled="disabled">
+	                        <b style="color: red; margin-left: 20px">No cuenta con ningún paquete disponible para la inscripción</b>
+	                        <%
+	                        }
+	                        %>
+	                        
 	                    </div> 
 	                    
 		           </div>
@@ -70,12 +84,12 @@
 		                
 		                <div class="contenedorinput mb-3" id="comboPaquetes">
 		                    <div class="form-group">
+                    	<%	
+		                    for(String paq : paquetes){ 
+			                %>
 		                        <label>Paquete:</label>
-		                         <select class="combobox input-large form-control" name="paquete">
-		                         <%	
-					                List<String> paquetes = (List<String>) request.getAttribute("paquetes"); 
-				                    for(String paq : paquetes){ 
-					                %>
+		                         <select class="combobox input-large form-control" name="paquete" >
+
 		                            	<option value="<%=paq%>" selected="selected"><%=paq%></option>
 		                            <% }%>
 		                        </select>
