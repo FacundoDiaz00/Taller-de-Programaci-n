@@ -3,7 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
+<%@page import="logica.datatypes.DTUsuario"%>
+<%@page import="logica.datatypes.DTProveedor"%>
+<%@page import="logica.datatypes.DTTurista"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +29,11 @@
                             <!-- Button HTML (to Trigger Modal) -->
                             <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
 
+                            
+                            <%
+                            DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");
+                            if (usuario instanceof DTProveedor){
+                            %>	
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
@@ -102,7 +109,29 @@
 	                                    	
 	                                </div>
 	                            </div>
-	                        </div>   
+	                        </div>
+	                        
+	                        
+	                        
+	                        
+                            <% } 
+                            else { 
+                            %>
+                            	
+                            <%}
+                            %>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
 					
 
 
