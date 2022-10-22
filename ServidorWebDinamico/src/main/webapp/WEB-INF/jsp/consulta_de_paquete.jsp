@@ -168,5 +168,18 @@
 
 <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 
+<%if(request.getAttribute("motivoDeError") != null){ %>
+	 <script>
+	 	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+	 	generarMensaje('error', "Error al comprar el paquete" , mensajeError , 200);
+	 </script>
+<%} %>
+
+<%if(request.getAttribute("exito") != null){ %>
+	 <script>
+	 	generarMensaje('success', "Operacion completada" , "Se ha realizado una compra de este paquete." , 500);
+	 </script>
+<%} %>
+
 </body>
 </html>

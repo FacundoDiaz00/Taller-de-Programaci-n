@@ -226,7 +226,13 @@
 
     </section>
 
- <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
+ <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>    
+    <%if(request.getAttribute("exito") != null){ %>
+	    <script>
+	    	generarMensaje('success', "Operacion completada" , "Se ha realizado un alta de salida satisfactoriamente" , 500);
+	    </script>
+    <%} %>
+ 
 
 </main>
 

@@ -12,8 +12,10 @@ import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaquetesSinActividadesExcepcion;
 import logica.controladores.Fabrica;
+import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
+import utils.Utiles;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -39,12 +41,27 @@ public class CompraPaqueteServlet extends HttpServlet {
         String nombre_paquete = (String) req.getParameter("nombre_paquete");
         DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
         String nickTuri = "";
-        if (turi != null)
+        if (turi != null && turi instanceof DTTurista) {
             nickTuri = turi.getNickname();
+        } else {
+            req = Utiles.insertarLoDeSiempre(req);
+            resp.sendRedirect("index");
+            return;
+        }
 
         try {
             Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickTuri, nombre_paquete,
                     cant_turistas, null);
+            System.out.println("Compra creada con exito");
+            req.setAttribute("exito", "exito");
+
+            DTPaqueteDetalles paquete = Fabrica.getInstancia().getIControladorPaquete()
+                    .obtenerDTPaqueteDetalle(nombre_paquete);
+            req.setAttribute("paquete", paquete);
+
+            req = Utiles.insertarLoDeSiempre(req);
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_paquete.jsp").forward(req, resp);
+            return;
         } catch (ObjetoNoExisteEnTurismoUy e) {
             String objetoFaltante = e.getClaseObjetoFaltante();
             // if (objetoFaltante == "Usuario")

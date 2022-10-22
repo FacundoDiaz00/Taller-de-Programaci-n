@@ -77,9 +77,6 @@ public class AltaActividadServlet extends HttpServlet {
         }
 
         String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
-        // TODO: generar este dato a partir
-        // de la
-        // sesión
         String departamento = req.getParameter("departamento");
         String nombre = req.getParameter("nombre");
         String descripcion = req.getParameter("descripcion");

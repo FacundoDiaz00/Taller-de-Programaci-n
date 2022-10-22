@@ -46,9 +46,9 @@ public class InscribirseASalidaServlet extends HttpServlet {
         }
 
         String nombSalida = (String) req.getParameter("id");
-        
-        if(nombSalida == null) {
-        	req.setAttribute("motivoDeError", "No se ha incluido el id de la salida en los parámetros");
+
+        if (nombSalida == null) {
+            req.setAttribute("motivoDeError", "No se ha incluido el id de la salida en los parámetros");
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
         }
 
@@ -59,15 +59,20 @@ public class InscribirseASalidaServlet extends HttpServlet {
             req = Utiles.insertarLoDeSiempre(req);
             DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
             String nickTuri = "";
-            if (turi != null)
+            if (turi != null) {
                 nickTuri = turi.getNickname();
-            //Todo en un else no hay que sacarlo de la pagina?
+            } else {
+                req = Utiles.insertarLoDeSiempre(req);
+                resp.sendRedirect("index");
+                return;
+            }
+
             List<String> paquetes = this.contrAT.obtenerIdComprasDisponiblesParaInscripcion(salida.getActividad(),
                     nickTuri);
             req.setAttribute("paquetes", paquetes);
 
         } catch (ObjetoNoExisteEnTurismoUy e) {
-        	req.setAttribute("motivoDeError", "No existe la salida turistica");
+            req.setAttribute("motivoDeError", "No existe la salida turistica");
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida.jsp").forward(req, resp);
             return;
         }
@@ -80,13 +85,17 @@ public class InscribirseASalidaServlet extends HttpServlet {
             req.setCharacterEncoding("UTF-8");
         }
 
-        System.out.println("Entré al post");
         String formaDePago = (String) req.getParameter("formaPago");
         int cantTuristas = Integer.parseInt(req.getParameter("cantTuristas"));
         DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
         String nickTuri = "";
-        if (turi != null)
+        if (turi != null && turi instanceof DTTurista) {
             nickTuri = turi.getNickname();
+        } else {
+            req = Utiles.insertarLoDeSiempre(req);
+            resp.sendRedirect("index");
+            return;
+        }
         LocalDate fechaInscripcion = LocalDate.now();
         String nombrePaquete = null;
         if (formaDePago.equals("1")) {

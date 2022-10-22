@@ -143,8 +143,12 @@ public class AltaSalidaServlet extends HttpServlet {
 
             System.out.println("Salida creada con exito");
             req.setAttribute("exito", "exito");
+
             req = Utiles.insertarLoDeSiempre(req);
-            resp.sendRedirect("ConsultaActividad?id=" + nomActividad);
+
+            var infoActividadTuristica = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
+            req.setAttribute("datosActividad", infoActividadTuristica);
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
             return;
 
         } catch (NumberFormatException e) {
