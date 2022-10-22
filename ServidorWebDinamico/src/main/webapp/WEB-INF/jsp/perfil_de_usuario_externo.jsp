@@ -114,7 +114,12 @@
 	                        <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 	                        <p class="card-text"><b>Email:</b> <%= usr.getCorreo()%></p>
 	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%= usr.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
-	
+							
+							<% if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()) { %>
+								<jsp:include page="/WEB-INF/jsp/modificar_usuario.jsp"/>
+							<% } %>
+							
+							
 	                    </div>
 	                </div><!-- Cierra perfil -->
 	                <%

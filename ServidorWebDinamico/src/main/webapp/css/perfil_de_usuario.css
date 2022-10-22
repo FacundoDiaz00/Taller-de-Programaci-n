@@ -70,5 +70,5 @@
 .popUp{
     display: grid;
     grid-template-columns: 0.5fr 0.5fr;
-    grid-column-gap: 20px;
+    grid-column-gap: 70px;
 }
