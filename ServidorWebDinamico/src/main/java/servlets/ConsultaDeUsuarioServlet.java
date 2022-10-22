@@ -65,13 +65,13 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
                 }
                 req.setAttribute("usuario", DUser);
-                req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
+                req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario.jsp").forward(req, res);
 
             } else {
                 try {
                     DTUsuario DTusr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
                     req.setAttribute("usuario", DTusr);
-                    req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario_externo.jsp").forward(req, res);
+                    req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario.jsp").forward(req, res);
 
                 } catch (ObjetoNoExisteEnTurismoUy e) {
                     req.setAttribute("motivoDeError",

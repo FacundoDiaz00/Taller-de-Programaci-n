@@ -4,6 +4,8 @@
 	DTUsuario "usr"
 
  --%>
+<%@page import="logica.datatypes.DTTurista"%>
+<%@page import="logica.datatypes.DTProveedor"%>
 <%@page import="logica.datatypes.DTInscripcion"%>
 <%@page import="logica.datatypes.DTUsuario"%>
 <%@page import="logica.datatypes.DTCompra"%>
@@ -109,12 +111,25 @@
 	                    <div class="card-body cards">
 	                        <h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 	                        <p class="text"><b><%= usr.getNombre()%> / <%= usr.getNickname()%></b></p>
+	                        <p class="card-text"><b>Tipo de usuario:</b> <%= usr instanceof DTProveedor ? "Proveedor" : "Turista"%></p>
 	                        <p class="card-text"><b>Nickname:</b> <%= usr.getNickname()%></p>
 	                        <p class="card-text"><b>Nombre: </b><%= usr.getNombre()%></p>
 	                        <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 	                        <p class="card-text"><b>Email:</b> <%= usr.getCorreo()%></p>
 	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%= usr.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
-	
+	                        <% if(usr instanceof DTProveedor){ 
+	                        	DTProveedor provData = (DTProveedor) usr;
+	                        %>
+	                        	<p class="card-text"><b>Descripcion:</b> <%= provData.getDescrpicionGeneral()%></p>
+	                        	<p class="card-text"><b>Url:</b> <%= provData.getLink() == null ? "Sin informacion" : provData.getLink()%></p>
+	                        
+	                        <% }else if(usr instanceof DTTurista){ 
+	                        	DTTurista turiData = (DTTurista) usr;
+	                        %>
+	                        <p class="card-text"><b>Nacionalidad:</b> <%= turiData.getNacionalidad()%></p>
+	                      
+							<%}%>	
+
 	                    </div>
 	                </div><!-- Cierra perfil -->
 	                <%
@@ -153,7 +168,7 @@
 							                                <p class="card-text"><b>Cantidad turistas:</b> <%= cmp.getCantTuristas()%></p>
 							                                <p class="card-text"><b>Fecha de compra:</b> <%= cmp.getFechaCompra().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
 							                                <p class="card-text"><b>Fecha de vencimiento:</b> <%= cmp.getVencimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
-							                                <p class="card-text"><b>Costo:</b> <%= cmp.getCosto()%></p>
+							                                <p class="card-text"><b>Costo:</b> <%= cmp.getCosto()%>$</p>
 							                                <div class="botonera">
 							                                    <a href="ConsultaPaquete?id=<%=cmp.getPaquete().getNombre()%>" class="btn btn-primary">Ver mas</a>
 							                                </div>
@@ -193,7 +208,7 @@
 	                                        <div class="card-body cards">
 	                                             <h5 class="card-title"><%=insc.getSalidaTuristica().getNombre()%></h5>
 	                                             <p class="card-text"><b>Cantidad turistas:</b> <%= insc.getCantidadTuristas()%></p>
-	                                             <p class="card-text"><b>Costo de la inscripción:</b> <%= insc.getCosto()%></p> 
+	                                             <p class="card-text"><b>Costo de la inscripción:</b> <%= insc.getCosto()%>$</p> 
 	                                             <p class="card-text"><b>Fecha de inscripción:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
 	                                             <%if(insc.getCompra() != null) {%>
 		                                             <p class="card-text"><b>Tipo de compra:</b> Con paquete</p>
