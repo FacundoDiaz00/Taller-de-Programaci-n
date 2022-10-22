@@ -302,7 +302,7 @@ public class ControladorMaestro implements IControladorMaestro {
             { 1, 340, 5, 9, 2022 },
             { 1, 680, 5, 9, 2022 },
             { 2, 680, 2, 10, 2022 },
-            { 2, 1360, 2, 10, 2022 },
+            { 2, 1360, 11, 10, 2022 },
             { 4, 1360, 12, 10, 2022 },
             { 4, 2720, 12, 10, 2022 },
 
@@ -397,12 +397,8 @@ public class ControladorMaestro implements IControladorMaestro {
         for (int i = 0; i < datosInscripcion.length; i++) {
             var datosStr = datosInscripcion[i];
             var datosInt = datosIntegerInscripcion[i];
-            try {
-                icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
-                        LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
-            } catch (TurismoUyException e) {
-                // nada
-            }
+            icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
+                    LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
         }
     }
 }

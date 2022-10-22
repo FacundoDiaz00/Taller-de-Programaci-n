@@ -1,6 +1,7 @@
 package test.controladores;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,8 +22,7 @@ import logica.datatypes.DTProveedorDetallePrivado;
 import logica.datatypes.DTTuristaDetallePrivado;
 
 class ControladorMaestroTest {
-    private static IControladorMaestro contrMaestro = null;
-
+    private static IControladorMaestro contrMaestro;
     private static String[][] datosDepartamentos = {
             { "Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es" },
             { "Maldonado", "División Turismo de la Intendencia", "https://www.maldonado.gub.uy/" },
@@ -202,17 +202,17 @@ class ControladorMaestroTest {
             true,
             true,
             false,
-            true,
-            true,
-            true,
-            false,
-            false,
             false,
             false,
             false,
             true,
             false,
-            true
+            true,
+            true,
+            false,
+            true,
+            true,
+            false
     };
 
     private static String[][] datosPaquetesString = new String[][] {
@@ -300,7 +300,7 @@ class ControladorMaestroTest {
             { 1, 340, 5, 9, 2022 },
             { 1, 680, 5, 9, 2022 },
             { 2, 680, 2, 10, 2022 },
-            { 2, 1360, 2, 10, 2022 },
+            { 2, 1360, 11, 10, 2022 },
             { 4, 1360, 12, 10, 2022 },
             { 4, 2720, 12, 10, 2022 },
 
@@ -312,7 +312,7 @@ class ControladorMaestroTest {
     }
 
     @Test
-    void testGenerarDosVecesDatosDePrueba() throws TurismoUyException {
+    void testGenerarDatosDePrueba() throws TurismoUyException {
         contrMaestro.generarDatosDePrueba();
 
         IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
@@ -399,8 +399,10 @@ class ControladorMaestroTest {
             assertEquals(salStr[2], salida.getLugarSalida());
             assertEquals(salInt[4], salida.getCantMaxTuristas());
 
-            if (img != null)
+            if (img != null) {
+                assertNotEquals(null, salida.getImg());
                 assertEquals(img, salida.getImg().getPath());
+            }
 
             assertThrows(TurismoUyException.class,
                     () -> icat.altaSalidaTuristica(salStr[0], salStr[1],
