@@ -81,5 +81,7 @@ public interface IControladorPaquete {
 
     List<DTPaquete> obtenerDTPaquetes();
 
+    List<DTPaquete> obtenerDTPaquetesPorCategoria(String categoria);
+
     DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) throws ObjetoNoExisteEnTurismoUy;
 }

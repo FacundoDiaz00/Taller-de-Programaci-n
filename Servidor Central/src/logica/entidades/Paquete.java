@@ -155,6 +155,12 @@ public class Paquete {
         this.categorias = cats;
     }
 
+    public List<String> getCategorias() {
+        List<String> categoriasString = new ArrayList<String>();
+        categorias.forEach((Categoria categ) -> categoriasString.add(categ.getNombre()));
+        return categoriasString;
+    }
+
     public float getCostoPorTurista() {
         float ret = 0.0f;
 

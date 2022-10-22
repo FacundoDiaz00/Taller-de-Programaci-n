@@ -80,11 +80,14 @@ public class IndexServlet extends HttpServlet {
         categoriaElegida = (String) req.getAttribute("idCategoria");
 
         List<DTActividadTuristica> actividades;
+        List<DTPaquete> paquetes;
 
         try {
             if (departamentoElegido != null) {
+                paquetes = contrPack.obtenerDTPaquetes(); // No se filtra
                 actividades = contrAct.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(departamentoElegido);
             } else {
+                paquetes = contrPack.obtenerDTPaquetesPorCategoria(categoriaElegida);
                 actividades = contrAct.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida);
             }
         } catch (ObjetoNoExisteEnTurismoUy e) {
@@ -92,8 +95,6 @@ public class IndexServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
             return;
         }
-
-        List<DTPaquete> paquetes = contrPack.obtenerDTPaquetes();
 
         req.setAttribute("departamentos", departamentos);
         req.setAttribute("categorias", categorias);

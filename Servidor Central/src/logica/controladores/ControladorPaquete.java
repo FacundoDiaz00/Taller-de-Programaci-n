@@ -87,6 +87,18 @@ public class ControladorPaquete implements IControladorPaquete {
     }
 
     @Override
+    public List<DTPaquete> obtenerDTPaquetesPorCategoria(String categoria) {
+        List<DTPaquete> ret = new ArrayList<DTPaquete>();
+
+        ManejadorPaquete.getInstancia().getPaquetes().forEach((Paquete p) -> {
+            if (p.getCategorias().contains(categoria))
+                ret.add(p.obtenerDTPaquete());
+        });
+
+        return ret;
+    }
+
+    @Override
     public List<String> obtenerIdPaquetes() {
         ManejadorPaquete manejadorPaq = ManejadorPaquete.getInstancia();
         return new ArrayList<String>(manejadorPaq.obtenerIdPaquetes());
