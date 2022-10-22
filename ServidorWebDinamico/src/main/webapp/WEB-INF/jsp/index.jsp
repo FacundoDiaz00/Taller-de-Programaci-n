@@ -23,7 +23,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+    <link rel="stylesheet" href="css/index.css">
 
 	
 </head>
@@ -58,8 +58,8 @@
 											path += actividad.getImg().getPath();
 										}							
 										%>
-			                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
-			                            <!-- Falta el manejo de foto de la verdadera actividad -->
+			                            <img src="img<%=path%>" class="img-fluid rounded-start">
+			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
@@ -102,7 +102,7 @@
 								path += pack.getImg().getPath();
 							}							
 							%>
-                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
+                            <img src="img<%=path%>" class="img-fluid rounded-start">
                             <!-- Falta el manejo de foto de la verdadero paquete-->
                         </div>
                         <div class="col-md-8">

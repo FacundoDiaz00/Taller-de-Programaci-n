@@ -10,14 +10,14 @@
     <meta charset="UTF-8">
     <title>Turismo UY</title>
 
-<!--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilosComun.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/alta_de_actividad_turistica.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/fontawesome-free-6.2.0-web/css/all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/estilosComun.css">
+    <link rel="stylesheet" href="css/alta_de_actividad_turistica.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
 
 
 
@@ -43,7 +43,7 @@
     	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         
         <div id="contenedorForm">
-            <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeSalida">
+            <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="AltaDeSalida">
                 <div class="card-body">
                     <h5 class="card-title">Alta de Salida Turística</h5>
                     

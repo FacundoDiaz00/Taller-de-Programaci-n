@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_usuario.css">
+    <link rel="stylesheet" href="css/consulta_de_usuario.css">
     <title>Turismo UY</title>
 </head>
 

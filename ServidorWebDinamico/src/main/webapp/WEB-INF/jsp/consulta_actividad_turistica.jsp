@@ -17,7 +17,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>   
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_actividad_turistica.css">
+    <link rel="stylesheet" href="css/consulta_actividad_turistica.css">
 
     
 </head>
@@ -50,7 +50,7 @@
 					path += datosActividad.getImg().getPath();
 				}							
 				%>
-                <img src="${pageContext.request.contextPath}/img<%=path%>" alt="">
+                <img src="img<%=path%>" alt="">
             </div>
 
             <div id="info">
@@ -143,7 +143,7 @@
 									pathSalida += salida.getImg().getPath();
 								}							
 								%>
-				                <img src="${pageContext.request.contextPath}/img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
+				                <img src="img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -196,7 +196,7 @@
 									pathPack += pack.getImg().getPath();
 								}							
 								%>
-				                <img src="${pageContext.request.contextPath}/img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+				                <img src="img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
                                 
                             </div>
                             <div class="col-md-8">

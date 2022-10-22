@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inscribirse_a_salida.css">
+    <link rel="stylesheet" href="css/inscribirse_a_salida.css">
 
 	
 </head>
@@ -26,7 +26,7 @@
                 
           
             
-            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="${pageContext.request.contextPath}/InscribiseASalida"> 
+            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="InscribiseASalida"> 
 					<div style="margin: 10px">
 					
 					<div class="contenedorinput mb-3">
@@ -119,7 +119,7 @@
 			path += salida.getImg().getPath();
 		}							
 		%>	
-            <img src="${pageContext.request.contextPath}/img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
+            <img src="img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">

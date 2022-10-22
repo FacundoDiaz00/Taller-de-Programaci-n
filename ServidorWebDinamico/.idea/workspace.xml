@@ -4,7 +4,6 @@
     <list default="true" id="85a92233-41ec-479b-8676-106a5d820c1f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/datatypes/DTInscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/datatypes/DTInscripcion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/logica/entidades/Inscripcion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Servidor Central/src/test/controladores/ControladorActividadTuristicaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/servidorCentral.jar" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/servidorCentral.jar" afterDir="false" />
     </list>
@@ -56,7 +55,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.All in Servidor Central (2)">
+  <component name="RunManager" selected="JUnit.All in Servidor Central (5)">
     <configuration name="All in Servidor Central (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
@@ -73,7 +72,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in Servidor Central (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Servidor Central (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -81,7 +80,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in Servidor Central (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Servidor Central (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Servidor Central" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -110,11 +109,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Servidor Central (5)" />
         <item itemvalue="JUnit.All in Servidor Central (2)" />
         <item itemvalue="JUnit.All in Servidor Central (1)" />
         <item itemvalue="JUnit.All in Servidor Central (4)" />
         <item itemvalue="JUnit.All in Servidor Central" />
-        <item itemvalue="JUnit.All in Servidor Central (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -140,7 +139,8 @@
       <workItem from="1665520675507" duration="800000" />
       <workItem from="1666121689340" duration="7380000" />
       <workItem from="1666218796823" duration="648000" />
-      <workItem from="1666243904242" duration="1844000" />
+      <workItem from="1666243904242" duration="2437000" />
+      <workItem from="1666328247449" duration="314000" />
     </task>
     <servers />
   </component>
@@ -209,6 +209,7 @@
       <FILTER>test.controladores.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__2_.ic" NAME="All in Servidor Central (2) Coverage Results" MODIFIED="1666244520367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ServidorWebDinamico$All_in_Servidor_Central__5_.ic" NAME="All in Servidor Central (5) Coverage Results" MODIFIED="1666328498597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ServidorWebDinamico$ControladorPaqueteTest_testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete.ic" NAME="ControladorPaqueteTest.testObtenerIdActividadesDeDepartamentoQueNoEstanEnPaquete Coverage Results" MODIFIED="1666126436785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.controladores.*</FILTER>
     </SUITE>

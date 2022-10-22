@@ -30,7 +30,7 @@
 <head>
     <meta charset="UTF-8">
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_usuario.css">
+    <link rel="stylesheet" href="css/consulta_de_usuario.css">
     <title>Turismo UY</title>
 </head>
 <body>
@@ -144,7 +144,7 @@
 															path += cmp.getPaquete().getImg().getPath();
 														}							
 														%>
-							                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
+							                            <img src="img<%=path%>" class="img-fluid rounded-start">
 							                            <!-- Falta el manejo de foto de la verdadero paquete-->
 							                        </div>
 							                        <div class="col-md-8">
@@ -186,7 +186,7 @@
 												pathImagen += insc.getSalidaTuristica().getImg().getPath();
 											}							
 											%>
-							                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+							                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
 	                                    
 	                                    </div>
 	                                    <div class="col-md-8">
@@ -232,7 +232,7 @@
 												pathImagen += sal.getImg().getPath();
 											}							
 											%>
-							                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+							                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
 	                                    
 	                                    </div>
 	                                    <div class="col-md-8">
@@ -280,7 +280,7 @@
 											pathImagen += act.getImg().getPath();
 										}							
 										%>
-						                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+						                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
@@ -327,7 +327,7 @@
 													pathImagen += acti.getImg().getPath();
 												}							
 												%>
-								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+								                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 					                        </div>
 					                        <div class="col-md-8">
 					                            <div class="card-body">
@@ -360,7 +360,7 @@
 													pathImagen += acti.getImg().getPath();
 												}							
 												%>
-								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+								                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 					                        </div>
 					                        <div class="col-md-8">
 					                            <div class="card-body">
@@ -396,7 +396,7 @@
 														pathSalida += sal.getImg().getPath();
 													}							
 													%>
-												    <img src="${pageContext.request.contextPath}/img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+												    <img src="img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
 												</div>
 		                                    </div>
 		                                    <div class="col-md-8">
@@ -422,8 +422,8 @@
 	    <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 	
  
-	<script src="${pageContext.request.contextPath}/js/perfil_de_usuario.js"></script>
-	<script src="${pageContext.request.contextPath}/js/popUp_modificar_usuario.js"></script>
+	<script src="js/perfil_de_usuario.js"></script>
+	<script src="js/popUp_modificar_usuario.js"></script>
     <script>
         $(document).ready(function(){
             $(".btn").click(function(){

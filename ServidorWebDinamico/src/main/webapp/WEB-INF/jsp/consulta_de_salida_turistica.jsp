@@ -10,7 +10,7 @@
 <head>
 
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>  	    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_salida_turistica.css">
+    <link rel="stylesheet" href="css/consulta_de_salida_turistica.css">
     
 </head>
 <body>
@@ -40,7 +40,7 @@
 						pathSalida += infoSalida.getImg().getPath();
 					}							
 					%>
-				    <img src="${pageContext.request.contextPath}/img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+				    <img src="img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
             </div>
 
             <div id="info">
@@ -98,7 +98,7 @@
 									path += infoSalida.getDtActividad().getImg().getPath();
 								}							
 								%>
-	                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
+	                            <img src="img<%=path%>" class="img-fluid rounded-start">
 	                            <!-- Falta el manejo de foto de la verdadero paquete-->
 	                        </div>
 	                        <div class="col-md-8">
