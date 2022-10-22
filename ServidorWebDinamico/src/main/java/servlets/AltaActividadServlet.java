@@ -120,26 +120,20 @@ public class AltaActividadServlet extends HttpServlet {
                 imgFileStream.close();
             }
 
-            System.out.println("Actividad creada con exito");
             req.setAttribute("exito", "exito");
 
             this.accionDoGet(req, resp);
             return;
         } catch (NumberFormatException e) {
-            System.out.println("No se ingresaron los números de duracion o costo correctamente");
             req.setAttribute("motivoDeError",
                     "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
         } catch (ActividadTuristicaYaRegistradaException e) {
-            System.out.println("La actividad con nombre '" + nombre
-                    + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Categoria")) {
-                System.out.println("No existe una de las categorias selecionadas");
                 req.setAttribute("motivoDeError",
                         "No existe una de las categorias selecionadas, cambielo y pruebe nuevamente");
             } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
-                System.out.println("No existe el departamento seleccionado");
                 req.setAttribute("motivoDeError",
                         "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
             }

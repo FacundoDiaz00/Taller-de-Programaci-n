@@ -121,8 +121,6 @@ public class AltaDeUsuarioServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
             return;
         } catch (UsuarioYaRegistradoException e) {
-            System.out.println("El usuario con nickname " + nickname + "y correo " + email
-                    + " no se puede crear ya que tiene alguna de sus dos claves repetidas");
             req.setAttribute("motivoDeError",
                     "Ya existe un usuario con este nickname o con ese correo, cambie alguno de estos y pruebe nuevamente");
         }

@@ -76,7 +76,6 @@
 				    <%
 				    boolean esProveedor = usr instanceof DTProveedorDetalle;
 				    if(!esProveedor){
-				        System.out.println("esTurista");
 				        DTTuristaDetalle tur = (DTTuristaDetalle) usr;
 				    %>
 				    	 
@@ -92,7 +91,6 @@
 				            </li>
 	                    <% }%>		
 				    <%}else{
-				        System.out.println("esProveedor");
 				        DTProveedorDetalle prv = (DTProveedorDetalle) usr;
 				    %>
 						<!--"Si es proveedor/a se muestra información de las actividades turísticas que ofrece (en estado “Confirmada”) y salidas asociadas."-->
@@ -263,7 +261,6 @@
 	                
 	                
 	                if(esProveedor){
-            			System.out.println("esProveedor");
             			DTProveedorDetalle prv = (DTProveedorDetalle) usr;
             		%>
             			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">

@@ -74,11 +74,9 @@
 		                         <select class="combobox input-large form-control" name="paquete">
 		                         <%	
 					                List<String> paquetes = (List<String>) request.getAttribute("paquetes"); 
-					                    for(String paq : paquetes){ 
-					                    	System.out.println("paq: "+ paq);
+				                    for(String paq : paquetes){ 
 					                %>
-		                            <option value="<%=paq%>" selected="selected"><%=paq%></option>
-		                            
+		                            	<option value="<%=paq%>" selected="selected"><%=paq%></option>
 		                            <% }%>
 		                        </select>
 		                    </div>

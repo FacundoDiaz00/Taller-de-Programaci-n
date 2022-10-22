@@ -95,12 +95,6 @@ public class AltaSalidaServlet extends HttpServlet {
         String horaSalida = req.getParameter("horaSalida");
         String lugar = req.getParameter("lugar");
         String cantMaxTur = req.getParameter("cantMaxTur");
-        System.out.println(nomActividad);
-        System.out.println(nombre);
-        System.out.println(fechaSalida);
-        System.out.println(horaSalida);
-        System.out.println(lugar);
-        System.out.println(cantMaxTur);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime fechaYHoraSalida = LocalDateTime.parse(fechaSalida + " " + horaSalida, formatter);
@@ -141,7 +135,6 @@ public class AltaSalidaServlet extends HttpServlet {
                 imgFileStream.close();
             }
 
-            System.out.println("Salida creada con exito");
             req.setAttribute("exito", "exito");
 
             req = Utiles.insertarLoDeSiempre(req);
@@ -152,28 +145,21 @@ public class AltaSalidaServlet extends HttpServlet {
             return;
 
         } catch (NumberFormatException e) {
-            System.out.println("No se ingresaron los números de duracion o costo correctamente");
             req.setAttribute("motivoDeError",
                     "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
         } catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
-            System.out.println("excepcion: Fecha de alta actividad es posterior a fecha alta de salida");
             req.setAttribute("motivoDeError",
                     "La fecha de la salida debe ser posterior a la fecha de alta de la actividad");
         } catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
-            System.out.println("excepcion: Fecha del alta salida es posterior a fecha alta de la salida");
             req.setAttribute("motivoDeError",
                     "La fecha de la salida debe ser posterior a la fecha actual");
         } catch (SalidaYaRegistradaException e) {
-            System.out.println("La actividad con nombre '" + nombre
-                    + "' no se puede crear ya que ya existe alguna act. con ese nombre.");
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Actividad")) {
-                System.out.println("No existe la actividad seleccionada");
                 req.setAttribute("motivoDeError",
                         "No existe la actividad seleccionada, cambielo y pruebe nuevamente");
             } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
-                System.out.println("No existe el departamento seleccionado");
                 req.setAttribute("motivoDeError",
                         "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
             }

@@ -52,7 +52,6 @@ public class CompraPaqueteServlet extends HttpServlet {
         try {
             Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickTuri, nombre_paquete,
                     cant_turistas, null);
-            System.out.println("Compra creada con exito");
             req.setAttribute("exito", "exito");
 
             DTPaqueteDetalles paquete = Fabrica.getInstancia().getIControladorPaquete()

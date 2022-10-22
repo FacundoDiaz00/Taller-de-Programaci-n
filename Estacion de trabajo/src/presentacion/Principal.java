@@ -22,325 +22,320 @@ import logica.controladores.IControladorPaquete;
 import logica.controladores.IControladorUsuario;
 
 public class Principal {
-	private IControladorUsuario contrUsuario;
-	private IControladorActividadTuristica contrActTur;
-	private IControladorPaquete contrPaquete;
+    private IControladorUsuario contrUsuario;
+    private IControladorActividadTuristica contrActTur;
+    private IControladorPaquete contrPaquete;
 
-	private JFrame frmEstacionDeTrabajo;
+    private JFrame frmEstacionDeTrabajo;
 
-	private AltaDeUsuario frmIntAltaUsuario;
-	private ConsultaDeUsuario frmIntConsultaDeUsuario; // Lo dejo de esta forma
-														// asi queda igual al
-														// ejemplo y no tenemos
-														// que tocar el metodo
-														// initialize
-	private AltaDeActividadTuristica frmIntAltaActividadTuristica;
-	private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
-	private AltaDePaquete frmIntAltaPaquete;
-	private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
-	private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
-	private ConsultaDeSalidaTuristica frmIntConsultaDeSalidaTuristica;
-	private InscribirseASalidaTurística frmInscribirseASalidaTuristica;
-	private AltaCategoria frmAltaCategoria;
+    private AltaDeUsuario frmIntAltaUsuario;
+    private ConsultaDeUsuario frmIntConsultaDeUsuario; // Lo dejo de esta forma
+                                                       // asi queda igual al
+                                                       // ejemplo y no tenemos
+                                                       // que tocar el metodo
+                                                       // initialize
+    private AltaDeActividadTuristica frmIntAltaActividadTuristica;
+    private ConsultaDeActividadTuristica frmIntConsultaDeActividadTuristica;
+    private AltaDePaquete frmIntAltaPaquete;
+    private AgregarActividadAPaquete frmIntAgregarActividadAPaquete;
+    private AltaDeSalidaTuristica frmIntAltaSalidaTuristica;
+    private ConsultaDeSalidaTuristica frmIntConsultaDeSalidaTuristica;
+    private InscribirseASalidaTurística frmInscribirseASalidaTuristica;
+    private AltaCategoria frmAltaCategoria;
 
-	private ModificarUsuario frmModificarUsuario;
+    private ModificarUsuario frmModificarUsuario;
 
-	private ConsultaDePaquete frmIntConsultaDePaquete;
-	
-	private aceptarRechazarActividadTuristica frmAceptarRechazarActividadTuristica;
+    private ConsultaDePaquete frmIntConsultaDePaquete;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal window = new Principal();
-					window.frmEstacionDeTrabajo.setVisible(true);
-				} catch (RuntimeException exception) { // Resolver qué captuar
-														// acá
-					exception.printStackTrace();
-				}
-			}
-		});
-	}
+    private aceptarRechazarActividadTuristica frmAceptarRechazarActividadTuristica;
 
-	/**
-	 * Create the application.
-	 */
-	public Principal() {
-		initialize();
-		Fabrica fabrica = Fabrica.getInstancia();
-		contrUsuario = fabrica.getIControladorUsuario();
-		contrActTur = fabrica.getIControladorActividadTuristica();
-		contrPaquete = fabrica.getIControladorPaquete();
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Principal window = new Principal();
+                    window.frmEstacionDeTrabajo.setVisible(true);
+                } catch (RuntimeException exception) { // Resolver qué captuar
+                                                       // acá
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
 
-		frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, contrUsuario);
-		frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica(contrActTur);
-		frmIntAltaActividadTuristica = new AltaDeActividadTuristica(contrActTur);
-		frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, contrActTur);
-		frmInscribirseASalidaTuristica = new InscribirseASalidaTurística(contrActTur, contrUsuario);
-		frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(contrActTur);
-		frmIntAltaUsuario = new AltaDeUsuario(contrUsuario);
-		frmIntAltaPaquete = new AltaDePaquete(contrPaquete);
-		frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(contrPaquete, contrActTur);
-		frmModificarUsuario = new ModificarUsuario(contrUsuario);
-		frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
-		frmIntConsultaDePaquete = new ConsultaDePaquete(this, contrPaquete);
-		frmAceptarRechazarActividadTuristica = new aceptarRechazarActividadTuristica(contrActTur);
-		frmAltaCategoria = new AltaCategoria(contrActTur);
+    /**
+     * Create the application.
+     */
+    public Principal() {
+        initialize();
+        Fabrica fabrica = Fabrica.getInstancia();
+        contrUsuario = fabrica.getIControladorUsuario();
+        contrActTur = fabrica.getIControladorActividadTuristica();
+        contrPaquete = fabrica.getIControladorPaquete();
 
-		frmEstacionDeTrabajo.getContentPane().setLayout(null);
-		frmIntAltaUsuario.setVisible(false);
-		frmIntAltaPaquete.setVisible(false);
-		frmIntConsultaDeUsuario.setVisible(false);
-		frmIntAltaActividadTuristica.setVisible(false);
-		frmIntConsultaDeActividadTuristica.setVisible(false);
-		frmIntAgregarActividadAPaquete.setVisible(false);
-		frmInscribirseASalidaTuristica.setVisible(false);
-		frmIntAltaSalidaTuristica.setVisible(false);
-		frmIntConsultaDePaquete.setVisible(false);
-		frmIntConsultaDeSalidaTuristica.setVisible(false);
-		frmModificarUsuario.setVisible(false);
-		frmAltaCategoria.setVisible(false);
-		frmAceptarRechazarActividadTuristica.setVisible(false);
+        frmIntConsultaDeUsuario = new ConsultaDeUsuario(this, contrUsuario);
+        frmIntAltaSalidaTuristica = new AltaDeSalidaTuristica(contrActTur);
+        frmIntAltaActividadTuristica = new AltaDeActividadTuristica(contrActTur);
+        frmIntConsultaDeActividadTuristica = new ConsultaDeActividadTuristica(this, contrActTur);
+        frmInscribirseASalidaTuristica = new InscribirseASalidaTurística(contrActTur, contrUsuario);
+        frmIntConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(contrActTur);
+        frmIntAltaUsuario = new AltaDeUsuario(contrUsuario);
+        frmIntAltaPaquete = new AltaDePaquete(contrPaquete);
+        frmIntAgregarActividadAPaquete = new AgregarActividadAPaquete(contrPaquete, contrActTur);
+        frmModificarUsuario = new ModificarUsuario(contrUsuario);
+        frmIntAltaPaquete.setNormalBounds(new Rectangle(100, 100, 425, 350));
+        frmIntConsultaDePaquete = new ConsultaDePaquete(this, contrPaquete);
+        frmAceptarRechazarActividadTuristica = new aceptarRechazarActividadTuristica(contrActTur);
+        frmAltaCategoria = new AltaCategoria(contrActTur);
 
-		frmEstacionDeTrabajo.getContentPane().setLayout(null);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
-		frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTuristica);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
-		frmEstacionDeTrabajo.getContentPane().add(frmModificarUsuario);
-		frmEstacionDeTrabajo.getContentPane().add(frmAltaCategoria);
-		frmEstacionDeTrabajo.getContentPane().add(frmAceptarRechazarActividadTuristica);
+        frmEstacionDeTrabajo.getContentPane().setLayout(null);
+        frmIntAltaUsuario.setVisible(false);
+        frmIntAltaPaquete.setVisible(false);
+        frmIntConsultaDeUsuario.setVisible(false);
+        frmIntAltaActividadTuristica.setVisible(false);
+        frmIntConsultaDeActividadTuristica.setVisible(false);
+        frmIntAgregarActividadAPaquete.setVisible(false);
+        frmInscribirseASalidaTuristica.setVisible(false);
+        frmIntAltaSalidaTuristica.setVisible(false);
+        frmIntConsultaDePaquete.setVisible(false);
+        frmIntConsultaDeSalidaTuristica.setVisible(false);
+        frmModificarUsuario.setVisible(false);
+        frmAltaCategoria.setVisible(false);
+        frmAceptarRechazarActividadTuristica.setVisible(false);
 
-		frmIntAltaUsuario.setVisible(false);
-		frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+        frmEstacionDeTrabajo.getContentPane().setLayout(null);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeUsuario);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntAltaActividadTuristica);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeActividadTuristica);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntAgregarActividadAPaquete);
+        frmEstacionDeTrabajo.getContentPane().add(frmInscribirseASalidaTuristica);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntAltaSalidaTuristica);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDePaquete);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntConsultaDeSalidaTuristica);
+        frmEstacionDeTrabajo.getContentPane().add(frmModificarUsuario);
+        frmEstacionDeTrabajo.getContentPane().add(frmAltaCategoria);
+        frmEstacionDeTrabajo.getContentPane().add(frmAceptarRechazarActividadTuristica);
 
-	}
+        frmIntAltaUsuario.setVisible(false);
+        frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmEstacionDeTrabajo = new JFrame();
-		frmEstacionDeTrabajo.setTitle("Estacion de trabajo");
-		frmEstacionDeTrabajo.setBounds(100, 100, 940, 600);
-		frmEstacionDeTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
-		JMenuBar menuBar = new JMenuBar();
-		frmEstacionDeTrabajo.setJMenuBar(menuBar);
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        frmEstacionDeTrabajo = new JFrame();
+        frmEstacionDeTrabajo.setTitle("Estacion de trabajo");
+        frmEstacionDeTrabajo.setBounds(100, 100, 940, 600);
+        frmEstacionDeTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JMenu sistemaMenu = new JMenu("Sistema");
-		menuBar.add(sistemaMenu);
-		frmEstacionDeTrabajo.getContentPane()
-				.setLayout(new BoxLayout(frmEstacionDeTrabajo.getContentPane(), BoxLayout.X_AXIS));
+        JMenuBar menuBar = new JMenuBar();
+        frmEstacionDeTrabajo.setJMenuBar(menuBar);
 
-		JDesktopPane desktopPane = new JDesktopPane();
-		frmEstacionDeTrabajo.getContentPane().add(desktopPane);
+        JMenu sistemaMenu = new JMenu("Sistema");
+        menuBar.add(sistemaMenu);
+        frmEstacionDeTrabajo.getContentPane()
+                .setLayout(new BoxLayout(frmEstacionDeTrabajo.getContentPane(), BoxLayout.X_AXIS));
 
-		JMenuItem salirJMenuItem = new JMenuItem("Salir");
-		salirJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmEstacionDeTrabajo.setVisible(false);
-				frmEstacionDeTrabajo.dispose();
-			}
-		});
-		salirJMenuItem.addMouseListener(new MouseAdapter() {
-		});
-		salirJMenuItem.setHorizontalAlignment(SwingConstants.LEFT);
-		sistemaMenu.add(salirJMenuItem);
+        JDesktopPane desktopPane = new JDesktopPane();
+        frmEstacionDeTrabajo.getContentPane().add(desktopPane);
 
-		JMenu mnUsuario = new JMenu("Usuarios");
-		menuBar.add(mnUsuario);
+        JMenuItem salirJMenuItem = new JMenuItem("Salir");
+        salirJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmEstacionDeTrabajo.setVisible(false);
+                frmEstacionDeTrabajo.dispose();
+            }
+        });
+        salirJMenuItem.addMouseListener(new MouseAdapter() {
+        });
+        salirJMenuItem.setHorizontalAlignment(SwingConstants.LEFT);
+        sistemaMenu.add(salirJMenuItem);
 
-		JMenuItem registrarUsuarioJMenuItem = new JMenuItem("Registrar Usuario");
-		registrarUsuarioJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntAltaUsuario.setVisible(true);
-			}
-		});
-		mnUsuario.add(registrarUsuarioJMenuItem);
+        JMenu mnUsuario = new JMenu("Usuarios");
+        menuBar.add(mnUsuario);
 
-		JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
-		consultarUsuarioJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntConsultaDeUsuario.setVisible(true);
-			}
+        JMenuItem registrarUsuarioJMenuItem = new JMenuItem("Registrar Usuario");
+        registrarUsuarioJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntAltaUsuario.setVisible(true);
+            }
+        });
+        mnUsuario.add(registrarUsuarioJMenuItem);
 
-		});
-		mnUsuario.add(consultarUsuarioJMenuItem);
+        JMenuItem consultarUsuarioJMenuItem = new JMenuItem("Consultar Usuario");
+        consultarUsuarioJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntConsultaDeUsuario.setVisible(true);
+            }
 
-		JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
-		modificarUsuarioJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmModificarUsuario.setVisible(true);
-			}
-		});
-		mnUsuario.add(modificarUsuarioJMenuItem);
+        });
+        mnUsuario.add(consultarUsuarioJMenuItem);
 
-		JMenu mnNewMenu3 = new JMenu("Actividades/Salidas turisticas");
-		menuBar.add(mnNewMenu3);
+        JMenuItem modificarUsuarioJMenuItem = new JMenuItem("Modificar Usuario");
+        modificarUsuarioJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmModificarUsuario.setVisible(true);
+            }
+        });
+        mnUsuario.add(modificarUsuarioJMenuItem);
 
-		JMenuItem registrarActividadJMenuItem = new JMenuItem("Registrar Actividad Turística");
-		registrarActividadJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntAltaActividadTuristica.setVisible(true);
-			}
-		});
-		
-		mnNewMenu3.add(registrarActividadJMenuItem);
-		
-		JMenuItem mnNewMenuAltaCategoria = new JMenuItem("Registrar Categoría");
+        JMenu mnNewMenu3 = new JMenu("Actividades/Salidas turisticas");
+        menuBar.add(mnNewMenu3);
 
-		mnNewMenuAltaCategoria.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				System.out.print("entré a alta categoria");
-				frmAltaCategoria.setVisible(true);
-			}
-		});
-		
-		mnNewMenu3.add(mnNewMenuAltaCategoria);
+        JMenuItem registrarActividadJMenuItem = new JMenuItem("Registrar Actividad Turística");
+        registrarActividadJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntAltaActividadTuristica.setVisible(true);
+            }
+        });
 
+        mnNewMenu3.add(registrarActividadJMenuItem);
 
-		JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
-		consultarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntConsultaDeActividadTuristica.setVisible(true);
-			}
-		});
-		mnNewMenu3.add(consultarActividadTuristicaJMenuItem);
-		
+        JMenuItem mnNewMenuAltaCategoria = new JMenuItem("Registrar Categoría");
 
-		JMenuItem aceptarRechazarActividadTuristicaJMenuItem = new JMenuItem("Aceptar/Rechazar Actividad Turística");
-		aceptarRechazarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmAceptarRechazarActividadTuristica.setVisible(true);
-			}
-		});
-		mnNewMenu3.add(aceptarRechazarActividadTuristicaJMenuItem);
-		
-		JMenu mnNewMenu_1 = new JMenu("Salidas");
-		menuBar.add(mnNewMenu_1);
-				
-						JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
-						mnNewMenu_1.add(consultarSalidaTuristicaJMenuItem);
-						consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent event) {
-								frmIntConsultaDeSalidaTuristica.setVisible(true);
-							}
-						});
-		
-				JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");
-				mnNewMenu_1.add(registrarSalidaJMenuItem);
-				
-						JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
-						mnNewMenu_1.add(inscribirseASalidaTuristicaJMenuItem);
-						inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent event) {
-								frmInscribirseASalidaTuristica.setVisible(true);
-							}
-						});
-				registrarSalidaJMenuItem.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						frmIntAltaSalidaTuristica.setVisible(true);
-					}
-				});
-			
-		
+        mnNewMenuAltaCategoria.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmAltaCategoria.setVisible(true);
+            }
+        });
 
-		JMenu mnNewMenu = new JMenu("Paquetes");
-		menuBar.add(mnNewMenu);
+        mnNewMenu3.add(mnNewMenuAltaCategoria);
 
-		JMenuItem altaPaqueteJMenuItem = new JMenuItem("Registrar Paquete");
-		altaPaqueteJMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntAltaPaquete.setVisible(true);
-			}
-		});
-		mnNewMenu.add(altaPaqueteJMenuItem);
+        JMenuItem consultarActividadTuristicaJMenuItem = new JMenuItem("Consultar Actividad Turística");
+        consultarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntConsultaDeActividadTuristica.setVisible(true);
+            }
+        });
+        mnNewMenu3.add(consultarActividadTuristicaJMenuItem);
 
-		JMenuItem mntmNewMenuItem2 = new JMenuItem("Consulta de Paquete");
-		mntmNewMenuItem2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntConsultaDePaquete.setVisible(true);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem2);
+        JMenuItem aceptarRechazarActividadTuristicaJMenuItem = new JMenuItem("Aceptar/Rechazar Actividad Turística");
+        aceptarRechazarActividadTuristicaJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmAceptarRechazarActividadTuristica.setVisible(true);
+            }
+        });
+        mnNewMenu3.add(aceptarRechazarActividadTuristicaJMenuItem);
 
-		JMenuItem mntmNewMenuItem1 = new JMenuItem("Agregar Actividad Turística a Paquete");
-		mntmNewMenuItem1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				frmIntAgregarActividadAPaquete.setVisible(true);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem1);
+        JMenu mnNewMenu_1 = new JMenu("Salidas");
+        menuBar.add(mnNewMenu_1);
 
-		JMenu datosInicoMenu = new JMenu("Datos de inicio");
-		menuBar.add(datosInicoMenu);
+        JMenuItem consultarSalidaTuristicaJMenuItem = new JMenuItem("Consultar Salida Turística");
+        mnNewMenu_1.add(consultarSalidaTuristicaJMenuItem);
+        consultarSalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntConsultaDeSalidaTuristica.setVisible(true);
+            }
+        });
 
-		JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos de prueba");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				cargarDatosDePrueba();
-			}
-		});
-		datosInicoMenu.add(mntmNewMenuItem);
-	}
+        JMenuItem registrarSalidaJMenuItem = new JMenuItem("Registrar Salida Turística");
+        mnNewMenu_1.add(registrarSalidaJMenuItem);
 
-	/*
-	 * Exponemos estos métodos para poder llamarlo desde otros módulos Se puede
-	 * pasar null como parámetro y que no se seleccione nada desde antes
-	 */
-	public void mostrarConsultaDeUsuario(String nickname) {
-		if (nickname != null) {
-			frmIntConsultaDeUsuario.seleccionYaHecha(nickname);
-		}
-		frmIntConsultaDeUsuario.setVisible(true);
-	}
+        JMenuItem inscribirseASalidaTuristicaJMenuItem = new JMenuItem("Inscribirse a Salida Turistica");
+        mnNewMenu_1.add(inscribirseASalidaTuristicaJMenuItem);
+        inscribirseASalidaTuristicaJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmInscribirseASalidaTuristica.setVisible(true);
+            }
+        });
+        registrarSalidaJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                frmIntAltaSalidaTuristica.setVisible(true);
+            }
+        });
 
-	public void mostrarConsultaDeActividadTuristica(String nombreActividad) {
-		if (nombreActividad != null) {
-			frmIntConsultaDeActividadTuristica.seleccionYaHecha(nombreActividad);
-		}
-		frmIntConsultaDeActividadTuristica.setVisible(true);
-	}
+        JMenu mnNewMenu = new JMenu("Paquetes");
+        menuBar.add(mnNewMenu);
 
-	public void mostrarConsultaDeSalidaTuristica(String nombreSalida) {
-		if (nombreSalida != null) {
-			frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);
-		}
-		frmIntConsultaDeSalidaTuristica.setVisible(true);
-	}
+        JMenuItem altaPaqueteJMenuItem = new JMenuItem("Registrar Paquete");
+        altaPaqueteJMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntAltaPaquete.setVisible(true);
+            }
+        });
+        mnNewMenu.add(altaPaqueteJMenuItem);
 
-	public void mostrarConsultaDePaquete(String nombrePaquete) {
-		if (nombrePaquete != null) {
-			frmIntConsultaDePaquete.seleccionYaHecha(nombrePaquete);
-		}
-		frmIntConsultaDePaquete.setVisible(true);
-	}
+        JMenuItem mntmNewMenuItem2 = new JMenuItem("Consulta de Paquete");
+        mntmNewMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntConsultaDePaquete.setVisible(true);
+            }
+        });
+        mnNewMenu.add(mntmNewMenuItem2);
 
-	private void cargarDatosDePrueba() {
-		try {
-			Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
-			JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Éxito",
-					JOptionPane.INFORMATION_MESSAGE);
+        JMenuItem mntmNewMenuItem1 = new JMenuItem("Agregar Actividad Turística a Paquete");
+        mntmNewMenuItem1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frmIntAgregarActividadAPaquete.setVisible(true);
+            }
+        });
+        mnNewMenu.add(mntmNewMenuItem1);
 
-		} catch (TurismoUyException exception) {
-			JOptionPane.showMessageDialog(null,
-					"Ha ocurrido un error a la hora de cargar los datos de prueba."
-							+ " Sugerimos que esta operación sea la primera que se haga cuando se ejecuta el sistema.",
-					"Error", JOptionPane.ERROR_MESSAGE);
-			exception.printStackTrace();
-		}
+        JMenu datosInicoMenu = new JMenu("Datos de inicio");
+        menuBar.add(datosInicoMenu);
 
-	}
+        JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos de prueba");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                cargarDatosDePrueba();
+            }
+        });
+        datosInicoMenu.add(mntmNewMenuItem);
+    }
+
+    /*
+     * Exponemos estos métodos para poder llamarlo desde otros módulos Se puede
+     * pasar null como parámetro y que no se seleccione nada desde antes
+     */
+    public void mostrarConsultaDeUsuario(String nickname) {
+        if (nickname != null) {
+            frmIntConsultaDeUsuario.seleccionYaHecha(nickname);
+        }
+        frmIntConsultaDeUsuario.setVisible(true);
+    }
+
+    public void mostrarConsultaDeActividadTuristica(String nombreActividad) {
+        if (nombreActividad != null) {
+            frmIntConsultaDeActividadTuristica.seleccionYaHecha(nombreActividad);
+        }
+        frmIntConsultaDeActividadTuristica.setVisible(true);
+    }
+
+    public void mostrarConsultaDeSalidaTuristica(String nombreSalida) {
+        if (nombreSalida != null) {
+            frmIntConsultaDeSalidaTuristica.seleccionYaHecha(nombreSalida);
+        }
+        frmIntConsultaDeSalidaTuristica.setVisible(true);
+    }
+
+    public void mostrarConsultaDePaquete(String nombrePaquete) {
+        if (nombrePaquete != null) {
+            frmIntConsultaDePaquete.seleccionYaHecha(nombrePaquete);
+        }
+        frmIntConsultaDePaquete.setVisible(true);
+    }
+
+    private void cargarDatosDePrueba() {
+        try {
+            Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
+            JOptionPane.showMessageDialog(null, "Los datos de prueba han sido cargado con exito", "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (TurismoUyException exception) {
+            JOptionPane.showMessageDialog(null,
+                    "Ha ocurrido un error a la hora de cargar los datos de prueba."
+                            + " Sugerimos que esta operación sea la primera que se haga cuando se ejecuta el sistema.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            exception.printStackTrace();
+        }
+
+    }
 }
