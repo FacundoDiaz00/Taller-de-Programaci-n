@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import excepciones.ActividadTuristicaNoAceptada;
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.CategoriaYaRegistradaException;
@@ -220,25 +221,23 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,
             LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img)
             throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
-            FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy {
+            FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy, ActividadTuristicaNoAceptada {
         if (fechaAlta == null)
             fechaAlta = LocalDate.now();
 
         ManejadorSalidaTuristica manejadorSalida = ManejadorSalidaTuristica.getInstancia();
         ManejadorActividadTuristica manejadorActividad = ManejadorActividadTuristica.getInstancia();
+
         if (manejadorSalida.existeSalidaTuristica(nombre)) {
             throw new SalidaYaRegistradaException("La salida con nombre" + nombre + " ya existe en el sistema.");
-        }
-        // AltaActividad <= AltaSalida <= Salida, se chequean ambas
-        // desigualdades.
-
-        if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
+        } else if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
             throw new FechaAltaActividadPosteriorAFechaAltaSalidaException(
                     "La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");
-        }
-        if (fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))) {
+        } else if (fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))) {
             throw new FechaAltaSalidaPosteriorAFechaSalidaException(
                     "La fecha de la Salida debe ser posterior a la fecha de su registro");
+        } else if (manejadorActividad.getActividad(actividad).getEstado() != EstadoActividadTuristica.ACEPTADA) {
+            throw new ActividadTuristicaNoAceptada("Se intentó registrar una salida a una actividad no aceptada");
         } else {
             SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida,
                     lugar, img);

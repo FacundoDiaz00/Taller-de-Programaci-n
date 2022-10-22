@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import excepciones.ActividadTuristicaNoAceptada;
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
@@ -155,6 +156,9 @@ public class AltaSalidaServlet extends HttpServlet {
                     "La fecha de la salida debe ser posterior a la fecha actual");
         } catch (SalidaYaRegistradaException e) {
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
+        } catch (ActividadTuristicaNoAceptada e) {
+            req.setAttribute("motivoDeError",
+                    "La actividad a la que intentó registrar una salida no está aceptada todavía.");
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Actividad")) {
                 req.setAttribute("motivoDeError",

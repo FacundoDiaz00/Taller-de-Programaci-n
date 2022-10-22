@@ -26,7 +26,6 @@ import excepciones.InscripcionYaRegistradaException;
 import excepciones.NoExisteConsumoParaLaActividadExcepcion;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteNoCompradoExcepcion;
-import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import excepciones.TurismoUyException;
 import excepciones.UsuarioYaRegistradoException;
@@ -91,6 +90,8 @@ class ControladorActividadTuristicaTest {
             contrActTur.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion,
                     costo, ciudad, fechaAlta, null, muestraCategorias);
 
+            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+
             nombresActividades.add(nombreActividad);
         }
         return nombresActividades;
@@ -98,8 +99,7 @@ class ControladorActividadTuristicaTest {
 
     // No es un test en sí
     static List<String> generarSalidas(int cant, String idTest)
-            throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
-            FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy {
+            throws TurismoUyException {
         preparacionPrevia();
         assertTrue(contrActTur != null);
 
@@ -450,6 +450,7 @@ class ControladorActividadTuristicaTest {
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
                     costo, ciudad, fechaAlta, null, muestraCategorias);
+            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
             if (i % 2 == 0) {
                 contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7),
                         fechaAlta.plusYears(6), "lugar", 5, null);
@@ -552,7 +553,7 @@ class ControladorActividadTuristicaTest {
 
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
                 ciudad, fechaAlta, null, muestraCategorias);
-
+        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                 cantMaxTuristas, null);
 
@@ -623,8 +624,10 @@ class ControladorActividadTuristicaTest {
                 fechaAlta, null, nombreProveedor, nombreProveedor);
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
                 ciudad, fechaAlta, null, muestraCategorias);
+        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                 cantMaxTuristas, null);
+
         contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
 
         assertThrows(InscripcionYaRegistradaException.class, () -> {
@@ -658,6 +661,7 @@ class ControladorActividadTuristicaTest {
                 localDateNow, null, nombreProveedor, nombreProveedor);
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
                 ciudad, localDateNow, null, muestraCategorias);
+        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, localDateTimeNow, localDateNow, lugar,
                 cantMaxTuristas, null);
 
@@ -699,6 +703,7 @@ class ControladorActividadTuristicaTest {
                 fechaAlta, null, nombreProveedor, nombreProveedor);
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
                 ciudad, fechaAlta, null, muestraCategorias);
+        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                 cantMaxTuristas, null);
         contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
@@ -827,7 +832,7 @@ class ControladorActividadTuristicaTest {
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
                     costo, ciudad, fechaAlta, null, muestraCategorias);
-
+            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
             contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                     cantMaxTuristas, null);
 
@@ -885,6 +890,7 @@ class ControladorActividadTuristicaTest {
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
                     costo, ciudad, fechaAlta, null, muestraCategorias);
+            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
 
             contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                     cantMaxTuristas, null);
@@ -907,7 +913,6 @@ class ControladorActividadTuristicaTest {
             String descripcion = "Desc";
             LocalDate fechaAlta = localDateNow;
 
-
             try {
                 contrActTur.altaDepartamento(departamento, descripcion, departamento);
             } catch (DeparamentoYaRegistradoException exception) {
@@ -921,18 +926,18 @@ class ControladorActividadTuristicaTest {
                 // Esperable, no pasa nada.
             }
 
-			try {
-				contrActTur.altaDepartamento(departamento, descripcion, departamento);
-			} catch (TurismoUyException exception) {
-				// OK, falla porque creamos repetidos a propósito
-			}
-			try {
-			Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
-					nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor,
-					nombreProveedor);
-			} catch (TurismoUyException exception) {
-				// OK, falla porque creamos repetidos a propósito
-			}
+            try {
+                contrActTur.altaDepartamento(departamento, descripcion, departamento);
+            } catch (TurismoUyException exception) {
+                // OK, falla porque creamos repetidos a propósito
+            }
+            try {
+                Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nombreProveedor, nombreProveedor,
+                        nombreProveedor, nombreProveedor, nombreProveedor, fechaAlta, null, nombreProveedor,
+                        nombreProveedor);
+            } catch (TurismoUyException exception) {
+                // OK, falla porque creamos repetidos a propósito
+            }
 
         }
     }
@@ -1120,11 +1125,10 @@ class ControladorActividadTuristicaTest {
         generarActividades(3, idTest);
 
         contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
 
         var actividades = contrActTur.obtenerIdActividadesTuristicasAgregadas();
 
-        assertTrue(actividades.contains("Actividad " + idTest + " i=2"));
+        assertFalse(actividades.contains("Actividad " + idTest + " i=2"));
 
         assertFalse(actividades.contains("Actividad " + idTest + " i=0"));
         assertFalse(actividades.contains("Actividad " + idTest + " i=1"));
