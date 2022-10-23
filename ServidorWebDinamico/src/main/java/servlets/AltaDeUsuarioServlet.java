@@ -56,6 +56,10 @@ public class AltaDeUsuarioServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
+    	
         String tipoUsuario = (String) req.getParameter("tipoUsuario");
 
         String nickname = (String) req.getParameter("nickname");
