@@ -459,19 +459,39 @@ class ControladorMaestroTest {
                 if (compra.getPaquete().getNombre().equals(asignacion[1])) {
                     aparece = true;
                     assertEquals(LocalDate.of(datos[3], datos[2], datos[1]), compra.getFechaCompra());
+                    assertEquals(LocalDate.of(datos[6], datos[5], datos[4]), compra.getVencimiento());
                     assertEquals(datos[0], compra.getCantTuristas());
+                    assertEquals(datos[7], compra.getCosto());
                 }
             }
             assertTrue(aparece);
+
         }
 
         // Inscripciones
         for (int i = 0; i < datosInscripcion.length; i++) {
             var datosStr = datosInscripcion[i];
             var datosInt = datosIntegerInscripcion[i];
+
+            var tur = datosStr[1];
             assertThrows(TurismoUyException.class,
                     () -> icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
                             LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]));
+            var inscDeTurista = ((DTTuristaDetallePrivado) iuser.obtenerDTUsuarioDetallePrivado(tur))
+                    .getDTInscripciones();
+            boolean aparece = false;
+            for (var inscripcion : inscDeTurista) {
+                if (inscripcion.getSalidaTuristica().getNombre().equals(datosStr[0])) {
+                    aparece = true;
+                    if (datosStr[2] != null)
+                        assertTrue(inscripcion.getCompra() != null);
+                    assertEquals(tur, inscripcion.getTurista());
+                    assertEquals(LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
+                            inscripcion.getFechaInscripcion());
+                    assertEquals(datosInt[1], inscripcion.getCosto());
+                }
+            }
+            assertTrue(aparece);
         }
     }
 
