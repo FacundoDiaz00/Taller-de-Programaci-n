@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +37,7 @@ public class ConsultaPaqueteServlet extends HttpServlet {
 
         try {
             String identificador = (String) req.getParameter("id");
+            identificador  = URLDecoder.decode(identificador , "UTF-8");
             String mostrarMensajeConfirmacionCompra = (String) req.getParameter("mostrarMensajeConfirmacionCompra");
             if(mostrarMensajeConfirmacionCompra != null && !mostrarMensajeConfirmacionCompra.toUpperCase().trim().equals("TRUE")) {
             	mostrarMensajeConfirmacionCompra = null;

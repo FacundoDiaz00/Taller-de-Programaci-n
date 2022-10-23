@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,15 +58,18 @@ public class CompraPaqueteServlet extends HttpServlet {
                     .obtenerDTPaqueteDetalle(nombre_paquete);
             req.setAttribute("paquete", paquete);
 
-            resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mostrarMensajeConfirmacionCompra=true");
+            resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") + "&mostrarMensajeConfirmacionCompra=true");
             return;
         } catch (ObjetoNoExisteEnTurismoUy e) {
             String objetoFaltante = e.getClaseObjetoFaltante();
-            resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mensajeDeError=" + "Para comprar un paquete es necesario estar loggeado con un Turista");           
+            resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") 
+            	+ "&mensajeDeError=" + URLEncoder.encode("Para comprar un paquete es necesario estar loggeado con un Turista", "UTF-8"));           
         } catch (CompraYaRegistradaException e) {
-        	resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mensajeDeError=" + "El usuario logueado ya ha comprado este mismo paquete.");
+        	resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") 
+        		+ "&mensajeDeError=" + URLEncoder.encode("El usuario logueado ya ha comprado este mismo paquete.", "UTF-8"));
         } catch (PaquetesSinActividadesExcepcion e) {
-        	resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mensajeDeError=" +  "El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.");
+        	resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") 
+        		+ "&mensajeDeError=" + URLEncoder.encode("El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.", "UTF-8"));
         }
     }
 }

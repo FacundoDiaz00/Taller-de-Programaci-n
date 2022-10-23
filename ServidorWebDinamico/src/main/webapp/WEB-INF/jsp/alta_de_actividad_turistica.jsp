@@ -161,8 +161,7 @@
                                 		categoriasSeleccionadas = (List<String>) request.getAttribute("categoriasSeleccionadas");
                                 	}else{
                                 		categoriasSeleccionadas = new ArrayList();
-                                	}
-                                
+                                	}                                
                                 	
                                 	for (String cat: getListWithoutNull((List<String>) request.getAttribute("categorias"))) { %>
 		                            <div class="form-check">
