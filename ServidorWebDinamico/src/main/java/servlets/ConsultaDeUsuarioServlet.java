@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
@@ -106,9 +108,10 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
         }
         HttpSession sesion = request.getSession(false);
+        DTUsuario userLogueado = (DTUsuario) sesion.getAttribute("usuarioLogeado");
         DTUsuario datosNuevos;
         
-        String nick = sesion.getAttribute("usuarioLogueado").toString();
+        String nick = userLogueado.getNickname();
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
         String modC = request.getParameter("modificar_contrasenia");
@@ -142,11 +145,16 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         else {
         	modD = request.getParameter("modificar_descripcion");
         	modL = request.getParameter("modificar_link");
+        	datosNuevos = (DTUsuario) new DTProveedor(nick, modN, modA, modC, fecha, imgDt, modD, modL);
         }
         
-        try {
-        	contrUsuario.modificarUsuario()
-        }
+        	try {
+				contrUsuario.modificarUsuario(datosNuevos);
+			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 
         doGet(request, response);
     }
