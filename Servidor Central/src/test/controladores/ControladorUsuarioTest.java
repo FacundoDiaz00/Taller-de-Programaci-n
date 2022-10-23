@@ -74,10 +74,11 @@ class ControladorUsuarioTest {
             String nombre = "NOMBRE TURISTA";
             String apellido = "APELLIDO TURISTA";
             String correo = "TURISTA " + idTest + " i=" + i;
+            String contrasenia = "1234";
             String nacionalidad = "CHINA";
             LocalDate fNacimiento = localDateNow.minusYears(15);
 
-            contrUsr.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+            contrUsr.altaTurista(nickname, nombre, apellido, correo, contrasenia, fNacimiento, null, nacionalidad);
             nicknameTuristas.add(nickname);
         }
         return nicknameTuristas;
@@ -264,11 +265,7 @@ class ControladorUsuarioTest {
             String nombreSalida = "Salida " + idTest + " i=" + i;
             String nombreActividad = "Actividad " + idTest + " i=" + i;
 
-            assertThrows(ClassCastException.class, () -> {
-
-                @SuppressWarnings("unused")
-                var dtErrorCasteado = (DTTuristaDetalle) dtdet;
-            });
+            assertTrue(dtdet instanceof DTProveedorDetalle);
 
             var dtCasteado = (DTProveedorDetalle) dtdet;
 
@@ -301,10 +298,7 @@ class ControladorUsuarioTest {
 
             var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
 
-            assertThrows(ClassCastException.class, () -> {
-                @SuppressWarnings("unused")
-                var dtErrorCasteado = (DTProveedorDetalle) dtdet;
-            });
+            assertTrue(dtdet instanceof DTTuristaDetalle);
 
             var dtCasteado = (DTTuristaDetalle) dtdet;
 
@@ -322,7 +316,6 @@ class ControladorUsuarioTest {
             } else {
                 assertEquals(40, dtCasteado.getInscripciones().size());
             }
-
         }
     }
 
@@ -345,10 +338,7 @@ class ControladorUsuarioTest {
 
             var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
 
-            assertThrows(ClassCastException.class, () -> {
-                @SuppressWarnings("unused")
-                var dtErrorCasteado = (DTTurista) dtUsuario;
-            });
+            assertTrue(dtUsuario instanceof DTProveedor);
 
             var dtCasteado = (DTProveedor) dtUsuario;
 
@@ -372,10 +362,7 @@ class ControladorUsuarioTest {
 
             var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
 
-            assertThrows(ClassCastException.class, () -> {
-                @SuppressWarnings("unused")
-                var dtErrorCasteado = (DTProveedor) dtUsuario;
-            });
+            assertTrue(dtUsuario instanceof DTTurista);
 
             var dtCasteado = (DTTurista) dtUsuario;
 
@@ -395,7 +382,7 @@ class ControladorUsuarioTest {
 
     @Test
     void testModificarUsuarioCaso() throws TurismoUyException {
-        /*String idTest = "testModificarUsuario";
+        String idTest = "testModificarUsuario";
 
         generarProveedores(50, idTest);
         generarTuristas(50, idTest);
@@ -407,8 +394,8 @@ class ControladorUsuarioTest {
             DTTurista dttur = (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur);
             DTProveedor dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv);
 
-            contrUsr.modificarUsuario(dttur);
-            contrUsr.modificarUsuario(dtprov);
+            contrUsr.modificarUsuario(dttur, null, false);
+            contrUsr.modificarUsuario(dtprov, null, false);
 
             assertEquals(dttur, (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur));
             assertEquals(dtprov, (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv));
@@ -423,8 +410,8 @@ class ControladorUsuarioTest {
                     dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), null,
                     dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
 
-            contrUsr.modificarUsuario(dtTurNuevo);
-            contrUsr.modificarUsuario(dtProvNuevo);
+            contrUsr.modificarUsuario(dtTurNuevo, null, false);
+            contrUsr.modificarUsuario(dtProvNuevo, null, false);
 
             dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
             dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
@@ -439,15 +426,15 @@ class ControladorUsuarioTest {
                     dtprov.getLink());
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtTurNuevo2);
+                contrUsr.modificarUsuario(dtTurNuevo2, null, false);
             });
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtProvNuevo2);
+                contrUsr.modificarUsuario(dtProvNuevo2, null, false);
             });
 
-            contrUsr.modificarUsuario(dtTurNuevo);
-            contrUsr.modificarUsuario(dtProvNuevo);
+            contrUsr.modificarUsuario(dtTurNuevo, null, false);
+            contrUsr.modificarUsuario(dtProvNuevo, null, false);
 
             dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
             dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
@@ -462,18 +449,18 @@ class ControladorUsuarioTest {
                     dtprov.getDescrpicionGeneral(), dtprov.getLink());
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtTurNuevo3);
+                contrUsr.modificarUsuario(dtTurNuevo3, null, false);
             });
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtProvNuevo3);
+                contrUsr.modificarUsuario(dtProvNuevo3, null, false);
             });
 
             dttur = (DTTurista) contrUsr.obtenerDTUsuario(dttur.getNickname());
             dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtprov.getNickname());
             assertNotEquals(dtTurNuevo3, dttur);
             assertNotEquals(dtProvNuevo3, dtprov);
-        }*/
+        }
     }
 
 }
