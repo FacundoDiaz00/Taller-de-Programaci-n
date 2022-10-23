@@ -6,25 +6,9 @@
 <%@page import="logica.datatypes.DTUsuario"%>
 <%@page import="logica.datatypes.DTProveedor"%>
 <%@page import="logica.datatypes.DTTurista"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Turismo UY</title>
-
-<!--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilosComun.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/alta_de_actividad_turistica.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/fontawesome-free-6.2.0-web/css/all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sweetalert2.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/perfil_de_usuario.css">
-</head>
 
 
 
-<body>
 
 	<%! public String getTextWithoutNull(String value){
 			return value == null ? "" : value;
@@ -40,14 +24,14 @@
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
-	                                    <div class="modal-content" style ="width: 800px;height: 600px;">
+	                                    <div class="modal-content" style =" width: 598px; height: 950px;">
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
 	                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                                        </div>
 	                                        
 	                                        
-		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 790px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
+		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 590px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
 
 																			
 							                    <div class="contenedorinput mb-3">
@@ -185,15 +169,18 @@
 	                                            %>
 	                                            <div class="contenedorinput mb-3" id="descripcion-general-field">
                                             <span class="input-label">Descripcion general:</span>
-                                            <input id="input-descripcionGeneral"
-                                            name="modificar_descripcion"
-                                            type="text" 
-                                            required class="form-control" 
-                                            placeholder="Ingrese una descripcion general" 
-                                            aria-label="Descripcion general" 
-                                            aria-describedby="basic-addon1"
-                                            value="<%= prov.getDescrpicionGeneral() %>"
-                                        	>
+                                            <textarea 
+                                            	rows = "4" cols = "60" 
+                                            	name = "modificar_descripcion"
+                                            	id="input-descripcionGeneral"
+		                                           
+		                                            required class="form-control" 
+		                                            placeholder="Ingrese una descripcion general" 
+		                                            aria-label="Descripcion general" 
+		                                            aria-describedby="basic-addon1"
+		                                           
+                                            	><%= prov.getDescrpicionGeneral() %></textarea><br>
+                                           
                                         </div>
 
                                         <div class="contenedorinput mb-3" id="link-sito-web-field">
