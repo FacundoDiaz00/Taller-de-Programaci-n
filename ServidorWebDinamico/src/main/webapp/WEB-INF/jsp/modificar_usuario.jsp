@@ -24,7 +24,12 @@
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
-	                                    <div class="modal-content" style =" width: 598px; height: 950px;">
+	                                <% if (usuario instanceof DTTurista){ %>
+	                                    <div class="modal-content" style =" width: 598px; height: 780px;">
+	                                    
+	                     			<% } else {%>
+	                     				<div class="modal-content" style =" width: 598px; height: 950px;">
+	                     			<% } %>
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
 	                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
