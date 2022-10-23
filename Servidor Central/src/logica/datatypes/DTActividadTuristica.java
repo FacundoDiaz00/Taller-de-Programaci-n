@@ -18,6 +18,8 @@ public class DTActividadTuristica {
 	private String departamento;
 	private List<String> categorias;
 	private Imagen img;
+	private EstadoActividadTuristica estado;
+	
 
 	public String getNombre() {
 		return nombre;
@@ -48,7 +50,7 @@ public class DTActividadTuristica {
 	}
 
 	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
-			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img) {
+			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img, EstadoActividadTuristica estado) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.costoPorTurista = costoPorTurista;
@@ -59,6 +61,7 @@ public class DTActividadTuristica {
 		this.departamento = departamento;
 		this.categorias = cats;
 		this.img = img;
+		this.estado = estado;
 	}
 
 	public String getDepartamento() {
@@ -72,4 +75,9 @@ public class DTActividadTuristica {
 	public Imagen getImg() {
 		return img;
 	}
+	
+	public EstadoActividadTuristica getEstado() {
+		return estado;
+	}
+	
 }

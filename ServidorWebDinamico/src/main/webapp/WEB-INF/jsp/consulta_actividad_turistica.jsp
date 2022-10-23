@@ -5,6 +5,7 @@
 
 
  --%>
+<%@page import="logica.datatypes.EstadoActividadTuristica"%>
 <%@page import="logica.datatypes.DTProveedor"%>
 <%@page import="logica.datatypes.DTPaquete"%>
 <%@page import="logica.datatypes.DTSalidaTuristica"%>
@@ -66,7 +67,7 @@
         			// nada
         		}
         		// Muestro el boton si soy turista
-        		if (proveedorLogueado) { %>		            
+        		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) { %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
 	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
@@ -81,7 +82,16 @@
                     <p><%= datosActividad.getDescripcion() %>a</p>
                 </div>
 
-
+                <div class="div-doble" id="Duracion">
+                    <h5 class="">Estado: </h5>
+                    <% if(datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA){%>
+                    	<p>Confirmada</p>
+                    <%} else if(datosActividad.getEstado() == EstadoActividadTuristica.AGREGADA){%>
+                    	<p>Agregada sin confirmar</p>
+                    <%} else {%>
+                    	<p>Rechazada</p>
+                    <%}%>
+                </div>
 
                 <div class="div-doble" id="Duracion">
                     <h5 class="">Duración: </h5>
@@ -127,47 +137,54 @@
 
 					<%
 					
-					for(DTSalidaTuristica salida : datosActividad.getSalidas().values()){
-					
+					if(datosActividad.getSalidas().values().size() == 0){
 					%>
-
-
-                    <div class="card mb-3" style="max-width: 800px;">
-                        <div class="row g-0">
-                            <div class="col-md-4 img-contain">
-                                 <% 
-		            			String pathSalida = "";
-								if (salida.getImg() == null) {
-									pathSalida += "/noFoto.png";
-								} else {
-									pathSalida += salida.getImg().getPath();
-								}							
-								%>
-				                <img src="img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <div class="salidaInfo">
-                                        <h5 class="card-title"><%=salida.getNombre() %></h5>
-                                        <div><strong>Lugar salida: </strong><%=salida.getLugarSalida() %> </div>
-                                        <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")) %> </div>
-                                        <div><strong>Capacidad de turistas: </strong><%=salida.getCantMaxTuristas()%></div>
-                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></div>
-
-                                    </div>
-
-
-                                    <div class="botonera">
-                                        <a href="ConsultaSalida?id=<%=salida.getNombre()%>" class="btn btn-primary">Ver más</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <%
+						<span style="margin-left: 10px">Sin informacion</span>
+					<%
+					}else{
+					
+						for(DTSalidaTuristica salida : datosActividad.getSalidas().values()){
+						
+						%>
+	
+	
+	                    <div class="card mb-3" style="max-width: 800px;">
+	                        <div class="row g-0">
+	                            <div class="col-md-4 img-contain">
+	                                 <% 
+			            			String pathSalida = "";
+									if (salida.getImg() == null) {
+										pathSalida += "/noFoto.png";
+									} else {
+										pathSalida += salida.getImg().getPath();
+									}							
+									%>
+					                <img src="img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
+	                            </div>
+	                            <div class="col-md-8">
+	                                <div class="card-body">
+	                                    <div class="salidaInfo">
+	                                        <h5 class="card-title"><%=salida.getNombre() %></h5>
+	                                        <div><strong>Lugar salida: </strong><%=salida.getLugarSalida() %> </div>
+	                                        <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")) %> </div>
+	                                        <div><strong>Capacidad de turistas: </strong><%=salida.getCantMaxTuristas()%></div>
+	                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></div>
+	
+	                                    </div>
+	
+	
+	                                    <div class="botonera">
+	                                        <a href="ConsultaSalida?id=<%=salida.getNombre()%>" class="btn btn-primary">Ver más</a>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <%
+						}
 					}
-                    %>
+	                    %>
                     
                     
                 </div>
@@ -178,46 +195,51 @@
                     <h2 class="card-title">Paquetes:</h2>
 
 					<%
+					if(datosActividad.getPaquetes().values().size() == 0){%>	
+						<span style="margin-left: 10px">Sin informacion</span>
+					<%} else {%>
+						<%for(DTPaquete pack: datosActividad.getPaquetes().values()){
+						
+						%>
+	
+	                    <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
+	                        <div class="row g-0">
+	                            <div class="col-md-4 img-contain">
+	
+	                           
+	                                <% 
+			            			String pathPack = "";
+									if (pack.getImg() == null) {
+										pathPack += "/noFoto.png";
+									} else {
+										pathPack += pack.getImg().getPath();
+									}							
+									%>
+					                <img src="img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+	                                
+	                            </div>
+	                            <div class="col-md-8">
+	                                <div class="card-body cards">
+	                                	<div>
+		                                	<h5 class="card-title"><%= pack.getNombre() %></h5>
+		                                    <p><%= pack.getDescrpicion() %></p>
+	                                	</div>
+	                                    
+	                                    <div class="botonera">
+	                                        <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    
+	                    <%
+						}
+	                    %>
 					
-					for(DTPaquete pack: datosActividad.getPaquetes().values()){
+					<%}%>
 					
-					%>
-
-                    <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
-                        <div class="row g-0">
-                            <div class="col-md-4 img-contain">
-
-                           
-                                <% 
-		            			String pathPack = "";
-								if (pack.getImg() == null) {
-									pathPack += "/noFoto.png";
-								} else {
-									pathPack += pack.getImg().getPath();
-								}							
-								%>
-				                <img src="img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
-                                
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body cards">
-                                	<div>
-	                                	<h5 class="card-title"><%= pack.getNombre() %></h5>
-	                                    <p><%= pack.getDescrpicion() %></p>
-                                	</div>
-                                    
-                                    <div class="botonera">
-                                        <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <%
-					}
-                    %>
                     
                     
                 </div>
