@@ -68,7 +68,7 @@
                         <input  id="actividad"
                         	   	name="actividad" 
                         		type="text" 
-                        		required 
+                        		0
                         		class="form-control" 
                         		placeholder="" 
                         		aria-label="Actividad" 
