@@ -9,13 +9,9 @@
     <title>Turismo UY</title>
 
 <!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/estilosComun.css">
+	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
     <link rel="stylesheet" href="css/alta_de_actividad_turistica.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="fontawesome-free-6.2.0-web/css/all.css">
-    <link rel="stylesheet" href="css/sweetalert2.min.css">
+
 
 
 

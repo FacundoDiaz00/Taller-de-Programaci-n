@@ -42,35 +42,38 @@ public class AltaSalidaServlet extends HttpServlet {
         super();
         this.cat = Fabrica.getInstancia().getIControladorActividadTuristica();
     }
+    
+    
+    private void procesarGet(String nomActividad, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    	 if (req.getCharacterEncoding() == null) {
+             req.setCharacterEncoding("UTF-8");
+         }
 
-    String nomActividad;
+         // Solo muestro el form si es un proveedor:
 
+         DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
+         if (usuario == null || !(usuario instanceof DTProveedor)) {
+             req = Utiles.insertarLoDeSiempre(req);
+             resp.sendRedirect("/index");
+             return;
+         }
+         try {
+             DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
+             req.setAttribute("datosActividad", datosActividad);
+
+         } catch (ObjetoNoExisteEnTurismoUy e) {
+             req.setAttribute("motivoDeError", "No existe la actividad turistica");
+             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+             return;
+         }
+
+         req = Utiles.insertarLoDeSiempre(req);
+         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
+    }
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getCharacterEncoding() == null) {
-            req.setCharacterEncoding("UTF-8");
-        }
-
-        // Solo muestro el form si es un proveedor:
-
-        DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
-        if (usuario == null || !(usuario instanceof DTProveedor)) {
-            req = Utiles.insertarLoDeSiempre(req);
-            resp.sendRedirect("/index");
-            return;
-        }
-        nomActividad = (String) req.getParameter("id");
-        try {
-            DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
-            req.setAttribute("datosActividad", datosActividad);
-
-        } catch (ObjetoNoExisteEnTurismoUy e) {
-            req.setAttribute("motivoDeError", "No existe la actividad turistica");
-            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_actividad.jsp").forward(req, resp);
-        }
-
-        req = Utiles.insertarLoDeSiempre(req);
-        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
+       this.procesarGet((String) req.getParameter("id"), req, resp); 
 
     }
 
@@ -116,7 +119,7 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         try {
-            cat.altaSalidaTuristica(nomActividad, nombre, fechaYHoraSalida, fechaDeAlta, lugar,
+            cat.altaSalidaTuristica(actividad, nombre, fechaYHoraSalida, fechaDeAlta, lugar,
                     Integer.valueOf(cantMaxTur), imgDt);
             if (hayImagen) {
                 // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
@@ -138,27 +141,35 @@ public class AltaSalidaServlet extends HttpServlet {
 
             req.setAttribute("exito", "exito");
 
-            req = Utiles.insertarLoDeSiempre(req);
+            
 
-            var infoActividadTuristica = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
+            var infoActividadTuristica = cat.obtenerDTActividadTuristicaDetalle(actividad);
+            
             req.setAttribute("datosActividad", infoActividadTuristica);
+            req = Utiles.insertarLoDeSiempre(req);
+            
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
             return;
 
         } catch (NumberFormatException e) {
             req.setAttribute("motivoDeError",
                     "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
+
         } catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
             req.setAttribute("motivoDeError",
                     "La fecha de la salida debe ser posterior a la fecha de alta de la actividad");
+
         } catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
             req.setAttribute("motivoDeError",
                     "La fecha de la salida debe ser posterior a la fecha actual");
+
         } catch (SalidaYaRegistradaException e) {
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
+
         } catch (ActividadTuristicaNoAceptada e) {
             req.setAttribute("motivoDeError",
                     "La actividad a la que intentó registrar una salida no está aceptada todavía.");
+
         } catch (ObjetoNoExisteEnTurismoUy e) {
             if (e.getClaseObjetoFaltante().equals("Actividad")) {
                 req.setAttribute("motivoDeError",
@@ -167,6 +178,8 @@ public class AltaSalidaServlet extends HttpServlet {
                 req.setAttribute("motivoDeError",
                         "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
             }
+
+            return;
         }
 
         // En este punto si o si hay error
@@ -174,11 +187,11 @@ public class AltaSalidaServlet extends HttpServlet {
         req.setAttribute("nombre", nombre);
         // req.setAttribute("fechaYHoraSalida", fechaYHoraSalida);
         req.setAttribute("lugar", lugar);
+        req.setAttribute("fechaSalida", fechaSalida);
+        req.setAttribute("horaSalida", horaSalida);
         req.setAttribute("cantMaxTur", cantMaxTur);
-
-        req = Utiles.insertarLoDeSiempre(req);
-
-        req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida.jsp").forward(req, resp);
+        
+        this.procesarGet(actividad, req, resp); 
 
     }
 
