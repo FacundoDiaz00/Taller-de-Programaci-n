@@ -98,6 +98,8 @@ public abstract class Usuario {
         this.setNombre(datosNuevos.getNombre());
         this.setApellido(datosNuevos.getApellido());
         this.setFechaNac(datosNuevos.getFechaNac());
+        if (datosNuevos.getImg() != null)
+        	this.setImagen(datosNuevos.getImg());
     }
 
     public boolean usuarioValido(String _contrasenia) {

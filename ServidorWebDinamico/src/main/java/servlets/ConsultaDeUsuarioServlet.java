@@ -1,19 +1,31 @@
 package servlets;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
+import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 import utils.Utiles;
 
 /**
@@ -21,6 +33,7 @@ import utils.Utiles;
  */
 
 @WebServlet("/ConsultaDeUsuario")
+@MultipartConfig
 public class ConsultaDeUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private IControladorUsuario contrUsuario;
@@ -97,8 +110,86 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         if (request.getCharacterEncoding() == null) {
             request.setCharacterEncoding("UTF-8");
         }
+        HttpSession sesion = request.getSession(false);
+        DTUsuario userLogueado = (DTUsuario) sesion.getAttribute("usuarioLogeado");
+        DTUsuario datosNuevos;
+        
+        Boolean borrarImagen = (Boolean) request.getParameter("borrar_imagen");
+        
+        String nick = userLogueado.getNickname();
+        String correo = userLogueado.getCorreo();
+        
+        String modN = request.getParameter("modificar_nombre");
+        String modA = request.getParameter("modificar_apellido");
+        String modC = request.getParameter("modificar_contrasenia");
+        String modFN = request.getParameter("modificar_fechaNac");
+        //TODO: chequear nulls
+        String modNac = null;
+        String modD = null;
+        String modL = null;
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fecha = LocalDate.parse(modFN, formatter);
+        
+        Part filePart = request.getPart("modificar_img");
 
-        // TODO Auto-generated method stub
+        boolean hayImagen = filePart.getSize() > 0 && !borrarImagen;
+        String ext = "";
+        String futuroNombreDelPath = "";
+        Imagen imgDt = null;
+        if (hayImagen) {
+            ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+
+            // Esto es la ruta relativa
+            futuroNombreDelPath = "/usuarios/" + nick + ext;
+            imgDt = new Imagen(futuroNombreDelPath);
+        }
+        
+        if (sesion.getAttribute("usuarioLogeado") instanceof DTTurista){
+        	modNac = request.getParameter("modificar_nacionalidad");
+        	datosNuevos = (DTUsuario) new DTTurista(nick, modN, modA, correo, fecha, imgDt, modNac);
+        }
+        else {
+        	modD = request.getParameter("modificar_descripcion");
+        	modL = request.getParameter("modificar_link");
+        	datosNuevos = (DTUsuario) new DTProveedor(nick, modN, modA, correo, fecha, imgDt, modD, modL);
+        }
+        
+        	try {
+				contrUsuario.modificarUsuario(datosNuevos, modC, borrarImagen);
+				
+				 String servidorPath = getServletContext().getRealPath("/");
+	            if (hayImagen) {
+	                // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
+	                InputStream imgInputStream = filePart.getInputStream();
+	               
+	                File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
+	                imgFile.createNewFile();
+	                FileOutputStream imgFileStream = new FileOutputStream(imgFile);
+
+	                byte[] buffer = new byte[8192];
+
+	                int readLength = imgInputStream.read(buffer);
+	                while (readLength != -1) {
+	                    imgFileStream.write(buffer, 0, readLength);
+	                    readLength = imgInputStream.read(buffer);
+	                }
+	                imgFileStream.close();
+	            } else if (borrarImagen && userLogueado.getImg() != null){
+	            	File imgDel = new File(servidorPath + "/img" + userLogueado.getImg().getPath());
+	            	imgDel.delete();
+	            	
+	            	
+	            }
+	            
+	            
+			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
+				request.setAttribute("motivoDeError",
+	                    "Los datos enviados no son válidos");
+				
+			}
+//TODO: ACTUALIZAR SESION
+
         doGet(request, response);
     }
 

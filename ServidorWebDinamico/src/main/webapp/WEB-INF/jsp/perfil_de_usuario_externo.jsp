@@ -4,8 +4,6 @@
 	DTUsuario "usr"
 
  --%>
-<%@page import="logica.datatypes.DTTurista"%>
-<%@page import="logica.datatypes.DTProveedor"%>
 <%@page import="logica.datatypes.DTInscripcion"%>
 <%@page import="logica.datatypes.DTUsuario"%>
 <%@page import="logica.datatypes.DTCompra"%>
@@ -32,7 +30,7 @@
 <head>
     <meta charset="UTF-8">
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="css/consulta_de_usuario.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_usuario.css">
     <title>Turismo UY</title>
 </head>
 <body>
@@ -83,13 +81,13 @@
 				    	 
 						<!--"Si es turista se muestra la información de las salidas a las que se inscribió."-->
 			            <li class="nav-item" role="presentation">
-			                <button class="nav-link" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Inscripciones a salidas</button>
+			                <button class="nav-link active" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Inscripciones a salidas</button>
 			            </li>
 			            <% 
 
 	                    if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){ %>
 			               <li class="nav-item" role="presentation">
-				                <button class="nav-link" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Compras de paquetes</button>
+				                <button class="nav-link active" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Compras de paquetes</button>
 				            </li>
 	                    <% }%>		
 				    <%}else{
@@ -97,43 +95,31 @@
 				    %>
 						<!--"Si es proveedor/a se muestra información de las actividades turísticas que ofrece (en estado “Confirmada”) y salidas asociadas."-->
 			            <li class="nav-item" role="presentation">
-			                <button class="nav-link" id="boton-actividades" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Actividades ofrecidas</button>
+			                <button class="nav-link active" id="boton-actividades" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Actividades ofrecidas</button>
 			            </li>
 			            
 			            <li class="nav-item" role="presentation">
-			                <button class="nav-link" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas que se proveen</button>
+			                <button class="nav-link active" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas que se proveen</button>
 			            </li>
 				    <%}%>
 		    	</ul>
 		    	<div class="tab-content" id="myTabContent">
-		    		<div class="tab-pane fade show cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+		    		<div class="tab-pane fade show active cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
 	                    <div class="card-body cards">
 	                        <h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 	                        <p class="text"><b><%= usr.getNombre()%> / <%= usr.getNickname()%></b></p>
-	                        <p class="card-text"><b>Tipo de usuario:</b> <%= usr instanceof DTProveedor ? "Proveedor" : "Turista"%></p>
 	                        <p class="card-text"><b>Nickname:</b> <%= usr.getNickname()%></p>
 	                        <p class="card-text"><b>Nombre: </b><%= usr.getNombre()%></p>
 	                        <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 	                        <p class="card-text"><b>Email:</b> <%= usr.getCorreo()%></p>
 	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%= usr.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
-	                        <% if(usr instanceof DTProveedor){ 
-	                        	DTProveedor provData = (DTProveedor) usr;
-	                        %>
-	                        	<p class="card-text"><b>Descripcion:</b> <%= provData.getDescrpicionGeneral()%></p>
-	                        	<p class="card-text"><b>Url:</b> <%= provData.getLink() == null ? "Sin informacion" : provData.getLink()%></p>
-	                        
-	                        <% }else if(usr instanceof DTTurista){ 
-	                        	DTTurista turiData = (DTTurista) usr;
-	                        %>
-	                        <p class="card-text"><b>Nacionalidad:</b> <%= turiData.getNacionalidad()%></p>
-	                      
-							<%}%>
 							
-							<% if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())) { %>
+							<% if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()) { %>
 								<jsp:include page="/WEB-INF/jsp/modificar_usuario.jsp"/>
-							<% } %>	
-
+							<% } %>
+							
+							
 	                    </div>
 	                </div><!-- Cierra perfil -->
 	                <%
@@ -147,12 +133,8 @@
 
 		                    <div class="card-body cards">
 		                        <h5 class="card-title"></h5>
-								<%if(turpriv.getCompras().size() == 0){%>
-									
-									<span>Sin informacion</span>
-								
-		            			<%}else{	
-		            					
+								<%
+		            				
 		            				for(DTCompra cmp : turpriv.getCompras()){%>
 		            					<div>
 						 					<div class="card mb-3" style="max-width: 800px;">
@@ -167,7 +149,7 @@
 															path += cmp.getPaquete().getImg().getPath();
 														}							
 														%>
-							                            <img src="img<%=path%>" class="img-fluid rounded-start">
+							                            <img src="${pageContext.request.contextPath}/img<%=path%>" class="img-fluid rounded-start">
 							                            <!-- Falta el manejo de foto de la verdadero paquete-->
 							                        </div>
 							                        <div class="col-md-8">
@@ -176,7 +158,7 @@
 							                                <p class="card-text"><b>Cantidad turistas:</b> <%= cmp.getCantTuristas()%></p>
 							                                <p class="card-text"><b>Fecha de compra:</b> <%= cmp.getFechaCompra().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
 							                                <p class="card-text"><b>Fecha de vencimiento:</b> <%= cmp.getVencimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></p>
-							                                <p class="card-text"><b>Costo:</b> <%= cmp.getCosto()%>$</p>
+							                                <p class="card-text"><b>Costo:</b> <%= cmp.getCosto()%></p>
 							                                <div class="botonera">
 							                                    <a href="ConsultaPaquete?id=<%=cmp.getPaquete().getNombre()%>" class="btn btn-primary">Ver mas</a>
 							                                </div>
@@ -188,59 +170,51 @@
 							                </div>
 					                    </div>
 					                
-		            				<%} 
-		            			}%>
+		            				<%} %>
 									
 		                    </div>	
 		                </div>
 		                	
 		                <div class="tab-pane fade cardSalidas" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="2">
-		                
-		                	<%if(turpriv.getDTInscripciones().size() == 0){%>
-									
-									<span>Sin informacion</span>
-								
-		            		<%}else{	
-		               
-		            			for(DTInscripcion insc: turpriv.getDTInscripciones()){
-		            			%>	
-		                            <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
-		                                <div class="row g-0">
-		                                    <div class="col-md-4 img-contain">
-		                                    
-		                                    	<% 
-						            			String pathImagen = "";
-												if (insc.getSalidaTuristica().getImg() == null) {
-													pathImagen += "/noFoto.png";
-												} else {
-													pathImagen += insc.getSalidaTuristica().getImg().getPath();
-												}							
-												%>
-								                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
-		                                    
-		                                    </div>
-		                                    <div class="col-md-8">
-		                                        <div class="card-body cards">
-		                                             <h5 class="card-title"><%=insc.getSalidaTuristica().getNombre()%></h5>
-		                                             <p class="card-text"><b>Cantidad turistas:</b> <%= insc.getCantidadTuristas()%></p>
-		                                             <p class="card-text"><b>Costo de la inscripción:</b> <%= insc.getCosto()%>$</p> 
-		                                             <p class="card-text"><b>Fecha de inscripción:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
-		                                             <%if(insc.getCompra() != null) {%>
-			                                             <p class="card-text"><b>Tipo de compra:</b> Con paquete</p>
-		                                             	 <p class="card-text"><b>Comprada con paquete:</b> <%= insc.getCompra().getPaquete().getNombre()%></p>
-		                                             
-		                                             <%} else {%>
-														<p class="card-text"><b>Tipo de compra:</b> General</p>                                             
-		                                             <%} %>
-		                                            <div class="botonera">
-		                                                <a href="ConsultaSalida?id=<%=insc.getSalidaTuristica().getNombre() %>" class="btn btn-primary">Ver mas</a>
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                            </div>
-		            			<%}
-		            		}%>
+	            			<%
+	            			for(DTInscripcion insc: turpriv.getDTInscripciones()){
+	            			%>	
+	                            <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
+	                                <div class="row g-0">
+	                                    <div class="col-md-4 img-contain">
+	                                    
+	                                    	<% 
+					            			String pathImagen = "";
+											if (insc.getSalidaTuristica().getImg() == null) {
+												pathImagen += "/noFoto.png";
+											} else {
+												pathImagen += insc.getSalidaTuristica().getImg().getPath();
+											}							
+											%>
+							                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+	                                    
+	                                    </div>
+	                                    <div class="col-md-8">
+	                                        <div class="card-body cards">
+	                                             <h5 class="card-title"><%=insc.getSalidaTuristica().getNombre()%></h5>
+	                                             <p class="card-text"><b>Cantidad turistas:</b> <%= insc.getCantidadTuristas()%></p>
+	                                             <p class="card-text"><b>Costo de la inscripción:</b> <%= insc.getCosto()%></p> 
+	                                             <p class="card-text"><b>Fecha de inscripción:</b> <%= insc.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></p>
+	                                             <%if(insc.getCompra() != null) {%>
+		                                             <p class="card-text"><b>Tipo de compra:</b> Con paquete</p>
+	                                             	 <p class="card-text"><b>Comprada con paquete:</b> <%= insc.getCompra().getPaquete().getNombre()%></p>
+	                                             
+	                                             <%} else {%>
+													<p class="card-text"><b>Tipo de compra:</b> General</p>                                             
+	                                             <%} %>
+	                                            <div class="botonera">
+	                                                <a href="ConsultaSalida?id=<%=insc.getSalidaTuristica().getNombre() %>" class="btn btn-primary">Ver mas</a>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	            			<%}%>
 	            		</div>
             		
             		
@@ -248,42 +222,36 @@
             			<%} else {%>
             				
 	            			<div class="tab-pane fade" id="boton-salidas-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
-	            			
-		            			<%if(tur.getInscripciones().size() == 0){%>
-										
-										<span>Sin informacion</span>
-									
-			            		<%}else{
-			            			for(DTSalidaTuristica sal: tur.getInscripciones()){
-			            			%>	
-			                            <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
-			                                <div class="row g-0">
-			                                    <div class="col-md-4 img-contain">
-			                                    
-			                                    	<% 
-							            			String pathImagen = "";
-													if (sal.getImg() == null) {
-														pathImagen += "/noFoto.png";
-													} else {
-														pathImagen += sal.getImg().getPath();
-													}							
-													%>
-									                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
-			                                    
-			                                    </div>
-			                                    <div class="col-md-8">
-			                                        <div class="card-body cards">
-			                                            <h5 class="card-title"><%=sal.getNombre()%></h5>
-			                                            
-			                                            <div class="botonera">
-			                                                <a href="ConsultaSalida?id=<%=sal.getNombre() %>" class="btn btn-primary">Ver más</a>
-			                                            </div>
-			                                        </div>
-			                                    </div>
-			                                </div>
-			                            </div>
-			            			<%}
-			            		}%>
+	            			<%
+	            			for(DTSalidaTuristica sal: tur.getInscripciones()){
+	            			%>	
+	                            <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
+	                                <div class="row g-0">
+	                                    <div class="col-md-4 img-contain">
+	                                    
+	                                    	<% 
+					            			String pathImagen = "";
+											if (sal.getImg() == null) {
+												pathImagen += "/noFoto.png";
+											} else {
+												pathImagen += sal.getImg().getPath();
+											}							
+											%>
+							                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+	                                    
+	                                    </div>
+	                                    <div class="col-md-8">
+	                                        <div class="card-body cards">
+	                                            <h5 class="card-title"><%=sal.getNombre()%></h5>
+	                                            
+	                                            <div class="botonera">
+	                                                <a href="ConsultaSalida?id=<%=sal.getNombre() %>" class="btn btn-primary">Ver más</a>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	            			<%}%>
 	            			</div>
             			
             			
@@ -317,7 +285,7 @@
 											pathImagen += act.getImg().getPath();
 										}							
 										%>
-						                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+						                <img src="${pageContext.request.contextPath}/img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
@@ -364,7 +332,7 @@
 													pathImagen += acti.getImg().getPath();
 												}							
 												%>
-								                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 					                        </div>
 					                        <div class="col-md-8">
 					                            <div class="card-body">
@@ -397,7 +365,7 @@
 													pathImagen += acti.getImg().getPath();
 												}							
 												%>
-								                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+								                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 					                        </div>
 					                        <div class="col-md-8">
 					                            <div class="card-body">
@@ -418,42 +386,35 @@
 						<%} %>
             			</div>
             			<div class="tab-pane fade" id="boton-salidasprov-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="3">
-            			
-            				<%if( prv.getActividades().size() == 0){%>										
-								<span>Sin informacion</span>									
-			            	<%}else{            			
-	            				 for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
-									<%if(!act.getSalidas().isEmpty()){ %>
-										<h4>Actividad: <%=act.getNombre() %></h4>
-									<%} %>
-									<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>
-										<div class="card mb-3 imagenSalidas" style="max-width: 800px;">
-			                                <div class="row g-0">
-			                                    <div class="col-md-4 img-contain">
-			                                        <div id="info-general-imagen">            
-									                 	<% 
-											            String pathSalida = "";
-														if (sal.getImg() == null) {
-															pathSalida += "/noFoto.png";
-														} else {
-															pathSalida += sal.getImg().getPath();
-														}							
-														%>
-													    <img src="img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
-													</div>
-			                                    </div>
-			                                    <div class="col-md-8">
-			                                        <div class="card-body cards">
-			                                            <h5 class="card-title"><%= sal.getNombre() %></h5>
-	 		                                            <p>Actividad: <%=sal.getActividad() %></p> 
-			                                            <div class="botonera">
-					                                        <a href="ConsultaSalida?id=<%=sal.getNombre()%>" class="btn btn-primary">Ver más</a>
-					                                    </div>
-			                                        </div>
-			                                    </div>
-			                                </div>
-			                            </div>
-									<% } %>
+            				<% for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
+								<h4>Actividad: <%=act.getNombre() %></h4>
+								<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>
+									<div class="card mb-3 imagenSalidas" style="max-width: 800px;">
+		                                <div class="row g-0">
+		                                    <div class="col-md-4 img-contain">
+		                                        <div id="info-general-imagen">            
+								                 	<% 
+										            String pathSalida = "";
+													if (sal.getImg() == null) {
+														pathSalida += "/noFoto.png";
+													} else {
+														pathSalida += sal.getImg().getPath();
+													}							
+													%>
+												    <img src="${pageContext.request.contextPath}/img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+												</div>
+		                                    </div>
+		                                    <div class="col-md-8">
+		                                        <div class="card-body cards">
+		                                            <h5 class="card-title"><%= sal.getNombre() %></h5>
+ 		                                            <p>Actividad: <%=sal.getActividad() %></p> 
+		                                            <div class="botonera">
+				                                        <a href="ConsultaSalida?id=<%=sal.getNombre()%>" class="btn btn-primary">Ver más</a>
+				                                    </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
 								<% } %>
 							<% } %>
             			</div>
@@ -466,8 +427,8 @@
 	    <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 	
  
-	<script src="js/perfil_de_usuario.js"></script>
-	<script src="js/popUp_modificar_usuario.js"></script>
+	<script src="${pageContext.request.contextPath}/js/perfil_de_usuario.js"></script>
+	<script src="${pageContext.request.contextPath}/js/popUp_modificar_usuario.js"></script>
     <script>
         $(document).ready(function(){
             $(".btn").click(function(){
