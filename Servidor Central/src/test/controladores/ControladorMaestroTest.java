@@ -336,6 +336,9 @@ class ControladorMaestroTest {
             String[] usr = datosUsuarios[i];
             var fechaNac = fechasNacUsuarios[i];
 
+            assertEquals(iuser.obtenerDTUsuarioPorEmail(usr[3], usr[4]).getNickname(),
+                    iuser.obtenerDTUsuarioPorNickname(usr[0], usr[4]).getNickname());
+
             if (usr[6] == null) {
                 var turista = (DTTuristaDetallePrivado) iuser.obtenerDTUsuarioDetallePrivado(usr[0]);
                 // Cargo Turistas
@@ -391,6 +394,8 @@ class ControladorMaestroTest {
                 img = "/salidas/" + salStr[1] + ".png";
 
             var salida = icat.obtenerDTSalidaTuristica(salStr[1]);
+
+            assertTrue(icat.obtenerIdSalidasTuristicas(salStr[0]).contains(salStr[1]));
 
             assertEquals(salStr[0], salida.getActividad());
             assertEquals(salStr[1], salida.getNombre());
