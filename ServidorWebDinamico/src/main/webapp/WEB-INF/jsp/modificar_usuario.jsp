@@ -202,12 +202,14 @@
                                         </div>
                                         <% } %>
                                         
+                                           <div class="modal-footer" style="display: flex;justify-content: space-between;">
+	                                            <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
+	                                            <input type="submit" id="aceptar-boton" class="btn btn-success" value="Aceptar">
+                                           </div>
 											</form>
 	                                        
-	                                        <div class="modal-footer" style="display: flex;justify-content: space-between;">
-	                                            <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
-	                                            <button type="button" class="btn btn-primary">Guardar</button>
-	                                        </div>
+
+	                                        
 	                                    </div>
 	                                    	
 	                                </div>

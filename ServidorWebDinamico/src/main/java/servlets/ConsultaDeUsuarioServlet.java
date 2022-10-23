@@ -97,6 +97,8 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         if (request.getCharacterEncoding() == null) {
             request.setCharacterEncoding("UTF-8");
         }
+        HttpSession sesion = request.getSession(false);
+        System.out.println(request.getParameter("nombre"));
 
         // TODO Auto-generated method stub
         doGet(request, response);
