@@ -94,7 +94,7 @@
                         <span class="input-label">Duración:<span class="obligatorio"> *</span></span>
                         <div class="input-group">
                             <input 	type="number" 
-                            		min="0" 
+                            		min="1" 
                             		id="duracion"
                         	   		name="duracion" 
                         	   	 	value="<%= duracion %>"
@@ -113,7 +113,7 @@
                         <div class="input-group">
                             <input 	type="number"
                             		step="0.01"
-                            		min="0" 
+                            		min="0.01" 
                             		id="costo"
                         	   		name="costo" 
                         	   	 	value="<%= costo %>"
