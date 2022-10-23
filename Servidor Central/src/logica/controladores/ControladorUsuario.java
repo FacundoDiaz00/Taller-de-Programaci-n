@@ -139,7 +139,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Boolean borrarImg)
+    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, boolean borrarImg)
             throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy {
 
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();

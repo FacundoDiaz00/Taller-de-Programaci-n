@@ -109,7 +109,7 @@ public interface IControladorUsuario {
      */
 
 
-	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Boolean borrarImg)
+	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, boolean borrarImg)
 			throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
 
 }
