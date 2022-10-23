@@ -30,10 +30,7 @@
                             <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
 
                             
-                            <%
-                            DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");
-                            if (usuario instanceof DTProveedor){
-                            %>	
+                            <% DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado"); %>
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
@@ -45,34 +42,87 @@
 	                                        
 	                                        
 		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 790px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
-	
-	                                            <div class="contenedorinput mb-3">
-	                                                <span class="input-label">Foto de Perfil:</span>
-	                                                <img style="width: 160px; height: 120px; margin:20px" src="../img/la_chiqui.png">
-	                                                <input id="input-imagen" type="file" accept="image/*"  class="form-control" placeholder="Imagen" aria-label="Imagen" aria-describedby="basic-addon1">
+												<%
+												String imgpath;
+												if(usuario.getImg() != null){
+													imgpath = "/img" + usuario.getImg().getPath();
+												}else{
+													imgpath = "/img/noFoto.png";
+												}
+												%>
+																			
+							                    <div class="contenedorinput mb-3">
+							                        <span class="input-label">Imagen:</span>
+							                        <input id="input-imagen" 
+							                        	   type="file" 
+							                        	   accept="image/*" 
+							                        	   name="img" 
+							                        	   class="form-control" 
+							                        	   placeholder="Imagen" 
+							                        	   aria-label="Imagen" 
+							                        	   aria-describedby="basic-addon1" 
+							                        	   >
+	                                                
 	                                            </div>
 	
 	                                            <div class="popUp">
 	                                                <div>
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label" >Nickname:</span>
-	                                                        <input id="input-nickname" type="text" required class="form-control" placeholder="lachiqui" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
+	                                                        <input id="input-nickname" 
+	                                                        name="nickname" 
+	                                                        type="text" 
+	                                                        required
+	                                                        class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Nickname" 
+	                                                        aria-describedby="basic-addon1" 
+	                                                        disabled
+	                                                        value="<%= usuario.getNickname() %>"
+	                                                        >
 	                                                    </div>
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Nombre:</span>
-	                                                        <input id="input-nombre" type="text" required class="form-control" placeholder="Rosa María" aria-label="Nombre" aria-describedby="basic-addon1">
+	                                                        <input id="input-nombre"
+	                                                        name="nombre" 
+	                                                        type="text" 
+	                                                        required class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Nombre" 
+	                                                        aria-describedby="basic-addon1"
+	                                                        value="<%= usuario.getNombre() %>"
+	                                                        >
 	                                                    </div>
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Apellido: </span>
-	                                                        <input id="input-apellido" type="text" required class="form-control" placeholder="Martínez" aria-label="Apellido" aria-describedby="basic-addon1">
+	                                                        <input id="input-apellido" 
+	                                                        name="apellido"
+	                                                        type="text" 
+	                                                        required class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Apellido" 
+	                                                        aria-describedby="basic-addon1"
+	                                                        value="<%= usuario.getApellido() %>"
+	                                                        
+	                                                        >
 	                                                    </div>
 	                                                    
+	                                                    <% if (usuario instanceof DTTurista){ %>
 	                                                    <div class="contenedorinput mb-3" id="nacionalidad-field">
 	                                              		  <span class="input-label">Nacionalidad: </span>
-	                                                		<input id="input-nacionalidad" type="text" class="form-control" placeholder="Argentina" aria-label="Imagen" aria-describedby="basic-addon1">
+	                                                		<input id="input-nacionalidad" 
+	                                                		type="text" 
+	                                                		class="form-control" 
+	                                                		placeholder="" 
+	                                                		aria-label="Imagen" 
+	                                                		aria-describedby="basic-addon1"
+	                                                		<% DTTurista tur = (DTTurista) usuario;  %>
+	                                                		value="<%= tur.getNacionalidad() %>"
+	                                                		>
 	                                         		   </div>
+	                                         		     <% } %>
 	
 	                                                </div>
 	
@@ -80,26 +130,79 @@
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Fecha de nacimiento:</span>
-	                                                        <input id="input-fecha-nacimiento" type="date" required class="form-control" placeholder="23/2/1927" aria-label="Fecha nacimiento" aria-describedby="basic-addon1">
+	                                                        <input id="input-fecha-nacimiento" 
+	                                                        type="date" 
+	                                                        required 
+	                                                        class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Fecha" 
+	                                                        aria-describedby="basic-addon1"
+	                                                        value=<%= usuario.getFechaNac().toString() %>
+	                                                        >
 	                                                    </div>
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Contraseña: </span>
-	                                                        <input id="input-contraseña" type="password" required class="form-control" placeholder="Contraseña" aria-label="Nickname" aria-describedby="basic-addon1">
+	                                                        <input id="input-contraseña" 
+	                                                        type="password" 
+	                                                        required 
+	                                                        class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Contraseña" 
+	                                                        aria-describedby="basic-addon1"
+	                                                        value="..."
+	                                                        >
 	                                                    </div>
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label"> Correo electronico:</span>
-	                                                        <input id="input-correo" type="password" required class="form-control" placeholder=" mirtha.legrand.ok@hotmail.com.ar" aria-label="Nickname" aria-describedby="basic-addon1" readonly>
+	                                                        <input id="input-correo" 
+	                                                        type="text" 
+	                                                        required class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Correo" 
+	                                                        aria-describedby="basic-addon1" 
+	                                                        value="<%= usuario.getCorreo() %>"
+	                                                        disabled
+	                                                        
+	                                                        >
 	                                                    </div>
 														
 	                                                
 	                                                </div>
 	
 	                                            </div>
-	
 	                                            
-	</form>
+	                                            
+	                                            <% if (usuario instanceof DTProveedor){ 
+	                                            		DTProveedor prov = (DTProveedor) usuario;
+	                                            %>
+	                                            <div class="contenedorinput mb-3" id="descripcion-general-field">
+                                            <span class="input-label">Descripcion general:</span>
+                                            <input id="input-descripcionGeneral" 
+                                            type="text" 
+                                            required class="form-control" 
+                                            placeholder="Ingrese una descripcion general" 
+                                            aria-label="Descripcion general" 
+                                            aria-describedby="basic-addon1"
+                                            value="<%= prov.getDescrpicionGeneral() %>"
+                                        	>
+                                        </div>
+
+                                        <div class="contenedorinput mb-3" id="link-sito-web-field">
+                                            <span class="input-label">Link sito web:</span>
+                                            <input id="input-link"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder=""
+                                            aria-label="Link"
+                                            aria-describedby="basic-addon1"
+                                            value="<%= prov.getLink() %>"
+                                            >
+                                        </div>
+                                        <% } %>
+                                        
+											</form>
 	                                        
 	                                        <div class="modal-footer" style="display: flex;justify-content: space-between;">
 	                                            <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
@@ -110,29 +213,6 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        
-	                        
-	                        
-	                        
-                            <% } 
-                            else { 
-                            %>
-                            	
-                            <%}
-                            %>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-					
 
 
     <%if(request.getAttribute("motivoDeError") != null){ %>
