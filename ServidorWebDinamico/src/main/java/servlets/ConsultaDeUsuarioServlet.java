@@ -112,6 +112,9 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         DTUsuario datosNuevos;
         
         String nick = userLogueado.getNickname();
+        String correo = userLogueado.getCorreo();
+        
+        System.out.println(nick);
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
         String modC = request.getParameter("modificar_contrasenia");
@@ -140,18 +143,18 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         
         if (sesion.getAttribute("usuarioLogueado") instanceof DTTurista){
         	modNac = request.getParameter("modificar_nacionalidad");
-        	datosNuevos = (DTUsuario) new DTTurista(nick, modN, modA, modC, fecha, imgDt, modNac);
+        	datosNuevos = (DTUsuario) new DTTurista(nick, modN, modA, correo, fecha, imgDt, modNac);
         }
         else {
         	modD = request.getParameter("modificar_descripcion");
         	modL = request.getParameter("modificar_link");
-        	datosNuevos = (DTUsuario) new DTProveedor(nick, modN, modA, modC, fecha, imgDt, modD, modL);
+        	datosNuevos = (DTUsuario) new DTProveedor(nick, modN, modA, correo, fecha, imgDt, modD, modL);
         }
         
         	try {
 				contrUsuario.modificarUsuario(datosNuevos);
 			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
-				// TODO Auto-generated catch block
+				System.out.println("EXCEPCIOON");
 				e.printStackTrace();
 			}
 
