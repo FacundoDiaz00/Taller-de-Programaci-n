@@ -114,7 +114,6 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String nick = userLogueado.getNickname();
         String correo = userLogueado.getCorreo();
         
-        System.out.println(nick);
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
         String modC = request.getParameter("modificar_contrasenia");
@@ -141,7 +140,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             imgDt = new Imagen(futuroNombreDelPath);
         }
         
-        if (sesion.getAttribute("usuarioLogueado") instanceof DTTurista){
+        if (sesion.getAttribute("usuarioLogeado") instanceof DTTurista){
         	modNac = request.getParameter("modificar_nacionalidad");
         	datosNuevos = (DTUsuario) new DTTurista(nick, modN, modA, correo, fecha, imgDt, modNac);
         }
@@ -154,8 +153,9 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	try {
 				contrUsuario.modificarUsuario(datosNuevos);
 			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
-				System.out.println("EXCEPCIOON");
-				e.printStackTrace();
+				request.setAttribute("motivoDeError",
+	                    "Los datos enviados no son válidos");
+				
 			}
 
 
