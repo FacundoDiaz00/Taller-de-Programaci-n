@@ -81,14 +81,12 @@
                         <span class="input-label">Descripcion:<span class="obligatorio"> *</span></span>
                         <textarea  	id="descripcion"
                         	   		name="descripcion" 
-                        	   	 	type="text" 
-                        	   	 	value="<%= descripcion %>"
                         			required
                         			class="form-control" 
                         			placeholder="Ingrese una descripcion" 
                         			aria-label="Descripcion" 
                         			aria-describedby="basic-addon1"
-                       	></textarea>
+                       	><%=descripcion%></textarea>
                     </div>
 
                     <div class="contenedorinput mb-3">
@@ -158,12 +156,21 @@
                         <span class="input-label">Categorias:</span>
                         <div id="contenedorCategorias">
                                 <% 	int i = 0;
+                                	List<String> categoriasSeleccionadas;
+                                	if(request.getAttribute("categoriasSeleccionadas") != null){
+                                		categoriasSeleccionadas = (List<String>) request.getAttribute("categoriasSeleccionadas");
+                                	}else{
+                                		categoriasSeleccionadas = new ArrayList();
+                                	}
+                                
+                                	
                                 	for (String cat: getListWithoutNull((List<String>) request.getAttribute("categorias"))) { %>
 		                            <div class="form-check">
 	                                	<input 	class="form-check-input opcion-categoria" 
 			                                	id="categoria_<%=i %>"
 		                        	   			name="categorias" 
-	                                			type="checkbox" 	                                			
+	                                			type="checkbox"
+	                                			<%= categoriasSeleccionadas.contains(cat) ? "checked" : "" %>                         			
 	                                			value="<%= cat %>" 
 	                                			id="flexCheckDefault">
 		                                	<label class="form-check-label" for="flexCheckDefault">
