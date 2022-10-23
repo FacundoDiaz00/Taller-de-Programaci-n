@@ -128,7 +128,11 @@
 	                        %>
 	                        <p class="card-text"><b>Nacionalidad:</b> <%= turiData.getNacionalidad()%></p>
 	                      
-							<%}%>	
+							<%}%>
+							
+							<% if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())) { %>
+								<jsp:include page="/WEB-INF/jsp/modificar_usuario.jsp"/>
+							<% } %>	
 
 	                    </div>
 	                </div><!-- Cierra perfil -->

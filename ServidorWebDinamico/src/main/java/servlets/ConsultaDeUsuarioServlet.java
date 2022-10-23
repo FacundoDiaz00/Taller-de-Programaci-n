@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 import utils.Utiles;
 
 /**
@@ -101,23 +106,46 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
         }
         HttpSession sesion = request.getSession(false);
+        DTUsuario datosNuevos;
         
+        String nick = sesion.getAttribute("usuarioLogueado").toString();
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
         String modC = request.getParameter("modificar_contrasenia");
         String modFN = request.getParameter("modificar_fechaNac");
-        String modI = request.getParameter("modificar_img");
         
         String modNac = "";
         String modD = "";
         String modL = "";
         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fecha = LocalDate.parse(modFN, formatter);
+        
+        Part filePart = request.getPart("modificar_img");
+
+        boolean hayImagen = filePart.getSize() > 0;
+        String ext = "";
+        String futuroNombreDelPath = "";
+        Imagen imgDt = null;
+        if (hayImagen) {
+            ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+
+            // Esto es la ruta relativa
+            futuroNombreDelPath = "/usuarios/" + nick + ext;
+            imgDt = new Imagen(futuroNombreDelPath);
+        }
+        
         if (sesion.getAttribute("usuarioLogueado") instanceof DTTurista){
         	modNac = request.getParameter("modificar_nacionalidad");
+        	datosNuevos = (DTUsuario) new DTTurista(nick, modN, modA, modC, fecha, imgDt, modNac);
         }
         else {
         	modD = request.getParameter("modificar_descripcion");
         	modL = request.getParameter("modificar_link");
+        }
+        
+        try {
+        	contrUsuario.modificarUsuario()
         }
 
         doGet(request, response);
