@@ -419,7 +419,9 @@
 								<span>Sin informacion</span>									
 			            	<%}else{            			
 	            				 for(DTActividadTuristicaDetalle act: prv.getActividades()) {%>	
-									<h4>Actividad: <%=act.getNombre() %></h4>
+									<%if(!act.getSalidas().isEmpty()){ %>
+										<h4>Actividad: <%=act.getNombre() %></h4>
+									<%} %>
 									<% for(DTSalidaTuristica sal: act.getSalidas().values()) {%>
 										<div class="card mb-3 imagenSalidas" style="max-width: 800px;">
 			                                <div class="row g-0">

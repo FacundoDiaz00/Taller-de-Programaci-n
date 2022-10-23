@@ -34,9 +34,7 @@
     <section id="contenedor">
 		
 	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
-		
         <div id="contenedor-items">
-
             <!--Actividades-->
 
             <div class="card" id="contenedor-actividades-turisticas">
