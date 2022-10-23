@@ -107,6 +107,9 @@ public interface IControladorUsuario {
      * @throws ModificacionUsuarioNoPermitida
      * @throws ObjetoNoExisteEnTurismoUy
      */
-    void modificarUsuario(DTUsuario datosNuevos) throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
+
+
+	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Boolean borrarImg)
+			throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
 
 }
