@@ -1,3 +1,4 @@
+<%@page import="logica.datatypes.DTProveedor"%>
 <%@page import="logica.datatypes.DTUsuario"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,7 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_usuario.css">
+    <link rel="stylesheet" href="css/consulta_de_usuario.css">
     <title>Turismo UY</title>
 </head>
 
@@ -52,6 +53,7 @@
 				                                <p class="card-text"><b>Nombre:</b> <%=usr.getNombre()%></p>
 				                                <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 				                                <p class="card-text"><b>Nickname:</b> <%= usr.getNickname()%></p>
+				                                <p class="card-text"><b>Tipo usuario:</b> <%= usr instanceof DTProveedor ? "Proveedor" : "Turista"%></p>
 				                                <div class="botonera">
 				                                    <a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false" class="btn btn-primary">Ver más</a>
 				                                </div>

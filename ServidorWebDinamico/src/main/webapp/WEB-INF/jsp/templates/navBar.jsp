@@ -59,7 +59,7 @@
 									path += usuario.getImg().getPath();
 								}							
 								%>
-				                <img class="imagen_perfil " src="${pageContext.request.contextPath}/img<%=path%>" alt="">
+				                <img class="imagen_perfil " src="img<%=path%>" alt="">
 	                            
 	                        </a>
 	                        <ul class="dropdown-menu" id="dropDown">

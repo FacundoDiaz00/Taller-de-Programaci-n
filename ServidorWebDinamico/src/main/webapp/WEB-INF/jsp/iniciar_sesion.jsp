@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/iniciar_sesion.css">
+    <link rel="stylesheet" href="css/iniciar_sesion.css">
 
 	
 </head>
@@ -20,7 +20,7 @@
         </div>
     <div id="centerRow">
         
-          <form class="card" id="form-iniciar-sesion" name="iniciarSesionForm" method="post" action="${pageContext.request.contextPath}/IniciarSesion">
+          <form class="card" id="form-iniciar-sesion" name="iniciarSesionForm" method="post" action="IniciarSesion">
                 <div class="card-body">
                     <h5 class="card-title">Iniciar Sesión</h5>
                     
@@ -108,7 +108,7 @@
        });
 </script>
 
-    <script src="${pageContext.request.contextPath}/js/alta_usuario.js"></script>
+    <script src="js/alta_usuario.js"></script>
     
     <%if(request.getAttribute("motivoDeError") != null){ %>
     

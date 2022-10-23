@@ -8,14 +8,10 @@
     <meta charset="UTF-8">
     <title>Turismo UY</title>
 
-<!--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilosComun.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/alta_de_actividad_turistica.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/fontawesome-free-6.2.0-web/css/all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sweetalert2.min.css">
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
+	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
+    <link rel="stylesheet" href="css/alta_de_actividad_turistica.css">
+
 
 
 
@@ -41,9 +37,9 @@
     	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         
         <div id="contenedorForm">
-            <form class="card" id="form-alta-actividad" name="altaActividadForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeActividad">
+            <form class="card" id="form-alta-actividad" name="altaActividadForm" enctype="multipart/form-data" method="post" action="AltaDeActividad">
                 <div class="card-body">
-                    <h5 class="card-title">Crear Actividad Turistica</h5>
+                    <h5 class="card-title">Crear Actividad Turística</h5>
 
                     <div class="contenedorinput mb-3">
                     	<% String departamento = getTextWithoutNull((String)request.getAttribute("departamento")); %>
@@ -82,22 +78,20 @@
 
 					<div class="contenedorinput mb-3">
 						<% String descripcion = getTextWithoutNull((String)request.getAttribute("descripcion")); %>
-                        <span class="input-label">Descripcion:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Descripción:<span class="obligatorio"> *</span></span>
                         <textarea  	id="descripcion"
                         	   		name="descripcion" 
-                        	   	 	type="text" 
-                        	   	 	value="<%= descripcion %>"
                         			required
                         			class="form-control" 
                         			placeholder="Ingrese una descripcion" 
                         			aria-label="Descripcion" 
                         			aria-describedby="basic-addon1"
-                       	></textarea>
+                       	><%=descripcion%></textarea>
                     </div>
 
                     <div class="contenedorinput mb-3">
                     	<% String duracion = getTextWithoutNull((String)request.getAttribute("duracion")); %>
-                        <span class="input-label">Duracion:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Duración:<span class="obligatorio"> *</span></span>
                         <div class="input-group">
                             <input 	type="number" 
                             		min="0" 
@@ -159,15 +153,24 @@
                     </div>
                     
                     <div class="contenedorinput mb-3">
-                        <span class="input-label">Categorias:</span>
+                        <span class="input-label">Categorías:</span>
                         <div id="contenedorCategorias">
                                 <% 	int i = 0;
+                                	List<String> categoriasSeleccionadas;
+                                	if(request.getAttribute("categoriasSeleccionadas") != null){
+                                		categoriasSeleccionadas = (List<String>) request.getAttribute("categoriasSeleccionadas");
+                                	}else{
+                                		categoriasSeleccionadas = new ArrayList();
+                                	}
+                                
+                                	
                                 	for (String cat: getListWithoutNull((List<String>) request.getAttribute("categorias"))) { %>
 		                            <div class="form-check">
-	                                	<input 	class="form-check-input" 
+	                                	<input 	class="form-check-input opcion-categoria" 
 			                                	id="categoria_<%=i %>"
 		                        	   			name="categorias" 
-	                                			type="checkbox" 
+	                                			type="checkbox"
+	                                			<%= categoriasSeleccionadas.contains(cat) ? "checked" : "" %>                         			
 	                                			value="<%= cat %>" 
 	                                			id="flexCheckDefault">
 		                                	<label class="form-check-label" for="flexCheckDefault">
@@ -195,7 +198,7 @@
     </section>
 
    	<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
-	<script src="${pageContext.request.contextPath}/js/alta_de_actividad_turistica.js"></script>
+	<script src="js/alta_de_actividad_turistica.js"></script>
     
     <%if(request.getAttribute("motivoDeError") != null){ %>
 	    <script>

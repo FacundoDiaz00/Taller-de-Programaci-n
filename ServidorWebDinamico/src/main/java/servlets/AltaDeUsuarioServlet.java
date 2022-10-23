@@ -67,6 +67,9 @@ public class AltaDeUsuarioServlet extends HttpServlet {
         String nacionalidad = (String) req.getParameter("nacionalidad");
         String descripcionGeneral = (String) req.getParameter("descripcionGeneral");
         String link = (String) req.getParameter("link");
+        if(link != null && link.trim().length() == 0) {
+        	link = null;
+        }
         Part filePart = req.getPart("img");
 
         try {

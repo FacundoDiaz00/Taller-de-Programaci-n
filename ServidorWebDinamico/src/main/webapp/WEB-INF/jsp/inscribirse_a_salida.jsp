@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/inscribirse_a_salida.css">
+    <link rel="stylesheet" href="css/inscribirse_a_salida.css">
 
 	
 </head>
@@ -26,7 +26,7 @@
                 
           
             
-            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="${pageContext.request.contextPath}/InscribiseASalida"> 
+            <form class="card" id="form-inscripcion-a-salida" name="inscripcionASalidaForm" method="post" action="InscribiseASalida"> 
 					<div style="margin: 10px">
 					
 					<div class="contenedorinput mb-3">
@@ -51,6 +51,8 @@
 	                <div class="contenedorinput mb-3">
 	                    <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
 	                    
+	                    <%	List<String> paquetes = (List<String>) request.getAttribute("paquetes"); %>
+	                    
 		                 <div class="form-check">
 		                        <input class="form-check-input" value="0" type="radio" name="formaPago" id="checkGeneral" checked>
 		                        <label class="form-check-label" for="checkGeneral">
@@ -58,11 +60,23 @@
 		                        </label>
 		                </div>
 		                
-	                    <div class="form-check">
-	                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
-	                        <label class="form-check-label" for="checkPaquete">
+	                    <div class="form-check" >
+	                    	<label class="form-check-label" for="checkPaquete">
 	                            Por Paquete
 	                        </label>
+	                        <%
+	                        if(paquetes.toArray().length > 0){
+	                        %>
+	                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
+	                       <%
+	                        }else{
+	                        %>
+	                        <input class="form-check-input"type="radio" disabled="disabled">
+	                        <b style="color: red; margin-left: 20px">No cuenta con ningún paquete disponible para la inscripción</b>
+	                        <%
+	                        }
+	                        %>
+	                        
 	                    </div> 
 	                    
 		           </div>
@@ -70,12 +84,12 @@
 		                
 		                <div class="contenedorinput mb-3" id="comboPaquetes">
 		                    <div class="form-group">
+                    	<%	
+		                    for(String paq : paquetes){ 
+			                %>
 		                        <label>Paquete:</label>
-		                         <select class="combobox input-large form-control" name="paquete">
-		                         <%	
-					                List<String> paquetes = (List<String>) request.getAttribute("paquetes"); 
-				                    for(String paq : paquetes){ 
-					                %>
+		                         <select class="combobox input-large form-control" name="paquete" >
+
 		                            	<option value="<%=paq%>" selected="selected"><%=paq%></option>
 		                            <% }%>
 		                        </select>
@@ -105,7 +119,7 @@
 			path += salida.getImg().getPath();
 		}							
 		%>	
-            <img src="${pageContext.request.contextPath}/img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
+            <img src="img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">

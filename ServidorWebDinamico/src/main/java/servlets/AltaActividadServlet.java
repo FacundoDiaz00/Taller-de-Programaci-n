@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -83,73 +84,76 @@ public class AltaActividadServlet extends HttpServlet {
         String duracion = req.getParameter("duracion");
         String costo = req.getParameter("costo");
         String ciudad = req.getParameter("ciudad");
-        List<String> categorias = Arrays.asList(req.getParameterValues("categorias"));
+        if(req.getParameterValues("categorias") == null) {
+        	req.setAttribute("motivoDeError", "Se debe seleccionar al menos una categoria");
+        } else  {
+        	 List<String> categorias = Arrays.asList(req.getParameterValues("categorias"));
 
-        Part filePart = req.getPart("img");
+             Part filePart = req.getPart("img");
 
-        boolean hayImagen = filePart.getSize() > 0;
-        String ext = "";
-        String futuroNombreDelPath = "";
-        Imagen imgDt = null;
-        if (hayImagen) {
-            ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+             boolean hayImagen = filePart.getSize() > 0;
+             String ext = "";
+             String futuroNombreDelPath = "";
+             Imagen imgDt = null;
+             if (hayImagen) {
+                 ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
 
-            // Esto es la ruta relativa
-            futuroNombreDelPath = "/actividades/" + nombre + ext;
-            imgDt = new Imagen(futuroNombreDelPath);
+                 // Esto es la ruta relativa
+                 futuroNombreDelPath = "/actividades/" + nombre + ext;
+                 imgDt = new Imagen(futuroNombreDelPath);
+             }
+
+             try {
+                 contActividad.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
+                         Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias);
+                 if (hayImagen) {
+                     // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
+                     InputStream imgInputStream = filePart.getInputStream();
+                     String servidorPath = getServletContext().getRealPath("/");
+                     File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
+                     imgFile.createNewFile();
+                     FileOutputStream imgFileStream = new FileOutputStream(imgFile);
+
+                     byte[] buffer = new byte[8192];
+
+                     int readLength = imgInputStream.read(buffer);
+                     while (readLength != -1) {
+                         imgFileStream.write(buffer, 0, readLength);
+                         readLength = imgInputStream.read(buffer);
+                     }
+                     imgFileStream.close();
+                 }
+
+                 req.setAttribute("exito", "exito");
+
+                 this.accionDoGet(req, resp);
+                 return;
+             } catch (NumberFormatException e) {
+                 req.setAttribute("motivoDeError",
+                         "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
+             } catch (ActividadTuristicaYaRegistradaException e) {
+                 req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
+             } catch (ObjetoNoExisteEnTurismoUy e) {
+                 if (e.getClaseObjetoFaltante().equals("Categoria")) {
+                     req.setAttribute("motivoDeError",
+                             "No existe una de las categorias selecionadas, cambielo y pruebe nuevamente");
+                 } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
+                     req.setAttribute("motivoDeError",
+                             "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
+                 }
+             }
+             req.setAttribute("categoriasSeleccionadas", categorias);
         }
-
-        try {
-            contActividad.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
-                    Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias);
-            if (hayImagen) {
-                // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-                InputStream imgInputStream = filePart.getInputStream();
-                String servidorPath = getServletContext().getRealPath("/");
-                File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-                imgFile.createNewFile();
-                FileOutputStream imgFileStream = new FileOutputStream(imgFile);
-
-                byte[] buffer = new byte[8192];
-
-                int readLength = imgInputStream.read(buffer);
-                while (readLength != -1) {
-                    imgFileStream.write(buffer, 0, readLength);
-                    readLength = imgInputStream.read(buffer);
-                }
-                imgFileStream.close();
-            }
-
-            req.setAttribute("exito", "exito");
-
-            this.accionDoGet(req, resp);
-            return;
-        } catch (NumberFormatException e) {
-            req.setAttribute("motivoDeError",
-                    "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
-        } catch (ActividadTuristicaYaRegistradaException e) {
-            req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
-        } catch (ObjetoNoExisteEnTurismoUy e) {
-            if (e.getClaseObjetoFaltante().equals("Categoria")) {
-                req.setAttribute("motivoDeError",
-                        "No existe una de las categorias selecionadas, cambielo y pruebe nuevamente");
-            } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
-                req.setAttribute("motivoDeError",
-                        "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
-            }
-        }
-
+       
         // En este punto si o si hay error
-
         req.setAttribute("departamento", departamento);
         req.setAttribute("nombre", nombre);
         req.setAttribute("descripcion", descripcion);
         req.setAttribute("duracion", duracion);
         req.setAttribute("costo", costo);
         req.setAttribute("ciudad", ciudad);
-
+        
         req = Utiles.insertarLoDeSiempre(req);
-
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);
 
     }

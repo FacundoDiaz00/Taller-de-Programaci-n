@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>     
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/alta_de_usuario.css">
+    <link rel="stylesheet" href="css/alta_de_usuario.css">
 
     <title>Turismo UY</title>
 </head>
@@ -20,7 +20,7 @@
     <section id="contenedor">
         <jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         <div id="contenedorForm">
-            <form class="card" id="form-alta-usuario" name="altaUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeUsuario">
+            <form class="card" id="form-alta-usuario" name="altaUsuarioForm" enctype="multipart/form-data" method="post" action="AltaDeUsuario">
                 <div class="card-body">
                     <h5 class="card-title">Registrar Usuario</h5>
 
@@ -235,7 +235,7 @@
 
 
  	<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
-    <script src="${pageContext.request.contextPath}/js/alta_usuario.js"></script>
+    <script src="js/alta_usuario.js"></script>
     
     <%if(request.getAttribute("motivoDeError") != null){ %>
     

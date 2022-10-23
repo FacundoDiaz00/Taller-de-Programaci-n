@@ -10,14 +10,11 @@
     <meta charset="UTF-8">
     <title>Turismo UY</title>
 
-<!--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilosComun.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/alta_de_actividad_turistica.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/fontawesome-free-6.2.0-web/css/all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sweetalert2.min.css">
+<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
+    <link rel="stylesheet" href="css/alta_de_actividad_turistica.css">
+
 
 
 
@@ -43,11 +40,13 @@
     	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         
         <div id="contenedorForm">
-            <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/AltaDeSalida">
+        	<% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
+        
+            <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="AltaDeSalida?id=<%=datosActividad.getNombre()%>">
                 <div class="card-body">
                     <h5 class="card-title">Alta de Salida Turística</h5>
                     
-                    <% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
+                    
 
                     <div class="contenedorinput mb-3">
                     	<% String departamento = datosActividad.getDepartamento(); %>
@@ -94,7 +93,7 @@
 
                     <div class="contenedorinput mb-3">
                     	<% String fechaSalida = getTextWithoutNull((String)request.getAttribute("fechaSalida")); %>
-                        <span class="input-label">Fecha:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Fecha salida:<span class="obligatorio"> *</span></span>
                         <input id="fechaSalida" 
                         	   type="date" 
                         	   required 
@@ -108,7 +107,7 @@
 
                     <div class="contenedorinput mb-3">
                     	<% String horaSalida = getTextWithoutNull((String)request.getAttribute("horaSalida")); %>
-                        <span class="input-label">Hora:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Hora salida:<span class="obligatorio"> *</span></span>
                         <input id="horaSalida" 
                         	   type="time" 
                         	   required 
@@ -139,7 +138,7 @@
                         <span class="input-label">Cantidad Máxima de Turistas:<span class="obligatorio"> *</span></span>
                         <div class="input-group">
                             <input 	type="number" 
-                            		min="0" 
+                            		min="1" 
                             		id="cantMaxTur"
                         	   		name="cantMaxTur" 
                         	   	 	value="<%= cantMaxTur %>"

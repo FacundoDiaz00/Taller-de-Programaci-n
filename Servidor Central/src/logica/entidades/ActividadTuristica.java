@@ -91,7 +91,7 @@ public class ActividadTuristica {
 
         return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
                 getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre(), listaIdCats,
-                getImagen());
+                getImagen(), estado);
     }
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
@@ -110,7 +110,7 @@ public class ActividadTuristica {
 
         return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
                 getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre(),
-                listaIdCats, getImagen());
+                listaIdCats, getImagen(), estado);
     }
 
     @Override

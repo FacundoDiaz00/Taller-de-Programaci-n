@@ -20,7 +20,7 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/consulta_de_paquete.css">
+    <link rel="stylesheet" href="css/consulta_de_paquete.css">
     
 </head>
 <body>
@@ -56,7 +56,7 @@
 								path += paquete.getImg().getPath();
 							}							
 							%>
-			                <img src="${pageContext.request.contextPath}/img<%=path%>" alt="">
+			                <img src="img<%=path%>" alt="">
 	            </div>
 	
 	            <div id="info">
@@ -137,7 +137,7 @@
 										pathImagen += act.getImg().getPath();
 									}							
 									%>
-					                <img src="${pageContext.request.contextPath}/img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+					                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
 		                        </div>
 		                        <div class="col-md-8">
 		                            <div class="card-body card-actividad">
