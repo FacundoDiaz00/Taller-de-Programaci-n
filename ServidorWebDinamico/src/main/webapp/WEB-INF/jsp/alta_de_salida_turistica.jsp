@@ -138,7 +138,7 @@
                         <span class="input-label">Cantidad Máxima de Turistas:<span class="obligatorio"> *</span></span>
                         <div class="input-group">
                             <input 	type="number" 
-                            		min="0" 
+                            		min="1" 
                             		id="cantMaxTur"
                         	   		name="cantMaxTur" 
                         	   	 	value="<%= cantMaxTur %>"
