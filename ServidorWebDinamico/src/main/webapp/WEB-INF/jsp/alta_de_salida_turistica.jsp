@@ -93,7 +93,7 @@
 
                     <div class="contenedorinput mb-3">
                     	<% String fechaSalida = getTextWithoutNull((String)request.getAttribute("fechaSalida")); %>
-                        <span class="input-label">Fecha:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Fecha salida:<span class="obligatorio"> *</span></span>
                         <input id="fechaSalida" 
                         	   type="date" 
                         	   required 
@@ -107,7 +107,7 @@
 
                     <div class="contenedorinput mb-3">
                     	<% String horaSalida = getTextWithoutNull((String)request.getAttribute("horaSalida")); %>
-                        <span class="input-label">Hora:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Hora salida:<span class="obligatorio"> *</span></span>
                         <input id="horaSalida" 
                         	   type="time" 
                         	   required 

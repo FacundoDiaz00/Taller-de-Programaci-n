@@ -23,6 +23,7 @@ public class ConsultaPaqueteServlet extends HttpServlet {
     public ConsultaPaqueteServlet() {
         super();
     }
+        
 
     /**
      * parametros posibles: - String id -> nombre del paquete consultado
@@ -35,12 +36,19 @@ public class ConsultaPaqueteServlet extends HttpServlet {
 
         try {
             String identificador = (String) req.getParameter("id");
+            String mostrarMensajeConfirmacionCompra = (String) req.getParameter("mostrarMensajeConfirmacionCompra");
+            if(mostrarMensajeConfirmacionCompra != null && !mostrarMensajeConfirmacionCompra.toUpperCase().trim().equals("TRUE")) {
+            	mostrarMensajeConfirmacionCompra = null;
+            }
+            String mensajeError= (String) req.getParameter("mensajeDeError");
             DTPaqueteDetalles paquete = Fabrica.getInstancia().getIControladorPaquete()
                     .obtenerDTPaqueteDetalle(identificador);
             req.setAttribute("paquete", paquete);
 
             req = Utiles.insertarLoDeSiempre(req);
-
+            req.setAttribute("exito", mostrarMensajeConfirmacionCompra);
+            req.setAttribute("motivoDeError", mensajeError);
+            req.setAttribute("mensajeError", mensajeError);
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_paquete.jsp").forward(req, resp);
         } catch (ObjetoNoExisteEnTurismoUy e) {
             req.setAttribute("motivoDeError", "No existe un paquete con ese nombre");

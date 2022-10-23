@@ -44,7 +44,6 @@ public class CompraPaqueteServlet extends HttpServlet {
         if (turi != null && turi instanceof DTTurista) {
             nickTuri = turi.getNickname();
         } else {
-            req = Utiles.insertarLoDeSiempre(req);
             resp.sendRedirect("index");
             return;
         }
@@ -53,31 +52,19 @@ public class CompraPaqueteServlet extends HttpServlet {
             Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickTuri, nombre_paquete,
                     cant_turistas, null);
             req.setAttribute("exito", "exito");
-
             DTPaqueteDetalles paquete = Fabrica.getInstancia().getIControladorPaquete()
                     .obtenerDTPaqueteDetalle(nombre_paquete);
             req.setAttribute("paquete", paquete);
 
-            req = Utiles.insertarLoDeSiempre(req);
-            req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_paquete.jsp").forward(req, resp);
+            resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mostrarMensajeConfirmacionCompra=true");
             return;
         } catch (ObjetoNoExisteEnTurismoUy e) {
             String objetoFaltante = e.getClaseObjetoFaltante();
-            // if (objetoFaltante == "Usuario")
-            req.setAttribute("motivoDeError", "Para comprar un paquete es necesario estar loggeado con un Turista");
-            // else
-            // req.setAttribute("motivoDeError", "No existe un " + objetoFaltante + " con
-            // ese nombre.");
-            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+            resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mensajeDeError=" + "Para comprar un paquete es necesario estar loggeado con un Turista");           
         } catch (CompraYaRegistradaException e) {
-            req.setAttribute("motivoDeError", "El usuario logueado ya ha comprado este mismo paquete.");
-            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+        	resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mensajeDeError=" + "El usuario logueado ya ha comprado este mismo paquete.");
         } catch (PaquetesSinActividadesExcepcion e) {
-            req.setAttribute("motivoDeError",
-                    "El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.");
-            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+        	resp.sendRedirect("ConsultaPaquete?id=" + nombre_paquete + "&mensajeDeError=" +  "El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.");
         }
-
-        resp.sendRedirect("index");
     }
 }

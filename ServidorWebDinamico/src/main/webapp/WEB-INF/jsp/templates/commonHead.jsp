@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page errorPage="/WEB-INF/jsp/templates/500.jsp" %>
 
 <title>Turismo UY</title>
 <meta charset="utf-8">
