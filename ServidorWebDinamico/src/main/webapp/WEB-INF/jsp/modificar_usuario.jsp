@@ -25,6 +25,12 @@
 
 
 <body>
+
+	<%! public String getTextWithoutNull(String value){
+			return value == null ? "" : value;
+		}
+	%>
+	
 <div class="bs-example">
                             <!-- Button HTML (to Trigger Modal) -->
                             <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
@@ -42,18 +48,12 @@
 	                                        
 	                                        
 		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 790px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
-												<%
-												String imgpath;
-												if(usuario.getImg() != null){
-													imgpath = "/img" + usuario.getImg().getPath();
-												}else{
-													imgpath = "/img/noFoto.png";
-												}
-												%>
+
 																			
 							                    <div class="contenedorinput mb-3">
 							                        <span class="input-label">Imagen:</span>
-							                        <input id="input-imagen" 
+							                        <input id="input-imagen"
+							                        		name="modificar_img"
 							                        	   type="file" 
 							                        	   accept="image/*" 
 							                        	   name="img" 
@@ -68,6 +68,7 @@
 	                                            <div class="popUp">
 	                                                <div>
 	                                                    <div class="contenedorinput mb-3">
+	                                                    
 	                                                        <span class="input-label" >Nickname:</span>
 	                                                        <input id="input-nickname" 
 	                                                        name="nickname" 
@@ -84,21 +85,23 @@
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Nombre:</span>
-	                                                        <input id="input-nombre"
-	                                                        name="nombre" 
+	                                                        <% String modificar_nombre = usuario.getNombre(); %>
+	                                                        <input id="modificar_nombre"
+	                                                        name="modificar_nombre" 
 	                                                        type="text" 
 	                                                        required class="form-control" 
 	                                                        placeholder="" 
 	                                                        aria-label="Nombre" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value="<%= usuario.getNombre() %>"
+	                                                        value="<%= modificar_nombre %>"
 	                                                        >
 	                                                    </div>
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Apellido: </span>
+	                                                        
 	                                                        <input id="input-apellido" 
-	                                                        name="apellido"
+	                                                        name="modificar_apellido"
 	                                                        type="text" 
 	                                                        required class="form-control" 
 	                                                        placeholder="" 
@@ -113,6 +116,7 @@
 	                                                    <div class="contenedorinput mb-3" id="nacionalidad-field">
 	                                              		  <span class="input-label">Nacionalidad: </span>
 	                                                		<input id="input-nacionalidad" 
+	                                                		name="modificar_nacionalidad"
 	                                                		type="text" 
 	                                                		class="form-control" 
 	                                                		placeholder="" 
@@ -130,7 +134,8 @@
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Fecha de nacimiento:</span>
-	                                                        <input id="input-fecha-nacimiento" 
+	                                                        <input id="input-fecha-nacimiento"
+	                                                        name="modificar_fechaNac"
 	                                                        type="date" 
 	                                                        required 
 	                                                        class="form-control" 
@@ -144,13 +149,14 @@
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Contraseña: </span>
 	                                                        <input id="input-contraseña" 
-	                                                        type="password" 
+	                                                        type="password"
+	                                                        name="modificar_contrasenia"
 	                                                        required 
 	                                                        class="form-control" 
 	                                                        placeholder="" 
 	                                                        aria-label="Contraseña" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value="..."
+	                                                        value="soy_una_contraseña"
 	                                                        >
 	                                                    </div>
 	
@@ -179,7 +185,8 @@
 	                                            %>
 	                                            <div class="contenedorinput mb-3" id="descripcion-general-field">
                                             <span class="input-label">Descripcion general:</span>
-                                            <input id="input-descripcionGeneral" 
+                                            <input id="input-descripcionGeneral"
+                                            name="modificar_descripcion"
                                             type="text" 
                                             required class="form-control" 
                                             placeholder="Ingrese una descripcion general" 
@@ -193,6 +200,7 @@
                                             <span class="input-label">Link sito web:</span>
                                             <input id="input-link"
                                             type="text"
+                                             name="modificar_link"
                                             class="form-control"
                                             placeholder=""
                                             aria-label="Link"

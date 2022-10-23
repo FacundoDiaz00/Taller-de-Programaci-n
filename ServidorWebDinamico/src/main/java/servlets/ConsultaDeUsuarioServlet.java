@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import utils.Utiles;
  */
 
 @WebServlet("/ConsultaDeUsuario")
+@MultipartConfig
 public class ConsultaDeUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private IControladorUsuario contrUsuario;
@@ -98,7 +100,23 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
         }
         HttpSession sesion = request.getSession(false);
-        System.out.println(request.getParameter("nombre"));
+        
+        String modN = request.getParameter("modificar_nombre");
+        String modA = request.getParameter("modificar_apellido");
+        String modC = request.getParameter("modificar_contrasenia");
+        String modFN = request.getParameter("modificar_fechaNac");
+        String modI = request.getParameter("modificar_img");
+        		
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println(request.getParameter("modificar_nacionalidad"));
+        
+        System.out.println(request.getParameter("modificar_descripcion"));
+        System.out.println(request.getParameter("modificar_link"));
+       
+        
+        
 
         // TODO Auto-generated method stub
         doGet(request, response);
