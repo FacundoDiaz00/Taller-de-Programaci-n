@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
@@ -178,17 +179,21 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	            } else if (borrarImagen && userLogueado.getImg() != null){
 	            	File imgDel = new File(servidorPath + "/img" + userLogueado.getImg().getPath());
 	            	imgDel.delete();
-	            	
-	            	
 	            }
+	            //Actualizo datos sesion
+	            DTUsuario usuario = contrUsuario.obtenerDTUsuarioPorNickname(nick, modC);
+	            request.setAttribute("usuarioLogeado", usuario);
 	            
 	            
 			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
 				request.setAttribute("motivoDeError",
 	                    "Los datos enviados no son válidos");
 				
+			} catch (ContraseniaInvalidaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-//TODO: ACTUALIZAR SESION
+
 
         doGet(request, response);
     }
