@@ -160,10 +160,10 @@
                                 <% 	int i = 0;
                                 	for (String cat: getListWithoutNull((List<String>) request.getAttribute("categorias"))) { %>
 		                            <div class="form-check">
-	                                	<input 	class="form-check-input" 
+	                                	<input 	class="form-check-input opcion-categoria" 
 			                                	id="categoria_<%=i %>"
 		                        	   			name="categorias" 
-	                                			type="checkbox" 
+	                                			type="checkbox" 	                                			
 	                                			value="<%= cat %>" 
 	                                			id="flexCheckDefault">
 		                                	<label class="form-check-label" for="flexCheckDefault">

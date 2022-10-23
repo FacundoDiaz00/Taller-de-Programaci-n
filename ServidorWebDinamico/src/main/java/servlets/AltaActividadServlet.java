@@ -83,6 +83,11 @@ public class AltaActividadServlet extends HttpServlet {
         String duracion = req.getParameter("duracion");
         String costo = req.getParameter("costo");
         String ciudad = req.getParameter("ciudad");
+        if(req.getParameterValues("categorias") == null) {
+        	req.setAttribute("motivoDeError", "Se debe enviar al menos una categoria");
+            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+            return;
+        }
         List<String> categorias = Arrays.asList(req.getParameterValues("categorias"));
 
         Part filePart = req.getPart("img");
