@@ -39,7 +39,7 @@
         <div id="contenedorForm">
             <form class="card" id="form-alta-actividad" name="altaActividadForm" enctype="multipart/form-data" method="post" action="AltaDeActividad">
                 <div class="card-body">
-                    <h5 class="card-title">Crear Actividad Turistica</h5>
+                    <h5 class="card-title">Crear Actividad Turística</h5>
 
                     <div class="contenedorinput mb-3">
                     	<% String departamento = getTextWithoutNull((String)request.getAttribute("departamento")); %>
@@ -78,7 +78,7 @@
 
 					<div class="contenedorinput mb-3">
 						<% String descripcion = getTextWithoutNull((String)request.getAttribute("descripcion")); %>
-                        <span class="input-label">Descripcion:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Descripción:<span class="obligatorio"> *</span></span>
                         <textarea  	id="descripcion"
                         	   		name="descripcion" 
                         			required
@@ -91,7 +91,7 @@
 
                     <div class="contenedorinput mb-3">
                     	<% String duracion = getTextWithoutNull((String)request.getAttribute("duracion")); %>
-                        <span class="input-label">Duracion:<span class="obligatorio"> *</span></span>
+                        <span class="input-label">Duración:<span class="obligatorio"> *</span></span>
                         <div class="input-group">
                             <input 	type="number" 
                             		min="0" 
@@ -153,7 +153,7 @@
                     </div>
                     
                     <div class="contenedorinput mb-3">
-                        <span class="input-label">Categorias:</span>
+                        <span class="input-label">Categorías:</span>
                         <div id="contenedorCategorias">
                                 <% 	int i = 0;
                                 	List<String> categoriasSeleccionadas;
