@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorUsuario;
+import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import utils.Utiles;
 
@@ -106,19 +107,19 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String modC = request.getParameter("modificar_contrasenia");
         String modFN = request.getParameter("modificar_fechaNac");
         String modI = request.getParameter("modificar_img");
-        		
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println(request.getParameter("modificar_nacionalidad"));
         
-        System.out.println(request.getParameter("modificar_descripcion"));
-        System.out.println(request.getParameter("modificar_link"));
-       
+        String modNac = "";
+        String modD = "";
+        String modL = "";
         
-        
+        if (sesion.getAttribute("usuarioLogueado") instanceof DTTurista){
+        	modNac = request.getParameter("modificar_nacionalidad");
+        }
+        else {
+        	modD = request.getParameter("modificar_descripcion");
+        	modL = request.getParameter("modificar_link");
+        }
 
-        // TODO Auto-generated method stub
         doGet(request, response);
     }
 
