@@ -43,8 +43,11 @@
                 	<% 
 					List<DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
 					
-					for(DTActividadTuristica actividad: actividades){
-						%>
+                	if (actividades.isEmpty()) {%>
+                		<span>No hay actividades para mostrar aquí.</span>
+               		<% } else {               	
+						for(DTActividadTuristica actividad: actividades){
+							%>
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0">
 			                        <div class="col-md-4 img-contain">
@@ -71,7 +74,9 @@
 			                    </div>
 			                </div>
 						
-					<% } %>
+					<% }
+                	}							
+					%>
                 
 
             </div>
@@ -85,8 +90,10 @@
 			<% 
 				List<DTPaquete> paquetes = (List<DTPaquete>) request.getAttribute("paquetes");
 					
-				for(DTPaquete pack: paquetes){
-			%>
+				if (paquetes.isEmpty()) {%>
+	    			<span>No hay paquetes para mostrar aquí.</span>
+	   		<% } else {               	
+					for(DTPaquete pack: paquetes) { %>
 
 
                 <div class="card mb-3" style="max-width: 800px;">
@@ -116,7 +123,7 @@
                     </div>
                 </div>
                 
-           <% } %>
+           <% } }%>
 
             </div>
         </div>
