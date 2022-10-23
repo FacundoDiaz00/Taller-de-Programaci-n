@@ -80,6 +80,22 @@
 	                    <h5 class="label">Descripción: </h5>
 	                    <p><%=paquete.getDescrpicion()%></p>
 	                </div>
+                <div id="categorias">
+                    <h5 class="">Categorías:</h5>
+                    <ul>
+                        <% if(paquete.getCategorias() != null ){
+                        		for(String cat : paquete.getCategorias() ) { %>
+                        			 <li> <%=cat %></li>
+                        <% 		}
+                        
+                            } else {
+                        %>
+							<span>Sin categorías</span>                        
+                        <%
+                        	}%>
+                       
+                    </ul>
+                </div>
 	
 	            </div>
 	
