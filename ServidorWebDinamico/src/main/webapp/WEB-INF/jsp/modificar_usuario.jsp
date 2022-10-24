@@ -25,10 +25,10 @@
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
 	                                <% if (usuario instanceof DTTurista){ %>
-	                                    <div class="modal-content" style =" width: 598px; height: 860px;">
+	                                    <div class="modal-content" style =" width: 598px; height: 790px;">
 	                                    
 	                     			<% } else {%>
-	                     				<div class="modal-content" style =" width: 598px; height: 1030px;">
+	                     				<div class="modal-content" style =" width: 598px; height: 955px;">
 	                     			<% } %>
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
@@ -36,10 +36,10 @@
 	                                        </div>
 	                                        
 	                                        
-		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 590px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
+		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 560px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
 
 																			
-							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px">
+							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px; align-items: flex-end;">
 							                    	<div> 
 								                        <span class="input-label">Imagen:</span>
 								                        <input id="input-imagen"
@@ -54,9 +54,9 @@
 								                        	   >
 							                        </div>
 							                        	   
-							                        <div style="display: flex; align-content: center;">
+							                        <div style="display: flex; align-content: center; margin-bottom: 10px">
 							                        	
-	    												<span class="input-label" >Eliminar foto:</span>
+	    												<span class="input-label"  style="margin-right: 5px" >Eliminar foto:</span>
 		                                                <input id="input-borrar-foto" 
 		                                                name="borrar_imagen" 
 		                                                type="checkbox"
@@ -145,47 +145,33 @@
 	                                                        value=<%= usuario.getFechaNac().toString() %>
 	                                                        >
 	                                                    </div>
-	
-	                                                    <div class="contenedorinput mb-3">
-	                                                        <span class="input-label">Contraseña: </span>
-	                                                        <input id="input-contraseña" 
-	                                                        type="password"
-	                                                        name="modificar_contrasenia"
-	                                                        class="form-control" 
-	                                                        placeholder="" 
-	                                                        aria-label="Contraseña" 
-	                                                        aria-describedby="basic-addon1"
-	                                                        >
-	                                                    </div>
+	                                                  
 	                                                    
 	                                                    <div class="contenedorinput mb-3">
-	                                                        <span class="input-label">Confirmar contraseña: </span>
-	                                                        <input id="input-confirmar_contrasenia" 
-	                                                        type="password"
-	                                                        name="confirmar_contrasenia"
-	                                                        required 
-	                                                        class="form-control" 
-	                                                        placeholder="" 
-	                                                        aria-label="Contraseña" 
-	                                                        aria-describedby="basic-addon1"
-	                                                        value="soy_una_contraseña"
-	                                                        >
-	                                                    </div>
-	                                                    
-	
-	                                                    <div class="contenedorinput mb-3">
-	                                                        <span class="input-label"> Correo electronico:</span>
-	                                                        <input id="input-correo" 
-	                                                        type="text" 
-	                                                        required class="form-control" 
-	                                                        placeholder="" 
-	                                                        aria-label="Correo" 
-	                                                        aria-describedby="basic-addon1" 
-	                                                        value="<%= usuario.getCorreo() %>"
-	                                                        disabled
-	                                                        
-	                                                        >
-	                                                    </div>
+									                    <% String password = ""; %>
+									                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
+									                        <input id="input-contrasenia" 
+									                        	   type="password" 
+									                        	   required name="input-contrasenia" 
+									                        	   class="form-control" 
+									                        	   placeholder="Ingrese una contraseña" 
+									                        	   aria-label="Contraseña" 
+									                        	   aria-describedby="basic-addon1"
+									                        	   value="<%= password %>"
+									                        	   >
+									                    </div>
+									
+									                    <div class="contenedorinput mb-3">
+									                        <span class="input-label">Confirmación contraseña:<span class="obligatorio"> *</span></span>
+									                        <input id="input-confirmacion-contrasenia" 
+									                        	   type="password" 
+									                        	   required 
+									                        	   class="form-control" 
+									                        	   placeholder="Vuelva a ingresar la contraseña" 
+									                        	   aria-label="Nickname" 
+									                        	   aria-describedby="basic-addon1"
+									                        	   value="<%= password %>">
+									                    </div>
 														
 	                                                
 	                                                </div>
@@ -239,9 +225,14 @@
 	                                </div>
 	                            </div>
 	                        </div>
+	                        
+	                        
+	<script src="js/jquery-3.3.1.slim.min.js"></script>
 
-
+    <script src="js/modificar_usuario.js"></script>
     <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    
     
     <script>
     	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
@@ -266,5 +257,4 @@
             });
         });
     </script>
-</body>
-</html>
+   
