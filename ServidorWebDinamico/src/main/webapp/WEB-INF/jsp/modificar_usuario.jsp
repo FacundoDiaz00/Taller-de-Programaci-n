@@ -145,47 +145,33 @@
 	                                                        value=<%= usuario.getFechaNac().toString() %>
 	                                                        >
 	                                                    </div>
-	
-	                                                    <div class="contenedorinput mb-3">
-	                                                        <span class="input-label">Contraseña: </span>
-	                                                        <input id="input-contraseña" 
-	                                                        type="password"
-	                                                        name="modificar_contrasenia"
-	                                                        class="form-control" 
-	                                                        placeholder="" 
-	                                                        aria-label="Contraseña" 
-	                                                        aria-describedby="basic-addon1"
-	                                                        >
-	                                                    </div>
+	                                                  
 	                                                    
 	                                                    <div class="contenedorinput mb-3">
-	                                                        <span class="input-label">Confirmar contraseña: </span>
-	                                                        <input id="input-confirmar_contrasenia" 
-	                                                        type="password"
-	                                                        name="confirmar_contrasenia"
-	                                                        required 
-	                                                        class="form-control" 
-	                                                        placeholder="" 
-	                                                        aria-label="Contraseña" 
-	                                                        aria-describedby="basic-addon1"
-	                                                        value="soy_una_contraseña"
-	                                                        >
-	                                                    </div>
-	                                                    
-	
-	                                                    <div class="contenedorinput mb-3">
-	                                                        <span class="input-label"> Correo electronico:</span>
-	                                                        <input id="input-correo" 
-	                                                        type="text" 
-	                                                        required class="form-control" 
-	                                                        placeholder="" 
-	                                                        aria-label="Correo" 
-	                                                        aria-describedby="basic-addon1" 
-	                                                        value="<%= usuario.getCorreo() %>"
-	                                                        disabled
-	                                                        
-	                                                        >
-	                                                    </div>
+									                    <% String password = "una_contrasenia"; %>
+									                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
+									                        <input id="modificar_contrasenia" 
+									                        	   type="password" 
+									                        	   required name="password" 
+									                        	   class="form-control" 
+									                        	   placeholder="Ingrese una contraseña" 
+									                        	   aria-label="Contraseña" 
+									                        	   aria-describedby="basic-addon1"
+									                        	   value="<%= password %>"
+									                        	   >
+									                    </div>
+									
+									                    <div class="contenedorinput mb-3">
+									                        <span class="input-label">Confirmación contraseña:<span class="obligatorio"> *</span></span>
+									                        <input id="input_modificar_contrasenia" 
+									                        	   type="password" 
+									                        	   required 
+									                        	   class="form-control" 
+									                        	   placeholder="Vuelva a ingresar la contraseña" 
+									                        	   aria-label="Nickname" 
+									                        	   aria-describedby="basic-addon1"
+									                        	   value="<%= password %>">
+									                    </div>
 														
 	                                                
 	                                                </div>
@@ -240,8 +226,11 @@
 	                            </div>
 	                        </div>
 
-
+    <script src="js/alta_usuario.js"></script>
+    
     <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    
     
     <script>
     	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
@@ -266,5 +255,8 @@
             });
         });
     </script>
+    
+
+	
 </body>
 </html>
