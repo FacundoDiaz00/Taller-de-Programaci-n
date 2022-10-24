@@ -58,7 +58,7 @@
 							                        	
 	    												<span class="input-label" >Eliminar foto:</span>
 		                                                <input id="input-borrar-foto" 
-		                                                name="borrarFoto" 
+		                                                name="borrar_imagen" 
 		                                                type="checkbox"
 		                                                >
 	                                                </div>

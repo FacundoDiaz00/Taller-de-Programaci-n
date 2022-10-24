@@ -123,11 +123,14 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
         String modC = request.getParameter("modificar_contrasenia");
+
         String modFN = request.getParameter("modificar_fechaNac");
-        //TODO: chequear nulls
         String modNac = null;
         String modD = null;
         String modL = null;
+        
+        if(modC != null && modC.equals(""))
+        	modC = null;
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(modFN, formatter);
