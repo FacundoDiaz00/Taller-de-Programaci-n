@@ -25,10 +25,10 @@
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
 	                                <% if (usuario instanceof DTTurista){ %>
-	                                    <div class="modal-content" style =" width: 598px; height: 860px;">
+	                                    <div class="modal-content" style =" width: 598px; height: 790px;">
 	                                    
 	                     			<% } else {%>
-	                     				<div class="modal-content" style =" width: 598px; height: 1030px;">
+	                     				<div class="modal-content" style =" width: 598px; height: 955px;">
 	                     			<% } %>
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
@@ -36,7 +36,7 @@
 	                                        </div>
 	                                        
 	                                        
-		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 790px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
+		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 560px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
 
 																			
 							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px; align-items: flex-end;">
@@ -148,11 +148,11 @@
 	                                                  
 	                                                    
 	                                                    <div class="contenedorinput mb-3">
-									                    <% String password = "una_contrasenia"; %>
+									                    <% String password = ""; %>
 									                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
 									                        <input id="input-contrasenia" 
 									                        	   type="password" 
-									                        	   required name="password" 
+									                        	   required name="input-contrasenia" 
 									                        	   class="form-control" 
 									                        	   placeholder="Ingrese una contraseña" 
 									                        	   aria-label="Contraseña" 
