@@ -151,7 +151,7 @@
 									                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
 									                        <input id="input-contrasenia" 
 									                        	   type="password" 
-									                        	   required name="input-contrasenia" 
+									                        	   name="input-contrasenia" 
 									                        	   class="form-control" 
 									                        	   placeholder="Ingrese una contraseña" 
 									                        	   aria-label="Contraseña" 
@@ -161,8 +161,7 @@
 									                    <div class="contenedorinput mb-3">
 									                        <span class="input-label">Confirmación contraseña:<span class="obligatorio"> *</span></span>
 									                        <input id="input-confirmacion-contrasenia" 
-									                        	   type="password" 
-									                        	   required 
+									                        	   type="password" 									                        	 
 									                        	   class="form-control" 
 									                        	   placeholder="Vuelva a ingresar la contraseña" 
 									                        	   aria-label="Nickname" 
@@ -203,7 +202,7 @@
                                             placeholder=""
                                             aria-label="Link"
                                             aria-describedby="basic-addon1"
-                                            value="<%= prov.getLink() %>"
+                                            value="<%= prov.getLink() == null ? "" : prov.getLink() %>"
                                             >
                                         </div>
                                         <% } %>

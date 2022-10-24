@@ -11,4 +11,14 @@ const onSubmit = (e) =>{
 }
 
 
+$("#input-borrar-foto")[0].addEventListener('click', (e) => onCLickEliminarFoto(e))
+
+
+const onCLickEliminarFoto = (e) => {
+	if($("#input-borrar-foto")[0].checked){		
+		$("#input-imagen")[0].disabled = true
+	} else {
+		$("#input-imagen")[0].disabled = false
+	}
+} 
 

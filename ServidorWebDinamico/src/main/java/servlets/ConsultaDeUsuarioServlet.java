@@ -137,7 +137,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         
         Part filePart = request.getPart("modificar_img");
 
-        boolean hayImagen = filePart.getSize() > 0 && !borrarImagen;
+        boolean hayImagen = filePart != null && filePart.getSize() > 0 && !borrarImagen;
         String ext = "";
         String futuroNombreDelPath = "";
         Imagen imgDt = null;
@@ -156,6 +156,9 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         else {
         	modD = request.getParameter("modificar_descripcion");
         	modL = request.getParameter("modificar_link");
+        	if(modL != null && modL.length() == 0) {
+        		modL = null;
+        	}
         	datosNuevos = (DTUsuario) new DTProveedor(nick, modN, modA, correo, fecha, imgDt, modD, modL);
         }
         
