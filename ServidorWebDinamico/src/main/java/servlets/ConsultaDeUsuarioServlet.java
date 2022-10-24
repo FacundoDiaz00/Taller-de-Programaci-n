@@ -115,7 +115,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         DTUsuario userLogueado = (DTUsuario) sesion.getAttribute("usuarioLogeado");
         DTUsuario datosNuevos;
         
-        boolean borrarImagen = (boolean) Boolean.valueOf(request.getParameter("borrar_imagen"));
+        boolean borrarImagen = "on".equals(request.getParameter("borrar_imagen"));        
         
         String nick = userLogueado.getNickname();
         String correo = userLogueado.getCorreo();

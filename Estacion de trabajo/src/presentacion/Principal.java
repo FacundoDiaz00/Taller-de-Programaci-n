@@ -58,8 +58,7 @@ public class Principal {
                 try {
                     Principal window = new Principal();
                     window.frmEstacionDeTrabajo.setVisible(true);
-                } catch (RuntimeException exception) { // Resolver qué captuar
-                                                       // acá
+                } catch (RuntimeException exception) {
                     exception.printStackTrace();
                 }
             }
@@ -187,7 +186,7 @@ public class Principal {
         });
         mnUsuario.add(modificarUsuarioJMenuItem);
 
-        JMenu mnNewMenu3 = new JMenu("Actividades/Salidas turisticas");
+        JMenu mnNewMenu3 = new JMenu("Actividades");
         menuBar.add(mnNewMenu3);
 
         JMenuItem registrarActividadJMenuItem = new JMenuItem("Registrar Actividad Turística");
