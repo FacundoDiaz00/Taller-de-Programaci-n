@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.entidades.Paquete;
 
 /**
@@ -40,8 +41,12 @@ public class ManejadorPaquete {
 		paquetes.put(paquete.getNombre(), paquete);
 	}
 
-	public Paquete getPaquete(String nombre) {
-		return paquetes.get(nombre);
+	public Paquete getPaquete(String nombre) throws ObjetoNoExisteEnTurismoUy {
+		if (paquetes.containsKey(nombre))
+			return paquetes.get(nombre);
+		else {
+			throw new ObjetoNoExisteEnTurismoUy(Paquete.class);
+		}
 	}
 
 	public boolean existePaquete(String nombre) {

@@ -1,5 +1,6 @@
 package logica.datatypes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -13,14 +14,16 @@ public class DTPaquete {
 	private int validez;
 	private List<String> categorias;
 	private Imagen img;
+	private LocalDate fechaRegistro;
 
 	public DTPaquete(String nombre, String descrpicion, float descuento, int validez, List<String> categorias,
-			Imagen img) {
+			LocalDate fechaAlta, Imagen img) {
 		this.nombre = nombre;
 		this.descrpicion = descrpicion;
 		this.descuento = descuento;
 		this.validez = validez;
 		this.categorias = categorias;
+		this.fechaRegistro = fechaAlta;
 		this.img = img;
 	}
 
@@ -46,5 +49,9 @@ public class DTPaquete {
 
 	public Imagen getImg() {
 		return img;
+	}
+
+	public LocalDate getFechaRegistro() {
+		return fechaRegistro;
 	}
 }

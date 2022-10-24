@@ -1,0 +1,26 @@
+#contenedor{
+    min-height: calc(100vh - 141.5px);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 300px 1fr 400px;
+    grid-column-gap: 20px;
+}
+
+#menu-lateral{
+    margin: 10px 0 0 10px;
+}
+
+#tituloPagina{
+    font-size: 35px;
+}
+#contenedorDer{
+    margin: 10px 0 0 0;
+}
+
+#botonera{
+    display: flex;
+    justify-content: space-between;
+}
+.hidden {
+    display: none;
+}

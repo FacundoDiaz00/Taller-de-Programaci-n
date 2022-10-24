@@ -8,6 +8,7 @@ package excepciones;
  * 
  */
 public class SuperaElMaximoDeTuristasException extends TurismoUyException {
+	private static final long serialVersionUID = 1L;
 	public SuperaElMaximoDeTuristasException(String message) {
 		super(message);
 	}

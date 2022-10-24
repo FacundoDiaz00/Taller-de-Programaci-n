@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,505 +25,442 @@ import logica.datatypes.DTTurista;
 import logica.datatypes.DTTuristaDetalle;
 
 class ControladorUsuarioTest {
-	private static IControladorUsuario contrUsr = null;
-	private static IControladorActividadTuristica contrActTur = null;
-	private static LocalDate localDateNow;
-
-	@BeforeAll
-	static void preparacionPrevia() {
-		contrUsr = Fabrica.getInstancia().getIControladorUsuario();
-		contrActTur = Fabrica.getInstancia().getIControladorActividadTuristica();
-		localDateNow = LocalDate.now();
-	}
-
-	// No es un test en sí
-	static void generarProveedores(int cant, String idTest) throws UsuarioYaRegistradoException {
-		if (contrUsr == null)
-			preparacionPrevia();
-
-		assertTrue(contrUsr != null);
-
-		for (int i = 0; i < cant; i++) {
-			String nickname = "Proveedor " + idTest + " i=" + i;
-			String nombre = "NOMBRE PROV";
-			String apellido = "APELLIDO PROV";
-			String correo = "Proveedor " + idTest + " i=" + i;
-			String descripcion = "HOLA! DESCRIPCION";
-			String link = "www.google.com.provedoor";
-			LocalDate fNacimiento = localDateNow.minusYears(30);
-
-			contrUsr.altaProveedor(nickname, nombre, apellido, correo, fNacimiento, null, descripcion, link);
-		}
-	}
-
-	// No es un test en sí
-	static void generarTuristas(int cant, String idTest) throws UsuarioYaRegistradoException {
-		if (contrUsr == null)
-			preparacionPrevia();
-
-		assertTrue(contrUsr != null);
-
-		for (int i = 0; i < cant; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
-			String nombre = "NOMBRE TURISTA";
-			String apellido = "APELLIDO TURISTA";
-			String correo = "TURISTA " + idTest + " i=" + i;
-			String nacionalidad = "CHINA";
-			LocalDate fNacimiento = localDateNow.minusYears(15);
-
-			contrUsr.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
-		}
-	}
-
-	@Test
-	void testObtenerIdUsuarios() {
-		assertTrue(contrUsr != null);
-
-		String idTest = "testObtenerIdUsuarios";
-
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		var ids = contrUsr.obtenerIdUsuarios();
-		assertTrue(ids != null);
-
-		int tamanioAntes = ids.size();
-
-		// chequeo proveedores
-		for (int i = 0; i < 50; i++) {
-			String nickname = "Proveedor " + idTest + " i=" + i;
-
-			// Cada prov deberían estar una única vez
-			assertTrue(ids.remove(nickname));
-			assertFalse(ids.remove(nickname));
-		}
-
-		// chequeo turistas
-		for (int i = 0; i < 50; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
-
-			// Cada tur. deberían estar una única vez
-			assertTrue(ids.remove(nickname));
-			assertFalse(ids.remove(nickname));
-		}
-
-		assertEquals(tamanioAntes - 100, ids.size());
-	}
-
-	@Test
-	void testObtenerIdProveedores() {
-		assertTrue(contrUsr != null);
-
-		String idTest = "testObtenerIdProveedores";
-
-		try {
-			generarProveedores(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		var ids = contrUsr.obtenerIdProveedores();
-		assertTrue(ids != null);
-
-		int tamanioAntes = ids.size();
-
-		// chequeo proveedores
-		for (int i = 0; i < 100; i++) {
-			String nickname = "Proveedor " + idTest + " i=" + i;
-
-			// Cada prov deberían estar una única vez
-			assertTrue(ids.remove(nickname));
-			assertFalse(ids.remove(nickname));
-		}
-
-		assertEquals(tamanioAntes - 100, ids.size());
-	}
-
-	@Test
-	void testObtenerIdTuristas() {
-		assertTrue(contrUsr != null);
-
-		String idTest = "testObtenerIdTuristas";
-
-		try {
-			generarTuristas(100, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		var ids = contrUsr.obtenerIdTuristas();
-		assertTrue(ids != null);
-
-		int tamanioAntes = ids.size();
-
-		// chequeo turistas
-		for (int i = 0; i < 100; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
-
-			// Cada tur. deberían estar una única vez
-			assertTrue(ids.remove(nickname));
-			assertFalse(ids.remove(nickname));
-		}
-
-		assertEquals(tamanioAntes - 100, ids.size());
-	}
-
-	@Test
-	void testAltaTuristaOK() {
-		try {
-			generarTuristas(100, "testAltaTuristaOK");
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-	}
-
-	@Test
-	void testAltaTuristaRepetido() {
-		String idTest = "testAltaTuristaRepetido";
-
-		try {
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			generarTuristas(1, idTest);
-		});
-
-		String nickname = "Turista CON NICK NUEVO " + idTest;
-		String nombre = "NOMBRE TURISTA";
-		String apellido = "APELLIDO TURISTA";
-		String correo = "TURISTA " + idTest + " i=" + 0;
-		String nacionalidad = "CHINA";
-		LocalDate fNacimiento = LocalDate.now().minusYears(15);
-
-		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			contrUsr.altaTurista(nickname, nombre, apellido, correo, fNacimiento, null, nacionalidad);
-		});
-	}
-
-	@Test
-	void testAltaProveedorOK() {
-		try {
-			generarProveedores(100, "testAltaProveedorOK");
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-	}
-
-	@Test
-	void testAltaProveedorRepetido() {
-		String idTest = "testAltaProveedorRepetido";
-
-		try {
-			generarProveedores(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			generarProveedores(1, idTest);
-		});
-
-		String nickname = "Proveedor CON NICK NUEVO " + idTest;
-		String nombre = "NOMBRE PROV";
-		String apellido = "APELLIDO PROV";
-
-		// Mismo correo que el generador:
-		String correo = "Proveedor " + idTest + " i=" + 0;
-		String descripcion = "HOLA! DESCRIPCION";
-		String link = "www.google.com.provedoor";
-		LocalDate fNacimiento = LocalDate.now().minusYears(30);
-
-		assertThrows(UsuarioYaRegistradoException.class, () -> {
-			contrUsr.altaProveedor(nickname, nombre, apellido, correo, fNacimiento, null, descripcion, link);
-		});
-	}
-
-	@Test
-	void testObtenerDTUsuarioDetalle() {
-		String idTest = "testObtenerDTUsuarioDetalle";
-
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-			ControladorActividadTuristicaTest.generarDepartamentos(50, idTest);
-			ControladorActividadTuristicaTest.generarActividades(50, idTest);
-			ControladorActividadTuristicaTest.generarSalidas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		// A los primeros 40 les asigno una sola salida
-		for (int i = 0; i < 40; i++) {
-			String nombreSalida = "Salida " + idTest + " i=" + i;
-			String nickname = "Turista " + idTest + " i=" + i;
-			try {
-				contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
-		}
-
-		// A los ultimos 10 les asigno una todas las salidas
-		for (int i = 40; i < 50; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
-			for (int j = 0; j < 40; j++) {
-				String nombreSalida = "Salida " + idTest + " i=" + j;
-				try {
-					contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now().plusYears(5));
-				} catch (TurismoUyException exception) {
-					fail(exception.getMessage());
-				}
-			}
-		}
-
-		// Verifico para los proveedores
-		for (int i = 0; i < 50; i++) {
-			String nickname = "Proveedor " + idTest + " i=" + i;
-			var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
-			String nombre = "NOMBRE PROV";
-			String apellido = "APELLIDO PROV";
-			String correo = "Proveedor " + idTest + " i=" + i;
-			String descripcion = "HOLA! DESCRIPCION";
-			String link = "www.google.com.provedoor";
-			LocalDate fNacimiento = localDateNow.minusYears(30);
-			String nombreSalida = "Salida " + idTest + " i=" + i;
-			String nombreActividad = "Actividad " + idTest + " i=" + i;
-
-			assertThrows(ClassCastException.class, () -> {
-				var dtErrorCasteado = (DTTuristaDetalle) dtdet;
-			});
-
-			var dtCasteado = (DTProveedorDetalle) dtdet;
-
-			assertEquals(nickname, dtCasteado.getNickname());
-			assertEquals(nombre, dtCasteado.getNombre());
-			assertEquals(apellido, dtCasteado.getApellido());
-			assertEquals(correo, dtCasteado.getCorreo());
-			assertEquals(descripcion, dtCasteado.getDescrpicionGeneral());
-			assertEquals(link, dtCasteado.getLink());
-			assertEquals(fNacimiento, dtCasteado.getFechaNac());
-
-			assertEquals(1, dtCasteado.getActividades().size());
-			var nombreActObtenida = dtCasteado.getActividades().get(0).getNombre();
-			assertEquals(nombreActividad, nombreActObtenida);
-
-			var salidasAsociadasObtenidas = dtCasteado.getActividades().get(0).getSalidas().keySet().toArray();
-			assertEquals(1, salidasAsociadasObtenidas.length);
-			assertEquals(nombreSalida, salidasAsociadasObtenidas[0]);
-		}
-
-		// Verifico para los turistas
-		for (int i = 0; i < 50; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
-			String nombre = "NOMBRE TURISTA";
-			String apellido = "APELLIDO TURISTA";
-			String correo = "TURISTA " + idTest + " i=" + i;
-			String nacionalidad = "CHINA";
-			LocalDate fNacimiento = localDateNow.minusYears(15);
-			String nombreSalida = "Salida " + idTest + " i=" + i;
-
-			var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
-
-			assertThrows(ClassCastException.class, () -> {
-				var dtErrorCasteado = (DTProveedorDetalle) dtdet;
-			});
-
-			var dtCasteado = (DTTuristaDetalle) dtdet;
-
-			assertEquals(nickname, dtCasteado.getNickname());
-			assertEquals(nombre, dtCasteado.getNombre());
-			assertEquals(apellido, dtCasteado.getApellido());
-			assertEquals(correo, dtCasteado.getCorreo());
-			assertEquals(nacionalidad, dtCasteado.getNacionalidad());
-			assertEquals(fNacimiento, dtCasteado.getFechaNac());
-
-			if (i < 40) {
-				assertEquals(1, dtCasteado.getInscripciones().size());
-				var nombreSalObtenida = dtCasteado.getInscripciones().get(0);
-				assertEquals(nombreSalida, nombreSalObtenida);
-			} else {
-				assertEquals(40, dtCasteado.getInscripciones().size());
-			}
-
-		}
-	}
-
-	@Test
-	void testObtenerDTUsuario() {
-		String idTest = "testObtenerDTUsuario";
-
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		// Verifico para los proveedores
-		for (int i = 0; i < 50; i++) {
-			String nickname = "Proveedor " + idTest + " i=" + i;
-			String nombre = "NOMBRE PROV";
-			String apellido = "APELLIDO PROV";
-			String correo = "Proveedor " + idTest + " i=" + i;
-			String descripcion = "HOLA! DESCRIPCION";
-			String link = "www.google.com.provedoor";
-			LocalDate fNacimiento = localDateNow.minusYears(30);
-
-			var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
-
-			assertThrows(ClassCastException.class, () -> {
-				var dtErrorCasteado = (DTTurista) dtUsuario;
-			});
-
-			var dtCasteado = (DTProveedor) dtUsuario;
-
-			assertEquals(nickname, dtCasteado.getNickname());
-			assertEquals(nombre, dtCasteado.getNombre());
-			assertEquals(apellido, dtCasteado.getApellido());
-			assertEquals(correo, dtCasteado.getCorreo());
-			assertEquals(descripcion, dtCasteado.getDescrpicionGeneral());
-			assertEquals(link, dtCasteado.getLink());
-			assertEquals(fNacimiento, dtCasteado.getFechaNac());
-		}
-
-		// Verifico para los turistas
-		for (int i = 0; i < 50; i++) {
-			String nickname = "Turista " + idTest + " i=" + i;
-			String nombre = "NOMBRE TURISTA";
-			String apellido = "APELLIDO TURISTA";
-			String correo = "TURISTA " + idTest + " i=" + i;
-			String nacionalidad = "CHINA";
-			LocalDate fNacimiento = localDateNow.minusYears(15);
-
-			var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
-
-			assertThrows(ClassCastException.class, () -> {
-				var dtErrorCasteado = (DTProveedor) dtUsuario;
-			});
-
-			var dtCasteado = (DTTurista) dtUsuario;
-
-			assertEquals(nickname, dtCasteado.getNickname());
-			assertEquals(nombre, dtCasteado.getNombre());
-			assertEquals(apellido, dtCasteado.getApellido());
-			assertEquals(correo, dtCasteado.getCorreo());
-			assertEquals(nacionalidad, dtCasteado.getNacionalidad());
-			assertEquals(fNacimiento, dtCasteado.getFechaNac());
-		}
-
-		// Caso en el que no se cumplen las pre-condiciones
-		assertThrows(Exception.class, () -> {
-			contrUsr.obtenerDTUsuario("NICK QUE OBVIAMENTE NO ESTA EN EL SISTEMA");
-		});
-	}
-
-	@Test
-	void testModificarUsuarioCaso() {
-		String idTest = "testModificarUsuario";
-
-		try {
-			generarProveedores(50, idTest);
-			generarTuristas(50, idTest);
-		} catch (TurismoUyException exception) {
-			fail(exception.getMessage());
-		}
-
-		for (int i = 0; i < 50; i++) {
-			String nicknameTur = "Turista " + idTest + " i=" + i;
-			String nicknameProv = "Proveedor " + idTest + " i=" + i;
-
-			DTTurista dttur = (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur);
-			DTProveedor dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv);
-
-			// Si no modifico nada:
-			try {
-				contrUsr.modificarUsuario(dttur);
-				contrUsr.modificarUsuario(dtprov);
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
-
-			assertEquals(dttur, (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur));
-			assertEquals(dtprov, (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv));
-
-			// Caso típico:
-			String nuevoString = "NUEVO DATO";
-
-			DTTurista dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre() + nuevoString,
-					dttur.getApellido() + nuevoString, dttur.getCorreo(), dttur.getFechaNac().plusDays(1), null,
-					dttur.getNacionalidad() + nuevoString);
-			DTProveedor dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre() + nuevoString,
-					dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), null,
-					dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
-
-			try {
-				contrUsr.modificarUsuario(dtTurNuevo);
-				contrUsr.modificarUsuario(dtProvNuevo);
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
-
-			dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
-			dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
-			assertEquals(dtTurNuevo, dttur);
-			assertEquals(dtProvNuevo, dtprov);
-
-			// Caso en el que se modifica el correo
-			DTTurista dtTurNuevo2 = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(),
-					dttur.getCorreo() + nuevoString, dttur.getFechaNac(), null, dttur.getNacionalidad());
-			DTProveedor dtProvNuevo2 = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(),
-					dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), null, dtprov.getDescrpicionGeneral(),
-					dtprov.getLink());
-
-			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-				contrUsr.modificarUsuario(dtTurNuevo2);
-			});
-
-			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-				contrUsr.modificarUsuario(dtProvNuevo2);
-			});
-
-			try {
-				contrUsr.modificarUsuario(dtTurNuevo);
-				contrUsr.modificarUsuario(dtProvNuevo);
-			} catch (TurismoUyException exception) {
-				fail(exception.getMessage());
-			}
-
-			dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
-			dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
-			assertNotEquals(dtTurNuevo2, dttur);
-			assertNotEquals(dtProvNuevo2, dtprov);
-
-			// Caso en el que se modifica el nick:
-			DTTurista dtTurNuevo3 = new DTTurista(dttur.getNickname() + nuevoString, dttur.getNombre(),
-					dttur.getApellido(), dttur.getCorreo(), dttur.getFechaNac(), null, dttur.getNacionalidad());
-			DTProveedor dtProvNuevo3 = new DTProveedor(dtprov.getNickname() + nuevoString, dtprov.getNombre(),
-					dtprov.getApellido(), dtprov.getCorreo(), dtprov.getFechaNac(), null,
-					dtprov.getDescrpicionGeneral(), dtprov.getLink());
-
-			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-				contrUsr.modificarUsuario(dtTurNuevo3);
-			});
-
-			assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-				contrUsr.modificarUsuario(dtProvNuevo3);
-			});
-
-			dttur = (DTTurista) contrUsr.obtenerDTUsuario(dttur.getNickname());
-			dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtprov.getNickname());
-			assertNotEquals(dtTurNuevo3, dttur);
-			assertNotEquals(dtProvNuevo3, dtprov);
-
-			// Todo falta verificar el cambio de nickname o correo
-		}
-	}
+    private static IControladorUsuario contrUsr = null;
+    private static IControladorActividadTuristica contrActTur = null;
+    private static LocalDate localDateNow;
+
+    @BeforeAll
+    static void preparacionPrevia() {
+        contrUsr = Fabrica.getInstancia().getIControladorUsuario();
+        contrActTur = Fabrica.getInstancia().getIControladorActividadTuristica();
+        localDateNow = LocalDate.now();
+    }
+
+    // No es un test en sí
+    static List<String> generarProveedores(int cant, String idTest) throws TurismoUyException {
+        if (contrUsr == null)
+            preparacionPrevia();
+
+        assertTrue(contrUsr != null);
+
+        List<String> nicknameProveedores = new ArrayList<>();
+
+        for (int i = 0; i < cant; i++) {
+            String nickname = "Proveedor " + idTest + " i=" + i;
+            String nombre = "NOMBRE PROV";
+            String apellido = "APELLIDO PROV";
+            String correo = "Proveedor " + idTest + " i=" + i;
+            String descripcion = "HOLA! DESCRIPCION";
+            String link = "www.google.com.provedoor";
+            LocalDate fNacimiento = localDateNow.minusYears(30);
+
+            contrUsr.altaProveedor(nickname, nombre, apellido, correo, "1234", fNacimiento, null, descripcion, link);
+            nicknameProveedores.add(nickname);
+        }
+        return nicknameProveedores;
+    }
+
+    // No es un test en sí
+    static List<String> generarTuristas(int cant, String idTest) throws TurismoUyException {
+        if (contrUsr == null)
+            preparacionPrevia();
+
+        assertTrue(contrUsr != null);
+
+        List<String> nicknameTuristas = new ArrayList<>();
+
+        for (int i = 0; i < cant; i++) {
+            String nickname = "Turista " + idTest + " i=" + i;
+            String nombre = "NOMBRE TURISTA";
+            String apellido = "APELLIDO TURISTA";
+            String correo = "TURISTA " + idTest + " i=" + i;
+            String contrasenia = "1234";
+            String nacionalidad = "CHINA";
+            LocalDate fNacimiento = localDateNow.minusYears(15);
+
+            contrUsr.altaTurista(nickname, nombre, apellido, correo, contrasenia, fNacimiento, null, nacionalidad);
+            nicknameTuristas.add(nickname);
+        }
+        return nicknameTuristas;
+    }
+
+    @Test
+    void testObtenerIdUsuarios() throws TurismoUyException {
+        assertTrue(contrUsr != null);
+
+        String idTest = "testObtenerIdUsuarios";
+
+        generarProveedores(50, idTest);
+        generarTuristas(50, idTest);
+
+        var ids = contrUsr.obtenerIdUsuarios();
+        assertTrue(ids != null);
+
+        int tamanioAntes = ids.size();
+
+        // chequeo proveedores
+        for (int i = 0; i < 50; i++) {
+            String nickname = "Proveedor " + idTest + " i=" + i;
+
+            // Cada prov deberían estar una única vez
+            assertTrue(ids.remove(nickname));
+            assertFalse(ids.remove(nickname));
+        }
+
+        // chequeo turistas
+        for (int i = 0; i < 50; i++) {
+            String nickname = "Turista " + idTest + " i=" + i;
+
+            // Cada tur. deberían estar una única vez
+            assertTrue(ids.remove(nickname));
+            assertFalse(ids.remove(nickname));
+        }
+
+        assertEquals(tamanioAntes - 100, ids.size());
+    }
+
+    @Test
+    void testObtenerIdProveedores() throws TurismoUyException {
+        assertTrue(contrUsr != null);
+
+        String idTest = "testObtenerIdProveedores";
+
+        generarProveedores(100, idTest);
+
+        var ids = contrUsr.obtenerIdProveedores();
+        assertTrue(ids != null);
+
+        int tamanioAntes = ids.size();
+
+        // chequeo proveedores
+        for (int i = 0; i < 100; i++) {
+            String nickname = "Proveedor " + idTest + " i=" + i;
+
+            // Cada prov deberían estar una única vez
+            assertTrue(ids.remove(nickname));
+            assertFalse(ids.remove(nickname));
+        }
+
+        assertEquals(tamanioAntes - 100, ids.size());
+    }
+
+    @Test
+    void testObtenerIdTuristas() throws TurismoUyException {
+        assertTrue(contrUsr != null);
+
+        String idTest = "testObtenerIdTuristas";
+
+        generarTuristas(100, idTest);
+
+        var ids = contrUsr.obtenerIdTuristas();
+        assertTrue(ids != null);
+
+        int tamanioAntes = ids.size();
+
+        // chequeo turistas
+        for (int i = 0; i < 100; i++) {
+            String nickname = "Turista " + idTest + " i=" + i;
+
+            // Cada tur. deberían estar una única vez
+            assertTrue(ids.remove(nickname));
+            assertFalse(ids.remove(nickname));
+        }
+
+        assertEquals(tamanioAntes - 100, ids.size());
+    }
+
+    @Test
+    void testAltaTuristaOK() throws TurismoUyException {
+        generarTuristas(100, "testAltaTuristaOK");
+    }
+
+    @Test
+    void testAltaTuristaRepetido() throws TurismoUyException {
+        String idTest = "testAltaTuristaRepetido";
+
+        generarTuristas(50, idTest);
+
+        assertThrows(UsuarioYaRegistradoException.class, () -> {
+            generarTuristas(1, idTest);
+        });
+
+        String nickname = "Turista CON NICK NUEVO " + idTest;
+        String nombre = "NOMBRE TURISTA";
+        String apellido = "APELLIDO TURISTA";
+        String correo = "TURISTA " + idTest + " i=" + 0;
+        String nacionalidad = "CHINA";
+        LocalDate fNacimiento = LocalDate.now().minusYears(15);
+
+        assertThrows(UsuarioYaRegistradoException.class, () -> {
+            contrUsr.altaTurista(nickname, nombre, apellido, correo, "1234", fNacimiento, null, nacionalidad);
+        });
+    }
+
+    @Test
+    void testAltaProveedorOK() throws TurismoUyException {
+        generarProveedores(100, "testAltaProveedorOK");
+    }
+
+    @Test
+    void testAltaProveedorRepetido() throws TurismoUyException {
+        String idTest = "testAltaProveedorRepetido";
+
+        generarProveedores(50, idTest);
+
+        assertThrows(UsuarioYaRegistradoException.class, () -> {
+            generarProveedores(1, idTest);
+        });
+
+        String nickname = "Proveedor CON NICK NUEVO " + idTest;
+        String nombre = "NOMBRE PROV";
+        String apellido = "APELLIDO PROV";
+
+        // Mismo correo que el generador:
+        String correo = "Proveedor " + idTest + " i=" + 0;
+        String descripcion = "HOLA! DESCRIPCION";
+        String link = "www.google.com.provedoor";
+        LocalDate fNacimiento = LocalDate.now().minusYears(30);
+
+        assertThrows(UsuarioYaRegistradoException.class, () -> {
+            contrUsr.altaProveedor(nickname, nombre, apellido, correo, "1234", fNacimiento, null, descripcion, link);
+        });
+    }
+
+    @Test
+    void testObtenerDTUsuarioDetalle() throws TurismoUyException {
+        String idTest = "testObtenerDTUsuarioDetalle";
+
+        generarProveedores(50, idTest);
+        generarTuristas(50, idTest);
+        ControladorActividadTuristicaTest.generarDepartamentos(50, idTest);
+        ControladorActividadTuristicaTest.generarActividades(50, idTest);
+        ControladorActividadTuristicaTest.generarSalidas(50, idTest);
+
+        // A los primeros 40 les asigno una sola salida
+        for (int i = 0; i < 40; i++) {
+            String nombreSalida = "Salida " + idTest + " i=" + i;
+            String nickname = "Turista " + idTest + " i=" + i;
+            contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now(), null);
+        }
+
+        // A los ultimos 10 les asigno una todas las salidas
+        for (int i = 40; i < 50; i++) {
+            String nickname = "Turista " + idTest + " i=" + i;
+            for (int j = 0; j < 40; j++) {
+                String nombreSalida = "Salida " + idTest + " i=" + j;
+                contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, LocalDate.now(), null);
+            }
+        }
+
+        // Verifico para los proveedores
+        for (int i = 0; i < 50; i++) {
+            String nickname = "Proveedor " + idTest + " i=" + i;
+            var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
+            String nombre = "NOMBRE PROV";
+            String apellido = "APELLIDO PROV";
+            String correo = "Proveedor " + idTest + " i=" + i;
+            String descripcion = "HOLA! DESCRIPCION";
+            String link = "www.google.com.provedoor";
+            LocalDate fNacimiento = localDateNow.minusYears(30);
+            String nombreSalida = "Salida " + idTest + " i=" + i;
+            String nombreActividad = "Actividad " + idTest + " i=" + i;
+
+            assertTrue(dtdet instanceof DTProveedorDetalle);
+
+            var dtCasteado = (DTProveedorDetalle) dtdet;
+
+            assertEquals(nickname, dtCasteado.getNickname());
+            assertEquals(nombre, dtCasteado.getNombre());
+            assertEquals(apellido, dtCasteado.getApellido());
+            assertEquals(correo, dtCasteado.getCorreo());
+            assertEquals(descripcion, dtCasteado.getDescrpicionGeneral());
+            assertEquals(link, dtCasteado.getLink());
+            assertEquals(fNacimiento, dtCasteado.getFechaNac());
+
+            assertEquals(1, dtCasteado.getActividades().size());
+            var nombreActObtenida = dtCasteado.getActividades().get(0).getNombre();
+            assertEquals(nombreActividad, nombreActObtenida);
+
+            var salidasAsociadasObtenidas = dtCasteado.getActividades().get(0).getSalidas().keySet().toArray();
+            assertEquals(1, salidasAsociadasObtenidas.length);
+            assertEquals(nombreSalida, salidasAsociadasObtenidas[0]);
+        }
+
+        // Verifico para los turistas
+        for (int i = 0; i < 50; i++) {
+            String nickname = "Turista " + idTest + " i=" + i;
+            String nombre = "NOMBRE TURISTA";
+            String apellido = "APELLIDO TURISTA";
+            String correo = "TURISTA " + idTest + " i=" + i;
+            String nacionalidad = "CHINA";
+            LocalDate fNacimiento = localDateNow.minusYears(15);
+            String nombreSalida = "Salida " + idTest + " i=" + i;
+
+            var dtdet = contrUsr.obtenerDTUsuarioDetalle(nickname);
+
+            assertTrue(dtdet instanceof DTTuristaDetalle);
+
+            var dtCasteado = (DTTuristaDetalle) dtdet;
+
+            assertEquals(nickname, dtCasteado.getNickname());
+            assertEquals(nombre, dtCasteado.getNombre());
+            assertEquals(apellido, dtCasteado.getApellido());
+            assertEquals(correo, dtCasteado.getCorreo());
+            assertEquals(nacionalidad, dtCasteado.getNacionalidad());
+            assertEquals(fNacimiento, dtCasteado.getFechaNac());
+
+            if (i < 40) {
+                assertEquals(1, dtCasteado.getInscripciones().size());
+                var SalObtenida = dtCasteado.getInscripciones().get(0);
+                assertEquals(nombreSalida, SalObtenida.getNombre());
+            } else {
+                assertEquals(40, dtCasteado.getInscripciones().size());
+            }
+        }
+    }
+
+    @Test
+    void testObtenerDTUsuario() throws TurismoUyException {
+        String idTest = "testObtenerDTUsuario";
+
+        List<String> nombreProveedores = generarProveedores(50, idTest);
+        List<String> nombreTuristas = generarTuristas(50, idTest);
+
+        // Verifico para los proveedores
+        for (int i = 0; i < 50; i++) {
+            String nickname = nombreProveedores.get(i);
+            String nombre = "NOMBRE PROV";
+            String apellido = "APELLIDO PROV";
+            String correo = "Proveedor " + idTest + " i=" + i;
+            String descripcion = "HOLA! DESCRIPCION";
+            String link = "www.google.com.provedoor";
+            LocalDate fNacimiento = localDateNow.minusYears(30);
+
+            var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
+
+            assertTrue(dtUsuario instanceof DTProveedor);
+
+            var dtCasteado = (DTProveedor) dtUsuario;
+
+            assertEquals(nickname, dtCasteado.getNickname());
+            assertEquals(nombre, dtCasteado.getNombre());
+            assertEquals(apellido, dtCasteado.getApellido());
+            assertEquals(correo, dtCasteado.getCorreo());
+            assertEquals(descripcion, dtCasteado.getDescrpicionGeneral());
+            assertEquals(link, dtCasteado.getLink());
+            assertEquals(fNacimiento, dtCasteado.getFechaNac());
+        }
+
+        // Verifico para los turistas
+        for (int i = 0; i < 50; i++) {
+            String nickname = nombreTuristas.get(i);
+            String nombre = "NOMBRE TURISTA";
+            String apellido = "APELLIDO TURISTA";
+            String correo = "TURISTA " + idTest + " i=" + i;
+            String nacionalidad = "CHINA";
+            LocalDate fNacimiento = localDateNow.minusYears(15);
+
+            var dtUsuario = contrUsr.obtenerDTUsuario(nickname);
+
+            assertTrue(dtUsuario instanceof DTTurista);
+
+            var dtCasteado = (DTTurista) dtUsuario;
+
+            assertEquals(nickname, dtCasteado.getNickname());
+            assertEquals(nombre, dtCasteado.getNombre());
+            assertEquals(apellido, dtCasteado.getApellido());
+            assertEquals(correo, dtCasteado.getCorreo());
+            assertEquals(nacionalidad, dtCasteado.getNacionalidad());
+            assertEquals(fNacimiento, dtCasteado.getFechaNac());
+        }
+
+        // Caso en el que no se cumplen las pre-condiciones
+        assertThrows(Exception.class, () -> {
+            contrUsr.obtenerDTUsuario("NICK QUE OBVIAMENTE NO ESTA EN EL SISTEMA");
+        });
+    }
+
+    @Test
+    void testModificarUsuarioCaso() throws TurismoUyException {
+        String idTest = "testModificarUsuario";
+
+        generarProveedores(50, idTest);
+        generarTuristas(50, idTest);
+
+        for (int i = 0; i < 50; i++) {
+            String nicknameTur = "Turista " + idTest + " i=" + i;
+            String nicknameProv = "Proveedor " + idTest + " i=" + i;
+
+            DTTurista dttur = (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur);
+            DTProveedor dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv);
+
+            contrUsr.modificarUsuario(dttur, null, false);
+            contrUsr.modificarUsuario(dtprov, null, false);
+
+            assertEquals(dttur, (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur));
+            assertEquals(dtprov, (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv));
+
+            // Caso típico:
+            String nuevoString = "NUEVO DATO";
+
+            DTTurista dtTurNuevo = new DTTurista(dttur.getNickname(), dttur.getNombre() + nuevoString,
+                    dttur.getApellido() + nuevoString, dttur.getCorreo(), dttur.getFechaNac().plusDays(1), null,
+                    dttur.getNacionalidad() + nuevoString);
+            DTProveedor dtProvNuevo = new DTProveedor(dtprov.getNickname(), dtprov.getNombre() + nuevoString,
+                    dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), null,
+                    dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
+
+            contrUsr.modificarUsuario(dtTurNuevo, null, false);
+            contrUsr.modificarUsuario(dtProvNuevo, null, false);
+
+            dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
+            dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
+            assertEquals(dtTurNuevo, dttur);
+            assertEquals(dtProvNuevo, dtprov);
+
+            // Caso en el que se modifica el correo
+            DTTurista dtTurNuevo2 = new DTTurista(dttur.getNickname(), dttur.getNombre(), dttur.getApellido(),
+                    dttur.getCorreo() + nuevoString, dttur.getFechaNac(), null, dttur.getNacionalidad());
+            DTProveedor dtProvNuevo2 = new DTProveedor(dtprov.getNickname(), dtprov.getNombre(), dtprov.getApellido(),
+                    dtprov.getCorreo() + nuevoString, dtprov.getFechaNac(), null, dtprov.getDescrpicionGeneral(),
+                    dtprov.getLink());
+
+            assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
+                contrUsr.modificarUsuario(dtTurNuevo2, null, false);
+            });
+
+            assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
+                contrUsr.modificarUsuario(dtProvNuevo2, null, false);
+            });
+
+            contrUsr.modificarUsuario(dtTurNuevo, null, false);
+            contrUsr.modificarUsuario(dtProvNuevo, null, false);
+
+            dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
+            dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
+            assertNotEquals(dtTurNuevo2, dttur);
+            assertNotEquals(dtProvNuevo2, dtprov);
+
+            // Caso en el que se modifica el nick:
+            DTTurista dtTurNuevo3 = new DTTurista(dttur.getNickname() + nuevoString, dttur.getNombre(),
+                    dttur.getApellido(), dttur.getCorreo(), dttur.getFechaNac(), null, dttur.getNacionalidad());
+            DTProveedor dtProvNuevo3 = new DTProveedor(dtprov.getNickname() + nuevoString, dtprov.getNombre(),
+                    dtprov.getApellido(), dtprov.getCorreo(), dtprov.getFechaNac(), null,
+                    dtprov.getDescrpicionGeneral(), dtprov.getLink());
+
+            assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
+                contrUsr.modificarUsuario(dtTurNuevo3, null, false);
+            });
+
+            assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
+                contrUsr.modificarUsuario(dtProvNuevo3, null, false);
+            });
+
+            dttur = (DTTurista) contrUsr.obtenerDTUsuario(dttur.getNickname());
+            dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtprov.getNickname());
+            assertNotEquals(dtTurNuevo3, dttur);
+            assertNotEquals(dtProvNuevo3, dtprov);
+        }
+    }
 
 }

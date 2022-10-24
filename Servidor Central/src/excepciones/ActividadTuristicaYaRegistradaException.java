@@ -8,6 +8,8 @@ package excepciones;
  * 
  */
 public class ActividadTuristicaYaRegistradaException extends TurismoUyException {
+	private static final long serialVersionUID = 1L;
+
 	public ActividadTuristicaYaRegistradaException(String message) {
 		super(message);
 	}

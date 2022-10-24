@@ -8,13 +8,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import excepciones.ActividadTuristicaNoAceptada;
 import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
+import excepciones.CategoriaYaRegistradaException;
+import excepciones.CompraConConsumosInsuficientesExcepcion;
+import excepciones.CompraPaqueteVencidoExcepcion;
 import excepciones.DeparamentoYaRegistradoException;
 import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
 import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.NoExisteConsumoParaLaActividadExcepcion;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import logica.datatypes.DTActividadTuristica;
@@ -22,13 +29,17 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.entidades.ActividadTuristica;
+import logica.entidades.Categoria;
+import logica.entidades.Compra;
 import logica.entidades.Departamento;
 import logica.entidades.Inscripcion;
 import logica.entidades.SalidaTuristica;
 import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
 import logica.manejadores.ManejadorSalidaTuristica;
 import logica.manejadores.ManejadorUsuario;
@@ -39,190 +50,269 @@ import logica.manejadores.ManejadorUsuario;
 
 public class ControladorActividadTuristica implements IControladorActividadTuristica {
 
-	public void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException {
-		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
-		if (!manejadorDepartamento.exists(nom)) {
-			Departamento dep = new Departamento(nom, descr, URL);
-			manejadorDepartamento.addDepartamento(dep);
-		} else {
-			throw new DeparamentoYaRegistradoException(
-					"El departamento con nombre " + nom + " ya existe en el sistema");
-		}
+    public void altaDepartamento(String nom, String descr, String URL) throws DeparamentoYaRegistradoException {
+        ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
+        if (!manejadorDepartamento.exists(nom)) {
+            Departamento dep = new Departamento(nom, descr, URL);
+            manejadorDepartamento.addDepartamento(dep);
+        } else {
+            throw new DeparamentoYaRegistradoException(
+                    "El departamento con nombre " + nom + " ya existe en el sistema");
+        }
 
-	}
+    }
 
-	public ControladorActividadTuristica() {
-	}
+    public ControladorActividadTuristica() {
+    }
 
-	public List<String> obtenerIdDepartamentos() {
-		ManejadorDepartamento manejadorDepartamento = ManejadorDepartamento.getInstancia();
-		return new ArrayList<String>(manejadorDepartamento.obtenerIdDepartamentos());
-	}
+    public List<String> obtenerIdDepartamentos() {
+        return new ArrayList<String>(ManejadorDepartamento.getInstancia().obtenerIdDepartamentos());
+    }
 
-	public List<String> obtenerIdCategorias() {
-		// TODO
-		return null;
-	}
+    public List<String> obtenerIdCategorias() {
+        return new ArrayList<String>(ManejadorCategoria.getInstancia().obtenerIdCategorias());
+    }
 
-	public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad,
-			String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img,
-			List<String> categorias) throws ActividadTuristicaYaRegistradaException {
-		// TODO: hacer algo con la img y categorias
+    public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad,
+            String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img,
+            List<String> categorias) throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
+        if (fechaAlta == null)
+            fechaAlta = LocalDate.now();
 
-		if (!existeActividadTuristica(nombreActividad)) {
-			// Se crea instancia:
-			ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-					duracion, costo, ciudad, fechaAlta);
-			ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
-			MAD.addActividad(actTuristica);
-		} else {
-			throw new ActividadTuristicaYaRegistradaException(
-					"Ya existe la actividad con el nombre " + nombreActividad);
-		}
-	}
+        if (!existeActividadTuristica(nombreActividad)) {
+            // Se crea instancia:
+            ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
+                    descripcion, duracion, costo, ciudad, fechaAlta, img, categorias);
+            ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
+            MAD.addActividad(actTuristica);
+        } else {
+            throw new ActividadTuristicaYaRegistradaException(
+                    "Ya existe la actividad con el nombre " + nombreActividad);
+        }
+    }
 
-	public boolean existeActividadTuristica(String nomActividad) {
-		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		return MAT.exists(nomActividad);
-	}
+    public boolean existeActividadTuristica(String nomActividad) {
+        ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+        return MAT.exists(nomActividad);
+    }
 
-	public List<String> obtenerIdActividadesTuristicas(String departamento) {
-		List<String> idActividades = new ArrayList<>();
-		ManejadorDepartamento mdep = ManejadorDepartamento.getInstancia();
-		Departamento dep = mdep.getDepartamento(departamento);
-		for (ActividadTuristica act : dep.getActividadTuristicas().values()) {
-			idActividades.add(act.getNombre());
-		}
-		return idActividades;
-	}
+    public List<String> obtenerIdActividadesTuristicas(String departamento) throws ObjetoNoExisteEnTurismoUy {
+        List<String> idActividades = new ArrayList<>();
+        ManejadorDepartamento mdep = ManejadorDepartamento.getInstancia();
+        Departamento dep = mdep.getDepartamento(departamento);
+        for (ActividadTuristica act : dep.getActividadTuristicas().values()) {
+            idActividades.add(act.getNombre());
+        }
+        return idActividades;
+    }
 
-	public List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria) {
-		// TODO
-		return null;
-	}
+    public List<String> obtenerIdActividadesTuristicasConfirmadasPorCategoria(String categoria)
+            throws ObjetoNoExisteEnTurismoUy {
+        return ManejadorCategoria.getInstancia().getCategoria(categoria).obtenerIdActividadesTuristicasConfirmadas();
+    }
 
-	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) {
-		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-		return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
-	}
+    public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct)
+            throws ObjetoNoExisteEnTurismoUy {
+        ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
+        return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
+    }
 
-	public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
-		// TODO
-		return null;
-	}
+    public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
+        var ret = new ArrayList<DTActividadTuristica>();
+        for (var activ : ManejadorActividadTuristica.getInstancia().getActividades()) {
+            if (activ.estaAceptada())
+                ret.add(activ.obtenerDTActividadTuristica());
+        }
+        return ret;
+    }
 
-	@Override
-	public List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) {
-		ArrayList<DTSalidaTuristica> dtsSal = new ArrayList<>();
+    @Override
+    public List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorCategoria(String nomCat)
+            throws ObjetoNoExisteEnTurismoUy {
+        Categoria cat = ManejadorCategoria.getInstancia().getCategoria(nomCat);
+        List<DTActividadTuristica> dtActis = new ArrayList<>();
+        for (ActividadTuristica act : cat.getActividades().values()) {
+            if (act.getEstado() == EstadoActividadTuristica.ACEPTADA) {
+                dtActis.add(act.obtenerDTActividadTuristica());
+            }
+        }
+        return dtActis;
+    }
 
-		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-		ActividadTuristica act = mat.getActividad(nombreActTuri);
-		for (SalidaTuristica sal : act.getSalidas().values()) {
-			dtsSal.add(sal.obtenerDTSalidaTuristica());
-		}
-		return dtsSal;
-	}
+    @Override
+    public List<DTActividadTuristica> obtenerDTActividadesTuristicasConfirmadasPorDepartamento(String nomDep)
+            throws ObjetoNoExisteEnTurismoUy {
+        Departamento dep = ManejadorDepartamento.getInstancia().getDepartamento(nomDep);
+        List<DTActividadTuristica> dtActis = new ArrayList<>();
+        for (ActividadTuristica act : dep.getActividadTuristicas().values()) {
+            if (act.getEstado() == EstadoActividadTuristica.ACEPTADA)
+                dtActis.add(act.obtenerDTActividadTuristica());
+        }
+        return dtActis;
+    }
 
-	public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) {
-		// TODO
-		return null;
-	}
+    @Override
+    public List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) throws ObjetoNoExisteEnTurismoUy {
+        ArrayList<DTSalidaTuristica> dtsSal = new ArrayList<>();
 
-	@Override
-	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
-			String nombrePaquete) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
-		// TODO hacer algo con el nombrePaquete y calcular la fecha de insc
+        ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica act = mat.getActividad(nombreActTuri);
+        for (SalidaTuristica sal : act.getSalidas().values()) {
+            dtsSal.add(sal.obtenerDTSalidaTuristica());
+        }
+        return dtsSal;
+    }
 
-	}
+    public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista)
+            throws ObjetoNoExisteEnTurismoUy {
+        ControladorUsuario contUser = new ControladorUsuario();
+        Turista turi = contUser.obtenerTurista(nickTurista);
+        return turi.obtenerIdPaquetesConConsumoDisponibleParaActividad(nombreActividad);
+    }
 
-	@Override
-	public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
-			LocalDate fechaInscripcion) throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
-			FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException {
-		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
-		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
-		if (turis.estaInscriptoASalida(nomSalTurim)) {
-			throw new InscripcionYaRegistradaException(
-					"Ya exite una inscrpcion entre la salida " + nomSalTurim + " y el turista " + nicknameTuris);
-		}
-		ManejadorSalidaTuristica msal = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = msal.getSalida(nomSalTurim);
-		int cantidadInscrptos = sal.obtenerCantidadInscriptos();
-		if (cantidadInscrptos + canTuris > sal.getCantMaxTuristas()) {
-			throw new SuperaElMaximoDeTuristasException("La salida " + nomSalTurim
-					+ " con las inscripcion ya realizada no tiene la capacidad suficiente para soportar esta inscrpcion");
-		}
+    @Override
+    public void altaInscripcionSalidaTuristica(String nomSalTurim, String nicknameTuris, int canTuris,
+            LocalDate fechaInscripcion, String nombrePaquete)
+            throws InscripcionYaRegistradaException, SuperaElMaximoDeTuristasException,
+            FechaAltaSalidaTuristicaPosteriorAFechaInscripcion, AltaInscripcionPosteriorAFechaSalidaException,
+            PaqueteNoCompradoExcepcion, CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion,
+            NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy {
 
-		turis.altaInscripcionSalidaTuristica(sal, canTuris, fechaInscripcion);
+        if (fechaInscripcion == null) {
+            fechaInscripcion = LocalDate.now();
+        }
 
-	}
+        ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
+        Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
+        if (turis.estaInscriptoASalida(nomSalTurim)) {
+            throw new InscripcionYaRegistradaException(
+                    "Ya exite una inscrpcion para la salida " + nomSalTurim + " del turista " + nicknameTuris);
+        }
+        ManejadorSalidaTuristica msal = ManejadorSalidaTuristica.getInstancia();
+        SalidaTuristica sal = msal.getSalida(nomSalTurim);
+        int cantidadInscrptos = sal.obtenerCantidadInscriptos();
+        if (cantidadInscrptos + canTuris > sal.getCantMaxTuristas()) {
+            throw new SuperaElMaximoDeTuristasException("La salida " + nomSalTurim
+                    + " no tiene la capacidad suficiente para soportar esta inscrpcion. El maximo es "
+                    + sal.getCantMaxTuristas());
+        }
 
-	public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,
-			LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img) throws SalidaYaRegistradaException,
-			FechaAltaActividadPosteriorAFechaAltaSalidaException, FechaAltaSalidaPosteriorAFechaSalidaException {
-		if (fechaAlta == null)
-			fechaAlta = LocalDate.now();
+        Compra compraUtilizadaEnInscrpicon = null;
+        String nombreActividad = sal.getActividad().getNombre();
+        if (nombrePaquete != null) {
+            compraUtilizadaEnInscrpicon = turis.obtenerCompraParaNombrePaquete(nombrePaquete);
+            if (compraUtilizadaEnInscrpicon == null) {
+                throw new PaqueteNoCompradoExcepcion(
+                        "El paquete " + nombrePaquete + " no fue comprado por el turista " + nicknameTuris);
+            }
+            if (fechaInscripcion.isAfter(compraUtilizadaEnInscrpicon.getVencimiento())) {
+                throw new CompraPaqueteVencidoExcepcion("La compra de este paquete esta vencida");
+            }
+            if (canTuris > compraUtilizadaEnInscrpicon.obtenerConsumosRestantesParaActividad(nombreActividad)) {
+                throw new CompraConConsumosInsuficientesExcepcion(
+                        "La compra no tiene un numero suficiente de consumos disponibles para realizar esta inscripcion");
+            }
+        }
+        turis.altaInscripcionSalidaTuristica(sal, canTuris, fechaInscripcion, compraUtilizadaEnInscrpicon,
+                nombreActividad);
 
-		ManejadorSalidaTuristica manejadorSalida = ManejadorSalidaTuristica.getInstancia();
-		ManejadorActividadTuristica manejadorActividad = ManejadorActividadTuristica.getInstancia();
-		if (manejadorSalida.existeSalidaTuristica(nombre)) {
-			throw new SalidaYaRegistradaException("La salida con nombre" + nombre + " ya existe en el sistema.");
-		}
-		// AltaActividad <= AltaSalida <= Salida, se chequean ambas
-		// desigualdades.
+    }
 
-		if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
-			throw new FechaAltaActividadPosteriorAFechaAltaSalidaException(
-					"La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");
-		}
-		if (fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))) {
-			throw new FechaAltaSalidaPosteriorAFechaSalidaException(
-					"La fecha de la Salida debe ser posterior a la fecha de su registro");
-		} else {
-			SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar,
-					img);
-			manejadorSalida.addSalida(salidaTur);
-		}
-	}
+    public void altaSalidaTuristica(String actividad, String nombre, LocalDateTime fechaYHoraSalida,
+            LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img)
+            throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
+            FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy, ActividadTuristicaNoAceptada {
+        if (fechaAlta == null)
+            fechaAlta = LocalDate.now();
 
-	public List<String> obtenerIdSalidasTuristicas(String act) {
-		ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-		ActividadTuristica actTuristica = MAT.getActividad(act);
-		Map<String, SalidaTuristica> salidas = actTuristica.getSalidas();
-		List<String> res = new ArrayList<>();
-		for (String idSalida : salidas.keySet()) {
-			res.add(idSalida);
-		}
-		return res;
-	}
+        ManejadorSalidaTuristica manejadorSalida = ManejadorSalidaTuristica.getInstancia();
+        ManejadorActividadTuristica manejadorActividad = ManejadorActividadTuristica.getInstancia();
 
-	public DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) {
-		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = MST.getSalida(nomSal);
-		return sal.obtenerDTSalidaTuristica();
-	}
+        if (manejadorSalida.existeSalidaTuristica(nombre)) {
+            throw new SalidaYaRegistradaException("La salida con nombre" + nombre + " ya existe en el sistema.");
+        } else if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
+            throw new FechaAltaActividadPosteriorAFechaAltaSalidaException(
+                    "La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");
+        } else if (fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))) {
+            throw new FechaAltaSalidaPosteriorAFechaSalidaException(
+                    "La fecha de la Salida debe ser posterior a la fecha de su registro");
+        } else if (manejadorActividad.getActividad(actividad).getEstado() != EstadoActividadTuristica.ACEPTADA) {
+            throw new ActividadTuristicaNoAceptada("Se intentó registrar una salida a una actividad no aceptada");
+        } else {
+            SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida,
+                    lugar, img);
+            manejadorSalida.addSalida(salidaTur);
+        }
+    }
 
-	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) {
-		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = MST.getSalida(nomSal);
-		return sal.obtenerDTSalidaTuristicaDetalle();
-	}
+    public List<String> obtenerIdSalidasTuristicas(String act) throws ObjetoNoExisteEnTurismoUy {
+        ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica actTuristica = manejActTur.getActividad(act);
+        Map<String, SalidaTuristica> salidas = actTuristica.getSalidas();
+        List<String> res = new ArrayList<>();
+        for (String idSalida : salidas.keySet()) {
+            res.add(idSalida);
+        }
+        return res;
+    }
 
-	public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) {
-		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
-		SalidaTuristica sal = MST.getSalida(nomSal);
-		var inscripciones = sal.getInscripciones();
-		Iterator<Inscripcion> iteratorInscripciones = inscripciones.iterator();
-		Inscripcion insc = null;
-		boolean encontrado = false;
-		while (!encontrado) {
-			insc = iteratorInscripciones.next();
-			if (insc.getTurista().getNickname() == nick) {
-				encontrado = true;
-			}
-		}
-		return insc.obtenerDTInscripcion();
-	}
+    public DTSalidaTuristica obtenerDTSalidaTuristica(String nomSal) throws ObjetoNoExisteEnTurismoUy {
+        ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+        SalidaTuristica sal = manejSalTur.getSalida(nomSal);
+        return sal.obtenerDTSalidaTuristica();
+    }
 
+    public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) throws ObjetoNoExisteEnTurismoUy {
+        ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+        SalidaTuristica sal = manejSalTur.getSalida(nomSal);
+        return sal.obtenerDTSalidaTuristicaDetalle();
+    }
+
+    public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy {
+        ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+        SalidaTuristica sal = manejSalTur.getSalida(nomSal);
+        var inscripciones = sal.getInscripciones();
+        Iterator<Inscripcion> iteratorInscripciones = inscripciones.iterator();
+        Inscripcion insc = null;
+        boolean encontrado = false;
+        while (!encontrado) {
+            insc = iteratorInscripciones.next();
+            if (insc.getTurista().getNickname().equals(nick)) {
+                encontrado = true;
+            }
+        }
+        return insc.obtenerDTInscripcion();
+    }
+
+    public List<String> obtenerIdActividadesTuristicasAgregadas() {
+        List<String> idActividades = new ArrayList<>();
+        ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+        for (ActividadTuristica act : manejActTur.getActividades()) {
+            if (act.getEstado() == EstadoActividadTuristica.AGREGADA)
+                idActividades.add(act.getNombre());
+        }
+        return idActividades;
+    }
+
+    public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada)
+            throws ObjetoNoExisteEnTurismoUy {
+        ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica act = manejActTur.getActividad(idActividad);
+        EstadoActividadTuristica est;
+        if (esAceptada)
+            est = EstadoActividadTuristica.ACEPTADA;
+        else
+            est = EstadoActividadTuristica.RECHAZADA;
+        act.setEstado(est);
+    }
+
+    public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {
+        ManejadorCategoria manejadorcAt = ManejadorCategoria.getInstancia();
+        if (!manejadorcAt.exists(nombre)) {
+            Categoria cat = new Categoria(nombre);
+            manejadorcAt.addCategoria(cat);
+        } else {
+            throw new CategoriaYaRegistradaException("La categoria " + nombre + " ya existe en el sistema.");
+        }
+    }
 }

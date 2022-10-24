@@ -7,6 +7,8 @@ package excepciones;
  * 
  */
 public class FechaAltaSalidaPosteriorAFechaSalidaException extends TurismoUyException {
+	private static final long serialVersionUID = 1L;
+	
 	public FechaAltaSalidaPosteriorAFechaSalidaException(String message) {
 		super(message);
 	}

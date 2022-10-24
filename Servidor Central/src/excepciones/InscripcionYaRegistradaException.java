@@ -9,6 +9,7 @@ package excepciones;
  */
 
 public class InscripcionYaRegistradaException extends TurismoUyException {
+	private static final long serialVersionUID = 1L;
 	public InscripcionYaRegistradaException(String message) {
 		super(message);
 	}

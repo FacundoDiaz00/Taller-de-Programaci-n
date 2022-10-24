@@ -1,9 +1,12 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import excepciones.NoExisteConsumoParaLaActividadExcepcion;
 import logica.datatypes.DTCompra;
 
 /**
@@ -12,66 +15,105 @@ import logica.datatypes.DTCompra;
 
 public class Compra {
 
-	private LocalDate fechaCompra;
-	private int cantidadTuristas;
-	private LocalDate vencimiento;
+    private LocalDate fechaCompra;
+    private int cantidadTuristas;
 
-	private Paquete paquete;
-	private Set<Inscripcion> inscripciones;
+    private Paquete paquete;
+    private Set<Inscripcion> inscripciones;
+    private Map<String, Integer> usosRestantesPorActividad;
 
-	// ToDo Falta el campo calculado costoTotal
+    public Compra(LocalDate fechaCompra, int cantidadTuristas, Paquete paquete) {
+        this.fechaCompra = fechaCompra;
+        this.cantidadTuristas = cantidadTuristas;
+        this.paquete = paquete;
+        this.inscripciones = new HashSet<>();
 
-	public Compra(LocalDate fechaCompra, int cantidadTuristas, LocalDate vencimiento, Paquete paquete) {
-		this.fechaCompra = fechaCompra;
-		this.cantidadTuristas = cantidadTuristas;
-		this.vencimiento = vencimiento;
-		this.paquete = paquete;
-		this.inscripciones = new HashSet<>();
-	}
+        calcularMapUsosRestantes();
+    }
 
-	public DTCompra obtenerDTCompra() {
-		var costo = 0.0;
-		// FIXME calcular bien el costo de la compra
-		return new DTCompra(fechaCompra, cantidadTuristas, (float) costo, vencimiento, paquete.getNombre());
-	}
+    public Compra(Paquete paquete, int cantTuristas, LocalDate fechaCompra) {
+        this.paquete = paquete;
+        this.cantidadTuristas = cantTuristas;
+        this.inscripciones = new HashSet<>();
+        this.fechaCompra = fechaCompra;
+        calcularMapUsosRestantes();
+    }
 
-	public LocalDate getFechaCompra() {
-		return fechaCompra;
-	}
+    private void calcularMapUsosRestantes() {
+        this.usosRestantesPorActividad = new HashMap<>();
+        for (var actividad : paquete.obtenerIdActividadesIncluidas()) {
+            usosRestantesPorActividad.put(actividad, this.cantidadTuristas);
+        }
+    }
 
-	public void setFechaCompra(LocalDate fechaCompra) {
-		this.fechaCompra = fechaCompra;
-	}
+    public LocalDate getVencimiento() {
+        return this.fechaCompra.plusDays(paquete.getValidez());
+    }
 
-	public int getCantidadTuristas() {
-		return cantidadTuristas;
-	}
+    public float getCostoTotal() {
+        return paquete.getCostoPorTurista() * (float) cantidadTuristas;
+    }
 
-	public void setCantidadTuristas(int cantidadTuristas) {
-		this.cantidadTuristas = cantidadTuristas;
-	}
+    public DTCompra obtenerDTCompra() {
+        return new DTCompra(getFechaCompra(), getCantidadTuristas(), getCostoTotal(), getVencimiento(),
+                paquete.obtenerDTPaquete());
+    }
 
-	public LocalDate getVencimiento() {
-		return vencimiento;
-	}
+    public boolean tieneConsumoDisponibleParaActividad(String nombreActividad) {
+        return this.usosRestantesPorActividad.containsKey(nombreActividad)
+                && this.usosRestantesPorActividad.get(nombreActividad) > 0;
+    }
 
-	public void setVencimiento(LocalDate vencimiento) {
-		this.vencimiento = vencimiento;
-	}
+    public int obtenerConsumosRestantesParaActividad(String nombreActividad)
+            throws NoExisteConsumoParaLaActividadExcepcion {
+        if (this.usosRestantesPorActividad.containsKey(nombreActividad)) {
+            return usosRestantesPorActividad.get(nombreActividad);
+        } else {
+            throw new NoExisteConsumoParaLaActividadExcepcion("El paquete utilizado no incluye a la actividad");
+        }
+    }
 
-	public Paquete getPaquete() {
-		return paquete;
-	}
+    public void descontarConsumos(String nomActividad, int cantTuris) {
+        this.usosRestantesPorActividad.put(nomActividad, this.usosRestantesPorActividad.get(nomActividad) - cantTuris);
+    }
 
-	public void setPaquete(Paquete paquete) {
-		this.paquete = paquete;
-	}
+    public void agregarInscripcion(Inscripcion ins) {
+        this.inscripciones.add(ins);
+    }
 
-	public Set<Inscripcion> getInscripciones() {
-		return inscripciones;
-	}
+    public LocalDate getFechaCompra() {
+        return fechaCompra;
+    }
 
-	public void setInscripciones(Set<Inscripcion> inscripciones) {
-		this.inscripciones = inscripciones;
-	}
+    public void setFechaCompra(LocalDate fechaCompra) {
+        this.fechaCompra = fechaCompra;
+    }
+
+    public int getCantidadTuristas() {
+        return cantidadTuristas;
+    }
+
+    public void setCantidadTuristas(int cantidadTuristas) {
+        this.cantidadTuristas = cantidadTuristas;
+    }
+
+    public Paquete getPaquete() {
+        return paquete;
+    }
+
+    public void setPaquete(Paquete paquete) {
+        this.paquete = paquete;
+    }
+
+    public Set<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(Set<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
+    }
+
+    public boolean correspondeAPaquete(String nombrePaquete) {
+        return paquete.getNombre().equals(nombrePaquete);
+    }
 }

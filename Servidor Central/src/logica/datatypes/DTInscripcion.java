@@ -6,15 +6,18 @@ public class DTInscripcion {
 	private LocalDate fechaInscripcion;
 	private int cantidadTuristas;
 	private float costo;
-	private String salida;
+	private DTSalidaTuristica salida;
 	private String turista;
 
-	public DTInscripcion(LocalDate fechaInscripcion, int cantidadTuristas, float costo, String salida, String turista) {
+	private DTCompra compra;
+
+	public DTInscripcion(LocalDate fechaInscripcion, int cantidadTuristas, float costo, DTSalidaTuristica salida, String turista, DTCompra compra) {
 		this.fechaInscripcion = fechaInscripcion;
 		this.cantidadTuristas = cantidadTuristas;
 		this.costo = costo;
 		this.salida = salida;
 		this.turista = turista;
+		this.compra = compra;
 	}
 
 	public LocalDate getFechaInscripcion() {
@@ -25,7 +28,7 @@ public class DTInscripcion {
 		return this.cantidadTuristas;
 	}
 
-	public String getSalidaTuristica() {
+	public DTSalidaTuristica getSalidaTuristica() {
 		return this.salida;
 	}
 
@@ -35,5 +38,9 @@ public class DTInscripcion {
 
 	public float getCosto() {
 		return costo;
+	}
+
+	public DTCompra getCompra() {
+		return compra;
 	}
 }

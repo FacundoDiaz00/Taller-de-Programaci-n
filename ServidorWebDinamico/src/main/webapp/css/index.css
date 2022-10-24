@@ -1,0 +1,67 @@
+#contenedor{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-column-gap: 20px;
+    min-height: calc(100vh - 141.5px);
+}
+
+
+.card-title{
+    padding: 2px 0 0 15px;
+}
+
+.barra_de_navegacion{
+    display: grid;
+    justify-content: space-between;
+}
+
+
+
+
+
+footer{
+
+}
+
+
+
+
+#contenedor-actividades-turisticas img, #contenedor-paquetes img{
+    height: 100%;
+}
+
+#contenedor-actividades-turisticas{
+    margin-bottom: 20px;
+}
+
+#contenedor-paquetes{
+    margin-bottom: 10px;
+}
+
+#contenedor-actividades-turisticas > div, #contenedor-paquetes > div{
+    margin-left: 20px;
+}
+
+.botonera{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.descripcion-actividad, .descripcion-paquete{
+    min-height: 100px;
+    max-height: 170px;
+    overflow-y: auto;
+}
+.header-card-with-button{
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 10px 0 5px 0;
+    align-items: center;
+}
+
+.header-card-with-button > a{
+    height: 40px;
+}
