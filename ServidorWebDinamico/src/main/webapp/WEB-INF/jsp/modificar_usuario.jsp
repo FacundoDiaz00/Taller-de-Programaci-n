@@ -39,7 +39,7 @@
 		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 590px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
 
 																			
-							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px">
+							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px; align-items: flex-end;">
 							                    	<div> 
 								                        <span class="input-label">Imagen:</span>
 								                        <input id="input-imagen"
@@ -54,9 +54,9 @@
 								                        	   >
 							                        </div>
 							                        	   
-							                        <div style="display: flex; align-content: center;">
+							                        <div style="display: flex; align-content: center; margin-bottom: 10px">
 							                        	
-	    												<span class="input-label" >Eliminar foto:</span>
+	    												<span class="input-label"  style="margin-right: 5px" >Eliminar foto:</span>
 		                                                <input id="input-borrar-foto" 
 		                                                name="borrar_imagen" 
 		                                                type="checkbox"
