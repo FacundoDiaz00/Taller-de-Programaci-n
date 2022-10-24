@@ -183,6 +183,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	            //Actualizo datos sesion
 	            DTUsuario usuario = contrUsuario.obtenerDTUsuarioPorNickname(nick, modC);
 	            sesion.setAttribute("usuarioLogeado", usuario);
+	            request.setAttribute("exito", Boolean.TRUE);
 	            
 	            
 			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {

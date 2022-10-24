@@ -25,10 +25,10 @@
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
 	                                <% if (usuario instanceof DTTurista){ %>
-	                                    <div class="modal-content" style =" width: 598px; height: 780px;">
+	                                    <div class="modal-content" style =" width: 598px; height: 860px;">
 	                                    
 	                     			<% } else {%>
-	                     				<div class="modal-content" style =" width: 598px; height: 950px;">
+	                     				<div class="modal-content" style =" width: 598px; height: 1030px;">
 	                     			<% } %>
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
@@ -151,6 +151,21 @@
 	                                                        value="soy_una_contraseña"
 	                                                        >
 	                                                    </div>
+	                                                    
+	                                                    <div class="contenedorinput mb-3">
+	                                                        <span class="input-label">Confirmar contraseña: </span>
+	                                                        <input id="input-confirmar_contrasenia" 
+	                                                        type="password"
+	                                                        name="confirmar_contrasenia"
+	                                                        required 
+	                                                        class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Contraseña" 
+	                                                        aria-describedby="basic-addon1"
+	                                                        value="soy_una_contraseña"
+	                                                        >
+	                                                    </div>
+	                                                    
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label"> Correo electronico:</span>
