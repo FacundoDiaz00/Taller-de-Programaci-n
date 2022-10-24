@@ -207,14 +207,14 @@ public class AltaDeUsuario extends JInternalFrame {
 		try {
 			if (tipoUsuario.getSelectedItem().toString().equals(OPCION_TURISTA)
 					&& (nombre.getText().isBlank() || apellido.getText().isBlank() || nickname.getText().isBlank()
-							|| fechaNacimiento.getText().isBlank() || nacionalidad.getText().isBlank())) {
+							|| fechaNacimiento.getText().isBlank() || nacionalidad.getText().isBlank() || contra.getText().isBlank()) ) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, apellido, nickname, correo, fecha de nacimiento y nacionalidad son obligatorios",
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			} else if (tipoUsuario.getSelectedItem().toString().equals(OPCION_PROVEEDOR)
 					&& (descripcion.getText().isBlank() || nombre.getText().isBlank() || apellido.getText().isBlank()
-							|| nickname.getText().isBlank() || fechaNacimiento.getText().isBlank())) {
+							|| nickname.getText().isBlank() || fechaNacimiento.getText().isBlank() || contra.getText().isBlank())) {
 				JOptionPane.showMessageDialog(null,
 						"Los campos nombre, apellido, nickname, correo, contaseña, confirmar contraseña, fecha de nacimiento y descripción son obligatorios",
 						"Error", JOptionPane.ERROR_MESSAGE);
