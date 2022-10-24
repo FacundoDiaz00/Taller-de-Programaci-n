@@ -123,11 +123,14 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
         String modC = request.getParameter("modificar_contrasenia");
+
         String modFN = request.getParameter("modificar_fechaNac");
-        //TODO: chequear nulls
         String modNac = null;
         String modD = null;
         String modL = null;
+        
+        if(modC != null && modC.equals(""))
+        	modC = null;
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(modFN, formatter);
@@ -181,18 +184,16 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	            	imgDel.delete();
 	            }
 	            //Actualizo datos sesion
-	            DTUsuario usuario = contrUsuario.obtenerDTUsuarioPorNickname(nick, modC);
+	            DTUsuario usuario = contrUsuario.obtenerDTUsuario(nick);
 	            sesion.setAttribute("usuarioLogeado", usuario);
+	            request.setAttribute("exito", Boolean.TRUE);
 	            
 	            
 			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
 				request.setAttribute("motivoDeError",
 	                    "Los datos enviados no son válidos");
 				
-			} catch (ContraseniaInvalidaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
 
 
         doGet(request, response);

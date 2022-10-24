@@ -25,10 +25,10 @@
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
 	                                <% if (usuario instanceof DTTurista){ %>
-	                                    <div class="modal-content" style =" width: 598px; height: 780px;">
+	                                    <div class="modal-content" style =" width: 598px; height: 860px;">
 	                                    
 	                     			<% } else {%>
-	                     				<div class="modal-content" style =" width: 598px; height: 950px;">
+	                     				<div class="modal-content" style =" width: 598px; height: 1030px;">
 	                     			<% } %>
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
@@ -39,25 +39,36 @@
 		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 590px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
 
 																			
-							                    <div class="contenedorinput mb-3">
-							                        <span class="input-label">Imagen:</span>
-							                        <input id="input-imagen"
-							                        		name="modificar_img"
-							                        	   type="file" 
-							                        	   accept="image/*" 
-							                        	   name="img" 
-							                        	   class="form-control" 
-							                        	   placeholder="Imagen" 
-							                        	   aria-label="Imagen" 
-							                        	   aria-describedby="basic-addon1" 
-							                        	   >
-	                                                
+							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px">
+							                    	<div> 
+								                        <span class="input-label">Imagen:</span>
+								                        <input id="input-imagen"
+								                        		name="modificar_img"
+								                        	   type="file" 
+								                        	   accept="image/*" 
+								                        	   name="img" 
+								                        	   class="form-control" 
+								                        	   placeholder="Imagen" 
+								                        	   aria-label="Imagen" 
+								                        	   aria-describedby="basic-addon1" 
+								                        	   >
+							                        </div>
+							                        	   
+							                        <div style="display: flex; align-content: center;">
+							                        	
+	    												<span class="input-label" >Eliminar foto:</span>
+		                                                <input id="input-borrar-foto" 
+		                                                name="borrar_imagen" 
+		                                                type="checkbox"
+		                                                >
+	                                                </div>
+	                                               
+	                                            
 	                                            </div>
-	
+	                                            
 	                                            <div class="popUp">
 	                                                <div>
-	                                                    <div class="contenedorinput mb-3">
-	                                                    
+	                                                    <div class="contenedorinput mb-3">    
 	                                                        <span class="input-label" >Nickname:</span>
 	                                                        <input id="input-nickname" 
 	                                                        name="nickname" 
@@ -78,7 +89,6 @@
 	                                                        <input id="modificar_nombre"
 	                                                        name="modificar_nombre" 
 	                                                        type="text" 
-	                                                        required 
 	                                                        required class="form-control" 
 	                                                        placeholder="" 
 	                                                        aria-label="Nombre" 
@@ -93,7 +103,6 @@
 	                                                        <input id="input-apellido" 
 	                                                        name="modificar_apellido"
 	                                                        type="text" 
-	                                                        required 
 	                                                        required class="form-control" 
 	                                                        placeholder="" 
 	                                                        aria-label="Apellido" 
@@ -110,7 +119,6 @@
 	                                                		name="modificar_nacionalidad"
 	                                                		type="text" 
 	                                                		class="form-control" 
-	                                                		required 
 	                                                		placeholder="" 
 	                                                		aria-label="Imagen" 
 	                                                		aria-describedby="basic-addon1"
@@ -129,7 +137,7 @@
 	                                                        <input id="input-fecha-nacimiento"
 	                                                        name="modificar_fechaNac"
 	                                                        type="date" 
-
+	                                                        required 
 	                                                        class="form-control" 
 	                                                        placeholder="" 
 	                                                        aria-label="Fecha" 
@@ -143,6 +151,18 @@
 	                                                        <input id="input-contraseña" 
 	                                                        type="password"
 	                                                        name="modificar_contrasenia"
+	                                                        class="form-control" 
+	                                                        placeholder="" 
+	                                                        aria-label="Contraseña" 
+	                                                        aria-describedby="basic-addon1"
+	                                                        >
+	                                                    </div>
+	                                                    
+	                                                    <div class="contenedorinput mb-3">
+	                                                        <span class="input-label">Confirmar contraseña: </span>
+	                                                        <input id="input-confirmar_contrasenia" 
+	                                                        type="password"
+	                                                        name="confirmar_contrasenia"
 	                                                        required 
 	                                                        class="form-control" 
 	                                                        placeholder="" 
@@ -151,12 +171,12 @@
 	                                                        value="soy_una_contraseña"
 	                                                        >
 	                                                    </div>
+	                                                    
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label"> Correo electronico:</span>
 	                                                        <input id="input-correo" 
 	                                                        type="text" 
-	                                                        required 
 	                                                        required class="form-control" 
 	                                                        placeholder="" 
 	                                                        aria-label="Correo" 
@@ -182,11 +202,11 @@
                                             	rows = "4" cols = "60" 
                                             	name = "modificar_descripcion"
                                             	id="input-descripcionGeneral"
-	                                            required 
-	                                            required class="form-control" 
-	                                            placeholder="Ingrese una descripcion general" 
-	                                            aria-label="Descripcion general" 
-	                                            aria-describedby="basic-addon1"
+		                                           
+		                                            required class="form-control" 
+		                                            placeholder="Ingrese una descripcion general" 
+		                                            aria-label="Descripcion general" 
+		                                            aria-describedby="basic-addon1"
 		                                           
                                             	><%= prov.getDescrpicionGeneral() %></textarea><br>
                                            
@@ -199,7 +219,6 @@
                                              name="modificar_link"
                                             class="form-control"
                                             placeholder=""
-                                            required 
                                             aria-label="Link"
                                             aria-describedby="basic-addon1"
                                             value="<%= prov.getLink() %>"
