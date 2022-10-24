@@ -184,7 +184,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 	            	imgDel.delete();
 	            }
 	            //Actualizo datos sesion
-	            DTUsuario usuario = contrUsuario.obtenerDTUsuarioPorNickname(nick, modC);
+	            DTUsuario usuario = contrUsuario.obtenerDTUsuario(nick);
 	            sesion.setAttribute("usuarioLogeado", usuario);
 	            
 	            
@@ -192,10 +192,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 				request.setAttribute("motivoDeError",
 	                    "Los datos enviados no son válidos");
 				
-			} catch (ContraseniaInvalidaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
 
 
         doGet(request, response);
