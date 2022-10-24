@@ -55,61 +55,61 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		JLabel lblNewLabel = new JLabel("Nickname:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(40, 38, 77, 14);
+		lblNewLabel.setBounds(40, 38, 116, 14);
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel1 = new JLabel("Nombre:");
 		lblNewLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel1.setBounds(53, 64, 64, 14);
+		lblNewLabel1.setBounds(53, 64, 103, 14);
 		getContentPane().add(lblNewLabel1);
 
 		JLabel lblNewLabel11 = new JLabel("Apellido:");
 		lblNewLabel11.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel11.setBounds(54, 90, 63, 14);
+		lblNewLabel11.setBounds(54, 90, 102, 14);
 		getContentPane().add(lblNewLabel11);
 
 		nombre = new JTextField();
-		nombre.setBounds(131, 62, 258, 20);
+		nombre.setBounds(166, 61, 258, 20);
 		getContentPane().add(nombre);
 		nombre.setColumns(10);
 
 		JLabel lblNewLabel111 = new JLabel("Correo:");
 		lblNewLabel111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel111.setBounds(64, 118, 53, 14);
+		lblNewLabel111.setBounds(64, 118, 92, 14);
 		getContentPane().add(lblNewLabel111);
 
 		JLabel lblNewLabel1111 = new JLabel("Fecha nacimiento:");
 		lblNewLabel1111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel1111.setBounds(7, 199, 110, 14);
+		lblNewLabel1111.setBounds(7, 199, 149, 14);
 		getContentPane().add(lblNewLabel1111);
 
 		JLabel lblNewLabel2 = new JLabel("Tipo de Usuario:");
 		lblNewLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel2.setBounds(0, 12, 120, 14);
+		lblNewLabel2.setBounds(0, 12, 156, 14);
 		getContentPane().add(lblNewLabel2);
 
 		nickname = new JTextField();
 		nickname.setColumns(10);
-		nickname.setBounds(131, 35, 258, 20);
+		nickname.setBounds(166, 35, 258, 20);
 		getContentPane().add(nickname);
 
 		fechaNacimiento = new JTextField();
 		fechaNacimiento.setColumns(10);
-		fechaNacimiento.setBounds(131, 197, 258, 20);
+		fechaNacimiento.setBounds(166, 196, 258, 20);
 		getContentPane().add(fechaNacimiento);
 
 		apellido = new JTextField();
 		apellido.setColumns(10);
-		apellido.setBounds(131, 89, 258, 20);
+		apellido.setBounds(166, 87, 258, 20);
 		getContentPane().add(apellido);
 
 		correo = new JTextField();
 		correo.setColumns(10);
-		correo.setBounds(131, 116, 258, 20);
+		correo.setBounds(166, 115, 258, 20);
 		getContentPane().add(correo);
 
 		tipoUsuario = new JComboBox();
-		tipoUsuario.setBounds(131, 7, 258, 24);
+		tipoUsuario.setBounds(166, 7, 258, 24);
 		getContentPane().add(tipoUsuario);
 		tipoUsuario.addItem(OPCION_PROVEEDOR);
 		tipoUsuario.addItem(OPCION_TURISTA);
@@ -136,53 +136,53 @@ public class AltaDeUsuario extends JInternalFrame {
 
 		JLabel lblNewLabel11111 = new JLabel("Nacionalidad:");
 		lblNewLabel11111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel11111.setBounds(20, 225, 97, 14);
+		lblNewLabel11111.setBounds(20, 225, 136, 14);
 		getContentPane().add(lblNewLabel11111);
 
 		nacionalidad = new JTextField();
 		nacionalidad.setColumns(10);
-		nacionalidad.setBounds(131, 224, 258, 20);
+		nacionalidad.setBounds(166, 222, 258, 20);
 		getContentPane().add(nacionalidad);
 		nacionalidad.setEnabled(false);
 
 		JLabel lblNewLabel111111 = new JLabel("URL:");
 		lblNewLabel111111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel111111.setBounds(20, 280, 97, 14);
+		lblNewLabel111111.setBounds(20, 280, 136, 14);
 		getContentPane().add(lblNewLabel111111);
 
 		descripcion = new JTextField();
 		descripcion.setColumns(10);
-		descripcion.setBounds(131, 251, 258, 20);
+		descripcion.setBounds(166, 248, 258, 20);
 		getContentPane().add(descripcion);
 
 		JLabel lblNewLabel1111111 = new JLabel("Descripción:");
 		lblNewLabel1111111.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel1111111.setBounds(20, 251, 97, 14);
+		lblNewLabel1111111.setBounds(20, 251, 136, 14);
 		getContentPane().add(lblNewLabel1111111);
 
 		url = new JTextField();
 		url.setColumns(10);
-		url.setBounds(131, 278, 258, 20);
+		url.setBounds(166, 277, 258, 20);
 		getContentPane().add(url);
 		
 		contra = new JPasswordField();
-		contra.setBounds(131, 143, 258, 20);
+		contra.setBounds(166, 141, 258, 20);
 		getContentPane().add(contra);
 		contra.setColumns(10);
 		
 		confirmarContra = new JPasswordField();
 		confirmarContra.setColumns(10);
-		confirmarContra.setBounds(131, 170, 258, 20);
+		confirmarContra.setBounds(166, 169, 258, 20);
 		getContentPane().add(confirmarContra);
 		
 		JLabel lblContrasea = new JLabel("Contraseña:");
 		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblContrasea.setBounds(17, 144, 100, 14);
+		lblContrasea.setBounds(17, 144, 139, 14);
 		getContentPane().add(lblContrasea);
 		
 		JLabel lblConfirmarContrasea = new JLabel("Confirmar Contraseña:");
 		lblConfirmarContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblConfirmarContrasea.setBounds(17, 172, 100, 14);
+		lblConfirmarContrasea.setBounds(17, 172, 139, 14);
 		getContentPane().add(lblConfirmarContrasea);
 
 		tipoUsuario.addActionListener(new ActionListener() {
