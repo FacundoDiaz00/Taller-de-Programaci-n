@@ -36,7 +36,7 @@
 	                                        </div>
 	                                        
 	                                        
-		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 590px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
+		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 790px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
 
 																			
 							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px; align-items: flex-end;">
@@ -150,7 +150,7 @@
 	                                                    <div class="contenedorinput mb-3">
 									                    <% String password = "una_contrasenia"; %>
 									                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
-									                        <input id="modificar_contrasenia" 
+									                        <input id="input-contrasenia" 
 									                        	   type="password" 
 									                        	   required name="password" 
 									                        	   class="form-control" 
@@ -163,7 +163,7 @@
 									
 									                    <div class="contenedorinput mb-3">
 									                        <span class="input-label">Confirmación contraseña:<span class="obligatorio"> *</span></span>
-									                        <input id="input_modificar_contrasenia" 
+									                        <input id="input-confirmacion-contrasenia" 
 									                        	   type="password" 
 									                        	   required 
 									                        	   class="form-control" 
@@ -225,9 +225,11 @@
 	                                </div>
 	                            </div>
 	                        </div>
+	                        
+	                        
+	<script src="js/jquery-3.3.1.slim.min.js"></script>
 
-    <script src="js/alta_usuario.js"></script>
-    
+    <script src="js/modificar_usuario.js"></script>
     <%if(request.getAttribute("motivoDeError") != null){ %>
     
     
@@ -255,8 +257,4 @@
             });
         });
     </script>
-    
-
-	
-</body>
-</html>
+   

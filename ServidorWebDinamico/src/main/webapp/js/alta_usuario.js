@@ -31,8 +31,6 @@ const onSubmit = (e) =>{
 		e.preventDefault();
 		generarMensaje('error', "Error" , "Las contraseñas no son identicas. Haga que coincidan y luego vuelva a enviar" , 0);	
 	}
-    
-	
 }
 
 

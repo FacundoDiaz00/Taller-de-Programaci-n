@@ -122,7 +122,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         
         String modN = request.getParameter("modificar_nombre");
         String modA = request.getParameter("modificar_apellido");
-        String modC = request.getParameter("modificar_contrasenia");
+        String modC = request.getParameter("input-contrasenia");
 
         String modFN = request.getParameter("modificar_fechaNac");
         String modNac = null;
