@@ -9,7 +9,6 @@ import logica.controladores.Fabrica;
 public class Utiles {
 
     public Utiles() {
-        // TODO Auto-generated constructor stub
     }
 
     public static HttpServletRequest insertarLoDeSiempre(HttpServletRequest req) {
