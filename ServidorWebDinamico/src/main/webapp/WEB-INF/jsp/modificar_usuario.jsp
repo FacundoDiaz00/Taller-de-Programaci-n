@@ -147,8 +147,7 @@
 	                                                    </div>
 	                                                  
 	                                                    
-	                                                    <div class="contenedorinput mb-3">
-									                    <% String password = ""; %>
+	                                                    <div class="contenedorinput mb-3">									                    
 									                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
 									                        <input id="input-contrasenia" 
 									                        	   type="password" 
@@ -156,9 +155,7 @@
 									                        	   class="form-control" 
 									                        	   placeholder="Ingrese una contraseña" 
 									                        	   aria-label="Contraseña" 
-									                        	   aria-describedby="basic-addon1"
-									                        	   value="<%= password %>"
-									                        	   >
+									                        	   aria-describedby="basic-addon1">
 									                    </div>
 									
 									                    <div class="contenedorinput mb-3">
@@ -169,8 +166,7 @@
 									                        	   class="form-control" 
 									                        	   placeholder="Vuelva a ingresar la contraseña" 
 									                        	   aria-label="Nickname" 
-									                        	   aria-describedby="basic-addon1"
-									                        	   value="<%= password %>">
+									                        	   aria-describedby="basic-addon1">
 									                    </div>
 														
 	                                                
