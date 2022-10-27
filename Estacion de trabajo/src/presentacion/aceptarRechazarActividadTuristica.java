@@ -17,6 +17,7 @@ import javax.swing.event.PopupMenuListener;
 
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorActividadTuristica;
+import logica.datatypes.EstadoActividadTuristica;
 
 public class aceptarRechazarActividadTuristica extends JInternalFrame {
 
@@ -94,7 +95,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 			public void actionPerformed(ActionEvent event) {
 				String idActividad = actividadTuristica.getSelectedItem().toString();
 				try {
-					controladorAct.aceptarORechazarActividadTuristica(idActividad, true);
+					controladorAct.cambiarEstadoDeActividadTuristica(idActividad, EstadoActividadTuristica.ACEPTADA);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Aceptar Actividad Turística",
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (ObjetoNoExisteEnTurismoUy e1) {
@@ -117,7 +118,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 			public void actionPerformed(ActionEvent event) {
 				String idActividad = actividadTuristica.getSelectedItem().toString();
 				try {
-					controladorAct.aceptarORechazarActividadTuristica(idActividad, false);
+					controladorAct.cambiarEstadoDeActividadTuristica(idActividad, EstadoActividadTuristica.RECHAZADA);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.",
 							"Rechazar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
 				} catch (ObjetoNoExisteEnTurismoUy e1) {

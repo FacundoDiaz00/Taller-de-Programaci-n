@@ -169,4 +169,26 @@ public class ControladorUsuario implements IControladorUsuario {
 
     }
 
+	@Override
+	public void seguirODejarDeSeguirUsuario(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
+		Usuario seguidorUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguidor);
+		Usuario seguidoUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguido);
+		
+		seguidoUsuario.agregarOBorrarSeguidor(seguidorUsuario);
+		seguidorUsuario.agregarOBorrarDeSeguidos(seguidoUsuario);
+	}
+
+	@Override
+	public void agregarOEliminarActividadDeFavoritos(String nickTurista, String nombreAct)
+			throws ObjetoNoExisteEnTurismoUy {
+		Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
+		turista.agregarOEliminarActividadDeFavoritos(nombreAct);	
+	}
+
+	@Override
+	public boolean perteneceAFavoritosDeTurista(String nickTurista, String nombreAct) throws ObjetoNoExisteEnTurismoUy {
+		Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
+		return turista.estaEnActividadesFavoritas(nombreAct);
+	}
+
 }

@@ -37,6 +37,7 @@ import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.EstadoActividadTuristica;
 
 class ControladorActividadTuristicaTest {
     private static IControladorActividadTuristica contrActTur;
@@ -88,9 +89,9 @@ class ControladorActividadTuristicaTest {
             LocalDate fechaAlta = localDateNow;
 
             contrActTur.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
 
-            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+            contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
 
             nombresActividades.add(nombreActividad);
         }
@@ -227,7 +228,7 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
 
             // assertTrue(cat.existeActividadTuristica(nombreActividad));
             assertTrue(contrActTur.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
@@ -276,7 +277,7 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, null, null, muestraCategorias);
+                    costo, ciudad, null, null, muestraCategorias, null);
 
             // assertTrue(cat.existeActividadTuristica(nombreActividad));
             assertTrue(contrActTur.obtenerIdActividadesTuristicas(departamento).contains(nombreActividad));
@@ -326,12 +327,12 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
 
             // Repito y debería tirar la excepcion
             assertThrows(ActividadTuristicaYaRegistradaException.class, () -> {
                 contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion,
-                        duracion, costo, ciudad, fechaAlta, null, muestraCategorias);
+                        duracion, costo, ciudad, fechaAlta, null, muestraCategorias, null);
             });
 
             // assertTrue(cat.existeActividadTuristica(nombreActividad));
@@ -381,7 +382,7 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
 
             var ids_loop = contrActTur.obtenerIdActividadesTuristicas(departamento);
 
@@ -449,8 +450,8 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
-            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
+            contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
             if (i % 2 == 0) {
                 contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaConHoraAhora.plusYears(7),
                         fechaAlta.plusYears(6), "lugar", 5, null);
@@ -552,8 +553,8 @@ class ControladorActividadTuristicaTest {
                 nombreProveedor);
 
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
-                ciudad, fechaAlta, null, muestraCategorias);
-        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                ciudad, fechaAlta, null, muestraCategorias, null);
+        contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                 cantMaxTuristas, null);
 
@@ -585,7 +586,7 @@ class ControladorActividadTuristicaTest {
         controladorPaquete.altaPaquete(nombrePaquete, descripcionPaquete, periodoValides, descuento, fechaAltaPaquete,
                 null);
 
-        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+        contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
         controladorPaquete.agregarActividadAPaquete(nombreActividad, nombrePaquete);
 
         controladorPaquete.comprarPaquete(nicknameTurista, nombrePaquete, 1, null);
@@ -623,8 +624,8 @@ class ControladorActividadTuristicaTest {
         contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
                 fechaAlta, null, nombreProveedor, nombreProveedor);
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
-                ciudad, fechaAlta, null, muestraCategorias);
-        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                ciudad, fechaAlta, null, muestraCategorias, null);
+        contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                 cantMaxTuristas, null);
 
@@ -660,8 +661,8 @@ class ControladorActividadTuristicaTest {
         contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
                 localDateNow, null, nombreProveedor, nombreProveedor);
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
-                ciudad, localDateNow, null, muestraCategorias);
-        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                ciudad, localDateNow, null, muestraCategorias, null);
+        contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, localDateTimeNow, localDateNow, lugar,
                 cantMaxTuristas, null);
 
@@ -702,8 +703,8 @@ class ControladorActividadTuristicaTest {
         contrUsuario.altaProveedor(nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor, nombreProveedor,
                 fechaAlta, null, nombreProveedor, nombreProveedor);
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
-                ciudad, fechaAlta, null, muestraCategorias);
-        contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                ciudad, fechaAlta, null, muestraCategorias, null);
+        contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
         contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                 cantMaxTuristas, null);
         contrActTur.altaInscripcionSalidaTuristica(nombreSalida, nickname, 1, localDateNow, null);
@@ -831,8 +832,8 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
-            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
+            contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
             contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                     cantMaxTuristas, null);
 
@@ -889,8 +890,8 @@ class ControladorActividadTuristicaTest {
             }
 
             contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion,
-                    costo, ciudad, fechaAlta, null, muestraCategorias);
-            contrActTur.aceptarORechazarActividadTuristica(nombreActividad, true);
+                    costo, ciudad, fechaAlta, null, muestraCategorias, null);
+            contrActTur.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
 
             contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
                     cantMaxTuristas, null);
@@ -977,7 +978,7 @@ class ControladorActividadTuristicaTest {
         }
 
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
-                ciudad, fechaAlta, null, muestraCategorias);
+                ciudad, fechaAlta, null, muestraCategorias, null);
 
         assertThrows(FechaAltaSalidaPosteriorAFechaSalidaException.class, () -> {
             contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
@@ -1018,7 +1019,7 @@ class ControladorActividadTuristicaTest {
         }
 
         contrActTur.altaActividadTuristica(nombreProveedor, departamento, nombreActividad, descripcion, duracion, costo,
-                ciudad, fechaAlta, null, muestraCategorias);
+                ciudad, fechaAlta, null, muestraCategorias, null);
 
         assertThrows(FechaAltaActividadPosteriorAFechaAltaSalidaException.class, () -> {
             contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaHoraSalida, fechaAltaSalida, lugar,
@@ -1048,8 +1049,8 @@ class ControladorActividadTuristicaTest {
         ControladorUsuarioTest.generarProveedores(2, idTest);
         generarActividades(2, idTest);
 
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=0", EstadoActividadTuristica.ACEPTADA);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=1", EstadoActividadTuristica.RECHAZADA);
 
         for (int i = 0; i < muestraCategorias.size(); i++) {
             var actividades = contrActTur
@@ -1066,8 +1067,8 @@ class ControladorActividadTuristicaTest {
         ControladorUsuarioTest.generarProveedores(2, idTest);
         generarActividades(2, idTest);
 
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=0", EstadoActividadTuristica.ACEPTADA);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=1", EstadoActividadTuristica.RECHAZADA);
 
         var actividades = contrActTur.obtenerDTActividadesTuristicas();
 
@@ -1091,8 +1092,8 @@ class ControladorActividadTuristicaTest {
         ControladorUsuarioTest.generarProveedores(5, idTest);
         generarActividades(5, idTest);
 
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=1", false);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=0", EstadoActividadTuristica.ACEPTADA);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=1", EstadoActividadTuristica.RECHAZADA);
 
         String dep = "Departamento " + idTest + " i=0";
         var actividades = contrActTur.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(dep);
@@ -1124,7 +1125,7 @@ class ControladorActividadTuristicaTest {
         ControladorUsuarioTest.generarProveedores(3, idTest);
         generarActividades(3, idTest);
 
-        contrActTur.aceptarORechazarActividadTuristica("Actividad " + idTest + " i=0", true);
+        contrActTur.cambiarEstadoDeActividadTuristica("Actividad " + idTest + " i=0", EstadoActividadTuristica.ACEPTADA);
 
         var actividades = contrActTur.obtenerIdActividadesTuristicasAgregadas();
 

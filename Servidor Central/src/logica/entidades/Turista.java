@@ -2,12 +2,16 @@ package logica.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import logica.controladores.ControladorActividadTuristica;
 import logica.datatypes.DTCompra;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
@@ -16,6 +20,7 @@ import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTTuristaDetallePrivado;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
+import logica.manejadores.ManejadorActividadTuristica;
 
 
 /**
@@ -26,6 +31,7 @@ public class Turista extends Usuario {
     private String nacionalidad;
     private Set<Compra> compras;
     private Set<Inscripcion> inscripciones;
+    private Map<String, ActividadTuristica> actividadesFavoritas;
 
     public Turista(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac,
             Imagen img,
@@ -34,6 +40,7 @@ public class Turista extends Usuario {
         setNacionalidad(nacionalidad);
         setCompras(new HashSet<>());
         setInscripciones(new HashSet<>());
+        setActividadesFavoritas(new HashMap<>());
     }
 
     public void altaInscripcionSalidaTuristica(SalidaTuristica sal, int canTuris, LocalDate fechaInscrp, Compra comp,
@@ -155,4 +162,27 @@ public class Turista extends Usuario {
     public void asociarCompra(Compra compra) {
         compras.add(compra);
     }
+
+	public void agregarOEliminarActividadDeFavoritos(String nombreAct) throws ObjetoNoExisteEnTurismoUy {
+		if (actividadesFavoritas.containsKey(nombreAct)) {
+			actividadesFavoritas.remove(nombreAct);
+			(new ControladorActividadTuristica()).disminuirCantidadDeFavoritos(nombreAct);
+		} else {
+			var actividad = ManejadorActividadTuristica.getInstancia().getActividad(nombreAct);
+			actividadesFavoritas.put(nombreAct, actividad);
+			(new ControladorActividadTuristica()).aumentarCantidadDeFavoritos(nombreAct);
+		}
+	}
+
+	public Map<String, ActividadTuristica> getActividadesFavoritas() {
+		return actividadesFavoritas;
+	}
+
+	public void setActividadesFavoritas(Map<String, ActividadTuristica> actividadesFavoritas) {
+		this.actividadesFavoritas = actividadesFavoritas;
+	}
+	
+	public boolean estaEnActividadesFavoritas(String nombreAct) {
+		return actividadesFavoritas.containsKey(nombreAct);
+	}
 }

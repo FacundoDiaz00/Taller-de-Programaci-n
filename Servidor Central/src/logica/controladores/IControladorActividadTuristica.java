@@ -25,6 +25,7 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 
 /**
@@ -72,7 +73,7 @@ public interface IControladorActividadTuristica {
      * 
      */
     void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion,
-            int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img, List<String> categorias)
+            int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img, List<String> categorias, String urlVideo)
             throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy;
 
     /**
@@ -222,6 +223,6 @@ public interface IControladorActividadTuristica {
 
     List<String> obtenerIdActividadesTuristicasAgregadas();
 
-    void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada) throws ObjetoNoExisteEnTurismoUy;
-
+    // Esto sumariza los casos de uso aceptar/rechazar y finalizar actividad turística
+    void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado) throws ObjetoNoExisteEnTurismoUy;
 }

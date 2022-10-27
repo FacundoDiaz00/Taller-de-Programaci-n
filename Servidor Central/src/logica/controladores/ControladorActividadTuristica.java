@@ -75,14 +75,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
     public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad,
             String descripcion, int duracion, float costo, String ciudad, LocalDate fechaAlta, Imagen img,
-            List<String> categorias) throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
+            List<String> categorias, String urlVideo) throws ActividadTuristicaYaRegistradaException, ObjetoNoExisteEnTurismoUy {
         if (fechaAlta == null)
             fechaAlta = LocalDate.now();
 
         if (!existeActividadTuristica(nombreActividad)) {
             // Se crea instancia:
             ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
-                    descripcion, duracion, costo, ciudad, fechaAlta, img, categorias);
+                    descripcion, duracion, costo, ciudad, fechaAlta, img, categorias, urlVideo);
             ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
             MAD.addActividad(actTuristica);
         } else {
@@ -294,16 +294,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         return idActividades;
     }
 
-    public void aceptarORechazarActividadTuristica(String idActividad, boolean esAceptada)
+    public void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado)
             throws ObjetoNoExisteEnTurismoUy {
         ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica act = manejActTur.getActividad(idActividad);
-        EstadoActividadTuristica est;
-        if (esAceptada)
-            est = EstadoActividadTuristica.ACEPTADA;
-        else
-            est = EstadoActividadTuristica.RECHAZADA;
-        act.setEstado(est);
+        if (nuevoEstado != EstadoActividadTuristica.FINALIZADA)
+        	act.setEstado(nuevoEstado);
+        else {
+			// TODO logica de persistencia y todas esas vueltas
+		}
     }
 
     public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {
@@ -315,4 +314,18 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
             throw new CategoriaYaRegistradaException("La categoria " + nombre + " ya existe en el sistema.");
         }
     }
+
+	public void aumentarCantidadDeFavoritos(String nombreAct) throws ObjetoNoExisteEnTurismoUy {
+		ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica act = manejActTur.getActividad(nombreAct);
+        
+        act.incrementarCantidadDeFavoritos();
+	}
+	
+	public void disminuirCantidadDeFavoritos(String nombreAct) throws ObjetoNoExisteEnTurismoUy {
+		ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica act = manejActTur.getActividad(nombreAct);
+        
+        act.decrementarCantidadDeFavoritos();
+	}
 }

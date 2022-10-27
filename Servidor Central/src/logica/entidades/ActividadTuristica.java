@@ -32,6 +32,8 @@ public class ActividadTuristica {
     private LocalDate fechaAlta;
     private EstadoActividadTuristica estado;
     private Imagen img;
+    private int cantFavoritos;
+    private String urlVideo;
 
     private Map<String, Paquete> paquetes;
     private Map<String, SalidaTuristica> salidas;
@@ -43,7 +45,7 @@ public class ActividadTuristica {
 
     public ActividadTuristica(String nombreProveedor, String departamento, String nombre, String descrpicion,
             int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta, Imagen img,
-            List<String> categorias) throws ObjetoNoExisteEnTurismoUy {
+            List<String> categorias, String urlVideo) throws ObjetoNoExisteEnTurismoUy {
         setNombre(nombre);
         setDescrpicion(descrpicion);
         setDuracion(duracion);
@@ -55,6 +57,7 @@ public class ActividadTuristica {
         setCategorias(new HashMap<>());
         setImagen(img);
         estado = EstadoActividadTuristica.AGREGADA;
+        setUrlVideo(urlVideo);
 
         // Se agrega a la coleccion de actividades:
         ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
@@ -91,7 +94,7 @@ public class ActividadTuristica {
 
         return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
                 getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre(), listaIdCats,
-                getImagen(), estado);
+                getImagen(), estado, cantFavoritos, urlVideo);
     }
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
@@ -110,7 +113,7 @@ public class ActividadTuristica {
 
         return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
                 getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre(),
-                listaIdCats, getImagen(), estado);
+                listaIdCats, getImagen(), estado, cantFavoritos, urlVideo);
     }
 
     @Override
@@ -241,4 +244,24 @@ public class ActividadTuristica {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+	public void incrementarCantidadDeFavoritos() {
+		cantFavoritos = getCantFavoritos() + 1;
+	}
+
+	public void decrementarCantidadDeFavoritos() {
+		cantFavoritos = getCantFavoritos() - 1;
+	}
+
+	public int getCantFavoritos() {
+		return cantFavoritos;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
+	}
+
+	public void setUrlVideo(String urlVideo) {
+		this.urlVideo = urlVideo;
+	}
 }

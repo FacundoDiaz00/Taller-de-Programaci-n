@@ -314,7 +314,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
             }
 
             try {
-                contrAct.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias);
+                contrAct.altaActividadTuristica(prov, dpto, nom, desc, dur, cost, ciu, fecha, null, categorias, null);
             } catch (ObjetoNoExisteEnTurismoUy e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

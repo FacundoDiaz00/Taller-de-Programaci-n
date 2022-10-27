@@ -104,8 +104,9 @@ public class AltaActividadServlet extends HttpServlet {
              }
 
              try {
+            	 // TODO aceptar la url del video
                  contActividad.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
-                         Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias);
+                         Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias, null);
                  if (hayImagen) {
                      // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
                      InputStream imgInputStream = filePart.getInputStream();

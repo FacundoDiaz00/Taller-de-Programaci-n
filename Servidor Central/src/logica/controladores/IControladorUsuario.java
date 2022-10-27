@@ -112,4 +112,12 @@ public interface IControladorUsuario {
 	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, boolean borrarImg)
 			throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
 
+	
+	void seguirODejarDeSeguirUsuario(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy;
+	
+    void agregarOEliminarActividadDeFavoritos(String nickTurista, String nombreAct) throws ObjetoNoExisteEnTurismoUy;
+    
+    // Cada vez que se muestre una actividad, se llamará a esta funcion para 
+    // saber si mostrar la opcion de agregar de favoritos o eliminarla de favoritos
+    boolean perteneceAFavoritosDeTurista(String nickTurista, String nombreAct) throws ObjetoNoExisteEnTurismoUy;
 }

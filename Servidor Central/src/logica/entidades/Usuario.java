@@ -1,6 +1,8 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
@@ -18,6 +20,8 @@ public abstract class Usuario {
     private String contrasenia;
     private LocalDate fechaNac;
     private Imagen img;
+    private Map<String, Usuario> seguidores;
+    private Map<String, Usuario> usuariosSeguidos;
 
     public Usuario(String nickname, String nombre, String apellido, String correo, String contra, LocalDate fechaNac,
             Imagen img) {
@@ -28,9 +32,19 @@ public abstract class Usuario {
         setContrasenia(contra);
         setFechaNac(fechaNac);
         setImagen(img);
+        setSeguidores(new HashMap<>());
+        setUsuariosSeguidos(new HashMap<>());
     }
 
-    public void setContrasenia(String contra) {
+    public void setUsuariosSeguidos(Map<String, Usuario> seguidos) {
+		this.usuariosSeguidos = seguidos;
+	}
+
+	public void setSeguidores(Map<String, Usuario> seguidores) {
+		this.seguidores = seguidores;
+	}
+
+	public void setContrasenia(String contra) {
         contrasenia = contra;
     }
 
@@ -105,5 +119,21 @@ public abstract class Usuario {
     public boolean usuarioValido(String _contrasenia) {
         return _contrasenia.equals(this.contrasenia);
     }
+
+	public void agregarOBorrarSeguidor(Usuario seguidorUsuario) {
+		if (seguidores.containsKey(seguidorUsuario.getNickname())) {
+			seguidores.remove(seguidorUsuario.getNickname());
+		} else {
+			seguidores.put(seguidorUsuario.getNickname(), seguidorUsuario);
+		}
+	}
+
+	public void agregarOBorrarDeSeguidos(Usuario seguidoUsuario) {
+		if (usuariosSeguidos.containsKey(seguidoUsuario.getNickname())) {
+			usuariosSeguidos.remove(seguidoUsuario.getNickname());
+		} else {
+			usuariosSeguidos.put(seguidoUsuario.getNickname(), seguidoUsuario);
+		}
+	}
 
 }

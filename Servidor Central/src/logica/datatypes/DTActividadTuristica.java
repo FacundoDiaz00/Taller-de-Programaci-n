@@ -19,8 +19,26 @@ public class DTActividadTuristica {
 	private List<String> categorias;
 	private Imagen img;
 	private EstadoActividadTuristica estado;
+	private int cantFavoritos;
+	private String urlVideo;
 	
-
+	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
+			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img, EstadoActividadTuristica estado, int cantFavoritos, String urlVideo) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.costoPorTurista = costoPorTurista;
+		this.cuidad = cuidad;
+		this.duracion = duracion;
+		this.fechaAlta = fechaAlta;
+		this.nicknameProveedor = nicknameProveedor;
+		this.departamento = departamento;
+		this.categorias = cats;
+		this.img = img;
+		this.estado = estado;
+		this.cantFavoritos = cantFavoritos;
+		this.urlVideo = urlVideo;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -49,21 +67,6 @@ public class DTActividadTuristica {
 		return nicknameProveedor;
 	}
 
-	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
-			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img, EstadoActividadTuristica estado) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.costoPorTurista = costoPorTurista;
-		this.cuidad = cuidad;
-		this.duracion = duracion;
-		this.fechaAlta = fechaAlta;
-		this.nicknameProveedor = nicknameProveedor;
-		this.departamento = departamento;
-		this.categorias = cats;
-		this.img = img;
-		this.estado = estado;
-	}
-
 	public String getDepartamento() {
 		return departamento;
 	}
@@ -78,6 +81,14 @@ public class DTActividadTuristica {
 	
 	public EstadoActividadTuristica getEstado() {
 		return estado;
+	}
+
+	public int getCantFavoritos() {
+		return cantFavoritos;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
 	}
 	
 }
