@@ -74,7 +74,7 @@ public class Proveedor extends Usuario {
         }
 
         return new DTProveedorDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(),
-                getImagen(), getDescrpicionGeneral(), getLink(), dtActDetalles);
+                getImagen(), getDescrpicionGeneral(), getLink(), dtActDetalles, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }
 
     public void asociarActividadTuristica(ActividadTuristica actividadTuristica) {
@@ -103,6 +103,7 @@ public class Proveedor extends Usuario {
         List<DTActividadTuristicaDetalle> actividades = new ArrayList<>();
         List<DTActividadTuristica> estadoAgregada = new ArrayList<>();
         List<DTActividadTuristica> estadoRechazada = new ArrayList<>();
+        List<DTActividadTuristica> estadoFinalizada = new ArrayList<>();
 
         for (var act : this.actividadesTuristicas.values()) {
             switch (act.getEstado()) {
@@ -119,13 +120,18 @@ public class Proveedor extends Usuario {
                     break;
             }
         }
+        
+        // TODO: cargar las actividades finalizadas ¿cómo?
 
         Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas = new HashMap<>();
         actividadesNoConfirmadas.put(EstadoActividadTuristica.RECHAZADA, estadoRechazada);
         actividadesNoConfirmadas.put(EstadoActividadTuristica.AGREGADA, estadoAgregada);
+        actividadesNoConfirmadas.put(EstadoActividadTuristica.FINALIZADA, estadoFinalizada);
+        
+        
 
         return new DTProveedorDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades,
-                actividadesNoConfirmadas);
+                actividadesNoConfirmadas, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }
 
 }

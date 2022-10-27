@@ -13,8 +13,8 @@ public class DTProveedorDetallePrivado extends DTProveedorDetalle {
 
 	public DTProveedorDetallePrivado(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
 			Imagen img, String desc, String url, List<DTActividadTuristicaDetalle> actividades,
-			Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas) {
-		super(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades);
+			Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas, List<String> seguidos, List<String> seguidores) {
+		super(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades, seguidos, seguidores);
 		this.actividadesNoConfirmadas = actividadesNoConfirmadas;
 	}
 

@@ -43,6 +43,14 @@ public abstract class Usuario {
 	public void setSeguidores(Map<String, Usuario> seguidores) {
 		this.seguidores = seguidores;
 	}
+	
+	public Map<String, Usuario> getUsuariosSeguidos() {
+		return usuariosSeguidos;
+	}
+
+	public Map<String, Usuario> getSeguidores() {
+		return seguidores;
+	}
 
 	public void setContrasenia(String contra) {
         contrasenia = contra;

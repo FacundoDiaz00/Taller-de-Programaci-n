@@ -105,9 +105,11 @@ public class Turista extends Usuario {
         for (Inscripcion inscripcion : inscripciones) {
             salidas.add(inscripcion.getSalidaTuristica().obtenerDTSalidaTuristica());
         }
+        
+        
 
         return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(),
-                nacionalidad, salidas);
+                nacionalidad, salidas, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }
 
     @Override
@@ -137,7 +139,7 @@ public class Turista extends Usuario {
         this.getInscripciones().forEach((Inscripcion x) -> inscripciones.add(x.obtenerDTInscripcion()));
 
         return new DTTuristaDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, nacionalidad,
-                inscripciones_salidas, compras, inscripciones);
+                inscripciones_salidas, compras, inscripciones, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }
 
     public boolean existeCompra(String nombrePaquete) {

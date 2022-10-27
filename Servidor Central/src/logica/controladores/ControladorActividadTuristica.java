@@ -79,16 +79,17 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         if (fechaAlta == null)
             fechaAlta = LocalDate.now();
 
-        if (!existeActividadTuristica(nombreActividad)) {
-            // Se crea instancia:
-            ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
-                    descripcion, duracion, costo, ciudad, fechaAlta, img, categorias, urlVideo);
-            ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
-            MAD.addActividad(actTuristica);
-        } else {
-            throw new ActividadTuristicaYaRegistradaException(
+        if (existeActividadTuristica(nombreActividad)) {
+        	throw new ActividadTuristicaYaRegistradaException(
                     "Ya existe la actividad con el nombre " + nombreActividad);
-        }
+           
+        } 
+        // Se crea instancia:
+        ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
+                descripcion, duracion, costo, ciudad, fechaAlta, img, categorias, urlVideo);
+        ManejadorActividadTuristica MAD = ManejadorActividadTuristica.getInstancia();
+        MAD.addActividad(actTuristica);
+    
     }
 
     public boolean existeActividadTuristica(String nomActividad) {
@@ -222,27 +223,26 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
             LocalDate fechaAlta, String lugar, int cantMaxTur, Imagen img)
             throws SalidaYaRegistradaException, FechaAltaActividadPosteriorAFechaAltaSalidaException,
             FechaAltaSalidaPosteriorAFechaSalidaException, ObjetoNoExisteEnTurismoUy, ActividadTuristicaNoAceptada {
-        if (fechaAlta == null)
+        
+    	if (fechaAlta == null)
             fechaAlta = LocalDate.now();
 
         ManejadorSalidaTuristica manejadorSalida = ManejadorSalidaTuristica.getInstancia();
         ManejadorActividadTuristica manejadorActividad = ManejadorActividadTuristica.getInstancia();
 
-        if (manejadorSalida.existeSalidaTuristica(nombre)) {
+        if (manejadorSalida.existeSalidaTuristica(nombre)) 
             throw new SalidaYaRegistradaException("La salida con nombre" + nombre + " ya existe en el sistema.");
-        } else if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta)) {
+        if (manejadorActividad.getActividad(actividad).getFechaAlta().isAfter(fechaAlta))
             throw new FechaAltaActividadPosteriorAFechaAltaSalidaException(
                     "La fecha de Registro de la salida debe ser posterior a la del alta de la actividad correspondiente.");
-        } else if (fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))) {
+        if (fechaAlta.isAfter(ChronoLocalDate.from(fechaYHoraSalida))) 
             throw new FechaAltaSalidaPosteriorAFechaSalidaException(
                     "La fecha de la Salida debe ser posterior a la fecha de su registro");
-        } else if (manejadorActividad.getActividad(actividad).getEstado() != EstadoActividadTuristica.ACEPTADA) {
+        if (manejadorActividad.getActividad(actividad).getEstado() != EstadoActividadTuristica.ACEPTADA)
             throw new ActividadTuristicaNoAceptada("Se intentó registrar una salida a una actividad no aceptada");
-        } else {
-            SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida,
-                    lugar, img);
-            manejadorSalida.addSalida(salidaTur);
-        }
+        
+        SalidaTuristica salidaTur = new SalidaTuristica(actividad, nombre, cantMaxTur, fechaAlta, fechaYHoraSalida, lugar, img);
+        manejadorSalida.addSalida(salidaTur);
     }
 
     public List<String> obtenerIdSalidasTuristicas(String act) throws ObjetoNoExisteEnTurismoUy {

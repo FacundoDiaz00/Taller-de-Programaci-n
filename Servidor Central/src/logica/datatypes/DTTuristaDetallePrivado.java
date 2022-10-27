@@ -13,8 +13,8 @@ public class DTTuristaDetallePrivado extends DTTuristaDetalle {
 
 	public DTTuristaDetallePrivado(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac,
 			Imagen img, String nacionalidad, List<DTSalidaTuristica> inscripciones_salidas, List<DTCompra> compras,
-			List<DTInscripcion> inscripciones) {
-		super(nickname, nombre, apellido, correo, fechaNac, img, nacionalidad, inscripciones_salidas);
+			List<DTInscripcion> inscripciones, List<String> seguidos, List<String> seguidores) {
+		super(nickname, nombre, apellido, correo, fechaNac, img, nacionalidad, inscripciones_salidas, seguidos, seguidores);
 		this.compras = compras;
 		this.dtInscripciones = inscripciones;
 	}
