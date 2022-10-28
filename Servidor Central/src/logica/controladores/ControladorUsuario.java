@@ -191,4 +191,14 @@ public class ControladorUsuario implements IControladorUsuario {
 		return turista.estaEnActividadesFavoritas(nombreAct);
 	}
 
+	@Override
+	public boolean nicknameDisponibleParaNuevoUsuario(String nick) {
+		return !ManejadorUsuario.getInstancia().existeUsuario(nick, null);
+	}
+
+	@Override
+	public boolean emailDisponibleParaNuevoUsuario(String email) {
+		return !ManejadorUsuario.getInstancia().existeUsuario(null, email);
+	}
+
 }
