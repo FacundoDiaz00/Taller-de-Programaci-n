@@ -324,7 +324,7 @@
 			                                <h5 class="card-title"><%=act.getNombre()%></h5>
 			                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 			                                <div class="botonera">
-			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
 			                            	</div>
 			                                
 			                            	<div id="salidas" style=";margin-left: 10px">

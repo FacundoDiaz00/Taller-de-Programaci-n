@@ -71,6 +71,12 @@
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
 	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
+	                    <%
+	                    	boolean sePuedeFinalizar = (boolean)request.getAttribute("sePuedeFinalizar");
+							if(sePuedeFinalizar){
+							%>
+	                    <li><a href="ConsultaActividad?finalizar=<%=true%>" class="btn btn-primary">Finalizar</a></li>
+	                  <%}%>
 	                </ul>	                
         		<% } %>
                 
@@ -254,6 +260,33 @@
 	    	generarMensaje('success', "Operacion completada" , "Se ha realizado un alta de salida satisfactoriamente" , 500);
 	    </script>
     <%} %>
+    
+    
+ <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error al finalizar actividad turística" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+    
+    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
+    <script>
+    
+	    setTimeout(() => {
+	        Swal.fire({
+	            icon: "success",
+	            title: "Éxito",
+	            text: "La actividad turistica ha sido finalizada con éxito",
+	            confirmButtonText: 'Entendido'  
+	        }).then((res) => {
+	        	window.location.href = "index";
+	        })
+	    }, 200)
+    
+	</script>
+	<%} %>
  
 
 </main>

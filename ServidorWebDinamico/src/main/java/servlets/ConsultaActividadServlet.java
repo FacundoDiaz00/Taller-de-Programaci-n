@@ -35,12 +35,24 @@ public class ConsultaActividadServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
-
+        
+        boolean finalizar = Boolean.valueOf(req.getParameter("finalizar"));
         String idActividad = (String) req.getParameter("id");
-
+        boolean sePuedeFinalizar = Boolean.valueOf(req.getParameter("actividadDeProveedor"));  
+   
         DTActividadTuristicaDetalle infoActividadTuristica;
         try {
             infoActividadTuristica = this.contAct.obtenerDTActividadTuristicaDetalle(idActividad);
+            
+            if(finalizar) {
+            	
+//                req = Utiles.insertarLoDeSiempre(req);
+//                req.setAttribute("sePuedeFinalizar", true);
+//                req.setAttribute("finalizar", false);
+//                req.setAttribute("id", idActividad);
+                req.setAttribute("exito", Boolean.TRUE);
+                req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
+            }
 
         } catch (ObjetoNoExisteEnTurismoUy e) {
             req.setAttribute("motivoDeError",
@@ -52,6 +64,7 @@ public class ConsultaActividadServlet extends HttpServlet {
         req = Utiles.insertarLoDeSiempre(req);
 
         req.setAttribute("datosActividad", infoActividadTuristica);
+        req.setAttribute("sePuedeFinalizar", sePuedeFinalizar);
         req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
 
     }
