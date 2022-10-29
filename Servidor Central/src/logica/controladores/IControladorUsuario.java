@@ -124,4 +124,6 @@ public interface IControladorUsuario {
     boolean nicknameDisponibleParaNuevoUsuario(String nick);
     
     boolean emailDisponibleParaNuevoUsuario(String email);
+    
+    boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido)throws ObjetoNoExisteEnTurismoUy;
 }

@@ -66,6 +66,13 @@
 						      		<div class="card-body">
 						    			<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 						        		<p class="card-text"><small class="text-muted"><%= usr.getNickname()%> / <%= usr.getCorreo()%></small></p>
+						        		<% 
+						        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
+						        			if(seSiguenUsuarios){ %>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user"></i></a>
+						        			<%} else{%>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-secondary"><i class="fa-solid fa-user-plus"></i></a>
+						        			<%} %>
 						      		</div>	
 						    	</div>
 						  	</div>
@@ -478,6 +485,16 @@
             });
         });
     </script>
+    
+     <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Ha ocurrido un error al seguir usuario" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+  
 
 </body>
 </html>

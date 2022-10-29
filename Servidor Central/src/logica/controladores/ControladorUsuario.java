@@ -200,5 +200,13 @@ public class ControladorUsuario implements IControladorUsuario {
 	public boolean emailDisponibleParaNuevoUsuario(String email) {
 		return !ManejadorUsuario.getInstancia().existeUsuario(null, email);
 	}
+	
+	@Override
+	public boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
+		Usuario seguidorUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguidor);
+		Usuario seguidoUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguido);
+		
+		return seguidorUsuario.sigueA(nickSeguido);
+	}
 
 }

@@ -60,7 +60,7 @@ public class ConsultaActividadServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
             return;
         }
-
+        
         req = Utiles.insertarLoDeSiempre(req);
 
         req.setAttribute("datosActividad", infoActividadTuristica);
