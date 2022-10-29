@@ -152,7 +152,7 @@
 									                        <input id="input-contrasenia" 
 									                        	   type="password" 
 									                        	   name="input-contrasenia" 
-									                        	   class="form-control" 
+									                        	b   class="form-control" 
 									                        	   placeholder="Ingrese una contraseña" 
 									                        	   aria-label="Contraseña" 
 									                        	   aria-describedby="basic-addon1">

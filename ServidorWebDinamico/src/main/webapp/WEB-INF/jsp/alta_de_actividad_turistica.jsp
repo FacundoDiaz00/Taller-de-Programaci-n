@@ -153,6 +153,20 @@
                     </div>
                     
                     <div class="contenedorinput mb-3">
+                    	<% String urlVideo = getTextWithoutNull((String)request.getAttribute("urlVideo")); %>
+                        <span class="input-label">urlVideo:</span>
+                        <input 	type="text"
+                           		id="urlVideo"
+                       	   		name="urlVideo" 
+                       	   	 	value="<%= urlVideo %>"
+                        		required 
+                        		class="form-control" 
+                        		placeholder="Ingrese(opcionalmente) un URL de un vídeo" 
+                        		aria-label="URL" 
+                        		aria-describedby="basic-addon1">
+                    </div> 
+                    
+                    <div class="contenedorinput mb-3">
                         <span class="input-label">Categorías:</span>
                         <div id="contenedorCategorias">
                                 <% 	int i = 0;

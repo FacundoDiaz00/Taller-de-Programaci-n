@@ -84,6 +84,8 @@ public class AltaActividadServlet extends HttpServlet {
         String duracion = req.getParameter("duracion");
         String costo = req.getParameter("costo");
         String ciudad = req.getParameter("ciudad");
+        String urlVideo = req.getParameter("urlVideo");
+        
         if(req.getParameterValues("categorias") == null) {
         	req.setAttribute("motivoDeError", "Se debe seleccionar al menos una categoria");
         } else  {
@@ -106,7 +108,7 @@ public class AltaActividadServlet extends HttpServlet {
              try {
             	 // TODO aceptar la url del video
                  contActividad.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
-                         Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias, null);
+                         Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias, urlVideo);
                  if (hayImagen) {
                      // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
                      InputStream imgInputStream = filePart.getInputStream();
@@ -153,6 +155,7 @@ public class AltaActividadServlet extends HttpServlet {
         req.setAttribute("duracion", duracion);
         req.setAttribute("costo", costo);
         req.setAttribute("ciudad", ciudad);
+        req.setAttribute("urlVideo", urlVideo);
         
         req = Utiles.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);
