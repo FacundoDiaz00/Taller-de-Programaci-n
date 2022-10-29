@@ -147,5 +147,9 @@ public abstract class Usuario {
 	public boolean sigueA(String nickSeguido) {
 		return 	usuariosSeguidos.containsKey(nickSeguido);
 	}
+	
+	public Map<String, Usuario> obtenerListaSeguidores(){
+		return seguidores;
+	}
 
 }

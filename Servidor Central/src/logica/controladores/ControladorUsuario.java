@@ -208,5 +208,11 @@ public class ControladorUsuario implements IControladorUsuario {
 		
 		return seguidorUsuario.sigueA(nickSeguido);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DTUsuario> obtenerSeguidores(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
+		Usuario usuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickUsuario);
+		return (List<DTUsuario>) usuario.obtenerListaSeguidores();
+	}
 
 }
