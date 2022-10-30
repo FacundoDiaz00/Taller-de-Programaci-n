@@ -27,7 +27,7 @@
 
 	
 </head>
-<body>
+<body style="margin:0;padding:0;height:100%;">
 
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
@@ -131,7 +131,7 @@
 
 
     <!-- </section> -->
-    <div style="bottom: 0;position: absolute;">
+    <div style="bottom: 0;position: fixed;">
 		<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 	</div>
 </body>
