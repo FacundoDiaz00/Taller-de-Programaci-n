@@ -1,12 +1,15 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * @author Equipo taller prog 16
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTSalidaTuristica {
 	private String nombre;
 	private LocalDateTime fechaHoraSalida;
@@ -15,6 +18,8 @@ public class DTSalidaTuristica {
 	private int cantMaxTuristas;
 	private Imagen img;
 	private String actividad;
+
+	public DTSalidaTuristica(){}
 
 	public DTSalidaTuristica(String nombre, LocalDateTime fechaHoraSalida, String lugarSalida, LocalDate fechaAlta,
 			int cantMaxTuristas, Imagen img, String actividad) {

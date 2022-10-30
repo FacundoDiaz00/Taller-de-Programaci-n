@@ -44,5 +44,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/stax2-api.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/streambuffer.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/woodstox-core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Daniel Padron/Documents/tpgr16/ServidorWebDinamico/src/main/webapp/WEB-INF/lib/servidorCentral.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

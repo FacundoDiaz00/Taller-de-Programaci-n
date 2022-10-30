@@ -10,7 +10,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="logica.datatypes.DTUsuario" %>
+  <%@ page import="logica.datatypes.DTUsuario" %> 
 
 
 
@@ -71,6 +71,9 @@
                     <% } %>
                     
                 </ul>
+                
+                 
+                
             </div>
         </div>
 

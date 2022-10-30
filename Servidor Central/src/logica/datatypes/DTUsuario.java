@@ -1,11 +1,14 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.time.LocalDate;
 
 /**
  * @author Equipo taller prog 16
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuario {
 
 	private String nickname;
@@ -15,6 +18,7 @@ public class DTUsuario {
 	private LocalDate fechaNac;
 	private Imagen img;
 
+	public DTUsuario(){}
 	public DTUsuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img) {
 		this.nickname = nickname;
 		this.nombre = nombre;

@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
-import logica.controladores.Fabrica;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
 
 public class Utiles {
 
@@ -12,8 +12,8 @@ public class Utiles {
     }
 
     public static HttpServletRequest insertarLoDeSiempre(HttpServletRequest req) {
-        var departamentos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
-        var categorias = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdCategorias();
+        var departamentos = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdDepartamentos();
+        var categorias = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdCategorias();
 
         req.setAttribute("departamentos", departamentos);
         req.setAttribute("categorias", categorias);

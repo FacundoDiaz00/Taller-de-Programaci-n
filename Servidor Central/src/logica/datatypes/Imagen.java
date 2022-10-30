@@ -1,13 +1,19 @@
 
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 /**
  * @author Equipo taller prog 16
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Imagen {
 	private String path;
 	private String altText;
+
+	public Imagen(){}
 
 	public Imagen(String path) {
 		this.path = path;

@@ -1,5 +1,8 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import java.util.List;
  * @author Equipo taller prog 16
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTActividadTuristica {
 	private String nombre;
 	private String descripcion;
@@ -21,9 +25,12 @@ public class DTActividadTuristica {
 	private EstadoActividadTuristica estado;
 	private int cantFavoritos;
 	private String urlVideo;
-	
+
+	public DTActividadTuristica() {
+	}
+
 	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
-			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img, EstadoActividadTuristica estado, int cantFavoritos, String urlVideo) {
+								LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img, EstadoActividadTuristica estado, int cantFavoritos, String urlVideo) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.costoPorTurista = costoPorTurista;

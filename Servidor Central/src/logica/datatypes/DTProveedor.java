@@ -1,15 +1,21 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.time.LocalDate;
 
 /**
  * @author Equipo taller prog 16
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTProveedor extends DTUsuario {
 
 	private String descrpicionGeneral;
 	private String link;
+
+	public DTProveedor(){}
 
 	public DTProveedor(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img,
 			String descrpicionGeneral, String link) {

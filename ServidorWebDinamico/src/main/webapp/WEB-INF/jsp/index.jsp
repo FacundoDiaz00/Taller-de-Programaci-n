@@ -10,13 +10,14 @@
  --%>
 
 
-<%@page import="logica.datatypes.DTPaquete"%>
-<%@page import="logica.datatypes.DTActividadTuristica"%>
+<%@page import="publicar.paqueteturisticasservice.DtPaquete"%>
+
+<%@page import="publicar.actividadesturisticasservice.DtActividadTuristica"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="logica.datatypes.DTUsuario" %>
+<%@ page import="publicar.usuarioturisticasservice.DtUsuario" %>
 
 
 <!doctype html>
@@ -41,12 +42,12 @@
                 <h2 class="card-title">Actividades</h2>
                 
                 	<% 
-					List<DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
+					List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
 					
                 	if (actividades.isEmpty()) {%>
                 		<span>No hay actividades para mostrar aquí.</span>
                		<% } else {               	
-						for(DTActividadTuristica actividad: actividades){
+						for(DtActividadTuristica actividad: actividades){
 							%>
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0">
@@ -88,12 +89,12 @@
                 <h2 class="card-title">Paquetes</h2>
 
 			<% 
-				List<DTPaquete> paquetes = (List<DTPaquete>) request.getAttribute("paquetes");
+				List<DtPaquete> paquetes = (List<DtPaquete>) request.getAttribute("paquetes");
 					
 				if (paquetes.isEmpty()) {%>
 	    			<span>No hay paquetes para mostrar aquí.</span>
 	   		<% } else {               	
-					for(DTPaquete pack: paquetes) { %>
+					for(DtPaquete pack: paquetes) { %>
 
 
                 <div class="card mb-3" style="max-width: 800px;">
