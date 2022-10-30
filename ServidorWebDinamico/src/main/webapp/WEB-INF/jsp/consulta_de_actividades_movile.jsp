@@ -83,7 +83,7 @@
         <div id="contenedor-items">
             <!--Actividades-->
 
-            <div class="card" id="contenedor-actividades-turisticas"> <!-- style="display: flex;justify-content: center;" -->
+            <div class="card"> <!-- style="display: flex;justify-content: center;" -->
                 <h2 class="card-title">Actividades</h2>
                 
                 	<% 
@@ -95,7 +95,7 @@
 						for(DTActividadTuristica actividad: actividades){
 							%>
 							<div class="card mb-3" style="max-width: 800px;">
-			                    <div class="row g-0">
+			                    <div class="row g-0" style="margin: 20px">
 			                        <div class="col-md-4 img-contain">
 			                        	<% 
 				            			String path = "";
@@ -105,7 +105,7 @@
 											path += actividad.getImg().getPath();
 										}							
 										%>
-			                            <img src="img<%=path%>" class="img-fluid rounded-start">
+			                            <img src="img<%=path%>" class="img-fluid rounded">
 			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
