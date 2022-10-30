@@ -12,28 +12,22 @@
 	
 </head>
 <body>
-    <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
-
-	
-<section id="contenedor">
-        <div>
-        </div>
+    
+<div class="container">
     <div id="centerRow">
+    <h1 style="justify-content: center; display: flex;margin-bottom: 40%;">Turismo.uy</h1>
         
           <form class="card" id="form-iniciar-sesion" name="iniciarSesionForm" method="post" action="IniciarSesion">
+          		
                 <div class="card-body">
-                    <h5 class="card-title">Iniciar Sesión</h5>
-                    
-
-                    <span class="input-label">Identificador:<span class="obligatorio"> *</span></span>
-			        <div class="input-group mb-3 contenedorinput">
-			   
-			        
-			            <select id="idForm" name="idForm" class="form-select" aria-label="Default select example">
+                <div class="input-group mb-3 contenedorinput">
+					<select id="idForm" name="idForm" class="form-select" aria-label="Default select example">
 			                <option selected value="1">Email</option>
 			                <option value="2">Nickname</option>
 			            </select>
-			            
+			        </div>  
+			        <div class="input-group mb-3 contenedorinput">
+			   
 			            <% String email = "";%>
 			            
                         <input id="input-correo-electronico" 
@@ -58,7 +52,6 @@
 
                     <div class="contenedorinput mb-3">
                     <% String password = ""; %>
-                        <span class="input-label">Contraseña:<span class="obligatorio"> *</span></span>
                         <input id="input-contrasenia" 
                         	   type="password" 
                         	   required name="password" 
@@ -70,17 +63,16 @@
                         	   >
                     </div>
                    
-		        <div id="botones">
-		            <a href="index.html" class="btn btn-danger btn-lg btn-block">Cancelar</a>
-		            <input type="submit" id="aceptar-boton" class="btn btn-success btn-lg btn-block" value="Aceptar">
+		        <div style="display: flex; justify-content: center;">
+		            <input type="submit" id="aceptar-boton" class="btn btn-success btn-lg btn-block" value="Ingresar">
 		        </div>
-
                 </div>
             </form>
     </div>
-</section>
-
- 	<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
+</div>
+<div style="bottom: 0;position: absolute;">
+<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
+</div>
 
 
 <script src="../js/jquery-3.3.1.slim.min.js"></script>
