@@ -131,7 +131,8 @@
 
 
     <!-- </section> -->
-
-    <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
+    <div style="bottom: 0;position: absolute;">
+		<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
+	</div>
 </body>
 </html>
