@@ -3,6 +3,7 @@ package publicar.usuarioturisticasservice;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -38,6 +39,10 @@ import jakarta.xml.bind.annotation.XmlType;
     "correo",
     "fechaNac",
     "img"
+})
+@XmlSeeAlso({
+    DtProveedor.class,
+    DtTurista.class
 })
 public class DtUsuario {
 

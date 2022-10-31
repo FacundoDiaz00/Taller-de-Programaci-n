@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,8 +13,8 @@ public class Utiles {
     }
 
     public static HttpServletRequest insertarLoDeSiempre(HttpServletRequest req) {
-        var departamentos = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdDepartamentos();
-        var categorias = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdCategorias();
+        List<String> departamentos = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdDepartamentos().getItem();
+        List<String> categorias = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdCategorias().getItem();
 
         req.setAttribute("departamentos", departamentos);
         req.setAttribute("categorias", categorias);

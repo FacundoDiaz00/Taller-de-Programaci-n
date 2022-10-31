@@ -30,6 +30,26 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtProveedor }
+     * 
+     * @return
+     *     the new instance of {@link DtProveedor }
+     */
+    public DtProveedor createDtProveedor() {
+        return new DtProveedor();
+    }
+
+    /**
+     * Create an instance of {@link DtTurista }
+     * 
+     * @return
+     *     the new instance of {@link DtTurista }
+     */
+    public DtTurista createDtTurista() {
+        return new DtTurista();
+    }
+
+    /**
      * Create an instance of {@link DtUsuario }
      * 
      * @return
@@ -50,13 +70,13 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtUsuarioCollection }
+     * Create an instance of {@link DtUsuarioSeparadosPorTipoCollection }
      * 
      * @return
-     *     the new instance of {@link DtUsuarioCollection }
+     *     the new instance of {@link DtUsuarioSeparadosPorTipoCollection }
      */
-    public DtUsuarioCollection createDtUsuarioCollection() {
-        return new DtUsuarioCollection();
+    public DtUsuarioSeparadosPorTipoCollection createDtUsuarioSeparadosPorTipoCollection() {
+        return new DtUsuarioSeparadosPorTipoCollection();
     }
 
 }

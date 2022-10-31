@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -27,6 +28,16 @@ import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
+import logica.entidades.Usuario;
+import publicar.actividadesturisticasservice.WebServiceActividades;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.paqueteturisticasservice.WebServicePaquetes;
+import publicar.usuarioturisticasservice.DtProveedor;
+import publicar.usuarioturisticasservice.DtTurista;
+import publicar.usuarioturisticasservice.DtUsuario;
+import publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection;
+import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 import utils.Utiles;
 
 /**
@@ -38,6 +49,10 @@ import utils.Utiles;
 public class ConsultaDeUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private IControladorUsuario contrUsuario;
+    
+    private WebServiceUsuarios wbUser;
+    
+    
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,6 +60,8 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
     public ConsultaDeUsuarioServlet() {
         super();
         contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
+        
+        wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
 
     /**
@@ -95,7 +112,17 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
                 }
             }
         } else {
-            List<DTUsuario> usuarios = contrUsuario.obtenerDTUsuarios();
+        	List<DtUsuario> usuarios = new ArrayList<>();
+        	DtUsuarioSeparadosPorTipoCollection dtUserSepCollection = wbUser.obtenerDTUsuarios();
+        	for (DtTurista dtTuri : dtUserSepCollection.getTuristas()) {
+        		usuarios.add(dtTuri);
+        	}
+        	for (DtProveedor dtProvv : dtUserSepCollection.getProveedores()) {
+        		usuarios.add(dtProvv);
+        	}
+        	
+        	
+             
             req.setAttribute("usuarios", usuarios);
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
         }

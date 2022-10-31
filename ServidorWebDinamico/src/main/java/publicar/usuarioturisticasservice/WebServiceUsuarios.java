@@ -26,11 +26,11 @@ public interface WebServiceUsuarios {
     /**
      * 
      * @return
-     *     returns publicar.usuarioturisticasservice.DtUsuarioCollection
+     *     returns publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection
      */
     @WebMethod
     @WebResult(partName = "return")
     @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosResponse")
-    public DtUsuarioCollection obtenerDTUsuarios();
+    public DtUsuarioSeparadosPorTipoCollection obtenerDTUsuarios();
 
 }

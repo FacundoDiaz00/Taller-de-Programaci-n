@@ -6,10 +6,13 @@ import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
-import logica.datatypes.colleciones.DTPaqueteCollection;
-import logica.datatypes.colleciones.DTUsuarioCollection;
+import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @WebService
@@ -34,10 +37,24 @@ public class WebServiceUsuarios {
     }
 
     @WebMethod
-    public DTUsuarioCollection obtenerDTUsuarios(){
+    public DTUsuarioSeparadosPorTipoCollection obtenerDTUsuarios(){
         log.info("Solicitud a 'obtenerDTUsuarios'");
-        return new DTUsuarioCollection(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarios());
+
+        List<DTProveedor> proveedores = new ArrayList<>();
+        List<DTTurista> turistas = new ArrayList<>();
+
+        for (DTUsuario dtu : Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarios()){
+            if (dtu instanceof DTProveedor){
+               proveedores.add((DTProveedor) dtu);
+            } else {
+                turistas.add((DTTurista) dtu);
+            }
+        }
+
+        return new DTUsuarioSeparadosPorTipoCollection(proveedores, turistas);
     }
+
+
 
 
 
