@@ -1,0 +1,17 @@
+RNEs 3era Iteración:
+
+Actividad Finalizada:
+No es posible dar de alta una salida para una actividad en estado finalizada
+No es posible modificar datos de una actividad en estado finalizada
+
+(Una actividad finalizada no aparece en las listas ni búsquedas del sistema)
+(Un proveedor ve las actividades finalizadas en su perfil)
+(Un turista ve las salidas a actividades finalizadas en su perfil)
+
+Actividad favorita:
+RNE: cantFavoritos se calcula como la cantidad de turistas que siguen a la actividad
+RNE: Solo se puede marcar/desmarcar como favorita a una actividad en estado "confirmada"
+
+Seguir usuarios:
+RNE: cantSeguidores se calcula como la cantidad de usuarios que siguen a este usuario
+RNE: un usuario no puede seguirse a si mismo.
