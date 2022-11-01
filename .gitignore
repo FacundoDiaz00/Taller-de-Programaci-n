@@ -221,3 +221,7 @@ Implementacion/Servidor Central/src/.idea/
 *.code-workspace
 
 *.dtmp
+
+*.iml
+
+Documentos de implementacion auxiliares/lib y programas necesarios/jaxws-ri/
