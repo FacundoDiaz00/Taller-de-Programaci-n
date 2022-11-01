@@ -32,24 +32,23 @@ public class Cargador {
             // Obtengo las configuraciones
 
             dirrecionAHacerDeploy = prop.getProperty("dirrecionAPublicar");
-            if(dirrecionAHacerDeploy == null){
+            if (dirrecionAHacerDeploy == null){
                 log.severe(" No se pudo leer la dirrecion a hacer deploy. Se termina el programa");
                 return false;
             }
             dirrectorioImagenes = prop.getProperty("dirrectorioImagenes");
-            if(dirrectorioImagenes == null){
+            if (dirrectorioImagenes == null){
                 log.severe(" No se pudo leer el dirrectorio de imagenes. Se termina el programa");
                 return false;
             }
 
             String nivelLogger = prop.getProperty("nivelLogger");
-            if(nivelLogger == null){
+            if (nivelLogger == null){
                 log.severe(" No se pudo leer el nivel de logger. Se termina el programa");
                 return false;
             }
 
             try {
-
                 log.setLevel(Level.parse(nivelLogger));
             } catch (IllegalArgumentException e) {
                 log.setLevel(Level.INFO);

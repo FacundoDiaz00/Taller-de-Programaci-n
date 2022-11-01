@@ -1,6 +1,8 @@
 package publicar.usuarioTuristicasService;
 
 import configuraciones.Cargador;
+import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.ObjetoNoExisteEnTurismoUy;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
@@ -9,6 +11,9 @@ import logica.controladores.Fabrica;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
+import logica.datatypes.DTUsuarioDetallePorTipo;
+import logica.datatypes.DTUsuarioDetallePrivadoPorTipo;
+import logica.datatypes.DTUsuarioPorTipo;
 import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
 
 import java.util.ArrayList;
@@ -53,9 +58,30 @@ public class WebServiceUsuarios {
 
         return new DTUsuarioSeparadosPorTipoCollection(proveedores, turistas);
     }
-
-
-
-
-
+    
+    @WebMethod
+    public DTUsuarioDetallePorTipo obtenerDTUsuarioDetalle(String nickname) throws ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'obtenerDTUsuarioDetalle'");
+        return new DTUsuarioDetallePorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetalle(nickname));
+    }
+    
+    @WebMethod
+    public DTUsuarioDetallePrivadoPorTipo obtenerDTUsuarioDetallePrivado(String nickname) throws ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'obtenerDTUsuarioDetallePrivado'");
+        return new DTUsuarioDetallePrivadoPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetallePrivado(nickname));
+    }
+    
+    @WebMethod
+    public DTUsuarioPorTipo obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'obtenerDTUsuario'");
+        return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(nickname));
+    }
+    
+    @WebMethod
+    public void modificarUsuario(DTUsuarioPorTipo datosNuevos, String contrasenia, boolean borrarFoto) throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'obtenerDTUsuarios'");
+        DTUsuario datosss = datosNuevos.esTurista() ? datosNuevos.getDtTurista() : datosNuevos.getDtProveedor();
+        
+        Fabrica.getInstancia().getIControladorUsuario().modificarUsuario(datosss, contrasenia, borrarFoto);
+    }
 }

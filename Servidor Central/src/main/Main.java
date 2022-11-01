@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		boolean resultado = Cargador.cargarPropiedades();
-		if(!resultado) {
+		if (!resultado) {
 			return;
 		}
 		try{
