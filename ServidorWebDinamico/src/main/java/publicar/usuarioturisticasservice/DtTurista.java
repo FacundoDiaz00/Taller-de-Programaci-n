@@ -3,6 +3,7 @@ package publicar.usuarioturisticasservice;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -28,6 +29,9 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtTurista", propOrder = {
     "nacionalidad"
+})
+@XmlSeeAlso({
+    DtTuristaDetalle.class
 })
 public class DtTurista
     extends DtUsuario

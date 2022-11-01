@@ -83,13 +83,14 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
                     return;
 
                 }
-                req.setAttribute("usuario", DUser);
+                
+                req.setAttribute("usuario", DUser.isEsTurista() ? DUser.getDtTuristaDetalle() : DUser.getDtProveedorDetalle());
                 req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario.jsp").forward(req, res);
 
             } else {
                 try {
                     DtUsuarioDetallePorTipo DTusr = wbUser.obtenerDTUsuarioDetalle(req.getParameter("id"));
-                    req.setAttribute("usuario", DTusr);
+                    req.setAttribute("usuario", DTusr.isEsTurista() ? DTusr.getDtTuristaDetalle() : DTusr.getDtProveedorDetalle());
                     req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario.jsp").forward(req, res);
 
                 } catch (ObjetoNoExisteEnTurismoUy_Exception e) {

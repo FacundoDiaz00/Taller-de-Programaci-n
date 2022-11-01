@@ -34,10 +34,10 @@ public interface WebServiceActividades {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorDepartamentoRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorDepartamentoResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorDepartamento/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorCategoriaRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorCategoriaResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorCategoria/Fault/ObjetoNoExisteEnTurismoUy")
     })
-    public DtActividadTuristicaCollection obtenerDTActividadesTuristicasConfirmadasPorDepartamento(
+    public DtActividadTuristicaCollection obtenerDTActividadesTuristicasConfirmadasPorCategoria(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0)
         throws ObjetoNoExisteEnTurismoUy_Exception
@@ -52,10 +52,10 @@ public interface WebServiceActividades {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorCategoriaRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorCategoriaResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorCategoria/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorDepartamentoRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorDepartamentoResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadesTuristicasConfirmadasPorDepartamento/Fault/ObjetoNoExisteEnTurismoUy")
     })
-    public DtActividadTuristicaCollection obtenerDTActividadesTuristicasConfirmadasPorCategoria(
+    public DtActividadTuristicaCollection obtenerDTActividadesTuristicasConfirmadasPorDepartamento(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0)
         throws ObjetoNoExisteEnTurismoUy_Exception

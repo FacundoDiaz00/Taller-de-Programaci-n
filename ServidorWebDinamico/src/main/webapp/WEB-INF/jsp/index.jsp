@@ -93,37 +93,34 @@
 					
 				if (paquetes.isEmpty()) {%>
 	    			<span>No hay paquetes para mostrar aquí.</span>
-	   		<% } else {               	
+	   			<% } else {               	
 					for(DtPaquete pack: paquetes) { %>
-
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                        	<% 
-	            			String path = "";
-							if (pack.getImg() == null) {
-								path += "/noFoto.png";
-							} else {
-								path += pack.getImg().getPath();
-							}							
-							%>
-                            <img src="img<%=path%>" class="img-fluid rounded-start">
-                            <!-- Falta el manejo de foto de la verdadero paquete-->
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= pack.getNombre()%> </h5>
-                                <p class="card-text descripcion-paquete"><%= pack.getDescrpicion()%> </p>
-                                <div class="botonera">
-                                    <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+		                <div class="card mb-3" style="max-width: 800px;">
+		                    <div class="row g-0">
+		                        <div class="col-md-4 img-contain">
+		                        	<% 
+			            			String path = "";
+									if (pack.getImg() == null) {
+										path += "/noFoto.png";
+									} else {
+										path += pack.getImg().getPath();
+									}							
+									%>
+		                            <img src="img<%=path%>" class="img-fluid rounded-start">
+		                            <!-- Falta el manejo de foto de la verdadero paquete-->
+		                        </div>
+		                        <div class="col-md-8">
+		                            <div class="card-body">
+		                                <h5 class="card-title"><%= pack.getNombre()%> </h5>
+		                                <p class="card-text descripcion-paquete"><%= pack.getDescrpicion()%> </p>
+		                                <div class="botonera">
+		                                    <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                                </div>
+		
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
            <% } }%>
 
             </div>

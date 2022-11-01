@@ -36,7 +36,7 @@
 	                                        </div>
 	                                        
 	                                        
-		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 560px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
+		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 560px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="ConsultaDeUsuario">
 
 																			
 							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px; align-items: flex-end;">

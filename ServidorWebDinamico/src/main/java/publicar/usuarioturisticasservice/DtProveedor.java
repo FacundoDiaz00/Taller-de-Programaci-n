@@ -3,6 +3,7 @@ package publicar.usuarioturisticasservice;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -30,6 +31,9 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "dtProveedor", propOrder = {
     "descrpicionGeneral",
     "link"
+})
+@XmlSeeAlso({
+    DtProveedorDetalle.class
 })
 public class DtProveedor
     extends DtUsuario

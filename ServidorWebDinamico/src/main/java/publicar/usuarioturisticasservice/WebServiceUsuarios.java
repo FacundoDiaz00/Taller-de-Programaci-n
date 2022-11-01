@@ -2,11 +2,13 @@
 package publicar.usuarioturisticasservice;
 
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.ws.Action;
+import jakarta.xml.ws.FaultAction;
 
 
 /**
@@ -25,6 +27,42 @@ public interface WebServiceUsuarios {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns publicar.usuarioturisticasservice.DtUsuarioDetallePrivadoPorTipo
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivadoRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivadoResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivado/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public DtUsuarioDetallePrivadoPorTipo obtenerDTUsuarioDetallePrivado(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns publicar.usuarioturisticasservice.DtUsuarioDetallePorTipo
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetalleRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetalleResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetalle/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public DtUsuarioDetallePorTipo obtenerDTUsuarioDetalle(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
      * @return
      *     returns publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection
      */
@@ -32,5 +70,46 @@ public interface WebServiceUsuarios {
     @WebResult(partName = "return")
     @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosResponse")
     public DtUsuarioSeparadosPorTipoCollection obtenerDTUsuarios();
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @throws ModificacionUsuarioNoPermitida_Exception
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuarioRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuarioResponse", fault = {
+        @FaultAction(className = ModificacionUsuarioNoPermitida_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuario/Fault/ModificacionUsuarioNoPermitida"),
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuario/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public void modificarUsuario(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtUsuarioPorTipo arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        boolean arg2)
+        throws ModificacionUsuarioNoPermitida_Exception, ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns publicar.usuarioturisticasservice.DtUsuarioPorTipo
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuario/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public DtUsuarioPorTipo obtenerDTUsuario(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
 
 }

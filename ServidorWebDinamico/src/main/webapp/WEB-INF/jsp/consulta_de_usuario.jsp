@@ -38,14 +38,14 @@
 				                        <%
 				                        String imgpath;
 				                        if(usr.getImg() != null){
-					                        imgpath = "/img" + usr.getImg().getPath();
+					                        imgpath = "img" + usr.getImg().getPath();
 
 				                        }else{
-				                        	imgpath = "/img/noFoto.png";
+				                        	imgpath = "img/noFoto.png";
 				                        }
 														                        
 				                        %>
-				                        <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
+				                        <img src="<%=imgpath%>" class="img-fluid rounded-start">
 				                    </div>
 				                    <div class="col-md-8">
 				                        <div class="card-body">
