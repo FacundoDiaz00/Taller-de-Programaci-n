@@ -68,8 +68,8 @@ public interface WebServiceActividades {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosResponse")
-    public ListOfString obtenerIdDepartamentos();
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdCategoriasRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdCategoriasResponse")
+    public ListOfString obtenerIdCategorias();
 
     /**
      * 
@@ -78,7 +78,7 @@ public interface WebServiceActividades {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdCategoriasRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdCategoriasResponse")
-    public ListOfString obtenerIdCategorias();
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosResponse")
+    public ListOfString obtenerIdDepartamentos();
 
 }
