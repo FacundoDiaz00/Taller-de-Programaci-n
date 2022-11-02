@@ -46,6 +46,31 @@ public interface WebServicePaquetes {
     /**
      * 
      * @param arg0
+     * @param arg1
+     * @param arg2
+     * @throws CompraYaRegistradaException_Exception
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     * @throws PaquetesSinActividadesExcepcion_Exception
+     */
+    @WebMethod
+    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaqueteRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaqueteResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaquete/Fault/ObjetoNoExisteEnTurismoUy"),
+        @FaultAction(className = CompraYaRegistradaException_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaquete/Fault/CompraYaRegistradaException"),
+        @FaultAction(className = PaquetesSinActividadesExcepcion_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaquete/Fault/PaquetesSinActividadesExcepcion")
+    })
+    public void comprarPaquete(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        int arg2)
+        throws CompraYaRegistradaException_Exception, ObjetoNoExisteEnTurismoUy_Exception, PaquetesSinActividadesExcepcion_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns publicar.paqueteturisticasservice.DtPaqueteDetalles
      * @throws ObjetoNoExisteEnTurismoUy_Exception

@@ -1,7 +1,9 @@
 package publicar.paqueteTuristicasService;
 
 import configuraciones.Cargador;
+import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaquetesSinActividadesExcepcion;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
@@ -9,9 +11,8 @@ import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.colleciones.DTPaqueteCollection;
-import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 @WebService
@@ -30,6 +31,7 @@ public class WebServicePaquetes {
         endpoint = Endpoint.publish(Cargador.getDirrecionAHacerDeploy() + "/paquetes", this);
         log.info("Servicio de paquetes publicado");
     }
+    
     @WebMethod(exclude = true)
     public Endpoint getEndpoint(){
         return endpoint;
@@ -49,12 +51,14 @@ public class WebServicePaquetes {
 
     @WebMethod
     public DTPaqueteDetalles obtenerDtPaqueteDetalle(String nombre) throws ObjetoNoExisteEnTurismoUy{
-        log.info("Solicitud a 'obtenerDtPaquetes'");
+        log.info("Solicitud a 'obtenerDtPaqueteDetalle'");
         return Fabrica.getInstancia().getIControladorPaquete().obtenerDTPaqueteDetalle(nombre);
     }
     
-
-
-
+    @WebMethod
+    public void comprarPaquete(String nickTurista, String nombrePaquete, int cantTuristas) throws ObjetoNoExisteEnTurismoUy, CompraYaRegistradaException, PaquetesSinActividadesExcepcion  {
+        log.info("Solicitud a 'comprarPaquete'");
+        Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickTurista, nombrePaquete, cantTuristas, null);
+    }
 
 }

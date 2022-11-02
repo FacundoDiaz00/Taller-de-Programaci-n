@@ -24,7 +24,9 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _CompraYaRegistradaException_QNAME = new QName("http://paqueteTuristicasService.publicar/", "CompraYaRegistradaException");
     private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://paqueteTuristicasService.publicar/", "ObjetoNoExisteEnTurismoUy");
+    private final static QName _PaquetesSinActividadesExcepcion_QNAME = new QName("http://paqueteTuristicasService.publicar/", "PaquetesSinActividadesExcepcion");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: publicar.paqueteturisticasservice
@@ -54,6 +56,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CompraYaRegistradaException }
+     * 
+     * @return
+     *     the new instance of {@link CompraYaRegistradaException }
+     */
+    public CompraYaRegistradaException createCompraYaRegistradaException() {
+        return new CompraYaRegistradaException();
+    }
+
+    /**
      * Create an instance of {@link ObjetoNoExisteEnTurismoUy }
      * 
      * @return
@@ -61,6 +73,16 @@ public class ObjectFactory {
      */
     public ObjetoNoExisteEnTurismoUy createObjetoNoExisteEnTurismoUy() {
         return new ObjetoNoExisteEnTurismoUy();
+    }
+
+    /**
+     * Create an instance of {@link PaquetesSinActividadesExcepcion }
+     * 
+     * @return
+     *     the new instance of {@link PaquetesSinActividadesExcepcion }
+     */
+    public PaquetesSinActividadesExcepcion createPaquetesSinActividadesExcepcion() {
+        return new PaquetesSinActividadesExcepcion();
     }
 
     /**
@@ -124,6 +146,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CompraYaRegistradaException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link CompraYaRegistradaException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://paqueteTuristicasService.publicar/", name = "CompraYaRegistradaException")
+    public JAXBElement<CompraYaRegistradaException> createCompraYaRegistradaException(CompraYaRegistradaException value) {
+        return new JAXBElement<>(_CompraYaRegistradaException_QNAME, CompraYaRegistradaException.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      * 
      * @param value
@@ -134,6 +169,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://paqueteTuristicasService.publicar/", name = "ObjetoNoExisteEnTurismoUy")
     public JAXBElement<ObjetoNoExisteEnTurismoUy> createObjetoNoExisteEnTurismoUy(ObjetoNoExisteEnTurismoUy value) {
         return new JAXBElement<>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PaquetesSinActividadesExcepcion }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link PaquetesSinActividadesExcepcion }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://paqueteTuristicasService.publicar/", name = "PaquetesSinActividadesExcepcion")
+    public JAXBElement<PaquetesSinActividadesExcepcion> createPaquetesSinActividadesExcepcion(PaquetesSinActividadesExcepcion value) {
+        return new JAXBElement<>(_PaquetesSinActividadesExcepcion_QNAME, PaquetesSinActividadesExcepcion.class, null, value);
     }
 
 }
