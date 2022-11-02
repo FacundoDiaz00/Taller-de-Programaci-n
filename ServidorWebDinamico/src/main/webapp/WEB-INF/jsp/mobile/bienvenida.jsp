@@ -29,7 +29,7 @@
 </head>
 <body style="margin:0;padding:0;height:100%;">
 
-    <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/mobile/templates/navBar.jsp"/>
 
     <!-- <section id="contenedor"> -->
 	<div>
