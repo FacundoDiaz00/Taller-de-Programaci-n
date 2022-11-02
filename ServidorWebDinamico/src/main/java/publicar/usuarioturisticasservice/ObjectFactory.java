@@ -24,6 +24,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ContraseniaInvalidaException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ContraseniaInvalidaException");
     private final static QName _ModificacionUsuarioNoPermitida_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ModificacionUsuarioNoPermitida");
     private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ObjetoNoExisteEnTurismoUy");
 
@@ -82,6 +83,16 @@ public class ObjectFactory {
      */
     public DtActividadTuristicaDetalle.Salidas createDtActividadTuristicaDetalleSalidas() {
         return new DtActividadTuristicaDetalle.Salidas();
+    }
+
+    /**
+     * Create an instance of {@link ContraseniaInvalidaException }
+     * 
+     * @return
+     *     the new instance of {@link ContraseniaInvalidaException }
+     */
+    public ContraseniaInvalidaException createContraseniaInvalidaException() {
+        return new ContraseniaInvalidaException();
     }
 
     /**
@@ -292,6 +303,19 @@ public class ObjectFactory {
      */
     public DtActividadTuristicaDetalle.Salidas.Entry createDtActividadTuristicaDetalleSalidasEntry() {
         return new DtActividadTuristicaDetalle.Salidas.Entry();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ContraseniaInvalidaException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ContraseniaInvalidaException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ContraseniaInvalidaException")
+    public JAXBElement<ContraseniaInvalidaException> createContraseniaInvalidaException(ContraseniaInvalidaException value) {
+        return new JAXBElement<>(_ContraseniaInvalidaException_QNAME, ContraseniaInvalidaException.class, null, value);
     }
 
     /**

@@ -1,11 +1,11 @@
+<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
+<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@page import="logica.datatypes.DTUsuario"%>
-<%@page import="logica.datatypes.DTProveedor"%>
-<%@page import="logica.datatypes.DTTurista"%>
 
 
 
@@ -20,11 +20,11 @@
                             <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
 
                             
-                            <% DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado"); %>
+                            <% DtUsuario usuario = (DtUsuario) session.getAttribute("usuarioLogeado"); %>
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
-	                                <% if (usuario instanceof DTTurista){ %>
+	                                <% if (usuario instanceof DtTurista){ %>
 	                                    <div class="modal-content" style =" width: 598px; height: 790px;">
 	                                    
 	                     			<% } else {%>
@@ -112,7 +112,7 @@
 	                                                        >
 	                                                    </div>
 	                                                    
-	                                                    <% if (usuario instanceof DTTurista){ %>
+	                                                    <% if (usuario instanceof DtTurista){ %>
 	                                                    <div class="contenedorinput mb-3" id="nacionalidad-field">
 	                                              		  <span class="input-label">Nacionalidad: </span>
 	                                                		<input id="input-nacionalidad" 
@@ -122,7 +122,7 @@
 	                                                		placeholder="" 
 	                                                		aria-label="Imagen" 
 	                                                		aria-describedby="basic-addon1"
-	                                                		<% DTTurista tur = (DTTurista) usuario;  %>
+	                                                		<% DtTurista tur = (DtTurista) usuario;  %>
 	                                                		value="<%= tur.getNacionalidad() %>"
 	                                                		>
 	                                         		   </div>
@@ -174,8 +174,8 @@
 	                                            </div>
 	                                            
 	                                            
-	                                            <% if (usuario instanceof DTProveedor){ 
-	                                            		DTProveedor prov = (DTProveedor) usuario;
+	                                            <% if (usuario instanceof DtProveedor){ 
+	                                            	DtProveedor prov = (DtProveedor) usuario;
 	                                            %>
 	                                            <div class="contenedorinput mb-3" id="descripcion-general-field">
                                             <span class="input-label">Descripcion general:</span>

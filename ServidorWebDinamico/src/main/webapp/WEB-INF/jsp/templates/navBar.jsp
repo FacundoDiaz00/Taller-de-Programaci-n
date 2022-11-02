@@ -2,15 +2,15 @@
 
 # ATTRIBUTOS QUE PRECISA LA PÁGINA
 
-- DTUsuario "usuarioLogeado" (opcional)
+- DtUsuario "usuarioLogeado" (opcional)
 
  --%>
 
 
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-  <%@ page import="logica.datatypes.DTUsuario" %> 
 
 
 
@@ -35,7 +35,7 @@
                     </form>
                     
                     <% 
-                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
+                	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");   
                     if(session.getAttribute("usuarioLogeado") == null){ %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>

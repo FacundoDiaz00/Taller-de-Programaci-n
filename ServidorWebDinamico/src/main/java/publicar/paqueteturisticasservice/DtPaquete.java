@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -43,6 +44,9 @@ import jakarta.xml.bind.annotation.XmlType;
     "categorias",
     "img",
     "fechaRegistro"
+})
+@XmlSeeAlso({
+    DtPaqueteDetalles.class
 })
 public class DtPaquete {
 

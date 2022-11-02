@@ -17,6 +17,10 @@ public class DTPaqueteDetalles extends DTPaquete {
 	private Map<String, DTActividadTuristica> actividades;
 	private List<DTCompra> compras;
 
+	public DTPaqueteDetalles() {
+		
+	}
+	
 	public DTPaqueteDetalles(String nombre, String descrpicion, float descuento, int validez, List<String> categorias,
 			LocalDate fechaAlta, Imagen img, Map<String, DTActividadTuristica> actividades, List<DTCompra> compras) {
 		super(nombre, descrpicion, descuento, validez, categorias, fechaAlta, img);

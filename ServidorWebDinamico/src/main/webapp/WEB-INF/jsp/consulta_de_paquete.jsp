@@ -8,10 +8,11 @@
  --%>
 
 
-<%@page import="logica.datatypes.DTTurista"%>
-<%@page import="logica.datatypes.DTActividadTuristica"%>
-<%@page import="logica.datatypes.DTPaqueteDetalles"%>
-<%@page import="logica.datatypes.Imagen"%>
+<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
+<%@page import="publicar.paqueteturisticasservice.DtPaqueteDetalles.Actividades.Entry"%>
+<%@page import="publicar.paqueteturisticasservice.DtActividadTuristica"%>
+<%@page import="publicar.paqueteturisticasservice.DtPaqueteDetalles"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -28,8 +29,12 @@
     
 <main>
     <% 
-	DTPaqueteDetalles paquete = (DTPaqueteDetalles) request.getAttribute("paquete");
-    Map<String, DTActividadTuristica> actividadesPaquete = paquete.getActividades();
+    DtPaqueteDetalles paquete = (DtPaqueteDetalles) request.getAttribute("paquete");
+    HashMap<String, DtActividadTuristica> actividadesPaquete = new HashMap<>();
+    
+    for (Entry ent: paquete.getActividades().getEntry()) {
+    	actividadesPaquete.put(ent.getKey(), ent.getValue());
+    }
 	
 	%>
 
@@ -61,7 +66,7 @@
 	
 	            <div id="info">
 	                <h2><%=paquete.getNombre()%></h2>
-	                <h6>Creado el <%=paquete.getFechaRegistro().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></h6>
+	                <h6>Creado el <%=paquete.getFechaRegistro().toString()%></h6>
 	
 	            </div>
 	
@@ -106,7 +111,7 @@
 	        	<% 	
 		        	boolean turistaLogueado = false;
 	        		try {
-		        		DTTurista tur = (DTTurista) session.getAttribute("usuarioLogeado");
+		        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
 		        		turistaLogueado = tur != null;
 	        		} catch (Exception e) {
 	        			// nada
@@ -139,7 +144,7 @@
 	                    <h2 class="card-title">Actividades</h2>
 	                </div>
 	
-					<% for(DTActividadTuristica act: actividadesPaquete.values()) {%>	
+					<% for(DtActividadTuristica act: actividadesPaquete.values()) {%>	
 					
 		                <div class="card mb-3" style="max-width: 800px;">
 		                    <div class="row g-0">

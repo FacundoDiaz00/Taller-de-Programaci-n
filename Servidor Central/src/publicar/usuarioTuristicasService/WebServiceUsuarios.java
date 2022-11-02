@@ -1,6 +1,7 @@
 package publicar.usuarioTuristicasService;
 
 import configuraciones.Cargador;
+import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import jakarta.jws.WebMethod;
@@ -84,4 +85,17 @@ public class WebServiceUsuarios {
         
         Fabrica.getInstancia().getIControladorUsuario().modificarUsuario(datosss, contrasenia, borrarFoto);
     }
+    
+    @WebMethod
+    public DTUsuarioPorTipo obtenerDtUsuarioPorNickname(String nickname, String contrasenia) throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException  {
+        log.info("Solicitud a 'obtenerDtUsuarioPorNickname'");
+        return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorNickname(nickname, contrasenia));
+    }
+    
+    @WebMethod
+    public DTUsuarioPorTipo obtenerDtUsuarioPorEmail(String email, String contrasenia) throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException  {
+        log.info("Solicitud a 'obtenerDtUsuarioPorNickname'");
+        return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorEmail(email, contrasenia));
+    }
+    
 }

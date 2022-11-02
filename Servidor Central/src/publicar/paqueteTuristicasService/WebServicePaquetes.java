@@ -7,6 +7,7 @@ import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
+import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.colleciones.DTPaqueteCollection;
 import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 
@@ -46,6 +47,12 @@ public class WebServicePaquetes {
         return new DTPaqueteCollection(Fabrica.getInstancia().getIControladorPaquete().obtenerDTPaquetesPorCategoria(cat));
     }
 
+    @WebMethod
+    public DTPaqueteDetalles obtenerDtPaqueteDetalle(String nombre) throws ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'obtenerDtPaquetes'");
+        return Fabrica.getInstancia().getIControladorPaquete().obtenerDTPaqueteDetalle(nombre);
+    }
+    
 
 
 

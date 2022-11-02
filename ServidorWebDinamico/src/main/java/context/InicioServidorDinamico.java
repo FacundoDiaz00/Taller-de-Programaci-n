@@ -12,12 +12,6 @@ public class InicioServidorDinamico implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        //try {
-            //Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
-            // Yo diria que esto se hace ahora en el servidor
-        //} catch (TurismoUyException e) {
-        //    e.printStackTrace();
-        //}
     	System.out.print("Servidor iniciado");
     }
 }
