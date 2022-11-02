@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class index_mobie
+ * Servlet implementation class index_mobile
  */
-@WebServlet("/index_mobie")
-public class IndexMobileServlet extends HttpServlet {
+@WebServlet("/mobile/bienvenida")
+public class BienvenidaMobileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexMobileServlet() {
+    public BienvenidaMobileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,9 +25,10 @@ public class IndexMobileServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		resp.getWriter().append("Served at: ").append(req.getContextPath());
+		req.getRequestDispatcher("/WEB-INF/jsp/mobile/bienvenida.jsp").forward(req, resp);
 	}
 
 	/**
