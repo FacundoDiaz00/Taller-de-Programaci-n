@@ -17,7 +17,7 @@
     <div id="centerRow">
     <h1 style="justify-content: center; display: flex;margin-bottom: 40%;">Turismo.uy</h1>
         
-          <form class="card" id="form-iniciar-sesion" name="iniciarSesionForm" method="post" action="IniciarSesion">
+          <form class="card" id="form-iniciar-sesion" name="iniciarSesionForm" method="post" action="IniciarSesionMobile">
           		
                 <div class="card-body">
                 <div class="input-group mb-3 contenedorinput">
