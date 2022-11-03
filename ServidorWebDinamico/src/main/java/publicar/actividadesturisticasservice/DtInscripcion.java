@@ -16,7 +16,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="fechaInscripcion" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaInscripcionStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="cantidadTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="costo" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         <element name="salida" type="{http://actividadesTuristicasService.publicar/}dtSalidaTuristica" minOccurs="0"/>
@@ -32,7 +32,7 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtInscripcion", propOrder = {
-    "fechaInscripcion",
+    "fechaInscripcionStr",
     "cantidadTuristas",
     "costo",
     "salida",
@@ -41,7 +41,7 @@ import jakarta.xml.bind.annotation.XmlType;
 })
 public class DtInscripcion {
 
-    protected Object fechaInscripcion;
+    protected String fechaInscripcionStr;
     protected int cantidadTuristas;
     protected float costo;
     protected DtSalidaTuristica salida;
@@ -49,27 +49,27 @@ public class DtInscripcion {
     protected DtCompra compra;
 
     /**
-     * Obtiene el valor de la propiedad fechaInscripcion.
+     * Obtiene el valor de la propiedad fechaInscripcionStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaInscripcion() {
-        return fechaInscripcion;
+    public String getFechaInscripcionStr() {
+        return fechaInscripcionStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaInscripcion.
+     * Define el valor de la propiedad fechaInscripcionStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaInscripcion(Object value) {
-        this.fechaInscripcion = value;
+    public void setFechaInscripcionStr(String value) {
+        this.fechaInscripcionStr = value;
     }
 
     /**

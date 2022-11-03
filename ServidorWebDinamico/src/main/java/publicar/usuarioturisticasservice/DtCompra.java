@@ -16,10 +16,10 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="fechaCompra" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaCompraStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="cantTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="costo" type="{http://www.w3.org/2001/XMLSchema}float"/>
- *         <element name="vencimiento" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="vencimientoStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="paquete" type="{http://usuarioTuristicasService.publicar/}dtPaquete" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
@@ -31,42 +31,42 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtCompra", propOrder = {
-    "fechaCompra",
+    "fechaCompraStr",
     "cantTuristas",
     "costo",
-    "vencimiento",
+    "vencimientoStr",
     "paquete"
 })
 public class DtCompra {
 
-    protected Object fechaCompra;
+    protected String fechaCompraStr;
     protected int cantTuristas;
     protected float costo;
-    protected Object vencimiento;
+    protected String vencimientoStr;
     protected DtPaquete paquete;
 
     /**
-     * Obtiene el valor de la propiedad fechaCompra.
+     * Obtiene el valor de la propiedad fechaCompraStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaCompra() {
-        return fechaCompra;
+    public String getFechaCompraStr() {
+        return fechaCompraStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaCompra.
+     * Define el valor de la propiedad fechaCompraStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaCompra(Object value) {
-        this.fechaCompra = value;
+    public void setFechaCompraStr(String value) {
+        this.fechaCompraStr = value;
     }
 
     /**
@@ -102,27 +102,27 @@ public class DtCompra {
     }
 
     /**
-     * Obtiene el valor de la propiedad vencimiento.
+     * Obtiene el valor de la propiedad vencimientoStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getVencimiento() {
-        return vencimiento;
+    public String getVencimientoStr() {
+        return vencimientoStr;
     }
 
     /**
-     * Define el valor de la propiedad vencimiento.
+     * Define el valor de la propiedad vencimientoStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setVencimiento(Object value) {
-        this.vencimiento = value;
+    public void setVencimientoStr(String value) {
+        this.vencimientoStr = value;
     }
 
     /**

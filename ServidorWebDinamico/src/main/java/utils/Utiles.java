@@ -12,6 +12,10 @@ import publicar.actividadesturisticasservice.WebServiceActividadesService;
 
 public class Utiles {
 
+    public static final DateTimeFormatter formatterLocalDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    public static final DateTimeFormatter formatterLocalDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	
     public Utiles() {
     }
 
@@ -62,13 +66,19 @@ public class Utiles {
     }
     
     public static LocalDate stringToLocalDate(String fecha) {
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    	return LocalDate.parse(fecha, formatter);
+    	return LocalDate.parse(fecha, Utiles.formatterLocalDate);
+    }
+    
+    public static String localDateToString(LocalDate fecha) {
+    	return fecha.format(Utiles.formatterLocalDate);
     }
     
     public static LocalDateTime stringToLocalDateTime(String fechaYHora) {
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    	return LocalDateTime.parse(fechaYHora, formatter);
+    	return LocalDateTime.parse(fechaYHora, Utiles.formatterLocalDateTime);
+    }
+    
+    public static String localDateTimeToString(LocalDateTime fechaYHora) {
+    	return fechaYHora.format(Utiles.formatterLocalDateTime);
     }
 
 }

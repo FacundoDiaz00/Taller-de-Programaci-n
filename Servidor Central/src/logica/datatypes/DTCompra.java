@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import logica.utils.UtilsDT;
 
 /**
  * @author Equipo taller prog 16
@@ -11,10 +12,10 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTCompra {
-	private LocalDate fechaCompra;
+	private String fechaCompraStr;
 	private int cantTuristas;
 	private float costo;
-	private LocalDate vencimiento;
+	private String vencimientoStr;
 	private DTPaquete paquete;
 
 	public DTCompra() {
@@ -22,15 +23,15 @@ public class DTCompra {
 	}
 	
 	public DTCompra(LocalDate fechaCompra, int cantTuristas, float costo, LocalDate vencimiento, DTPaquete paquete) {
-		this.fechaCompra = fechaCompra;
+		this.fechaCompraStr = fechaCompra.format(UtilsDT.formatterLocalDate);
 		this.cantTuristas = cantTuristas;
 		this.costo = costo;
-		this.vencimiento = vencimiento;
+		this.vencimientoStr = vencimiento.format(UtilsDT.formatterLocalDate);
 		this.paquete = paquete;
 	}
 
 	public LocalDate getFechaCompra() {
-		return fechaCompra;
+		return LocalDate.parse(fechaCompraStr, UtilsDT.formatterLocalDate);
 	}
 
 	public int getCantTuristas() {
@@ -42,10 +43,20 @@ public class DTCompra {
 	}
 
 	public LocalDate getVencimiento() {
-		return vencimiento;
+		return LocalDate.parse(vencimientoStr, UtilsDT.formatterLocalDate);
 	}
 
 	public DTPaquete getPaquete() {
 		return paquete;
 	}
+
+	public String getFechaCompraStr() {
+		return fechaCompraStr;
+	}
+
+	public String getVencimientoStr() {
+		return vencimientoStr;
+	}
+
+
 }

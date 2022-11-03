@@ -23,7 +23,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       <sequence>
  *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaAlta" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="cuidad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="duracion" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="costoPorTurista" type="{http://www.w3.org/2001/XMLSchema}float"/>
@@ -46,7 +46,7 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "dtActividadTuristica", propOrder = {
     "nombre",
     "descripcion",
-    "fechaAlta",
+    "fechaAltaStr",
     "cuidad",
     "duracion",
     "costoPorTurista",
@@ -65,7 +65,7 @@ public class DtActividadTuristica {
 
     protected String nombre;
     protected String descripcion;
-    protected Object fechaAlta;
+    protected String fechaAltaStr;
     protected String cuidad;
     protected int duracion;
     protected float costoPorTurista;
@@ -128,27 +128,27 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaAlta.
+     * Obtiene el valor de la propiedad fechaAltaStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaAlta() {
-        return fechaAlta;
+    public String getFechaAltaStr() {
+        return fechaAltaStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaAlta.
+     * Define el valor de la propiedad fechaAltaStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaAlta(Object value) {
-        this.fechaAlta = value;
+    public void setFechaAltaStr(String value) {
+        this.fechaAltaStr = value;
     }
 
     /**

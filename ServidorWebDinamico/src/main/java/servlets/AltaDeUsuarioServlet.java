@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import excepciones.UsuarioYaRegistradoException;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorUsuario;
-import logica.datatypes.Imagen;
+
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.paqueteturisticasservice.WebServicePaquetes;
+import publicar.usuarioturisticasservice.Imagen;
+import publicar.usuarioturisticasservice.UsuarioYaRegistradoException_Exception;
+import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 import utils.Utiles;
 
 /**
@@ -27,14 +30,14 @@ import utils.Utiles;
 @MultipartConfig
 public class AltaDeUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorUsuario contUsuario;
+    private WebServiceUsuarios wbUser;
 
     private final String tipoUsuarioProveedor = "proveedor";
     private final String tipoUsuarioTurista = "turista";
 
     public AltaDeUsuarioServlet() {
         super();
-        this.contUsuario = Fabrica.getInstancia().getIControladorUsuario();
+        wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
 
     /**
@@ -89,15 +92,16 @@ public class AltaDeUsuarioServlet extends HttpServlet {
                                                                      // la
                                                                      // ruta
                                                                      // relativa
-                imgDt = new Imagen(futuroNombreDelPath);
+                imgDt = new Imagen();
+                imgDt.setPath(futuroNombreDelPath);
             }
 
             LocalDate fechaNac = LocalDate.parse(fechaNacStr);
             if (tipoUsuario.equals(tipoUsuarioProveedor)) {
-                this.contUsuario.altaProveedor(nickname, nombre, apellido, email, password, fechaNac, imgDt,
+            	wbUser.altaProveedor(nickname, nombre, apellido, email, password, Utiles.localDateToString(fechaNac), imgDt,
                         descripcionGeneral, link);
             } else if (tipoUsuario.equals(tipoUsuarioTurista)) {
-                this.contUsuario.altaTurista(nickname, nombre, apellido, email, password, fechaNac, imgDt,
+            	wbUser.altaTurista(nickname, nombre, apellido, email, password, Utiles.localDateToString(fechaNac), imgDt,
                         nacionalidad);
             } else {
                 req.setAttribute("motivoDeError", "No se soporta el alta de este tipo de usuario");
@@ -127,7 +131,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
             req = Utiles.insertarLoDeSiempre(req);
             req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
             return;
-        } catch (UsuarioYaRegistradoException e) {
+        } catch (UsuarioYaRegistradoException_Exception e) {
             req.setAttribute("motivoDeError",
                     "Ya existe un usuario con este nickname o con ese correo, cambie alguno de estos y pruebe nuevamente");
         }

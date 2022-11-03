@@ -2,6 +2,7 @@ package logica.datatypes;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
 
@@ -15,7 +16,7 @@ public class DTUsuario {
 	private String nombre;
 	private String apellido;
 	private String correo;
-	private LocalDate fechaNac;
+	private String fechaNacStr;
 	private Imagen img;
 
 	public DTUsuario(){}
@@ -24,7 +25,7 @@ public class DTUsuario {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
-		this.fechaNac = fechaNac;
+		this.fechaNacStr = fechaNac.format(UtilsDT.formatterLocalDate);
 		this.img = img;
 	}
 
@@ -45,10 +46,14 @@ public class DTUsuario {
 	}
 
 	public LocalDate getFechaNac() {
-		return fechaNac;
+		return LocalDate.parse(fechaNacStr, UtilsDT.formatterLocalDate);
 	}
 
 	public Imagen getImg() {
 		return img;
+	}
+
+	public String getFechaNacStr() {
+		return fechaNacStr;
 	}
 }

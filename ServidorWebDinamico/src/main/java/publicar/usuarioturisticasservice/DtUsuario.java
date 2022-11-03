@@ -21,7 +21,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="apellido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="correo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaNac" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaNacStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
@@ -37,7 +37,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "nombre",
     "apellido",
     "correo",
-    "fechaNac",
+    "fechaNacStr",
     "img"
 })
 @XmlSeeAlso({
@@ -50,7 +50,7 @@ public class DtUsuario {
     protected String nombre;
     protected String apellido;
     protected String correo;
-    protected Object fechaNac;
+    protected String fechaNacStr;
     protected Imagen img;
 
     /**
@@ -150,27 +150,27 @@ public class DtUsuario {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaNac.
+     * Obtiene el valor de la propiedad fechaNacStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaNac() {
-        return fechaNac;
+    public String getFechaNacStr() {
+        return fechaNacStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaNac.
+     * Define el valor de la propiedad fechaNacStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaNac(Object value) {
-        this.fechaNac = value;
+    public void setFechaNacStr(String value) {
+        this.fechaNacStr = value;
     }
 
     /**

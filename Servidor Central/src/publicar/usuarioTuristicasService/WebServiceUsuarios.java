@@ -4,19 +4,17 @@ import configuraciones.Cargador;
 import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.UsuarioYaRegistradoException;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTTurista;
-import logica.datatypes.DTUsuario;
-import logica.datatypes.DTUsuarioDetallePorTipo;
-import logica.datatypes.DTUsuarioDetallePrivadoPorTipo;
-import logica.datatypes.DTUsuarioPorTipo;
+import logica.datatypes.*;
 import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
+import logica.utils.UtilsDT;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -97,5 +95,23 @@ public class WebServiceUsuarios {
         log.info("Solicitud a 'obtenerDtUsuarioPorNickname'");
         return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorEmail(email, contrasenia));
     }
+
+    @WebMethod
+    public void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra,
+                              String FNacimiento,
+                              Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException{
+        LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
+        Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nickname, nombre, apellido, correo, contra, fNacLocalDate, img, descripcion, link);
+    }
+
+    @WebMethod
+    public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra,
+                 String FNacimiento, Imagen img,
+                 String nacionalidad) throws UsuarioYaRegistradoException{
+        LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
+        Fabrica.getInstancia().getIControladorUsuario().altaTurista(nickname, nombre, apellido, correo, contra, fNacLocalDate, img, nacionalidad);
+
+    }
+
     
 }

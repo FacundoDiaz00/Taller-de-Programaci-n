@@ -72,9 +72,12 @@
 			            <li class="nav-item" role="presentation">
 			                <button class="nav-link" id="boton-salidas" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Inscripciones a salidas</button>
 			            </li>
+			            
+			            
+			            
 			            <% 
 
-	                    if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){ %>
+	                    if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname()) ){ %>
 			               <li class="nav-item" role="presentation">
 				                <button class="nav-link" id="boton-paquetes" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Compras de paquetes</button>
 				            </li>
@@ -103,7 +106,7 @@
 	                        <p class="card-text"><b>Nombre: </b><%= usr.getNombre()%></p>
 	                        <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 	                        <p class="card-text"><b>Email:</b> <%= usr.getCorreo()%></p>
-	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%=usr.getFechaNac().toString()%></p>
+	                        <p class="card-text"><b>Fecha de Nacimiento:</b> <%=usr.getFechaNacStr()%></p>
 	                        <% if(usr instanceof DtProveedor){ 
 	                        	DtProveedor provData = (DtProveedor) usr;
 	                        %>
@@ -126,7 +129,7 @@
 	                <%
 					if(!esProveedor){						
             			DtTuristaDetalle tur = (DtTuristaDetalle) usr;
-            			if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){	
+            			if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())){	
             				DtTuristaDetallePrivado turpriv = (DtTuristaDetallePrivado) usr;
             		%>
             			
@@ -161,8 +164,8 @@
 							                            <div class="card-body">
 							                                <h5 class="card-title"><%= cmp.getPaquete().getNombre()%> </h5>
 							                                <p class="card-text"><b>Cantidad turistas:</b> <%= cmp.getCantTuristas()%></p>
-							                                <p class="card-text"><b>Fecha de compra:</b> <%= cmp.getFechaCompra().toString()%></p>
-							                                <p class="card-text"><b>Fecha de vencimiento:</b> <%= cmp.getVencimiento().toString()%></p>
+							                                <p class="card-text"><b>Fecha de compra:</b> <%= cmp.getFechaCompraStr()%></p>
+							                                <p class="card-text"><b>Fecha de vencimiento:</b> <%= cmp.getVencimientoStr()%></p>
 							                                <p class="card-text"><b>Costo:</b> <%= cmp.getCosto()%>$</p>
 							                                <div class="botonera">
 							                                    <a href="ConsultaPaquete?id=<%=cmp.getPaquete().getNombre()%>" class="btn btn-primary">Ver mas</a>
@@ -211,7 +214,7 @@
 		                                             <h5 class="card-title"><%=insc.getSalida().getNombre()%></h5>
 		                                             <p class="card-text"><b>Cantidad turistas:</b> <%= insc.getCantidadTuristas()%></p>
 		                                             <p class="card-text"><b>Costo de la inscripción:</b> <%= insc.getCosto()%>$</p> 
-		                                             <p class="card-text"><b>Fecha de inscripción:</b> <%= insc.getFechaInscripcion()%></p>
+		                                             <p class="card-text"><b>Fecha de inscripción:</b> <%= insc.getFechaInscripcionStr()%></p>
 		                                             <%if(insc.getCompra() != null) {%>
 			                                             <p class="card-text"><b>Tipo de compra:</b> Con paquete</p>
 		                                             	 <p class="card-text"><b>Comprada con paquete:</b> <%= insc.getCompra().getPaquete().getNombre()%></p>
@@ -336,7 +339,7 @@
             				
             			<%} %>
 						<%
-						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname() == usr.getNickname()){%>
+						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())){%>
             				<% DtProveedorDetallePrivado prvPriv = (DtProveedorDetallePrivado) usr;%>
             				<%if(!prvPriv.getActividadesNoConfirmadas().getEntry().isEmpty()){ %>
 		        				<% for(DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry entrie: prvPriv.getActividadesNoConfirmadas().getEntry()){
