@@ -2,6 +2,7 @@ package logica.datatypes;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,9 +13,9 @@ import java.time.LocalDateTime;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTSalidaTuristica {
 	private String nombre;
-	private LocalDateTime fechaHoraSalida;
+	private String fechaHoraSalidaStr;
 	private String lugarSalida;
-	private LocalDate fechaAlta;
+	private String fechaAltaStr;
 	private int cantMaxTuristas;
 	private Imagen img;
 	private String actividad;
@@ -24,9 +25,9 @@ public class DTSalidaTuristica {
 	public DTSalidaTuristica(String nombre, LocalDateTime fechaHoraSalida, String lugarSalida, LocalDate fechaAlta,
 			int cantMaxTuristas, Imagen img, String actividad) {
 		this.nombre = nombre;
-		this.fechaHoraSalida = fechaHoraSalida;
+		this.fechaHoraSalidaStr = fechaHoraSalida.format(UtilsDT.formatterLocalDateTime);
 		this.lugarSalida = lugarSalida;
-		this.fechaAlta = fechaAlta;
+		this.fechaAltaStr = fechaAlta.format(UtilsDT.formatterLocalDate);
 		this.cantMaxTuristas = cantMaxTuristas;
 		this.img = img;
 		this.actividad = actividad;
@@ -37,7 +38,7 @@ public class DTSalidaTuristica {
 	}
 
 	public LocalDateTime getFechaHoraSalida() {
-		return fechaHoraSalida;
+		return LocalDateTime.parse(fechaHoraSalidaStr, UtilsDT.formatterLocalDateTime);
 	}
 
 	public String getLugarSalida() {
@@ -45,7 +46,7 @@ public class DTSalidaTuristica {
 	}
 
 	public LocalDate getFechaAlta() {
-		return fechaAlta;
+		return LocalDate.parse(fechaAltaStr, UtilsDT.formatterLocalDate);
 	}
 
 	public int getCantMaxTuristas() {
@@ -58,5 +59,13 @@ public class DTSalidaTuristica {
 
 	public String getActividad() {
 		return actividad;
+	}
+
+	public String getFechaHoraSalidaStr() {
+		return fechaHoraSalidaStr;
+	}
+
+	public String getFechaAltaStr() {
+		return fechaAltaStr;
 	}
 }
