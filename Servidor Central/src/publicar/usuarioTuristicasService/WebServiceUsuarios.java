@@ -5,6 +5,7 @@ import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
+import jakarta.annotation.Nullable;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
