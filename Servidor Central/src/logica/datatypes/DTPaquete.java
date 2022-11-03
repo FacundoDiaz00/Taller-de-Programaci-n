@@ -2,6 +2,7 @@ package logica.datatypes;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,8 @@ public class DTPaquete {
 	private int validez;
 	private List<String> categorias;
 	private Imagen img;
-	private LocalDate fechaRegistro;
+
+	private String fechaRegistroStr;
 
 	public DTPaquete(){}
 
@@ -29,7 +31,7 @@ public class DTPaquete {
 		this.descuento = descuento;
 		this.validez = validez;
 		this.categorias = categorias;
-		this.fechaRegistro = fechaAlta;
+		this.fechaRegistroStr = fechaAlta.format(UtilsDT.formatterLocalDate);
 		this.img = img;
 	}
 
@@ -58,6 +60,10 @@ public class DTPaquete {
 	}
 
 	public LocalDate getFechaRegistro() {
-		return fechaRegistro;
+		return LocalDate.parse(fechaRegistroStr, UtilsDT.formatterLocalDate);
+	}
+
+	public String getFechaRegistroStr() {
+		return fechaRegistroStr;
 	}
 }

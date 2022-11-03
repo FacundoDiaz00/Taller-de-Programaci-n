@@ -173,7 +173,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtTurista.setNombre(modN);
         	nuevoDtTurista.setApellido(modA);
         	nuevoDtTurista.setCorreo(correo);
-        	nuevoDtTurista.setFechaNac(fecha);
+        	nuevoDtTurista.setFechaNacStr(Utiles.localDateToString(fecha));
         	nuevoDtTurista.setImg(imgDt);
         	nuevoDtTurista.setNacionalidad(modNac);
 
@@ -192,7 +192,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtProv.setNombre(modN);
         	nuevoDtProv.setApellido(modA);
         	nuevoDtProv.setCorreo(correo);
-        	nuevoDtProv.setFechaNac(fecha);
+        	nuevoDtProv.setFechaNacStr(Utiles.localDateToString(fecha));
         	nuevoDtProv.setImg(imgDt);
         	nuevoDtProv.setDescrpicionGeneral(modD);
         	nuevoDtProv.setLink(modL);

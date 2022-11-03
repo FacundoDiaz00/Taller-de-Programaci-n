@@ -25,7 +25,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="validez" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
- *         <element name="fechaRegistro" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaRegistroStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -42,7 +42,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "validez",
     "categorias",
     "img",
-    "fechaRegistro"
+    "fechaRegistroStr"
 })
 public class DtPaquete {
 
@@ -53,7 +53,7 @@ public class DtPaquete {
     @XmlElement(nillable = true)
     protected List<String> categorias;
     protected Imagen img;
-    protected Object fechaRegistro;
+    protected String fechaRegistroStr;
 
     /**
      * Obtiene el valor de la propiedad nombre.
@@ -191,27 +191,27 @@ public class DtPaquete {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaRegistro.
+     * Obtiene el valor de la propiedad fechaRegistroStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaRegistro() {
-        return fechaRegistro;
+    public String getFechaRegistroStr() {
+        return fechaRegistroStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaRegistro.
+     * Define el valor de la propiedad fechaRegistroStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaRegistro(Object value) {
-        this.fechaRegistro = value;
+    public void setFechaRegistroStr(String value) {
+        this.fechaRegistroStr = value;
     }
 
 }

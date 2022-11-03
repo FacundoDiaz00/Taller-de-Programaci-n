@@ -17,9 +17,9 @@ import jakarta.xml.bind.annotation.XmlType;
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
  *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaHoraSalida" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaHoraSalidaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="lugarSalida" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaAlta" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" minOccurs="0"/>
+ *         <element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="cantMaxTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
  *         <element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -34,9 +34,9 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtSalidaTuristica", propOrder = {
     "nombre",
-    "fechaHoraSalida",
+    "fechaHoraSalidaStr",
     "lugarSalida",
-    "fechaAlta",
+    "fechaAltaStr",
     "cantMaxTuristas",
     "img",
     "actividad"
@@ -44,9 +44,9 @@ import jakarta.xml.bind.annotation.XmlType;
 public class DtSalidaTuristica {
 
     protected String nombre;
-    protected Object fechaHoraSalida;
+    protected String fechaHoraSalidaStr;
     protected String lugarSalida;
-    protected Object fechaAlta;
+    protected String fechaAltaStr;
     protected int cantMaxTuristas;
     protected Imagen img;
     protected String actividad;
@@ -76,27 +76,27 @@ public class DtSalidaTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaHoraSalida.
+     * Obtiene el valor de la propiedad fechaHoraSalidaStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaHoraSalida() {
-        return fechaHoraSalida;
+    public String getFechaHoraSalidaStr() {
+        return fechaHoraSalidaStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaHoraSalida.
+     * Define el valor de la propiedad fechaHoraSalidaStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaHoraSalida(Object value) {
-        this.fechaHoraSalida = value;
+    public void setFechaHoraSalidaStr(String value) {
+        this.fechaHoraSalidaStr = value;
     }
 
     /**
@@ -124,27 +124,27 @@ public class DtSalidaTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaAlta.
+     * Obtiene el valor de la propiedad fechaAltaStr.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFechaAlta() {
-        return fechaAlta;
+    public String getFechaAltaStr() {
+        return fechaAltaStr;
     }
 
     /**
-     * Define el valor de la propiedad fechaAlta.
+     * Define el valor de la propiedad fechaAltaStr.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFechaAlta(Object value) {
-        this.fechaAlta = value;
+    public void setFechaAltaStr(String value) {
+        this.fechaAltaStr = value;
     }
 
     /**

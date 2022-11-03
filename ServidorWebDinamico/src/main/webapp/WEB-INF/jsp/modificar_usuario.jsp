@@ -1,3 +1,4 @@
+<%@page import="utils.Utiles"%>
 <%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
 <%@page import="publicar.usuarioturisticasservice.DtTurista"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
@@ -131,7 +132,7 @@
 	                                                </div>
 	
 	                                                <div>
-	
+													
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Fecha de nacimiento:</span>
 	                                                        <input id="input-fecha-nacimiento"
@@ -142,7 +143,7 @@
 	                                                        placeholder="" 
 	                                                        aria-label="Fecha" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value=<%= usuario.getFechaNac().toString() %>
+	                                                        value=<%=Utiles.stringToLocalDate(usuario.getFechaNacStr()).toString()  %>
 	                                                        >
 	                                                    </div>
 	                                                  

@@ -27,6 +27,7 @@ public class ObjectFactory {
     private final static QName _ContraseniaInvalidaException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ContraseniaInvalidaException");
     private final static QName _ModificacionUsuarioNoPermitida_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ModificacionUsuarioNoPermitida");
     private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ObjetoNoExisteEnTurismoUy");
+    private final static QName _UsuarioYaRegistradoException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "UsuarioYaRegistradoException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: publicar.usuarioturisticasservice
@@ -113,6 +114,16 @@ public class ObjectFactory {
      */
     public ObjetoNoExisteEnTurismoUy createObjetoNoExisteEnTurismoUy() {
         return new ObjetoNoExisteEnTurismoUy();
+    }
+
+    /**
+     * Create an instance of {@link UsuarioYaRegistradoException }
+     * 
+     * @return
+     *     the new instance of {@link UsuarioYaRegistradoException }
+     */
+    public UsuarioYaRegistradoException createUsuarioYaRegistradoException() {
+        return new UsuarioYaRegistradoException();
     }
 
     /**
@@ -342,6 +353,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ObjetoNoExisteEnTurismoUy")
     public JAXBElement<ObjetoNoExisteEnTurismoUy> createObjetoNoExisteEnTurismoUy(ObjetoNoExisteEnTurismoUy value) {
         return new JAXBElement<>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UsuarioYaRegistradoException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link UsuarioYaRegistradoException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "UsuarioYaRegistradoException")
+    public JAXBElement<UsuarioYaRegistradoException> createUsuarioYaRegistradoException(UsuarioYaRegistradoException value) {
+        return new JAXBElement<>(_UsuarioYaRegistradoException_QNAME, UsuarioYaRegistradoException.class, null, value);
     }
 
 }
