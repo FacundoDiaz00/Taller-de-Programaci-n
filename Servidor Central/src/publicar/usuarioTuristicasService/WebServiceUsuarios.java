@@ -107,10 +107,13 @@ public class WebServiceUsuarios {
 
     @WebMethod
     public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra,
-                 String FNacimiento, Imagen img,
-                 String nacionalidad) throws UsuarioYaRegistradoException{
+                 String FNacimiento, byte[] img, String nacionalidad) throws UsuarioYaRegistradoException{
+
         LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
-        Fabrica.getInstancia().getIControladorUsuario().altaTurista(nickname, nombre, apellido, correo, contra, fNacLocalDate, img, nacionalidad);
+
+        
+
+        //Fabrica.getInstancia().getIControladorUsuario().altaTurista(nickname, nombre, apellido, correo, contra, fNacLocalDate, img, nacionalidad);
 
     }
 
