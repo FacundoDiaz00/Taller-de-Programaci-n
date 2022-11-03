@@ -1,5 +1,8 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import java.util.List;
  * @author Equipo taller prog 16
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTPaquete {
 	private String nombre;
 	private String descrpicion;
@@ -15,6 +19,8 @@ public class DTPaquete {
 	private List<String> categorias;
 	private Imagen img;
 	private LocalDate fechaRegistro;
+
+	public DTPaquete(){}
 
 	public DTPaquete(String nombre, String descrpicion, float descuento, int validez, List<String> categorias,
 			LocalDate fechaAlta, Imagen img) {

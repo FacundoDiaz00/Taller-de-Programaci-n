@@ -10,13 +10,14 @@
  --%>
 
 
-<%@page import="logica.datatypes.DTPaquete"%>
-<%@page import="logica.datatypes.DTActividadTuristica"%>
+<%@page import="publicar.paqueteturisticasservice.DtPaquete"%>
+
+<%@page import="publicar.actividadesturisticasservice.DtActividadTuristica"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="logica.datatypes.DTUsuario" %>
+<%@ page import="publicar.usuarioturisticasservice.DtUsuario" %>
 
 
 <!doctype html>
@@ -41,12 +42,12 @@
                 <h2 class="card-title">Actividades</h2>
                 
                 	<% 
-					List<DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
+					List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
 					
                 	if (actividades.isEmpty()) {%>
                 		<span>No hay actividades para mostrar aquí.</span>
                		<% } else {               	
-						for(DTActividadTuristica actividad: actividades){
+						for(DtActividadTuristica actividad: actividades){
 							%>
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0">
@@ -88,41 +89,38 @@
                 <h2 class="card-title">Paquetes</h2>
 
 			<% 
-				List<DTPaquete> paquetes = (List<DTPaquete>) request.getAttribute("paquetes");
+				List<DtPaquete> paquetes = (List<DtPaquete>) request.getAttribute("paquetes");
 					
 				if (paquetes.isEmpty()) {%>
 	    			<span>No hay paquetes para mostrar aquí.</span>
-	   		<% } else {               	
-					for(DTPaquete pack: paquetes) { %>
-
-
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4 img-contain">
-                        	<% 
-	            			String path = "";
-							if (pack.getImg() == null) {
-								path += "/noFoto.png";
-							} else {
-								path += pack.getImg().getPath();
-							}							
-							%>
-                            <img src="img<%=path%>" class="img-fluid rounded-start">
-                            <!-- Falta el manejo de foto de la verdadero paquete-->
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= pack.getNombre()%> </h5>
-                                <p class="card-text descripcion-paquete"><%= pack.getDescrpicion()%> </p>
-                                <div class="botonera">
-                                    <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+	   			<% } else {               	
+					for(DtPaquete pack: paquetes) { %>
+		                <div class="card mb-3" style="max-width: 800px;">
+		                    <div class="row g-0">
+		                        <div class="col-md-4 img-contain">
+		                        	<% 
+			            			String path = "";
+									if (pack.getImg() == null) {
+										path += "/noFoto.png";
+									} else {
+										path += pack.getImg().getPath();
+									}							
+									%>
+		                            <img src="img<%=path%>" class="img-fluid rounded-start">
+		                            <!-- Falta el manejo de foto de la verdadero paquete-->
+		                        </div>
+		                        <div class="col-md-8">
+		                            <div class="card-body">
+		                                <h5 class="card-title"><%= pack.getNombre()%> </h5>
+		                                <p class="card-text descripcion-paquete"><%= pack.getDescrpicion()%> </p>
+		                                <div class="botonera">
+		                                    <a href="ConsultaPaquete?id=<%=pack.getNombre()%>" class="btn btn-primary">Ver más</a>
+		                                </div>
+		
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
            <% } }%>
 
             </div>

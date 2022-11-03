@@ -2,6 +2,11 @@ package logica.datatypes;
 
 import java.time.LocalDate;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTInscripcion {
 	private LocalDate fechaInscripcion;
 	private int cantidadTuristas;
@@ -10,6 +15,8 @@ public class DTInscripcion {
 	private String turista;
 
 	private DTCompra compra;
+	
+	public DTInscripcion() {}
 
 	public DTInscripcion(LocalDate fechaInscripcion, int cantidadTuristas, float costo, DTSalidaTuristica salida, String turista, DTCompra compra) {
 		this.fechaInscripcion = fechaInscripcion;

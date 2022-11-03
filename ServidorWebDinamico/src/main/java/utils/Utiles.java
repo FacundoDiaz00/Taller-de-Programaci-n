@@ -1,10 +1,14 @@
 package utils;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import logica.controladores.Fabrica;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
 
 public class Utiles {
 
@@ -12,8 +16,8 @@ public class Utiles {
     }
 
     public static HttpServletRequest insertarLoDeSiempre(HttpServletRequest req) {
-        var departamentos = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
-        var categorias = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdCategorias();
+        List<String> departamentos = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdDepartamentos().getItem();
+        List<String> categorias = (new WebServiceActividadesService().getWebServiceActividadesPort()).obtenerIdCategorias().getItem();
 
         req.setAttribute("departamentos", departamentos);
         req.setAttribute("categorias", categorias);
@@ -55,6 +59,16 @@ public class Utiles {
             theDirSalis.mkdirs();
             theDirPacks.mkdirs();
         }
+    }
+    
+    public static LocalDate stringToLocalDate(String fecha) {
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    	return LocalDate.parse(fecha, formatter);
+    }
+    
+    public static LocalDateTime stringToLocalDateTime(String fechaYHora) {
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    	return LocalDateTime.parse(fechaYHora, formatter);
     }
 
 }

@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorActividadTuristica;
-import logica.controladores.IControladorPaquete;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTPaquete;
+import publicar.actividadesturisticasservice.WebServiceActividades;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.paqueteturisticasservice.WebServicePaquetes;
+import publicar.paqueteturisticasservice.WebServicePaquetesService;
+
+
 
 /**
  * Servlet implementation class IndexServlet
@@ -26,13 +26,13 @@ import logica.datatypes.DTPaquete;
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorActividadTuristica contrAct;
-    private IControladorPaquete contrPack;
+    private WebServiceActividades wbActi;
+    private WebServicePaquetes wbPack;
 
     public IndexServlet() {
         super();
-        contrAct = Fabrica.getInstancia().getIControladorActividadTuristica();
-        contrPack = Fabrica.getInstancia().getIControladorPaquete();
+        wbActi = new WebServiceActividadesService().getWebServiceActividadesPort();
+        wbPack = new WebServicePaquetesService().getWebServicePaquetesPort();
     }
 
     /**
@@ -58,8 +58,8 @@ public class IndexServlet extends HttpServlet {
             sesion.invalidate();
         }
 
-        var departamentos = contrAct.obtenerIdDepartamentos();
-        var categorias = contrAct.obtenerIdCategorias();
+        List<String> departamentos = wbActi.obtenerIdDepartamentos().getItem();
+        List<String> categorias = wbActi.obtenerIdCategorias().getItem();
 
         String departamentoElegido = (String) req.getParameter("idDepartamento");
         String categoriaElegida = (String) req.getParameter("idCategoria");
@@ -79,19 +79,23 @@ public class IndexServlet extends HttpServlet {
         departamentoElegido = (String) req.getAttribute("idDepartamento");
         categoriaElegida = (String) req.getAttribute("idCategoria");
 
-        List<DTActividadTuristica> actividades;
-        List<DTPaquete> paquetes;
+        List<publicar.actividadesturisticasservice.DtActividadTuristica> actividades;
+        List<publicar.paqueteturisticasservice.DtPaquete> paquetes;
 
         try {
             if (departamentoElegido != null) {
-                paquetes = contrPack.obtenerDTPaquetes(); // No se filtra
-                actividades = contrAct.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(departamentoElegido);
+                paquetes = wbPack.obtenerDtPaquetes().getPaquetes();
+                actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(departamentoElegido).getActividadTuristicas();
             } else {
-                paquetes = contrPack.obtenerDTPaquetesPorCategoria(categoriaElegida);
-                actividades = contrAct.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida);
+                paquetes =  wbPack.obtenerDTPaquetesPorCategoria(categoriaElegida).getPaquetes();
+                actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida).getActividadTuristicas();
             }
-        } catch (ObjetoNoExisteEnTurismoUy e) {
-            req.setAttribute("motivoDeError", "El nombre de la categoria/departamento no existe en el sistema");
+        } catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+            req.setAttribute("motivoDeError", "El nombre de la departamento no existe en el sistema");
+            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+            return;
+        } catch (publicar.paqueteturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+            req.setAttribute("motivoDeError", "El nombre de la categoria no existe en el sistema");
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
             return;
         }
