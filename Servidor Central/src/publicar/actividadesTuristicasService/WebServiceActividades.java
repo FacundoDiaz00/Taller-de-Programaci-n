@@ -8,6 +8,7 @@ import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.colleciones.DTPaqueteCollection;
 import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 
@@ -58,12 +59,17 @@ public class WebServiceActividades {
         return new DtActividadTuristicaCollection(Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoria));
     }
 
+    @WebMethod
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String id) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'obtenerDTActividadesTuristicasConfirmadasPorCategoria'");
         return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTActividadTuristicaDetalle(id);
-
     }
 
+    @WebMethod
+    public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String id) throws ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'obtenerDTActividadesTuristicasConfirmadasPorCategoria'");
+        return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTSalidaTuristicaDetalle(id);
+    }
 
 
 

@@ -3,6 +3,7 @@ package publicar.actividadesturisticasservice;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -40,6 +41,9 @@ import jakarta.xml.bind.annotation.XmlType;
     "cantMaxTuristas",
     "img",
     "actividad"
+})
+@XmlSeeAlso({
+    DtSalidaTuristicaDetalle.class
 })
 public class DtSalidaTuristica {
 

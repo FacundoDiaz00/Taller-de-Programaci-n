@@ -104,6 +104,26 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtCompra }
+     * 
+     * @return
+     *     the new instance of {@link DtCompra }
+     */
+    public DtCompra createDtCompra() {
+        return new DtCompra();
+    }
+
+    /**
+     * Create an instance of {@link DtInscripcion }
+     * 
+     * @return
+     *     the new instance of {@link DtInscripcion }
+     */
+    public DtInscripcion createDtInscripcion() {
+        return new DtInscripcion();
+    }
+
+    /**
      * Create an instance of {@link DtPaquete }
      * 
      * @return
@@ -121,6 +141,16 @@ public class ObjectFactory {
      */
     public DtSalidaTuristica createDtSalidaTuristica() {
         return new DtSalidaTuristica();
+    }
+
+    /**
+     * Create an instance of {@link DtSalidaTuristicaDetalle }
+     * 
+     * @return
+     *     the new instance of {@link DtSalidaTuristicaDetalle }
+     */
+    public DtSalidaTuristicaDetalle createDtSalidaTuristicaDetalle() {
+        return new DtSalidaTuristicaDetalle();
     }
 
     /**

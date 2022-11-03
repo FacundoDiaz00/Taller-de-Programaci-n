@@ -1,7 +1,7 @@
 
-<%@page import="logica.datatypes.DTTurista"%>
-<%@page import="logica.datatypes.DTSalidaTuristicaDetalle"%>
-<%@page import="logica.datatypes.DTSalidaTuristica"%>
+<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
+<%@page import="publicar.actividadesturisticasservice.DtSalidaTuristicaDetalle"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,7 +22,7 @@
     <section id="contenedor">
         <jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 
-		<% DTSalidaTuristicaDetalle infoSalida = (DTSalidaTuristicaDetalle)request.getAttribute("datosSalida");%>
+		<% DtSalidaTuristicaDetalle infoSalida = (DtSalidaTuristicaDetalle)request.getAttribute("datosSalida");%>
 
         <div id="titulo">
             <h1>Consulta de Salida turística</h1>
@@ -45,11 +45,11 @@
 
             <div id="info">
                 <h2><%= infoSalida.getNombre() %></h2>
-                <h6>Creado el <%= infoSalida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
+                <h6>Creado el <%= infoSalida.getFechaAltaStr() %></h6>
                 <% 
                 boolean turistaLogueado = false;
         		try {
-	        		DTTurista tur = (DTTurista) session.getAttribute("usuarioLogeado");
+	        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
 	        		turistaLogueado = tur != null;
         		} catch (Exception e) {
         			// nada
@@ -68,7 +68,7 @@
 
                 <div class="div-doble" id="FechaYhoraSalida">
                     <h5 class="label">Fecha y hora de partida: </h5>
-                    <p><%=infoSalida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm"))%> </p>
+                    <p><%=infoSalida.getFechaHoraSalidaStr()%> </p>
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="label">Capacidad de turistas: </h5>
