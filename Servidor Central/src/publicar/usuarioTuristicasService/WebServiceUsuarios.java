@@ -1,20 +1,23 @@
 package publicar.usuarioTuristicasService;
 
 import configuraciones.Cargador;
-import excepciones.*;
-import jakarta.annotation.Nullable;
+import excepciones.ContraseniaInvalidaException;
+import excepciones.ErrorAlProcesar;
+import excepciones.ModificacionUsuarioNoPermitida;
+import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.UsuarioYaRegistradoException;
 import jakarta.jws.WebMethod;
-import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
-import logica.datatypes.*;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
+import logica.datatypes.DTUsuario;
+import logica.datatypes.Imagen;
 import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
 import logica.utils.UtilsDT;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,41 +63,40 @@ public class WebServiceUsuarios {
     }
     
     @WebMethod
-    public DTUsuarioDetallePorTipo obtenerDTUsuarioDetalle(String nickname) throws ObjetoNoExisteEnTurismoUy{
+    public DTUsuario obtenerDTUsuarioDetalle(String nickname) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'obtenerDTUsuarioDetalle'");
-        return new DTUsuarioDetallePorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetalle(nickname));
+        return Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetalle(nickname);
     }
     
     @WebMethod
-    public DTUsuarioDetallePrivadoPorTipo obtenerDTUsuarioDetallePrivado(String nickname) throws ObjetoNoExisteEnTurismoUy{
+    public DTUsuario obtenerDTUsuarioDetallePrivado(String nickname) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'obtenerDTUsuarioDetallePrivado'");
-        return new DTUsuarioDetallePrivadoPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetallePrivado(nickname));
+        return Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetallePrivado(nickname);
     }
     
     @WebMethod
-    public DTUsuarioPorTipo obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy{
+    public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'obtenerDTUsuario'");
-        return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(nickname));
+        return Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuario(nickname);
     }
     
     @WebMethod
-    public void modificarUsuario(DTUsuarioPorTipo datosNuevos, String contrasenia, boolean borrarFoto) throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy{
-        log.info("Solicitud a 'obtenerDTUsuarios'");
-        DTUsuario datosss = datosNuevos.esTurista() ? datosNuevos.getDtTurista() : datosNuevos.getDtProveedor();
+    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, boolean borrarFoto) throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'modificarUsuario'");
         
-        Fabrica.getInstancia().getIControladorUsuario().modificarUsuario(datosss, contrasenia, borrarFoto);
+        Fabrica.getInstancia().getIControladorUsuario().modificarUsuario(datosNuevos, contrasenia, borrarFoto);
     }
     
     @WebMethod
-    public DTUsuarioPorTipo obtenerDtUsuarioPorNickname(String nickname, String contrasenia) throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException  {
+    public DTUsuario obtenerDtUsuarioPorNickname(String nickname, String contrasenia) throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException  {
         log.info("Solicitud a 'obtenerDtUsuarioPorNickname'");
-        return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorNickname(nickname, contrasenia));
+        return Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorNickname(nickname, contrasenia);
     }
     
     @WebMethod
-    public DTUsuarioPorTipo obtenerDtUsuarioPorEmail(String email, String contrasenia) throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException  {
-        log.info("Solicitud a 'obtenerDtUsuarioPorNickname'");
-        return new DTUsuarioPorTipo(Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorEmail(email, contrasenia));
+    public DTUsuario obtenerDtUsuarioPorEmail(String email, String contrasenia) throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException  {
+        log.info("Solicitud a 'obtenerDtUsuarioPorEmail'");
+        return Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioPorEmail(email, contrasenia);
     }
 
     @WebMethod
@@ -103,7 +105,7 @@ public class WebServiceUsuarios {
                               byte[] imgContent, String extImg , String descripcion, String link) throws UsuarioYaRegistradoException, ErrorAlProcesar {
         LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
 
-        if(link != null && link.trim().length() == 0){
+        if (link != null && link.trim().length() == 0){
             link = null;
         }
 
@@ -136,8 +138,6 @@ public class WebServiceUsuarios {
         if (imgContent.length > 0) {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
         }
-
-
 
     }
 

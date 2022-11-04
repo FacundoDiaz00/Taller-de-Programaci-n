@@ -48,6 +48,26 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtPaqueteDetalles }
+     * 
+     * @return
+     *     the new instance of {@link DtPaqueteDetalles }
+     */
+    public DtPaqueteDetalles createDtPaqueteDetalles() {
+        return new DtPaqueteDetalles();
+    }
+
+    /**
+     * Create an instance of {@link DtPaqueteDetalles.Actividades }
+     * 
+     * @return
+     *     the new instance of {@link DtPaqueteDetalles.Actividades }
+     */
+    public DtPaqueteDetalles.Actividades createDtPaqueteDetallesActividades() {
+        return new DtPaqueteDetalles.Actividades();
+    }
+
+    /**
      * Create an instance of {@link DtActividadTuristicaDetalle }
      * 
      * @return
@@ -325,6 +345,16 @@ public class ObjectFactory {
      */
     public DtActividadTuristicaCollection createDtActividadTuristicaCollection() {
         return new DtActividadTuristicaCollection();
+    }
+
+    /**
+     * Create an instance of {@link DtPaqueteDetalles.Actividades.Entry }
+     * 
+     * @return
+     *     the new instance of {@link DtPaqueteDetalles.Actividades.Entry }
+     */
+    public DtPaqueteDetalles.Actividades.Entry createDtPaqueteDetallesActividadesEntry() {
+        return new DtPaqueteDetalles.Actividades.Entry();
     }
 
     /**

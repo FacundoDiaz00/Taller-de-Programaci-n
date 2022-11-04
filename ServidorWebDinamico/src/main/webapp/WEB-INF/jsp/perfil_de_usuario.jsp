@@ -10,6 +10,8 @@
 <%@page import="publicar.usuarioturisticasservice.*"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 
  
@@ -300,27 +302,40 @@
             			<%} %>
 						<%
 
-						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())){%>
-            				<% DtProveedorDetallePrivado prvPriv = (DtProveedorDetallePrivado) usr;%>
+						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())){
+            				DtProveedorDetallePrivado prvPriv = (DtProveedorDetallePrivado) usr;
             				
-            				<%if(!prvPriv.getActividadesNoConfirmadas().getEntry().isEmpty()){ %>
-		        				<% for(DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry entrie: prvPriv.getActividadesNoConfirmadas().getEntry()){
-		        					List<DtActividadTuristica> actividades = entrie.getValue();
-		        					String estadoAct = "";
-		        					switch (entrie.getKey()) {
+            				Map<EstadoActividadTuristica, List<DtActividadTuristica>> map = new HashMap<>();
+            				
+            				map.put(EstadoActividadTuristica.AGREGADA, prvPriv.getActividadesAgregadas());
+            				map.put(EstadoActividadTuristica.FINALIZADA, prvPriv.getActividadesFinalizadas());
+            				map.put(EstadoActividadTuristica.RECHAZADA, prvPriv.getActividadesRechazadas());
+            				
+            				if (prvPriv.getActividadesAgregadas().size() + prvPriv.getActividadesFinalizadas().size() + prvPriv.getActividadesRechazadas().size() > 0) {
+	            				%>
+	           					<h4>Actividades no confirmadas:</h4>
+	        				<% }
+	        				for(EstadoActividadTuristica estado: map.keySet()) {
+	        						List<DtActividadTuristica> actividades = map.get(estado);
+	        						
+	        						if (actividades.size() <= 0)
+	        							continue;
+	        						
+	        						String estadoAct = "";
+		        					switch (estado) {
 		        					case AGREGADA:
-		        						estadoAct = "Agregada";
+		        						estadoAct = "agregadas";
 		        						break;
 		        					case FINALIZADA:
-		        						estadoAct = "Finalizada";
+		        						estadoAct = "finalizadas";
 		        						break;
 		        					case RECHAZADA:
-		        						estadoAct = "Rechazada";
+		        						estadoAct = "rechazadas";
 		        						break;
 		        					default:
 		        						break;
 		        					}
-		        					
+		        					%> <h5>Actividades <%=estadoAct%>:</h5> <%
 		        					for (DtActividadTuristica acti : actividades) { %>
 			        					<div class="card mb-3" style="max-width: 850px;">
 						                    <div class="row g-0">
@@ -330,7 +345,7 @@
 						                        <div class="col-md-8">
 						                            <div class="card-body">
 						                                <h5 class="card-title"><%=acti.getNombre()%></h5>
-						                                <p class="card-text descripcion-actividad"><%=acti.getDescripcion() + "\nEstado: " + estadoAct%></p>
+						                                <p class="card-text descripcion-actividad"><%=acti.getDescripcion()%></p>
 						                                <div class="botonera">
 						                            		<a href="ConsultaActividad?id=<%=acti.getNombre()%>" class="btn btn-primary">Ver más</a>
 						                            	</div>
@@ -338,11 +353,9 @@
 						                        </div>
 						                    </div>
 						                </div>
-		        				<%} }%>
-        				<%}else{ %>
-            				<p>No hay información.</p>
-            			<%} %>
-						<%} %>
+		        					<% } %>
+        					<% } %>
+						<% } %>
             			</div>
             			<div class="tab-pane fade" id="boton-salidasprov-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="3">
             			

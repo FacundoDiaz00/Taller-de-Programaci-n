@@ -3,6 +3,7 @@ package logica.datatypes;
 import jakarta.annotation.Nullable;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso(DTProveedorDetalle.class)
 public class DTProveedor extends DTUsuario {
 
 	private String descrpicionGeneral;

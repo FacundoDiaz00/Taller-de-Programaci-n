@@ -2,6 +2,7 @@ package logica.datatypes;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso(DTPaqueteDetalles.class)
 public class DTPaquete {
 	private String nombre;
 	private String descrpicion;

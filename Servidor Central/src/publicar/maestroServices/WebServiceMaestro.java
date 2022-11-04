@@ -37,7 +37,7 @@ public class WebServiceMaestro {
     public byte[] getImg(String path) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'getImg'");
         File imgFile = new File(Cargador.getDirrectorioImagenes() + path);
-        if(imgFile.exists()){
+        if (imgFile.exists()){
             try{
                 FileInputStream imgStream = new FileInputStream(imgFile);
                 byte[] contenido = imgStream.readAllBytes();

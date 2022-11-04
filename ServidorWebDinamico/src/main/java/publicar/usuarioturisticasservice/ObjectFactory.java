@@ -38,23 +38,23 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtProveedorDetallePrivado }
+     * Create an instance of {@link DtPaqueteDetalles }
      * 
      * @return
-     *     the new instance of {@link DtProveedorDetallePrivado }
+     *     the new instance of {@link DtPaqueteDetalles }
      */
-    public DtProveedorDetallePrivado createDtProveedorDetallePrivado() {
-        return new DtProveedorDetallePrivado();
+    public DtPaqueteDetalles createDtPaqueteDetalles() {
+        return new DtPaqueteDetalles();
     }
 
     /**
-     * Create an instance of {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas }
+     * Create an instance of {@link DtPaqueteDetalles.Actividades }
      * 
      * @return
-     *     the new instance of {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas }
+     *     the new instance of {@link DtPaqueteDetalles.Actividades }
      */
-    public DtProveedorDetallePrivado.ActividadesNoConfirmadas createDtProveedorDetallePrivadoActividadesNoConfirmadas() {
-        return new DtProveedorDetallePrivado.ActividadesNoConfirmadas();
+    public DtPaqueteDetalles.Actividades createDtPaqueteDetallesActividades() {
+        return new DtPaqueteDetalles.Actividades();
     }
 
     /**
@@ -198,6 +198,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtProveedorDetallePrivado }
+     * 
+     * @return
+     *     the new instance of {@link DtProveedorDetallePrivado }
+     */
+    public DtProveedorDetallePrivado createDtProveedorDetallePrivado() {
+        return new DtProveedorDetallePrivado();
+    }
+
+    /**
      * Create an instance of {@link DtSalidaTuristica }
      * 
      * @return
@@ -205,6 +215,16 @@ public class ObjectFactory {
      */
     public DtSalidaTuristica createDtSalidaTuristica() {
         return new DtSalidaTuristica();
+    }
+
+    /**
+     * Create an instance of {@link DtSalidaTuristicaDetalle }
+     * 
+     * @return
+     *     the new instance of {@link DtSalidaTuristicaDetalle }
+     */
+    public DtSalidaTuristicaDetalle createDtSalidaTuristicaDetalle() {
+        return new DtSalidaTuristicaDetalle();
     }
 
     /**
@@ -248,36 +268,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtUsuarioDetallePorTipo }
-     * 
-     * @return
-     *     the new instance of {@link DtUsuarioDetallePorTipo }
-     */
-    public DtUsuarioDetallePorTipo createDtUsuarioDetallePorTipo() {
-        return new DtUsuarioDetallePorTipo();
-    }
-
-    /**
-     * Create an instance of {@link DtUsuarioDetallePrivadoPorTipo }
-     * 
-     * @return
-     *     the new instance of {@link DtUsuarioDetallePrivadoPorTipo }
-     */
-    public DtUsuarioDetallePrivadoPorTipo createDtUsuarioDetallePrivadoPorTipo() {
-        return new DtUsuarioDetallePrivadoPorTipo();
-    }
-
-    /**
-     * Create an instance of {@link DtUsuarioPorTipo }
-     * 
-     * @return
-     *     the new instance of {@link DtUsuarioPorTipo }
-     */
-    public DtUsuarioPorTipo createDtUsuarioPorTipo() {
-        return new DtUsuarioPorTipo();
-    }
-
-    /**
      * Create an instance of {@link Imagen }
      * 
      * @return
@@ -298,13 +288,13 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry }
+     * Create an instance of {@link DtPaqueteDetalles.Actividades.Entry }
      * 
      * @return
-     *     the new instance of {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry }
+     *     the new instance of {@link DtPaqueteDetalles.Actividades.Entry }
      */
-    public DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry createDtProveedorDetallePrivadoActividadesNoConfirmadasEntry() {
-        return new DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry();
+    public DtPaqueteDetalles.Actividades.Entry createDtPaqueteDetallesActividadesEntry() {
+        return new DtPaqueteDetalles.Actividades.Entry();
     }
 
     /**

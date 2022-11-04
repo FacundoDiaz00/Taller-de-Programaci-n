@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * @author Equipo taller prog 16
@@ -12,6 +13,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso(DTTuristaDetallePrivado.class)
 public class DTTuristaDetalle extends DTTurista {
 	private List<DTSalidaTuristica> inscripcionesSalidas;
 	private List<String> seguidos;

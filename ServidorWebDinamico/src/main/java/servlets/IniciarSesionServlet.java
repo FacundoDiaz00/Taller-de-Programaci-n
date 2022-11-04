@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import publicar.usuarioturisticasservice.DtUsuario;
-import publicar.usuarioturisticasservice.DtUsuarioPorTipo;
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.usuarioturisticasservice.ContraseniaInvalidaException_Exception;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
@@ -57,18 +56,16 @@ public class IniciarSesionServlet extends HttpServlet {
 
         try {
 
-            DtUsuarioPorTipo usuario;
+            DtUsuario usuario;
             if (tipoID.equals("1")) {
                 usuario = wbUser.obtenerDtUsuarioPorEmail(email, password);
             } else {
                 usuario = wbUser.obtenerDtUsuarioPorNickname(nickname, password);
-            }
-            DtUsuario logueado = usuario.isEsTurista() ? usuario.getDtTurista() : usuario.getDtProveedor();
+            }            
             
-            
-            req.setAttribute("usuarioLogeado", logueado);
+            req.setAttribute("usuarioLogeado", usuario);
             HttpSession sesion = req.getSession(true);
-            sesion.setAttribute("usuarioLogeado", logueado);
+            sesion.setAttribute("usuarioLogeado", usuario);
             resp.sendRedirect("index");
 
         } catch (ObjetoNoExisteEnTurismoUy_Exception e) {

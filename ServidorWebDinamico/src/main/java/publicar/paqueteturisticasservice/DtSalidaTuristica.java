@@ -1,5 +1,5 @@
 
-package publicar.usuarioturisticasservice;
+package publicar.paqueteturisticasservice;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -22,7 +22,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="lugarSalida" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="cantMaxTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
+ *         <element name="img" type="{http://paqueteTuristicasService.publicar/}imagen" minOccurs="0"/>
  *         <element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       </sequence>
  *     </restriction>

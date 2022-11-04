@@ -9,7 +9,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
-import publicar.usuarioturisticasservice.Imagen;
 
 public class Utiles {
 

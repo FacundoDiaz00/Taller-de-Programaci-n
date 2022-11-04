@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -19,28 +19,9 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <extension base="{http://usuarioTuristicasService.publicar/}dtProveedorDetalle">
  *       <sequence>
- *         <element name="actividadesNoConfirmadas" minOccurs="0">
- *           <complexType>
- *             <complexContent>
- *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 <sequence>
- *                   <element name="entry" maxOccurs="unbounded" minOccurs="0">
- *                     <complexType>
- *                       <complexContent>
- *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           <sequence>
- *                             <element name="key" type="{http://usuarioTuristicasService.publicar/}estadoActividadTuristica" minOccurs="0"/>
- *                             <element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *                           </sequence>
- *                         </restriction>
- *                       </complexContent>
- *                     </complexType>
- *                   </element>
- *                 </sequence>
- *               </restriction>
- *             </complexContent>
- *           </complexType>
- *         </element>
+ *         <element name="actividadesAgregadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="actividadesFinalizadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="actividadesRechazadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </extension>
  *   </complexContent>
@@ -51,197 +32,112 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtProveedorDetallePrivado", propOrder = {
-    "actividadesNoConfirmadas"
+    "actividadesAgregadas",
+    "actividadesFinalizadas",
+    "actividadesRechazadas"
 })
 public class DtProveedorDetallePrivado
     extends DtProveedorDetalle
 {
 
-    protected DtProveedorDetallePrivado.ActividadesNoConfirmadas actividadesNoConfirmadas;
+    @XmlElement(nillable = true)
+    protected List<DtActividadTuristica> actividadesAgregadas;
+    @XmlElement(nillable = true)
+    protected List<DtActividadTuristica> actividadesFinalizadas;
+    @XmlElement(nillable = true)
+    protected List<DtActividadTuristica> actividadesRechazadas;
 
     /**
-     * Obtiene el valor de la propiedad actividadesNoConfirmadas.
+     * Gets the value of the actividadesAgregadas property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the actividadesAgregadas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActividadesAgregadas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DtActividadTuristica }
+     * 
      * 
      * @return
-     *     possible object is
-     *     {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas }
-     *     
+     *     The value of the actividadesAgregadas property.
      */
-    public DtProveedorDetallePrivado.ActividadesNoConfirmadas getActividadesNoConfirmadas() {
-        return actividadesNoConfirmadas;
+    public List<DtActividadTuristica> getActividadesAgregadas() {
+        if (actividadesAgregadas == null) {
+            actividadesAgregadas = new ArrayList<>();
+        }
+        return this.actividadesAgregadas;
     }
 
     /**
-     * Define el valor de la propiedad actividadesNoConfirmadas.
+     * Gets the value of the actividadesFinalizadas property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the actividadesFinalizadas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActividadesFinalizadas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DtActividadTuristica }
+     * 
+     * 
+     * @return
+     *     The value of the actividadesFinalizadas property.
      */
-    public void setActividadesNoConfirmadas(DtProveedorDetallePrivado.ActividadesNoConfirmadas value) {
-        this.actividadesNoConfirmadas = value;
+    public List<DtActividadTuristica> getActividadesFinalizadas() {
+        if (actividadesFinalizadas == null) {
+            actividadesFinalizadas = new ArrayList<>();
+        }
+        return this.actividadesFinalizadas;
     }
 
-
     /**
-     * <p>Clase Java para anonymous complex type.
+     * Gets the value of the actividadesRechazadas property.
      * 
-     * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the actividadesRechazadas property.
      * 
-     * <pre>{@code
-     * <complexType>
-     *   <complexContent>
-     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       <sequence>
-     *         <element name="entry" maxOccurs="unbounded" minOccurs="0">
-     *           <complexType>
-     *             <complexContent>
-     *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                 <sequence>
-     *                   <element name="key" type="{http://usuarioTuristicasService.publicar/}estadoActividadTuristica" minOccurs="0"/>
-     *                   <element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
-     *                 </sequence>
-     *               </restriction>
-     *             </complexContent>
-     *           </complexType>
-     *         </element>
-     *       </sequence>
-     *     </restriction>
-     *   </complexContent>
-     * </complexType>
-     * }</pre>
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActividadesRechazadas().add(newItem);
+     * </pre>
      * 
      * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DtActividadTuristica }
+     * 
+     * 
+     * @return
+     *     The value of the actividadesRechazadas property.
      */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "entry"
-    })
-    public static class ActividadesNoConfirmadas {
-
-        protected List<DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry> entry;
-
-        /**
-         * Gets the value of the entry property.
-         * 
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the Jakarta XML Binding object.
-         * This is why there is not a {@code set} method for the entry property.
-         * 
-         * <p>
-         * For example, to add a new item, do as follows:
-         * <pre>
-         *    getEntry().add(newItem);
-         * </pre>
-         * 
-         * 
-         * <p>
-         * Objects of the following type(s) are allowed in the list
-         * {@link DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry }
-         * 
-         * 
-         * @return
-         *     The value of the entry property.
-         */
-        public List<DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry> getEntry() {
-            if (entry == null) {
-                entry = new ArrayList<>();
-            }
-            return this.entry;
+    public List<DtActividadTuristica> getActividadesRechazadas() {
+        if (actividadesRechazadas == null) {
+            actividadesRechazadas = new ArrayList<>();
         }
-
-
-        /**
-         * <p>Clase Java para anonymous complex type.
-         * 
-         * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
-         * 
-         * <pre>{@code
-         * <complexType>
-         *   <complexContent>
-         *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *       <sequence>
-         *         <element name="key" type="{http://usuarioTuristicasService.publicar/}estadoActividadTuristica" minOccurs="0"/>
-         *         <element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
-         *       </sequence>
-         *     </restriction>
-         *   </complexContent>
-         * </complexType>
-         * }</pre>
-         * 
-         * 
-         */
-        @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "key",
-            "value"
-        })
-        public static class Entry {
-
-            @XmlSchemaType(name = "string")
-            protected EstadoActividadTuristica key;
-            protected List<DtActividadTuristica> value;
-
-            /**
-             * Obtiene el valor de la propiedad key.
-             * 
-             * @return
-             *     possible object is
-             *     {@link EstadoActividadTuristica }
-             *     
-             */
-            public EstadoActividadTuristica getKey() {
-                return key;
-            }
-
-            /**
-             * Define el valor de la propiedad key.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link EstadoActividadTuristica }
-             *     
-             */
-            public void setKey(EstadoActividadTuristica value) {
-                this.key = value;
-            }
-
-            /**
-             * Gets the value of the value property.
-             * 
-             * <p>
-             * This accessor method returns a reference to the live list,
-             * not a snapshot. Therefore any modification you make to the
-             * returned list will be present inside the Jakarta XML Binding object.
-             * This is why there is not a {@code set} method for the value property.
-             * 
-             * <p>
-             * For example, to add a new item, do as follows:
-             * <pre>
-             *    getValue().add(newItem);
-             * </pre>
-             * 
-             * 
-             * <p>
-             * Objects of the following type(s) are allowed in the list
-             * {@link DtActividadTuristica }
-             * 
-             * 
-             * @return
-             *     The value of the value property.
-             */
-            public List<DtActividadTuristica> getValue() {
-                if (value == null) {
-                    value = new ArrayList<>();
-                }
-                return this.value;
-            }
-
-        }
-
+        return this.actividadesRechazadas;
     }
 
 }
