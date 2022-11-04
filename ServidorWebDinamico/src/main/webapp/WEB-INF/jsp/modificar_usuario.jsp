@@ -246,7 +246,6 @@
         <script>
         $(document).ready(function(){
             $(".botonModificar").click(function(){
-            	console.log('holllo')
                 $("#myModal").modal('show');
             });
             $(".close").click(function(){
