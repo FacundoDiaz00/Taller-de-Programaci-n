@@ -121,7 +121,6 @@ public class WebServiceUsuarios {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
         }
 
-
     }
 
     @WebMethod

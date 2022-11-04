@@ -55,12 +55,12 @@
 			                        	<% 
 				            			String path = "";
 										if (actividad.getImg() == null) {
-											path += "/noFoto.png";
+											path += "img/noFoto.png";
 										} else {
-											path += actividad.getImg().getPath();
+											path += "Imagen?href=" + actividad.getImg().getPath();
 										}							
 										%>
-			                            <img src="img<%=path%>" class="img-fluid rounded-start">
+			                            <img src="<%=path%>" class="img-fluid rounded-start">
 			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">

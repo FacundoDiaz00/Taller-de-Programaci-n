@@ -4,6 +4,7 @@ import configuraciones.Cargador;
 import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
 import publicar.actividadesTuristicasService.WebServiceActividades;
+import publicar.maestroServices.WebServiceMaestro;
 import publicar.paqueteTuristicasService.WebServicePaquetes;
 import publicar.usuarioTuristicasService.WebServiceUsuarios;
 
@@ -26,9 +27,11 @@ public class Main {
 		WebServiceActividades webServiceActividades = new WebServiceActividades();
 		WebServicePaquetes webServicePaquetes = new WebServicePaquetes();
 		WebServiceUsuarios webServiceUsuarios = new WebServiceUsuarios();
+		WebServiceMaestro webServiceMaestro = new WebServiceMaestro();
 		webServiceActividades.publicar();
 		webServicePaquetes.publicar();
 		webServiceUsuarios.publicar();
+		webServiceMaestro.publicar();
 	}
 
 }
