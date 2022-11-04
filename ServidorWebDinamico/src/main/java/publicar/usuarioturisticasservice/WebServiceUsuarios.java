@@ -29,24 +29,6 @@ public interface WebServiceUsuarios {
      * 
      * @param arg0
      * @return
-     *     returns publicar.usuarioturisticasservice.DtUsuarioDetallePrivadoPorTipo
-     * @throws ObjetoNoExisteEnTurismoUy_Exception
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivadoRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivadoResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivado/Fault/ObjetoNoExisteEnTurismoUy")
-    })
-    public DtUsuarioDetallePrivadoPorTipo obtenerDTUsuarioDetallePrivado(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws ObjetoNoExisteEnTurismoUy_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @return
      *     returns publicar.usuarioturisticasservice.DtUsuarioDetallePorTipo
      * @throws ObjetoNoExisteEnTurismoUy_Exception
      */
@@ -64,24 +46,155 @@ public interface WebServiceUsuarios {
     /**
      * 
      * @param arg0
-     * @param arg1
      * @return
-     *     returns publicar.usuarioturisticasservice.DtUsuarioPorTipo
-     * @throws ContraseniaInvalidaException_Exception
+     *     returns publicar.usuarioturisticasservice.DtUsuarioDetallePrivadoPorTipo
      * @throws ObjetoNoExisteEnTurismoUy_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmailRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmailResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmail/Fault/ObjetoNoExisteEnTurismoUy"),
-        @FaultAction(className = ContraseniaInvalidaException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmail/Fault/ContraseniaInvalidaException")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivadoRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivadoResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioDetallePrivado/Fault/ObjetoNoExisteEnTurismoUy")
     })
-    public DtUsuarioPorTipo obtenerDtUsuarioPorEmail(
+    public DtUsuarioDetallePrivadoPorTipo obtenerDTUsuarioDetallePrivado(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @param arg4
+     * @param arg5
+     * @param arg6
+     * @param arg7
+     * @param arg8
+     * @throws IOException_Exception
+     * @throws UsuarioYaRegistradoException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTuristaRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTuristaResponse", fault = {
+        @FaultAction(className = UsuarioYaRegistradoException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTurista/Fault/UsuarioYaRegistradoException"),
+        @FaultAction(className = IOException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTurista/Fault/IOException")
+    })
+    public void altaTurista(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
-        String arg1)
-        throws ContraseniaInvalidaException_Exception, ObjetoNoExisteEnTurismoUy_Exception
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        String arg4,
+        @WebParam(name = "arg5", partName = "arg5")
+        String arg5,
+        @WebParam(name = "arg6", partName = "arg6")
+        byte[] arg6,
+        @WebParam(name = "arg7", partName = "arg7")
+        String arg7,
+        @WebParam(name = "arg8", partName = "arg8")
+        String arg8)
+        throws IOException_Exception, UsuarioYaRegistradoException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @param arg4
+     * @param arg5
+     * @param arg6
+     * @param arg7
+     * @param arg8
+     * @param arg9
+     * @throws IOException_Exception
+     * @throws UsuarioYaRegistradoException_Exception
+     */
+    @WebMethod
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedorRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedorResponse", fault = {
+        @FaultAction(className = UsuarioYaRegistradoException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedor/Fault/UsuarioYaRegistradoException"),
+        @FaultAction(className = IOException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedor/Fault/IOException")
+    })
+    public void altaProveedor(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        String arg4,
+        @WebParam(name = "arg5", partName = "arg5")
+        String arg5,
+        @WebParam(name = "arg6", partName = "arg6")
+        byte[] arg6,
+        @WebParam(name = "arg7", partName = "arg7")
+        String arg7,
+        @WebParam(name = "arg8", partName = "arg8")
+        String arg8,
+        @WebParam(name = "arg9", partName = "arg9")
+        String arg9)
+        throws IOException_Exception, UsuarioYaRegistradoException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @throws ModificacionUsuarioNoPermitida_Exception
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuarioRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuarioResponse", fault = {
+        @FaultAction(className = ModificacionUsuarioNoPermitida_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuario/Fault/ModificacionUsuarioNoPermitida"),
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuario/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public void modificarUsuario(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtUsuarioPorTipo arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        boolean arg2)
+        throws ModificacionUsuarioNoPermitida_Exception, ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosResponse")
+    public DtUsuarioSeparadosPorTipoCollection obtenerDTUsuarios();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns publicar.usuarioturisticasservice.DtUsuarioPorTipo
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuario/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public DtUsuarioPorTipo obtenerDTUsuario(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
     ;
 
     /**
@@ -110,127 +223,24 @@ public interface WebServiceUsuarios {
     /**
      * 
      * @param arg0
+     * @param arg1
      * @return
      *     returns publicar.usuarioturisticasservice.DtUsuarioPorTipo
+     * @throws ContraseniaInvalidaException_Exception
      * @throws ObjetoNoExisteEnTurismoUy_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuarioResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuario/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmailRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmailResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmail/Fault/ObjetoNoExisteEnTurismoUy"),
+        @FaultAction(className = ContraseniaInvalidaException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDtUsuarioPorEmail/Fault/ContraseniaInvalidaException")
     })
-    public DtUsuarioPorTipo obtenerDTUsuario(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws ObjetoNoExisteEnTurismoUy_Exception
-    ;
-
-    /**
-     * 
-     * @return
-     *     returns publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/obtenerDTUsuariosResponse")
-    public DtUsuarioSeparadosPorTipoCollection obtenerDTUsuarios();
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @param arg4
-     * @param arg5
-     * @param arg6
-     * @param arg7
-     * @throws UsuarioYaRegistradoException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTuristaRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTuristaResponse", fault = {
-        @FaultAction(className = UsuarioYaRegistradoException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaTurista/Fault/UsuarioYaRegistradoException")
-    })
-    public void altaTurista(
+    public DtUsuarioPorTipo obtenerDtUsuarioPorEmail(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        String arg4,
-        @WebParam(name = "arg5", partName = "arg5")
-        String arg5,
-        @WebParam(name = "arg6", partName = "arg6")
-        Imagen arg6,
-        @WebParam(name = "arg7", partName = "arg7")
-        String arg7)
-        throws UsuarioYaRegistradoException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @param arg4
-     * @param arg5
-     * @param arg6
-     * @param arg7
-     * @param arg8
-     * @throws UsuarioYaRegistradoException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedorRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedorResponse", fault = {
-        @FaultAction(className = UsuarioYaRegistradoException_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/altaProveedor/Fault/UsuarioYaRegistradoException")
-    })
-    public void altaProveedor(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        String arg4,
-        @WebParam(name = "arg5", partName = "arg5")
-        String arg5,
-        @WebParam(name = "arg6", partName = "arg6")
-        Imagen arg6,
-        @WebParam(name = "arg7", partName = "arg7")
-        String arg7,
-        @WebParam(name = "arg8", partName = "arg8")
-        String arg8)
-        throws UsuarioYaRegistradoException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @param arg1
-     * @param arg2
-     * @throws ModificacionUsuarioNoPermitida_Exception
-     * @throws ObjetoNoExisteEnTurismoUy_Exception
-     */
-    @WebMethod
-    @Action(input = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuarioRequest", output = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuarioResponse", fault = {
-        @FaultAction(className = ModificacionUsuarioNoPermitida_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuario/Fault/ModificacionUsuarioNoPermitida"),
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://usuarioTuristicasService.publicar/WebServiceUsuarios/modificarUsuario/Fault/ObjetoNoExisteEnTurismoUy")
-    })
-    public void modificarUsuario(
-        @WebParam(name = "arg0", partName = "arg0")
-        DtUsuarioPorTipo arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        boolean arg2)
-        throws ModificacionUsuarioNoPermitida_Exception, ObjetoNoExisteEnTurismoUy_Exception
+        String arg1)
+        throws ContraseniaInvalidaException_Exception, ObjetoNoExisteEnTurismoUy_Exception
     ;
 
 }

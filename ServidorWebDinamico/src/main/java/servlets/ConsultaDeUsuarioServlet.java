@@ -179,7 +179,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
         	datosNuevos.setEsTurista(true);
         	datosNuevos.setDtTurista(nuevoDtTurista);
-        	
+        	datosNuevos.setDtProveedor(new DtProveedor());
         }
         else {
         	modD = request.getParameter("modificar_descripcion");
@@ -199,6 +199,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
         	datosNuevos.setEsTurista(false);
         	datosNuevos.setDtProveedor(nuevoDtProv);
+        	datosNuevos.setDtTurista(new DtTurista());
         }
         
         	try {
