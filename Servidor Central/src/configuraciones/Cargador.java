@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Cargador {
 
-    private static final String UBICACION_ARCHIVO_PROPIEDADES = "/tProgProyecto/configuraciones/";
+    private static final String UBICACION_ARCHIVO_PROPIEDADES = "/.tProgProyecto/configuraciones/";
     private static final String ARCHIVO_CONFIGURACIONES_SERVIDOR_CENTRAL = "servidorConfiguracion.properties";
 
     private static String dirrecionAHacerDeploy;

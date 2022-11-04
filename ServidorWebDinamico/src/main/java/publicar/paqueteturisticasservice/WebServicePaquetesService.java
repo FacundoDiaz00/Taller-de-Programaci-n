@@ -17,7 +17,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServicePaquetesService", targetNamespace = "http://paqueteTuristicasService.publicar/", wsdlLocation = "http://localhost:5060/webservicesActividades/paquetes?wsdl")
+@WebServiceClient(name = "WebServicePaquetesService", targetNamespace = "http://paqueteTuristicasService.publicar/", wsdlLocation = "http://localhost:5558/webservices/paquetes?wsdl")
 public class WebServicePaquetesService
     extends Service
 {
@@ -30,7 +30,7 @@ public class WebServicePaquetesService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:5060/webservicesActividades/paquetes?wsdl");
+            url = new URL("http://localhost:5558/webservices/paquetes?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

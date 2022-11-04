@@ -7,14 +7,17 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
 import jakarta.annotation.Nullable;
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
 import logica.datatypes.*;
 import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
 import logica.utils.UtilsDT;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,20 +103,45 @@ public class WebServiceUsuarios {
     @WebMethod
     public void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra,
                               String FNacimiento,
-                              Imagen img, String descripcion, String link) throws UsuarioYaRegistradoException{
+                              byte[] imgContent, String extImg , String descripcion, String link) throws UsuarioYaRegistradoException, IOException {
         LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
-        Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nickname, nombre, apellido, correo, contra, fNacLocalDate, img, descripcion, link);
+
+        if(link != null && link.trim().length() == 0){
+            link = null;
+        }
+
+        Imagen imgMetaData = null;
+        if (imgContent.length > 0){
+            imgMetaData = new Imagen("/usuarios/" + nickname + extImg);
+        }
+
+        Fabrica.getInstancia().getIControladorUsuario().altaProveedor(nickname, nombre, apellido, correo, contra, fNacLocalDate, imgMetaData, descripcion, link);
+
+        if (imgContent.length > 0) {
+            UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
+        }
+
+
     }
 
     @WebMethod
     public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra,
-                 String FNacimiento, byte[] img, String nacionalidad) throws UsuarioYaRegistradoException{
+                 String FNacimiento, byte[] imgContent, String extImg, String nacionalidad) throws UsuarioYaRegistradoException, IOException{
 
         LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
 
-        
+        Imagen imgMetaData = null;
+        if (imgContent.length > 0){
+            imgMetaData = new Imagen("/usuarios/" + nickname + extImg);
+        }
 
-        //Fabrica.getInstancia().getIControladorUsuario().altaTurista(nickname, nombre, apellido, correo, contra, fNacLocalDate, img, nacionalidad);
+        Fabrica.getInstancia().getIControladorUsuario().altaTurista(nickname, nombre, apellido, correo, contra, fNacLocalDate, imgMetaData, nacionalidad);
+
+        if (imgContent.length > 0) {
+            UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
+        }
+
+
 
     }
 

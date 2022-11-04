@@ -45,16 +45,6 @@ public interface WebServicePaquetes {
 
     /**
      * 
-     * @return
-     *     returns publicar.paqueteturisticasservice.DtPaqueteCollection
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesResponse")
-    public DtPaqueteCollection obtenerDtPaquetes();
-
-    /**
-     * 
      * @param arg0
      * @param arg1
      * @param arg2
@@ -95,5 +85,15 @@ public interface WebServicePaquetes {
         String arg0)
         throws ObjetoNoExisteEnTurismoUy_Exception
     ;
+
+    /**
+     * 
+     * @return
+     *     returns publicar.paqueteturisticasservice.DtPaqueteCollection
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesResponse")
+    public DtPaqueteCollection obtenerDtPaquetes();
 
 }
