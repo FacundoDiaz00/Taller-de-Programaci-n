@@ -10,6 +10,7 @@
  --%>
 
 
+<%@page import="utils.Utiles"%>
 <%@page import="publicar.paqueteturisticasservice.DtPaquete"%>
 
 <%@page import="publicar.actividadesturisticasservice.DtActividadTuristica"%>
@@ -52,15 +53,7 @@
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0">
 			                        <div class="col-md-4 img-contain">
-			                        	<% 
-				            			String path = "";
-										if (actividad.getImg() == null) {
-											path += "img/noFoto.png";
-										} else {
-											path += "Imagen?href=" + actividad.getImg().getPath();
-										}							
-										%>
-			                            <img src="<%=path%>" class="img-fluid rounded-start">
+			                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
 			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
@@ -98,15 +91,8 @@
 		                <div class="card mb-3" style="max-width: 800px;">
 		                    <div class="row g-0">
 		                        <div class="col-md-4 img-contain">
-		                        	<% 
-			            			String path = "";
-									if (pack.getImg() == null) {
-										path += "/noFoto.png";
-									} else {
-										path += pack.getImg().getPath();
-									}							
-									%>
-		                            <img src="img<%=path%>" class="img-fluid rounded-start">
+
+		                            <img src="<%=Utiles.obtenerUrlParaImagen(pack.getImg())%>" class="img-fluid rounded-start">
 		                            <!-- Falta el manejo de foto de la verdadero paquete-->
 		                        </div>
 		                        <div class="col-md-8">

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.usuarioturisticasservice.Imagen;
 
 public class Utiles {
 
@@ -79,6 +80,28 @@ public class Utiles {
     
     public static String localDateTimeToString(LocalDateTime fechaYHora) {
     	return fechaYHora.format(Utiles.formatterLocalDateTime);
+    }
+    
+    public static String obtenerUrlParaImagen(publicar.actividadesturisticasservice.Imagen img) {
+    	if(img == null) {
+    		return "img/noFoto.png";
+    	} else {
+    		return "Imagen?href=" + img.getPath();
+    	}
+    }
+    public static String obtenerUrlParaImagen(publicar.usuarioturisticasservice.Imagen img) {
+    	if(img == null) {
+    		return "img/noFoto.png";
+    	} else {
+    		return "Imagen?href=" + img.getPath();
+    	}
+    }
+    public static String obtenerUrlParaImagen(publicar.paqueteturisticasservice.Imagen img) {
+    	if(img == null) {
+    		return "img/noFoto.png";
+    	} else {
+    		return "Imagen?href=" + img.getPath();
+    	}
     }
 
 }

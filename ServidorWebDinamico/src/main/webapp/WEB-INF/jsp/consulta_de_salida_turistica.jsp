@@ -1,4 +1,5 @@
 
+<%@page import="utils.Utiles"%>
 <%@page import="publicar.usuarioturisticasservice.DtTurista"%>
 <%@page import="publicar.actividadesturisticasservice.DtSalidaTuristicaDetalle"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
@@ -18,7 +19,6 @@
 
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
-
     <section id="contenedor">
         <jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 
@@ -31,16 +31,8 @@
         <div id="info-salida">
 
 
-            <div id="info-general-imagen">            
-                 <% 
-		            String pathSalida = "";
-					if (infoSalida.getImg() == null) {
-						pathSalida += "/noFoto.png";
-					} else {
-						pathSalida += infoSalida.getImg().getPath();
-					}							
-					%>
-				    <img src="img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+            <div id="info-general-imagen">                             
+			    <img src="<%=Utiles.obtenerUrlParaImagen(infoSalida.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
             </div>
 
             <div id="info">
@@ -90,15 +82,8 @@
 	        	<div class="card mb-3 card-actividad" style="max-width: 800px;">
 	                    <div class="row g-0">
 	                        <div class="col-md-4 img-contain">
-	                        	<% 
-		            			String path = "";
-								if (infoSalida.getDtActividad().getImg() == null) {
-									path += "/noFoto.png";
-								} else {
-									path += infoSalida.getDtActividad().getImg().getPath();
-								}							
-								%>
-	                            <img src="img<%=path%>" class="img-fluid rounded-start">
+
+	                            <img src="<%=Utiles.obtenerUrlParaImagen(infoSalida.getDtActividad().getImg())%>" class="img-fluid rounded-start">
 	                            <!-- Falta el manejo de foto de la verdadero paquete-->
 	                        </div>
 	                        <div class="col-md-8">

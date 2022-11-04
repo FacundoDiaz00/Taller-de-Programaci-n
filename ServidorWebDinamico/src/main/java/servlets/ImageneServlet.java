@@ -35,7 +35,6 @@ public class ImageneServlet extends HttpServlet {
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String href = (String) request.getParameter("href");
-		System.out.print(href);
 		try {
 			String ext = Utiles.devolverExtencionDelNombreDeArchivo(href);
 			byte[] content = wbMaster.getImg(href);

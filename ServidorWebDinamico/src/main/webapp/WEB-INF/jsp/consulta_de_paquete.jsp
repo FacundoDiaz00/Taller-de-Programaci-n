@@ -7,7 +7,7 @@
 
  --%>
 
-
+<%@page import="utils.Utiles"%>
 <%@page import="publicar.usuarioturisticasservice.DtTurista"%>
 <%@page import="publicar.paqueteturisticasservice.DtPaqueteDetalles.Actividades.Entry"%>
 <%@page import="publicar.paqueteturisticasservice.DtActividadTuristica"%>
@@ -52,21 +52,13 @@
 	        <div id="info-paquete">
 	
 	
-	            <div id="info-general-imagen">
-	            			<% 
-	            			String path = "";
-							if (paquete.getImg() == null) {
-								path += "/noFoto.png";
-							} else {
-								path += paquete.getImg().getPath();
-							}							
-							%>
-			                <img src="img<%=path%>" alt="">
+	            <div id="info-general-imagen">	            			
+			                <img src="<%=Utiles.obtenerUrlParaImagen(paquete.getImg())%>" alt="">
 	            </div>
 	
 	            <div id="info">
 	                <h2><%=paquete.getNombre()%></h2>
-	                <h6>Creado el <%=paquete.getFechaRegistro().toString()%></h6>
+	                <h6>Creado el <%=paquete.getFechaRegistroStr()%></h6>
 	
 	            </div>
 	
@@ -149,16 +141,8 @@
 		                <div class="card mb-3" style="max-width: 800px;">
 		                    <div class="row g-0">
 		                        <div class="col-md-4 img-contain">
-		                        	
-		                        	<% 
-			            			String pathImagen = "";
-									if (act.getImg() == null) {
-										pathImagen += "noFoto.png";
-									} else {
-										pathImagen += act.getImg().getPath();
-									}							
-									%>
-					                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+
+					                <img src="<%=Utiles.obtenerUrlParaImagen(act.getImg())%>" alt="" class="img-fluid rounded-start imagen">
 		                        </div>
 		                        <div class="col-md-8">
 		                            <div class="card-body card-actividad">
