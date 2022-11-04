@@ -8,6 +8,7 @@ import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
 import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.Imagen;
 import logica.datatypes.colleciones.DTPaqueteCollection;
@@ -95,8 +96,15 @@ public class WebServiceActividades {
 
 
     @WebMethod
+    public DTSalidaTuristica obtenerDTSalidaTuristica(String nomSalida) throws ObjetoNoExisteEnTurismoUy {
+        log.info("Solicitud a 'altaActividadTuristica'");
+        return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTSalidaTuristica(nomSalida);
+    }
+
+    @WebMethod
     public void altaSalidaTuristica(String actividad, String nombreSalida, String fechaYHoraSalidaStr,
                              String lugar, int cantMaxTur, byte[] imgContent, String extImg) throws FechaAltaSalidaPosteriorAFechaSalidaException, ActividadTuristicaNoAceptada, FechaAltaActividadPosteriorAFechaAltaSalidaException, ObjetoNoExisteEnTurismoUy, SalidaYaRegistradaException, ErrorAlProcesar {
+        log.info("Solicitud a 'altaSalidaTuristica'");
         LocalDateTime fechaHoraSalida = LocalDateTime.parse(fechaYHoraSalidaStr, UtilsDT.formatterLocalDateTime);
 
         Imagen imgMetaData = null;
@@ -113,6 +121,7 @@ public class WebServiceActividades {
 
     @WebMethod
     public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) throws ObjetoNoExisteEnTurismoUy {
+        log.info("Solicitud a 'obtenerIdComprasDisponiblesParaInscripcion'");
         return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdComprasDisponiblesParaInscripcion(nombreActividad, nickTurista);
     }
 
@@ -123,6 +132,7 @@ public class WebServiceActividades {
             CompraPaqueteVencidoExcepcion, CompraConConsumosInsuficientesExcepcion, PaqueteNoCompradoExcepcion,
             NoExisteConsumoParaLaActividadExcepcion, ObjetoNoExisteEnTurismoUy{
 
+        log.info("Solicitud a 'altaInscripcionSalidaTuristica'");
         if (nombrePaquete  != null  && nombrePaquete.trim().length() == 0){
            nombrePaquete  =  null;
         }
