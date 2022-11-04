@@ -1,4 +1,4 @@
-
+<%@page import="utils.Utiles"%>
 <%@ page import="java.util.List" %>
 <%@page import="logica.datatypes.DTSalidaTuristica"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -111,15 +111,8 @@
     </div>
     <div id="contenedorDer">
         <div class="card" style="width: 18rem;">  
-            <% DTSalidaTuristica salida = (DTSalidaTuristica) request.getAttribute("salida");
-  			String path = "";
-		if (salida.getImg() == null) {
-			path += "/noFoto.png";
-		} else {
-			path += salida.getImg().getPath();
-		}							
-		%>	
-            <img src="img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
+            <% DTSalidaTuristica salida = (DTSalidaTuristica) request.getAttribute("salida");%>	
+            <img src="<%=Utiles.obtenerUrlParaImagen(salida.getImg())%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">

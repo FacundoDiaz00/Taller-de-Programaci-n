@@ -1,3 +1,4 @@
+<%@page import="utils.Utiles"%>
 <%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 
@@ -35,17 +36,7 @@
 							<div class="card mb-3" style="max-width: 800px; margin-left: 15px">
 				                <div class="row g-0">
 				                    <div class="col-md-4 img-contain">
-				                        <%
-				                        String imgpath;
-				                        if(usr.getImg() != null){
-					                        imgpath = "img" + usr.getImg().getPath();
-
-				                        }else{
-				                        	imgpath = "img/noFoto.png";
-				                        }
-														                        
-				                        %>
-				                        <img src="<%=imgpath%>" class="img-fluid rounded-start">
+				                        <img src="<%=Utiles.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
 				                    </div>
 				                    <div class="col-md-8">
 				                        <div class="card-body">

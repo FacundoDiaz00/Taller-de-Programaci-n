@@ -5,6 +5,7 @@
 
 
  --%>
+ <%@page import="utils.Utiles"%>
 <%@page import="publicar.actividadesturisticasservice.DtActividadTuristicaDetalle"%>
 <%@page import="publicar.actividadesturisticasservice.EstadoActividadTuristica"%>
 <%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
@@ -43,15 +44,7 @@
 
 
             <div id="info-general-imagen">
-                <% 
-        		String path = "";
-				if (datosActividad.getImg() == null) {
-					path += "/noFoto.png";
-				} else {
-					path += datosActividad.getImg().getPath();
-				}							
-				%>
-                <img src="img<%=path%>" alt="">
+                <img src="<%=Utiles.obtenerUrlParaImagen(datosActividad.getImg())%>" alt="">
             </div>
 
             <div id="info">
@@ -151,15 +144,8 @@
 	                    <div class="card mb-3" style="max-width: 800px;">
 	                        <div class="row g-0">
 	                            <div class="col-md-4 img-contain">
-	                                 <% 
-			            			String pathSalida = "";
-									if (salida.getImg() == null) {
-										pathSalida += "/noFoto.png";
-									} else {
-										pathSalida += salida.getImg().getPath();
-									}							
-									%>
-					                <img src="img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
+	                                 
+					                <img src="<%=Utiles.obtenerUrlParaImagen(salida.getImg())%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
 	                            </div>
 	                            <div class="col-md-8">
 	                                <div class="card-body">
@@ -206,16 +192,8 @@
 	                        <div class="row g-0">
 	                            <div class="col-md-4 img-contain">
 	
-	                           
-	                                <% 
-			            			String pathPack = "";
-									if (pack.getImg() == null) {
-										pathPack += "/noFoto.png";
-									} else {
-										pathPack += pack.getImg().getPath();
-									}							
-									%>
-					                <img src="img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+	  
+					                <img src="<%=Utiles.obtenerUrlParaImagen(pack.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
 	                                
 	                            </div>
 	                            <div class="col-md-8">

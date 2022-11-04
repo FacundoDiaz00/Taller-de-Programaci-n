@@ -6,7 +6,7 @@
 
  --%>
 
-
+<%@page import="utils.Utiles"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -50,16 +50,8 @@
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                            <%=usuario.getNombre() %>
-	                            
-	                            <% 
-				        		String path = "";
-								if (usuario.getImg() == null) {
-									path += "/noFoto.png";
-								} else {
-									path += usuario.getImg().getPath();
-								}							
-								%>
-				                <img class="imagen_perfil " src="img<%=path%>" alt="">
+
+				                <img class="imagen_perfil " src="<%=Utiles.obtenerUrlParaImagen(usuario.getImg())%>" alt="">
 	                            
 	                        </a>
 	                        <ul class="dropdown-menu" id="dropDown">

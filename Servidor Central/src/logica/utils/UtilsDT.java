@@ -20,7 +20,7 @@ public class UtilsDT {
             FileOutputStream imgFileStream = new FileOutputStream(fileImg);
             imgFileStream.write(content);
             imgFileStream.close();
-        } catch (Exception e){
+        } catch (IOException e){
             e.printStackTrace();
             throw new IOException();
         }

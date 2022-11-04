@@ -4,6 +4,7 @@
 	DtUsuario "usr"
 
  --%>
+ <%@page import="utils.Utiles"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="publicar.usuarioturisticasservice.DtActividadTuristicaDetalle.Salidas.Entry"%>
 <%@page import="publicar.usuarioturisticasservice.*"%>
@@ -35,19 +36,11 @@
 		if(usr!= null){%>
 			<div id="contenedor-items">
 				
-				<%
-				String imgpath;
-				if(usr.getImg() != null){
-					imgpath = "img" + usr.getImg().getPath();
-				}else{
-					imgpath = "img/noFoto.png";
-				}
-				%>
 				
             			<div class="card mb-3" style="max-width: 540px;">
 						  	<div class="row g-0">
 						    	<div class="col-md-4">
-						    		<img src="<%=imgpath%>" class="img-fluid rounded-start">
+						    		<img src="<%=Utiles.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
 						    	</div>
 						    	<div class="col-md-8">
 						      		<div class="card-body">
@@ -149,15 +142,7 @@
 							                    <div class="row g-0">
 
 							                        <div class="col-md-4 img-contain">
-							                        	<% 
-								            			String path = "";
-														if (cmp.getPaquete().getImg() == null) {
-															path += "/noFoto.png";
-														} else {
-															path += cmp.getPaquete().getImg().getPath();
-														}							
-														%>
-							                            <img src="img<%=path%>" class="img-fluid rounded-start">
+							                            <img src="<%=Utiles.obtenerUrlParaImagen(cmp.getPaquete().getImg())%>" class="img-fluid rounded-start">
 							                            <!-- Falta el manejo de foto de la verdadero paquete-->
 							                        </div>
 							                        <div class="col-md-8">
@@ -196,17 +181,8 @@
 		            			%>	
 		                            <div class="card mb-3 imagenSalidas" style="max-width: 800px;">
 		                                <div class="row g-0">
-		                                    <div class="col-md-4 img-contain">
-		                                    
-		                                    	<% 
-						            			String pathImagen = "";
-												if (insc.getSalida().getImg() == null) {
-													pathImagen += "/noFoto.png";
-												} else {
-													pathImagen += insc.getSalida().getImg().getPath();
-												}							
-												%>
-								                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+		                                    <div class="col-md-4 img-contain">		                                   
+								                <img src="<%=Utiles.obtenerUrlParaImagen(insc.getSalida().getImg())%>" alt="" class="img-fluid rounded-start imagenSalidas">
 		                                    
 		                                    </div>
 		                                    <div class="col-md-8">
@@ -250,15 +226,7 @@
 			                                <div class="row g-0">
 			                                    <div class="col-md-4 img-contain">
 			                                    
-			                                    	<% 
-							            			String pathImagen = "";
-													if (sal.getImg() == null) {
-														pathImagen += "/noFoto.png";
-													} else {
-														pathImagen += sal.getImg().getPath();
-													}							
-													%>
-									                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagenSalidas">
+									                <img src="<%=Utiles.obtenerUrlParaImagen(sal.getImg())%>" alt="" class="img-fluid rounded-start imagenSalidas">
 			                                    
 			                                    </div>
 			                                    <div class="col-md-8">
@@ -299,15 +267,7 @@
 			                    <div class="row g-0">
 			                        <div class="col-md-4 img-contain">
 			              
-			                        	<% 
-				            			String pathImagen = "";
-										if (act.getImg() == null) {
-											pathImagen += "/noFoto.png";
-										} else {
-											pathImagen += act.getImg().getPath();
-										}							
-										%>
-						                <img src="img<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+						                <img src="<%=Utiles.obtenerUrlParaImagen(act.getImg())%>" alt="" class="img-fluid rounded-start imagen">
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
@@ -363,15 +323,7 @@
 			        					<div class="card mb-3" style="max-width: 850px;">
 						                    <div class="row g-0">
 						                        <div class="col-md-4 img-contain">
-						                        	<% 
-							            			String pathImagen = "";
-													if (acti.getImg() == null) {
-														pathImagen += "/noFoto.png";
-													} else {
-														pathImagen += acti.getImg().getPath();
-													}							
-													%>
-									                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+									                <img src="<%=Utiles.obtenerUrlParaImagen(acti.getImg())%>" alt="" class="img-fluid rounded-start imagen">
 						                        </div>
 						                        <div class="col-md-8">
 						                            <div class="card-body">
@@ -406,15 +358,7 @@
 			                                <div class="row g-0">
 			                                    <div class="col-md-4 img-contain">
 			                                        <div id="info-general-imagen">            
-									                 	<% 
-											            String pathSalida = "";
-														if (sal.getImg() == null) {
-															pathSalida += "/noFoto.png";
-														} else {
-															pathSalida += sal.getImg().getPath();
-														}							
-														%>
-													    <img src="img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+													    <img src="<%=Utiles.obtenerUrlParaImagen(sal.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
 													</div>
 			                                    </div>
 			                                    <div class="col-md-8">
@@ -445,7 +389,7 @@
 	<script src="js/popUp_modificar_usuario.js"></script>
     <script>
         $(document).ready(function(){
-            $(".btn").click(function(){
+            $(".botonModificar").click(function(){
                 $("#myModal").modal('show');
             });
             $(".close").click(function(){

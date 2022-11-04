@@ -18,7 +18,7 @@
 	
 <div class="bs-example">
                             <!-- Button HTML (to Trigger Modal) -->
-                            <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
+                            <button type="button" class="botonModificar btn btn-lg btn-primary">Editar perfil</button>
 
                             
                             <% DtUsuario usuario = (DtUsuario) session.getAttribute("usuarioLogeado"); %>
@@ -245,7 +245,8 @@
     <%} %>
         <script>
         $(document).ready(function(){
-            $(".btn").click(function(){
+            $(".botonModificar").click(function(){
+            	console.log('holllo')
                 $("#myModal").modal('show');
             });
             $(".close").click(function(){
