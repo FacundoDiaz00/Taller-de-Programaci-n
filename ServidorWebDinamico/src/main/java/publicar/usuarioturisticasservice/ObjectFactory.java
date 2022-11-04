@@ -25,7 +25,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
     private final static QName _ContraseniaInvalidaException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ContraseniaInvalidaException");
-    private final static QName _IOException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "IOException");
+    private final static QName _ErrorAlProcesar_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ErrorAlProcesar");
     private final static QName _ModificacionUsuarioNoPermitida_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ModificacionUsuarioNoPermitida");
     private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ObjetoNoExisteEnTurismoUy");
     private final static QName _UsuarioYaRegistradoException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "UsuarioYaRegistradoException");
@@ -98,13 +98,13 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IOException }
+     * Create an instance of {@link ErrorAlProcesar }
      * 
      * @return
-     *     the new instance of {@link IOException }
+     *     the new instance of {@link ErrorAlProcesar }
      */
-    public IOException createIOException() {
-        return new IOException();
+    public ErrorAlProcesar createErrorAlProcesar() {
+        return new ErrorAlProcesar();
     }
 
     /**
@@ -341,16 +341,16 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IOException }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ErrorAlProcesar }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link IOException }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ErrorAlProcesar }{@code >}
      */
-    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "IOException")
-    public JAXBElement<IOException> createIOException(IOException value) {
-        return new JAXBElement<>(_IOException_QNAME, IOException.class, null, value);
+    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ErrorAlProcesar")
+    public JAXBElement<ErrorAlProcesar> createErrorAlProcesar(ErrorAlProcesar value) {
+        return new JAXBElement<>(_ErrorAlProcesar_QNAME, ErrorAlProcesar.class, null, value);
     }
 
     /**

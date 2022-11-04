@@ -1,10 +1,7 @@
 package publicar.usuarioTuristicasService;
 
 import configuraciones.Cargador;
-import excepciones.ContraseniaInvalidaException;
-import excepciones.ModificacionUsuarioNoPermitida;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.UsuarioYaRegistradoException;
+import excepciones.*;
 import jakarta.annotation.Nullable;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
@@ -103,7 +100,7 @@ public class WebServiceUsuarios {
     @WebMethod
     public void altaProveedor(String nickname, String nombre, String apellido, String correo, String contra,
                               String FNacimiento,
-                              byte[] imgContent, String extImg , String descripcion, String link) throws UsuarioYaRegistradoException, IOException {
+                              byte[] imgContent, String extImg , String descripcion, String link) throws UsuarioYaRegistradoException, ErrorAlProcesar {
         LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
 
         if(link != null && link.trim().length() == 0){
@@ -125,7 +122,7 @@ public class WebServiceUsuarios {
 
     @WebMethod
     public void altaTurista(String nickname, String nombre, String apellido, String correo, String contra,
-                 String FNacimiento, byte[] imgContent, String extImg, String nacionalidad) throws UsuarioYaRegistradoException, IOException{
+                 String FNacimiento, byte[] imgContent, String extImg, String nacionalidad) throws UsuarioYaRegistradoException, ErrorAlProcesar {
 
         LocalDate fNacLocalDate = LocalDate.parse(FNacimiento, UtilsDT.formatterLocalDate);
 

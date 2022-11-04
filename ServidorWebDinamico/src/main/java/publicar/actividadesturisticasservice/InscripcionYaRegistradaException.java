@@ -1,5 +1,5 @@
 
-package publicar.usuarioturisticasservice;
+package publicar.actividadesturisticasservice;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -7,12 +7,12 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para IOException complex type.
+ * <p>Clase Java para InscripcionYaRegistradaException complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>{@code
- * <complexType name="IOException">
+ * <complexType name="InscripcionYaRegistradaException">
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
@@ -26,10 +26,10 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IOException", propOrder = {
+@XmlType(name = "InscripcionYaRegistradaException", propOrder = {
     "message"
 })
-public class IOException {
+public class InscripcionYaRegistradaException {
 
     protected String message;
 

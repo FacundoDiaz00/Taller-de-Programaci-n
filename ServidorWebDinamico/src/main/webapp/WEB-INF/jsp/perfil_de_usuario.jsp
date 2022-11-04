@@ -299,8 +299,10 @@
             				
             			<%} %>
 						<%
+
 						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())){%>
             				<% DtProveedorDetallePrivado prvPriv = (DtProveedorDetallePrivado) usr;%>
+            				
             				<%if(!prvPriv.getActividadesNoConfirmadas().getEntry().isEmpty()){ %>
 		        				<% for(DtProveedorDetallePrivado.ActividadesNoConfirmadas.Entry entrie: prvPriv.getActividadesNoConfirmadas().getEntry()){
 		        					List<DtActividadTuristica> actividades = entrie.getValue();

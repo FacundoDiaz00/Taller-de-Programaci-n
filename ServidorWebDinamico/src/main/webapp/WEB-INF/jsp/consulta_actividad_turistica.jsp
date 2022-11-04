@@ -130,7 +130,7 @@
 
 					<%
 					
-					if(datosActividad.getSalidas().getEntry().size() == 0){
+					if(datosActividad.getSalidas() == null || datosActividad.getSalidas().getEntry().size() == 0){
 					%>
 						<span style="margin-left: 10px">Sin informacion</span>
 					<%
@@ -181,7 +181,7 @@
                     <h2 class="card-title">Paquetes:</h2>
 
 					<%
-					if(datosActividad.getPaquetes().getEntry().size() == 0){%>	
+					if(datosActividad.getPaquetes() == null || datosActividad.getPaquetes().getEntry().size() == 0){%>	
 						<span style="margin-left: 10px">Sin informacion</span>
 					<%} else {%>
 						<%for(publicar.actividadesturisticasservice.DtActividadTuristicaDetalle.Paquetes.Entry entryPack: datosActividad.getPaquetes().getEntry()){

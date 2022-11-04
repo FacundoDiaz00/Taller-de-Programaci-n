@@ -1,6 +1,7 @@
 package logica.utils;
 
 import configuraciones.Cargador;
+import excepciones.ErrorAlProcesar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +14,7 @@ public class UtilsDT {
 
     public static final DateTimeFormatter formatterLocalDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    public static void guardarImagen(String relativePath, byte[] content) throws IOException {
+    public static void guardarImagen(String relativePath, byte[] content) throws ErrorAlProcesar {
         try{
             File fileImg = new File(Cargador.getDirrectorioImagenes() + relativePath);
             fileImg.createNewFile();
@@ -22,7 +23,7 @@ public class UtilsDT {
             imgFileStream.close();
         } catch (IOException e){
             e.printStackTrace();
-            throw new IOException();
+            throw new ErrorAlProcesar("No se pudo guardar la imagen");
         }
 
     }

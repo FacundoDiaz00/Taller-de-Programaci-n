@@ -17,7 +17,7 @@ import javax.servlet.http.Part;
 
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.paqueteturisticasservice.WebServicePaquetes;
-import publicar.usuarioturisticasservice.IOException_Exception;
+import publicar.usuarioturisticasservice.ErrorAlProcesar_Exception;
 import publicar.usuarioturisticasservice.Imagen;
 import publicar.usuarioturisticasservice.UsuarioYaRegistradoException_Exception;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
@@ -111,7 +111,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
         } catch (UsuarioYaRegistradoException_Exception e) {
             req.setAttribute("motivoDeError",
                     "Ya existe un usuario con este nickname o con ese correo, cambie alguno de estos y pruebe nuevamente");
-        } catch (IOException_Exception e) {
+        } catch (ErrorAlProcesar_Exception e) {
         	req.setAttribute("motivoDeError",
                     "Error al procesar la solicitud");
         }

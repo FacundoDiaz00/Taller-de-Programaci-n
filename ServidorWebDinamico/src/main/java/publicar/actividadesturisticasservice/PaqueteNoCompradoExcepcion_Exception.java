@@ -1,5 +1,5 @@
 
-package publicar.usuarioturisticasservice;
+package publicar.actividadesturisticasservice;
 
 import jakarta.xml.ws.WebFault;
 
@@ -10,8 +10,8 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "IOException", targetNamespace = "http://usuarioTuristicasService.publicar/")
-public class IOException_Exception
+@WebFault(name = "PaqueteNoCompradoExcepcion", targetNamespace = "http://actividadesTuristicasService.publicar/")
+public class PaqueteNoCompradoExcepcion_Exception
     extends Exception
 {
 
@@ -19,14 +19,14 @@ public class IOException_Exception
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
-    private IOException faultInfo;
+    private PaqueteNoCompradoExcepcion faultInfo;
 
     /**
      * 
      * @param faultInfo
      * @param message
      */
-    public IOException_Exception(String message, IOException faultInfo) {
+    public PaqueteNoCompradoExcepcion_Exception(String message, PaqueteNoCompradoExcepcion faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class IOException_Exception
      * @param faultInfo
      * @param message
      */
-    public IOException_Exception(String message, IOException faultInfo, Throwable cause) {
+    public PaqueteNoCompradoExcepcion_Exception(String message, PaqueteNoCompradoExcepcion faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }
@@ -45,9 +45,9 @@ public class IOException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: publicar.usuarioturisticasservice.IOException
+     *     returns fault bean: publicar.actividadesturisticasservice.PaqueteNoCompradoExcepcion
      */
-    public IOException getFaultInfo() {
+    public PaqueteNoCompradoExcepcion getFaultInfo() {
         return faultInfo;
     }
 

@@ -138,7 +138,7 @@
                         		placeholder="Ingrese una cuidad" 
                         		aria-label="Cuidad" 
                         		aria-describedby="basic-addon1">
-                    </div>
+                    </div>                    
 
                     <div class="contenedorinput mb-3">
                         <span class="input-label">Imagen:</span>

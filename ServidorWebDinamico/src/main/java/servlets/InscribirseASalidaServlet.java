@@ -96,8 +96,8 @@ public class InscribirseASalidaServlet extends HttpServlet {
             resp.sendRedirect("index");
             return;
         }
-        LocalDate fechaInscripcion = LocalDate.now();
-        String nombrePaquete = null;
+
+        String nombrePaquete = "";
         if (formaDePago.equals("1")) {
             nombrePaquete = (String) req.getParameter("paquete");
         }
@@ -115,7 +115,7 @@ public class InscribirseASalidaServlet extends HttpServlet {
         req.setAttribute("salida", this.salida);
 
         try {
-            contrAT.altaInscripcionSalidaTuristica(salida.getNombre(), nickTuri, cantTuristas, fechaInscripcion,
+            contrAT.altaInscripcionSalidaTuristica(salida.getNombre(), nickTuri, cantTuristas, null,
                     nombrePaquete);
 
             req.setAttribute("exito", Boolean.TRUE);
