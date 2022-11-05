@@ -15,6 +15,7 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="publicar.usuarioturisticasservice.DtTurista" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,7 +49,25 @@
             </div>
 
             <div id="info">
-                <h2><%= datosActividad.getNombre() %></h2>
+            	<div>
+            		<h2><%= datosActividad.getNombre() %></h2>
+            		<% 
+            		boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
+            		
+					 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+                     	String idDepartamento = (String)request.getAttribute("idDepartamento");
+                     	if(esFavoritaActividad){
+         
+                      %>
+                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+                      
+                      <%} else { %>
+                      
+                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+                      	
+                      <% } 
+                     	}%>
+            	</div>
                 
                 <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
                 <% 
@@ -59,7 +78,7 @@
         		} catch (Exception e) {
         			// nada
         		}
-        		// Muestro el boton si soy turista
+        		// Muestro el boton si soy proveedor
         		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) { %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>

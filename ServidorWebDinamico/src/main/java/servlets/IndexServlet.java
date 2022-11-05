@@ -70,7 +70,7 @@ public class IndexServlet extends HttpServlet {
             sesion.invalidate();
         }else {
         	HttpSession sesion = req.getSession(false);
-        	if(sesion.getAttribute("usuarioLogeado") != null) {
+        	if(sesion != null && sesion.getAttribute("usuarioLogeado") != null) {
         		user = (DtUsuario)sesion.getAttribute("usuarioLogeado");
                 boolean marcarActividadComoFav = Boolean.valueOf(req.getParameter("marcarComoFav"));
                 String nomActividad = (String) req.getParameter("nomAct");
