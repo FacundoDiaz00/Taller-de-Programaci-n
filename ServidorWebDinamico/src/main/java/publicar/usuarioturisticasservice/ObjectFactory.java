@@ -138,26 +138,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ListOfObject }
-     * 
-     * @return
-     *     the new instance of {@link ListOfObject }
-     */
-    public ListOfObject createListOfObject() {
-        return new ListOfObject();
-    }
-
-    /**
-     * Create an instance of {@link ListOfDTUsuario }
-     * 
-     * @return
-     *     the new instance of {@link ListOfDTUsuario }
-     */
-    public ListOfDTUsuario createListOfDTUsuario() {
-        return new ListOfDTUsuario();
-    }
-
-    /**
      * Create an instance of {@link DtActividadTuristica }
      * 
      * @return

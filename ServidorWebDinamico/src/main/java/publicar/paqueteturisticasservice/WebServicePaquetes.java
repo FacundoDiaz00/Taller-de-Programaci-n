@@ -27,6 +27,34 @@ public interface WebServicePaquetes {
 
     /**
      * 
+     * @return
+     *     returns publicar.paqueteturisticasservice.DtPaqueteCollection
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesResponse")
+    public DtPaqueteCollection obtenerDtPaquetes();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns publicar.paqueteturisticasservice.DtPaqueteDetalles
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalle/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public DtPaqueteDetalles obtenerDtPaqueteDetalle(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns publicar.paqueteturisticasservice.DtPaqueteCollection
@@ -66,34 +94,6 @@ public interface WebServicePaquetes {
         @WebParam(name = "arg2", partName = "arg2")
         int arg2)
         throws CompraYaRegistradaException_Exception, ObjetoNoExisteEnTurismoUy_Exception, PaquetesSinActividadesExcepcion_Exception
-    ;
-
-    /**
-     * 
-     * @return
-     *     returns publicar.paqueteturisticasservice.DtPaqueteCollection
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesResponse")
-    public DtPaqueteCollection obtenerDtPaquetes();
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns publicar.paqueteturisticasservice.DtPaqueteDetalles
-     * @throws ObjetoNoExisteEnTurismoUy_Exception
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalle/Fault/ObjetoNoExisteEnTurismoUy")
-    })
-    public DtPaqueteDetalles obtenerDtPaqueteDetalle(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws ObjetoNoExisteEnTurismoUy_Exception
     ;
 
 }

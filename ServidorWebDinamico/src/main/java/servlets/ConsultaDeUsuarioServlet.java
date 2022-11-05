@@ -22,6 +22,7 @@ import publicar.usuarioturisticasservice.DtProveedor;
 import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection;
+import publicar.usuarioturisticasservice.ErrorAlProcesar_Exception;
 import publicar.usuarioturisticasservice.Imagen;
 import publicar.usuarioturisticasservice.ModificacionUsuarioNoPermitida_Exception;
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
@@ -68,6 +69,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         HttpSession sesion = req.getSession(false);
         boolean seSiguenUsuarios = false;
         Object usr = sesion.getAttribute("usuarioLogeado");
+        
         if (debelistar != null && debelistar.equals("false")) {
         	
         	try {
@@ -187,15 +189,13 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
         boolean hayImagen = filePart != null && filePart.getSize() > 0 && !borrarImagen;
         String ext = "";
-        String futuroNombreDelPath = "";
-        Imagen imgDt = null;
+        byte[] imgContent = new byte[0]; 
+        
         if (hayImagen) {
+         	InputStream imgInputStream = filePart.getInputStream();
             ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
-
-            // Esto es la ruta relativa
-            futuroNombreDelPath = "/usuarios/" + nick + ext;
-            imgDt = new Imagen();
-            imgDt.setPath(futuroNombreDelPath);
+            imgContent = imgInputStream.readAllBytes();
+            imgInputStream.close();
         }
         
         if (sesion.getAttribute("usuarioLogeado") instanceof DtTurista){
@@ -206,7 +206,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtTurista.setApellido(modA);
         	nuevoDtTurista.setCorreo(correo);
         	nuevoDtTurista.setFechaNacStr(Utiles.localDateToString(fecha));
-        	nuevoDtTurista.setImg(imgDt);
+        	nuevoDtTurista.setImg(null);
         	nuevoDtTurista.setNacionalidad(modNac);
         	
         	datosNuevos = nuevoDtTurista;
@@ -223,7 +223,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtProv.setApellido(modA);
         	nuevoDtProv.setCorreo(correo);
         	nuevoDtProv.setFechaNacStr(Utiles.localDateToString(fecha));
-        	nuevoDtProv.setImg(imgDt);
+        	nuevoDtProv.setImg(null);
         	nuevoDtProv.setDescrpicionGeneral(modD);
         	nuevoDtProv.setLink(modL);
         	
@@ -231,31 +231,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         }    
         
     	try {
-			wbUser.modificarUsuario(datosNuevos, modC, borrarImagen);
-			String servidorPath = getServletContext().getRealPath("/");
-			
-            if (hayImagen) {
-	            // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-	            InputStream imgInputStream = filePart.getInputStream();
-	           
-	            File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-	            imgFile.createNewFile();
-	            FileOutputStream imgFileStream = new FileOutputStream(imgFile);
-	
-	            byte[] buffer = new byte[8192];
-	
-	            int readLength = imgInputStream.read(buffer);
-	            while (readLength != -1) {
-	                imgFileStream.write(buffer, 0, readLength);
-	                readLength = imgInputStream.read(buffer);
-	            }
-	            
-	            imgFileStream.close();
-	            
-            } else if (borrarImagen && userLogueado.getImg() != null){
-            	File imgDel = new File(servidorPath + "/img" + userLogueado.getImg().getPath());
-            	imgDel.delete();
-            }
+			wbUser.modificarUsuario(datosNuevos, modC, imgContent, ext);
             //Actualizo datos sesion
             DtUsuario usuario = wbUser.obtenerDTUsuario(nick);
                      
@@ -267,6 +243,9 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 			request.setAttribute("motivoDeError",
                     "Los datos enviados no son válidos");
 			
+		} catch (ErrorAlProcesar_Exception e) {
+       	 	request.setAttribute("motivoDeError",
+                 "Error general al procesar la solicitud");
 		} 
 
 
