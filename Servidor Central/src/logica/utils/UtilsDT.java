@@ -16,7 +16,7 @@ public class UtilsDT {
 
     public static void guardarImagen(String relativePath, byte[] content) throws ErrorAlProcesar {
         try{
-            File fileImg = new File(Cargador.getDirrectorioImagenes() + relativePath);
+            File fileImg = new File(Cargador.getDirectorioImagenes() + relativePath);
             fileImg.createNewFile();
             FileOutputStream imgFileStream = new FileOutputStream(fileImg);
             imgFileStream.write(content);
@@ -29,7 +29,7 @@ public class UtilsDT {
     }
 
     public static void borrarImagen(String relativePath){
-        File fileImg = new File(Cargador.getDirrectorioImagenes() + relativePath);
+        File fileImg = new File(Cargador.getDirectorioImagenes() + relativePath);
         fileImg.delete();
     }
 

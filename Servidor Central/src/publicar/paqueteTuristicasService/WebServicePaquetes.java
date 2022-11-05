@@ -28,7 +28,7 @@ public class WebServicePaquetes {
 
     @WebMethod(exclude = true)
     public void publicar(){
-        endpoint = Endpoint.publish(Cargador.getDirrecionAHacerDeploy() + "/paquetes", this);
+        endpoint = Endpoint.publish(Cargador.getDireccionAHacerDeploy() + "/paquetes", this);
         log.info("Servicio de paquetes publicado");
     }
     

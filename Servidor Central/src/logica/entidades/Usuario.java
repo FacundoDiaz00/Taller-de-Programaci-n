@@ -1,6 +1,7 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -145,11 +146,15 @@ public abstract class Usuario {
 	}
 	
 	public boolean sigueA(String nickSeguido) {
-		return 	usuariosSeguidos.containsKey(nickSeguido);
+		return usuariosSeguidos.containsKey(nickSeguido);
 	}
 	
-	public Map<String, Usuario> obtenerListaSeguidores(){
-		return seguidores;
+	public Collection<Usuario> obtenerSeguidores(){
+		return seguidores.values();
+	}
+	
+	public Collection<Usuario> obtenerSeguidos(){
+		return usuariosSeguidos.values();
 	}
 
 }

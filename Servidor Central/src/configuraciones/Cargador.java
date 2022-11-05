@@ -13,7 +13,7 @@ public class Cargador {
     private static final String ARCHIVO_CONFIGURACIONES_SERVIDOR_CENTRAL = "servidorConfiguracion.properties";
 
     private static String dirrecionAHacerDeploy;
-    private static String dirrectorioImagenes;
+    private static String directorioImagenes;
 
 
     public static Boolean cargarPropiedades(){
@@ -36,8 +36,8 @@ public class Cargador {
                 log.severe(" No se pudo leer la dirrecion a hacer deploy. Se termina el programa");
                 return false;
             }
-            dirrectorioImagenes = prop.getProperty("dirrectorioImagenes");
-            if (dirrectorioImagenes == null){
+            directorioImagenes = prop.getProperty("dirrectorioImagenes");
+            if (directorioImagenes == null){
                 log.severe(" No se pudo leer el dirrectorio de imagenes. Se termina el programa");
                 return false;
             }
@@ -57,7 +57,7 @@ public class Cargador {
 
             log.info("CONFIGURACIONES:");
             log.info("DIRRECION A PUBLICAR: " + dirrecionAHacerDeploy);
-            log.info("DIRRECION A CARPETA IMAGENES: " + dirrectorioImagenes);
+            log.info("DIRRECION A CARPETA IMAGENES: " + directorioImagenes);
 
         }catch (IOException e){
             log.setLevel(Level.ALL);
@@ -67,11 +67,11 @@ public class Cargador {
         return true;
     }
 
-    public static String getDirrecionAHacerDeploy() {
+    public static String getDireccionAHacerDeploy() {
         return dirrecionAHacerDeploy;
     }
 
-    public static String getDirrectorioImagenes() {
-        return dirrectorioImagenes;
+    public static String getDirectorioImagenes() {
+        return directorioImagenes;
     }
 }

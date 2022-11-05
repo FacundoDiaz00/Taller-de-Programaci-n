@@ -111,7 +111,7 @@ public interface IControladorUsuario {
      */
 
 
-	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, boolean borrarImg)
+	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Imagen imgMetaData)
 			throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
 
 	
@@ -128,6 +128,10 @@ public interface IControladorUsuario {
     boolean emailDisponibleParaNuevoUsuario(String email);
     
     boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido)throws ObjetoNoExisteEnTurismoUy;
+
+	List<DTUsuario> obtenerSeguidores(String nickUsuario) throws ObjetoNoExisteEnTurismoUy;
+
+	List<DTUsuario> obtenerSeguidos(String nickUsuario) throws ObjetoNoExisteEnTurismoUy;
 
 /*
     DTTurista obtenerDtTurista(String nickname) throws ObjetoNoExisteEnTurismoUy;
