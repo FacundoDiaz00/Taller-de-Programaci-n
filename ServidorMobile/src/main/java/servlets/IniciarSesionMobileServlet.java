@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import excepciones.ContraseniaInvalidaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorUsuario;
-import logica.datatypes.DTUsuario;
+import publicar.usuarioturisticasservice.DtUsuario;
+import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.usuarioturisticasservice.ContraseniaInvalidaException_Exception;
+import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -21,11 +21,12 @@ import logica.datatypes.DTUsuario;
 @WebServlet("/IniciarSesionMobile")
 public class IniciarSesionMobileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorUsuario contrU;
+    private WebServiceUsuarios wbUser;
+
 
     public IniciarSesionMobileServlet() {
         super();
-        contrU = Fabrica.getInstancia().getIControladorUsuario();
+        wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,6 +48,7 @@ public class IniciarSesionMobileServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
+
         String password = (String) req.getParameter("password");
         String email = (String) req.getParameter("email");
         String nickname = (String) req.getParameter("nickname");
@@ -54,23 +56,24 @@ public class IniciarSesionMobileServlet extends HttpServlet {
 
         try {
 
-            DTUsuario usuario;
+            DtUsuario usuario;
             if (tipoID.equals("1")) {
-                usuario = contrU.obtenerDTUsuarioPorEmail(email, password);
+                usuario = wbUser.obtenerDtUsuarioPorEmail(email, password);
             } else {
-                usuario = contrU.obtenerDTUsuarioPorNickname(nickname, password);
-            }
+                usuario = wbUser.obtenerDtUsuarioPorNickname(nickname, password);
+            }            
+            
             req.setAttribute("usuarioLogeado", usuario);
             HttpSession sesion = req.getSession(true);
             sesion.setAttribute("usuarioLogeado", usuario);
-            req.getRequestDispatcher("/WEB-INF/jsp/mobile/bienvenida.jsp").forward(req, resp);
+            resp.sendRedirect("index");
 
-        } catch (ObjetoNoExisteEnTurismoUy e) {
+        } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
             req.setAttribute("motivoDeError", "El usuario es incorrecto");
-            req.getRequestDispatcher("/WEB-INF/jsp/mobile/iniciar_sesion.jsp").forward(req, resp);
-        } catch (ContraseniaInvalidaException e) {
+            req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
+        } catch (ContraseniaInvalidaException_Exception e) {
             req.setAttribute("motivoDeError", "La contrasenia es incorrecta");
-            req.getRequestDispatcher("/WEB-INF/jsp/mobile/iniciar_sesion.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
         }
     }
 
