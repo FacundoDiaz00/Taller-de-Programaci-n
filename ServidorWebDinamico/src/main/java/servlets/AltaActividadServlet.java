@@ -17,12 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import excepciones.ActividadTuristicaYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorActividadTuristica;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTUsuario;
-import logica.datatypes.Imagen;
+import publicar.actividadesturisticasservice.ActividadTuristicaYaRegistradaException_Exception;
+import publicar.actividadesturisticasservice.ErrorAlProcesar_Exception;
+import publicar.actividadesturisticasservice.Imagen;
+import publicar.actividadesturisticasservice.ListOfString;
+import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.actividadesturisticasservice.WebServiceActividades;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.usuarioturisticasservice.DtProveedor;
+import publicar.usuarioturisticasservice.DtUsuario;
 import utils.Utiles;
 
 /**
@@ -32,11 +35,11 @@ import utils.Utiles;
 @MultipartConfig
 public class AltaActividadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorActividadTuristica contActividad;
+    private WebServiceActividades wbActi;
 
     public AltaActividadServlet() {
         super();
-        this.contActividad = Fabrica.getInstancia().getIControladorActividadTuristica();
+        wbActi = new WebServiceActividadesService().getWebServiceActividadesPort();
     }
     
     void accionDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -45,9 +48,8 @@ public class AltaActividadServlet extends HttpServlet {
         }
 
         // Solo muestro el form si es un proveedor:
-
-        DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
-        if (usuario == null || !(usuario instanceof DTProveedor)) {
+    	DtUsuario usuario = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
+        if (usuario == null || !(usuario instanceof DtProveedor)) {
             req = Utiles.insertarLoDeSiempre(req);
             resp.sendRedirect("/index");
             return;
@@ -70,21 +72,21 @@ public class AltaActividadServlet extends HttpServlet {
         }
 
         // Solo analizo el request si es un proveedor:
-        DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
-        if (usuario == null || !(usuario instanceof DTProveedor)) {
+        DtUsuario usuario = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
+        if (usuario == null || !(usuario instanceof DtProveedor)) {
             req = Utiles.insertarLoDeSiempre(req);
             resp.sendRedirect("index");
             return;
         }
 
-        String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
+        String nickProveedor = ((DtUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
         String departamento = req.getParameter("departamento");
         String nombre = req.getParameter("nombre");
         String descripcion = req.getParameter("descripcion");
         String duracion = req.getParameter("duracion");
         String costo = req.getParameter("costo");
         String ciudad = req.getParameter("ciudad");
-        String urlVideo = req.getParameter("urlVideo");
+        String url = req.getParameter("url");
         
         if(req.getParameterValues("categorias") == null) {
         	req.setAttribute("motivoDeError", "Se debe seleccionar al menos una categoria");
@@ -95,37 +97,23 @@ public class AltaActividadServlet extends HttpServlet {
 
              boolean hayImagen = filePart.getSize() > 0;
              String ext = "";
-             String futuroNombreDelPath = "";
-             Imagen imgDt = null;
+             byte[] imgContent = new byte[0]; 
              if (hayImagen) {
-                 ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
-
-                 // Esto es la ruta relativa
-                 futuroNombreDelPath = "/actividades/" + nombre + ext;
-                 imgDt = new Imagen(futuroNombreDelPath);
+             	InputStream imgInputStream = filePart.getInputStream();
+                ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+                imgContent = imgInputStream.readAllBytes();
+                imgInputStream.close();
              }
 
              try {
-            	 // TODO aceptar la url del video
-                 contActividad.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
-                         Integer.valueOf(duracion), Float.valueOf(costo), ciudad, null, imgDt, categorias, urlVideo);
-                 if (hayImagen) {
-                     // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-                     InputStream imgInputStream = filePart.getInputStream();
-                     String servidorPath = getServletContext().getRealPath("/");
-                     File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-                     imgFile.createNewFile();
-                     FileOutputStream imgFileStream = new FileOutputStream(imgFile);
+            	 
+            	 ListOfString categoriasListOfString = new ListOfString();
+            	 for (String  cat : categorias) {
+            		 categoriasListOfString.getItem().add(cat);
+				}
 
-                     byte[] buffer = new byte[8192];
-
-                     int readLength = imgInputStream.read(buffer);
-                     while (readLength != -1) {
-                         imgFileStream.write(buffer, 0, readLength);
-                         readLength = imgInputStream.read(buffer);
-                     }
-                     imgFileStream.close();
-                 }
+				 wbActi.altaActividadTuristica(nickProveedor, departamento, nombre, descripcion,
+							  Integer.valueOf(duracion), Float.valueOf(costo), ciudad, imgContent, ext, categoriasListOfString, url);
 
                  req.setAttribute("exito", "exito");
 
@@ -134,16 +122,15 @@ public class AltaActividadServlet extends HttpServlet {
              } catch (NumberFormatException e) {
                  req.setAttribute("motivoDeError",
                          "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
-             } catch (ActividadTuristicaYaRegistradaException e) {
+             } catch (ActividadTuristicaYaRegistradaException_Exception e) {
                  req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
-             } catch (ObjetoNoExisteEnTurismoUy e) {
-                 if (e.getClaseObjetoFaltante().equals("Categoria")) {
-                     req.setAttribute("motivoDeError",
-                             "No existe una de las categorias selecionadas, cambielo y pruebe nuevamente");
-                 } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
-                     req.setAttribute("motivoDeError",
-                             "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
-                 }
+             } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+                req.setAttribute("motivoDeError",
+                          "No existe uno de los objetos enviados");
+                
+             } catch(ErrorAlProcesar_Exception e) {
+            	 req.setAttribute("motivoDeError",
+                         "Error general al procesar la solicitud");
              }
              req.setAttribute("categoriasSeleccionadas", categorias);
         }
@@ -155,7 +142,7 @@ public class AltaActividadServlet extends HttpServlet {
         req.setAttribute("duracion", duracion);
         req.setAttribute("costo", costo);
         req.setAttribute("ciudad", ciudad);
-        req.setAttribute("urlVideo", urlVideo);
+        req.setAttribute("url", url);
         
         req = Utiles.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_actividad_turistica.jsp").forward(req, resp);

@@ -5,8 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,15 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import excepciones.ContraseniaInvalidaException;
-import excepciones.ModificacionUsuarioNoPermitida;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorUsuario;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTTurista;
-import logica.datatypes.DTUsuario;
-import logica.datatypes.Imagen;
+import publicar.usuarioturisticasservice.DtProveedor;
+import publicar.usuarioturisticasservice.DtTurista;
+import publicar.usuarioturisticasservice.DtUsuario;
+import publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection;
+import publicar.usuarioturisticasservice.Imagen;
+import publicar.usuarioturisticasservice.ModificacionUsuarioNoPermitida_Exception;
+import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 import utils.Utiles;
 
 /**
@@ -36,15 +36,16 @@ import utils.Utiles;
 @WebServlet("/ConsultaDeUsuario")
 @MultipartConfig
 public class ConsultaDeUsuarioServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private IControladorUsuario contrUsuario;
-
+    private static final long serialVersionUID = 1L;    
+    private WebServiceUsuarios wbUser;
+    
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ConsultaDeUsuarioServlet() {
         super();
-        contrUsuario = Fabrica.getInstancia().getIControladorUsuario();
+        wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
 
     /**
@@ -103,25 +104,26 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             if (usr != null && ((DTUsuario) usr).getNickname().equals(req.getParameter("id"))) {
                 DTUsuario DUser = null;
                 try {
-                    DUser = contrUsuario.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
-                } catch (ObjetoNoExisteEnTurismoUy e) {
+                	usuario = wbUser.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
+                } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
                     req.setAttribute("motivoDeError",
                             "id de usuario invalido. No existe un usuario con ese nickname");
                     req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
                     e.printStackTrace();
                     return;
-
                 }
-                req.setAttribute("usuario", DUser);
+                
+                req.setAttribute("usuario", usuario);
                 req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario.jsp").forward(req, res);
 
             } else {
                 try {
-                    DTUsuario DTusr = contrUsuario.obtenerDTUsuarioDetalle(req.getParameter("id"));
-                    req.setAttribute("usuario", DTusr);
+                    DtUsuario usuario = wbUser.obtenerDTUsuarioDetalle(req.getParameter("id"));
+                    
+                    req.setAttribute("usuario", usuario);
                     req.getRequestDispatcher("/WEB-INF/jsp/perfil_de_usuario.jsp").forward(req, res);
 
-                } catch (ObjetoNoExisteEnTurismoUy e) {
+                } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
                     req.setAttribute("motivoDeError",
                             "id de usuario invalido. No existe un usuario con ese nickname");
                     req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
@@ -130,7 +132,17 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             }
             
         } else {
-            List<DTUsuario> usuarios = contrUsuario.obtenerDTUsuarios();
+        	List<DtUsuario> usuarios = new ArrayList<>();
+        	DtUsuarioSeparadosPorTipoCollection dtUserSepCollection = wbUser.obtenerDTUsuarios();
+        	for (DtTurista dtTuri : dtUserSepCollection.getTuristas()) {
+        		usuarios.add(dtTuri);
+        	}
+        	for (DtProveedor dtProvv : dtUserSepCollection.getProveedores()) {
+        		usuarios.add(dtProvv);
+        	}
+        	
+        	
+             
             req.setAttribute("usuarios", usuarios);
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_usuario.jsp").forward(req, res);
         }
@@ -147,8 +159,8 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
         }
         HttpSession sesion = request.getSession(false);
-        DTUsuario userLogueado = (DTUsuario) sesion.getAttribute("usuarioLogeado");
-        DTUsuario datosNuevos;
+        DtUsuario userLogueado = (DtUsuario) sesion.getAttribute("usuarioLogeado");
+        DtUsuario datosNuevos;
         
         boolean borrarImagen = "on".equals(request.getParameter("borrar_imagen"));        
         
@@ -181,12 +193,22 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
             // Esto es la ruta relativa
             futuroNombreDelPath = "/usuarios/" + nick + ext;
-            imgDt = new Imagen(futuroNombreDelPath);
+            imgDt = new Imagen();
+            imgDt.setPath(futuroNombreDelPath);
         }
         
-        if (sesion.getAttribute("usuarioLogeado") instanceof DTTurista){
+        if (sesion.getAttribute("usuarioLogeado") instanceof DtTurista){
         	modNac = request.getParameter("modificar_nacionalidad");
-        	datosNuevos = (DTUsuario) new DTTurista(nick, modN, modA, correo, fecha, imgDt, modNac);
+        	DtTurista nuevoDtTurista = new DtTurista();
+        	nuevoDtTurista.setNickname(nick);
+        	nuevoDtTurista.setNombre(modN);
+        	nuevoDtTurista.setApellido(modA);
+        	nuevoDtTurista.setCorreo(correo);
+        	nuevoDtTurista.setFechaNacStr(Utiles.localDateToString(fecha));
+        	nuevoDtTurista.setImg(imgDt);
+        	nuevoDtTurista.setNacionalidad(modNac);
+        	
+        	datosNuevos = nuevoDtTurista;
         }
         else {
         	modD = request.getParameter("modificar_descripcion");
@@ -194,44 +216,57 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	if(modL != null && modL.length() == 0) {
         		modL = null;
         	}
-        	datosNuevos = (DTUsuario) new DTProveedor(nick, modN, modA, correo, fecha, imgDt, modD, modL);
-        }
+        	DtProveedor nuevoDtProv = new DtProveedor();
+        	nuevoDtProv.setNickname(nick);
+        	nuevoDtProv.setNombre(modN);
+        	nuevoDtProv.setApellido(modA);
+        	nuevoDtProv.setCorreo(correo);
+        	nuevoDtProv.setFechaNacStr(Utiles.localDateToString(fecha));
+        	nuevoDtProv.setImg(imgDt);
+        	nuevoDtProv.setDescrpicionGeneral(modD);
+        	nuevoDtProv.setLink(modL);
+        	
+        	datosNuevos = nuevoDtProv;
+        }    
         
-        	try {
-				contrUsuario.modificarUsuario(datosNuevos, modC, borrarImagen);
-				
-				 String servidorPath = getServletContext().getRealPath("/");
-	            if (hayImagen) {
-	                // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-	                InputStream imgInputStream = filePart.getInputStream();
-	               
-	                File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-	                imgFile.createNewFile();
-	                FileOutputStream imgFileStream = new FileOutputStream(imgFile);
-
-	                byte[] buffer = new byte[8192];
-
-	                int readLength = imgInputStream.read(buffer);
-	                while (readLength != -1) {
-	                    imgFileStream.write(buffer, 0, readLength);
-	                    readLength = imgInputStream.read(buffer);
-	                }
-	                imgFileStream.close();
-	            } else if (borrarImagen && userLogueado.getImg() != null){
-	            	File imgDel = new File(servidorPath + "/img" + userLogueado.getImg().getPath());
-	            	imgDel.delete();
+    	try {
+			wbUser.modificarUsuario(datosNuevos, modC, borrarImagen);
+			String servidorPath = getServletContext().getRealPath("/");
+			
+            if (hayImagen) {
+	            // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
+	            InputStream imgInputStream = filePart.getInputStream();
+	           
+	            File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
+	            imgFile.createNewFile();
+	            FileOutputStream imgFileStream = new FileOutputStream(imgFile);
+	
+	            byte[] buffer = new byte[8192];
+	
+	            int readLength = imgInputStream.read(buffer);
+	            while (readLength != -1) {
+	                imgFileStream.write(buffer, 0, readLength);
+	                readLength = imgInputStream.read(buffer);
 	            }
-	            //Actualizo datos sesion
-	            DTUsuario usuario = contrUsuario.obtenerDTUsuario(nick);
-	            sesion.setAttribute("usuarioLogeado", usuario);
-	            request.setAttribute("exito", Boolean.TRUE);
 	            
+	            imgFileStream.close();
 	            
-			} catch (ModificacionUsuarioNoPermitida | ObjetoNoExisteEnTurismoUy e) {
-				request.setAttribute("motivoDeError",
-	                    "Los datos enviados no son válidos");
-				
-			} 
+            } else if (borrarImagen && userLogueado.getImg() != null){
+            	File imgDel = new File(servidorPath + "/img" + userLogueado.getImg().getPath());
+            	imgDel.delete();
+            }
+            //Actualizo datos sesion
+            DtUsuario usuario = wbUser.obtenerDTUsuario(nick);
+                     
+            sesion.setAttribute("usuarioLogeado", usuario);
+            request.setAttribute("exito", Boolean.TRUE);
+            
+            
+		} catch (ObjetoNoExisteEnTurismoUy_Exception | ModificacionUsuarioNoPermitida_Exception e) {
+			request.setAttribute("motivoDeError",
+                    "Los datos enviados no son válidos");
+			
+		} 
 
 
         doGet(request, response);

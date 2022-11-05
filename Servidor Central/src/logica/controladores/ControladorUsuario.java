@@ -8,6 +8,8 @@ import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 import logica.entidades.Proveedor;
@@ -214,5 +216,27 @@ public class ControladorUsuario implements IControladorUsuario {
 		Usuario usuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickUsuario);
 		return (List<DTUsuario>) usuario.obtenerListaSeguidores();
 	}
+
+/*    @Override
+    public DTTurista obtenerDtTurista(String nickname) throws ObjetoNoExisteEnTurismoUy {
+
+        Turista turi = obtenerTurista(nickname);
+        if (turi == null){
+            throw new ObjetoNoExisteEnTurismoUy(Turista.class);
+        }
+
+        return (DTTurista) turi.obtenerDTUsuario();
+    }
+
+    @Override
+    public DTProveedor obtenerDtProveedor(String nickname) throws ObjetoNoExisteEnTurismoUy {
+        Proveedor provee = obtenerProveedor(nickname);
+        if (provee == null){
+            throw new ObjetoNoExisteEnTurismoUy(Turista.class);
+        }
+
+        return (DTProveedor) provee.obtenerDTUsuario();
+    }*/
+
 
 }

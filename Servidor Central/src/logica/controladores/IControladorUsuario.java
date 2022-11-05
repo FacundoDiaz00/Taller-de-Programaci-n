@@ -7,6 +7,8 @@ import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
+import logica.datatypes.DTProveedor;
+import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 
@@ -126,4 +128,10 @@ public interface IControladorUsuario {
     boolean emailDisponibleParaNuevoUsuario(String email);
     
     boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido)throws ObjetoNoExisteEnTurismoUy;
+
+/*
+    DTTurista obtenerDtTurista(String nickname) throws ObjetoNoExisteEnTurismoUy;
+
+    DTProveedor obtenerDtProveedor(String nickname) throws ObjetoNoExisteEnTurismoUy;*/
+
 }

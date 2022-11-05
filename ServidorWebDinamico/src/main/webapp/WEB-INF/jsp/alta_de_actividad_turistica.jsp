@@ -138,7 +138,7 @@
                         		placeholder="Ingrese una cuidad" 
                         		aria-label="Cuidad" 
                         		aria-describedby="basic-addon1">
-                    </div>
+                    </div>                    
 
                     <div class="contenedorinput mb-3">
                         <span class="input-label">Imagen:</span>
@@ -153,18 +153,17 @@
                     </div>
                     
                     <div class="contenedorinput mb-3">
-                    	<% String urlVideo = getTextWithoutNull((String)request.getAttribute("urlVideo")); %>
-                        <span class="input-label">urlVideo:</span>
+                    	<% String url = ""; %>
+                        <span class="input-label">URL vídeo de la actividad:</span>
                         <input 	type="text"
-                           		id="urlVideo"
-                       	   		name="urlVideo" 
-                       	   	 	value="<%= urlVideo %>"
+                           		id="url"
+                       	   		name="url"<%= url %>"
                         		required 
                         		class="form-control" 
-                        		placeholder="Ingrese(opcionalmente) un URL de un vídeo" 
-                        		aria-label="URL" 
+                        		placeholder="Ingrese una el URL asociado al vídeo que desea agregar" 
+                        		aria-label="url" 
                         		aria-describedby="basic-addon1">
-                    </div> 
+                    </div>  
                     
                     <div class="contenedorinput mb-3">
                         <span class="input-label">Categorías:</span>

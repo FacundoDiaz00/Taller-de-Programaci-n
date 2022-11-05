@@ -1,6 +1,7 @@
-
+<%@page import="publicar.actividadesturisticasservice.DtSalidaTuristica" %>
+<%@page import="utils.Utiles"%>
 <%@ page import="java.util.List" %>
-<%@page import="logica.datatypes.DTSalidaTuristica"%>
+
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -111,20 +112,13 @@
     </div>
     <div id="contenedorDer">
         <div class="card" style="width: 18rem;">  
-            <% DTSalidaTuristica salida = (DTSalidaTuristica) request.getAttribute("salida");
-  			String path = "";
-		if (salida.getImg() == null) {
-			path += "/noFoto.png";
-		} else {
-			path += salida.getImg().getPath();
-		}							
-		%>	
-            <img src="img<%=path%>" alt="..." style="margin: 10px;width: 267px;">
+            <% DtSalidaTuristica salida = (DtSalidaTuristica) request.getAttribute("salida");%>	
+            <img src="<%=Utiles.obtenerUrlParaImagen(salida.getImg())%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">
                     <h5 class="label">Fecha y hora de partida: </h5>
-                    <p><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm"))%></p>
+                    <p><%=salida.getFechaHoraSalidaStr()%></p>
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="label">Capacidad de turistas: </h5>

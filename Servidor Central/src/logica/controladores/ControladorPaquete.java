@@ -13,11 +13,9 @@ import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.Imagen;
-import logica.entidades.ActividadTuristica;
-import logica.entidades.Compra;
-import logica.entidades.Paquete;
-import logica.entidades.Turista;
+import logica.entidades.*;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorPaquete;
 import logica.manejadores.ManejadorUsuario;
 
@@ -87,8 +85,12 @@ public class ControladorPaquete implements IControladorPaquete {
     }
 
     @Override
-    public List<DTPaquete> obtenerDTPaquetesPorCategoria(String categoria) {
+    public List<DTPaquete> obtenerDTPaquetesPorCategoria(String categoria) throws ObjetoNoExisteEnTurismoUy {
         List<DTPaquete> ret = new ArrayList<DTPaquete>();
+
+        if (!ManejadorCategoria.getInstancia().exists(categoria) ){
+            throw new ObjetoNoExisteEnTurismoUy(Categoria.class);
+        }
 
         ManejadorPaquete.getInstancia().getPaquetes().forEach((Paquete p) -> {
             if (p.getCategorias().contains(categoria))

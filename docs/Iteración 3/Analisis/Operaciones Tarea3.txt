@@ -6,11 +6,16 @@ Alta de actividad turística:
 Finalizar actividad turística
 	2 opciones:
 		+ agregar funcion void finalizarActividadTuristica(string,bool)
-		+ cambiar void aceptarORechazarActividadTuristica(string,bool) a aceptarORechazarActividadTuristica(string,EstadoActividadTuristica)
+		+ cambiar void aceptarORechazarActividadTuristica(string,bool) a cambiarEstado(string,EstadoActividadTuristica)
 
 Marcar/Desmarcar Actividad Turistica como Favorita
 	+ void MarcarODesmarcarActividadComoFav(string turista, string nomAct) // si no esta marcada como favorita la marca o vice-versa
 	+ (metodo de ActividadTuristica) int getCantFavoritos()
+	+ esFavorita(string actividad)
 
 Seguir / Dejar de seguir usuario
 	+ SeguirODejarDeSeguirUsr(string idSeguidor, string idSeguido)
+	+ usuarioSigueA(string, string)
+
+Tema PDF:
+generarComprobante(...) //(puede estar en el servlet)
