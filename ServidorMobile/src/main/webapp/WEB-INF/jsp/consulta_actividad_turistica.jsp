@@ -1,9 +1,5 @@
 <%-- 
-
 # ATRIBUTOS QUE PRECISA LA PÁGINA
-
-
-
  --%>
 <%@page import="logica.datatypes.EstadoActividadTuristica"%>
 <%@page import="logica.datatypes.DTProveedor"%>
