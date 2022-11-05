@@ -58,7 +58,7 @@ public class ConsultaActividadServlet extends HttpServlet {
         
 
         req.setAttribute("datosActividad", infoActividadTuristica);
-        req.setAttribute("sePuedeFinalizar", sePuedeFinalizar);
+//        req.setAttribute("sePuedeFinalizar", sePuedeFinalizar);
         req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
 
     }

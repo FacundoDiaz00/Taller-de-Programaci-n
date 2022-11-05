@@ -71,10 +71,10 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         if (debelistar != null && debelistar.equals("false")) {
         	
         	try {
+        		String nick = ((DtUsuario)usr).getNickname();	
+        		seSiguenUsuarios = wbUser.usuariosSeSiguen( nick, req.getParameter("id"));
         	
-        	seSiguenUsuarios = this.contrUsuario.usuariosSeSiguen(((DTUsuario) usr).getNickname(), req.getParameter("id"));
-        	
-        	}catch (ObjetoNoExisteEnTurismoUy e) {
+        	}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
 				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
                 e.printStackTrace();
@@ -84,15 +84,15 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	
             if(seguir) {
             	
-            	if (usr != null && !((DTUsuario) usr).getNickname().equals(req.getParameter("id"))){
+            	if (usr != null && !((DtUsuario) usr).getNickname().equals(req.getParameter("id"))){
             		try {
             			
-            			this.contrUsuario.seguirODejarDeSeguirUsuario(((DTUsuario) usr).getNickname(), req.getParameter("id"));
-            			seSiguenUsuarios = this.contrUsuario.usuariosSeSiguen(((DTUsuario) usr).getNickname(), req.getParameter("id"));
+            			wbUser.seguirODejarDeSeguirUsuario(((DtUsuario) usr).getNickname(), req.getParameter("id"));
+            			seSiguenUsuarios = wbUser.usuariosSeSiguen(((DtUsuario) usr).getNickname(), req.getParameter("id"));
             			req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
             			req.setAttribute("exito", Boolean.TRUE);
             			
-            			}catch (ObjetoNoExisteEnTurismoUy e) {
+            			}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
             				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
                             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
                             e.printStackTrace();
@@ -101,9 +101,10 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             	}
             }
         	
-            if (usr != null && ((DTUsuario) usr).getNickname().equals(req.getParameter("id"))) {
-                DTUsuario DUser = null;
-                try {
+            if (usr != null && ((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
+                DtUsuario DUser = null;
+                DtUsuario usuario;
+				try {
                 	usuario = wbUser.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
                 } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
                     req.setAttribute("motivoDeError",
