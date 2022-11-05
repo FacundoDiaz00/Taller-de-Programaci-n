@@ -206,7 +206,6 @@ public class ControladorUsuario implements IControladorUsuario {
 	@Override
 	public boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
 		Usuario seguidorUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguidor);
-		Usuario seguidoUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguido);
 		
 		return seguidorUsuario.sigueA(nickSeguido);
 	}

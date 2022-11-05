@@ -1,7 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import publicar.actividadesturisticasservice.DtActividadTuristica;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.paqueteturisticasservice.WebServicePaquetes;
 import publicar.paqueteturisticasservice.WebServicePaquetesService;
+import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.usuarioturisticasservice.WebServiceUsuarios;
 
 
 
@@ -28,6 +34,7 @@ public class IndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private WebServiceActividades wbActi;
     private WebServicePaquetes wbPack;
+    private WebServiceUsuarios wbUsuarios;
 
     public IndexServlet() {
         super();
@@ -79,8 +86,8 @@ public class IndexServlet extends HttpServlet {
         departamentoElegido = (String) req.getAttribute("idDepartamento");
         categoriaElegida = (String) req.getAttribute("idCategoria");
 
-        List<publicar.actividadesturisticasservice.DtActividadTuristica> actividades;
-        List<publicar.paqueteturisticasservice.DtPaquete> paquetes;
+        List<publicar.actividadesturisticasservice.DtActividadTuristica> actividades = null;
+        List<publicar.paqueteturisticasservice.DtPaquete> paquetes = null;
 
         try {
             if (departamentoElegido != null) {
@@ -90,6 +97,14 @@ public class IndexServlet extends HttpServlet {
                 paquetes =  wbPack.obtenerDTPaquetesPorCategoria(categoriaElegida).getPaquetes();
                 actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida).getActividadTuristicas();
             }
+            
+            HttpSession sesion = req.getSession(false);
+            Map<DtActividadTuristica, Boolean> actividadPerteneceAFavoritos = new HashMap<DtActividadTuristica, Boolean>();
+            if(sesion != null) {
+            	for(var actividad: actividades) {
+            		actividadPerteneceAFavoritos.put(actividad, wbUsuarios.perteneceAFavoritosDeTurista(departamentoElegido, categoriaElegida));
+            	}
+            }
         } catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
             req.setAttribute("motivoDeError", "El nombre de la departamento no existe en el sistema");
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
@@ -98,7 +113,10 @@ public class IndexServlet extends HttpServlet {
             req.setAttribute("motivoDeError", "El nombre de la categoria no existe en el sistema");
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
             return;
-        }
+        } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         req.setAttribute("departamentos", departamentos);
         req.setAttribute("categorias", categorias);

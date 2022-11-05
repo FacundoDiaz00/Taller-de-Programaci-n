@@ -17,6 +17,7 @@ import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
 import logica.entidades.Turista;
+import logica.entidades.Usuario;
 import logica.manejadores.ManejadorUsuario;
 import logica.utils.UtilsDT;
 
@@ -143,10 +144,50 @@ public class WebServiceUsuarios {
 
     }
 
+
+    @WebMethod
+    public void seguirODejarDeSeguirUsuario(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
+        Usuario seguidorUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguidor);
+        Usuario seguidoUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguido);
+
+        seguidoUsuario.agregarOBorrarSeguidor(seguidorUsuario);
+        seguidorUsuario.agregarOBorrarDeSeguidos(seguidoUsuario);
+    }
+
+    @WebMethod
+    public void agregarOEliminarActividadDeFavoritos(String nickTurista, String nombreAct)
+            throws ObjetoNoExisteEnTurismoUy {
+        Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
+        turista.agregarOEliminarActividadDeFavoritos(nombreAct);
+    }
+
     @WebMethod
     public boolean perteneceAFavoritosDeTurista(String nickTurista, String nombreAct) throws ObjetoNoExisteEnTurismoUy {
         Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
         return turista.estaEnActividadesFavoritas(nombreAct);
+    }
+
+    @WebMethod
+    public boolean nicknameDisponibleParaNuevoUsuario(String nick) {
+        return !ManejadorUsuario.getInstancia().existeUsuario(nick, null);
+    }
+
+    @WebMethod
+    public boolean emailDisponibleParaNuevoUsuario(String email) {
+        return !ManejadorUsuario.getInstancia().existeUsuario(null, email);
+    }
+
+    @WebMethod
+    public boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
+        Usuario seguidorUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguidor);
+
+        return seguidorUsuario.sigueA(nickSeguido);
+    }
+
+    @WebMethod
+    public List<DTUsuario> obtenerSeguidores(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
+        Usuario usuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickUsuario);
+        return (List<DTUsuario>) usuario.obtenerListaSeguidores();
     }
 
     

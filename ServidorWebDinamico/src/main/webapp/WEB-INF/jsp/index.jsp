@@ -69,7 +69,7 @@
 			                                %>
 			                                
 			                                
-			                                
+			                                <%} %>
 			                                
 			                                <div class="botonera">
 			                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver más</a>
