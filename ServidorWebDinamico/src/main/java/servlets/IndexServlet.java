@@ -105,7 +105,7 @@ public class IndexServlet extends HttpServlet {
         req.setAttribute("actividades", actividades);
         req.setAttribute("paquetes", paquetes);
 
-        req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion_mobile.jsp").forward(req, resp);
+        req.getRequestDispatcher("").forward(req, resp);
     }
 
 }

@@ -7,13 +7,12 @@
  --%>
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@ page import="logica.datatypes.DTUsuario" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 
 
-	<% DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado"); %>
+
+	<% DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado"); %>
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 
         <div class="container-fluid">
