@@ -70,6 +70,7 @@ public class ConsultaActividadServlet extends HttpServlet {
             infoActividadTuristica = wbActi.obtenerDTActividadTuristicaDetalle(idActividad);
 			esFavorito = wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), idActividad);
 			req.setAttribute("esFavoritaActividad", esFavorito);
+			req.setAttribute("cantFavoritos", infoActividadTuristica.getCantFavoritos());
 	        
 
         } catch (publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {

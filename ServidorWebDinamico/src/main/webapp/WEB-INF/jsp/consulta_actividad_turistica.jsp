@@ -53,7 +53,7 @@
             		<h2><%= datosActividad.getNombre() %></h2>
             		<% 
             		boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
-            		
+            		int cantFavoritos = (int) request.getAttribute("cantFavoritos");
 					 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
                      	String idDepartamento = (String)request.getAttribute("idDepartamento");
                      	if(esFavoritaActividad){
@@ -65,8 +65,10 @@
                       
                       	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
                       	
-                      <% } 
+                      <% }
+                     	
                      	}%>
+                    <p>favorito de <%=cantFavoritos%> persona/s </p>
             	</div>
                 
                 <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
