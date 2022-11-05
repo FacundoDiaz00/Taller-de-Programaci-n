@@ -150,12 +150,11 @@ public class ControladorUsuario implements IControladorUsuario {
             
             if (u_nick != null && u_correo != null && u_nick.equals(u_correo)) {
                 u_nick.setearDatos(datosNuevos);
+                
                 if (contrasenia != null)
                 	u_nick.setContrasenia(contrasenia);
                 
-                if (imgMetaData == null) {
-                	u_nick.setImagen(null);
-                }
+            	u_nick.setImagen(imgMetaData);
                 
             } else {
                 throw new ModificacionUsuarioNoPermitida(

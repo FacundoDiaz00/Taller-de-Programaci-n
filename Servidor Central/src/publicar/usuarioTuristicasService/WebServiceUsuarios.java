@@ -68,6 +68,7 @@ public class WebServiceUsuarios {
         return iControladorUsuario.obtenerDTUsuario(nickname);
     }
     
+    
     @WebMethod
     public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, byte[] imgContent, String extImg) throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy, ErrorAlProcesar{
         log.info("Solicitud a 'modificarUsuario'");
@@ -75,7 +76,13 @@ public class WebServiceUsuarios {
         Imagen imgMetaData = null;
         if (imgContent.length > 0){
             imgMetaData = new Imagen("/usuarios/" + datosNuevos.getNickname() + extImg);
+        } else if (!extImg.equals("BORRAR")) { // MUY chancho pero estoy 100% seguro que no hay extensiones de imágenes .BORRAR
+            imgMetaData = iControladorUsuario.obtenerDTUsuario(datosNuevos.getNickname()).getImg();
         }
+        
+        
+        if (contrasenia.equals(""))
+        	contrasenia = null;
 
         iControladorUsuario.modificarUsuario(datosNuevos, contrasenia, imgMetaData);
 

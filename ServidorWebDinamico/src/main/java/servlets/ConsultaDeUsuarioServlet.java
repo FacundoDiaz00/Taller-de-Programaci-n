@@ -179,16 +179,13 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String modD = null;
         String modL = null;
         
-        if(modC != null && modC.equals(""))
-        	modC = null;
-        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(modFN, formatter);
         
         Part filePart = request.getPart("modificar_img");
 
         boolean hayImagen = filePart != null && filePart.getSize() > 0 && !borrarImagen;
-        String ext = "";
+        String ext = borrarImagen ? "BORRAR" : "";
         byte[] imgContent = new byte[0]; 
         
         if (hayImagen) {
