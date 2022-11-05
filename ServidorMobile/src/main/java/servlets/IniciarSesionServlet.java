@@ -18,13 +18,13 @@ import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 /**
  * Servlet implementation class ConsultaActividadServlet
  */
-@WebServlet("/IniciarSesionMobile")
-public class IniciarSesionMobileServlet extends HttpServlet {
+@WebServlet("/IniciarSesion")
+public class IniciarSesionServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private WebServiceUsuarios wbUser;
 
 
-    public IniciarSesionMobileServlet() {
+    public IniciarSesionServlet() {
         super();
         wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
