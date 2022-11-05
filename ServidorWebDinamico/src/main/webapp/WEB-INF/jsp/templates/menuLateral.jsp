@@ -9,13 +9,12 @@
 
  --%>
 
-<%@page import="logica.datatypes.DTProveedor"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
+<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="logica.datatypes.DTUsuario" %>
-<%@ page import="logica.datatypes.DTProveedor" %>
 
  		<div id="menu-lateral">
  		
@@ -30,8 +29,8 @@
                 <a href="ConsultaDeUsuario" class="list-group-item">Ver usuarios</a>
                 
                 <% 
-                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
-                	if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DTProveedor){%>
+                	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");   
+                	if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtProveedor){%>
 		                <a href="AltaDeActividad" class="list-group-item">Crear Actividad turística</a>
                 	<%}%>
                 

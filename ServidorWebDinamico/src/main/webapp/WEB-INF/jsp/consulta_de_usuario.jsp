@@ -1,5 +1,7 @@
-<%@page import="logica.datatypes.DTProveedor"%>
-<%@page import="logica.datatypes.DTUsuario"%>
+<%@page import="utils.Utiles"%>
+<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
+
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -28,23 +30,13 @@
             	</div>
                 
                 	<% 
-                		List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
-						for(DTUsuario usr: usuarios){
+                		List<DtUsuario> usuarios = (List<DtUsuario>) request.getAttribute("usuarios");
+						for(DtUsuario usr: usuarios){
 					%>
 							<div class="card mb-3" style="max-width: 800px; margin-left: 15px">
 				                <div class="row g-0">
 				                    <div class="col-md-4 img-contain">
-				                        <%
-				                        String imgpath;
-				                        if(usr.getImg() != null){
-					                        imgpath = "/img" + usr.getImg().getPath();
-
-				                        }else{
-				                        	imgpath = "/img/noFoto.png";
-				                        }
-														                        
-				                        %>
-				                        <img src="${pageContext.request.contextPath}<%=imgpath%>" class="img-fluid rounded-start">
+				                        <img src="<%=Utiles.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
 				                    </div>
 				                    <div class="col-md-8">
 				                        <div class="card-body">
@@ -53,7 +45,7 @@
 				                                <p class="card-text"><b>Nombre:</b> <%=usr.getNombre()%></p>
 				                                <p class="card-text"><b>Apellido:</b> <%= usr.getApellido()%></p>
 				                                <p class="card-text"><b>Nickname:</b> <%= usr.getNickname()%></p>
-				                                <p class="card-text"><b>Tipo usuario:</b> <%= usr instanceof DTProveedor ? "Proveedor" : "Turista"%></p>
+				                                <p class="card-text"><b>Tipo usuario:</b> <%= usr instanceof DtProveedor ? "Proveedor" : "Turista"%></p>
 				                                <div class="botonera">
 				                                    <a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false" class="btn btn-primary">Ver más</a>
 				                                </div>

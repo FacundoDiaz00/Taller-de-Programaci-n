@@ -1,14 +1,22 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+
 import java.time.LocalDate;
 
 /**
  * @author Equipo taller prog 16
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso(DTTuristaDetalle.class)
 public class DTTurista extends DTUsuario {
 	private String nacionalidad;
 
+
+	public DTTurista(){}
 	public DTTurista(String nickname, String nombre, String apellido, String correo, LocalDate fechaNac, Imagen img,
 			String nacionalidad) {
 		super(nickname, nombre, apellido, correo, fechaNac, img);

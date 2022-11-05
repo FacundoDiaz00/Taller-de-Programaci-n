@@ -5,12 +5,13 @@
 
 
  --%>
-<%@page import="logica.datatypes.EstadoActividadTuristica"%>
-<%@page import="logica.datatypes.DTProveedor"%>
-<%@page import="logica.datatypes.DTPaquete"%>
-<%@page import="logica.datatypes.DTSalidaTuristica"%>
-<%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
-<%@page import="logica.datatypes.DTActividadTuristica"%>
+ <%@page import="utils.Utiles"%>
+<%@page import="publicar.actividadesturisticasservice.DtActividadTuristicaDetalle"%>
+<%@page import="publicar.actividadesturisticasservice.EstadoActividadTuristica"%>
+<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
+<%@page import="publicar.actividadesturisticasservice.DtPaquete"%>
+<%@page import="publicar.actividadesturisticasservice.DtSalidaTuristica"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -38,30 +39,22 @@
         <div id="info-actividad">
         
         
-        	<% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
+        	<% DtActividadTuristicaDetalle datosActividad = (DtActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
 
 
 
             <div id="info-general-imagen">
-                <% 
-        		String path = "";
-				if (datosActividad.getImg() == null) {
-					path += "/noFoto.png";
-				} else {
-					path += datosActividad.getImg().getPath();
-				}							
-				%>
-                <img src="img<%=path%>" alt="">
+                <img src="<%=Utiles.obtenerUrlParaImagen(datosActividad.getImg())%>" alt="">
             </div>
 
             <div id="info">
                 <h2><%= datosActividad.getNombre() %></h2>
-                <h6>Creado el <%= datosActividad.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
                 
+                <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
                 <% 
                 boolean proveedorLogueado = false;
         		try {
-	        		DTProveedor tur = (DTProveedor) session.getAttribute("usuarioLogeado");
+	        		DtProveedor tur = (DtProveedor) session.getAttribute("usuarioLogeado");
 	        		proveedorLogueado = tur != null;
         		} catch (Exception e) {
         			// nada
@@ -137,38 +130,31 @@
 
 					<%
 					
-					if(datosActividad.getSalidas().values().size() == 0){
+					if(datosActividad.getSalidas() == null || datosActividad.getSalidas().getEntry().size() == 0){
 					%>
 						<span style="margin-left: 10px">Sin informacion</span>
 					<%
 					}else{
 					
-						for(DTSalidaTuristica salida : datosActividad.getSalidas().values()){
-						
+						for(publicar.actividadesturisticasservice.DtActividadTuristicaDetalle.Salidas.Entry entrySalida : datosActividad.getSalidas().getEntry()){
+							DtSalidaTuristica salida = entrySalida.getValue();
 						%>
 	
 	
 	                    <div class="card mb-3" style="max-width: 800px;">
 	                        <div class="row g-0">
 	                            <div class="col-md-4 img-contain">
-	                                 <% 
-			            			String pathSalida = "";
-									if (salida.getImg() == null) {
-										pathSalida += "/noFoto.png";
-									} else {
-										pathSalida += salida.getImg().getPath();
-									}							
-									%>
-					                <img src="img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
+	                                 
+					                <img src="<%=Utiles.obtenerUrlParaImagen(salida.getImg())%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
 	                            </div>
 	                            <div class="col-md-8">
 	                                <div class="card-body">
 	                                    <div class="salidaInfo">
 	                                        <h5 class="card-title"><%=salida.getNombre() %></h5>
 	                                        <div><strong>Lugar salida: </strong><%=salida.getLugarSalida() %> </div>
-	                                        <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")) %> </div>
+	                                        <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalidaStr() %> </div>
 	                                        <div><strong>Capacidad de turistas: </strong><%=salida.getCantMaxTuristas()%></div>
-	                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></div>
+	                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAltaStr() %></div>
 	
 	                                    </div>
 	
@@ -195,27 +181,19 @@
                     <h2 class="card-title">Paquetes:</h2>
 
 					<%
-					if(datosActividad.getPaquetes().values().size() == 0){%>	
+					if(datosActividad.getPaquetes() == null || datosActividad.getPaquetes().getEntry().size() == 0){%>	
 						<span style="margin-left: 10px">Sin informacion</span>
 					<%} else {%>
-						<%for(DTPaquete pack: datosActividad.getPaquetes().values()){
-						
+						<%for(publicar.actividadesturisticasservice.DtActividadTuristicaDetalle.Paquetes.Entry entryPack: datosActividad.getPaquetes().getEntry()){
+							DtPaquete pack = entryPack.getValue();
 						%>
 	
 	                    <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
 	                        <div class="row g-0">
 	                            <div class="col-md-4 img-contain">
 	
-	                           
-	                                <% 
-			            			String pathPack = "";
-									if (pack.getImg() == null) {
-										pathPack += "/noFoto.png";
-									} else {
-										pathPack += pack.getImg().getPath();
-									}							
-									%>
-					                <img src="img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+	  
+					                <img src="<%=Utiles.obtenerUrlParaImagen(pack.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
 	                                
 	                            </div>
 	                            <div class="col-md-8">

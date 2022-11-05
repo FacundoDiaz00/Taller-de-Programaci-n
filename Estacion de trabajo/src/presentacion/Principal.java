@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JDesktopPane;
@@ -15,11 +16,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import configuraciones.Cargador;
 import excepciones.TurismoUyException;
 import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 import logica.controladores.IControladorUsuario;
+import publicar.actividadesTuristicasService.WebServiceActividades;
+import publicar.maestroServices.WebServiceMaestro;
+import publicar.paqueteTuristicasService.WebServicePaquetes;
+import publicar.usuarioTuristicasService.WebServiceUsuarios;
 
 public class Principal {
     private IControladorUsuario contrUsuario;
@@ -53,6 +59,27 @@ public class Principal {
      * Launch the application.
      */
     public static void main(String[] args) {
+
+        boolean resultado = Cargador.cargarPropiedades();
+        if (!resultado) {
+            return;
+        }
+        try{
+            Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
+        }catch (TurismoUyException e){
+            Logger.getLogger("logger").severe("Error al generar datos de prueba");
+            return;
+        }
+
+        WebServiceActividades webServiceActividades = new WebServiceActividades();
+        WebServicePaquetes webServicePaquetes = new WebServicePaquetes();
+        WebServiceUsuarios webServiceUsuarios = new WebServiceUsuarios();
+        WebServiceMaestro webServiceMaestro = new WebServiceMaestro();
+        webServiceActividades.publicar();
+        webServicePaquetes.publicar();
+        webServiceUsuarios.publicar();
+        webServiceMaestro.publicar();
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

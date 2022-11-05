@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
@@ -10,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import excepciones.CompraYaRegistradaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.PaquetesSinActividadesExcepcion;
-import logica.controladores.Fabrica;
-import logica.datatypes.DTPaqueteDetalles;
-import logica.datatypes.DTTurista;
-import logica.datatypes.DTUsuario;
-import utils.Utiles;
+import publicar.paqueteturisticasservice.CompraYaRegistradaException_Exception;
+import publicar.paqueteturisticasservice.DtPaqueteDetalles;
+import publicar.paqueteturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.paqueteturisticasservice.PaquetesSinActividadesExcepcion_Exception;
+import publicar.paqueteturisticasservice.WebServicePaquetes;
+import publicar.paqueteturisticasservice.WebServicePaquetesService;
+import publicar.usuarioturisticasservice.DtTurista;
+import publicar.usuarioturisticasservice.DtUsuario;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -25,9 +24,11 @@ import utils.Utiles;
 @WebServlet("/CompraPaquete")
 public class CompraPaqueteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private WebServicePaquetes wbPaquetes;
 
     public CompraPaqueteServlet() {
         super();
+        wbPaquetes = new WebServicePaquetesService().getWebServicePaquetesPort();
     }
 
     /**
@@ -41,9 +42,9 @@ public class CompraPaqueteServlet extends HttpServlet {
 
         int cant_turistas = Integer.valueOf(req.getParameter("cant_turistas"));
         String nombre_paquete = (String) req.getParameter("nombre_paquete");
-        DTUsuario turi = (DTTurista) req.getSession().getAttribute("usuarioLogeado");
+        DtUsuario turi = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
         String nickTuri = "";
-        if (turi != null && turi instanceof DTTurista) {
+        if (turi != null && turi instanceof DtTurista) {
             nickTuri = turi.getNickname();
         } else {
             resp.sendRedirect("index");
@@ -51,23 +52,21 @@ public class CompraPaqueteServlet extends HttpServlet {
         }
 
         try {
-            Fabrica.getInstancia().getIControladorPaquete().comprarPaquete(nickTuri, nombre_paquete,
-                    cant_turistas, null);
+            wbPaquetes.comprarPaquete(nickTuri, nombre_paquete,
+                    cant_turistas);
             req.setAttribute("exito", "exito");
-            DTPaqueteDetalles paquete = Fabrica.getInstancia().getIControladorPaquete()
-                    .obtenerDTPaqueteDetalle(nombre_paquete);
+            DtPaqueteDetalles paquete = wbPaquetes.obtenerDtPaqueteDetalle(nombre_paquete);
             req.setAttribute("paquete", paquete);
 
             resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") + "&mostrarMensajeConfirmacionCompra=true");
             return;
-        } catch (ObjetoNoExisteEnTurismoUy e) {
-            String objetoFaltante = e.getClaseObjetoFaltante();
+        } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
             resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") 
             	+ "&mensajeDeError=" + URLEncoder.encode("Para comprar un paquete es necesario estar loggeado con un Turista", "UTF-8"));           
-        } catch (CompraYaRegistradaException e) {
+        } catch (CompraYaRegistradaException_Exception e) {
         	resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") 
         		+ "&mensajeDeError=" + URLEncoder.encode("El usuario logueado ya ha comprado este mismo paquete.", "UTF-8"));
-        } catch (PaquetesSinActividadesExcepcion e) {
+        } catch (PaquetesSinActividadesExcepcion_Exception e) {
         	resp.sendRedirect("ConsultaPaquete?id=" + URLEncoder.encode(nombre_paquete, "UTF-8") 
         		+ "&mensajeDeError=" + URLEncoder.encode("El paquete no puede ser comprado, ya que no tiene asociada ninguna actividad turística.", "UTF-8"));
         }

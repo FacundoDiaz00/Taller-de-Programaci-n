@@ -1,11 +1,12 @@
+<%@page import="utils.Utiles"%>
+<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
+<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@page import="logica.datatypes.DTUsuario"%>
-<%@page import="logica.datatypes.DTProveedor"%>
-<%@page import="logica.datatypes.DTTurista"%>
 
 
 
@@ -17,14 +18,14 @@
 	
 <div class="bs-example">
                             <!-- Button HTML (to Trigger Modal) -->
-                            <button type="button" class="btn btn-lg btn-primary">Editar perfil</button>
+                            <button type="button" class="botonModificar btn btn-lg btn-primary">Editar perfil</button>
 
                             
-                            <% DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado"); %>
+                            <% DtUsuario usuario = (DtUsuario) session.getAttribute("usuarioLogeado"); %>
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
-	                                <% if (usuario instanceof DTTurista){ %>
+	                                <% if (usuario instanceof DtTurista){ %>
 	                                    <div class="modal-content" style =" width: 598px; height: 790px;">
 	                                    
 	                     			<% } else {%>
@@ -36,7 +37,7 @@
 	                                        </div>
 	                                        
 	                                        
-		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 560px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/ConsultaDeUsuario">
+		                                     <form class="modal-body" id="form-modificar-usuario" style="width: 560px" name="modificarUsuarioForm" enctype="multipart/form-data" method="post" action="ConsultaDeUsuario">
 
 																			
 							                    <div class="contenedorinput mb-3" style="display: grid; grid-template-columns: 1fr auto; grid-column-gap: 20px; align-items: flex-end;">
@@ -112,7 +113,7 @@
 	                                                        >
 	                                                    </div>
 	                                                    
-	                                                    <% if (usuario instanceof DTTurista){ %>
+	                                                    <% if (usuario instanceof DtTurista){ %>
 	                                                    <div class="contenedorinput mb-3" id="nacionalidad-field">
 	                                              		  <span class="input-label">Nacionalidad: </span>
 	                                                		<input id="input-nacionalidad" 
@@ -122,7 +123,7 @@
 	                                                		placeholder="" 
 	                                                		aria-label="Imagen" 
 	                                                		aria-describedby="basic-addon1"
-	                                                		<% DTTurista tur = (DTTurista) usuario;  %>
+	                                                		<% DtTurista tur = (DtTurista) usuario;  %>
 	                                                		value="<%= tur.getNacionalidad() %>"
 	                                                		>
 	                                         		   </div>
@@ -131,7 +132,7 @@
 	                                                </div>
 	
 	                                                <div>
-	
+													
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Fecha de nacimiento:</span>
 	                                                        <input id="input-fecha-nacimiento"
@@ -142,7 +143,7 @@
 	                                                        placeholder="" 
 	                                                        aria-label="Fecha" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value=<%= usuario.getFechaNac().toString() %>
+	                                                        value=<%=Utiles.stringToLocalDate(usuario.getFechaNacStr()).toString()  %>
 	                                                        >
 	                                                    </div>
 	                                                  
@@ -174,8 +175,8 @@
 	                                            </div>
 	                                            
 	                                            
-	                                            <% if (usuario instanceof DTProveedor){ 
-	                                            		DTProveedor prov = (DTProveedor) usuario;
+	                                            <% if (usuario instanceof DtProveedor){ 
+	                                            	DtProveedor prov = (DtProveedor) usuario;
 	                                            %>
 	                                            <div class="contenedorinput mb-3" id="descripcion-general-field">
                                             <span class="input-label">Descripcion general:</span>
@@ -244,7 +245,7 @@
     <%} %>
         <script>
         $(document).ready(function(){
-            $(".btn").click(function(){
+            $(".botonModificar").click(function(){
                 $("#myModal").modal('show');
             });
             $(".close").click(function(){
