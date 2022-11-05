@@ -1,5 +1,5 @@
 
-package publicar.actividadesturisticasservice;
+package publicar.usuarioturisticasservice;
 
 import java.util.ArrayList;
 import java.util.List;

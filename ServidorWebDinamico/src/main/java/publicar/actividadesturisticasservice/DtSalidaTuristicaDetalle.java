@@ -14,18 +14,18 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>
- * &lt;complexType name="dtSalidaTuristicaDetalle">
- *   &lt;complexContent>
- *     &lt;extension base="{http://actividadesTuristicasService.publicar/}dtSalidaTuristica">
- *       &lt;sequence>
- *         &lt;element name="inscripciones" type="{http://actividadesTuristicasService.publicar/}dtInscripcion" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="dtActividad" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristicaDetalle" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="dtSalidaTuristicaDetalle">
+ *   <complexContent>
+ *     <extension base="{http://actividadesTuristicasService.publicar/}dtSalidaTuristica">
+ *       <sequence>
+ *         <element name="inscripciones" type="{http://actividadesTuristicasService.publicar/}dtInscripcion" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="dtActividad" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristicaDetalle" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -48,8 +48,8 @@ public class DtSalidaTuristicaDetalle
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the inscripciones property.
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the inscripciones property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -63,10 +63,12 @@ public class DtSalidaTuristicaDetalle
      * {@link DtInscripcion }
      * 
      * 
+     * @return
+     *     The value of the inscripciones property.
      */
     public List<DtInscripcion> getInscripciones() {
         if (inscripciones == null) {
-            inscripciones = new ArrayList<DtInscripcion>();
+            inscripciones = new ArrayList<>();
         }
         return this.inscripciones;
     }

@@ -1,5 +1,5 @@
 
-package publicar.actividadesturisticasservice;
+package publicar.usuarioturisticasservice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +10,16 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para listOfObject complex type.
+ * <p>Clase Java para listOfDTUsuario complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>{@code
- * <complexType name="listOfObject">
+ * <complexType name="listOfDTUsuario">
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="item" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="item" type="{http://usuarioTuristicasService.publicar/}dtUsuario" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -29,13 +29,13 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "listOfObject", propOrder = {
+@XmlType(name = "listOfDTUsuario", propOrder = {
     "item"
 })
-public class ListOfObject {
+public class ListOfDTUsuario {
 
     @XmlElement(nillable = true)
-    protected List<Object> item;
+    protected List<DtUsuario> item;
 
     /**
      * Gets the value of the item property.
@@ -55,13 +55,13 @@ public class ListOfObject {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Object }
+     * {@link DtUsuario }
      * 
      * 
      * @return
      *     The value of the item property.
      */
-    public List<Object> getItem() {
+    public List<DtUsuario> getItem() {
         if (item == null) {
             item = new ArrayList<>();
         }

@@ -12,18 +12,18 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>
- * &lt;complexType name="dtProveedor">
- *   &lt;complexContent>
- *     &lt;extension base="{http://usuarioTuristicasService.publicar/}dtUsuario">
- *       &lt;sequence>
- *         &lt;element name="descrpicionGeneral" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="link" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="dtProveedor">
+ *   <complexContent>
+ *     <extension base="{http://usuarioTuristicasService.publicar/}dtUsuario">
+ *       <sequence>
+ *         <element name="descrpicionGeneral" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="link" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       </sequence>
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */

@@ -1,10 +1,10 @@
 
 package publicar.maestroservices;
 
+import javax.xml.namespace.QName;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.XmlElementDecl;
 import jakarta.xml.bind.annotation.XmlRegistry;
-import javax.xml.namespace.QName;
 
 
 /**
@@ -36,18 +36,24 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ObjetoNoExisteEnTurismoUy }
      * 
+     * @return
+     *     the new instance of {@link ObjetoNoExisteEnTurismoUy }
      */
     public ObjetoNoExisteEnTurismoUy createObjetoNoExisteEnTurismoUy() {
         return new ObjetoNoExisteEnTurismoUy();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      */
     @XmlElementDecl(namespace = "http://maestroServices.publicar/", name = "ObjetoNoExisteEnTurismoUy")
     public JAXBElement<ObjetoNoExisteEnTurismoUy> createObjetoNoExisteEnTurismoUy(ObjetoNoExisteEnTurismoUy value) {
-        return new JAXBElement<ObjetoNoExisteEnTurismoUy>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
+        return new JAXBElement<>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
     }
 
 }

@@ -15,23 +15,23 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>
- * &lt;complexType name="dtPaquete">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="descrpicion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="descuento" type="{http://www.w3.org/2001/XMLSchema}float"/>
- *         &lt;element name="validez" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
- *         &lt;element name="fechaRegistroStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="dtPaquete">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="descrpicion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="descuento" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         <element name="validez" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
+ *         <element name="fechaRegistroStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -145,8 +145,8 @@ public class DtPaquete {
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the categorias property.
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a {@code set} method for the categorias property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -160,10 +160,12 @@ public class DtPaquete {
      * {@link String }
      * 
      * 
+     * @return
+     *     The value of the categorias property.
      */
     public List<String> getCategorias() {
         if (categorias == null) {
-            categorias = new ArrayList<String>();
+            categorias = new ArrayList<>();
         }
         return this.categorias;
     }
