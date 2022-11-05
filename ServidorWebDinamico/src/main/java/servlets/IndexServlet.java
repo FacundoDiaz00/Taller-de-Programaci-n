@@ -18,8 +18,11 @@ import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.paqueteturisticasservice.WebServicePaquetes;
 import publicar.paqueteturisticasservice.WebServicePaquetesService;
+import publicar.usuarioturisticasservice.DtTurista;
+import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 
 
 
@@ -40,6 +43,7 @@ public class IndexServlet extends HttpServlet {
         super();
         wbActi = new WebServiceActividadesService().getWebServiceActividadesPort();
         wbPack = new WebServicePaquetesService().getWebServicePaquetesPort();
+        wbUsuarios = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
 
     /**
@@ -57,12 +61,28 @@ public class IndexServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
+        DtUsuario user = null;
 
         var sessionClosed = req.getParameter("sesionCerrada");
         if (sessionClosed != null && sessionClosed.equals("true")) {
             HttpSession sesion = req.getSession(false);
             sesion.setAttribute("usuarioLogeado", null);
             sesion.invalidate();
+        }else {
+        	HttpSession sesion = req.getSession(false);
+        	if(sesion.getAttribute("usuarioLogeado") != null) {
+        		user = (DtUsuario)sesion.getAttribute("usuarioLogeado");
+                boolean marcarActividadComoFav = Boolean.valueOf(req.getParameter("marcarComoFav"));
+                String nomActividad = (String) req.getParameter("nomAct");
+                try {
+	                if(marcarActividadComoFav) {
+	                	wbUsuarios.agregarOEliminarActividadDeFavoritos(user.getNickname(), nomActividad);
+	                }
+                } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+                    req.setAttribute("motivoDeError", "La actividad que se desea marcar/desmarcar como favorita no existe en el sistema");
+                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                }
+        	}
         }
 
         List<String> departamentos = wbActi.obtenerIdDepartamentos().getItem();
@@ -100,10 +120,12 @@ public class IndexServlet extends HttpServlet {
             
             HttpSession sesion = req.getSession(false);
             Map<DtActividadTuristica, Boolean> actividadPerteneceAFavoritos = new HashMap<DtActividadTuristica, Boolean>();
-            if(sesion != null) {
+            if(sesion != null && user != null && user instanceof DtTurista) {
             	for(var actividad: actividades) {
-            		actividadPerteneceAFavoritos.put(actividad, wbUsuarios.perteneceAFavoritosDeTurista(departamentoElegido, categoriaElegida));
+            		actividadPerteneceAFavoritos.put(actividad, wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), actividad.getNombre()));
             	}
+            	
+            	req.setAttribute("actividadFavorito", actividadPerteneceAFavoritos);
             }
         } catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
             req.setAttribute("motivoDeError", "El nombre de la departamento no existe en el sistema");
