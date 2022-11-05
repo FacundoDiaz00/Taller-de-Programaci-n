@@ -14,17 +14,17 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtActividadTuristicaCollection">
- *   <complexContent>
- *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       <sequence>
- *         <element name="actividadTuristicas" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *       </sequence>
- *     </restriction>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtActividadTuristicaCollection">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="actividadTuristicas" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -43,8 +43,8 @@ public class DtActividadTuristicaCollection {
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the actividadTuristicas property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actividadTuristicas property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -58,12 +58,10 @@ public class DtActividadTuristicaCollection {
      * {@link DtActividadTuristica }
      * 
      * 
-     * @return
-     *     The value of the actividadTuristicas property.
      */
     public List<DtActividadTuristica> getActividadTuristicas() {
         if (actividadTuristicas == null) {
-            actividadTuristicas = new ArrayList<>();
+            actividadTuristicas = new ArrayList<DtActividadTuristica>();
         }
         return this.actividadTuristicas;
     }

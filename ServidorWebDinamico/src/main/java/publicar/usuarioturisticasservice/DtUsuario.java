@@ -12,22 +12,22 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtUsuario">
- *   <complexContent>
- *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       <sequence>
- *         <element name="nickname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="apellido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="correo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaNacStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
- *       </sequence>
- *     </restriction>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtUsuario">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="nickname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="apellido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="correo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="fechaNacStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -41,8 +41,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "img"
 })
 @XmlSeeAlso({
-    DtProveedor.class,
-    DtTurista.class
+    DtTurista.class,
+    DtProveedor.class
 })
 public class DtUsuario {
 

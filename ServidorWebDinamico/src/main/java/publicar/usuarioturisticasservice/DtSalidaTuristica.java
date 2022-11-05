@@ -12,23 +12,23 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtSalidaTuristica">
- *   <complexContent>
- *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       <sequence>
- *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaHoraSalidaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="lugarSalida" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="cantMaxTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
- *         <element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       </sequence>
- *     </restriction>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtSalidaTuristica">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="fechaHoraSalidaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="lugarSalida" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="cantMaxTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
+ *         &lt;element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */

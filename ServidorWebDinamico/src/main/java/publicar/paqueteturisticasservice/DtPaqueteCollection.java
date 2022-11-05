@@ -14,17 +14,17 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtPaqueteCollection">
- *   <complexContent>
- *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       <sequence>
- *         <element name="paquetes" type="{http://paqueteTuristicasService.publicar/}dtPaquete" maxOccurs="unbounded" minOccurs="0"/>
- *       </sequence>
- *     </restriction>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtPaqueteCollection">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="paquetes" type="{http://paqueteTuristicasService.publicar/}dtPaquete" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -43,8 +43,8 @@ public class DtPaqueteCollection {
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the paquetes property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the paquetes property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -58,12 +58,10 @@ public class DtPaqueteCollection {
      * {@link DtPaquete }
      * 
      * 
-     * @return
-     *     The value of the paquetes property.
      */
     public List<DtPaquete> getPaquetes() {
         if (paquetes == null) {
-            paquetes = new ArrayList<>();
+            paquetes = new ArrayList<DtPaquete>();
         }
         return this.paquetes;
     }

@@ -14,39 +14,39 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtPaqueteDetalles">
- *   <complexContent>
- *     <extension base="{http://usuarioTuristicasService.publicar/}dtPaquete">
- *       <sequence>
- *         <element name="actividades" minOccurs="0">
- *           <complexType>
- *             <complexContent>
- *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 <sequence>
- *                   <element name="entry" maxOccurs="unbounded" minOccurs="0">
- *                     <complexType>
- *                       <complexContent>
- *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           <sequence>
- *                             <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                             <element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
- *                           </sequence>
- *                         </restriction>
- *                       </complexContent>
- *                     </complexType>
- *                   </element>
- *                 </sequence>
- *               </restriction>
- *             </complexContent>
- *           </complexType>
- *         </element>
- *         <element name="compras" type="{http://usuarioTuristicasService.publicar/}dtCompra" maxOccurs="unbounded" minOccurs="0"/>
- *       </sequence>
- *     </extension>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtPaqueteDetalles">
+ *   &lt;complexContent>
+ *     &lt;extension base="{http://usuarioTuristicasService.publicar/}dtPaquete">
+ *       &lt;sequence>
+ *         &lt;element name="actividades" minOccurs="0">
+ *           &lt;complexType>
+ *             &lt;complexContent>
+ *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 &lt;sequence>
+ *                   &lt;element name="entry" maxOccurs="unbounded" minOccurs="0">
+ *                     &lt;complexType>
+ *                       &lt;complexContent>
+ *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                           &lt;sequence>
+ *                             &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                             &lt;element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
+ *                           &lt;/sequence>
+ *                         &lt;/restriction>
+ *                       &lt;/complexContent>
+ *                     &lt;/complexType>
+ *                   &lt;/element>
+ *                 &lt;/sequence>
+ *               &lt;/restriction>
+ *             &lt;/complexContent>
+ *           &lt;/complexType>
+ *         &lt;/element>
+ *         &lt;element name="compras" type="{http://usuarioTuristicasService.publicar/}dtCompra" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/extension>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -93,8 +93,8 @@ public class DtPaqueteDetalles
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the compras property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the compras property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -108,12 +108,10 @@ public class DtPaqueteDetalles
      * {@link DtCompra }
      * 
      * 
-     * @return
-     *     The value of the compras property.
      */
     public List<DtCompra> getCompras() {
         if (compras == null) {
-            compras = new ArrayList<>();
+            compras = new ArrayList<DtCompra>();
         }
         return this.compras;
     }
@@ -124,28 +122,28 @@ public class DtPaqueteDetalles
      * 
      * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
      * 
-     * <pre>{@code
-     * <complexType>
-     *   <complexContent>
-     *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       <sequence>
-     *         <element name="entry" maxOccurs="unbounded" minOccurs="0">
-     *           <complexType>
-     *             <complexContent>
-     *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                 <sequence>
-     *                   <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                   <element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
-     *                 </sequence>
-     *               </restriction>
-     *             </complexContent>
-     *           </complexType>
-     *         </element>
-     *       </sequence>
-     *     </restriction>
-     *   </complexContent>
-     * </complexType>
-     * }</pre>
+     * <pre>
+     * &lt;complexType>
+     *   &lt;complexContent>
+     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       &lt;sequence>
+     *         &lt;element name="entry" maxOccurs="unbounded" minOccurs="0">
+     *           &lt;complexType>
+     *             &lt;complexContent>
+     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *                 &lt;sequence>
+     *                   &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *                   &lt;element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
+     *                 &lt;/sequence>
+     *               &lt;/restriction>
+     *             &lt;/complexContent>
+     *           &lt;/complexType>
+     *         &lt;/element>
+     *       &lt;/sequence>
+     *     &lt;/restriction>
+     *   &lt;/complexContent>
+     * &lt;/complexType>
+     * </pre>
      * 
      * 
      */
@@ -163,8 +161,8 @@ public class DtPaqueteDetalles
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the Jakarta XML Binding object.
-         * This is why there is not a {@code set} method for the entry property.
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the entry property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
@@ -178,12 +176,10 @@ public class DtPaqueteDetalles
          * {@link DtPaqueteDetalles.Actividades.Entry }
          * 
          * 
-         * @return
-         *     The value of the entry property.
          */
         public List<DtPaqueteDetalles.Actividades.Entry> getEntry() {
             if (entry == null) {
-                entry = new ArrayList<>();
+                entry = new ArrayList<DtPaqueteDetalles.Actividades.Entry>();
             }
             return this.entry;
         }
@@ -194,18 +190,18 @@ public class DtPaqueteDetalles
          * 
          * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
          * 
-         * <pre>{@code
-         * <complexType>
-         *   <complexContent>
-         *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *       <sequence>
-         *         <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *         <element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
-         *       </sequence>
-         *     </restriction>
-         *   </complexContent>
-         * </complexType>
-         * }</pre>
+         * <pre>
+         * &lt;complexType>
+         *   &lt;complexContent>
+         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *       &lt;sequence>
+         *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+         *         &lt;element name="value" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
+         *       &lt;/sequence>
+         *     &lt;/restriction>
+         *   &lt;/complexContent>
+         * &lt;/complexType>
+         * </pre>
          * 
          * 
          */

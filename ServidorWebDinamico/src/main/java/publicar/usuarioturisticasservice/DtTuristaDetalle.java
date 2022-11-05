@@ -15,19 +15,19 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtTuristaDetalle">
- *   <complexContent>
- *     <extension base="{http://usuarioTuristicasService.publicar/}dtTurista">
- *       <sequence>
- *         <element name="inscripcionesSalidas" type="{http://usuarioTuristicasService.publicar/}dtSalidaTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="seguidos" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="seguidores" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *       </sequence>
- *     </extension>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtTuristaDetalle">
+ *   &lt;complexContent>
+ *     &lt;extension base="{http://usuarioTuristicasService.publicar/}dtTurista">
+ *       &lt;sequence>
+ *         &lt;element name="inscripcionesSalidas" type="{http://usuarioTuristicasService.publicar/}dtSalidaTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="seguidos" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="seguidores" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/extension>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -57,8 +57,8 @@ public class DtTuristaDetalle
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the inscripcionesSalidas property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the inscripcionesSalidas property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -72,12 +72,10 @@ public class DtTuristaDetalle
      * {@link DtSalidaTuristica }
      * 
      * 
-     * @return
-     *     The value of the inscripcionesSalidas property.
      */
     public List<DtSalidaTuristica> getInscripcionesSalidas() {
         if (inscripcionesSalidas == null) {
-            inscripcionesSalidas = new ArrayList<>();
+            inscripcionesSalidas = new ArrayList<DtSalidaTuristica>();
         }
         return this.inscripcionesSalidas;
     }
@@ -88,8 +86,8 @@ public class DtTuristaDetalle
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the seguidos property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the seguidos property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -103,12 +101,10 @@ public class DtTuristaDetalle
      * {@link String }
      * 
      * 
-     * @return
-     *     The value of the seguidos property.
      */
     public List<String> getSeguidos() {
         if (seguidos == null) {
-            seguidos = new ArrayList<>();
+            seguidos = new ArrayList<String>();
         }
         return this.seguidos;
     }
@@ -119,8 +115,8 @@ public class DtTuristaDetalle
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the seguidores property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the seguidores property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -134,12 +130,10 @@ public class DtTuristaDetalle
      * {@link String }
      * 
      * 
-     * @return
-     *     The value of the seguidores property.
      */
     public List<String> getSeguidores() {
         if (seguidores == null) {
-            seguidores = new ArrayList<>();
+            seguidores = new ArrayList<String>();
         }
         return this.seguidores;
     }

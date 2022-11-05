@@ -16,6 +16,8 @@ import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 import logica.datatypes.colleciones.DTUsuarioSeparadosPorTipoCollection;
+import logica.entidades.Turista;
+import logica.manejadores.ManejadorUsuario;
 import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
@@ -139,6 +141,12 @@ public class WebServiceUsuarios {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
         }
 
+    }
+
+    @WebMethod
+    public boolean perteneceAFavoritosDeTurista(String nickTurista, String nombreAct) throws ObjetoNoExisteEnTurismoUy {
+        Turista turista = (Turista) ManejadorUsuario.getInstancia().getUsuarioPorNick(nickTurista);
+        return turista.estaEnActividadesFavoritas(nombreAct);
     }
 
     

@@ -60,6 +60,17 @@
 			                            <div class="card-body">
 			                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
 			                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
+			                                
+			                              
+			                                <% 
+			                            	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");   
+			                                if(session.getAttribute("usuarioLogeado") == null){ 
+			                                	
+			                                %>
+			                                
+			                                
+			                                
+			                                
 			                                <div class="botonera">
 			                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver más</a>
 			                                </div>

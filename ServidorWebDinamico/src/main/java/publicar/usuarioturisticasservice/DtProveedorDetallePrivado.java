@@ -14,19 +14,19 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtProveedorDetallePrivado">
- *   <complexContent>
- *     <extension base="{http://usuarioTuristicasService.publicar/}dtProveedorDetalle">
- *       <sequence>
- *         <element name="actividadesAgregadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="actividadesFinalizadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="actividadesRechazadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *       </sequence>
- *     </extension>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtProveedorDetallePrivado">
+ *   &lt;complexContent>
+ *     &lt;extension base="{http://usuarioTuristicasService.publicar/}dtProveedorDetalle">
+ *       &lt;sequence>
+ *         &lt;element name="actividadesAgregadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="actividadesFinalizadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="actividadesRechazadas" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/extension>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -53,8 +53,8 @@ public class DtProveedorDetallePrivado
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the actividadesAgregadas property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actividadesAgregadas property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -68,12 +68,10 @@ public class DtProveedorDetallePrivado
      * {@link DtActividadTuristica }
      * 
      * 
-     * @return
-     *     The value of the actividadesAgregadas property.
      */
     public List<DtActividadTuristica> getActividadesAgregadas() {
         if (actividadesAgregadas == null) {
-            actividadesAgregadas = new ArrayList<>();
+            actividadesAgregadas = new ArrayList<DtActividadTuristica>();
         }
         return this.actividadesAgregadas;
     }
@@ -84,8 +82,8 @@ public class DtProveedorDetallePrivado
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the actividadesFinalizadas property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actividadesFinalizadas property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -99,12 +97,10 @@ public class DtProveedorDetallePrivado
      * {@link DtActividadTuristica }
      * 
      * 
-     * @return
-     *     The value of the actividadesFinalizadas property.
      */
     public List<DtActividadTuristica> getActividadesFinalizadas() {
         if (actividadesFinalizadas == null) {
-            actividadesFinalizadas = new ArrayList<>();
+            actividadesFinalizadas = new ArrayList<DtActividadTuristica>();
         }
         return this.actividadesFinalizadas;
     }
@@ -115,8 +111,8 @@ public class DtProveedorDetallePrivado
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the actividadesRechazadas property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actividadesRechazadas property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -130,12 +126,10 @@ public class DtProveedorDetallePrivado
      * {@link DtActividadTuristica }
      * 
      * 
-     * @return
-     *     The value of the actividadesRechazadas property.
      */
     public List<DtActividadTuristica> getActividadesRechazadas() {
         if (actividadesRechazadas == null) {
-            actividadesRechazadas = new ArrayList<>();
+            actividadesRechazadas = new ArrayList<DtActividadTuristica>();
         }
         return this.actividadesRechazadas;
     }
