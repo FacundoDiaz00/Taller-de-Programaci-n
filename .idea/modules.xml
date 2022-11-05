@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Estacion de trabajo/Estacion de trabajo.iml" filepath="$PROJECT_DIR$/Estacion de trabajo/Estacion de trabajo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Servidor Central/Servidor Central.iml" filepath="$PROJECT_DIR$/Servidor Central/Servidor Central.iml" />
+    </modules>
+  </component>
+</project>

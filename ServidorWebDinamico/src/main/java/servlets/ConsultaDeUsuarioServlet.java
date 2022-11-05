@@ -63,12 +63,46 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         }
 
         String debelistar = req.getParameter("listar");
+        boolean seguir = Boolean.valueOf(req.getParameter("seguir"));
         req = Utiles.insertarLoDeSiempre(req);
         HttpSession sesion = req.getSession(false);
+        boolean seSiguenUsuarios = false;
         Object usr = sesion.getAttribute("usuarioLogeado");
         if (debelistar != null && debelistar.equals("false")) {
-            if (usr != null && ((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
-            	DtUsuario usuario;
+        	
+        	try {
+        	
+        	seSiguenUsuarios = this.contrUsuario.usuariosSeSiguen(((DTUsuario) usr).getNickname(), req.getParameter("id"));
+        	
+        	}catch (ObjetoNoExisteEnTurismoUy e) {
+				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
+                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                e.printStackTrace();
+        	}
+        	
+        	req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+        	
+            if(seguir) {
+            	
+            	if (usr != null && !((DTUsuario) usr).getNickname().equals(req.getParameter("id"))){
+            		try {
+            			
+            			this.contrUsuario.seguirODejarDeSeguirUsuario(((DTUsuario) usr).getNickname(), req.getParameter("id"));
+            			seSiguenUsuarios = this.contrUsuario.usuariosSeSiguen(((DTUsuario) usr).getNickname(), req.getParameter("id"));
+            			req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+            			req.setAttribute("exito", Boolean.TRUE);
+            			
+            			}catch (ObjetoNoExisteEnTurismoUy e) {
+            				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
+                            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                            e.printStackTrace();
+            		}
+            		
+            	}
+            }
+        	
+            if (usr != null && ((DTUsuario) usr).getNickname().equals(req.getParameter("id"))) {
+                DTUsuario DUser = null;
                 try {
                 	usuario = wbUser.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
                 } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
@@ -96,6 +130,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            
         } else {
         	List<DtUsuario> usuarios = new ArrayList<>();
         	DtUsuarioSeparadosPorTipoCollection dtUserSepCollection = wbUser.obtenerDTUsuarios();

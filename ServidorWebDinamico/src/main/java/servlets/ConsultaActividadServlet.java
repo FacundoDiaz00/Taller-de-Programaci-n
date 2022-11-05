@@ -36,7 +36,8 @@ public class ConsultaActividadServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
-
+        
+        boolean finalizar = Boolean.valueOf(req.getParameter("finalizar"));
         String idActividad = (String) req.getParameter("id");
 
         DtActividadTuristicaDetalle infoActividadTuristica;
@@ -49,7 +50,7 @@ public class ConsultaActividadServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
             return;
         }
-
+        
         req = Utiles.insertarLoDeSiempre(req);
         
         
@@ -57,6 +58,7 @@ public class ConsultaActividadServlet extends HttpServlet {
         
 
         req.setAttribute("datosActividad", infoActividadTuristica);
+        req.setAttribute("sePuedeFinalizar", sePuedeFinalizar);
         req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
 
     }

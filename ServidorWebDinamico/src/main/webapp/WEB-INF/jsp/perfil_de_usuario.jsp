@@ -48,6 +48,13 @@
 						      		<div class="card-body">
 						    			<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 						        		<p class="card-text"><small class="text-muted"><%= usr.getNickname()%> / <%= usr.getCorreo()%></small></p>
+						        		<% 
+						        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
+						        			if(seSiguenUsuarios){ %>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user"></i></a>
+						        			<%} else{%>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-secondary"><i class="fa-solid fa-user-plus"></i></a>
+						        			<%} %>
 						      		</div>	
 						    	</div>
 						  	</div>
@@ -276,7 +283,7 @@
 			                                <h5 class="card-title"><%=act.getNombre()%></h5>
 			                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 			                                <div class="botonera">
-			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
 			                            	</div>
 			                                
 			                            	<div id="salidas" style=";margin-left: 10px">
@@ -412,6 +419,16 @@
             });
         });
     </script>
+    
+     <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Ha ocurrido un error al seguir usuario" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+  
 
 </body>
 </html>
