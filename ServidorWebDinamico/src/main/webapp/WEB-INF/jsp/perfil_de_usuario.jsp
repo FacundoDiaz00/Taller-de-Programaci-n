@@ -53,9 +53,9 @@
 						        		if(!usr.getNickname().equals(usuario.getNickname())){
 						        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
 						        			if(seSiguenUsuarios){ %>
-						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user"></i></a>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
 						        			<%} else{%>
-						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-secondary"><i class="fa-solid fa-user-plus"></i></a>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></a>
 						        			<%} 
 						        		}%>
 						      		</div>	
@@ -99,6 +99,13 @@
 			                <button class="nav-link" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas que se proveen</button>
 			            </li>
 				    <%}%>
+				    
+				    <li class="nav-item" role="presentation">
+	                    <button class="nav-link" id="boton-seguidores" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidores</button>
+	                </li>	
+	                <li class="nav-item" role="presentation">
+	                    <button class="nav-link" id="boton-seguidos" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidos</button>
+	                </li>	
 		    	</ul>
 		    	<div class="tab-content" id="myTabContent">
 		    		<div class="tab-pane fade show cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -402,7 +409,16 @@
 							<% } %>
             			</div>
 					<%}%>
+					
 				</div><!-- cierra tabcontent -->
+				
+				 <div class="tab-pane fade" id="boton-seguidos-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="4">
+           			ayudaaaaa
+           		</div>
+           		
+           		<div class="tab-pane fade" id="boton-seguidores-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="5">
+           			holaaaaa
+           		</div>
 				
 		    </div><!-- cierra ContenedorItems -->
 		<%}%>

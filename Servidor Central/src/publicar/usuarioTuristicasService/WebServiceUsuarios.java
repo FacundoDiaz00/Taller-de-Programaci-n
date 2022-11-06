@@ -184,5 +184,11 @@ public class WebServiceUsuarios {
         return new DTUsuarioSeparadosPorTipoCollection(usuarios);
     }
 
+    @WebMethod
+    public DTUsuarioSeparadosPorTipoCollection obtenerSeguidos(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
+        var usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerSeguidos(nickUsuario);
+        return new DTUsuarioSeparadosPorTipoCollection(usuarios);
+    }
+
     
 }
