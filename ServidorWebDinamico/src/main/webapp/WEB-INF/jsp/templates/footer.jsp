@@ -1,12 +1,9 @@
-<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/><%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-
-    
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+ <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
       <div class="container text-center">
          <span class="" style="font-size: 25px; color: Grey;">
          <i class="fas fa-route"></i>
          </span>
-         <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo DÃ­az, AgustÃ­n MartÃ­Â­nez, Daniel PadrÃ³n y AgustÃ­Â­n Recoba</small>
+         <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Díaz, Agustín Martí­nez, Daniel Padrón y Agustí­n Recoba</small>
       </div>
     </footer>
     

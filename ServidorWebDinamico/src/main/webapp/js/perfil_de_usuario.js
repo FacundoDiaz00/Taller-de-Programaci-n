@@ -69,13 +69,13 @@ $("#boton-actividades-2")[0]?.addEventListener("click", function() {
 console.log($("#boton-seguidos"));
 
 $("#boton-seguidos")[0]?.addEventListener("click", function() {
-	usuariosAListar = seguidos;
+	//usuariosAListar = seguidos;
     console.log("entre a seguidos");
     cambiarSeleccionado($("#boton-seguidos-pane"),$("#boton-paquetes-pane"), $("#boton-actividades-pane"), $("#boton-general-pane"),$("#boton-salidas-pane"),$("#boton-salidasprov-pane"),$("#boton-seguidores-pane"));
 })
 
 $("#boton-seguidores")[0]?.addEventListener("click", function() {
-	usuariosAListar = seguidores;
+	//usuariosAListar = seguidores;
     console.log("entre a seguidores");
     cambiarSeleccionado($("#boton-seguidores-pane"),$("#boton-paquetes-pane"), $("#boton-actividades-pane"), $("#boton-general-pane"),$("#boton-salidas-pane"),$("#boton-salidasprov-pane"),$("#boton-seguidos-pane"));
 })
