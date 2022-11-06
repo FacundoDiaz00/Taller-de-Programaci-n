@@ -99,12 +99,12 @@
 			                <button class="nav-link" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas que se proveen</button>
 			            </li>
 				    <%}%>
+				    <li class="nav-item" role="presentation">
+	                    <button class="nav-link" id="boton-seguidos" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidos</button>
+	                </li>	
 				    
 				    <li class="nav-item" role="presentation">
 	                    <button class="nav-link" id="boton-seguidores" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidores</button>
-	                </li>	
-	                <li class="nav-item" role="presentation">
-	                    <button class="nav-link" id="boton-seguidos" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidos</button>
 	                </li>	
 		    	</ul>
 		    	<div class="tab-content" id="myTabContent">
@@ -410,20 +410,17 @@
             			</div>
 					<%}%>
 					
-				</div><!-- cierra tabcontent -->
-				
-				<%DtUsuarioSeparadosPorTipoCollection seguidores = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidores");
-				  DtUsuarioSeparadosPorTipoCollection seguidos = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidos");
-				  DtUsuarioSeparadosPorTipoCollection usuariosAListar;
-				%>
-				
-				 <div class="tab-pane fade" id="boton-seguidos-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="4">
-           			<jsp:include page="/WEB-INF/jsp/listarUsuarios.jsp"/>
+				<div class="tab-pane fade" id="boton-seguidos-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="4">
+           			<jsp:include page="/WEB-INF/jsp/listarSeguidos.jsp"/>
            		</div>
            		
            		<div class="tab-pane fade" id="boton-seguidores-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="5">
-           			<jsp:include page="/WEB-INF/jsp/listarUsuarios.jsp"/>
+           			<jsp:include page="/WEB-INF/jsp/listarSeguidores.jsp"/>
            		</div>
+				
+					
+				</div><!-- cierra tabcontent -->
+				
 				
 		    </div><!-- cierra ContenedorItems -->
 		<%}%>
@@ -451,6 +448,8 @@
     	generarMensaje('error', "Ha ocurrido un error al seguir usuario" , mensajeError , 200);
     </script>
     <%} %>
+    
+
     
   
 

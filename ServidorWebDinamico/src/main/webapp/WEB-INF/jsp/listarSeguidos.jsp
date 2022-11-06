@@ -1,7 +1,11 @@
 <%@page import="utils.Utiles"%>
-<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
-<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
-<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
+
+<%@page import="publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection"%>
+<%@ page import="publicar.usuarioturisticasservice.DtUsuario" %>
+<%@ page import="publicar.usuarioturisticasservice.DtTurista" %>
+<%@ page import="publicar.usuarioturisticasservice.DtProveedor" %>
+
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,20 +19,24 @@
 			return value == null ? "" : value;
 		}
 	%>
-		<section id="contenedor">
-		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
-		<div id="contenedor-items">
-			
-            <!--Actividades-->
-
-            <div class="card" id="contenedor-actividades-turisticas">
-                <div class="header-card-with-button" style="margin-left: 30px">
-                	<h2 class="card-title header_usuarios">Usuarios</h2>
-            	</div>
-                
+             <div class="card" id="contenedor-actividades-turisticas" style="margin-top: 20px">
                 	<% 
-                		List<DtUsuario> usuarios = (List<DtUsuario>) request.getAttribute("usuarios");
+                	  DtUsuarioSeparadosPorTipoCollection users = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidos");
+                	  ArrayList<DtUsuario> usuarios= new ArrayList<DtUsuario>();
+                	  List<DtTurista> turistas = users.getTuristas();
+                	  List<DtProveedor> proveedores = users.getProveedores();
+                	  
+                	  for(DtTurista turista: turistas){
+                		  usuarios.add((DtUsuario)turista);
+                	  }
+                	  
+                	  for(DtProveedor proveedor: proveedores){
+                		  usuarios.add((DtUsuario) proveedor);
+                	  }
+                	  System.out.println("cant saeguidos: " + usuarios.size());
+                	  
 						for(DtUsuario usr: usuarios){
+							System.out.println("sigo a : " + usr.getNickname());
 					%>
 							<div class="card mb-3" style="max-width: 800px; margin-left: 15px">
 				                <div class="row g-0">
@@ -56,11 +64,7 @@
                 
 
             </div>
-
-
-    </section>
-	                        
-	                        
+               
 	<script src="js/jquery-3.3.1.slim.min.js"></script>
 
    
