@@ -412,12 +412,17 @@
 					
 				</div><!-- cierra tabcontent -->
 				
+				<%DtUsuarioSeparadosPorTipoCollection seguidores = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidores");
+				  DtUsuarioSeparadosPorTipoCollection seguidos = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidos");
+				  DtUsuarioSeparadosPorTipoCollection usuariosAListar;
+				%>
+				
 				 <div class="tab-pane fade" id="boton-seguidos-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="4">
-           			ayudaaaaa
+           			<jsp:include page="/WEB-INF/jsp/listarUsuarios.jsp"/>
            		</div>
            		
            		<div class="tab-pane fade" id="boton-seguidores-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="5">
-           			holaaaaa
+           			<jsp:include page="/WEB-INF/jsp/listarUsuarios.jsp"/>
            		</div>
 				
 		    </div><!-- cierra ContenedorItems -->

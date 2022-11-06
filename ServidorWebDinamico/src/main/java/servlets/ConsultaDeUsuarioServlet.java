@@ -70,12 +70,18 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         boolean seSiguenUsuarios = false;
         Object usr = sesion.getAttribute("usuarioLogeado");
         
+       
+        
         if (debelistar != null && debelistar.equals("false")) {
         	
         	try {
         		String nick = ((DtUsuario)usr).getNickname();	
         		seSiguenUsuarios = wbUser.usuariosSeSiguen( nick, req.getParameter("id"));
-        	
+        		DtUsuarioSeparadosPorTipoCollection seguidos = wbUser.obtenerSeguidos(nick);
+        		DtUsuarioSeparadosPorTipoCollection seguidores = wbUser.obtenerSeguidores(nick);
+        		req.setAttribute("seguidos", seguidos);
+        		req.setAttribute("seguidores", seguidores);
+        		
         	}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
 				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
