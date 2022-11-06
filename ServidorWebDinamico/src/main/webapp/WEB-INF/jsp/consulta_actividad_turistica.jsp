@@ -15,6 +15,7 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="publicar.usuarioturisticasservice.DtTurista" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,7 +49,27 @@
             </div>
 
             <div id="info">
-                <h2><%= datosActividad.getNombre() %></h2>
+            	<div>
+            		<h2><%= datosActividad.getNombre() %></h2>
+            		<% 
+            		int cantFavoritos = (int) request.getAttribute("cantFavoritos");
+					 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+						boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
+                     	String idDepartamento = (String)request.getAttribute("idDepartamento");
+                     	if(esFavoritaActividad){
+         
+                      %>
+                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+                      
+                      <%} else { %>
+                      
+                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+                      	
+                      <% }
+                     	
+                     	}%>
+                    <p>favorito de <%=cantFavoritos%> persona/s </p>
+            	</div>
                 
                 <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
                 <% 
@@ -59,11 +80,17 @@
         		} catch (Exception e) {
         			// nada
         		}
-        		// Muestro el boton si soy turista
+        		// Muestro el boton si soy proveedor
         		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) { %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
-	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
+<%-- 	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
+	                    <%
+	                    	boolean sePuedeFinalizar = (boolean)request.getAttribute("sePuedeFinalizar");
+							if(sePuedeFinalizar){
+							%>
+	                    <li><a href="ConsultaActividad?finalizar=<%=true%>" class="btn btn-primary">Finalizar</a></li>
+	                  <%}%> --%>
 	                </ul>	                
         		<% } %>
                 
@@ -119,6 +146,8 @@
                        
                     </ul>
                 </div>
+                
+                <iframe width="640" height="360" src="<%=datosActividad.getUrlVideo() %>" frameborder="0" allowfullscreen></iframe>
             </div>
 
         </div>
@@ -232,6 +261,33 @@
 	    	generarMensaje('success', "Operacion completada" , "Se ha realizado un alta de salida satisfactoriamente" , 500);
 	    </script>
     <%} %>
+    
+    
+ <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error al finalizar actividad turística" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+    
+    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
+    <script>
+    
+	    setTimeout(() => {
+	        Swal.fire({
+	            icon: "success",
+	            title: "Éxito",
+	            text: "La actividad turistica ha sido finalizada con éxito",
+	            confirmButtonText: 'Entendido'  
+	        }).then((res) => {
+	        	window.location.href = "index";
+	        })
+	    }, 200)
+    
+	</script>
+	<%} %>
  
 
 </main>

@@ -1,6 +1,7 @@
 package logica.entidades;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,8 +121,6 @@ public abstract class Usuario {
         this.setNombre(datosNuevos.getNombre());
         this.setApellido(datosNuevos.getApellido());
         this.setFechaNac(datosNuevos.getFechaNac());
-        if (datosNuevos.getImg() != null)
-        	this.setImagen(datosNuevos.getImg());
     }
 
     public boolean usuarioValido(String _contrasenia) {
@@ -129,7 +128,7 @@ public abstract class Usuario {
     }
 
 	public void agregarOBorrarSeguidor(Usuario seguidorUsuario) {
-		if (seguidores.containsKey(seguidorUsuario.getNickname())) {
+		if (sigueA(seguidorUsuario.getNickname())) {
 			seguidores.remove(seguidorUsuario.getNickname());
 		} else {
 			seguidores.put(seguidorUsuario.getNickname(), seguidorUsuario);
@@ -137,11 +136,23 @@ public abstract class Usuario {
 	}
 
 	public void agregarOBorrarDeSeguidos(Usuario seguidoUsuario) {
-		if (usuariosSeguidos.containsKey(seguidoUsuario.getNickname())) {
+		if (sigueA(seguidoUsuario.getNickname())) {
 			usuariosSeguidos.remove(seguidoUsuario.getNickname());
 		} else {
 			usuariosSeguidos.put(seguidoUsuario.getNickname(), seguidoUsuario);
 		}
+	}
+	
+	public boolean sigueA(String nickSeguido) {
+		return usuariosSeguidos.containsKey(nickSeguido);
+	}
+	
+	public Collection<Usuario> obtenerSeguidores(){
+		return seguidores.values();
+	}
+	
+	public Collection<Usuario> obtenerSeguidos(){
+		return usuariosSeguidos.values();
 	}
 
 }

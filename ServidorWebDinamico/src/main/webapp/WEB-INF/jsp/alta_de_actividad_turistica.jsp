@@ -153,6 +153,19 @@
                     </div>
                     
                     <div class="contenedorinput mb-3">
+                    	<% String url = ""; %>
+                        <span class="input-label">URL vídeo de la actividad:</span>
+                        <input 	type="text"
+                           		id="url"
+                       	   		name="url"<%= url %>"
+                        		required 
+                        		class="form-control" 
+                        		placeholder="Ingrese una el URL asociado al vídeo que desea agregar" 
+                        		aria-label="url" 
+                        		aria-describedby="basic-addon1">
+                    </div>  
+                    
+                    <div class="contenedorinput mb-3">
                         <span class="input-label">Categorías:</span>
                         <div id="contenedorCategorias">
                                 <% 	int i = 0;

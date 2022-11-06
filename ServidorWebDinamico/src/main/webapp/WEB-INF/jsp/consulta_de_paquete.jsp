@@ -150,7 +150,24 @@
 		                            		<h5 class="card-title"><%=act.getNombre()%></h5>
 		                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 		                            	</div>
-		                            	<div class="botonera">
+		                            	<div style="display:flex; justify-content: space-between;">
+		                            				                              
+					                                <%   	 
+					                                
+				                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+				                                	Map<DtActividadTuristica, Boolean> actividadesFav = (Map<DtActividadTuristica, Boolean>) request.getAttribute("actividadFavorito");
+				                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
+				                                	if(actividadesFav.get(act.getNombre())){
+				                    
+					                                %>
+					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+					                                
+					                                <%} else { %>
+					                                
+					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+					                                	
+					                                <% } 
+				                                	}%>
 		                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
 		                            	</div>		                           
 		                                

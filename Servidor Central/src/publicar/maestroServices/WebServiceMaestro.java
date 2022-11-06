@@ -25,7 +25,7 @@ public class WebServiceMaestro {
 
     @WebMethod(exclude = true)
     public void publicar(){
-        endpoint = Endpoint.publish(Cargador.getDirrecionAHacerDeploy() + "/maestro", this);
+        endpoint = Endpoint.publish(Cargador.getDireccionAHacerDeploy() + "/maestro", this);
         log.info("Servicios maestro publicado");
     }
     @WebMethod(exclude = true)
@@ -36,7 +36,7 @@ public class WebServiceMaestro {
     @WebMethod
     public byte[] getImg(String path) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'getImg'");
-        File imgFile = new File(Cargador.getDirrectorioImagenes() + path);
+        File imgFile = new File(Cargador.getDirectorioImagenes() + path);
         if (imgFile.exists()){
             try{
                 FileInputStream imgStream = new FileInputStream(imgFile);

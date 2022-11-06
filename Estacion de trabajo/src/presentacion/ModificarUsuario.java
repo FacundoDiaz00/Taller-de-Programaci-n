@@ -347,7 +347,7 @@ public class ModificarUsuario extends JInternalFrame {
 		}
 
 		try {
-			icu.modificarUsuario(dtu, null, false);
+			icu.modificarUsuario(dtu, null, null);
 			setVisible(false);
 			JOptionPane.showMessageDialog(null, "Usuario modificado con éxito.", "Operación con éxito.",
 					JOptionPane.INFORMATION_MESSAGE);

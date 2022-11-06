@@ -69,7 +69,6 @@
                         <input  id="actividad"
                         	   	name="actividad" 
                         		type="text" 
-                        		0
                         		class="form-control" 
                         		placeholder="" 
                         		aria-label="Actividad" 
@@ -165,6 +164,7 @@
                         	   aria-label="Imagen" 
                         	   aria-describedby="basic-addon1">
                     </div>
+                   
                     
                     <div id="botonera">
                         <a href="index.html" class="btn btn-danger">Cancelar</a>

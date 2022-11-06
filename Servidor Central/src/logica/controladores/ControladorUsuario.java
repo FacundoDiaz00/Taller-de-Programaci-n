@@ -8,8 +8,6 @@ import excepciones.ContraseniaInvalidaException;
 import excepciones.ModificacionUsuarioNoPermitida;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.UsuarioYaRegistradoException;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
 import logica.entidades.Proveedor;
@@ -34,7 +32,7 @@ public class ControladorUsuario implements IControladorUsuario {
         ManejadorUsuario manUsr = ManejadorUsuario.getInstancia();
         return (Proveedor) manUsr.getUsuarioPorNick(nickProv);
     }
-
+    @Override
     public List<String> obtenerIdUsuarios() {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         return new ArrayList<String>(ins.obtenerNickUsuarios());
@@ -115,7 +113,7 @@ public class ControladorUsuario implements IControladorUsuario {
             throw new ContraseniaInvalidaException("Se intento acceder a un usuario con la contrasenia incorrecta");
         }
     }
-
+    @Override
     public DTUsuario obtenerDTUsuarioPorEmail(String correo, String contrasenia)
             throws ObjetoNoExisteEnTurismoUy, ContraseniaInvalidaException {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
@@ -126,7 +124,7 @@ public class ControladorUsuario implements IControladorUsuario {
             throw new ContraseniaInvalidaException("Se intento acceder a un usuario con la contrasenia incorrecta");
         }
     }
-
+    @Override
     public DTUsuario obtenerDTUsuario(String nickname) throws ObjetoNoExisteEnTurismoUy {
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
         Usuario usuario = ins.getUsuarioPorNick(nickname);
@@ -141,7 +139,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, boolean borrarImg)
+    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Imagen imgMetaData)
             throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy {
 
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
@@ -149,16 +147,14 @@ public class ControladorUsuario implements IControladorUsuario {
         try {
             Usuario u_nick = ins.getUsuarioPorNick(datosNuevos.getNickname());
             Usuario u_correo = ins.getUsuarioPorCorreo(datosNuevos.getCorreo());
+            
             if (u_nick != null && u_correo != null && u_nick.equals(u_correo)) {
                 u_nick.setearDatos(datosNuevos);
+                
                 if (contrasenia != null)
                 	u_nick.setContrasenia(contrasenia);
                 
-                if (borrarImg) {
-                	u_nick.setImagen(null);
-                }
-                
-                
+            	u_nick.setImagen(imgMetaData);
                 
             } else {
                 throw new ModificacionUsuarioNoPermitida(
@@ -202,27 +198,34 @@ public class ControladorUsuario implements IControladorUsuario {
 	public boolean emailDisponibleParaNuevoUsuario(String email) {
 		return !ManejadorUsuario.getInstancia().existeUsuario(null, email);
 	}
-
-/*    @Override
-    public DTTurista obtenerDtTurista(String nickname) throws ObjetoNoExisteEnTurismoUy {
-
-        Turista turi = obtenerTurista(nickname);
-        if (turi == null){
-            throw new ObjetoNoExisteEnTurismoUy(Turista.class);
-        }
-
-        return (DTTurista) turi.obtenerDTUsuario();
-    }
-
-    @Override
-    public DTProveedor obtenerDtProveedor(String nickname) throws ObjetoNoExisteEnTurismoUy {
-        Proveedor provee = obtenerProveedor(nickname);
-        if (provee == null){
-            throw new ObjetoNoExisteEnTurismoUy(Turista.class);
-        }
-
-        return (DTProveedor) provee.obtenerDTUsuario();
-    }*/
-
+	
+	@Override
+	public boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
+		Usuario seguidorUsuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickSeguidor);
+		
+		return seguidorUsuario.sigueA(nickSeguido);
+	}
+	@Override
+	public List<DTUsuario> obtenerSeguidores(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
+		Usuario usuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickUsuario);
+		
+		var seguidores = usuario.obtenerSeguidores();
+		
+		List<DTUsuario> retDtUsuarios = new ArrayList<>();
+		seguidores.forEach((Usuario user) -> retDtUsuarios.add(user.obtenerDTUsuario()));
+		
+		return retDtUsuarios;
+	}
+	@Override
+	public List<DTUsuario> obtenerSeguidos(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
+		Usuario usuario = ManejadorUsuario.getInstancia().getUsuarioPorNick(nickUsuario);
+		
+		var seguidores = usuario.obtenerSeguidos();
+		
+		List<DTUsuario> retDtUsuarios = new ArrayList<>();
+		seguidores.forEach((Usuario user) -> retDtUsuarios.add(user.obtenerDTUsuario()));
+		
+		return retDtUsuarios;
+	}
 
 }

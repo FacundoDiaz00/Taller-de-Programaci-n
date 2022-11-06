@@ -19,6 +19,11 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="publicar.usuarioturisticasservice.DtUsuario" %>
+<%@ page import="publicar.usuarioturisticasservice.DtTurista" %>
+
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 
 
 <!doctype html>
@@ -43,32 +48,57 @@
                 <h2 class="card-title">Actividades</h2>
                 
                 	<% 
-					List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
+                
+                	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");  
+                	List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
+                	Map<DtActividadTuristica, Boolean> actividadesFav = new HashMap<DtActividadTuristica, Boolean>();
+                	
+                	if(usuario != null && usuario instanceof DtTurista){
+                		actividadesFav = (Map<DtActividadTuristica, Boolean>) request.getAttribute("actividadFavorito");
+                	}
 					
                 	if (actividades.isEmpty()) {%>
                 		<span>No hay actividades para mostrar aquí.</span>
-               		<% } else {               	
-						for(DtActividadTuristica actividad: actividades){
-							%>
-							<div class="card mb-3" style="max-width: 800px;">
-			                    <div class="row g-0">
-			                        <div class="col-md-4 img-contain">
-			                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
-			                            <!--  Falta el manejo de foto de la verdadera actividad -->
-			                        </div>
-			                        <div class="col-md-8">
-			                            <div class="card-body">
-			                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
-			                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
-			                                <div class="botonera">
-			                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver más</a>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-			                </div>
-						
-					<% }
+               		<% } else {
+	               			for(DtActividadTuristica actividad: actividades){
+								%>
+								<div class="card mb-3" style="max-width: 800px;">
+				                    <div class="row g-0">
+				                        <div class="col-md-4 img-contain">
+				                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
+				                            <!--  Falta el manejo de foto de la verdadera actividad -->
+				                        </div>
+				                        <div class="col-md-8">
+				                            <div class="card-body">
+				                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
+				                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
+				                               
+				                                
+				                                <div class="botonera" style="justify-content: space-between">
+				                                				                              
+					                                <% 
+					                            	 
+					                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+					                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
+					                                	if(actividadesFav.get(actividad)){
+					                    
+						                                %>
+						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento %>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+						                                
+						                                <%} else { %>
+						                                
+						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>"><i class="fa-regular fa-star fa-2x"></i></a>
+						                                	
+						                                <% } 
+					                                	}%>
+				                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver más</a>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>
+							
+						<% }
                 	}							
 					%>
                 

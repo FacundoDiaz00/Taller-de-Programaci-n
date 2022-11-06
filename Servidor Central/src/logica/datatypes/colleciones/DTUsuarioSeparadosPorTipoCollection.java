@@ -2,22 +2,37 @@ package logica.datatypes.colleciones;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import logica.controladores.Fabrica;
 import logica.datatypes.DTProveedor;
 import logica.datatypes.DTTurista;
 import logica.datatypes.DTUsuario;
+import logica.entidades.Usuario;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuarioSeparadosPorTipoCollection {
-
-    List<DTProveedor> proveedores;
-
-    List<DTTurista> turistas;
+    private List<DTProveedor> proveedores;
+    private List<DTTurista> turistas;
 
     public DTUsuarioSeparadosPorTipoCollection() {
     }
 
+    public DTUsuarioSeparadosPorTipoCollection(Collection<DTUsuario> usuarios) {
+    	this.proveedores = new ArrayList<>();
+    	this.turistas = new ArrayList<>();
+
+        for (DTUsuario dtu : usuarios){
+            if (dtu instanceof DTProveedor){
+               proveedores.add((DTProveedor) dtu);
+            } else {
+                turistas.add((DTTurista) dtu);
+            }
+        }
+    }
+    
     public DTUsuarioSeparadosPorTipoCollection(List<DTProveedor> proveedores, List<DTTurista> turistas) {
         this.turistas = turistas;
         this.proveedores = proveedores;

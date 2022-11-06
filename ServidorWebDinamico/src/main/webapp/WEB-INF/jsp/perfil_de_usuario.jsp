@@ -48,6 +48,16 @@
 						      		<div class="card-body">
 						    			<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 						        		<p class="card-text"><small class="text-muted"><%= usr.getNickname()%> / <%= usr.getCorreo()%></small></p>
+						        		<% 
+						        		System.out.println("usuario que visita = " + usuario.getNickname() + " usuario visitado: " + usr.getNickname());
+						        		if(!usr.getNickname().equals(usuario.getNickname())){
+						        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
+						        			if(seSiguenUsuarios){ %>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
+						        			<%} else{%>
+						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></a>
+						        			<%} 
+						        		}%>
 						      		</div>	
 						    	</div>
 						  	</div>
@@ -89,6 +99,13 @@
 			                <button class="nav-link" id="boton-salidasprov" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Salidas que se proveen</button>
 			            </li>
 				    <%}%>
+				    <li class="nav-item" role="presentation">
+	                    <button class="nav-link" id="boton-seguidos" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidos</button>
+	                </li>	
+				    
+				    <li class="nav-item" role="presentation">
+	                    <button class="nav-link" id="boton-seguidores" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Seguidores</button>
+	                </li>	
 		    	</ul>
 		    	<div class="tab-content" id="myTabContent">
 		    		<div class="tab-pane fade show cardPerfil" id="boton-general-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -276,7 +293,7 @@
 			                                <h5 class="card-title"><%=act.getNombre()%></h5>
 			                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 			                                <div class="botonera">
-			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
+			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
 			                            	</div>
 			                                
 			                            	<div id="salidas" style=";margin-left: 10px">
@@ -392,7 +409,18 @@
 							<% } %>
             			</div>
 					<%}%>
+					
+				<div class="tab-pane fade" id="boton-seguidos-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="4">
+           			<jsp:include page="/WEB-INF/jsp/listarSeguidos.jsp"/>
+           		</div>
+           		
+           		<div class="tab-pane fade" id="boton-seguidores-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="5">
+           			<jsp:include page="/WEB-INF/jsp/listarSeguidores.jsp"/>
+           		</div>
+				
+					
 				</div><!-- cierra tabcontent -->
+				
 				
 		    </div><!-- cierra ContenedorItems -->
 		<%}%>
@@ -412,6 +440,18 @@
             });
         });
     </script>
+    
+     <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Ha ocurrido un error al seguir usuario" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+
+    
+  
 
 </body>
 </html>

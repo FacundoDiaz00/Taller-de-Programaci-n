@@ -22,6 +22,7 @@ import publicar.usuarioturisticasservice.DtProveedor;
 import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection;
+import publicar.usuarioturisticasservice.ErrorAlProcesar_Exception;
 import publicar.usuarioturisticasservice.Imagen;
 import publicar.usuarioturisticasservice.ModificacionUsuarioNoPermitida_Exception;
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
@@ -63,13 +64,55 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         }
 
         String debelistar = req.getParameter("listar");
+        boolean seguir = Boolean.valueOf(req.getParameter("seguir"));
         req = Utiles.insertarLoDeSiempre(req);
         HttpSession sesion = req.getSession(false);
+        boolean seSiguenUsuarios = false;
         Object usr = sesion.getAttribute("usuarioLogeado");
+        
+       
+        
         if (debelistar != null && debelistar.equals("false")) {
+        	
+        	try {
+        		String nick = ((DtUsuario)usr).getNickname();	
+        		seSiguenUsuarios = wbUser.usuariosSeSiguen( nick, req.getParameter("id"));
+        		DtUsuarioSeparadosPorTipoCollection seguidos = wbUser.obtenerSeguidos(nick);
+        		DtUsuarioSeparadosPorTipoCollection seguidores = wbUser.obtenerSeguidores(nick);
+        		req.setAttribute("seguidos", seguidos);
+        		req.setAttribute("seguidores", seguidores);
+        		
+        	}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
+                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                e.printStackTrace();
+        	}
+        	
+        	req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+        	
+            if(seguir) {
+            	
+            	if (usr != null && !((DtUsuario) usr).getNickname().equals(req.getParameter("id"))){
+            		try {
+            			
+            			wbUser.seguirODejarDeSeguirUsuario(((DtUsuario) usr).getNickname(), req.getParameter("id"));
+            			seSiguenUsuarios = wbUser.usuariosSeSiguen(((DtUsuario) usr).getNickname(), req.getParameter("id"));
+            			req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+            			req.setAttribute("exito", Boolean.TRUE);
+            			
+            			}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+            				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
+                            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                            e.printStackTrace();
+            		}
+            		
+            	}
+            }
+        	
             if (usr != null && ((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
-            	DtUsuario usuario;
-                try {
+                DtUsuario DUser = null;
+                DtUsuario usuario;
+				try {
                 	usuario = wbUser.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));
                 } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
                     req.setAttribute("motivoDeError",
@@ -96,6 +139,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            
         } else {
         	List<DtUsuario> usuarios = new ArrayList<>();
         	DtUsuarioSeparadosPorTipoCollection dtUserSepCollection = wbUser.obtenerDTUsuarios();
@@ -141,25 +185,20 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String modD = null;
         String modL = null;
         
-        if(modC != null && modC.equals(""))
-        	modC = null;
-        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = LocalDate.parse(modFN, formatter);
         
         Part filePart = request.getPart("modificar_img");
 
         boolean hayImagen = filePart != null && filePart.getSize() > 0 && !borrarImagen;
-        String ext = "";
-        String futuroNombreDelPath = "";
-        Imagen imgDt = null;
+        String ext = borrarImagen ? "BORRAR" : "";
+        byte[] imgContent = new byte[0]; 
+        
         if (hayImagen) {
+         	InputStream imgInputStream = filePart.getInputStream();
             ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
-
-            // Esto es la ruta relativa
-            futuroNombreDelPath = "/usuarios/" + nick + ext;
-            imgDt = new Imagen();
-            imgDt.setPath(futuroNombreDelPath);
+            imgContent = imgInputStream.readAllBytes();
+            imgInputStream.close();
         }
         
         if (sesion.getAttribute("usuarioLogeado") instanceof DtTurista){
@@ -170,7 +209,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtTurista.setApellido(modA);
         	nuevoDtTurista.setCorreo(correo);
         	nuevoDtTurista.setFechaNacStr(Utiles.localDateToString(fecha));
-        	nuevoDtTurista.setImg(imgDt);
+        	nuevoDtTurista.setImg(null);
         	nuevoDtTurista.setNacionalidad(modNac);
         	
         	datosNuevos = nuevoDtTurista;
@@ -187,7 +226,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtProv.setApellido(modA);
         	nuevoDtProv.setCorreo(correo);
         	nuevoDtProv.setFechaNacStr(Utiles.localDateToString(fecha));
-        	nuevoDtProv.setImg(imgDt);
+        	nuevoDtProv.setImg(null);
         	nuevoDtProv.setDescrpicionGeneral(modD);
         	nuevoDtProv.setLink(modL);
         	
@@ -195,31 +234,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         }    
         
     	try {
-			wbUser.modificarUsuario(datosNuevos, modC, borrarImagen);
-			String servidorPath = getServletContext().getRealPath("/");
-			
-            if (hayImagen) {
-	            // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-	            InputStream imgInputStream = filePart.getInputStream();
-	           
-	            File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-	            imgFile.createNewFile();
-	            FileOutputStream imgFileStream = new FileOutputStream(imgFile);
-	
-	            byte[] buffer = new byte[8192];
-	
-	            int readLength = imgInputStream.read(buffer);
-	            while (readLength != -1) {
-	                imgFileStream.write(buffer, 0, readLength);
-	                readLength = imgInputStream.read(buffer);
-	            }
-	            
-	            imgFileStream.close();
-	            
-            } else if (borrarImagen && userLogueado.getImg() != null){
-            	File imgDel = new File(servidorPath + "/img" + userLogueado.getImg().getPath());
-            	imgDel.delete();
-            }
+			wbUser.modificarUsuario(datosNuevos, modC, imgContent, ext);
             //Actualizo datos sesion
             DtUsuario usuario = wbUser.obtenerDTUsuario(nick);
                      
@@ -231,6 +246,9 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 			request.setAttribute("motivoDeError",
                     "Los datos enviados no son válidos");
 			
+		} catch (ErrorAlProcesar_Exception e) {
+       	 	request.setAttribute("motivoDeError",
+                 "Error general al procesar la solicitud");
 		} 
 
 

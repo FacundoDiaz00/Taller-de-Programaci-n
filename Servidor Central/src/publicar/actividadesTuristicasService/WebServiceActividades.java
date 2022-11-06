@@ -33,7 +33,7 @@ public class WebServiceActividades {
 
     @WebMethod(exclude = true)
     public void publicar(){
-        endpoint = Endpoint.publish(Cargador.getDirrecionAHacerDeploy() + "/actividades", this);
+        endpoint = Endpoint.publish(Cargador.getDireccionAHacerDeploy() + "/actividades", this);
         log.info("Servicios de actividades publicado");
     }
     @WebMethod(exclude = true)
