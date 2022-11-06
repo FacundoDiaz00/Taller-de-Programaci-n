@@ -32,7 +32,7 @@
                     <% }else{ %> --%>
                     
                     <li class="alta_de_usuario">
-	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Ver Actividades</a>
+	                        <a class="nav-link active" aria-current="page" href="ConsultaActividad">Ver Actividades</a>
 	                    </li>
                      <li class="alta_de_usuario">
                         <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Ver Salidas</a>
