@@ -10,7 +10,9 @@
  --%>
 
 <%@page import="publicar.usuarioturisticasservice.DtPaquete"%>
-<%@page import="publicar.usuarioturisticasservice.DtActividadTuristica"%>
+<%@page import="utils.Utiles"%>
+
+<%@page import="publicar.actividadesturisticasservice.DtActividadTuristica"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 
 <%@ page import="java.util.List" %>
@@ -50,9 +52,9 @@
 						for(String dep: departamentos){
 							if( idDepartamentoMarcada != null && idDepartamentoMarcada.equals(dep) ){ 
 							%>
-								<li><a href="index?idDepartamento=<%= dep %>" class="  active dropdown-item"><%= dep %></a>	</li>
+								<li><a href="ConsultaActividad?idDepartamento=<%= dep %>" class="  active dropdown-item"><%= dep %></a>	</li>
 						  <%} else {%>
-						  		<li><a href="index?idDepartamento=<%= dep %>" class=" dropdown-item"><%= dep %></a></li>
+						  		<li><a href="ConsultaActividad?idDepartamento=<%= dep %>" class=" dropdown-item"><%= dep %></a></li>
 					<%		}
 						}	%>
 			  </ul>
@@ -105,7 +107,7 @@
 											path += actividad.getImg().getPath();
 										}							
 										%>
-			                            <img src="img<%=path%>" class="img-fluid rounded">
+			                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
 			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
