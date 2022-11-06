@@ -16,29 +16,29 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
- * <pre>{@code
- * <complexType name="dtActividadTuristica">
- *   <complexContent>
- *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       <sequence>
- *         <element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="cuidad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="duracion" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         <element name="costoPorTurista" type="{http://www.w3.org/2001/XMLSchema}float"/>
- *         <element name="nicknameProveedor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="departamento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="img" type="{http://actividadesTuristicasService.publicar/}imagen" minOccurs="0"/>
- *         <element name="estado" type="{http://actividadesTuristicasService.publicar/}estadoActividadTuristica" minOccurs="0"/>
- *         <element name="cantFavoritos" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         <element name="urlVideo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       </sequence>
- *     </restriction>
- *   </complexContent>
- * </complexType>
- * }</pre>
+ * <pre>
+ * &lt;complexType name="dtActividadTuristica">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="fechaAltaStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="cuidad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="duracion" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="costoPorTurista" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="nicknameProveedor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="departamento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="img" type="{http://actividadesTuristicasService.publicar/}imagen" minOccurs="0"/>
+ *         &lt;element name="estado" type="{http://actividadesTuristicasService.publicar/}estadoActividadTuristica" minOccurs="0"/>
+ *         &lt;element name="cantFavoritos" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="urlVideo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
  * 
  * 
  */
@@ -261,8 +261,8 @@ public class DtActividadTuristica {
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a {@code set} method for the categorias property.
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the categorias property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
@@ -276,12 +276,10 @@ public class DtActividadTuristica {
      * {@link String }
      * 
      * 
-     * @return
-     *     The value of the categorias property.
      */
     public List<String> getCategorias() {
         if (categorias == null) {
-            categorias = new ArrayList<>();
+            categorias = new ArrayList<String>();
         }
         return this.categorias;
     }
