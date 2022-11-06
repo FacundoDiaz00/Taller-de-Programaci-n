@@ -140,8 +140,10 @@ public class WebServiceActividades {
         Fabrica.getInstancia().getIControladorActividadTuristica().altaInscripcionSalidaTuristica(nomSalTurim, nicknameTuris, canTuris, null, nombrePaquete);
 
     }
-
-
-
+    
+    @WebMethod
+    public List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy{
+    	return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTSalidasTuristicas();
+    }
 
 }

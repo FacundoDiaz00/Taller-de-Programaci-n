@@ -328,4 +328,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         
         act.decrementarCantidadDeFavoritos();
 	}
+	
+    @Override
+    public List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy {
+    	List<DTSalidaTuristica> res = new ArrayList<DTSalidaTuristica>();
+    	ManejadorSalidaTuristica mst = ManejadorSalidaTuristica.getInstancia();
+    	
+    	for (SalidaTuristica sal : mst.getSalidas()) {
+    		res.add(sal.obtenerDTSalidaTuristica());
+    	}
+        return res;
+    }
 }
