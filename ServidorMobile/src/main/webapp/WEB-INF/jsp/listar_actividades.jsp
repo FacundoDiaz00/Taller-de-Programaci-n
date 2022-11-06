@@ -115,7 +115,7 @@
 			                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
 			                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
 			                                <div class="botonera">
-			                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver más</a>
+			                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>&listar=false" class="btn btn-primary">Ver más</a>
 			                                </div>
 			                            </div>
 			                        </div>
