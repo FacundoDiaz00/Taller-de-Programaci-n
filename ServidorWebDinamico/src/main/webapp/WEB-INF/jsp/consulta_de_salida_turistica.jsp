@@ -92,7 +92,22 @@
 	                            		<h5 class="card-title"><%= infoSalida.getDtActividad().getNombre()%> </h5>
 	                                <p class="card-text descripcion-paquete"><%= infoSalida.getDtActividad().getDescripcion() %> </p>
 	                            	</div>                            
-	                                <div class="botonera">
+	                                <div style="display: flex; justify-content: space-between;">
+	                                 <% 
+		                            	 
+		                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+		                                	boolean esActividadFavorita = (boolean) request.getAttribute("esFavoritaActividad");
+		                                	if(esActividadFavorita){
+		                    
+			                                %>
+			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+			                                
+			                                <%} else { %>
+			                                
+			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+			                                	
+			                                <% } 
+		                                	}%>
 	                                    <a href="ConsultaActividad?id=<%=infoSalida.getDtActividad().getNombre()%>" class="btn btn-primary">Ver mas</a>
 	                                </div>
 	
