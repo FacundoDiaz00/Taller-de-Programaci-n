@@ -66,7 +66,7 @@ public class IniciarSesionServlet extends HttpServlet {
             req.setAttribute("usuarioLogeado", usuario);
             HttpSession sesion = req.getSession(true);
             sesion.setAttribute("usuarioLogeado", usuario);
-            resp.sendRedirect("index");
+            resp.sendRedirect("bienvenida");
 
         } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
             req.setAttribute("motivoDeError", "El usuario es incorrecto");

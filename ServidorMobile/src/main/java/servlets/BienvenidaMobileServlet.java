@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class index_mobile
  */
-@WebServlet("/mobile/bienvenida")
+@WebServlet("/bienvenida")
 public class BienvenidaMobileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,7 +28,7 @@ public class BienvenidaMobileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		resp.getWriter().append("Served at: ").append(req.getContextPath());
-		req.getRequestDispatcher("/WEB-INF/jsp/mobile/bienvenida.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/jsp/bienvenida.jsp").forward(req, resp);
 	}
 
 	/**
