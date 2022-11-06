@@ -20,7 +20,7 @@
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>   
     <link rel="stylesheet" href="css/consulta_actividad_turistica.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
 </head>
 <body>
@@ -41,13 +41,13 @@
         	<% DtActividadTuristicaDetalle datosActividad = (DtActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
 
 
-
+			<h2><%= datosActividad.getNombre() %></h2>
             <div id="info-general-imagen">
                 <img src="<%=Utiles.obtenerUrlParaImagen(datosActividad.getImg())%>" alt="">
             </div>
 
             <div id="info">
-                <h2><%= datosActividad.getNombre() %></h2>
+      
                 
                 <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
                 <% 
