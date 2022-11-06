@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/><%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 
     
     <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
