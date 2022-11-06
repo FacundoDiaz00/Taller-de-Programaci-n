@@ -33,11 +33,19 @@ public class IniciarSesionServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
-
+        
+        var sessionClosed = req.getParameter("sesionCerrada");
+        if (sessionClosed != null && sessionClosed.equals("true")) {
+        	HttpSession sesionACerrar = req.getSession(false);
+        	sesionACerrar = req.getSession(false);
+        	sesionACerrar.setAttribute("usuarioLogeado", null);
+        	sesionACerrar.invalidate();
+        }
+        
         HttpSession sesion = req.getSession(true);
         Object usr = sesion.getAttribute("usuarioLogeado");
         if (usr != null) {
-            req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
+        	resp.sendRedirect("index");
         } else {
             req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
         }
@@ -66,7 +74,7 @@ public class IniciarSesionServlet extends HttpServlet {
             req.setAttribute("usuarioLogeado", usuario);
             HttpSession sesion = req.getSession(true);
             sesion.setAttribute("usuarioLogeado", usuario);
-            resp.sendRedirect("bienvenida");
+            resp.sendRedirect("index");
 
         } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
             req.setAttribute("motivoDeError", "El usuario es incorrecto");

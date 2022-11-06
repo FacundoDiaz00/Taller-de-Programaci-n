@@ -38,7 +38,7 @@
                         <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Ver Salidas</a>
                     </li>
 	                    <li class="iniciar_sesion">
-	                        <a class="nav-link active" href="index?sesionCerrada=<%=true%>">Salir</a>
+	                        <a class="nav-link active" href="IniciarSesion?sesionCerrada=<%=true%>">Salir</a>
 	                    </li>
   
                     <%-- <% } %> --%>

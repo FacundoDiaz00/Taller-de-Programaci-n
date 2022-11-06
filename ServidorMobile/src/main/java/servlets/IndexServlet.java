@@ -50,15 +50,21 @@ public class IndexServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             req.setCharacterEncoding("UTF-8");
         }
-
-        var sessionClosed = req.getParameter("sesionCerrada");
-        if (sessionClosed != null && sessionClosed.equals("true")) {
-            HttpSession sesion = req.getSession(false);
-            sesion.setAttribute("usuarioLogeado", null);
-            sesion.invalidate();
+        
+        HttpSession sesion = req.getSession(false);
+        if (sesion != null && sesion.getAttribute("usuarioLogeado") != null) {
+            req.getRequestDispatcher("/WEB-INF/jsp/bienvenida.jsp").forward(req, resp);
+        } else {
+        	resp.sendRedirect("IniciarSesion");
         }
 
-        req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
+        var sessionClosed = req.getParameter("sesionCerrada");
+        if (sesion != null && sessionClosed != null && sessionClosed.equals("true")) {
+            sesion = req.getSession(false);
+            sesion.setAttribute("usuarioLogeado", null);
+            sesion.invalidate();
+            resp.sendRedirect("IniciarSesion");
+        }
     }
 
 }
