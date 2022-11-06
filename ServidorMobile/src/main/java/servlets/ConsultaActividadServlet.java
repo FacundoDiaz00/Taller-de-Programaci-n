@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import publicar.actividadesturisticasservice.DtActividadTuristicaDetalle;
+import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.paqueteturisticasservice.WebServicePaquetes;
 import publicar.paqueteturisticasservice.WebServicePaquetesService;
+import utils.Utiles;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -37,9 +40,24 @@ public class ConsultaActividadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	if((String)req.getParameter("listar") == "true" && req.getParameter("id") != null)  {
+    	String debelistar = req.getParameter("listar");
+    	if(debelistar != null && debelistar.equals("false") && req.getParameter("id") != null)  {
     		
-    		
+    		String idActividad = (String) req.getParameter("id");
+
+            DtActividadTuristicaDetalle infoActividadTuristica;
+            try {
+                infoActividadTuristica = wbActi.obtenerDTActividadTuristicaDetalle(idActividad);
+
+            } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+                req.setAttribute("motivoDeError",
+                        "id de actividad invalido. No existe una actividad turistica con este nombre en el sistema");
+                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                return;
+            }
+            req.setAttribute("datosActividad", infoActividadTuristica);
+            req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
+            
     	}else {
         	if (req.getCharacterEncoding() == null) {
                 req.setCharacterEncoding("UTF-8");
