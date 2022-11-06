@@ -146,6 +146,8 @@
                        
                     </ul>
                 </div>
+                
+                <iframe width="640" height="360" src="<%=datosActividad.getUrlVideo() %>" frameborder="0" allowfullscreen></iframe>
             </div>
 
         </div>
