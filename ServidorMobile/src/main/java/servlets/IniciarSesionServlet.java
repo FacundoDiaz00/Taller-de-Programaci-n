@@ -34,12 +34,12 @@ public class IniciarSesionServlet extends HttpServlet {
             req.setCharacterEncoding("UTF-8");
         }
 
-        HttpSession sesion = req.getSession(false);
+        HttpSession sesion = req.getSession(true);
         Object usr = sesion.getAttribute("usuarioLogeado");
         if (usr != null) {
             req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
         } else {
-            req.getRequestDispatcher("/WEB-INF/jsp/mobile/iniciar_sesion.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
         }
 
     }
