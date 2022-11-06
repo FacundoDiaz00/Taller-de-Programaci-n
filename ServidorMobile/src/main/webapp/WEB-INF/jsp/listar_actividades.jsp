@@ -107,7 +107,7 @@
 											path += actividad.getImg().getPath();
 										}							
 										%>
-			                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
+			                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded">
 			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">
