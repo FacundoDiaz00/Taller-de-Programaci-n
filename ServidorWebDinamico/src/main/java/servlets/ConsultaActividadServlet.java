@@ -13,6 +13,7 @@ import publicar.actividadesturisticasservice.DtActividadTuristicaDetalle;
 import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
 import publicar.usuarioturisticasservice.WebServiceUsuariosService;
@@ -68,8 +69,10 @@ public class ConsultaActividadServlet extends HttpServlet {
         	DtUsuario user = (DtUsuario)sesion.getAttribute("usuarioLogeado");
         	
             infoActividadTuristica = wbActi.obtenerDTActividadTuristicaDetalle(idActividad);
-			esFavorito = wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), idActividad);
-			req.setAttribute("esFavoritaActividad", esFavorito);
+            if(user instanceof DtTurista) {
+				esFavorito = wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), idActividad);
+				req.setAttribute("esFavoritaActividad", esFavorito);
+            }
 			req.setAttribute("cantFavoritos", infoActividadTuristica.getCantFavoritos());
 	        
 

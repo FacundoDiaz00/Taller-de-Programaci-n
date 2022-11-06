@@ -52,9 +52,9 @@
             	<div>
             		<h2><%= datosActividad.getNombre() %></h2>
             		<% 
-            		boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
             		int cantFavoritos = (int) request.getAttribute("cantFavoritos");
 					 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+						boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
                      	String idDepartamento = (String)request.getAttribute("idDepartamento");
                      	if(esFavoritaActividad){
          
@@ -84,13 +84,13 @@
         		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) { %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
-	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
+<%-- 	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
 	                    <%
 	                    	boolean sePuedeFinalizar = (boolean)request.getAttribute("sePuedeFinalizar");
 							if(sePuedeFinalizar){
 							%>
 	                    <li><a href="ConsultaActividad?finalizar=<%=true%>" class="btn btn-primary">Finalizar</a></li>
-	                  <%}%>
+	                  <%}%> --%>
 	                </ul>	                
         		<% } %>
                 
