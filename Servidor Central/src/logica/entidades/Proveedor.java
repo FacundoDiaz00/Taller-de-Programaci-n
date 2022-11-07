@@ -14,6 +14,8 @@ import logica.datatypes.DTProveedorDetallePrivado;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.jpa.ProveedorJPA;
+import logica.jpa.UsuarioJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -88,6 +90,11 @@ public class Proveedor extends Usuario {
         DTProveedor prov = (DTProveedor) datosNuevos;
         this.setDescrpicionGeneral(prov.getDescrpicionGeneral());
         this.setLink(prov.getLink());
+    }
+
+    @Override
+    public UsuarioJPA obtenerUsuarioJPA() {
+        return new ProveedorJPA();
     }
 
     @Override

@@ -181,7 +181,7 @@ class ControladorActividadTuristicaTest {
 
             contrActTur.altaDepartamento(nom, descr, url);
 
-            var idsLoop = contrActTur.obtenerIdDepartamentos();
+            List<String> idsLoop = contrActTur.obtenerIdDepartamentos();
 
             // Ambos departamentos deberían estar una única vez
             assertTrue(idsLoop.remove(nom));
