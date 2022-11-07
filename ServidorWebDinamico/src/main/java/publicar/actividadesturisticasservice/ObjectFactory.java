@@ -268,6 +268,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ListOfDTSalidaTuristica }
+     * 
+     * @return
+     *     the new instance of {@link ListOfDTSalidaTuristica }
+     */
+    public ListOfDTSalidaTuristica createListOfDTSalidaTuristica() {
+        return new ListOfDTSalidaTuristica();
+    }
+
+    /**
      * Create an instance of {@link DtActividadTuristica }
      * 
      * @return
