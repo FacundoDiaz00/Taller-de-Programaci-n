@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		ActividadJPA act = new ActividadJPA();
-        act.setNombre("aba");
+        act.setNombre("abija");
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
