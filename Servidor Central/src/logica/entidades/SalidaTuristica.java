@@ -10,6 +10,8 @@ import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.Imagen;
+import logica.jpa.InscripcionJPA;
+import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 
 /**
@@ -137,5 +139,13 @@ public class SalidaTuristica {
 
     public void setImagen(Imagen img) {
         this.img = img;
+    }
+
+    public SalidaJPA obtenerSalidaJPA() {
+        var inscripcionesJPA = new ArrayList<InscripcionJPA>();
+        inscripciones.forEach((Inscripcion i ) -> inscripcionesJPA.add(i.obtenerInscripcionJPA()) );
+        var actividadJPA = actividad.obtenerActividadJPA();
+        // TODO jpa
+        return new SalidaJPA();
     }
 }

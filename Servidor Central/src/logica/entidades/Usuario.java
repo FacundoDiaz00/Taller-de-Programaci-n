@@ -7,6 +7,7 @@ import java.util.Map;
 
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
+import logica.jpa.UsuarioJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -155,4 +156,5 @@ public abstract class Usuario {
 		return usuariosSeguidos.values();
 	}
 
+    public abstract UsuarioJPA obtenerUsuarioJPA();
 }
