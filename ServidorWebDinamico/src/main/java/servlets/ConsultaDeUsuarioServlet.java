@@ -1,7 +1,5 @@
 package servlets;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -23,7 +21,6 @@ import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection;
 import publicar.usuarioturisticasservice.ErrorAlProcesar_Exception;
-import publicar.usuarioturisticasservice.Imagen;
 import publicar.usuarioturisticasservice.ModificacionUsuarioNoPermitida_Exception;
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
@@ -110,7 +107,6 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             }
         	
             if (usr != null && ((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
-                DtUsuario DUser = null;
                 DtUsuario usuario;
 				try {
                 	usuario = wbUser.obtenerDTUsuarioDetallePrivado(req.getParameter("id"));

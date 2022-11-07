@@ -143,7 +143,6 @@ public class WebServiceUsuarios {
         if (imgContent.length > 0) {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
         }
-
     }
 
 
@@ -175,18 +174,18 @@ public class WebServiceUsuarios {
 
     @WebMethod
     public boolean usuariosSeSiguen(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy {
-        return Fabrica.getInstancia().getIControladorUsuario().usuariosSeSiguen(nickSeguidor, nickSeguido);
+        return iControladorUsuario.usuariosSeSiguen(nickSeguidor, nickSeguido);
     }
 
     @WebMethod
     public DTUsuarioSeparadosPorTipoCollection obtenerSeguidores(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
-        var usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerSeguidores(nickUsuario);
+        var usuarios = iControladorUsuario.obtenerSeguidores(nickUsuario);
         return new DTUsuarioSeparadosPorTipoCollection(usuarios);
     }
 
     @WebMethod
     public DTUsuarioSeparadosPorTipoCollection obtenerSeguidos(String nickUsuario) throws ObjetoNoExisteEnTurismoUy{
-        var usuarios = Fabrica.getInstancia().getIControladorUsuario().obtenerSeguidos(nickUsuario);
+        var usuarios = iControladorUsuario.obtenerSeguidos(nickUsuario);
         return new DTUsuarioSeparadosPorTipoCollection(usuarios);
     }
 
