@@ -77,13 +77,16 @@ public class ConsultaActividadServlet extends HttpServlet {
             }
             
             String url = infoActividadTuristica.getUrlVideo();
-            url = url.replace("youtu.be", "youtube.com/embed");
-            url = url.replace("?t=", "?start=");
-            
-            String embed = "<iframe width='560' height='315' src='@' frameborder='0'allow='autoplay; encrypted-media' allowfullscreen></iframe>";
-            embed.replaceAll("@", url);
-            
-            req.setAttribute("url", embed);
+            if(url != null) {
+                url = url.replace("youtu.be", "youtube.com/embed");
+                url = url.replace("?t=", "?start=");
+                
+                String embed = "<iframe width='560' height='315' src='@' frameborder='0'allow='autoplay; encrypted-media' allowfullscreen></iframe>";
+                embed.replaceAll("@", url);
+                
+                req.setAttribute("url", embed);
+            }
+
                     
 			req.setAttribute("cantFavoritos", infoActividadTuristica.getCantFavoritos());
 	        

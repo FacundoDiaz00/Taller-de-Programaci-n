@@ -1,5 +1,5 @@
 
-package publicar.actividadesturisticasservice;
+package net.java.dev.jaxb.array;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +10,16 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para listOfDTSalidaTuristica complex type.
+ * <p>Clase Java para stringArray complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>{@code
- * <complexType name="listOfDTSalidaTuristica">
+ * <complexType name="stringArray">
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="item" type="{http://actividadesTuristicasService.publicar/}dtSalidaTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="item" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -29,13 +29,13 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "listOfDTSalidaTuristica", propOrder = {
+@XmlType(name = "stringArray", propOrder = {
     "item"
 })
-public class ListOfDTSalidaTuristica {
+public class StringArray {
 
     @XmlElement(nillable = true)
-    protected List<DtSalidaTuristica> item;
+    protected List<String> item;
 
     /**
      * Gets the value of the item property.
@@ -55,13 +55,13 @@ public class ListOfDTSalidaTuristica {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DtSalidaTuristica }
+     * {@link String }
      * 
      * 
      * @return
      *     The value of the item property.
      */
-    public List<DtSalidaTuristica> getItem() {
+    public List<String> getItem() {
         if (item == null) {
             item = new ArrayList<>();
         }

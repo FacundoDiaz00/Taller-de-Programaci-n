@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -18,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <extension base="{http://actividadesTuristicasService.publicar/}dtActividadTuristica">
  *       <sequence>
- *         <element name="salidas" minOccurs="0">
+ *         <element name="salidas">
  *           <complexType>
  *             <complexContent>
  *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -40,7 +41,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *             </complexContent>
  *           </complexType>
  *         </element>
- *         <element name="paquetes" minOccurs="0">
+ *         <element name="paquetes">
  *           <complexType>
  *             <complexContent>
  *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -79,7 +80,9 @@ public class DtActividadTuristicaDetalle
     extends DtActividadTuristica
 {
 
+    @XmlElement(required = true)
     protected DtActividadTuristicaDetalle.Salidas salidas;
+    @XmlElement(required = true)
     protected DtActividadTuristicaDetalle.Paquetes paquetes;
 
     /**

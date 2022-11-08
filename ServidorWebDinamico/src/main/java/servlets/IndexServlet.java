@@ -145,7 +145,7 @@ public class IndexServlet extends HttpServlet {
         req.setAttribute("actividades", actividades);
         req.setAttribute("paquetes", paquetes);
 
-        req.getRequestDispatcher("").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
     }
 
 }

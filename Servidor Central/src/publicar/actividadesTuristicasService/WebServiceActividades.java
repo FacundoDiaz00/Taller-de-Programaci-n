@@ -11,14 +11,14 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.Imagen;
-import logica.datatypes.colleciones.DTPaqueteCollection;
 import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 import logica.utils.UtilsDT;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
 
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
@@ -42,15 +42,25 @@ public class WebServiceActividades {
     }
 
     @WebMethod
-    public List<String> obtenerIdCategorias(){
+    public String[] obtenerIdCategorias(){
         log.info("Solicitud a 'obtenerIdCategorias'");
-        return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdCategorias();
+        List<String> salida = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdCategorias();
+        String[] salidaArry = new String[salida.size()];
+        salida.toArray(salidaArry);
+        return salidaArry;
+       
     }
 
+    
     @WebMethod
-    public List<String> obtenerIdDepartamentos(){
+    public String[] obtenerIdDepartamentos(){
         log.info("Solicitud a 'obtenerIdDepartamentos'");
-        return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+        List<String> salida = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdDepartamentos();
+        
+        String[] salidaArry = new String[salida.size()];
+        salida.toArray(salidaArry);
+        return salidaArry;
+        
     }
 
     @WebMethod
@@ -58,6 +68,8 @@ public class WebServiceActividades {
         log.info("Solicitud a 'obtenerDTActividadesTuristicasConfirmadasPorDepartamento'");
         return new DtActividadTuristicaCollection(Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTActividadesTuristicasConfirmadasPorDepartamento(departamento));
     }
+    
+    
     @WebMethod
     public DtActividadTuristicaCollection obtenerDTActividadesTuristicasConfirmadasPorCategoria(String categoria) throws ObjetoNoExisteEnTurismoUy {
         log.info("Solicitud a 'obtenerDTActividadesTuristicasConfirmadasPorCategoria'");
@@ -78,7 +90,7 @@ public class WebServiceActividades {
 
     @WebMethod
     public void altaActividadTuristica(String nombreProveedor, String departamento, String nombreActividad, String descripcion,
-                                int duracion, float costo, String ciudad, byte[] imgContent, String extImg, List<String> categorias, String urlVideo) throws ObjetoNoExisteEnTurismoUy, ActividadTuristicaYaRegistradaException, ErrorAlProcesar {
+                                int duracion, float costo, String ciudad, byte[] imgContent, String extImg, String[] categorias, String urlVideo) throws ObjetoNoExisteEnTurismoUy, ActividadTuristicaYaRegistradaException, ErrorAlProcesar {
         log.info("Solicitud a 'altaActividadTuristica'");
 
         Imagen imgMetaData = null;
@@ -86,8 +98,10 @@ public class WebServiceActividades {
             imgMetaData = new Imagen("/actividades/" + nombreActividad + extImg);
         }
 
+        
+        
         Fabrica.getInstancia().getIControladorActividadTuristica().altaActividadTuristica(nombreProveedor, departamento, nombreActividad,
-                descripcion, duracion, costo, ciudad, null, imgMetaData, categorias, urlVideo);
+                descripcion, duracion, costo, ciudad, null, imgMetaData, Arrays.asList(categorias) , urlVideo);
 
         if (imgContent.length > 0) {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
@@ -112,7 +126,7 @@ public class WebServiceActividades {
             imgMetaData = new Imagen("/salidas/" + nombreSalida + extImg);
         }
 
-        Fabrica.getInstancia().getIControladorActividadTuristica().altaSalidaTuristica(actividad,nombreSalida, fechaHoraSalida, null, lugar, cantMaxTur,  imgMetaData);
+        Fabrica.getInstancia().getIControladorActividadTuristica().altaSalidaTuristica(actividad, nombreSalida, fechaHoraSalida, null, lugar, cantMaxTur,  imgMetaData);
 
         if (imgContent.length > 0) {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);
@@ -120,9 +134,13 @@ public class WebServiceActividades {
     }
 
     @WebMethod
-    public List<String> obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) throws ObjetoNoExisteEnTurismoUy {
+    public String[] obtenerIdComprasDisponiblesParaInscripcion(String nombreActividad, String nickTurista) throws ObjetoNoExisteEnTurismoUy {
         log.info("Solicitud a 'obtenerIdComprasDisponiblesParaInscripcion'");
-        return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdComprasDisponiblesParaInscripcion(nombreActividad, nickTurista);
+        List<String> salida = Fabrica.getInstancia().getIControladorActividadTuristica().obtenerIdComprasDisponiblesParaInscripcion(nombreActividad, nickTurista);
+        String[] salidaArry = new String[salida.size()];
+        salida.toArray(salidaArry);
+        return salidaArry;
+        
     }
 
     @WebMethod
@@ -141,9 +159,10 @@ public class WebServiceActividades {
 
     }
     
-    @WebMethod
+    
+    /*@WebMethod
     public List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy{
     	return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTSalidasTuristicas();
-    }
+    }*/
 
 }

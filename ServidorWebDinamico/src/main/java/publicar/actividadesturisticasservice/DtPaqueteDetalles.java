@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <extension base="{http://actividadesTuristicasService.publicar/}dtPaquete">
  *       <sequence>
- *         <element name="actividades" minOccurs="0">
+ *         <element name="actividades">
  *           <complexType>
  *             <complexContent>
  *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -59,6 +59,7 @@ public class DtPaqueteDetalles
     extends DtPaquete
 {
 
+    @XmlElement(required = true)
     protected DtPaqueteDetalles.Actividades actividades;
     @XmlElement(nillable = true)
     protected List<DtCompra> compras;
