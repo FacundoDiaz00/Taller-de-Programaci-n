@@ -14,6 +14,11 @@ SEGUIDORES:
 	- Usuario:
 		* seguidos y seguidores Set<Usuario>
 		* sigueA(String)
+	- Controlador Usuario / ICU:
+		* seguirODejarDeSeguirUsuario(String, String)
+		* usuariosSeSiguen(String, String): Boolean
+		* obtenerSeguidores(String): Set<DTUsuario>
+		* obtenerSeguidos(String): Set<DTUsuario>
 
 VIDEO:
 	- Actividad Turística:
@@ -23,8 +28,26 @@ FAVORITOS:
 		* campo cantFavoritos
 		* incrementar favoritos
 		* decrementar favoritos
+	- Controlador AT / ICA:
+		* incrementar favoritos
+		* decrementar favoritos
 	- Turista:
 		* Lista actividades favoritas
 		* agregarOEliminarActividadDeFavoritos
+	- ControladorUsuario / ICU:
+		* agregarOEliminarActividadDeFavoritos
+		* perteneceAFavoritosDeTurista
+
+
+VISITAS:
+	- Actividad Turística:
+		* campo cantVisitas: int
+	- Salida Turística
+		* campo cantVisitas: int
+
+parte AJAX:
+	- Controlador Usuario / Interfaz CU:
+		* nicknameDisponibleParaNuevoUsuario(String): boolean
+		* emailDisponibleParaNuevoUsuario(String email): boolean
 
 PERSISTENCIA
