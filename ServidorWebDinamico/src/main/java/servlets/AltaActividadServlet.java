@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
 import net.java.dev.jaxb.array.StringArray;
 import publicar.actividadesturisticasservice.ActividadTuristicaYaRegistradaException_Exception;
 import publicar.actividadesturisticasservice.ErrorAlProcesar_Exception;
