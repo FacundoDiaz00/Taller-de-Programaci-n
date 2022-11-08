@@ -1,0 +1,30 @@
+WEB SERVICES:
+	- WebServiceActividad
+		* todos sus métodos
+	- WebServiceUsuario
+		* todos sus métodos
+	- WebServicePaquetes
+		* todos sus métodos
+
+FINALIZAR AT:
+ 	- enum EstadoAT
+		* Finalizada 
+
+SEGUIDORES:
+	- Usuario:
+		* seguidos y seguidores Set<Usuario>
+		* sigueA(String)
+
+VIDEO:
+	- Actividad Turística:
+		* campo video: string
+FAVORITOS:
+	- Actividad Turística:
+		* campo cantFavoritos
+		* incrementar favoritos
+		* decrementar favoritos
+	- Turista:
+		* Lista actividades favoritas
+		* agregarOEliminarActividadDeFavoritos
+
+PERSISTENCIA
