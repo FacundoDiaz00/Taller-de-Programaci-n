@@ -1,0 +1,9 @@
+- Web Services:
+
+- Métodos nuevos:
+	* SeguirODejarDeSeguirUsr(string idSeguidor, string idSeguido)
+	* usuarioSigueA(string, string)
+- Cambio en entidades:
+	* Finalizada en EstadoAT
+	* URL de imagen a objeto y alta
+- Persistencia
