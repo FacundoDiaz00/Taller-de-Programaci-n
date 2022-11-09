@@ -1,0 +1,53 @@
+WEB SERVICES:
+	- WebServiceActividad
+		* todos sus métodos
+	- WebServiceUsuario
+		* todos sus métodos
+	- WebServicePaquetes
+		* todos sus métodos
+
+FINALIZAR AT:
+ 	- enum EstadoAT
+		* Finalizada 
+
+SEGUIDORES:
+	- Usuario:
+		* seguidos y seguidores Set<Usuario>
+		* sigueA(String)
+	- Controlador Usuario / ICU:
+		* seguirODejarDeSeguirUsuario(String, String)
+		* usuariosSeSiguen(String, String): Boolean
+		* obtenerSeguidores(String): Set<DTUsuario>
+		* obtenerSeguidos(String): Set<DTUsuario>
+
+VIDEO:
+	- Actividad Turística:
+		* campo video: string
+FAVORITOS:
+	- Actividad Turística:
+		* campo cantFavoritos
+		* incrementar favoritos
+		* decrementar favoritos
+	- Controlador AT / ICA:
+		* incrementar favoritos
+		* decrementar favoritos
+	- Turista:
+		* Lista actividades favoritas
+		* agregarOEliminarActividadDeFavoritos
+	- ControladorUsuario / ICU:
+		* agregarOEliminarActividadDeFavoritos
+		* perteneceAFavoritosDeTurista
+
+
+VISITAS:
+	- Actividad Turística:
+		* campo cantVisitas: int
+	- Salida Turística
+		* campo cantVisitas: int
+
+parte AJAX:
+	- Controlador Usuario / Interfaz CU:
+		* nicknameDisponibleParaNuevoUsuario(String): boolean
+		* emailDisponibleParaNuevoUsuario(String email): boolean
+
+PERSISTENCIA

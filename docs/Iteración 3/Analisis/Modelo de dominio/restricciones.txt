@@ -13,4 +13,4 @@ Actividad favorita:
 RNE: Solo se puede marcar/desmarcar como favorita a una actividad en estado "confirmada"
 
 Seguir usuarios:
-RNE: un usuario no puede seguirse a si mismo.
+- [x] RNE: un usuario no puede seguirse a si mismo.
