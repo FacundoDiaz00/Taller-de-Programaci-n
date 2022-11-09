@@ -15,7 +15,9 @@ import logica.datatypes.DTUsuario;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.jpa.ProveedorJPA;
+import logica.jpa.TuristaJPA;
 import logica.jpa.UsuarioJPA;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -94,7 +96,10 @@ public class Proveedor extends Usuario {
 
     @Override
     public UsuarioJPA obtenerUsuarioJPA() {
-        return new ProveedorJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), descrpicionGeneral, link);
+    	var usr = ManejadorPersistenciaJPA.getInstancia().encontrarUsuarioJPA(getNickname());
+    	if (usr == null)
+    		usr =  new ProveedorJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), descrpicionGeneral, link);
+    	return usr;
     }
 
     @Override

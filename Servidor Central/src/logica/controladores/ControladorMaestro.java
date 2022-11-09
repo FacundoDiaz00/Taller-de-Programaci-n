@@ -7,6 +7,7 @@ import java.util.Arrays;
 import excepciones.TurismoUyException;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -401,7 +402,7 @@ public class ControladorMaestro implements IControladorMaestro {
             icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
                     LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
         }
-
+        
         icat.cambiarEstadoDeActividadTuristica("Degusta", EstadoActividadTuristica.FINALIZADA);
     }
 }

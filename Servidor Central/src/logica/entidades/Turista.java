@@ -23,6 +23,7 @@ import logica.datatypes.Imagen;
 import logica.jpa.TuristaJPA;
 import logica.jpa.UsuarioJPA;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 
 /**
@@ -123,7 +124,10 @@ public class Turista extends Usuario {
 
     @Override
     public UsuarioJPA obtenerUsuarioJPA() {
-        return new TuristaJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), nacionalidad);
+    	var usr = ManejadorPersistenciaJPA.getInstancia().encontrarUsuarioJPA(getNickname());
+    	if (usr == null)
+    		usr =  new TuristaJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), nacionalidad);
+    	return usr;
     }
 
     @Override

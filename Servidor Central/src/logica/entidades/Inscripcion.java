@@ -2,12 +2,16 @@ package logica.entidades;
 
 import java.time.LocalDate;
 
+import org.eclipse.persistence.jpa.jpql.parser.NewValueBNF;
+
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import logica.datatypes.DTInscripcion;
+import logica.jpa.ClaveInscripcionJPA;
 import logica.jpa.InscripcionJPA;
 import logica.jpa.SalidaJPA;
 import logica.jpa.TuristaJPA;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -114,6 +118,7 @@ public class Inscripcion {
     }
 
     public InscripcionJPA obtenerInscripcionJPA(SalidaJPA salida) {
-        return new InscripcionJPA(salida, (TuristaJPA) turista.obtenerUsuarioJPA(), fechaInscrpicion, cantidadTuristas, getCostoInscripcion());
+    	var turis = (TuristaJPA) turista.obtenerUsuarioJPA();
+        return new InscripcionJPA(salida, turis, fechaInscrpicion, cantidadTuristas, getCostoInscripcion());
     }
 }

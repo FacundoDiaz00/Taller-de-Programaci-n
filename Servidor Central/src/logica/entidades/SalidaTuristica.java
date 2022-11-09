@@ -14,6 +14,7 @@ import logica.jpa.ActividadJPA;
 import logica.jpa.InscripcionJPA;
 import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -144,7 +145,7 @@ public class SalidaTuristica {
 
     public SalidaJPA obtenerSalidaJPA(ActividadJPA actividadJPA) {
         var inscripcionesJPA = new ArrayList<InscripcionJPA>();
-        var salidaJPA = new SalidaJPA(nombre, fechaAlta, fechaHoraSalida,cantMaxTuristas, lugarSalida,actividadJPA, inscripcionesJPA);
+        SalidaJPA salidaJPA = new SalidaJPA(nombre, fechaAlta, fechaHoraSalida, cantMaxTuristas, lugarSalida, actividadJPA, inscripcionesJPA);
         inscripciones.forEach((Inscripcion i ) -> inscripcionesJPA.add(i.obtenerInscripcionJPA(salidaJPA)) );
         return salidaJPA;
     }

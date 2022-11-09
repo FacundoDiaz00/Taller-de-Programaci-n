@@ -20,6 +20,7 @@ import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -270,8 +271,9 @@ public class ActividadTuristica {
 
     public ActividadJPA obtenerActividadJPA() {
         var salidasJPA = new ArrayList<SalidaJPA>();
-        var actividad = new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad,
-        departamento.getNombre(), fechaAlta, salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA());
+        ActividadJPA actividad = new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad, departamento.getNombre(), fechaAlta, 
+    			salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA()
+    		);
         salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA(actividad)));
         return actividad;
     }
