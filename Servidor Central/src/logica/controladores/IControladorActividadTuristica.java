@@ -225,4 +225,6 @@ public interface IControladorActividadTuristica {
 
     // Esto sumariza los casos de uso aceptar/rechazar y finalizar actividad turística
     void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado) throws ObjetoNoExisteEnTurismoUy;
+
+	List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy;
 }

@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -73,6 +75,19 @@ public class ConsultaActividadServlet extends HttpServlet {
 				esFavorito = wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), idActividad);
 				req.setAttribute("esFavoritaActividad", esFavorito);
             }
+            
+            String url = infoActividadTuristica.getUrlVideo();
+            if(url != null) {
+                url = url.replace("youtu.be", "youtube.com/embed");
+                url = url.replace("?t=", "?start=");
+                
+                String embed = "<iframe width='560' height='315' src='@' frameborder='0'allow='autoplay; encrypted-media' allowfullscreen></iframe>";
+                embed.replaceAll("@", url);
+                
+                req.setAttribute("url", embed);
+            }
+
+                    
 			req.setAttribute("cantFavoritos", infoActividadTuristica.getCantFavoritos());
 	        
 
