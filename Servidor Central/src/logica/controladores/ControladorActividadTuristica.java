@@ -41,6 +41,7 @@ import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
+import logica.manejadores.ManejadorPersistenciaJPA;
 import logica.manejadores.ManejadorSalidaTuristica;
 import logica.manejadores.ManejadorUsuario;
 
@@ -82,7 +83,6 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         if (existeActividadTuristica(nombreActividad)) {
         	throw new ActividadTuristicaYaRegistradaException(
                     "Ya existe la actividad con el nombre " + nombreActividad);
-           
         } 
         // Se crea instancia:
         ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
@@ -94,7 +94,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
     public boolean existeActividadTuristica(String nomActividad) {
         ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-        return MAT.exists(nomActividad);
+        return MAT.exists(nomActividad) || ManejadorPersistenciaJPA.getInstancia().obtenerIdActividadesFinalizadas().contains(nomActividad);
     }
 
     public List<String> obtenerIdActividadesTuristicas(String departamento) throws ObjetoNoExisteEnTurismoUy {
@@ -298,11 +298,17 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
             throws ObjetoNoExisteEnTurismoUy {
         ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica act = manejActTur.getActividad(idActividad);
-        if (nuevoEstado != EstadoActividadTuristica.FINALIZADA)
+        if (nuevoEstado == EstadoActividadTuristica.AGREGADA)
+            throw new IllegalArgumentException("No se puede cambiar el estado de una actividad a AGREGADA");
+
+        if (nuevoEstado != EstadoActividadTuristica.FINALIZADA && act.getEstado() == EstadoActividadTuristica.AGREGADA) {
         	act.setEstado(nuevoEstado);
-        else {
-			// TODO logica de persistencia y todas esas vueltas
-		}
+        } else if (nuevoEstado == EstadoActividadTuristica.FINALIZADA) {
+			ManejadorPersistenciaJPA.getInstancia().persistirActividad(idActividad);
+            act.eliminarLinks();
+		} else {
+            throw new IllegalArgumentException("No se puede cambiar el estado");
+        }
     }
 
     public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {

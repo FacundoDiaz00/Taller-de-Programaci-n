@@ -123,8 +123,7 @@ public class Turista extends Usuario {
 
     @Override
     public UsuarioJPA obtenerUsuarioJPA() {
-        // TODO completar
-        return new TuristaJPA();
+        return new TuristaJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), nacionalidad);
     }
 
     @Override

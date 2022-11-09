@@ -3,7 +3,6 @@ package logica.jpa;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -30,7 +29,7 @@ public class ActividadJPA {
     private String ciudad;
 
     @Column(name="nombre_departamento", nullable = false)
-    private String nombre_departamento;
+    private String nombreDepartamento;
 
     @Column(name="fechaAlta", nullable = false, columnDefinition = "DATE")
     private LocalDate fechaAlta;
@@ -38,7 +37,7 @@ public class ActividadJPA {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "actividadJPA", cascade = {CascadeType.PERSIST})
     private Collection<SalidaJPA> salidas = new java.util.ArrayList<>();
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name="id_proveedor", nullable=false)
     private ProveedorJPA proveedorJPA;
 
@@ -49,7 +48,7 @@ public class ActividadJPA {
         this.duracion = duracion;
         this.costo = costo;
         this.ciudad = ciudad;
-        this.nombre_departamento = nombre_departamento;
+        this.nombreDepartamento = nombre_departamento;
         this.fechaAlta = fechaAlta;
         this.salidas = salidas;
         this.proveedorJPA = proveedorJPA;

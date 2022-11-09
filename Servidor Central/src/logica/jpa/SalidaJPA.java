@@ -2,6 +2,8 @@ package logica.jpa;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -11,6 +13,21 @@ public class SalidaJPA {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+    
+    @Column(name="nombre", unique=true, nullable = false)
+    private String nombre;
+    
+    @Column(name="fechaAlta", nullable = false, columnDefinition = "DATE")
+    private LocalDate fechaAlta;
+    
+    @Column(name="fecha_salida", nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime fechaSalida;
+    
+    @Column(name="cant_turistas_max", nullable = false)
+    private int cantTurMax;
+    
+    @Column(name="lugar", nullable = false)
+    private String lugar;
 
     @ManyToOne
     @JoinColumn(name = "actividad_jpa_id", nullable=false)
@@ -18,6 +35,20 @@ public class SalidaJPA {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "salidaJPA", cascade = {CascadeType.PERSIST})
     private Collection<InscripcionJPA> inscripciones = new java.util.ArrayList<>();
+
+    public SalidaJPA() {
+
+    }
+
+    public SalidaJPA(String nombre, LocalDate fechaAlta, LocalDateTime fechaSalida, int cantTurMax, String lugar, ActividadJPA actividadJPA, Collection<InscripcionJPA> inscripciones) {
+        this.nombre = nombre;
+        this.fechaAlta = fechaAlta;
+        this.fechaSalida = fechaSalida;
+        this.cantTurMax = cantTurMax;
+        this.lugar = lugar;
+        this.actividadJPA = actividadJPA;
+        this.inscripciones = inscripciones;
+    }
 
     public Collection<InscripcionJPA> getInscripciones() {
         return inscripciones;

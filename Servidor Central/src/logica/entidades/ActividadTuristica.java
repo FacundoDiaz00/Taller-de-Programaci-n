@@ -270,8 +270,13 @@ public class ActividadTuristica {
 
     public ActividadJPA obtenerActividadJPA() {
         var salidasJPA = new ArrayList<SalidaJPA>();
-        salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA()));
-        return new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad,
-                departamento.getNombre(), fechaAlta, salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA());
+        var actividad = new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad,
+        departamento.getNombre(), fechaAlta, salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA());
+        salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA(actividad)));
+        return actividad;
+    }
+
+    public void eliminarLinks() {
+        // FIXME
     }
 }

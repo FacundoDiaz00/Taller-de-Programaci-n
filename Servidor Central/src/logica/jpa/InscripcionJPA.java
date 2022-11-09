@@ -27,6 +27,17 @@ public class InscripcionJPA {
     @Column(name="costo", nullable = false)
     private float costo;
 
+    public InscripcionJPA() {
+    }
+
+    public InscripcionJPA(SalidaJPA salidaJPA, TuristaJPA turistaJPA, LocalDate fecha_inscripcion, int cantidad_turistas, float costo) {
+        this.salidaJPA = salidaJPA;
+        this.turistaJPA = turistaJPA;
+        this.fecha_inscripcion = fecha_inscripcion;
+        this.cantidad_turistas = cantidad_turistas;
+        this.costo = costo;
+    }
+
     public TuristaJPA getTuristaJPA() {
         return turistaJPA;
     }

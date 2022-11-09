@@ -6,6 +6,8 @@ import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import logica.datatypes.DTInscripcion;
 import logica.jpa.InscripcionJPA;
+import logica.jpa.SalidaJPA;
+import logica.jpa.TuristaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -111,8 +113,7 @@ public class Inscripcion {
                 getTurista().getNickname(), (getCompra() != null) ? getCompra().obtenerDTCompra() : null) ;
     }
 
-    public InscripcionJPA obtenerInscripcionJPA() {
-        // TODO jpa
-        return new InscripcionJPA();
+    public InscripcionJPA obtenerInscripcionJPA(SalidaJPA salida) {
+        return new InscripcionJPA(salida, (TuristaJPA) turista.obtenerUsuarioJPA(), fechaInscrpicion, cantidadTuristas, getCostoInscripcion());
     }
 }

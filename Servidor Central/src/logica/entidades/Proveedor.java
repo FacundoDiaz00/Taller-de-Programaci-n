@@ -94,7 +94,7 @@ public class Proveedor extends Usuario {
 
     @Override
     public UsuarioJPA obtenerUsuarioJPA() {
-        return new ProveedorJPA();
+        return new ProveedorJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), descrpicionGeneral, link);
     }
 
     @Override

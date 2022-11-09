@@ -60,6 +60,8 @@ public abstract class Usuario {
 
     @Override
     public boolean equals(Object obj) {
+        if (! (obj instanceof Usuario)) 
+            return false;
         return this.getNickname().equals(((Usuario) obj).getNickname())
                 || this.getCorreo().equals(((Usuario) obj).getCorreo());
     }
