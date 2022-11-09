@@ -146,8 +146,10 @@
                        
                     </ul>
                 </div>
-                
-                <iframe width="640" height="360" src="<%=datosActividad.getUrlVideo() %>" frameborder="0" allowfullscreen></iframe>
+                <%if(datosActividad.getUrlVideo() != null && datosActividad.toString().length() > 0 ){ 
+                	String url = (String)request.getAttribute("url");%>
+                <%=url %>
+                <%} %>
             </div>
 
         </div>
@@ -288,6 +290,8 @@
     
 	</script>
 	<%} %>
+
+
  
 
 </main>

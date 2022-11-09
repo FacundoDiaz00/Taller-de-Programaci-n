@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import logica.datatypes.DTInscripcion;
+import logica.jpa.InscripcionJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -108,5 +109,10 @@ public class Inscripcion {
     public DTInscripcion obtenerDTInscripcion() {
         return new DTInscripcion(fechaInscrpicion, cantidadTuristas, getCostoInscripcion(), getSalidaTuristica().obtenerDTSalidaTuristica(),
                 getTurista().getNickname(), (getCompra() != null) ? getCompra().obtenerDTCompra() : null) ;
+    }
+
+    public InscripcionJPA obtenerInscripcionJPA() {
+        // TODO jpa
+        return new InscripcionJPA();
     }
 }

@@ -20,6 +20,8 @@ import logica.datatypes.DTTuristaDetalle;
 import logica.datatypes.DTTuristaDetallePrivado;
 import logica.datatypes.DTUsuario;
 import logica.datatypes.Imagen;
+import logica.jpa.TuristaJPA;
+import logica.jpa.UsuarioJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 
 
@@ -117,6 +119,12 @@ public class Turista extends Usuario {
         super.setearDatos(datosNuevos);
         DTTurista tur = (DTTurista) datosNuevos;
         this.setNacionalidad(tur.getNacionalidad());
+    }
+
+    @Override
+    public UsuarioJPA obtenerUsuarioJPA() {
+        // TODO completar
+        return new TuristaJPA();
     }
 
     @Override

@@ -14,6 +14,9 @@ import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.jpa.ActividadJPA;
+import logica.jpa.ProveedorJPA;
+import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
@@ -264,4 +267,11 @@ public class ActividadTuristica {
 	public void setUrlVideo(String urlVideo) {
 		this.urlVideo = urlVideo;
 	}
+
+    public ActividadJPA obtenerActividadJPA() {
+        var salidasJPA = new ArrayList<SalidaJPA>();
+        salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA()));
+        return new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad,
+                departamento.getNombre(), fechaAlta, salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA());
+    }
 }

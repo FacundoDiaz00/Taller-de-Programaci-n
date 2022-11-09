@@ -16,11 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import excepciones.ActividadTuristicaYaRegistradaException;
+import net.java.dev.jaxb.array.StringArray;
 import publicar.actividadesturisticasservice.ActividadTuristicaYaRegistradaException_Exception;
 import publicar.actividadesturisticasservice.ErrorAlProcesar_Exception;
 import publicar.actividadesturisticasservice.Imagen;
-import publicar.actividadesturisticasservice.ListOfString;
 import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
@@ -107,7 +106,7 @@ public class AltaActividadServlet extends HttpServlet {
 
              try {
             	 
-            	 ListOfString categoriasListOfString = new ListOfString();
+            	 StringArray categoriasListOfString = new StringArray();
             	 for (String  cat : categorias) {
             		 categoriasListOfString.getItem().add(cat);
 				}
