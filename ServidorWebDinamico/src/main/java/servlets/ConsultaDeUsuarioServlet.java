@@ -71,22 +71,6 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         
         if (debelistar != null && debelistar.equals("false")) {
         	
-        	try {
-        		String nick = ((DtUsuario)usr).getNickname();	
-        		seSiguenUsuarios = wbUser.usuariosSeSiguen( nick, req.getParameter("id"));
-        		DtUsuarioSeparadosPorTipoCollection seguidos = wbUser.obtenerSeguidos(nick);
-        		DtUsuarioSeparadosPorTipoCollection seguidores = wbUser.obtenerSeguidores(nick);
-        		req.setAttribute("seguidos", seguidos);
-        		req.setAttribute("seguidores", seguidores);
-        		
-        	}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
-				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
-                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
-                e.printStackTrace();
-        	}
-        	
-        	req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
-        	
             if(seguir) {
             	
             	if (usr != null && !((DtUsuario) usr).getNickname().equals(req.getParameter("id"))){
@@ -105,6 +89,23 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             		
             	}
             }
+        	
+        	try {
+        		String nick = ((DtUsuario)usr).getNickname();	
+        		String usrVisitado = (String) req.getParameter("id");
+        		DtUsuarioSeparadosPorTipoCollection seguidos = wbUser.obtenerSeguidos(usrVisitado);
+        		DtUsuarioSeparadosPorTipoCollection seguidores = wbUser.obtenerSeguidores(usrVisitado);
+        		req.setAttribute("seguidos", seguidos);
+        		req.setAttribute("seguidores", seguidores);
+        		
+        	}catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+				req.setAttribute("motivoDeError","id de usuario invalido. No existe un usuario con ese nickname");
+                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                e.printStackTrace();
+        	}
+        	
+        	req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+        
         	
             if (usr != null && ((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
                 DtUsuario usuario;

@@ -248,36 +248,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ListOfObject }
-     * 
-     * @return
-     *     the new instance of {@link ListOfObject }
-     */
-    public ListOfObject createListOfObject() {
-        return new ListOfObject();
-    }
-
-    /**
-     * Create an instance of {@link ListOfString }
-     * 
-     * @return
-     *     the new instance of {@link ListOfString }
-     */
-    public ListOfString createListOfString() {
-        return new ListOfString();
-    }
-
-    /**
-     * Create an instance of {@link ListOfDTSalidaTuristica }
-     * 
-     * @return
-     *     the new instance of {@link ListOfDTSalidaTuristica }
-     */
-    public ListOfDTSalidaTuristica createListOfDTSalidaTuristica() {
-        return new ListOfDTSalidaTuristica();
-    }
-
-    /**
      * Create an instance of {@link DtActividadTuristica }
      * 
      * @return
@@ -285,36 +255,6 @@ public class ObjectFactory {
      */
     public DtActividadTuristica createDtActividadTuristica() {
         return new DtActividadTuristica();
-    }
-
-    /**
-     * Create an instance of {@link DtCompra }
-     * 
-     * @return
-     *     the new instance of {@link DtCompra }
-     */
-    public DtCompra createDtCompra() {
-        return new DtCompra();
-    }
-
-    /**
-     * Create an instance of {@link DtInscripcion }
-     * 
-     * @return
-     *     the new instance of {@link DtInscripcion }
-     */
-    public DtInscripcion createDtInscripcion() {
-        return new DtInscripcion();
-    }
-
-    /**
-     * Create an instance of {@link DtPaquete }
-     * 
-     * @return
-     *     the new instance of {@link DtPaquete }
-     */
-    public DtPaquete createDtPaquete() {
-        return new DtPaquete();
     }
 
     /**
@@ -328,6 +268,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Imagen }
+     * 
+     * @return
+     *     the new instance of {@link Imagen }
+     */
+    public Imagen createImagen() {
+        return new Imagen();
+    }
+
+    /**
      * Create an instance of {@link DtSalidaTuristicaDetalle }
      * 
      * @return
@@ -338,13 +288,33 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Imagen }
+     * Create an instance of {@link DtInscripcion }
      * 
      * @return
-     *     the new instance of {@link Imagen }
+     *     the new instance of {@link DtInscripcion }
      */
-    public Imagen createImagen() {
-        return new Imagen();
+    public DtInscripcion createDtInscripcion() {
+        return new DtInscripcion();
+    }
+
+    /**
+     * Create an instance of {@link DtCompra }
+     * 
+     * @return
+     *     the new instance of {@link DtCompra }
+     */
+    public DtCompra createDtCompra() {
+        return new DtCompra();
+    }
+
+    /**
+     * Create an instance of {@link DtPaquete }
+     * 
+     * @return
+     *     the new instance of {@link DtPaquete }
+     */
+    public DtPaquete createDtPaquete() {
+        return new DtPaquete();
     }
 
     /**
