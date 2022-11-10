@@ -403,6 +403,11 @@ public class ControladorMaestro implements IControladorMaestro {
                     LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
         }
         
-        icat.cambiarEstadoDeActividadTuristica("Degusta", EstadoActividadTuristica.FINALIZADA);
+        
+        
+        icat.altaActividadTuristica("washington", "San José", "Iglesia", "a misa los domingos...", 
+        		3, 10, "San José de Mayo", LocalDate.of(2022, 10, 10), null, null , null) ;
+        icat.cambiarEstadoDeActividadTuristica("Iglesia", EstadoActividadTuristica.ACEPTADA);
+        icat.cambiarEstadoDeActividadTuristica("Iglesia", EstadoActividadTuristica.FINALIZADA);
     }
 }
