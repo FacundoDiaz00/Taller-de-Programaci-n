@@ -10,6 +10,7 @@ import logica.controladores.Fabrica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 import logica.utils.UtilsDT;
@@ -157,6 +158,12 @@ public class WebServiceActividades {
 
         Fabrica.getInstancia().getIControladorActividadTuristica().altaInscripcionSalidaTuristica(nomSalTurim, nicknameTuris, canTuris, null, nombrePaquete);
 
+    }
+    
+    public void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado)
+            throws ObjetoNoExisteEnTurismoUy{
+    	log.info("Solicitud a 'cambiarEstadoDeActividadTuristica'");
+    	Fabrica.getInstancia().getIControladorActividadTuristica().cambiarEstadoDeActividadTuristica(idActividad, nuevoEstado);
     }
     
     

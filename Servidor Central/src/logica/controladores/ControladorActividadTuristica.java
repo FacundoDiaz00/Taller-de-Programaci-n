@@ -301,6 +301,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         if (nuevoEstado != EstadoActividadTuristica.FINALIZADA)
         	act.setEstado(nuevoEstado);
         else {
+        	System.out.println("entré a finalizar en persistencia");
 			// TODO logica de persistencia y todas esas vueltas
 		}
     }

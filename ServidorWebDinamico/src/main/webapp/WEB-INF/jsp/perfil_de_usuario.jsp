@@ -290,8 +290,14 @@
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
-			                                <h5 class="card-title"><%=act.getNombre()%></h5>
-			                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+			                            	<div style="display: grid;grid-template-columns: auto 177px;">
+			                            		<div>
+			                            		    <h5 class="card-title"><%=act.getNombre()%></h5>
+				                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+			                            		</div>
+			                                	<a href="ConsultaDeUsuario?id=listar=false&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                	
+			                            	</div>
 			                                <div class="botonera">
 			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
 			                            	</div>
