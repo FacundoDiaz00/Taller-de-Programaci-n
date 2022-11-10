@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.TurismoUyException;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
@@ -346,15 +347,20 @@ public class ControladorMaestro implements IControladorMaestro {
             String[] datosAct = datosActividadesStrings[i];
             int[] datosInt = datosActividadesInteger[i];
             String[] categorias = actividadesCategorias[i];
-
-            icat.altaActividadTuristica(datosAct[4], datosAct[3], datosAct[0], datosAct[1],
-                    datosInt[0], datosInt[1], datosAct[2], LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
-                    new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), null);
+            try {
+            	icat.altaActividadTuristica(datosAct[4], datosAct[3], datosAct[0], datosAct[1],
+            			datosInt[0], datosInt[1], datosAct[2], LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
+            			new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), null);
+            } catch (ActividadTuristicaYaRegistradaException e) {
+			}
         }
 
         // Clasificacion de actividades
         for (String act : actividadesConfirmadas)
-            icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.ACEPTADA);
+        	try {
+        		icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.ACEPTADA);
+        	} catch (TurismoUyException e) {
+			}
 
         for (String act : actividadesRechazadas)
             icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.RECHAZADA);
