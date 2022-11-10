@@ -6,6 +6,7 @@ import java.util.List;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -75,8 +76,12 @@ public class ManejadorPersistenciaJPA {
         em.getTransaction().begin();
 
   		TypedQuery<ActividadJPA> query = em.createQuery("SELECT a FROM ActividadJPA a WHERE a.nombre = ?1", ActividadJPA.class);
-  		ActividadJPA result = query.setParameter(1, nombre).getSingleResult();
-        
+  		ActividadJPA result;
+  		try {
+  			result = query.setParameter(1, nombre).getSingleResult();
+  		} catch (NoResultException e) {
+  			result = null;
+  		} 
         em.getTransaction().commit();
         em.close();
         return result;
@@ -87,7 +92,12 @@ public class ManejadorPersistenciaJPA {
         em.getTransaction().begin();
 
   		TypedQuery<UsuarioJPA> query = em.createQuery("SELECT a FROM UsuarioJPA a WHERE a.nickname = ?1", UsuarioJPA.class);
-  		UsuarioJPA result = query.setParameter(1, nickname).getSingleResult();
+  		UsuarioJPA result;
+  		try {
+  			result = query.setParameter(1, nickname).getSingleResult();
+  		} catch (NoResultException e) {
+  			result = null;
+  		} 
         
         em.getTransaction().commit();
         em.close();

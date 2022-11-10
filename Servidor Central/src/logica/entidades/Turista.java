@@ -198,4 +198,12 @@ public class Turista extends Usuario {
 	public boolean estaEnActividadesFavoritas(String nombreAct) {
 		return actividadesFavoritas.containsKey(nombreAct);
 	}
+
+	public void eliminarInscripcion(String nombreSalida) {
+		for (Inscripcion inscripcion : this.inscripciones)
+			if (inscripcion.getNombreSalida().equals(nombreSalida)) {
+				this.inscripciones.remove(inscripcion);
+				return;
+			}
+	}
 }

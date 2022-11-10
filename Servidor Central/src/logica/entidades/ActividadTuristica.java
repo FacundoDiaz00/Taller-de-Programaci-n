@@ -277,8 +277,17 @@ public class ActividadTuristica {
         salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA(actividad)));
         return actividad;
     }
-
+    //PRECONDICIÒN: la actividad no tiene paquetes asociados
     public void eliminarLinks() {
-        // FIXME
+        //eliminar de categorias
+    	for (Categoria categoria : this.categorias.values())
+    		categoria.eliminarActividad(this.nombre);
+    	//eliminar de salidas y eliminar las salidas 
+    	for (SalidaTuristica salida : this.salidas.values())
+    		salida.eliminarLinks();
+    	
+    	this.proveedor.eliminarActividad(this.nombre);
+    	
+    	
     }
 }

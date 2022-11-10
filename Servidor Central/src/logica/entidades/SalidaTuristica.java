@@ -149,4 +149,12 @@ public class SalidaTuristica {
         inscripciones.forEach((Inscripcion i ) -> inscripcionesJPA.add(i.obtenerInscripcionJPA(salidaJPA)) );
         return salidaJPA;
     }
+
+	public void eliminarLinks() {
+		for (Inscripcion insc : this.inscripciones) {
+			insc.eliminarLinks();
+		}
+			
+		
+	}
 }

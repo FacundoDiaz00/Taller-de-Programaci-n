@@ -39,4 +39,9 @@ public class Categoria {
     public void addActividad(ActividadTuristica actividadTuristica) {
         actividades.put(actividadTuristica.getNombre(), actividadTuristica);
     }
+
+	public void eliminarActividad(String nomActividad) {
+		this.actividades.remove(nomActividad);
+		
+	}
 }

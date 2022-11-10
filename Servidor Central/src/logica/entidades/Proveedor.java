@@ -147,4 +147,9 @@ public class Proveedor extends Usuario {
                 actividadesNoConfirmadas, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }
 
+	public void eliminarActividad(String nomActividad) {
+		this.actividadesTuristicas.remove(nomActividad);
+		
+	}
+
 }

@@ -304,8 +304,15 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         if (nuevoEstado != EstadoActividadTuristica.FINALIZADA && act.getEstado() == EstadoActividadTuristica.AGREGADA) {
         	act.setEstado(nuevoEstado);
         } else if (nuevoEstado == EstadoActividadTuristica.FINALIZADA) {
+        	
+        	ControladorPaquete icp = new ControladorPaquete();
+        	if (icp.actividadExisteEnAlgunPaquete(idActividad)) {
+        		throw new IllegalArgumentException("No es posible finalizar una activdad que esté dentro de un paquete");
+        	}
+        	
 			ManejadorPersistenciaJPA.getInstancia().persistirActividad(idActividad);
             act.eliminarLinks();
+      
 		} else {
             throw new IllegalArgumentException("No se puede cambiar el estado");
         }

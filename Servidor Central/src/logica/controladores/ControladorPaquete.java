@@ -159,4 +159,14 @@ public class ControladorPaquete implements IControladorPaquete {
         return ret;
     }
 
+	public boolean actividadExisteEnAlgunPaquete(String idActividad) {
+		ManejadorPaquete manPaq = ManejadorPaquete.getInstancia();
+		List<Paquete> paquetes = manPaq.getPaquetes();
+		for (Paquete paquete : paquetes) {
+			if (paquete.getActividades().containsKey(idActividad))
+				return true;
+		}
+		return false;
+	}
+
 }

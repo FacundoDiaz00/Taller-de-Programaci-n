@@ -121,4 +121,8 @@ public class Inscripcion {
     	var turis = (TuristaJPA) turista.obtenerUsuarioJPA();
         return new InscripcionJPA(salida, turis, fechaInscrpicion, cantidadTuristas, getCostoInscripcion());
     }
+
+	public void eliminarLinks() {
+		this.turista.eliminarInscripcion(this.getNombreSalida());
+	}
 }
