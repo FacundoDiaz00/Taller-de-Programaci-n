@@ -129,7 +129,7 @@ public abstract class Usuario {
     }
 
 	public void agregarOBorrarSeguidor(Usuario seguidorUsuario) {
-		if (sigueA(seguidorUsuario.getNickname())) {
+		if (seguidorUsuario.sigueA(nickname)) {
 			seguidores.remove(seguidorUsuario.getNickname());
 		} else {
 			seguidores.put(seguidorUsuario.getNickname(), seguidorUsuario);
