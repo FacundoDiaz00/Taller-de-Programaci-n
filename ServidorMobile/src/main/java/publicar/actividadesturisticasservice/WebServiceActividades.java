@@ -66,21 +66,18 @@ public interface WebServiceActividades {
     /**
      * 
      * @param arg0
-     * @param arg1
      * @return
-     *     returns net.java.dev.jaxb.array.StringArray
+     *     returns publicar.actividadesturisticasservice.DtActividadTuristicaDetalle
      * @throws ObjetoNoExisteEnTurismoUy_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdComprasDisponiblesParaInscripcionRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdComprasDisponiblesParaInscripcionResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdComprasDisponiblesParaInscripcion/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadTuristicaDetalleRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadTuristicaDetalleResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadTuristicaDetalle/Fault/ObjetoNoExisteEnTurismoUy")
     })
-    public StringArray obtenerIdComprasDisponiblesParaInscripcion(
+    public DtActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1)
+        String arg0)
         throws ObjetoNoExisteEnTurismoUy_Exception
     ;
 
@@ -93,6 +90,16 @@ public interface WebServiceActividades {
     @WebResult(partName = "return")
     @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdCategoriasRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdCategoriasResponse")
     public StringArray obtenerIdCategorias();
+
+    /**
+     * 
+     * @return
+     *     returns net.java.dev.jaxb.array.StringArray
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosResponse")
+    public StringArray obtenerIdDepartamentos();
 
     /**
      * 
@@ -146,30 +153,45 @@ public interface WebServiceActividades {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns publicar.actividadesturisticasservice.DtActividadTuristicaDetalle
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @param arg4
+     * @param arg5
+     * @param arg6
+     * @throws ActividadTuristicaNoAceptada_Exception
+     * @throws ErrorAlProcesar_Exception
+     * @throws FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception
+     * @throws FechaAltaSalidaPosteriorAFechaSalidaException_Exception
      * @throws ObjetoNoExisteEnTurismoUy_Exception
+     * @throws SalidaYaRegistradaException_Exception
      */
     @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadTuristicaDetalleRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadTuristicaDetalleResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerDTActividadTuristicaDetalle/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristicaRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristicaResponse", fault = {
+        @FaultAction(className = FechaAltaSalidaPosteriorAFechaSalidaException_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/FechaAltaSalidaPosteriorAFechaSalidaException"),
+        @FaultAction(className = ActividadTuristicaNoAceptada_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/ActividadTuristicaNoAceptada"),
+        @FaultAction(className = FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/FechaAltaActividadPosteriorAFechaAltaSalidaException"),
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/ObjetoNoExisteEnTurismoUy"),
+        @FaultAction(className = SalidaYaRegistradaException_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/SalidaYaRegistradaException"),
+        @FaultAction(className = ErrorAlProcesar_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/ErrorAlProcesar")
     })
-    public DtActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(
+    public void altaSalidaTuristica(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0)
-        throws ObjetoNoExisteEnTurismoUy_Exception
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        String arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        int arg4,
+        @WebParam(name = "arg5", partName = "arg5")
+        byte[] arg5,
+        @WebParam(name = "arg6", partName = "arg6")
+        String arg6)
+        throws ActividadTuristicaNoAceptada_Exception, ErrorAlProcesar_Exception, FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception, FechaAltaSalidaPosteriorAFechaSalidaException_Exception, ObjetoNoExisteEnTurismoUy_Exception, SalidaYaRegistradaException_Exception
     ;
-
-    /**
-     * 
-     * @return
-     *     returns net.java.dev.jaxb.array.StringArray
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdDepartamentosResponse")
-    public StringArray obtenerIdDepartamentos();
 
     /**
      * 
@@ -214,49 +236,6 @@ public interface WebServiceActividades {
     /**
      * 
      * @param arg0
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @param arg4
-     * @param arg5
-     * @param arg6
-     * @throws ActividadTuristicaNoAceptada_Exception
-     * @throws ErrorAlProcesar_Exception
-     * @throws FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception
-     * @throws FechaAltaSalidaPosteriorAFechaSalidaException_Exception
-     * @throws ObjetoNoExisteEnTurismoUy_Exception
-     * @throws SalidaYaRegistradaException_Exception
-     */
-    @WebMethod
-    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristicaRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristicaResponse", fault = {
-        @FaultAction(className = FechaAltaSalidaPosteriorAFechaSalidaException_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/FechaAltaSalidaPosteriorAFechaSalidaException"),
-        @FaultAction(className = ActividadTuristicaNoAceptada_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/ActividadTuristicaNoAceptada"),
-        @FaultAction(className = FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/FechaAltaActividadPosteriorAFechaAltaSalidaException"),
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/ObjetoNoExisteEnTurismoUy"),
-        @FaultAction(className = SalidaYaRegistradaException_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/SalidaYaRegistradaException"),
-        @FaultAction(className = ErrorAlProcesar_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/altaSalidaTuristica/Fault/ErrorAlProcesar")
-    })
-    public void altaSalidaTuristica(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        String arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        int arg4,
-        @WebParam(name = "arg5", partName = "arg5")
-        byte[] arg5,
-        @WebParam(name = "arg6", partName = "arg6")
-        String arg6)
-        throws ActividadTuristicaNoAceptada_Exception, ErrorAlProcesar_Exception, FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception, FechaAltaSalidaPosteriorAFechaSalidaException_Exception, ObjetoNoExisteEnTurismoUy_Exception, SalidaYaRegistradaException_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
      * @return
      *     returns publicar.actividadesturisticasservice.DtSalidaTuristicaDetalle
      * @throws ObjetoNoExisteEnTurismoUy_Exception
@@ -287,6 +266,45 @@ public interface WebServiceActividades {
     public DtSalidaTuristica obtenerDTSalidaTuristica(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/cambiarEstadoDeActividadTuristicaRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/cambiarEstadoDeActividadTuristicaResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/cambiarEstadoDeActividadTuristica/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public void cambiarEstadoDeActividadTuristica(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        EstadoActividadTuristica arg1)
+        throws ObjetoNoExisteEnTurismoUy_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @return
+     *     returns net.java.dev.jaxb.array.StringArray
+     * @throws ObjetoNoExisteEnTurismoUy_Exception
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdComprasDisponiblesParaInscripcionRequest", output = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdComprasDisponiblesParaInscripcionResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://actividadesTuristicasService.publicar/WebServiceActividades/obtenerIdComprasDisponiblesParaInscripcion/Fault/ObjetoNoExisteEnTurismoUy")
+    })
+    public StringArray obtenerIdComprasDisponiblesParaInscripcion(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1)
         throws ObjetoNoExisteEnTurismoUy_Exception
     ;
 
