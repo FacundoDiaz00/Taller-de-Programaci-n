@@ -79,7 +79,13 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	
         	if(finalizar) {
         		String idActividad = (String) req.getParameter("idAct");
-        		//wbActi.cambiarEstadoDeActividadTuristica(idActividad ,EstadoActividadTuristica.FINALIZADA);
+        		try {
+					wbActi.cambiarEstadoDeActividadTuristica(idActividad ,EstadoActividadTuristica.FINALIZADA);
+				} catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+					req.setAttribute("motivoDeError","La actividad turistica que se desea finalizar no existe");
+                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                    e.printStackTrace();
+				}
         	}
         	
             if(seguir) {
