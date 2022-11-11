@@ -359,7 +359,20 @@ public class ControladorMaestro implements IControladorMaestro {
         { "meche", "eleven11" },
 
 };
+// Videos actividades
 
+private static String[] videosActividades = new String[] {
+        "https://www.youtube.com/embed/zQjSMQ6uV1g",
+        "https://www.youtube.com/embed/Lxit3xvKShc",
+        "https://www.youtube.com/embed/zVDGjURCBz8",
+        "https://www.youtube.com/embed/wfyDxicM1PQ",
+        "https://www.youtube.com/embed/5uaEdiQVEEE",
+        "https://www.youtube.com/embed/dlUb22YfXDg",
+        "https://www.youtube.com/embed/FCFoe4ibkk8",
+        null,
+        "https://www.youtube.com/embed/a7Lfx4Flb28",
+        null
+};
 
     public void generarDatosDePrueba() throws TurismoUyException {
         IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
@@ -406,7 +419,7 @@ public class ControladorMaestro implements IControladorMaestro {
             try {
             	icat.altaActividadTuristica(datosAct[4], datosAct[3], datosAct[0], datosAct[1],
             			datosInt[0], datosInt[1], datosAct[2], LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
-            			new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), null);
+            			new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), videosActividades[i]);
             } catch (ActividadTuristicaYaRegistradaException e) {
             	// Actividad posiblemente en persistencia
 			}
