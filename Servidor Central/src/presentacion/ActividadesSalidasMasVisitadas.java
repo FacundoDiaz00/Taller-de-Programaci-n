@@ -48,36 +48,14 @@ public class ActividadesSalidasMasVisitadas extends JInternalFrame {
 		setBounds(100, 100, 461, 459);
 		getContentPane().setLayout(null);
 		
-		String[] columnNames = {"#",
+		String[] columnNames = {
                 "Nombre",
                 "Proveedor",
                 "Tipo",
                 "Cant. de Visitas"};
 		
-		List<Object> listaTop = controladorAct.obtenerTopDiezActividadesSalidas();
-		
-		for (Object datoActual : listaTop) {
-			if (datoActual instanceof DTActividadTuristica) {
-				DTActividadTuristica actividadActual = (DTActividadTuristica) datoActual;
-			}
-			else if (datoActual instanceof DTSalidaTuristica) {
-				DTSalidaTuristica salidaActual = (DTSalidaTuristica) datoActual;
-			}
-		}
-		Object[][] data;
-						
-//		Object[][] data = {
-//			    {"Kathy", "Smith",
-//			     "Snowboarding", 5, false},
-//			    {"John", "Doe",
-//			     "Rowing", 3, false},
-//			    {"Sue", "Black",
-//			     "Knitting", 2, false},
-//			    {"Jane", "White",
-//			     "Speed reading", 20, true},
-//			    {"Joe", "Brown",
-//			     "Pool", 10, false}
-//			};
+		List<String[]> listaTop = controladorAct.obtenerDatosVisitas();
+		String[][] data = listaTop.toArray(new String[][] {});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 12, 427, 403);
