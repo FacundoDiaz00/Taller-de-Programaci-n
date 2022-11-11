@@ -15,6 +15,7 @@ import logica.jpa.InscripcionJPA;
 import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorPersistenciaJPA;
+import logica.manejadores.ManejadorSalidaTuristica;
 
 /**
  * @author Equipo taller prog 16
@@ -154,6 +155,8 @@ public class SalidaTuristica {
 		for (Inscripcion insc : this.inscripciones) {
 			insc.eliminarLinks();
 		}
+		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
+		MST.removeSalida(this.nombre);
 			
 		
 	}
