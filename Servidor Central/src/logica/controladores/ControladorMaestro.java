@@ -310,6 +310,56 @@ public class ControladorMaestro implements IControladorMaestro {
             { 4, 2720, 12, 10, 2022 },
 
     };
+    
+    // Seguidores
+    private static String[][] seguidoresYSeguidos = new String[][] {
+        { "lachiqui", "isabelita" }, //U1
+        { "lachiqui", "mastropiero" },
+        { "lachiqui", "washington" },
+        { "lachiqui", "eldiez" },
+        { "lachiqui", "meche" },
+        
+        { "isabelita", "lachiqui" }, //U2
+        
+        { "anibal", "waston" }, //U3
+        { "anibal", "eleven11" },
+        { "anibal", "bobesponja" },
+        { "anibal", "meche" },
+        
+        { "waston", "isabelita" }, //U4
+        { "waston", "washington" },
+        
+        { "elelvis", "bobesponja" }, //U5
+        { "elelvis", "tony" },
+        { "elelvis", "eldiez" },
+        
+        { "eleven11", "lachiqui" }, //U6
+        { "eleven11", "waston" },
+        { "eleven11", "mastropiero" },
+        
+        { "bobesponja", "anibal" },//U7
+        { "bobesponja", "eleven11" },
+        
+        { "tony", "chino" }, //U8
+        { "tony", "eldiez" },
+
+        { "chino", "elelvis" }, //U9
+        { "chino", "mastropiero" },
+        { "chino", "washington" },
+        { "chino", "meche" },
+
+        { "washington", "mastropiero" },
+        { "washington", "waston" },
+
+        { "eldiez", "tony" },
+
+        { "meche", "lachiqui" },
+        { "meche", "isabelita" },
+        { "meche", "waston" },
+        { "meche", "eleven11" },
+
+};
+
 
     public void generarDatosDePrueba() throws TurismoUyException {
         IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
@@ -340,6 +390,12 @@ public class ControladorMaestro implements IControladorMaestro {
                         LocalDate.of(fechasNacUsuarios[i][2], fechasNacUsuarios[i][1], fechasNacUsuarios[i][0]),
                         new Imagen("/usuarios/" + usr[0] + ".png"), usr[6], usr[7]);
             }
+        }
+        
+        //Seguidores
+        
+        for(String[] seg : seguidoresYSeguidos) {
+        	iuser.seguirODejarDeSeguirUsuario(seg[0],seg[1]);
         }
 
         // Altas de actividades
