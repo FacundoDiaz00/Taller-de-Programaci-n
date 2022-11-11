@@ -3,6 +3,8 @@ package logica.jpa;
 import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.Imagen;
+import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -92,9 +94,14 @@ public class SalidaJPA {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	private Imagen getImagen() {
+    	String pathImg = UtilsDT.buscarImagen("/salidas/", nombre);
+        return pathImg != null ? new Imagen(pathImg) : null;
+    }
 
 	public DTSalidaTuristica obtenerDTSalidaTuristica() {
-		return new DTSalidaTuristica(nombre, fechaSalida, lugar, fechaAlta, cantTurMax, null,
+		return new DTSalidaTuristica(nombre, fechaSalida, lugar, fechaAlta, cantTurMax, getImagen(),
                 actividadJPA.getNombre());
 	}
 
@@ -104,7 +111,7 @@ public class SalidaJPA {
             insc.add(inscr.obtenerDTInscripcion());
         }
         
-        return new DTSalidaTuristicaDetalle(nombre, fechaSalida, lugar, fechaAlta, cantTurMax, null,
+        return new DTSalidaTuristicaDetalle(nombre, fechaSalida, lugar, fechaAlta, cantTurMax, getImagen(),
                 actividadJPA.getNombre(), insc, actividadJPA.obtenerDTActividadTuristicaDetalle());
 	}
 }

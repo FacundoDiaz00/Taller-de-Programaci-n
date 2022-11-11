@@ -6,6 +6,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
+import logica.datatypes.Imagen;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +38,7 @@ public class WebServiceMaestro {
     public byte[] getImg(String path) throws ObjetoNoExisteEnTurismoUy{
         log.info("Solicitud a 'getImg'");
         File imgFile = new File(Cargador.getDirectorioImagenes() + path);
-        if (imgFile.exists()){
+        if (imgFile.exists()) {
             try{
                 FileInputStream imgStream = new FileInputStream(imgFile);
                 byte[] contenido = imgStream.readAllBytes();
@@ -46,8 +47,8 @@ public class WebServiceMaestro {
             } catch (IOException e){
                 return new byte[0];
             }
-        }else {
-            throw new ObjetoNoExisteEnTurismoUy("Objeto no encontrado");
+        } else {
+            throw new ObjetoNoExisteEnTurismoUy(Imagen.class);
         }
     }
 

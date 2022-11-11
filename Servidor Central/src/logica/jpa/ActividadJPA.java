@@ -6,8 +6,10 @@ import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.EstadoActividadTuristica;
+import logica.datatypes.Imagen;
 import logica.entidades.Paquete;
 import logica.entidades.SalidaTuristica;
+import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -82,6 +84,11 @@ public class ActividadJPA {
     	return nombre;
     }
     
+    private Imagen getImagen() {
+    	String pathImg = UtilsDT.buscarImagen("/actividades/", nombre);
+        return pathImg != null ? new Imagen(pathImg) : null;
+    }
+    
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
     	HashMap<String, DTPaquete> packs = new HashMap<>();
         HashMap<String, DTSalidaTuristica> salid = new HashMap<>();
@@ -92,7 +99,7 @@ public class ActividadJPA {
 
         return new DTActividadTuristicaDetalle(salid, packs, getNombre(), descripcion, costo,
                 ciudad, duracion, fechaAlta, proveedorJPA.getNickname(), nombreDepartamento,
-                listaIdCats, null, EstadoActividadTuristica.FINALIZADA, -1, null);
+                listaIdCats, getImagen(), EstadoActividadTuristica.FINALIZADA, -1, null);
     }
 
 	public DTActividadTuristica obtenerDTActividadTuristica() {
@@ -100,7 +107,7 @@ public class ActividadJPA {
 
         return new DTActividadTuristica(getNombre(), descripcion, costo, ciudad, duracion,
                 fechaAlta, proveedorJPA.getNickname(), nombreDepartamento, listaIdCats,
-                null, EstadoActividadTuristica.FINALIZADA, -1, null);
+                getImagen(), EstadoActividadTuristica.FINALIZADA, -1, null);
 	}
 
 

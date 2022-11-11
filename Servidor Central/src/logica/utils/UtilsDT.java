@@ -32,5 +32,23 @@ public class UtilsDT {
         File fileImg = new File(Cargador.getDirectorioImagenes() + relativePath);
         fileImg.delete();
     }
+    
+    public static boolean existeImagen(String relativePath){
+        File fileImg = new File(Cargador.getDirectorioImagenes() + relativePath);
+        return fileImg.exists();
+    }
+    
+    public static String buscarImagen(String pathCarpeta, String nombreSinExt){
+    	File dirFile =  new File(Cargador.getDirectorioImagenes() + pathCarpeta);
+    	
+    	for (int i = 0; i < dirFile.listFiles().length; i++) {
+    		var nombreSinExtensionCalculado = dirFile.listFiles()[i].getName().replaceFirst("[.][^.]+$", "");
+    		if (nombreSinExtensionCalculado.equals(nombreSinExt))
+    			return pathCarpeta + dirFile.listFiles()[i].getName();
+    	}
+        return null;
+    }
+    
+    
 
 }
