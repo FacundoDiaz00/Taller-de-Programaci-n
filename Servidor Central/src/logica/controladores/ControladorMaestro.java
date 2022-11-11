@@ -233,31 +233,34 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomía" },
             { "Un día en Colonia",
                     "Paseos por el casco histórico y se puede terminar con Almuerzo en la Plaza de Toros" },
-            { "Valle Del Lunarejo", "Visite un área protegida con un paisaje natural hermoso" }
+            { "Valle Del Lunarejo", "Visite un área protegida con un paisaje natural hermoso" },
+            {"Rocha de Fiesta","Para cerrar el año a lo grande en nuestro departamento más oceánico"}        
     };
 
     private static int[][] datosPaquetesInteger = new int[][] {
             { 60, 20, 10, 8, 2022 },
             { 45, 15, 01, 8, 2022 },
-            { 60, 15, 15, 9, 2022 }
+            { 60, 15, 15, 9, 2022 },
+            { 45, 30, 07, 11, 2022 }
     };
 
     private static String[][] asigPaqueteAct = new String[][] {
             { "Disfrutar Rocha", "Degusta" },
             { "Disfrutar Rocha", "Teatro con Sabores" },
             { "Un día en Colonia", "Tour por Colonia del Sacramento" },
-            { "Un día en Colonia", "Almuerzo en el Real de San Carlos" },
+//            { "Un día en Colonia", "Almuerzo en el Real de San Carlos" },
             { "Valle Del Lunarejo", "Almuerzo en Valle del Lunarejo" },
-            { "Valle Del Lunarejo", "Cabalgata en Valle del Lunarejo" }
+            { "Valle Del Lunarejo", "Cabalgata en Valle del Lunarejo" },
+            { "Rocha de Fiesta", "Degusta" }
     };
 
     private static int[][] datosCompras = new int[][] {
             { 2, 15, 8, 2022, 14, 10, 2022, 2080 },
-            { 5, 20, 8, 2022, 04, 10, 2022, 5100 },
-            { 1, 15, 9, 2022, 30, 10, 2022, 1020 },
+            { 5, 20, 8, 2022, 04, 10, 2022, 1700},
+            { 1, 15, 9, 2022, 30, 10, 2022, 340 },
             { 10, 1, 9, 2022, 31, 10, 2022, 10400 },
-            { 2, 18, 9, 2022, 2, 11, 2022, 2040 },
-            { 6, 2, 9, 2022, 17, 10, 2022, 6120 }
+            { 2, 18, 9, 2022, 2, 11, 2022, 680 },
+            { 6, 2, 9, 2022, 17, 10, 2022, 2040 }
     };
 
     private static String[][] asigPaqueteTurista = new String[][] {
@@ -280,18 +283,18 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Teatro con Sabores 2", "bobesponja", null },
             { "Teatro con Sabores 2", "anibal", null },
             { "Degusta Setiembre", "tony", null },
-            { "Degusta Noviembre", "lachiqui", "Disfrutar Rocha" },
+            { "Degusta Noviembre", "lachiqui", "Disfrutar Rocha" }, //I11
             { "Teatro con Sabores 3", "lachiqui", "Disfrutar Rocha" },
             { "Degusta Setiembre", "elelvis", "Disfrutar Rocha" },
             { "Teatro con Sabores 1", "elelvis", "Disfrutar Rocha" },
             { "Tour Colonia del Sacramento 11-09", "lachiqui", "Un día en Colonia" },
-            { "Almuerzo 1", "lachiqui", "Un día en Colonia" },
+            { "Almuerzo 1", "lachiqui", null }, //I16
             { "Tour Colonia del Sacramento 18-09", "waston", "Un día en Colonia" },
-            { "Almuerzo 2", "waston", "Un día en Colonia" },
+            { "Almuerzo 2", "waston", null},
             { "Tour Colonia del Sacramento 30-10", "elelvis", "Un día en Colonia" },
-            { "Almuerzo en el Real 1", "elelvis", "Un día en Colonia" },
+            { "Almuerzo en el Real 1", "elelvis", null},
             { "Tour Colonia del Sacramento 30-10", "mastropiero", "Un día en Colonia" },
-            { "Almuerzo en el Real 1", "mastropiero", "Un día en Colonia" }
+            { "Almuerzo en el Real 1", "mastropiero", null}
     };
 
     private static int[][] datosIntegerInscripcion = new int[][] {
@@ -310,13 +313,13 @@ public class ControladorMaestro implements IControladorMaestro {
             { 5, 3200, 2, 9, 2022 },
             { 5, 2000, 2, 9, 2022 },
             { 5, 1700, 3, 9, 2022 },
-            { 5, 3400, 3, 9, 2022 },
+            { 5, 4000, 3, 9, 2022 }, //I16
             { 1, 340, 5, 9, 2022 },
-            { 1, 680, 5, 9, 2022 },
+            { 1, 800, 5, 9, 2022 },//18
             { 2, 680, 2, 10, 2022 },
-            { 2, 1360, 11, 10, 2022 },
+            { 2, 1600, 11, 10, 2022 },//20
             { 4, 1360, 12, 10, 2022 },
-            { 4, 2720, 12, 10, 2022 },
+            { 4, 3200, 12, 10, 2022 },//22
 
     };
     
