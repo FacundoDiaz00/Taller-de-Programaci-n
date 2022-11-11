@@ -57,4 +57,8 @@ public class ManejadorActividadTuristica {
 	public ActividadTuristica obtenerActividadTuristica(String IDActividad) {
 		return actividades.get(IDActividad);
 	}
+	
+	public void removeActividad(String nombre) {
+		actividades.remove(nombre);
+	}
 }
