@@ -48,12 +48,10 @@ public class Principal {
     private ConsultaDeSalidaTuristica frmIntConsultaDeSalidaTuristica;
     private InscribirseASalidaTurística frmInscribirseASalidaTuristica;
     private AltaCategoria frmAltaCategoria;
-
     private ModificarUsuario frmModificarUsuario;
-
     private ConsultaDePaquete frmIntConsultaDePaquete;
-
     private aceptarRechazarActividadTuristica frmAceptarRechazarActividadTuristica;
+    private ActividadesSalidasMasVisitadas frmActividadesSalidasMasVisitadas;
 
     /**
      * Launch the application.
@@ -117,6 +115,7 @@ public class Principal {
         frmIntConsultaDePaquete = new ConsultaDePaquete(this, contrPaquete);
         frmAceptarRechazarActividadTuristica = new aceptarRechazarActividadTuristica(contrActTur);
         frmAltaCategoria = new AltaCategoria(contrActTur);
+        frmActividadesSalidasMasVisitadas = new ActividadesSalidasMasVisitadas(contrActTur);
 
         frmEstacionDeTrabajo.getContentPane().setLayout(null);
         frmIntAltaUsuario.setVisible(false);
@@ -132,6 +131,7 @@ public class Principal {
         frmModificarUsuario.setVisible(false);
         frmAltaCategoria.setVisible(false);
         frmAceptarRechazarActividadTuristica.setVisible(false);
+        frmActividadesSalidasMasVisitadas.setVisible(false);
 
         frmEstacionDeTrabajo.getContentPane().setLayout(null);
         frmEstacionDeTrabajo.getContentPane().add(frmIntAltaPaquete);
@@ -148,6 +148,7 @@ public class Principal {
         frmEstacionDeTrabajo.getContentPane().add(frmModificarUsuario);
         frmEstacionDeTrabajo.getContentPane().add(frmAltaCategoria);
         frmEstacionDeTrabajo.getContentPane().add(frmAceptarRechazarActividadTuristica);
+        frmEstacionDeTrabajo.getContentPane().add(frmActividadesSalidasMasVisitadas);
 
         frmIntAltaUsuario.setVisible(false);
         frmEstacionDeTrabajo.getContentPane().add(frmIntAltaUsuario);
@@ -173,18 +174,34 @@ public class Principal {
 
         JDesktopPane desktopPane = new JDesktopPane();
         frmEstacionDeTrabajo.getContentPane().add(desktopPane);
-
-        JMenuItem salirJMenuItem = new JMenuItem("Salir");
-        salirJMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                frmEstacionDeTrabajo.setVisible(false);
-                frmEstacionDeTrabajo.dispose();
-            }
-        });
-        salirJMenuItem.addMouseListener(new MouseAdapter() {
-        });
-        salirJMenuItem.setHorizontalAlignment(SwingConstants.LEFT);
-        sistemaMenu.add(salirJMenuItem);
+                
+                        JMenuItem salirJMenuItem = new JMenuItem("Salir");
+                        salirJMenuItem.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent event) {
+                                frmEstacionDeTrabajo.setVisible(false);
+                                frmEstacionDeTrabajo.dispose();
+                            }
+                        });
+                        salirJMenuItem.addMouseListener(new MouseAdapter() {
+                        });
+                        
+                        JMenuItem mntmTopActividadessalidas = new JMenuItem("Top Actividades/Salidas");
+                        mntmTopActividadessalidas.addActionListener(new ActionListener() {
+                        	public void actionPerformed(ActionEvent e) {
+                        		frmActividadesSalidasMasVisitadas.setVisible(true);
+                        	}
+                        });
+                        sistemaMenu.add(mntmTopActividadessalidas);
+                        
+                                JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos de prueba");
+                                sistemaMenu.add(mntmNewMenuItem);
+                                mntmNewMenuItem.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent event) {
+                                        cargarDatosDePrueba();
+                                    }
+                                });
+                        salirJMenuItem.setHorizontalAlignment(SwingConstants.LEFT);
+                        sistemaMenu.add(salirJMenuItem);
 
         JMenu mnUsuario = new JMenu("Usuarios");
         menuBar.add(mnUsuario);
@@ -305,17 +322,6 @@ public class Principal {
             }
         });
         mnNewMenu.add(mntmNewMenuItem1);
-
-        JMenu datosInicoMenu = new JMenu("Datos de inicio");
-        menuBar.add(datosInicoMenu);
-
-        JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos de prueba");
-        mntmNewMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                cargarDatosDePrueba();
-            }
-        });
-        datosInicoMenu.add(mntmNewMenuItem);
     }
 
     /*
