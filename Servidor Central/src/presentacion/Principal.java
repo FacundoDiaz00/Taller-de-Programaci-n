@@ -68,6 +68,7 @@ public class Principal {
             Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
         }catch (TurismoUyException e){
             Logger.getLogger("logger").severe("Error al generar datos de prueba");
+            e.printStackTrace();
             return;
         }
 

@@ -23,6 +23,7 @@ import logica.datatypes.Imagen;
 import logica.jpa.TuristaJPA;
 import logica.jpa.UsuarioJPA;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 
 /**
@@ -107,8 +108,8 @@ public class Turista extends Usuario {
         for (Inscripcion inscripcion : inscripciones) {
             salidas.add(inscripcion.getSalidaTuristica().obtenerDTSalidaTuristica());
         }
-        
-        
+        // Agrego la persistencia
+        salidas.addAll(ManejadorPersistenciaJPA.getInstancia().obtenerSalidasDeTurista(getNickname()));        
 
         return new DTTuristaDetalle(getNickname(), getNombre(), getApellido(), getCorreo(), getFechaNac(), getImagen(),
                 nacionalidad, salidas, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
@@ -123,8 +124,10 @@ public class Turista extends Usuario {
 
     @Override
     public UsuarioJPA obtenerUsuarioJPA() {
-        // TODO completar
-        return new TuristaJPA();
+    	var usr = ManejadorPersistenciaJPA.getInstancia().encontrarUsuarioJPA(getNickname());
+    	if (usr == null)
+    		usr =  new TuristaJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), nacionalidad);
+    	return usr;
     }
 
     @Override
@@ -139,12 +142,14 @@ public class Turista extends Usuario {
 
         List<DTSalidaTuristica> inscripciones_salidas = new ArrayList<>();
         this.getInscripciones().forEach((Inscripcion x) -> inscripciones_salidas.add(x.getSalidaTuristica().obtenerDTSalidaTuristica()));
+        inscripciones_salidas.addAll(ManejadorPersistenciaJPA.getInstancia().obtenerSalidasDeTurista(getNickname()));        
 
         List<DTCompra> compras = new ArrayList<>();
         this.getCompras().forEach((Compra x) -> compras.add(x.obtenerDTCompra()));
 
         List<DTInscripcion> inscripciones = new ArrayList<>();
         this.getInscripciones().forEach((Inscripcion x) -> inscripciones.add(x.obtenerDTInscripcion()));
+        inscripciones.addAll(ManejadorPersistenciaJPA.getInstancia().obtenerInscripcionesDeTurista(nickname));
 
         return new DTTuristaDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, nacionalidad,
                 inscripciones_salidas, compras, inscripciones, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
@@ -194,5 +199,13 @@ public class Turista extends Usuario {
 	
 	public boolean estaEnActividadesFavoritas(String nombreAct) {
 		return actividadesFavoritas.containsKey(nombreAct);
+	}
+
+	public void eliminarInscripcion(String nombreSalida) {
+		for (Inscripcion inscripcion : this.inscripciones)
+			if (inscripcion.getNombreSalida().equals(nombreSalida)) {
+				this.inscripciones.remove(inscripcion);
+				return;
+			}
 	}
 }

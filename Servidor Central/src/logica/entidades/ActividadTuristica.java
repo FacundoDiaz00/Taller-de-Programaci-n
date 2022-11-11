@@ -20,6 +20,7 @@ import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -270,8 +271,30 @@ public class ActividadTuristica {
 
     public ActividadJPA obtenerActividadJPA() {
         var salidasJPA = new ArrayList<SalidaJPA>();
-        salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA()));
-        return new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad,
-                departamento.getNombre(), fechaAlta, salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA());
+        ActividadJPA actividad = new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad, departamento.getNombre(), fechaAlta, 
+    			salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA()
+    		);
+        salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA(actividad)));
+        return actividad;
+    }
+    //PRECONDICIÒN: la actividad no tiene paquetes asociados
+    public void eliminarLinks() {
+        //eliminar de categorias
+    	for (Categoria categoria : this.categorias.values())
+    		categoria.eliminarActividad(this.nombre);
+    	//eliminar de salidas y eliminar las salidas 
+    	for (SalidaTuristica salida : this.salidas.values())
+    		salida.eliminarLinks();
+    	
+    	this.proveedor.eliminarActividad(this.nombre);
+    	
+    	ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+    	MAT.removeActividad(this.nombre);
+    	
+    	//Desasocio departamento
+    	this.departamento.desasociarActividadTuristica(nombre);
+    	
+    	
+    	
     }
 }

@@ -41,6 +41,7 @@ import logica.entidades.Turista;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
+import logica.manejadores.ManejadorPersistenciaJPA;
 import logica.manejadores.ManejadorSalidaTuristica;
 import logica.manejadores.ManejadorUsuario;
 
@@ -82,7 +83,6 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         if (existeActividadTuristica(nombreActividad)) {
         	throw new ActividadTuristicaYaRegistradaException(
                     "Ya existe la actividad con el nombre " + nombreActividad);
-           
         } 
         // Se crea instancia:
         ActividadTuristica actTuristica = new ActividadTuristica(nombreProveedor, departamento, nombreActividad,
@@ -94,7 +94,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
     public boolean existeActividadTuristica(String nomActividad) {
         ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
-        return MAT.exists(nomActividad);
+        return MAT.exists(nomActividad) || ManejadorPersistenciaJPA.getInstancia().obtenerIdActividadesFinalizadas().contains(nomActividad);
     }
 
     public List<String> obtenerIdActividadesTuristicas(String departamento) throws ObjetoNoExisteEnTurismoUy {
@@ -114,8 +114,16 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct)
             throws ObjetoNoExisteEnTurismoUy {
-        ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-        return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
+    	DTActividadTuristicaDetalle act;
+    	if (ManejadorActividadTuristica.getInstancia().exists(nombreAct))
+    		act = ManejadorActividadTuristica.getInstancia().getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
+    	else
+    		act = ManejadorPersistenciaJPA.getInstancia().obtenerDTActividadTuristicaDetalle(nombreAct);
+        
+    	if (act == null) 
+    		throw new ObjetoNoExisteEnTurismoUy(ActividadTuristica.class);
+    	
+        return act;
     }
 
     public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
@@ -263,9 +271,17 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     }
 
     public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) throws ObjetoNoExisteEnTurismoUy {
-        ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
-        SalidaTuristica sal = manejSalTur.getSalida(nomSal);
-        return sal.obtenerDTSalidaTuristicaDetalle();
+    	DTSalidaTuristicaDetalle sal;
+        if (ManejadorSalidaTuristica.getInstancia().existeSalidaTuristica(nomSal))
+        	sal = ManejadorSalidaTuristica.getInstancia().getSalida(nomSal).obtenerDTSalidaTuristicaDetalle();
+        else 
+        	sal = ManejadorPersistenciaJPA.getInstancia().obtenerDTSalidaTuristicaDetalle(nomSal);
+        
+        if (sal == null)
+        	throw new ObjetoNoExisteEnTurismoUy(SalidaTuristica.class); 
+        
+        
+        return sal;
     }
 
     public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy {
@@ -298,12 +314,24 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
             throws ObjetoNoExisteEnTurismoUy {
         ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica act = manejActTur.getActividad(idActividad);
-        if (nuevoEstado != EstadoActividadTuristica.FINALIZADA)
+        if (nuevoEstado == EstadoActividadTuristica.AGREGADA)
+            throw new IllegalArgumentException("No se puede cambiar el estado de una actividad a AGREGADA");
+
+        if (nuevoEstado != EstadoActividadTuristica.FINALIZADA && act.getEstado() == EstadoActividadTuristica.AGREGADA) {
         	act.setEstado(nuevoEstado);
-        else {
-        	System.out.println("entré a finalizar en persistencia");
-			// TODO logica de persistencia y todas esas vueltas
-		}
+        } else if (nuevoEstado == EstadoActividadTuristica.FINALIZADA) {
+        	
+        	ControladorPaquete icp = new ControladorPaquete();
+        	if (icp.actividadExisteEnAlgunPaquete(idActividad)) {
+        		throw new IllegalArgumentException("No es posible finalizar una activdad que esté dentro de un paquete");
+        	}
+        	
+			ManejadorPersistenciaJPA.getInstancia().persistirActividad(idActividad);
+            act.eliminarLinks();
+      
+		} else {
+            throw new IllegalArgumentException("No se puede cambiar el estado");
+        }
     }
 
     public void altaCategoria(String nombre) throws CategoriaYaRegistradaException {

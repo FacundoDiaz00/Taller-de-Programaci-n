@@ -10,9 +10,12 @@ import logica.datatypes.DTInscripcion;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.Imagen;
+import logica.jpa.ActividadJPA;
 import logica.jpa.InscripcionJPA;
 import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
+import logica.manejadores.ManejadorPersistenciaJPA;
+import logica.manejadores.ManejadorSalidaTuristica;
 
 /**
  * @author Equipo taller prog 16
@@ -141,11 +144,20 @@ public class SalidaTuristica {
         this.img = img;
     }
 
-    public SalidaJPA obtenerSalidaJPA() {
+    public SalidaJPA obtenerSalidaJPA(ActividadJPA actividadJPA) {
         var inscripcionesJPA = new ArrayList<InscripcionJPA>();
-        inscripciones.forEach((Inscripcion i ) -> inscripcionesJPA.add(i.obtenerInscripcionJPA()) );
-        var actividadJPA = actividad.obtenerActividadJPA();
-        // TODO jpa
-        return new SalidaJPA();
+        SalidaJPA salidaJPA = new SalidaJPA(nombre, fechaAlta, fechaHoraSalida, cantMaxTuristas, lugarSalida, actividadJPA, inscripcionesJPA);
+        inscripciones.forEach((Inscripcion i ) -> inscripcionesJPA.add(i.obtenerInscripcionJPA(salidaJPA)) );
+        return salidaJPA;
     }
+
+	public void eliminarLinks() {
+		for (Inscripcion insc : this.inscripciones) {
+			insc.eliminarLinks();
+		}
+		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
+		MST.removeSalida(this.nombre);
+			
+		
+	}
 }

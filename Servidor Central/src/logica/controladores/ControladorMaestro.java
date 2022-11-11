@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import excepciones.ActividadTuristicaYaRegistradaException;
 import excepciones.TurismoUyException;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -345,15 +347,22 @@ public class ControladorMaestro implements IControladorMaestro {
             String[] datosAct = datosActividadesStrings[i];
             int[] datosInt = datosActividadesInteger[i];
             String[] categorias = actividadesCategorias[i];
-
-            icat.altaActividadTuristica(datosAct[4], datosAct[3], datosAct[0], datosAct[1],
-                    datosInt[0], datosInt[1], datosAct[2], LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
-                    new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), null);
+            try {
+            	icat.altaActividadTuristica(datosAct[4], datosAct[3], datosAct[0], datosAct[1],
+            			datosInt[0], datosInt[1], datosAct[2], LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
+            			new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), null);
+            } catch (ActividadTuristicaYaRegistradaException e) {
+            	// Actividad posiblemente en persistencia
+			}
         }
 
         // Clasificacion de actividades
         for (String act : actividadesConfirmadas)
-            icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.ACEPTADA);
+        	try {
+        		icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.ACEPTADA);
+        	} catch (TurismoUyException e) {
+            	// Actividad posiblemente en persistencia
+			}
 
         for (String act : actividadesRechazadas)
             icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.RECHAZADA);
@@ -401,5 +410,12 @@ public class ControladorMaestro implements IControladorMaestro {
             icat.altaInscripcionSalidaTuristica(datosStr[0], datosStr[1], datosInt[0],
                     LocalDate.of(datosInt[4], datosInt[3], datosInt[2]), datosStr[2]);
         }
+        
+        
+        
+        // icat.altaActividadTuristica("washington", "San José", "Iglesia", "a misa los domingos...", 
+        // 		3, 10, "San José de Mayo", LocalDate.of(2022, 10, 10), null, null , null) ;
+        // icat.cambiarEstadoDeActividadTuristica("Iglesia", EstadoActividadTuristica.ACEPTADA);
+        // icat.cambiarEstadoDeActividadTuristica("Iglesia", EstadoActividadTuristica.FINALIZADA);
     }
 }

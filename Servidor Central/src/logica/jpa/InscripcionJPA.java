@@ -1,6 +1,7 @@
 package logica.jpa;
 
 import jakarta.persistence.*;
+import logica.datatypes.DTInscripcion;
 
 import java.time.LocalDate;
 
@@ -27,6 +28,17 @@ public class InscripcionJPA {
     @Column(name="costo", nullable = false)
     private float costo;
 
+    public InscripcionJPA() {
+    }
+
+    public InscripcionJPA(SalidaJPA salidaJPA, TuristaJPA turistaJPA, LocalDate fecha_inscripcion, int cantidad_turistas, float costo) {
+        this.salidaJPA = salidaJPA;
+        this.turistaJPA = turistaJPA;
+        this.fecha_inscripcion = fecha_inscripcion;
+        this.cantidad_turistas = cantidad_turistas;
+        this.costo = costo;
+    }
+
     public TuristaJPA getTuristaJPA() {
         return turistaJPA;
     }
@@ -42,5 +54,10 @@ public class InscripcionJPA {
     public void setSalidaJPA(SalidaJPA salidaJPA) {
         this.salidaJPA = salidaJPA;
     }
+
+	public DTInscripcion obtenerDTInscripcion() {
+		return new DTInscripcion(fecha_inscripcion, cantidad_turistas, costo, salidaJPA.obtenerDTSalidaTuristica(),
+                turistaJPA.getNickname(), null);
+	}
 }
 

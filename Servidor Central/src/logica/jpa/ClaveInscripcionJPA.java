@@ -31,6 +31,14 @@ public class ClaveInscripcionJPA implements Serializable {
         this.id_turista = id_turista;
     }
 
+    public ClaveInscripcionJPA(long id_sal, long id_tur) {
+    	this.id_salida = id_sal;
+    	this.id_turista = id_tur;
+    }
+    
+    public ClaveInscripcionJPA() {
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

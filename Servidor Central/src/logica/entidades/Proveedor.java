@@ -15,7 +15,9 @@ import logica.datatypes.DTUsuario;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.jpa.ProveedorJPA;
+import logica.jpa.TuristaJPA;
 import logica.jpa.UsuarioJPA;
+import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -94,7 +96,10 @@ public class Proveedor extends Usuario {
 
     @Override
     public UsuarioJPA obtenerUsuarioJPA() {
-        return new ProveedorJPA();
+    	var usr = ManejadorPersistenciaJPA.getInstancia().encontrarUsuarioJPA(getNickname());
+    	if (usr == null)
+    		usr =  new ProveedorJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(), getClass().getSimpleName(), descrpicionGeneral, link);
+    	return usr;
     }
 
     @Override
@@ -111,7 +116,6 @@ public class Proveedor extends Usuario {
         List<DTActividadTuristicaDetalle> actividades = new ArrayList<>();
         List<DTActividadTuristica> estadoAgregada = new ArrayList<>();
         List<DTActividadTuristica> estadoRechazada = new ArrayList<>();
-        List<DTActividadTuristica> estadoFinalizada = new ArrayList<>();
 
         for (var act : this.actividadesTuristicas.values()) {
             switch (act.getEstado()) {
@@ -128,18 +132,21 @@ public class Proveedor extends Usuario {
                     break;
             }
         }
-        
-        // TODO: cargar las actividades finalizadas ¿cómo?
+
+        List<DTActividadTuristica> estadoFinalizada = ManejadorPersistenciaJPA.getInstancia().obtenerActividadesFinalizadasDeProveedor(nickname);
 
         Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas = new HashMap<>();
         actividadesNoConfirmadas.put(EstadoActividadTuristica.RECHAZADA, estadoRechazada);
         actividadesNoConfirmadas.put(EstadoActividadTuristica.AGREGADA, estadoAgregada);
         actividadesNoConfirmadas.put(EstadoActividadTuristica.FINALIZADA, estadoFinalizada);
         
-        
-
         return new DTProveedorDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades,
                 actividadesNoConfirmadas, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }
+
+	public void eliminarActividad(String nomActividad) {
+		this.actividadesTuristicas.remove(nomActividad);
+		
+	}
 
 }
