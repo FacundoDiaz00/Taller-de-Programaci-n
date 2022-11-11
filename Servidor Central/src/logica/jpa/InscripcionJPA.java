@@ -1,6 +1,7 @@
 package logica.jpa;
 
 import jakarta.persistence.*;
+import logica.datatypes.DTInscripcion;
 
 import java.time.LocalDate;
 
@@ -53,5 +54,10 @@ public class InscripcionJPA {
     public void setSalidaJPA(SalidaJPA salidaJPA) {
         this.salidaJPA = salidaJPA;
     }
+
+	public DTInscripcion obtenerDTInscripcion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

@@ -1,9 +1,18 @@
 package logica.jpa;
 
 import jakarta.persistence.*;
+import logica.datatypes.DTActividadTuristicaDetalle;
+import logica.datatypes.DTPaquete;
+import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.EstadoActividadTuristica;
+import logica.entidades.Paquete;
+import logica.entidades.SalidaTuristica;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 @Entity
 @Table(name = "actividades")
@@ -41,7 +50,7 @@ public class ActividadJPA {
     @JoinColumn(name="id_proveedor", nullable=false)
     private ProveedorJPA proveedorJPA;
 
-    public ActividadJPA (String nombre, String descripcion, int duracion, float costo, String ciudad,
+    public ActividadJPA(String nombre, String descripcion, int duracion, float costo, String ciudad,
                          String nombre_departamento, LocalDate fechaAlta, Collection<SalidaJPA> salidas, ProveedorJPA proveedorJPA) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -70,6 +79,19 @@ public class ActividadJPA {
     
     public String getNombre() {
     	return nombre;
+    }
+    
+    public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
+    	HashMap<String, DTPaquete> packs = new HashMap<>();
+        HashMap<String, DTSalidaTuristica> salid = new HashMap<>();
+        for (SalidaJPA sal : salidas) {
+            salid.put(sal.getNombre(), sal.obtenerDTSalidaTuristica());
+        }
+        List<String> listaIdCats = new ArrayList<>();
+
+        return new DTActividadTuristicaDetalle(salid, packs, getNombre(), descripcion, costo,
+                ciudad, duracion, fechaAlta, proveedorJPA.getNickname(), nombreDepartamento,
+                listaIdCats, null, EstadoActividadTuristica.FINALIZADA, -1, null);
     }
 
 

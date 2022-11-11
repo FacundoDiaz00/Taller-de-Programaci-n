@@ -1,9 +1,17 @@
 package logica.jpa;
 
 import jakarta.persistence.*;
+import logica.controladores.Fabrica;
+import logica.datatypes.DTInscripcion;
+import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
+import logica.datatypes.Imagen;
+import logica.entidades.Inscripcion;
+import logica.utils.UtilsDT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -73,4 +81,24 @@ public class SalidaJPA {
     public void setActividadJPA(ActividadJPA actividadJPA) {
         this.actividadJPA = actividadJPA;
     }
+
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DTSalidaTuristica obtenerDTSalidaTuristica() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle() {
+		var insc = new ArrayList<DTInscripcion>();
+        for (InscripcionJPA inscr : inscripciones) {
+            insc.add(inscr.obtenerDTInscripcion());
+        }
+        
+        return new DTSalidaTuristicaDetalle(nombre, fechaSalida, lugar, fechaAlta, cantTurMax, null,
+                actividadJPA.getNombre(), insc, actividadJPA.obtenerDTActividadTuristicaDetalle());
+	}
 }

@@ -114,8 +114,16 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct)
             throws ObjetoNoExisteEnTurismoUy {
-        ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
-        return mat.getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
+    	DTActividadTuristicaDetalle act;
+    	if (ManejadorActividadTuristica.getInstancia().exists(nombreAct))
+    		act = ManejadorActividadTuristica.getInstancia().getActividad(nombreAct).obtenerDTActividadTuristicaDetalle();
+    	else
+    		act = ManejadorPersistenciaJPA.getInstancia().obtenerDTActividadTuristicaDetalle(nombreAct);
+        
+    	if (act == null) 
+    		throw new ObjetoNoExisteEnTurismoUy(ActividadTuristica.class);
+    	
+        return act;
     }
 
     public List<DTActividadTuristica> obtenerDTActividadesTuristicas() {
@@ -263,9 +271,17 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     }
 
     public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) throws ObjetoNoExisteEnTurismoUy {
-        ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
-        SalidaTuristica sal = manejSalTur.getSalida(nomSal);
-        return sal.obtenerDTSalidaTuristicaDetalle();
+    	DTSalidaTuristicaDetalle sal;
+        if (ManejadorSalidaTuristica.getInstancia().existeSalidaTuristica(nomSal))
+        	sal = ManejadorSalidaTuristica.getInstancia().getSalida(nomSal).obtenerDTSalidaTuristicaDetalle();
+        else 
+        	sal = ManejadorPersistenciaJPA.getInstancia().obtenerDTSalidaTuristicaDetalle(nomSal);
+        
+        if (sal == null)
+        	throw new ObjetoNoExisteEnTurismoUy(SalidaTuristica.class); 
+        
+        
+        return sal;
     }
 
     public DTInscripcion obtenerDTInscripcion(String nick, String nomSal) throws ObjetoNoExisteEnTurismoUy {

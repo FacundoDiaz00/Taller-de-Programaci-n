@@ -116,7 +116,6 @@ public class Proveedor extends Usuario {
         List<DTActividadTuristicaDetalle> actividades = new ArrayList<>();
         List<DTActividadTuristica> estadoAgregada = new ArrayList<>();
         List<DTActividadTuristica> estadoRechazada = new ArrayList<>();
-        List<DTActividadTuristica> estadoFinalizada = new ArrayList<>();
 
         for (var act : this.actividadesTuristicas.values()) {
             switch (act.getEstado()) {
@@ -133,16 +132,14 @@ public class Proveedor extends Usuario {
                     break;
             }
         }
-        
-        // TODO: cargar las actividades finalizadas ¿cómo?
+
+        List<DTActividadTuristica> estadoFinalizada = ManejadorPersistenciaJPA.getInstancia().obtenerActividadesFinalizadasDeProveedor(nickname);
 
         Map<EstadoActividadTuristica, List<DTActividadTuristica>> actividadesNoConfirmadas = new HashMap<>();
         actividadesNoConfirmadas.put(EstadoActividadTuristica.RECHAZADA, estadoRechazada);
         actividadesNoConfirmadas.put(EstadoActividadTuristica.AGREGADA, estadoAgregada);
         actividadesNoConfirmadas.put(EstadoActividadTuristica.FINALIZADA, estadoFinalizada);
         
-        
-
         return new DTProveedorDetallePrivado(nickname, nombre, apellido, correo, fechaNac, img, desc, url, actividades,
                 actividadesNoConfirmadas, new ArrayList<>(getUsuariosSeguidos().keySet()), new ArrayList<>(getSeguidores().keySet()));
     }

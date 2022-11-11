@@ -10,10 +10,15 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
+import logica.datatypes.DTSalidaTuristica;
+import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.entidades.ActividadTuristica;
+import logica.entidades.SalidaTuristica;
 import logica.jpa.ActividadJPA;
+import logica.jpa.SalidaJPA;
 import logica.jpa.UsuarioJPA;
 
 public class ManejadorPersistenciaJPA {
@@ -49,14 +54,19 @@ public class ManejadorPersistenciaJPA {
         // TODO actualizar los datos del usuario si ya está en la base
     }
 
-    public List<DTActividadTuristicaDetalle> obtenerActividadesFinalizadasDeProveedor(String nickname) {
+    public List<DTActividadTuristica> obtenerActividadesFinalizadasDeProveedor(String nickname) {
         // TODO buscar por nick en la base y devolver todas las actividades asociadas
-        return new ArrayList<DTActividadTuristicaDetalle>();
+        return new ArrayList<DTActividadTuristica>();
     }
 
     public List<DTInscripcion> obtenerInscripcionesDeTurista(String nickname) {
         // TODO buscar por nick en la base y devolver todas las inscripciones asociadas
         return new ArrayList<DTInscripcion>();
+    }
+    
+    public List<DTSalidaTuristica> obtenerSalidasDeTurista(String nickname) {
+        // TODO buscar por nick en la base y devolver todas las salidas asociadas
+        return new ArrayList<DTSalidaTuristica>();
     }
 
     public List<String> obtenerIdActividadesFinalizadas() {
@@ -103,4 +113,37 @@ public class ManejadorPersistenciaJPA {
         em.close();
         return result;
     }
+
+	public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle(String nombreAct) {
+		var actJPA = encontrarActividadJPA(nombreAct);
+		if (actJPA == null)
+			return null;
+		
+		return actJPA.obtenerDTActividadTuristicaDetalle();
+	}
+
+	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle(String nomSal) {
+		var salJPA = encontrarSalidaJPA(nomSal);
+		if (salJPA == null)
+			return null;
+		
+		return salJPA.obtenerDTSalidaTuristicaDetalle();
+	}
+
+	private SalidaJPA encontrarSalidaJPA(String nomSal) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+  		TypedQuery<SalidaJPA> query = em.createQuery("SELECT a FROM SalidaJPA a WHERE a.nombre = ?1", SalidaJPA.class);
+  		SalidaJPA result;
+  		try {
+  			result = query.setParameter(1, nomSal).getSingleResult();
+  		} catch (NoResultException e) {
+  			result = null;
+  		} 
+        
+        em.getTransaction().commit();
+        em.close();
+        return result;
+	}
 }

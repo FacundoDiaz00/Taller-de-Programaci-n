@@ -25,4 +25,9 @@ public class ProveedorJPA extends UsuarioJPA {
         this.descripcion = descripcion;
         this.url = url;
     }
+
+	public String getNickname() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
