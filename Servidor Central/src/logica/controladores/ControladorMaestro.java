@@ -352,6 +352,7 @@ public class ControladorMaestro implements IControladorMaestro {
             			datosInt[0], datosInt[1], datosAct[2], LocalDate.of(datosInt[4], datosInt[3], datosInt[2]),
             			new Imagen("/actividades/" + datosAct[0] + ".png"), Arrays.asList(categorias), null);
             } catch (ActividadTuristicaYaRegistradaException e) {
+            	// Actividad posiblemente en persistencia
 			}
         }
 
@@ -360,6 +361,7 @@ public class ControladorMaestro implements IControladorMaestro {
         	try {
         		icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.ACEPTADA);
         	} catch (TurismoUyException e) {
+            	// Actividad posiblemente en persistencia
 			}
 
         for (String act : actividadesRechazadas)

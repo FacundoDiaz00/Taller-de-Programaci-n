@@ -233,7 +233,7 @@ class ControladorUsuarioTest {
         generarProveedores(50, idTest);
         generarTuristas(50, idTest);
         ControladorActividadTuristicaTest.generarDepartamentos(50, idTest);
-        ControladorActividadTuristicaTest.generarActividades(50, idTest);
+        ControladorActividadTuristicaTest.aceptarActividades(ControladorActividadTuristicaTest.generarActividades(50, idTest));
         ControladorActividadTuristicaTest.generarSalidas(50, idTest);
 
         // A los primeros 40 les asigno una sola salida

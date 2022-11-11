@@ -41,7 +41,6 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.DTTuristaDetallePrivado;
 import logica.datatypes.EstadoActividadTuristica;
-import logica.manejadores.ManejadorPersistenciaJPA;
 
 class ControladorActividadTuristicaTest {
     private static IControladorActividadTuristica contrActTur;
