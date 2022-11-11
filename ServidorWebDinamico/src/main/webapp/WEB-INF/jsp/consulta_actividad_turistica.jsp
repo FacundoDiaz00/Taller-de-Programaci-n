@@ -146,9 +146,8 @@
                        
                     </ul>
                 </div>
-                <%if(datosActividad.getUrlVideo() != null && datosActividad.toString().length() > 0 ){ 
-                	String url = (String)request.getAttribute("url");%>
-                <%=url %>
+                <%if(datosActividad.getUrlVideo() != null && datosActividad.toString().length() > 0 ){ %>
+                <iframe width="560" height="315" src="<%= datosActividad.getUrlVideo() %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <%} %>
             </div>
 
