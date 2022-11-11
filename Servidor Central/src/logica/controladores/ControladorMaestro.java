@@ -175,7 +175,10 @@ public class ControladorMaestro implements IControladorMaestro {
             { "Teatro con Sabores", "Teatro con Sabores 3", "Club Deportivo Unión" },
             { "Tour por Colonia del Sacramento", "Tour Colonia del Sacramento 30-10", "Encuentro en la base del Faro" },
             { "Cabalgata en Valle del Lunarejo", "Cabalgata Extrema", "Posada del Lunarejo" },
-            { "Almuerzo en el Real de San Carlos", "Almuerzo en el Real 1", "Restaurante de la Plaza de Toros" }
+            { "Almuerzo en el Real de San Carlos", "Almuerzo en el Real 1", "Restaurante de la Plaza de Toros" },
+            
+            { "Degusta", "Degusta Diciembre", "Sociedad Agropecuaria de Rocha" },
+            { "Teatro con Sabores", "Teatro con Sabores 4", "Club Deportivo Unión" }
     };
 
     private static int[][] datosSalidasInteger = new int[][] {
@@ -196,7 +199,10 @@ public class ControladorMaestro implements IControladorMaestro {
             { 11, 11, 2022, 18, 30, 25, 8, 2022 },
             { 30, 10, 2022, 10, 10, 07, 9, 2022 },
             { 30, 10, 2022, 16, 4, 15, 9, 2022 },
-            { 30, 10, 2022, 12, 10, 10, 10, 2022 }
+            { 30, 10, 2022, 12, 10, 10, 10, 2022 },
+            
+            { 02, 12, 2022, 17, 20, 07, 11, 2022 },
+            { 03, 12, 2022, 18, 30, 07, 11, 2022 }
     };
 
     private static boolean[] salidaTieneImg = new boolean[] {
@@ -216,6 +222,9 @@ public class ControladorMaestro implements IControladorMaestro {
             true,
             false,
             true,
+            true,
+            false,
+            
             true,
             false
     };
@@ -374,6 +383,39 @@ private static String[] videosActividades = new String[] {
         null
 };
 
+//Actividades favoritas
+
+private static String[][] actFav = new String[][] {
+    { "lachiqui", "Degusta" }, //U1
+    { "lachiqui", "Tour por Colonia del Sacramento" },
+
+    
+    { "isabelita", "Tour por Colonia del Sacramento" }, //U2
+    { "isabelita", "Almuerzo en el Real de San Carlos" }, //U2
+
+    { "anibal", "Almuerzo en el Real de San Carlos" }, //U3
+    { "anibal", "Almuerzo en Valle del Lunarejo" },
+    { "anibal", "Cabalgata en Valle del Lunarejo" },
+    
+    { "waston", "Degusta" }, //U4
+    { "waston", "Teatro con Sabores" },
+    { "waston", "Tour por Colonia del Sacramento" },
+    { "waston", "Almuerzo en el Real de San Carlos" },
+
+       
+    { "elelvis", "Cabalgata en Valle del Lunarejo" }, //U5
+
+    
+    { "eleven11", "Degusta" }, //U6
+    { "eleven11", "Teatro con Sabores" },
+    
+    { "bobesponja", "Tour por Colonia del Sacramento" },//U7
+    { "bobesponja", "Almuerzo en el Real de San Carlos" },
+    
+    { "tony", "Teatro con Sabores" }, //U8
+
+
+};
     public void generarDatosDePrueba() throws TurismoUyException {
         IControladorActividadTuristica icat = Fabrica.getInstancia().getIControladorActividadTuristica();
         IControladorUsuario iuser = Fabrica.getInstancia().getIControladorUsuario();
@@ -436,6 +478,11 @@ private static String[] videosActividades = new String[] {
         for (String act : actividadesRechazadas)
             icat.cambiarEstadoDeActividadTuristica(act, EstadoActividadTuristica.RECHAZADA);
 
+        //Favoritos
+        for(String[] fav : actFav) {
+        	iuser.agregarOEliminarActividadDeFavoritos(fav[0], fav[1]);
+        }
+        
         // Altas de salidas
         for (int i = 0; i < datosSalidasStrings.length; i++) {
             var salStr = datosSalidasStrings[i];
