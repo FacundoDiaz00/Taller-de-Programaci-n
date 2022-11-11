@@ -31,6 +31,7 @@ public class SalidaTuristica {
     private Imagen img;
     private ActividadTuristica actividad;
     private Set<Inscripcion> inscripciones;
+	private long cantVisitas;
 
     public SalidaTuristica(String nombreActividad, String nombre, int cantMaxTuristas, LocalDate fechaAlta,
             LocalDateTime fechaHoraSalida, String lugarSalida, Imagen img) {
@@ -42,6 +43,7 @@ public class SalidaTuristica {
         setActividad(null);
         setInscripciones(new HashSet<>());
         setImagen(img);
+        cantVisitas = 0;
 
         ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica actTuristica = mat.obtenerActividadTuristica(nombreActividad);
@@ -157,7 +159,13 @@ public class SalidaTuristica {
 		}
 		ManejadorSalidaTuristica MST = ManejadorSalidaTuristica.getInstancia();
 		MST.removeSalida(this.nombre);
-			
-		
+	}
+
+	public void incrementarContadorVisitas() {
+		this.cantVisitas++;
+	}
+	
+	public long getCantVisitas() {
+		return this.cantVisitas;
 	}
 }

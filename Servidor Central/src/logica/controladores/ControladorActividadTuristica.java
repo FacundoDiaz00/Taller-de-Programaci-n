@@ -368,4 +368,43 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     	}
         return res;
     }
+
+	@Override
+	public void incrementarContadorActividad(String nombreAct) throws ObjetoNoExisteEnTurismoUy {
+		ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
+        ActividadTuristica act = manejActTur.getActividad(nombreAct);
+        
+        act.incrementarContadorVisitas();
+	}
+
+	@Override
+	public void incrementarContadorSalida(String nombreSal) throws ObjetoNoExisteEnTurismoUy {
+		ManejadorSalidaTuristica manejSalTur = ManejadorSalidaTuristica.getInstancia();
+        SalidaTuristica sal = manejSalTur.getSalida(nombreSal);
+        
+        sal.incrementarContadorVisitas();
+	}
+
+	@Override
+	public List<String[]> obtenerDatosVisitas() {
+		ArrayList<String[]> tuplas = new ArrayList<String[]>();
+		
+		for (var actividad: ManejadorActividadTuristica.getInstancia().getActividades()) {
+			tuplas.add(
+				new String[] { actividad.getNombre(), actividad.getProveedor().getNickname(), "Actividad", String.valueOf(actividad.getCantVisitas())}
+			);
+		}
+		
+		for (var salida: ManejadorSalidaTuristica.getInstancia().getSalidas()) {
+			tuplas.add(
+				new String[] { salida.getNombre(), salida.getActividad().getProveedor().getNickname(), "Salida", String.valueOf(salida.getCantVisitas())}
+			);
+		}
+		
+		// Ordeno
+		tuplas.sort((String[] tupla1, String[] tupla2) -> Integer.valueOf(tupla1[3]).compareTo(Integer.valueOf(tupla2[3])));
+		
+		// Me quedo con el top 10
+		return tuplas.subList(0, 10);
+	}
 }

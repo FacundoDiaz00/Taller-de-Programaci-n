@@ -227,4 +227,11 @@ public interface IControladorActividadTuristica {
     void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado) throws ObjetoNoExisteEnTurismoUy;
 
 	List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy;
+
+	void incrementarContadorActividad(String nombreAct) throws ObjetoNoExisteEnTurismoUy;
+
+	void incrementarContadorSalida(String nombreSal) throws ObjetoNoExisteEnTurismoUy;
+	
+	// Devuelve una lista ordenada (descendente) de 4-tuplas con los datos: Actividad o Salida | Proveedor | Tipo | Cantidad de visitas
+	List<String[]> obtenerDatosVisitas();
 }

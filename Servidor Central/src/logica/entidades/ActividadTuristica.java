@@ -46,6 +46,7 @@ public class ActividadTuristica {
     private Map<String, Categoria> categorias;
 
     private Departamento departamento;
+	private long cantVisitas;
 
     public ActividadTuristica(String nombreProveedor, String departamento, String nombre, String descrpicion,
             int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta, Imagen img,
@@ -60,8 +61,9 @@ public class ActividadTuristica {
         setSalidas(new HashMap<>());
         setCategorias(new HashMap<>());
         setImagen(img);
-        estado = EstadoActividadTuristica.AGREGADA;
         setUrlVideo(urlVideo);
+        estado = EstadoActividadTuristica.AGREGADA;
+        cantVisitas = 0;
 
         // Se agrega a la coleccion de actividades:
         ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
@@ -293,8 +295,13 @@ public class ActividadTuristica {
     	
     	//Desasocio departamento
     	this.departamento.desasociarActividadTuristica(nombre);
-    	
-    	
-    	
     }
+
+	public void incrementarContadorVisitas() {
+		this.cantVisitas++;
+	}
+	
+	public long getCantVisitas() {
+		return this.cantVisitas;
+	}
 }
