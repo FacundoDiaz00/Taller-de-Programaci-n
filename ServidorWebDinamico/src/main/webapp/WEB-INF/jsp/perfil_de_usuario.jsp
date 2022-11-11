@@ -9,6 +9,7 @@
 <%@page import="publicar.usuarioturisticasservice.DtActividadTuristicaDetalle.Salidas.Entry"%>
 <%@page import="publicar.usuarioturisticasservice.*"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="publicar.actividadesturisticasservice.EstadoActividadTuristica"%>
 
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
@@ -280,7 +281,9 @@
             			<div class="tab-pane fade" id="boton-actividades-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="1">
             			<h4>Actividades Confirmadas:</h4>
             			<%if(!prv.getActividades().isEmpty()){ %>
-	            			<% for(DtActividadTuristicaDetalle act: prv.getActividades()) {%>	
+	            			<% for(DtActividadTuristicaDetalle act: prv.getActividades()) {
+	            			
+	            				if(act.getEstado().toString().equals(EstadoActividadTuristica.ACEPTADA.toString())){%>	
 							
 			                <div class="card mb-3" style="max-width: 850px;">
 			                    <div class="row g-0">
@@ -290,8 +293,14 @@
 			                        </div>
 			                        <div class="col-md-8">
 			                            <div class="card-body">
-			                                <h5 class="card-title"><%=act.getNombre()%></h5>
-			                                <p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+			                            	<div style="display: grid;grid-template-columns: auto 177px;">
+			                            		<div>
+			                            		    <h5 class="card-title"><%=act.getNombre()%></h5>
+				                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+			                            		</div>
+			                                	<a href="ConsultaDeUsuario?id=listar=false&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                	
+			                            	</div>
 			                                <div class="botonera">
 			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
 			                            	</div>
@@ -312,11 +321,62 @@
 			                        </div>
 			                    </div>
 			                </div>
-							<% } %>
+							<% }
+	            				}%>
             			<%}else{ %>
             				<p>No hay información.</p>
             				
             			<%} %>
+            			
+            			<h4>Actividades Finalizadas:</h4>
+            			<%if(!prv.getActividades().isEmpty()){ %>
+	            			<% for(DtActividadTuristicaDetalle act: prv.getActividades()) {
+	            				if(act.getEstado().toString().equals(EstadoActividadTuristica.FINALIZADA.toString())){%>	
+							
+			                <div class="card mb-3" style="max-width: 850px;">
+			                    <div class="row g-0">
+			                        <div class="col-md-4 img-contain">
+			              
+						                <img src="<%=Utiles.obtenerUrlParaImagen(act.getImg())%>" alt="" class="img-fluid rounded-start imagen">
+			                        </div>
+			                        <div class="col-md-8">
+			                            <div class="card-body">
+			                            	<div style="display: grid;grid-template-columns: auto 177px;">
+			                            		<div>
+			                            		    <h5 class="card-title"><%=act.getNombre()%></h5>
+				                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+			                            		</div>
+			                                	<a href="ConsultaDeUsuario?id=listar=false&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                	
+			                            	</div>
+			                                <div class="botonera">
+			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
+			                            	</div>
+			                                
+			                            	<div id="salidas" style=";margin-left: 10px">
+			                            		<% if(act != null && act.getSalidas() != null &&  act.getSalidas().getEntry() != null && !act.getSalidas().getEntry().isEmpty()) { %>
+				                            		<h6>Salidas:</h6>
+				                            		<% for(Entry entr: act.getSalidas().getEntry()) {
+				                            			DtSalidaTuristica sal = entr.getValue();
+				                            		%>	
+				                            			<li><a href="ConsultaSalida?id=<%=sal.getNombre() %>"><%=sal.getNombre() %></a></li>
+													<% } %>
+												<% } else {%>
+													<h6>Todavía no hay salidas creadas.</h6>
+												<% } %>
+			                            	</div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+							<% }
+	            				}%>
+            			<%}else{ %>
+            				<p>No hay información.</p>
+            				
+            			<%} %>
+            			
+            			
 						<%
 
 						if(session.getAttribute("usuarioLogeado") != null && usuario.getNickname().equals(usr.getNickname())){

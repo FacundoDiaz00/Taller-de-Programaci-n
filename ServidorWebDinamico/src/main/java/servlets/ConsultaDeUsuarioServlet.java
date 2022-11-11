@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import publicar.actividadesturisticasservice.EstadoActividadTuristica;
+import publicar.actividadesturisticasservice.WebServiceActividades;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.usuarioturisticasservice.DtProveedor;
 import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
@@ -36,6 +39,7 @@ import utils.Utiles;
 public class ConsultaDeUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;    
     private WebServiceUsuarios wbUser;
+    private WebServiceActividades wbActi;
     
     
     /**
@@ -44,6 +48,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
     public ConsultaDeUsuarioServlet() {
         super();
         wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
+        wbActi = new WebServiceActividadesService().getWebServiceActividadesPort();
     }
 
     /**
@@ -62,6 +67,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
         String debelistar = req.getParameter("listar");
         boolean seguir = Boolean.valueOf(req.getParameter("seguir"));
+        boolean finalizar = Boolean.valueOf(req.getParameter("finalizar"));
         req = Utiles.insertarLoDeSiempre(req);
         HttpSession sesion = req.getSession(false);
         boolean seSiguenUsuarios = false;
@@ -70,6 +76,17 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
        
         
         if (debelistar != null && debelistar.equals("false")) {
+        	
+        	if(finalizar) {
+        		String idActividad = (String) req.getParameter("idAct");
+        		try {
+					wbActi.cambiarEstadoDeActividadTuristica(idActividad ,EstadoActividadTuristica.FINALIZADA);
+				} catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+					req.setAttribute("motivoDeError","La actividad turistica que se desea finalizar no existe");
+                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+                    e.printStackTrace();
+				}
+        	}
         	
             if(seguir) {
             	
