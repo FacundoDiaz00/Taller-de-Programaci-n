@@ -288,6 +288,13 @@ public class ActividadTuristica {
     	
     	this.proveedor.eliminarActividad(this.nombre);
     	
+    	ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+    	MAT.removeActividad(this.nombre);
+    	
+    	//Desasocio departamento
+    	this.departamento.desasociarActividadTuristica(nombre);
+    	
+    	
     	
     }
 }
