@@ -166,6 +166,26 @@ public class WebServiceActividades {
     	Fabrica.getInstancia().getIControladorActividadTuristica().cambiarEstadoDeActividadTuristica(idActividad, nuevoEstado);
     }
     
+    public void incrementarContadorActividad(String nombreAct) {
+    	log.info("Solicitud a 'incrementarContadorActividad'");
+    	try {
+    		Fabrica.getInstancia().getIControladorActividadTuristica().incrementarContadorActividad(nombreAct);			
+		} catch (TurismoUyException e) {
+			// No contabilizamos la visita
+			log.severe("No se pudo contabilizar la visita a la actividad " + nombreAct);
+		}
+    }
+    
+    public void incrementarContadorSalida(String nombreSal) {
+    	log.info("Solicitud a 'incrementarContadorSalida'");
+    	try {
+    		Fabrica.getInstancia().getIControladorActividadTuristica().incrementarContadorSalida(nombreSal);			
+		} catch (TurismoUyException e) {
+			// No contabilizamos la visita
+			log.severe("No se pudo contabilizar la visita a la salida " + nombreSal);
+		}
+    }
+    
     
     /*@WebMethod
     public List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy{
