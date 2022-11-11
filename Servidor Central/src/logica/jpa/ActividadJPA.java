@@ -1,6 +1,7 @@
 package logica.jpa;
 
 import jakarta.persistence.*;
+import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
@@ -93,6 +94,14 @@ public class ActividadJPA {
                 ciudad, duracion, fechaAlta, proveedorJPA.getNickname(), nombreDepartamento,
                 listaIdCats, null, EstadoActividadTuristica.FINALIZADA, -1, null);
     }
+
+	public DTActividadTuristica obtenerDTActividadTuristica() {
+		List<String> listaIdCats = new ArrayList<>();
+
+        return new DTActividadTuristica(getNombre(), descripcion, costo, ciudad, duracion,
+                fechaAlta, proveedorJPA.getNickname(), nombreDepartamento, listaIdCats,
+                null, EstadoActividadTuristica.FINALIZADA, -1, null);
+	}
 
 
 }

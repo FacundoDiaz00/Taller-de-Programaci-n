@@ -243,7 +243,6 @@ public class AltaDeUsuario extends JInternalFrame {
 		} catch (UsuarioYaRegistradoException exception) {
 			JOptionPane.showMessageDialog(null, "Ya existe un usuario con este nickname o con este correo", "Error",
 					JOptionPane.ERROR_MESSAGE);
-			// throw new RuntimeException(e); // TODO ¿porque ponen esto?
 		} catch (DateTimeParseException exception) {
 			JOptionPane.showMessageDialog(null,
 					"Fecha nacimiento inválida, es un campo obligatorio y su formato es dd/mm/yyyy", "Error",

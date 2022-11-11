@@ -2,12 +2,15 @@ package logica.manejadores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import configuraciones.Cargador;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import logica.datatypes.DTActividadTuristica;
@@ -18,6 +21,7 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.SalidaTuristica;
 import logica.jpa.ActividadJPA;
+import logica.jpa.InscripcionJPA;
 import logica.jpa.SalidaJPA;
 import logica.jpa.UsuarioJPA;
 
@@ -50,23 +54,71 @@ public class ManejadorPersistenciaJPA {
         entityManager.close();
     }
 
-    public void persistirModificacionUsuario(String usuario) {
+    public void persistirModificacionUsuario(UsuarioJPA usuario) {
         // TODO actualizar los datos del usuario si ya está en la base
     }
 
     public List<DTActividadTuristica> obtenerActividadesFinalizadasDeProveedor(String nickname) {
-        // TODO buscar por nick en la base y devolver todas las actividades asociadas
-        return new ArrayList<DTActividadTuristica>();
+    	EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+  		Query query = em.createQuery("SELECT a FROM ActividadJPA a WHERE a.proveedorJPA.nickname = ?1");
+  		List<ActividadJPA> result;
+  		try {
+  			result = query.setParameter(1, nickname).getResultList();
+  		} catch (NoResultException e) {
+  			result = new ArrayList<ActividadJPA>();
+  		} 
+        em.getTransaction().commit();
+        em.close();
+        
+        var salida = new ArrayList<DTActividadTuristica>();
+        
+        result.forEach((ActividadJPA act) -> salida.add(act.obtenerDTActividadTuristica()));
+        
+        return salida;
     }
 
     public List<DTInscripcion> obtenerInscripcionesDeTurista(String nickname) {
-        // TODO buscar por nick en la base y devolver todas las inscripciones asociadas
-        return new ArrayList<DTInscripcion>();
+    	EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+  		Query query = em.createQuery("SELECT i FROM InscripcionJPA i WHERE i.turistaJPA.nickname = ?1");
+  		List<InscripcionJPA> result;
+  		try {
+  			result = query.setParameter(1, nickname).getResultList();
+  		} catch (NoResultException e) {
+  			result = new ArrayList<InscripcionJPA>();
+  		} 
+        em.getTransaction().commit();
+        em.close();
+        
+        var salida = new ArrayList<DTInscripcion>();
+        
+        result.forEach((InscripcionJPA insc) -> salida.add(insc.obtenerDTInscripcion()));
+        
+        return salida;
     }
     
     public List<DTSalidaTuristica> obtenerSalidasDeTurista(String nickname) {
-        // TODO buscar por nick en la base y devolver todas las salidas asociadas
-        return new ArrayList<DTSalidaTuristica>();
+    	EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+  		Query query = em.createQuery("SELECT i.salidaJPA FROM InscripcionJPA i WHERE i.turistaJPA.nickname = ?1");
+  		List<SalidaJPA> result;
+  		try {
+  			result = query.setParameter(1, nickname).getResultList();
+  		} catch (NoResultException e) {
+  			result = new ArrayList<SalidaJPA>();
+  		} 
+        em.getTransaction().commit();
+        em.close();
+        
+        var salida = new ArrayList<DTSalidaTuristica>();
+        
+        result.forEach((SalidaJPA sal) -> salida.add(sal.obtenerDTSalidaTuristica()));
+        
+        return salida;
     }
 
     public List<String> obtenerIdActividadesFinalizadas() {

@@ -50,5 +50,9 @@ public class UsuarioJPA {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public String getNickname() {
+    	return nickname;
+    }
 
 }

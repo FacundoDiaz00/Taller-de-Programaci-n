@@ -83,13 +83,12 @@ public class SalidaJPA {
     }
 
 	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
+		return nombre;
 	}
 
 	public DTSalidaTuristica obtenerDTSalidaTuristica() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DTSalidaTuristica(nombre, fechaSalida, lugar, fechaAlta, cantTurMax, null,
+                actividadJPA.getNombre());
 	}
 
 	public DTSalidaTuristicaDetalle obtenerDTSalidaTuristicaDetalle() {

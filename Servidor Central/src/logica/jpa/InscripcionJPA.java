@@ -56,8 +56,8 @@ public class InscripcionJPA {
     }
 
 	public DTInscripcion obtenerDTInscripcion() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DTInscripcion(fecha_inscripcion, cantidad_turistas, costo, salidaJPA.obtenerDTSalidaTuristica(),
+                turistaJPA.getNickname(), null);
 	}
 }
 
