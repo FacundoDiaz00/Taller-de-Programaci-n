@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.usuarioturisticasservice.ContraseniaInvalidaException_Exception;
+import publicar.usuarioturisticasservice.DtProveedor;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
 import publicar.usuarioturisticasservice.WebServiceUsuariosService;
 
@@ -70,6 +71,12 @@ public class IniciarSesionServlet extends HttpServlet {
             } else {
                 usuario = wbUser.obtenerDtUsuarioPorNickname(nickname, password);
             }            
+            
+            if(usuario instanceof DtProveedor) {
+            	req.setAttribute("motivoDeError", "Tipo de usuario invalido");
+                req.getRequestDispatcher("/WEB-INF/jsp/iniciar_sesion.jsp").forward(req, resp);
+                return;
+            }
             
             req.setAttribute("usuarioLogeado", usuario);
             HttpSession sesion = req.getSession(true);

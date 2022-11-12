@@ -13,11 +13,15 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
 import logica.datatypes.colleciones.DtActividadTuristicaCollection;
+import logica.datatypes.colleciones.DtMapActividadSalidaTuristicaCollection;
+import logica.datatypes.colleciones.DtSalidaTuristicaCollection;
 import logica.utils.UtilsDT;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 
@@ -159,13 +163,15 @@ public class WebServiceActividades {
         Fabrica.getInstancia().getIControladorActividadTuristica().altaInscripcionSalidaTuristica(nomSalTurim, nicknameTuris, canTuris, null, nombrePaquete);
 
     }
-    
+
+    @WebMethod
     public void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado)
             throws ObjetoNoExisteEnTurismoUy{
     	log.info("Solicitud a 'cambiarEstadoDeActividadTuristica'");
     	Fabrica.getInstancia().getIControladorActividadTuristica().cambiarEstadoDeActividadTuristica(idActividad, nuevoEstado);
     }
-    
+
+    @WebMethod
     public void incrementarContadorActividad(String nombreAct) {
     	log.info("Solicitud a 'incrementarContadorActividad'");
     	try {
@@ -175,7 +181,8 @@ public class WebServiceActividades {
 			log.severe("No se pudo contabilizar la visita a la actividad " + nombreAct);
 		}
     }
-    
+
+    @WebMethod
     public void incrementarContadorSalida(String nombreSal) {
     	log.info("Solicitud a 'incrementarContadorSalida'");
     	try {
@@ -187,9 +194,19 @@ public class WebServiceActividades {
     }
     
     
-    /*@WebMethod
-    public List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy{
-    	return Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTSalidasTuristicas();
-    }*/
+    @WebMethod
+    public DtMapActividadSalidaTuristicaCollection obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy{
+        log.info("Solicitud a 'incrementarContadorSalida'");
+
+        Map<String, List<DTSalidaTuristica>> salidas =  Fabrica.getInstancia().getIControladorActividadTuristica().obtenerDTSalidasTuristicas();
+
+        Map<String, DtSalidaTuristicaCollection> respuestaInfo = new HashMap<>();
+
+        for (String key : salidas.keySet()){
+            respuestaInfo.put(key, new DtSalidaTuristicaCollection(salidas.get(key)));
+        }
+
+    	return new DtMapActividadSalidaTuristicaCollection(respuestaInfo);
+    }
 
 }

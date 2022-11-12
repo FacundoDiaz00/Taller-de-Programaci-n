@@ -3,6 +3,7 @@ package logica.controladores;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import excepciones.ActividadTuristicaNoAceptada;
 import excepciones.ActividadTuristicaYaRegistradaException;
@@ -27,6 +28,7 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 
 /**
  * @author Equipo taller prog 16
@@ -226,7 +228,7 @@ public interface IControladorActividadTuristica {
     // Esto sumariza los casos de uso aceptar/rechazar y finalizar actividad turística
     void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado) throws ObjetoNoExisteEnTurismoUy;
 
-	List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy;
+    Map<String, List<DTSalidaTuristica>> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy;
 
 	void incrementarContadorActividad(String nombreAct) throws ObjetoNoExisteEnTurismoUy;
 

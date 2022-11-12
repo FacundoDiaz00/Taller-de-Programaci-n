@@ -17,8 +17,8 @@
 
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="index.html">Turismo UY</a>
-             <b class="navbar-text" >Bienvenido/a <%=usuario.getNombre() %></b>
+            <a class="navbar-brand" href="#">Turismo UY</a>
+             <b class="navbar-text" style="font-size: 13px;" >Bienvenido/a <%=usuario.getNombre() %></b>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
 	                        <a class="nav-link active" aria-current="page" href="ConsultaActividad?listar=<%=true %>">Ver Actividades</a>
 	                    </li>
                      <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Ver Salidas</a>
+                        <a class="nav-link active" aria-current="page" href="ConsultaSalida?listar=<%=true %>">Ver Salidas</a>
                     </li>
 	                    <li class="iniciar_sesion">
 	                        <a class="nav-link active" href="IniciarSesion?sesionCerrada=<%=true%>">Salir</a>

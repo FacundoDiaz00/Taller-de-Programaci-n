@@ -62,13 +62,6 @@ public class Principal {
         if (!resultado) {
             return;
         }
-        try{
-            Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
-        }catch (TurismoUyException e){
-            Logger.getLogger("logger").severe("Error al generar datos de prueba");
-            e.printStackTrace();
-            return;
-        }
 
         WebServiceActividades webServiceActividades = new WebServiceActividades();
         WebServicePaquetes webServicePaquetes = new WebServicePaquetes();

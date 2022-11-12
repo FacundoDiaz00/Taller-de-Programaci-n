@@ -25,11 +25,11 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/listar_actividades.css">
 
 	
 </head>
-<body style="margin:0;padding:0;height:100%;">
+<body style="">
 
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
@@ -39,7 +39,7 @@
 				String idDepartamentoMarcada = (String) request.getAttribute("idDepartamento");
 	%>
 <%-- 	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/> --%>
-		<div class="container btn-group " style="display: flex;justify-content: space-around;margin-top:10px;margin-bottom:10px">
+		<div id="filtrosContainer" class="container btn-group ">
 			<div class="dropdown">
 			  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 			    Departamentos
@@ -71,9 +71,9 @@
 						for(String cat: categorias){
 							if( idCategoriaMarcada != null && idCategoriaMarcada.equals(cat) ){ 
 							%>
-								<li><a href="index?idCategoria=<%= cat %>" class="  active dropdown-item"><%= cat %></a>	</li>
+								<li><a href="ConsultaActividad?idCategoria=<%= cat %>" class="  active dropdown-item"><%= cat %></a>	</li>
 						  <%} else {%>
-						  		<li><a href="index?idCategoria=<%= cat %>" class=" dropdown-item"><%= cat %></a></li>
+						  		<li><a href="ConsultaActividad?idCategoria=<%= cat %>" class=" dropdown-item"><%= cat %></a></li>
 					<%		}
 						}	%>
 			  </ul>
@@ -97,7 +97,7 @@
 						for(DtActividadTuristica actividad: actividades){
 							%>
 							<div class="card mb-3" style="max-width: 800px;">
-			                    <div class="row g-0" style="margin: 20px">
+			                    <div class="row g-0" style="margin: 10px">
 			                        <div class="col-md-4 img-contain">
 			                        	<% 
 				            			String path = "";
@@ -133,7 +133,7 @@
 
 
     <!-- </section> -->
-    <div style="bottom: 0;position: fixed;">
+    <div style="bottom: 0 ">
 		<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 	</div>
 </body>

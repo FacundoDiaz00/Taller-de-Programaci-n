@@ -7,9 +7,6 @@
 <html lang="en">
 <head>
 	<jsp:include page="/WEB-INF/jsp/templates/commonHead.jsp"/>
-    <link rel="stylesheet" href="css/iniciar_sesion.css">
-
-	
 </head>
 <body>
     
@@ -70,16 +67,10 @@
             </form>
     </div>
 </div>
-<div style="bottom: 0;position: absolute;">
+<div style="bottom: 0;position: absolute; width: 100%">
 <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 </div>
 
-
-<script src="../js/jquery-3.3.1.slim.min.js"></script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/sweetalert2.all.min.js"></script>
-<script src="../js/comportamientoComun.js"></script>
 
 <script>
         $(function(){
@@ -100,8 +91,6 @@
        });
 </script>
 
-    <script src="js/alta_usuario.js"></script>
-    
     <%if(request.getAttribute("motivoDeError") != null){ %>
     
     <script>

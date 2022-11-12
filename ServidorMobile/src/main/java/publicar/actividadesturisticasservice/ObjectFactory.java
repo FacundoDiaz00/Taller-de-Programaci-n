@@ -48,23 +48,23 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtPaqueteDetalles }
+     * Create an instance of {@link DtMapActividadSalidaTuristicaCollection }
      * 
      * @return
-     *     the new instance of {@link DtPaqueteDetalles }
+     *     the new instance of {@link DtMapActividadSalidaTuristicaCollection }
      */
-    public DtPaqueteDetalles createDtPaqueteDetalles() {
-        return new DtPaqueteDetalles();
+    public DtMapActividadSalidaTuristicaCollection createDtMapActividadSalidaTuristicaCollection() {
+        return new DtMapActividadSalidaTuristicaCollection();
     }
 
     /**
-     * Create an instance of {@link DtPaqueteDetalles.Actividades }
+     * Create an instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas }
      * 
      * @return
-     *     the new instance of {@link DtPaqueteDetalles.Actividades }
+     *     the new instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas }
      */
-    public DtPaqueteDetalles.Actividades createDtPaqueteDetallesActividades() {
-        return new DtPaqueteDetalles.Actividades();
+    public DtMapActividadSalidaTuristicaCollection.MapSalidas createDtMapActividadSalidaTuristicaCollectionMapSalidas() {
+        return new DtMapActividadSalidaTuristicaCollection.MapSalidas();
     }
 
     /**
@@ -95,6 +95,26 @@ public class ObjectFactory {
      */
     public DtActividadTuristicaDetalle.Salidas createDtActividadTuristicaDetalleSalidas() {
         return new DtActividadTuristicaDetalle.Salidas();
+    }
+
+    /**
+     * Create an instance of {@link DtPaqueteDetalles }
+     * 
+     * @return
+     *     the new instance of {@link DtPaqueteDetalles }
+     */
+    public DtPaqueteDetalles createDtPaqueteDetalles() {
+        return new DtPaqueteDetalles();
+    }
+
+    /**
+     * Create an instance of {@link DtPaqueteDetalles.Actividades }
+     * 
+     * @return
+     *     the new instance of {@link DtPaqueteDetalles.Actividades }
+     */
+    public DtPaqueteDetalles.Actividades createDtPaqueteDetallesActividades() {
+        return new DtPaqueteDetalles.Actividades();
     }
 
     /**
@@ -248,13 +268,13 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtActividadTuristica }
+     * Create an instance of {@link DtSalidaTuristicaDetalle }
      * 
      * @return
-     *     the new instance of {@link DtActividadTuristica }
+     *     the new instance of {@link DtSalidaTuristicaDetalle }
      */
-    public DtActividadTuristica createDtActividadTuristica() {
-        return new DtActividadTuristica();
+    public DtSalidaTuristicaDetalle createDtSalidaTuristicaDetalle() {
+        return new DtSalidaTuristicaDetalle();
     }
 
     /**
@@ -268,26 +288,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Imagen }
-     * 
-     * @return
-     *     the new instance of {@link Imagen }
-     */
-    public Imagen createImagen() {
-        return new Imagen();
-    }
-
-    /**
-     * Create an instance of {@link DtSalidaTuristicaDetalle }
-     * 
-     * @return
-     *     the new instance of {@link DtSalidaTuristicaDetalle }
-     */
-    public DtSalidaTuristicaDetalle createDtSalidaTuristicaDetalle() {
-        return new DtSalidaTuristicaDetalle();
-    }
-
-    /**
      * Create an instance of {@link DtInscripcion }
      * 
      * @return
@@ -295,6 +295,16 @@ public class ObjectFactory {
      */
     public DtInscripcion createDtInscripcion() {
         return new DtInscripcion();
+    }
+
+    /**
+     * Create an instance of {@link Imagen }
+     * 
+     * @return
+     *     the new instance of {@link Imagen }
+     */
+    public Imagen createImagen() {
+        return new Imagen();
     }
 
     /**
@@ -318,6 +328,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtActividadTuristica }
+     * 
+     * @return
+     *     the new instance of {@link DtActividadTuristica }
+     */
+    public DtActividadTuristica createDtActividadTuristica() {
+        return new DtActividadTuristica();
+    }
+
+    /**
      * Create an instance of {@link DtActividadTuristicaCollection }
      * 
      * @return
@@ -328,13 +348,23 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtPaqueteDetalles.Actividades.Entry }
+     * Create an instance of {@link DtSalidaTuristicaCollection }
      * 
      * @return
-     *     the new instance of {@link DtPaqueteDetalles.Actividades.Entry }
+     *     the new instance of {@link DtSalidaTuristicaCollection }
      */
-    public DtPaqueteDetalles.Actividades.Entry createDtPaqueteDetallesActividadesEntry() {
-        return new DtPaqueteDetalles.Actividades.Entry();
+    public DtSalidaTuristicaCollection createDtSalidaTuristicaCollection() {
+        return new DtSalidaTuristicaCollection();
+    }
+
+    /**
+     * Create an instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry }
+     * 
+     * @return
+     *     the new instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry }
+     */
+    public DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry createDtMapActividadSalidaTuristicaCollectionMapSalidasEntry() {
+        return new DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry();
     }
 
     /**
@@ -355,6 +385,16 @@ public class ObjectFactory {
      */
     public DtActividadTuristicaDetalle.Salidas.Entry createDtActividadTuristicaDetalleSalidasEntry() {
         return new DtActividadTuristicaDetalle.Salidas.Entry();
+    }
+
+    /**
+     * Create an instance of {@link DtPaqueteDetalles.Actividades.Entry }
+     * 
+     * @return
+     *     the new instance of {@link DtPaqueteDetalles.Actividades.Entry }
+     */
+    public DtPaqueteDetalles.Actividades.Entry createDtPaqueteDetallesActividadesEntry() {
+        return new DtPaqueteDetalles.Actividades.Entry();
     }
 
     /**
