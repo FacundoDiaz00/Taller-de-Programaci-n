@@ -405,6 +405,6 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		tuplas.sort((String[] tupla1, String[] tupla2) -> Integer.valueOf(tupla1[3]).compareTo(Integer.valueOf(tupla2[3])));
 		
 		// Me quedo con el top 10
-		return tuplas.subList(0, 10);
+		return tuplas.subList(0, Math.min(10, tuplas.size()));
 	}
 }
