@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import publicar.maestroservices.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.maestroservices.WebServiceMaestro;
 import publicar.maestroservices.WebServiceMaestroService;
-import utils.Utiles;
+import utils.Utile;
 
 /**
  * Servlet implementation class ImageneServlet
@@ -36,7 +36,7 @@ public class ImageneServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String href = (String) request.getParameter("href");
 		try {
-			String ext = Utiles.devolverExtencionDelNombreDeArchivo(href);
+			String ext = Utile.devolverExtencionDelNombreDeArchivo(href);
 			byte[] content = wbMaster.getImg(href);
 			response.setContentType("image/"+ext);
 			response.setContentLength((int) content.length);

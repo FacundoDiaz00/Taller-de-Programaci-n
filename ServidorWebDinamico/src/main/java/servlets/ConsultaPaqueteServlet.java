@@ -22,7 +22,7 @@ import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
 import publicar.usuarioturisticasservice.WebServiceUsuariosService;
-import utils.Utiles;
+import utils.Utile;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -88,7 +88,7 @@ public class ConsultaPaqueteServlet extends HttpServlet {
             }
             req.setAttribute("paquete", paquete);
 
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             req.setAttribute("exito", mostrarMensajeConfirmacionCompra);
             req.setAttribute("motivoDeError", mensajeError);
             req.setAttribute("mensajeError", mensajeError);

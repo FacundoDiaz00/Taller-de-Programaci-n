@@ -7,7 +7,7 @@
 
  --%>
 
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@page import="publicar.usuarioturisticasservice.DtTurista"%>
 <%@page import="publicar.paqueteturisticasservice.DtPaqueteDetalles.Actividades.Entry"%>
 <%@page import="publicar.paqueteturisticasservice.DtActividadTuristica"%>
@@ -28,15 +28,14 @@
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
     
 <main>
-    <% 
+    <%
     DtPaqueteDetalles paquete = (DtPaqueteDetalles) request.getAttribute("paquete");
-    HashMap<String, DtActividadTuristica> actividadesPaquete = new HashMap<>();
-    
-    for (Entry ent: paquete.getActividades().getEntry()) {
-    	actividadesPaquete.put(ent.getKey(), ent.getValue());
-    }
-	
-	%>
+        HashMap<String, DtActividadTuristica> actividadesPaquete = new HashMap<>();
+        
+        for (Entry ent: paquete.getActividades().getEntry()) {
+        	actividadesPaquete.put(ent.getKey(), ent.getValue());
+        }
+    %>
 
 
     <section id="contenedor">
@@ -53,7 +52,7 @@
 	
 	
 	            <div id="info-general-imagen">	            			
-			                <img src="<%=Utiles.obtenerUrlParaImagen(paquete.getImg())%>" alt="">
+			                <img src="<%=Utile.obtenerUrlParaImagen(paquete.getImg())%>" alt="">
 	            </div>
 	
 	            <div id="info">
@@ -67,7 +66,7 @@
 	
 	                <div class="div-doble" id="validesPaquete">
 	                    <h5 class="label">Validez del paquete: </h5>
-	                    <p><%=paquete.getValidez() %> dias</p>
+	                    <p><%=paquete.getValidez()%> dias</p>
 	                </div>
 	                <div class="div-doble" id="descuento">
 	                    <h5 class="label">Descuento: </h5>
@@ -80,16 +79,20 @@
                 <div id="categorias">
                     <h5 class="">Categorías:</h5>
                     <ul>
-                        <% if(paquete.getCategorias() != null ){
-                        		for(String cat : paquete.getCategorias() ) { %>
-                        			 <li> <%=cat %></li>
-                        <% 		}
-                        
-                            } else {
+                        <%
+                        if(paquete.getCategorias() != null ){
+                                                		for(String cat : paquete.getCategorias() ) {
+                        %>
+                        			 <li> <%=cat%></li>
+                        <%
+                        }
+                                                
+                                                    } else {
                         %>
 							<span>Sin categorías</span>                        
                         <%
-                        	}%>
+                                                }
+                                                %>
                        
                     </ul>
                 </div>
@@ -100,16 +103,17 @@
 	
 			
 	        <div id="actividades-compra-turisticas" style="max-width: 800px;">
-	        	<% 	
-		        	boolean turistaLogueado = false;
-	        		try {
-		        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
-		        		turistaLogueado = tur != null;
-	        		} catch (Exception e) {
-	        			// nada
-	        		}
-	        		// Muestro el form de compra solo si estoy logueado
-	        		if (turistaLogueado) { %>	
+	        	<%
+	        	boolean turistaLogueado = false;
+	        		        		try {
+	        			        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
+	        			        		turistaLogueado = tur != null;
+	        		        		} catch (Exception e) {
+	        		        			// nada
+	        		        		}
+	        		        		// Muestro el form de compra solo si estoy logueado
+	        		        		if (turistaLogueado) {
+	        	%>	
 			            <div class="card" id="contenedor-compra" style="max-width: 800px;">
 			                <div class="header-card-with-button">
 			                    <h2 class="card-title">Compra paquete</h2>
@@ -129,20 +133,24 @@
 			                    </form>
 			                </div>
 			            </div>
-	        		<% } %>
+	        		<%
+	        		}
+	        		%>
 
 	            <div class="card" id="contenedor-actividades-turisticas">
 	                <div class="header-card-with-button">
 	                    <h2 class="card-title">Actividades</h2>
 	                </div>
 	
-					<% for(DtActividadTuristica act: actividadesPaquete.values()) {%>	
+					<%
+						for(DtActividadTuristica act: actividadesPaquete.values()) {
+						%>	
 					
 		                <div class="card mb-3" style="max-width: 800px;">
 		                    <div class="row g-0">
 		                        <div class="col-md-4 img-contain">
 
-					                <img src="<%=Utiles.obtenerUrlParaImagen(act.getImg())%>" alt="" class="img-fluid rounded-start imagen">
+					                <img src="<%=Utile.obtenerUrlParaImagen(act.getImg())%>" alt="" class="img-fluid rounded-start imagen">
 		                        </div>
 		                        <div class="col-md-8">
 		                            <div class="card-body card-actividad">

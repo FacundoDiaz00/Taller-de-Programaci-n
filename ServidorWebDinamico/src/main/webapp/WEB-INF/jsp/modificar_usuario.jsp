@@ -1,4 +1,4 @@
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
 <%@page import="publicar.usuarioturisticasservice.DtTurista"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
@@ -11,26 +11,33 @@
 
 
 
-	<%! public String getTextWithoutNull(String value){
+	<%!public String getTextWithoutNull(String value){
 			return value == null ? "" : value;
-		}
-	%>
+		}%>
 	
 <div class="bs-example">
                             <!-- Button HTML (to Trigger Modal) -->
                             <button type="button" class="botonModificar btn btn-lg btn-primary">Editar perfil</button>
 
                             
-                            <% DtUsuario usuario = (DtUsuario) session.getAttribute("usuarioLogeado"); %>
+                            <%
+                                                        DtUsuario usuario = (DtUsuario) session.getAttribute("usuarioLogeado");
+                                                        %>
                             <!-- Modal HTML -->
                             <div id="myModal" class="modal fade" tabindex="-1">
 	                                <div class="modal-dialog">
-	                                <% if (usuario instanceof DtTurista){ %>
+	                                <%
+	                                if (usuario instanceof DtTurista){
+	                                %>
 	                                    <div class="modal-content" style =" width: 598px; height: 790px;">
 	                                    
-	                     			<% } else {%>
+	                     			<%
+	                                    	                     			} else {
+	                                    	                     			%>
 	                     				<div class="modal-content" style =" width: 598px; height: 955px;">
-	                     			<% } %>
+	                     			<%
+	                     			}
+	                     			%>
 	                                        <div class="modal-header">
 	                                            <h5 class="modal-title">Modificar Usuario</h5>
 	                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -80,13 +87,15 @@
 	                                                        aria-label="Nickname" 
 	                                                        aria-describedby="basic-addon1" 
 	                                                        disabled
-	                                                        value="<%= usuario.getNickname() %>"
+	                                                        value="<%=usuario.getNickname()%>"
 	                                                        >
 	                                                    </div>
 	
 	                                                    <div class="contenedorinput mb-3">
 	                                                        <span class="input-label">Nombre:</span>
-	                                                        <% String modificar_nombre = usuario.getNombre(); %>
+	                                                        <%
+	                                                        String modificar_nombre = usuario.getNombre();
+	                                                        %>
 	                                                        <input id="modificar_nombre"
 	                                                        name="modificar_nombre" 
 	                                                        type="text" 
@@ -94,7 +103,7 @@
 	                                                        placeholder="" 
 	                                                        aria-label="Nombre" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value="<%= modificar_nombre %>"
+	                                                        value="<%=modificar_nombre%>"
 	                                                        >
 	                                                    </div>
 	
@@ -108,12 +117,14 @@
 	                                                        placeholder="" 
 	                                                        aria-label="Apellido" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value="<%= usuario.getApellido() %>"
+	                                                        value="<%=usuario.getApellido()%>"
 	                                                        
 	                                                        >
 	                                                    </div>
 	                                                    
-	                                                    <% if (usuario instanceof DtTurista){ %>
+	                                                    <%
+	                                                    	                                                    if (usuario instanceof DtTurista){
+	                                                    	                                                    %>
 	                                                    <div class="contenedorinput mb-3" id="nacionalidad-field">
 	                                              		  <span class="input-label">Nacionalidad: </span>
 	                                                		<input id="input-nacionalidad" 
@@ -123,11 +134,13 @@
 	                                                		placeholder="" 
 	                                                		aria-label="Imagen" 
 	                                                		aria-describedby="basic-addon1"
-	                                                		<% DtTurista tur = (DtTurista) usuario;  %>
-	                                                		value="<%= tur.getNacionalidad() %>"
+	                                                		<%DtTurista tur = (DtTurista) usuario;%>
+	                                                		value="<%=tur.getNacionalidad()%>"
 	                                                		>
 	                                         		   </div>
-	                                         		     <% } %>
+	                                         		     <%
+	                                         		     }
+	                                         		     %>
 	
 	                                                </div>
 	
@@ -143,7 +156,7 @@
 	                                                        placeholder="" 
 	                                                        aria-label="Fecha" 
 	                                                        aria-describedby="basic-addon1"
-	                                                        value=<%=Utiles.stringToLocalDate(usuario.getFechaNacStr()).toString()  %>
+	                                                        value=<%=Utile.stringToLocalDate(usuario.getFechaNacStr()).toString()%>
 	                                                        >
 	                                                    </div>
 	                                                  

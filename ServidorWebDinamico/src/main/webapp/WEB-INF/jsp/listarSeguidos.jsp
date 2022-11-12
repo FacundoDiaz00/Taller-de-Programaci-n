@@ -1,4 +1,4 @@
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 
 <%@page import="publicar.usuarioturisticasservice.DtUsuarioSeparadosPorTipoCollection"%>
 <%@ page import="publicar.usuarioturisticasservice.DtUsuario" %>
@@ -15,33 +15,32 @@
 
 
 
-	<%! public String getTextWithoutNull(String value){
+	<%!public String getTextWithoutNull(String value){
 			return value == null ? "" : value;
-		}
-	%>
+		}%>
              <div class="card" id="contenedor-actividades-turisticas" style="margin-top: 20px">
-                	<% 
-                	  DtUsuarioSeparadosPorTipoCollection users = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidos");
-                	  ArrayList<DtUsuario> usuarios= new ArrayList<DtUsuario>();
-                	  List<DtTurista> turistas = users.getTuristas();
-                	  List<DtProveedor> proveedores = users.getProveedores();
-                	  
-                	  for(DtTurista turista: turistas){
-                		  usuarios.add((DtUsuario)turista);
-                	  }
-                	  
-                	  for(DtProveedor proveedor: proveedores){
-                		  usuarios.add((DtUsuario) proveedor);
-                	  }
-                	  System.out.println("cant saeguidos: " + usuarios.size());
-                	  
-						for(DtUsuario usr: usuarios){
-							System.out.println("sigo a : " + usr.getNickname());
-					%>
+                	<%
+                	DtUsuarioSeparadosPorTipoCollection users = (DtUsuarioSeparadosPorTipoCollection) request.getAttribute("seguidos");
+                	                	  ArrayList<DtUsuario> usuarios= new ArrayList<DtUsuario>();
+                	                	  List<DtTurista> turistas = users.getTuristas();
+                	                	  List<DtProveedor> proveedores = users.getProveedores();
+                	                	  
+                	                	  for(DtTurista turista: turistas){
+                	                		  usuarios.add((DtUsuario)turista);
+                	                	  }
+                	                	  
+                	                	  for(DtProveedor proveedor: proveedores){
+                	                		  usuarios.add((DtUsuario) proveedor);
+                	                	  }
+                	                	  System.out.println("cant saeguidos: " + usuarios.size());
+                	                	  
+                					for(DtUsuario usr: usuarios){
+                						System.out.println("sigo a : " + usr.getNickname());
+                	%>
 							<div class="card mb-3" style="max-width: 800px; margin-left: 15px">
 				                <div class="row g-0">
 				                    <div class="col-md-4 img-contain">
-				                        <img src="<%=Utiles.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
+				                        <img src="<%=Utile.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
 				                    </div>
 				                    <div class="col-md-8">
 				                        <div class="card-body">

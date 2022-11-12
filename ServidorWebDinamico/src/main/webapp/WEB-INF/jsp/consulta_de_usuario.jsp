@@ -1,4 +1,4 @@
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 
@@ -29,14 +29,14 @@
                 	<h2 class="card-title header_usuarios">Usuarios</h2>
             	</div>
                 
-                	<% 
-                		List<DtUsuario> usuarios = (List<DtUsuario>) request.getAttribute("usuarios");
-						for(DtUsuario usr: usuarios){
-					%>
+                	<%
+                                	List<DtUsuario> usuarios = (List<DtUsuario>) request.getAttribute("usuarios");
+                                					for(DtUsuario usr: usuarios){
+                                	%>
 							<div class="card mb-3" style="max-width: 800px; margin-left: 15px">
 				                <div class="row g-0">
 				                    <div class="col-md-4 img-contain">
-				                        <img src="<%=Utiles.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
+				                        <img src="<%=Utile.obtenerUrlParaImagen(usr.getImg())%>" class="img-fluid rounded-start">
 				                    </div>
 				                    <div class="col-md-8">
 				                        <div class="card-body">

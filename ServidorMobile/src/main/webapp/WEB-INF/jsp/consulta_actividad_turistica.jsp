@@ -5,7 +5,7 @@
 
 
  --%>
- <%@page import="utils.Utiles"%>
+ <%@page import="utils.Utile"%>
 <%@page import="publicar.actividadesturisticasservice.DtActividadTuristicaDetalle"%>
 <%@page import="publicar.actividadesturisticasservice.EstadoActividadTuristica"%>
 <%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
@@ -38,13 +38,16 @@
         <div id="info-actividad">
         
         
-        	<% DtActividadTuristicaDetalle datosActividad = (DtActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
+        	<%
+                        	p
+                        	 DtActividadTuristicaDetalle datosActividad = (DtActividadTuristicaDetalle) request.getAttribute("datosActividad")
+                        	%>
 
 
-			<h2><%= datosActividad.getNombre() %></h2>
-			 <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
+			<h2><%=t( datosActividad.getNombre(%></h2>
+			 <h6>Creado el <%=t( datosActividad.getFechaAltaStr(%></h6>
             <div id="info-general-imagen">
-                <img src="<%=Utiles.obtenerUrlParaImagen(datosActividad.getImg())%>" alt="">
+                <img src="<%=t(Utile.obtenerUrlParaImagen(datosActividad.getImg(%>" alt="">
             </div>
 
             <div id="info">

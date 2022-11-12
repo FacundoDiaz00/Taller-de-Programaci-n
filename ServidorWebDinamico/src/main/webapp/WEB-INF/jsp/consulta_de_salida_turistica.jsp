@@ -1,5 +1,5 @@
 
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@page import="publicar.usuarioturisticasservice.DtTurista"%>
 <%@page import="publicar.actividadesturisticasservice.DtSalidaTuristicaDetalle"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
@@ -22,7 +22,9 @@
     <section id="contenedor">
         <jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 
-		<% DtSalidaTuristicaDetalle infoSalida = (DtSalidaTuristicaDetalle)request.getAttribute("datosSalida");%>
+		<%
+		DtSalidaTuristicaDetalle infoSalida = (DtSalidaTuristicaDetalle)request.getAttribute("datosSalida");
+		%>
 
         <div id="titulo">
             <h1>Consulta de Salida turística</h1>
@@ -32,27 +34,30 @@
 
 
             <div id="info-general-imagen">                             
-			    <img src="<%=Utiles.obtenerUrlParaImagen(infoSalida.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+			    <img src="<%=Utile.obtenerUrlParaImagen(infoSalida.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
             </div>
 
             <div id="info">
-                <h2><%= infoSalida.getNombre() %></h2>
-                <h6>Creado el <%= infoSalida.getFechaAltaStr() %></h6>
-                <% 
+                <h2><%=infoSalida.getNombre()%></h2>
+                <h6>Creado el <%=infoSalida.getFechaAltaStr()%></h6>
+                <%
                 boolean turistaLogueado = false;
-        		try {
-	        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
-	        		turistaLogueado = tur != null;
-        		} catch (Exception e) {
-        			// nada
-        		}
-        		// Muestro el boton si soy turista
-        		if (turistaLogueado) { %>		            
+                        		try {
+                	        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
+                	        		turistaLogueado = tur != null;
+                        		} catch (Exception e) {
+                        			// nada
+                        		}
+                        		// Muestro el boton si soy turista
+                        		if (turistaLogueado) {
+                %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
 	                    <li><a href="InscribiseASalida?id=<%=infoSalida.getNombre()%>">Inscribirse a la salida</a></li>
 	                </ul>
-        		<% } %>
+        		<%
+        		}
+        		%>
             </div>
 
             <div id="resto-de-la-info-actividad">
@@ -64,11 +69,11 @@
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="label">Capacidad de turistas: </h5>
-                    <p><%= infoSalida.getCantMaxTuristas() %></p>
+                    <p><%=infoSalida.getCantMaxTuristas()%></p>
                 </div>
                 <div class="div-doble" id="Cuidad">
                     <h5 class="label">Lugar: </h5>
-                    <p><%= infoSalida.getLugarSalida() %></p>
+                    <p><%=infoSalida.getLugarSalida()%></p>
                 </div>
 
             </div>
@@ -83,7 +88,7 @@
 	                    <div class="row g-0">
 	                        <div class="col-md-4 img-contain">
 
-	                            <img src="<%=Utiles.obtenerUrlParaImagen(infoSalida.getDtActividad().getImg())%>" class="img-fluid rounded-start">
+	                            <img src="<%=Utile.obtenerUrlParaImagen(infoSalida.getDtActividad().getImg())%>" class="img-fluid rounded-start">
 	                            <!-- Falta el manejo de foto de la verdadero paquete-->
 	                        </div>
 	                        <div class="col-md-8">

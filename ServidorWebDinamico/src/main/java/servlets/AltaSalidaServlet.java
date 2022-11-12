@@ -24,7 +24,7 @@ import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.usuarioturisticasservice.DtProveedor;
 import publicar.usuarioturisticasservice.DtUsuario;
-import utils.Utiles;
+import utils.Utile;
 
 /**
  * Servlet implementation class AltaDeUsuario
@@ -50,7 +50,7 @@ public class AltaSalidaServlet extends HttpServlet {
 
          DtUsuario usuario = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
          if (usuario == null || !(usuario instanceof DtProveedor)) {
-             req = Utiles.insertarLoDeSiempre(req);
+             req = Utile.insertarLoDeSiempre(req);
              resp.sendRedirect("/index");
              return;
          }
@@ -64,7 +64,7 @@ public class AltaSalidaServlet extends HttpServlet {
              return;
          }
 
-         req = Utiles.insertarLoDeSiempre(req);
+         req = Utile.insertarLoDeSiempre(req);
          req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
     }
     
@@ -83,7 +83,7 @@ public class AltaSalidaServlet extends HttpServlet {
         // Solo analizo el request si es un proveedor:
         DtUsuario usuario = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
         if (usuario == null || !(usuario instanceof DtProveedor)) {
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             resp.sendRedirect("index");
             return;
         }
@@ -107,14 +107,14 @@ public class AltaSalidaServlet extends HttpServlet {
         byte[] imgContent = new byte[0]; 
         if (hayImagen) {
          	InputStream imgInputStream = filePart.getInputStream();
-            ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+            ext = Utile.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
             imgContent = imgInputStream.readAllBytes();
             imgInputStream.close();
         }
 
         try {
         	        	
-        	wbActi.altaSalidaTuristica(actividad, nombre, Utiles.localDateTimeToString(fechaYHoraSalida), lugar,
+        	wbActi.altaSalidaTuristica(actividad, nombre, Utile.localDateTimeToString(fechaYHoraSalida), lugar,
                     Integer.valueOf(cantMaxTur), imgContent, ext);
            
 
@@ -125,7 +125,7 @@ public class AltaSalidaServlet extends HttpServlet {
             var infoActividadTuristica = wbActi.obtenerDTActividadTuristicaDetalle(actividad);
             
             req.setAttribute("datosActividad", infoActividadTuristica);
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
             return;

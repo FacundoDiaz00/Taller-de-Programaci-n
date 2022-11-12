@@ -24,7 +24,7 @@ import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
-import utils.Utiles;
+import utils.Utile;
 
 /**
  * Servlet implementation class ConsultaActividadServlet
@@ -56,13 +56,13 @@ public class InscribirseASalidaServlet extends HttpServlet {
 
             salida = wbActi.obtenerDTSalidaTuristica(nombSalida);
             req.setAttribute("salida", salida);
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             DtTurista turi = (DtTurista) req.getSession().getAttribute("usuarioLogeado");
             String nickTuri = "";
             if (turi != null) {
                 nickTuri = turi.getNickname();
             } else {
-                req = Utiles.insertarLoDeSiempre(req);
+                req = Utile.insertarLoDeSiempre(req);
                 resp.sendRedirect("index");
                 return;
             }
@@ -92,7 +92,7 @@ public class InscribirseASalidaServlet extends HttpServlet {
         if (turi != null && turi instanceof DtTurista) {
             nickTuri = turi.getNickname();
         } else {
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             resp.sendRedirect("index");
             return;
         }
@@ -111,7 +111,7 @@ public class InscribirseASalidaServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
         }
 
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
         req.setAttribute("salida", this.salida);
 
         try {
@@ -119,7 +119,7 @@ public class InscribirseASalidaServlet extends HttpServlet {
                     nombrePaquete);
 
             req.setAttribute("exito", Boolean.TRUE);
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             req.getRequestDispatcher("/WEB-INF/jsp/inscribirse_a_salida.jsp").forward(req, resp);
         } catch (InscripcionYaRegistradaException_Exception e) {
             req.setAttribute("motivoDeError", "Usuario ya inscripto para esta salida turística");

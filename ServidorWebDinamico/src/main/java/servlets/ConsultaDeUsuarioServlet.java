@@ -29,7 +29,9 @@ import publicar.usuarioturisticasservice.ModificacionUsuarioNoPermitida_Exceptio
 import publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
 import publicar.usuarioturisticasservice.WebServiceUsuariosService;
-import utils.Utiles;
+import utils.Utile;
+
+
 
 /**
  * Servlet implementation class ConsultaDeUsuarioServlet
@@ -69,7 +71,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         String debelistar = req.getParameter("listar");
         boolean seguir = Boolean.valueOf(req.getParameter("seguir"));
         boolean finalizar = Boolean.valueOf(req.getParameter("finalizar"));
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
         HttpSession sesion = req.getSession(false);
         boolean seSiguenUsuarios = false;
         Object usr = sesion.getAttribute("usuarioLogeado");
@@ -211,7 +213,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         
         if (hayImagen) {
          	InputStream imgInputStream = filePart.getInputStream();
-            ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+            ext = Utile.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
             imgContent = imgInputStream.readAllBytes();
             imgInputStream.close();
         }
@@ -223,7 +225,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtTurista.setNombre(modN);
         	nuevoDtTurista.setApellido(modA);
         	nuevoDtTurista.setCorreo(correo);
-        	nuevoDtTurista.setFechaNacStr(Utiles.localDateToString(fecha));
+        	nuevoDtTurista.setFechaNacStr(Utile.localDateToString(fecha));
         	nuevoDtTurista.setImg(null);
         	nuevoDtTurista.setNacionalidad(modNac);
         	
@@ -240,7 +242,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         	nuevoDtProv.setNombre(modN);
         	nuevoDtProv.setApellido(modA);
         	nuevoDtProv.setCorreo(correo);
-        	nuevoDtProv.setFechaNacStr(Utiles.localDateToString(fecha));
+        	nuevoDtProv.setFechaNacStr(Utile.localDateToString(fecha));
         	nuevoDtProv.setImg(null);
         	nuevoDtProv.setDescrpicionGeneral(modD);
         	nuevoDtProv.setLink(modL);

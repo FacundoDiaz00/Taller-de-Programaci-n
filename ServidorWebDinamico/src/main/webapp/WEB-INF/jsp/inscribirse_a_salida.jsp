@@ -1,5 +1,5 @@
 <%@page import="publicar.actividadesturisticasservice.DtSalidaTuristica" %>
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@ page import="java.util.List" %>
 
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -32,7 +32,9 @@
 					
 					<div class="contenedorinput mb-3">
 	                    <span class="input-label">Cantidad De Turistas:<span class="obligatorio"> *</span></span>
-	                     <%String cantTuristas = "";%>
+	                     <%
+	                     String cantTuristas = "";
+	                     %>
 	                    <input 
 	                    	id="input-cantTur" 
 	                    	type="number" 
@@ -52,7 +54,9 @@
 	                <div class="contenedorinput mb-3">
 	                    <span class="input-label">Forma de Pago:<span class="obligatorio"> *</span></span>
 	                    
-	                    <%	List<String> paquetes = (List<String>) request.getAttribute("paquetes"); %>
+	                    <%
+	                    	                    List<String> paquetes = (List<String>) request.getAttribute("paquetes");
+	                    	                    %>
 	                    
 		                 <div class="form-check">
 		                        <input class="form-check-input" value="0" type="radio" name="formaPago" id="checkGeneral" checked>
@@ -70,8 +74,8 @@
 	                        %>
 	                        <input class="form-check-input"  value="1" type="radio" name="formaPago" id="checkPaquete">
 	                       <%
-	                        }else{
-	                        %>
+	                       }else{
+	                       %>
 	                        <input class="form-check-input"type="radio" disabled="disabled">
 	                        <b style="color: red; margin-left: 20px">No cuenta con ningún paquete disponible para la inscripción</b>
 	                        <%
@@ -85,14 +89,16 @@
 		                
 		                <div class="contenedorinput mb-3" id="comboPaquetes">
 		                    <div class="form-group">
-                    	<%	
-		                    for(String paq : paquetes){ 
-			                %>
+                    	<%
+                    	for(String paq : paquetes){
+                    	%>
 		                        <label>Paquete:</label>
 		                         <select class="combobox input-large form-control" name="paquete" >
 
 		                            	<option value="<%=paq%>" selected="selected"><%=paq%></option>
-		                            <% }%>
+		                            <%
+		                            }
+		                            %>
 		                        </select>
 		                    </div>
 		                </div>
@@ -112,8 +118,10 @@
     </div>
     <div id="contenedorDer">
         <div class="card" style="width: 18rem;">  
-            <% DtSalidaTuristica salida = (DtSalidaTuristica) request.getAttribute("salida");%>	
-            <img src="<%=Utiles.obtenerUrlParaImagen(salida.getImg())%>" alt="..." style="margin: 10px;width: 267px;">
+            <%
+              DtSalidaTuristica salida = (DtSalidaTuristica) request.getAttribute("salida");
+              %>	
+            <img src="<%=Utile.obtenerUrlParaImagen(salida.getImg())%>" alt="..." style="margin: 10px;width: 267px;">
             <div class="card-body">
                 <h4 class="card-title">Degusta Setiembre</h4>
                 <div class="div-doble" id="FechaYhoraSalida">

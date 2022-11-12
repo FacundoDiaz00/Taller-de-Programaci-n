@@ -18,7 +18,7 @@ import publicar.usuarioturisticasservice.DtTurista;
 import publicar.usuarioturisticasservice.DtUsuario;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
 import publicar.usuarioturisticasservice.WebServiceUsuariosService;
-import utils.Utiles;
+import utils.Utile;
 
 @WebServlet("/ConsultaSalida")
 public class ConsultaSalidaServlet extends HttpServlet {
@@ -73,7 +73,7 @@ public class ConsultaSalidaServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 		}
 
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
 
         req.setAttribute("datosSalida", infoSalidaTuristica);
         req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida_turistica.jsp").forward(req, resp);

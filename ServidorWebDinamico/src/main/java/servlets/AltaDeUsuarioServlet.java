@@ -22,7 +22,7 @@ import publicar.usuarioturisticasservice.Imagen;
 import publicar.usuarioturisticasservice.UsuarioYaRegistradoException_Exception;
 import publicar.usuarioturisticasservice.WebServiceUsuarios;
 import publicar.usuarioturisticasservice.WebServiceUsuariosService;
-import utils.Utiles;
+import utils.Utile;
 
 /**
  * Servlet implementation class AltaDeUsuario
@@ -53,7 +53,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
             req.setCharacterEncoding("UTF-8");
         }
 
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 
     }
@@ -88,16 +88,16 @@ public class AltaDeUsuarioServlet extends HttpServlet {
             if (hayImagen) {
             	
             	InputStream imgInputStream = filePart.getInputStream();
-                ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+                ext = Utile.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
                 imgContent = imgInputStream.readAllBytes();
                 imgInputStream.close();
             }
 
             LocalDate fechaNac = LocalDate.parse(fechaNacStr);
             if (tipoUsuario.equals(tipoUsuarioProveedor)) {
-            	wbUser.altaProveedor(nickname, nombre, apellido, email, password, Utiles.localDateToString(fechaNac),imgContent, ext ,descripcionGeneral, link);
+            	wbUser.altaProveedor(nickname, nombre, apellido, email, password, Utile.localDateToString(fechaNac),imgContent, ext ,descripcionGeneral, link);
             } else if (tipoUsuario.equals(tipoUsuarioTurista)) {
-            	wbUser.altaTurista(nickname, nombre, apellido, email, password, Utiles.localDateToString(fechaNac), imgContent, ext, nacionalidad);
+            	wbUser.altaTurista(nickname, nombre, apellido, email, password, Utile.localDateToString(fechaNac), imgContent, ext, nacionalidad);
             } else {
                 req.setAttribute("motivoDeError", "No se soporta el alta de este tipo de usuario");
                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
@@ -105,7 +105,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
             }
 
             req.setAttribute("exito", Boolean.TRUE);
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
             return;
         } catch (UsuarioYaRegistradoException_Exception e) {
@@ -130,7 +130,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
         req.setAttribute("descripcionGeneral", descripcionGeneral);
         req.setAttribute("link", link);
 
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
 
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 

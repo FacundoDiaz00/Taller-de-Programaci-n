@@ -10,7 +10,7 @@
  --%>
 
 
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@page import="publicar.paqueteturisticasservice.DtPaquete"%>
 
 <%@page import="publicar.actividadesturisticasservice.DtActividadTuristica"%>
@@ -47,49 +47,52 @@
             <div class="card" id="contenedor-actividades-turisticas">
                 <h2 class="card-title">Actividades</h2>
                 
-                	<% 
-                
-                	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");  
-                	List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
-                	Map<DtActividadTuristica, Boolean> actividadesFav = new HashMap<DtActividadTuristica, Boolean>();
-                	
-                	if(usuario != null && usuario instanceof DtTurista){
-                		actividadesFav = (Map<DtActividadTuristica, Boolean>) request.getAttribute("actividadFavorito");
-                	}
-					
-                	if (actividades.isEmpty()) {%>
+                	<%
+                                	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");  
+                                	                	List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
+                                	                	Map<DtActividadTuristica, Boolean> actividadesFav = new HashMap<DtActividadTuristica, Boolean>();
+                                	                	
+                                	                	if(usuario != null && usuario instanceof DtTurista){
+                                	                		actividadesFav = (Map<DtActividadTuristica, Boolean>) request.getAttribute("actividadFavorito");
+                                	                	}
+                                				
+                                	                	if (actividades.isEmpty()) {
+                                	%>
                 		<span>No hay actividades para mostrar aquí.</span>
-               		<% } else {
-	               			for(DtActividadTuristica actividad: actividades){
-								%>
+               		<%
+               		} else {
+               			               			for(DtActividadTuristica actividad: actividades){
+               		%>
 								<div class="card mb-3" style="max-width: 800px;">
 				                    <div class="row g-0">
 				                        <div class="col-md-4 img-contain">
-				                            <img src="<%=Utiles.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
+				                            <img src="<%=Utile.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
 				                            <!--  Falta el manejo de foto de la verdadera actividad -->
 				                        </div>
 				                        <div class="col-md-8">
 				                            <div class="card-body">
 				                            <div  style="justify-content: space-between; display: flex">
-				                                  <h5 class="card-title"><%= actividad.getNombre() %></h5>
-				                                   <% 
-					                            	 
-					                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
-					                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
-					                                	if(actividadesFav.get(actividad)){
-					                    
-						                                %>
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento %>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
+				                                  <h5 class="card-title"><%=actividad.getNombre()%></h5>
+				                                   <%
+				                                   if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+				                                   			                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
+				                                   			                                	if(actividadesFav.get(actividad)){
+				                                   %>
+						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
 						                                
-						                                <%} else { %>
+						                                <%
+						                                						                                } else {
+						                                						                                %>
 						                                
 						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
 						                                	
-						                                <% } 
-					                                	}%>
+						                                <%
+						                                							                                } 
+						                                							                                			                                	}
+						                                							                                %>
 					                                	
 				                            </div>        	
-				                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
+				                                <p class="card-text descripcion-actividad"><%=actividad.getDescripcion()%></p>
 				                               
 				                                
 				                                <div class="botonera">
@@ -100,9 +103,10 @@
 				                    </div>
 				                </div>
 							
-						<% }
-                	}							
-					%>
+						<%
+													}
+													                	}
+													%>
                 
 
             </div>
@@ -113,18 +117,21 @@
             <div class="card" id="contenedor-paquetes">
                 <h2 class="card-title">Paquetes</h2>
 
-			<% 
-				List<DtPaquete> paquetes = (List<DtPaquete>) request.getAttribute("paquetes");
-					
-				if (paquetes.isEmpty()) {%>
+			<%
+			List<DtPaquete> paquetes = (List<DtPaquete>) request.getAttribute("paquetes");
+						
+					if (paquetes.isEmpty()) {
+			%>
 	    			<span>No hay paquetes para mostrar aquí.</span>
-	   			<% } else {               	
-					for(DtPaquete pack: paquetes) { %>
+	   			<%
+	   			} else {               	
+	   						for(DtPaquete pack: paquetes) {
+	   			%>
 		                <div class="card mb-3" style="max-width: 800px;">
 		                    <div class="row g-0">
 		                        <div class="col-md-4 img-contain">
 
-		                            <img src="<%=Utiles.obtenerUrlParaImagen(pack.getImg())%>" class="img-fluid rounded-start">
+		                            <img src="<%=Utile.obtenerUrlParaImagen(pack.getImg())%>" class="img-fluid rounded-start">
 		                            <!-- Falta el manejo de foto de la verdadero paquete-->
 		                        </div>
 		                        <div class="col-md-8">

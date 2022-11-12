@@ -6,7 +6,7 @@
 
  --%>
 
-<%@page import="utils.Utiles"%>
+<%@page import="utils.Utile"%>
 <%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -34,9 +34,10 @@
                         <button class="btn" ><i class="fas fa-search"></i></button>
                     </form>
                     
-                    <% 
-                	DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");   
-                    if(session.getAttribute("usuarioLogeado") == null){ %>
+                    <%
+                                        DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");   
+                                                            if(session.getAttribute("usuarioLogeado") == null){
+                                        %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
 	                    </li>
@@ -44,14 +45,16 @@
 	                        <a class="nav-link active" href="IniciarSesion">Iniciar Sesión</a>
 	                    </li>
                     
-                    <% }else{ %>
+                    <%
+                                        }else{
+                                        %>
                     
 	                    <div class="dropdown">
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            <%=usuario.getNombre() %>
+	                            <%=usuario.getNombre()%>
 
-				                <img class="imagen_perfil " src="<%=Utiles.obtenerUrlParaImagen(usuario.getImg())%>" alt="">
+				                <img class="imagen_perfil " src="<%=Utile.obtenerUrlParaImagen(usuario.getImg())%>" alt="">
 	                            
 	                        </a>
 	                        <ul class="dropdown-menu" id="dropDown">
