@@ -36,6 +36,7 @@
             </div>
 
 
+
             <div id="resto-de-la-info-actividad">
 
 

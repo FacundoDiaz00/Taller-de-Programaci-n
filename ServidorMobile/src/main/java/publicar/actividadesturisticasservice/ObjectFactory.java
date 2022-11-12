@@ -48,6 +48,26 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtMapActividadSalidaTuristicaCollection }
+     * 
+     * @return
+     *     the new instance of {@link DtMapActividadSalidaTuristicaCollection }
+     */
+    public DtMapActividadSalidaTuristicaCollection createDtMapActividadSalidaTuristicaCollection() {
+        return new DtMapActividadSalidaTuristicaCollection();
+    }
+
+    /**
+     * Create an instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas }
+     * 
+     * @return
+     *     the new instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas }
+     */
+    public DtMapActividadSalidaTuristicaCollection.MapSalidas createDtMapActividadSalidaTuristicaCollectionMapSalidas() {
+        return new DtMapActividadSalidaTuristicaCollection.MapSalidas();
+    }
+
+    /**
      * Create an instance of {@link DtActividadTuristicaDetalle }
      * 
      * @return
@@ -325,6 +345,26 @@ public class ObjectFactory {
      */
     public DtActividadTuristicaCollection createDtActividadTuristicaCollection() {
         return new DtActividadTuristicaCollection();
+    }
+
+    /**
+     * Create an instance of {@link DtSalidaTuristicaCollection }
+     * 
+     * @return
+     *     the new instance of {@link DtSalidaTuristicaCollection }
+     */
+    public DtSalidaTuristicaCollection createDtSalidaTuristicaCollection() {
+        return new DtSalidaTuristicaCollection();
+    }
+
+    /**
+     * Create an instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry }
+     * 
+     * @return
+     *     the new instance of {@link DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry }
+     */
+    public DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry createDtMapActividadSalidaTuristicaCollectionMapSalidasEntry() {
+        return new DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry();
     }
 
     /**

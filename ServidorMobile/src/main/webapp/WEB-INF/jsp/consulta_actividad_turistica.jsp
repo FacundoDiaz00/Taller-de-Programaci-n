@@ -141,7 +141,7 @@
 								DtSalidaTuristica salida = entrySalida.getValue();
 							%>
 							<div style="margin-top: 5px;margin-bottom: 5px">
-									<a href="ConsultaSalida?id=<%=salida.getNombre()%>"><%=salida.getNombre() %></a> 
+									<a href="ConsultaSalida?id=<%=salida.getNombre()%>&listar=false"><%=salida.getNombre() %></a> 
 							</div>
 		                    <%
 							}

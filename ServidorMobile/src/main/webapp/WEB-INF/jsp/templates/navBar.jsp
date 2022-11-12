@@ -35,7 +35,7 @@
 	                        <a class="nav-link active" aria-current="page" href="ConsultaActividad?listar=<%=true %>">Ver Actividades</a>
 	                    </li>
                      <li class="alta_de_usuario">
-                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Ver Salidas</a>
+                        <a class="nav-link active" aria-current="page" href="ConsultaSalida?listar=<%=true %>">Ver Salidas</a>
                     </li>
 	                    <li class="iniciar_sesion">
 	                        <a class="nav-link active" href="IniciarSesion?sesionCerrada=<%=true%>">Salir</a>

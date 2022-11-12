@@ -67,7 +67,7 @@
             </form>
     </div>
 </div>
-<div style="bottom: 0;position: absolute;">
+<div style="bottom: 0;position: absolute; width: 100%">
 <jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 </div>
 

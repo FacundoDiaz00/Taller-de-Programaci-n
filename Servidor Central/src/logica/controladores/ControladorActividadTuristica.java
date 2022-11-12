@@ -3,10 +3,7 @@ package logica.controladores;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import excepciones.ActividadTuristicaNoAceptada;
 import excepciones.ActividadTuristicaYaRegistradaException;
@@ -31,6 +28,8 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.datatypes.colleciones.DtActividadTuristicaCollection;
+import logica.datatypes.colleciones.DtMapActividadSalidaTuristicaCollection;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Categoria;
 import logica.entidades.Compra;
@@ -359,12 +358,18 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 	}
 	
     @Override
-    public List<DTSalidaTuristica> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy {
-    	List<DTSalidaTuristica> res = new ArrayList<DTSalidaTuristica>();
-    	ManejadorSalidaTuristica mst = ManejadorSalidaTuristica.getInstancia();
-    	
-    	for (SalidaTuristica sal : mst.getSalidas()) {
-    		res.add(sal.obtenerDTSalidaTuristica());
+    public Map<String, List<DTSalidaTuristica>> obtenerDTSalidasTuristicas() {
+        Map<String, List<DTSalidaTuristica>> res = new HashMap<>();
+    	ManejadorActividadTuristica mact = ManejadorActividadTuristica.getInstancia();
+    	for (ActividadTuristica act : mact.getActividades()) {
+            if(act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+                List<DTSalidaTuristica> colecionActividades = new ArrayList<>();
+                for(SalidaTuristica sal : act.getSalidas().values()){
+                    colecionActividades.add(sal.obtenerDTSalidaTuristica());
+                }
+                res.put(act.getNombre(), colecionActividades);
+
+            }
     	}
         return res;
     }

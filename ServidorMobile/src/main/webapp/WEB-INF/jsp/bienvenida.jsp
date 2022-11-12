@@ -33,7 +33,7 @@
 
 
     <!-- </section> -->
-    <div style="bottom: 0;position: fixed;">
+    <div style="bottom: 0;position: fixed; width: 100%">
 		<jsp:include page="/WEB-INF/jsp/templates/footer.jsp"/>
 	</div>
 </body>
