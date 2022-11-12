@@ -18,7 +18,7 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="#">Turismo UY</a>
-             <b class="navbar-text" >Bienvenido/a <%=usuario.getNombre() %></b>
+             <b class="navbar-text" style="font-size: 13px;" >Bienvenido/a <%=usuario.getNombre() %></b>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

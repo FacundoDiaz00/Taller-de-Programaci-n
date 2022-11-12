@@ -31,7 +31,7 @@
 
 
         <div id="titulo">
-            <h1 style="justify-content: center; display: flex; margin-top:5px;">Consulta de actividad</h1>
+            <h1 style="">Consulta de actividad</h1>
         </div>
 
 
@@ -42,6 +42,7 @@
 
 
 			<h2><%= datosActividad.getNombre() %></h2>
+			 <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
             <div id="info-general-imagen">
                 <img src="<%=Utiles.obtenerUrlParaImagen(datosActividad.getImg())%>" alt="">
             </div>
@@ -49,7 +50,7 @@
             <div id="info">
       
                 
-                <h6>Creado el <%= datosActividad.getFechaAltaStr() %></h6>
+               
                 <% 
                 boolean proveedorLogueado = false;
         		try {
