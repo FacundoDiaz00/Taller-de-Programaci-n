@@ -21,6 +21,7 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.TurismoUyException;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -28,7 +29,6 @@ import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
-import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 
 /**
  * @author Equipo taller prog 16
@@ -226,7 +226,7 @@ public interface IControladorActividadTuristica {
     List<String> obtenerIdActividadesTuristicasAgregadas();
 
     // Esto sumariza los casos de uso aceptar/rechazar y finalizar actividad turística
-    void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado) throws ObjetoNoExisteEnTurismoUy;
+    void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado) throws TurismoUyException;
 
     Map<String, List<DTSalidaTuristica>> obtenerDTSalidasTuristicas() throws ObjetoNoExisteEnTurismoUy;
 

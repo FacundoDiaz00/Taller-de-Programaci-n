@@ -21,6 +21,7 @@ import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
+import excepciones.TurismoUyException;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTActividadTuristicaDetalle;
 import logica.datatypes.DTInscripcion;
@@ -310,11 +311,11 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
     }
 
     public void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado)
-            throws ObjetoNoExisteEnTurismoUy {
+            throws TurismoUyException{
         ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica act = manejActTur.getActividad(idActividad);
         if (nuevoEstado == EstadoActividadTuristica.AGREGADA)
-            throw new IllegalArgumentException("No se puede cambiar el estado de una actividad a AGREGADA");
+            throw new TurismoUyException("No se puede cambiar el estado de una actividad a AGREGADA");
 
         if (nuevoEstado != EstadoActividadTuristica.FINALIZADA && act.getEstado() == EstadoActividadTuristica.AGREGADA) {
         	act.setEstado(nuevoEstado);
@@ -322,14 +323,14 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         	
         	ControladorPaquete icp = new ControladorPaquete();
         	if (icp.actividadExisteEnAlgunPaquete(idActividad)) {
-        		throw new IllegalArgumentException("No es posible finalizar una activdad que esté dentro de un paquete");
+        		throw new TurismoUyException("No es posible finalizar una activdad que esté dentro de un paquete");
         	}
         	
 			ManejadorPersistenciaJPA.getInstancia().persistirActividad(idActividad);
             act.eliminarLinks();
       
 		} else {
-            throw new IllegalArgumentException("No se puede cambiar el estado");
+            throw new TurismoUyException("No se puede cambiar el estado");
         }
     }
 

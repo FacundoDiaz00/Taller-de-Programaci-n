@@ -166,7 +166,7 @@ public class WebServiceActividades {
 
     @WebMethod
     public void cambiarEstadoDeActividadTuristica(String idActividad, EstadoActividadTuristica nuevoEstado)
-            throws ObjetoNoExisteEnTurismoUy{
+            throws TurismoUyException{
     	log.info("Solicitud a 'cambiarEstadoDeActividadTuristica'");
     	Fabrica.getInstancia().getIControladorActividadTuristica().cambiarEstadoDeActividadTuristica(idActividad, nuevoEstado);
     }
