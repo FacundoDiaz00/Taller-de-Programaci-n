@@ -83,15 +83,14 @@
         		// Muestro el boton si soy proveedor
         		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) { %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
-	                <ul>
-<%-- 	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
-	                    <%
-	                    	boolean sePuedeFinalizar = (boolean)request.getAttribute("sePuedeFinalizar");
-							if(sePuedeFinalizar){
-							%>
-	                    <li><a href="ConsultaActividad?finalizar=<%=true%>" class="btn btn-primary">Finalizar</a></li>
-	                  <%}%> --%>
-	                </ul>	                
+					<%
+						DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");
+						if(usuario.getNickname().equals(datosActividad.getNicknameProveedor())){ %>
+						
+			               <a href="ConsultaActividad?id=<%= datosActividad.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			           	
+			           	<%} %>
+	                       
         		<% } %>
                 
             </div>
@@ -150,6 +149,8 @@
                 <iframe width="560" height="315" src="<%= datosActividad.getUrlVideo() %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <%} %>
             </div>
+            
+           
 
         </div>
 

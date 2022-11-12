@@ -107,8 +107,7 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
             	}
             }
         	
-        	try {
-//        		String nick = ((DtUsuario)usr).getNickname();	
+        	try {	
         		String usrVisitado = (String) req.getParameter("id");
         		DtUsuarioSeparadosPorTipoCollection seguidos = wbUser.obtenerSeguidos(usrVisitado);
         		DtUsuarioSeparadosPorTipoCollection seguidores = wbUser.obtenerSeguidores(usrVisitado);

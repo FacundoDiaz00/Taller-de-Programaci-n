@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import publicar.actividadesturisticasservice.DtActividadTuristicaDetalle;
+import publicar.actividadesturisticasservice.EstadoActividadTuristica;
 import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
@@ -67,6 +68,21 @@ public class ConsultaActividadServlet extends HttpServlet {
         	}
         		
         }
+        
+        if(finalizar) {
+    		try {
+				wbActi.cambiarEstadoDeActividadTuristica(idActividad ,EstadoActividadTuristica.FINALIZADA);
+			} catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+				req.setAttribute("motivoDeError","La actividad turistica que se desea finalizar no existe");
+                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                e.printStackTrace();
+			} catch(IllegalArgumentException e) {
+				req.setAttribute("motivoDeError",e.getMessage());
+                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                e.printStackTrace();
+			}
+    	}
+        
         try {
         	DtUsuario user = (DtUsuario)sesion.getAttribute("usuarioLogeado");
         	

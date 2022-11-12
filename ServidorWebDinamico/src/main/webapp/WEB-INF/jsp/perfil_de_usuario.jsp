@@ -298,8 +298,9 @@
 			                            		    <h5 class="card-title"><%=act.getNombre()%></h5>
 				                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 			                            		</div>
-			                                	<a href="ConsultaDeUsuario?id=listar=false&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
-			                                	
+			                            		<%if(usr.getNickname().equals(usuario.getNickname())){ %>
+			                                		<a href="ConsultaDeUsuario?listar=<%=false %>&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                	<%} %>
 			                            	</div>
 			                                <div class="botonera">
 			                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>&actividadDeProveedor=<%=true%>" class="btn btn-primary">Ver más</a>
