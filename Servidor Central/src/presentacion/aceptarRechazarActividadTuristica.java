@@ -15,7 +15,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
-import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.TurismoUyException;
 import logica.controladores.IControladorActividadTuristica;
 import logica.datatypes.EstadoActividadTuristica;
 
@@ -98,7 +98,7 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 					controladorAct.cambiarEstadoDeActividadTuristica(idActividad, EstadoActividadTuristica.ACEPTADA);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.", "Aceptar Actividad Turística",
 							JOptionPane.INFORMATION_MESSAGE);
-				} catch (ObjetoNoExisteEnTurismoUy e1) {
+				} catch (TurismoUyException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -121,9 +121,9 @@ public class aceptarRechazarActividadTuristica extends JInternalFrame {
 					controladorAct.cambiarEstadoDeActividadTuristica(idActividad, EstadoActividadTuristica.RECHAZADA);
 					JOptionPane.showMessageDialog(null, "Operación realizada con éxito.",
 							"Rechazar Actividad Turística", JOptionPane.INFORMATION_MESSAGE);
-				} catch (ObjetoNoExisteEnTurismoUy e1) {
+				} catch (TurismoUyException e) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e.printStackTrace();
 				}
 				limpiarForm();
 			}
