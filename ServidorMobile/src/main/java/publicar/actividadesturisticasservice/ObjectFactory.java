@@ -39,6 +39,7 @@ public class ObjectFactory {
     private final static QName _PaqueteNoCompradoExcepcion_QNAME = new QName("http://actividadesTuristicasService.publicar/", "PaqueteNoCompradoExcepcion");
     private final static QName _SalidaYaRegistradaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "SalidaYaRegistradaException");
     private final static QName _SuperaElMaximoDeTuristasException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "SuperaElMaximoDeTuristasException");
+    private final static QName _TurismoUyException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "TurismoUyException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: publicar.actividadesturisticasservice
@@ -265,6 +266,16 @@ public class ObjectFactory {
      */
     public SuperaElMaximoDeTuristasException createSuperaElMaximoDeTuristasException() {
         return new SuperaElMaximoDeTuristasException();
+    }
+
+    /**
+     * Create an instance of {@link TurismoUyException }
+     * 
+     * @return
+     *     the new instance of {@link TurismoUyException }
+     */
+    public TurismoUyException createTurismoUyException() {
+        return new TurismoUyException();
     }
 
     /**
@@ -590,6 +601,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "SuperaElMaximoDeTuristasException")
     public JAXBElement<SuperaElMaximoDeTuristasException> createSuperaElMaximoDeTuristasException(SuperaElMaximoDeTuristasException value) {
         return new JAXBElement<>(_SuperaElMaximoDeTuristasException_QNAME, SuperaElMaximoDeTuristasException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TurismoUyException }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link TurismoUyException }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "TurismoUyException")
+    public JAXBElement<TurismoUyException> createTurismoUyException(TurismoUyException value) {
+        return new JAXBElement<>(_TurismoUyException_QNAME, TurismoUyException.class, null, value);
     }
 
 }
