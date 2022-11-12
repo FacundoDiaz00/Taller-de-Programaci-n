@@ -42,7 +42,13 @@ if [ -d "../Servidor Central" ] && [ -d "../ServidorWebDinamico" ] && [ -d "../S
     cp "target/ServidorWebDinamico-1.0-SNAPSHOT.war" "../Deploy/web.war"
 
 
-    # Falta el servidor movil
+    echo "---------------------------------------------------------"
+    echo "--------------- Generar Servidor Movil ------------------"
+    echo "---------------------------------------------------------"
+    cd "../ServidorMobile"
+    mvn clean
+    mvn package
+    cp "target/ServidorMobile-1.0-SNAPSHOT.war" "../Deploy/mobile.war"
 
 
     cd "../Deploy"
