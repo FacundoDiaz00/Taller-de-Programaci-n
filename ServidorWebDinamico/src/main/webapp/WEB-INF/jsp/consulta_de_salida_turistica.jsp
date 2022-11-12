@@ -98,11 +98,11 @@
 		                                	if(esActividadFavorita){
 		                    
 			                                %>
-			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
 			                                
 			                                <%} else { %>
 			                                
-			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
 			                                	
 			                                <% } 
 		                                	}%>

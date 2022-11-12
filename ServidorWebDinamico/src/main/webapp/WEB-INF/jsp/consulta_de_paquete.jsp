@@ -146,11 +146,7 @@
 		                        </div>
 		                        <div class="col-md-8">
 		                            <div class="card-body card-actividad">
-		                            	<div>
-		                            		<h5 class="card-title"><%=act.getNombre()%></h5>
-		                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
-		                            	</div>
-		                            	<div style="display:flex; justify-content: space-between;">
+		                            	<div style="display:flex; justify-content: space-between;">		<h5 class="card-title"><%=act.getNombre()%></h5>
 		                            				                              
 					                                <%   	 
 					                                
@@ -160,16 +156,20 @@
 				                                	if(actividadesFav.get(act.getNombre())){
 				                    
 					                                %>
-					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
 					                                
 					                                <%} else { %>
 					                                
-					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
 					                                	
 					                                <% } 
 				                                	}%>
-		                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
-		                            	</div>		                           
+		                            		
+		                            	</div>		  
+		                            	
+		                            	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+		                            	
+		                            	<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>                         
 		                                
 		                            </div>
 		                        </div>
