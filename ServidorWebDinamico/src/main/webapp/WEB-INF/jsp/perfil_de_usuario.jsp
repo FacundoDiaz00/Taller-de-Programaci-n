@@ -52,7 +52,7 @@
 							      		<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
 							    			
 							    			<% 
-							        		if(!usr.getNickname().equals(usuario.getNickname())){
+							        		if(usuario != null && !usr.getNickname().equals(usuario.getNickname())){
 							        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
 							        			if(seSiguenUsuarios){ %>
 							        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
@@ -305,7 +305,7 @@
 				                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 			                            		</div>
 			                            		<%if(usr.getNickname().equals(usuario.getNickname())){ %>
-			                                		<a href="ConsultaDeUsuario?listar=<%=false %>&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                		<a href="ConsultaDeUsuario?id=<%=usr.getNickname() %>&listar=<%=false %>&idAct=<%= act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
 			                                	<%} %>
 			                            	</div>
 			                                <div class="botonera">
@@ -446,26 +446,38 @@
  
 	<script src="js/perfil_de_usuario.js"></script>
 	<script src="js/popUp_modificar_usuario.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".botonModificar").click(function(){
-                $("#myModal").modal('show');
-            });
-            $(".close").click(function(){
-                $("#myModal").modal('hide');
-            });
-        });
-    </script>
+    <%if(request.getAttribute("exito") != null){ %>
+	    <script>
+	    	generarMensaje('success', "Operacion completada" , "Se ha finalizado la actividad de manera exitosa" , 500);
+	    </script>
+    <%} %>
     
-     <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+ <%if(request.getAttribute("motivoDeError") != null){ %>
     
     <script>
     	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
-    	generarMensaje('error', "Ha ocurrido un error al seguir usuario" , mensajeError , 200);
+    	generarMensaje('error', "Error al finalizar actividad turística" , mensajeError , 200);
     </script>
     <%} %>
     
-
+    
+    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
+    <script>
+    
+	    setTimeout(() => {
+	        Swal.fire({
+	            icon: "success",
+	            title: "Éxito",
+	            text: "La actividad turistica ha sido finalizada con éxito",
+	            confirmButtonText: 'Entendido'  
+	        }).then((res) => {
+	        	window.location.href = "index";
+	        })
+	    }, 200)
+    
+	</script>
+	<%} %>
     
   
 
