@@ -50,24 +50,30 @@
 
             <div id="info">
             	<div>
-            		<h2><%= datosActividad.getNombre() %></h2>
-            		<% 
-            		int cantFavoritos = (int) request.getAttribute("cantFavoritos");
-					 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
-						boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
-                     	String idDepartamento = (String)request.getAttribute("idDepartamento");
-                     	if(esFavoritaActividad){
-         
-                      %>
-                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
-                      
-                      <%} else { %>
-                      
-                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
-                      	
-                      <% }
+            		<div style="display:flex; justify-content: space-between">
+            		
+	            		<h2><%= datosActividad.getNombre() %></h2>
+	            		<% 
+	            		int cantFavoritos = (int) request.getAttribute("cantFavoritos");
+						 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+							boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
+	                     	String idDepartamento = (String)request.getAttribute("idDepartamento");
+	                     	if(esFavoritaActividad){
+	         
+	                      %>
+	                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: yellow"></i></a>
+	                      
+	                      <%} else { %>
+	                      
+	                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>"><i class="fa-regular fa-star fa-2x"></i></a>
+	                      	
+	                      <% }
+	                     	
+	                     	}%>
                      	
-                     	}%>
+            		
+            		</div>
+            		
                     <p>favorito de <%=cantFavoritos%> persona/s </p>
             	</div>
                 
