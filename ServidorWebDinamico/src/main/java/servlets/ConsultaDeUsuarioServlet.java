@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import publicar.actividadesturisticasservice.EstadoActividadTuristica;
+import publicar.actividadesturisticasservice.TurismoUyException_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.usuarioturisticasservice.DtProveedor;
@@ -81,9 +82,10 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
         		String idActividad = (String) req.getParameter("idAct");
         		try {
 					wbActi.cambiarEstadoDeActividadTuristica(idActividad ,EstadoActividadTuristica.FINALIZADA);
-				} catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+				} catch (TurismoUyException_Exception e) {
 					req.setAttribute("motivoDeError","La actividad turistica que se desea finalizar no existe");
-                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, res);
+					req.setAttribute("finalizar", false);
+                    req.getRequestDispatcher("/WEB-INF/jsp/ConsultaDeUsuario.jsp").forward(req, res);
                     e.printStackTrace();
 				}
         	}

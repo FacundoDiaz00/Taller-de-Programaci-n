@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import publicar.actividadesturisticasservice.DtActividadTuristicaDetalle;
 import publicar.actividadesturisticasservice.EstadoActividadTuristica;
 import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.actividadesturisticasservice.TurismoUyException_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.usuarioturisticasservice.DtTurista;
@@ -63,7 +64,7 @@ public class ConsultaActividadServlet extends HttpServlet {
 	             
                 } catch (publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
                     req.setAttribute("motivoDeError", "La actividad que se desea marcar/desmarcar como favorita no existe en el sistema");
-                    req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/WEB-INF/jsp/errores/ConsultaActividad.jsp").forward(req, resp);
                 } 
         	}
         		
@@ -72,14 +73,11 @@ public class ConsultaActividadServlet extends HttpServlet {
         if(finalizar) {
     		try {
 				wbActi.cambiarEstadoDeActividadTuristica(idActividad ,EstadoActividadTuristica.FINALIZADA);
-			} catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
-				req.setAttribute("motivoDeError","La actividad turistica que se desea finalizar no existe");
-                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-                e.printStackTrace();
-			} catch(IllegalArgumentException e) {
+
+	            resp.sendRedirect("index");
+			} catch(TurismoUyException_Exception e) {
 				req.setAttribute("motivoDeError",e.getMessage());
-                req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-                e.printStackTrace();
+				req.setAttribute("finalizar", false);
 			}
     	}
         
