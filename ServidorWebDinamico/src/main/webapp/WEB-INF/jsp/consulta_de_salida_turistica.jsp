@@ -89,12 +89,10 @@
 	                        <div class="col-md-8">
 	                            <div class="card-body card-actividad">
 	                            	<div>
+	                            	<div style="display: flex; justify-content: space-between;">
 	                            		<h5 class="card-title"><%= infoSalida.getDtActividad().getNombre()%> </h5>
-	                                <p class="card-text descripcion-paquete"><%= infoSalida.getDtActividad().getDescripcion() %> </p>
-	                            	</div>                            
-	                                <div style="display: flex; justify-content: space-between;">
-	                                 <% 
-		                            	 
+	                            		
+	                            		 <% 
 		                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
 		                                	boolean esActividadFavorita = (boolean) request.getAttribute("esFavoritaActividad");
 		                                	if(esActividadFavorita){
@@ -108,6 +106,10 @@
 			                                	
 			                                <% } 
 		                                	}%>
+	                            	</div>	
+	                                <p class="card-text descripcion-paquete"><%= infoSalida.getDtActividad().getDescripcion() %> </p>
+	                            	</div>                            
+	                                <div>
 	                                    <a href="ConsultaActividad?id=<%=infoSalida.getDtActividad().getNombre()%>" class="btn btn-primary">Ver mas</a>
 	                                </div>
 	

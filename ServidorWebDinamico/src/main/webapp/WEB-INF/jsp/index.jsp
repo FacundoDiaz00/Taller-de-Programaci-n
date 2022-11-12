@@ -70,13 +70,9 @@
 				                        </div>
 				                        <div class="col-md-8">
 				                            <div class="card-body">
-				                                <h5 class="card-title"><%= actividad.getNombre() %></h5>
-				                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
-				                               
-				                                
-				                                <div class="botonera" style="justify-content: space-between">
-				                                				                              
-					                                <% 
+				                            <div  style="justify-content: space-between; display: flex">
+				                                  <h5 class="card-title"><%= actividad.getNombre() %></h5>
+				                                   <% 
 					                            	 
 					                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
 					                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
@@ -91,6 +87,12 @@
 						                                	
 						                                <% } 
 					                                	}%>
+					                                	
+				                            </div>        	
+				                                <p class="card-text descripcion-actividad"><%= actividad.getDescripcion() %></p>
+				                               
+				                                
+				                                <div class="botonera">
 				                                    <a href="ConsultaActividad?id=<%=actividad.getNombre()%>" class="btn btn-primary">Ver más</a>
 				                                </div>
 				                            </div>
