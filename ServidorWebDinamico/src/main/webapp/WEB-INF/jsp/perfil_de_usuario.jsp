@@ -47,18 +47,24 @@
 						    	</div>
 						    	<div class="col-md-8">
 						      		<div class="card-body">
-						    			<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
+						      		
+						      		<div style="display:flex; justify-content: space-between">
+							      		<h5 class="card-title"><%= usr.getNombre()%> <%= usr.getApellido()%></h5>
+							    			
+							    			<% 
+							        		if(!usr.getNickname().equals(usuario.getNickname())){
+							        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
+							        			if(seSiguenUsuarios){ %>
+							        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
+							        			<%} else{%>
+							        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></a>
+							        			<%} 
+							        		}%>
+							        		
+						      		</div>
+						        		
 						        		<p class="card-text"><small class="text-muted"><%= usr.getNickname()%> / <%= usr.getCorreo()%></small></p>
-						        		<% 
-						        		System.out.println("usuario que visita = " + usuario.getNickname() + " usuario visitado: " + usr.getNickname());
-						        		if(!usr.getNickname().equals(usuario.getNickname())){
-						        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
-						        			if(seSiguenUsuarios){ %>
-						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
-						        			<%} else{%>
-						        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></a>
-						        			<%} 
-						        		}%>
+						        		
 						      		</div>	
 						    	</div>
 						  	</div>
