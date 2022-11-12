@@ -21,10 +21,7 @@
 
     <section id="contenedor">
 
-		<%
-		p
-		 DtSalidaTuristicaDetalle infoSalida = (DtSalidaTuristicaDetalle)request.getAttribute("datosSalida"
-		%>
+		<% DtSalidaTuristicaDetalle infoSalida = (DtSalidaTuristicaDetalle)request.getAttribute("datosSalida");%>
 
         <div id="titulo">
             <h1>Consulta de Salida turística</h1>
@@ -32,10 +29,10 @@
 
         <div id="info-salida">
 
-			<h2><%=t( infoSalida.getNombre(%></h2>
-            <h6>Creado el <%=t( infoSalida.getFechaAltaStr(%></h6>
+			<h2><%= infoSalida.getNombre() %></h2>
+            <h6>Creado el <%= infoSalida.getFechaAltaStr() %></h6>
             <div id="info-general-imagen">                             
-			    <img src="<%=t(Utile.obtenerUrlParaImagen(infoSalida.getImg(%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+			    <img src="<%=Utile.obtenerUrlParaImagen(infoSalida.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
             </div>
 
 

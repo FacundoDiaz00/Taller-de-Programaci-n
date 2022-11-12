@@ -40,44 +40,37 @@
             <div class="card" style="margin: 4px"> <!-- style="display: flex;justify-content: center;" -->
                 <h2 class="card-title">Salidas</h2>
                 
-                	<%
-                                	p
-                                	 
-                                	                	DtMapActividadSalidaTuristicaCollection datoSalida = (DtMapActividadSalidaTuristicaCollection) request.getAttribute("datosSalida");
-                                				
-                                	                	if (datoSalida.getMapSalidas() == null || datoSalida.getMapSalidas().getEntry().size() == 0 )
-                                	%>
+                	<% 
+                	DtMapActividadSalidaTuristicaCollection datoSalida = (DtMapActividadSalidaTuristicaCollection) request.getAttribute("datosSalida");
+					
+                	if (datoSalida.getMapSalidas() == null || datoSalida.getMapSalidas().getEntry().size() == 0 ) {%>
                 		<span>No hay salidas para mostrar aquí.</span>
-               		<%
-               		p
-               		 } else {
-               		               			
-               		               			for(DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry entrySalida : datoSalida.getMapSalidas().getEntry()){
-               		               				
-               		               				if(entrySalida.getValue() == null || entrySalida.getValue().getSalidas() == null) continue;
-               		%>
+               		<% } else {
+               			
+               			for(DtMapActividadSalidaTuristicaCollection.MapSalidas.Entry entrySalida : datoSalida.getMapSalidas().getEntry()){
                				
-               				<h4>Actividad: <%=t( entrySalida.getKey(%></h3>
+               				if(entrySalida.getValue() == null || entrySalida.getValue().getSalidas() == null) continue;
+               				
+               				
+               				%>
+               				
+               				<h4>Actividad: <%= entrySalida.getKey() %></h3>
                				
                				<%
-               				               				p
-
-               				               									for(DtSalidaTuristica salida: entrySalida.getValue().getSalidas()){
-               				               				%>
+							for(DtSalidaTuristica salida: entrySalida.getValue().getSalidas()){
+								%>
 								<div class="card mb-3" style="max-width: 800px;margin: 5px">
 				                    <div class="row g-0" style="margin: 10px">
 				                        <div class="col-md-4 img-contain">
-				                        	<%
-				                        	p
-				                        	 
-				                        				            			String path = "";
-				                        										if (salida.getImg() == null) {
-				                        											path += "/noFoto.png";
-				                        										} else {
-				                        											path += salida.getImg().getPath();
-				                        										}
-				                        	%>
-				                            <img src="<%=t(Utile.obtenerUrlParaImagen(salida.getImg(%>" class="img-fluid rounded">
+				                        	<% 
+					            			String path = "";
+											if (salida.getImg() == null) {
+												path += "/noFoto.png";
+											} else {
+												path += salida.getImg().getPath();
+											}							
+											%>
+				                            <img src="<%=Utile.obtenerUrlParaImagen(salida.getImg())%>" class="img-fluid rounded">
 				                            <!--  Falta el manejo de foto de la verdadera actividad -->
 				                        </div>
 				                        <div class="col-md-8">

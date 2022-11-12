@@ -34,11 +34,9 @@
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
     <!-- <section id="contenedor"> -->
-	<%
-	p
-	 
-			String idCategoriaMarcada = (String) request.getAttribute("idCategoria");
-			String idDepartamentoMarcada = (String) request.getAttribute("idDepartamento");
+	<% 
+				String idCategoriaMarcada = (String) request.getAttribute("idCategoria");
+				String idDepartamentoMarcada = (String) request.getAttribute("idDepartamento");
 	%>
 <%-- 	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/> --%>
 		<div id="filtrosContainer" class="container btn-group ">
@@ -48,24 +46,17 @@
 			  </button>
 			  
 			  <ul class="dropdown-menu">
-			  <%
-			  p
-			   
-			  				List<String> departamentos = (List<String>) request.getAttribute("departamentos");
-			  				
-			  				for(String dep: departamentos){
-			  					if( idDepartamentoMarcada != null && idDepartamentoMarcada.equals(dep) ){
-			  %>
-								<li><a href="ConsultaActividad?idDepartamento=<%=t( de%>" class="  active dropdown-item"><%=t( de%></a>	</li>
-						  <%
-						  p
-						  } else
-						  %>
-						  		<li><a href="ConsultaActividad?idDepartamento=<%=t( de%>" class=" dropdown-item"><%=t( de%></a></li>
-					<%
-					p
-							}
-					%>
+			  <% 
+						List<String> departamentos = (List<String>) request.getAttribute("departamentos");
+						
+						for(String dep: departamentos){
+							if( idDepartamentoMarcada != null && idDepartamentoMarcada.equals(dep) ){ 
+							%>
+								<li><a href="ConsultaActividad?idDepartamento=<%= dep %>" class="  active dropdown-item"><%= dep %></a>	</li>
+						  <%} else {%>
+						  		<li><a href="ConsultaActividad?idDepartamento=<%= dep %>" class=" dropdown-item"><%= dep %></a></li>
+					<%		}
+						}	%>
 			  </ul>
 			</div>
 			<div class="dropdown">
@@ -74,24 +65,17 @@
 			  </button>
 			  
 			  <ul class="dropdown-menu">
-			  <%
-			  p
-			   
-			  				List<String> categorias = (List<String>) request.getAttribute("categorias");
-			  				
-			  				for(String cat: categorias){
-			  					if( idCategoriaMarcada != null && idCategoriaMarcada.equals(cat) ){
-			  %>
-								<li><a href="ConsultaActividad?idCategoria=<%=t( ca%>" class="  active dropdown-item"><%=t( ca%></a>	</li>
-						  <%
-						  p
-						  } else
-						  %>
-						  		<li><a href="ConsultaActividad?idCategoria=<%=t( ca%>" class=" dropdown-item"><%=t( ca%></a></li>
-					<%
-					p
-							}
-					%>
+			  <% 
+						List<String> categorias = (List<String>) request.getAttribute("categorias");
+						
+						for(String cat: categorias){
+							if( idCategoriaMarcada != null && idCategoriaMarcada.equals(cat) ){ 
+							%>
+								<li><a href="ConsultaActividad?idCategoria=<%= cat %>" class="  active dropdown-item"><%= cat %></a>	</li>
+						  <%} else {%>
+						  		<li><a href="ConsultaActividad?idCategoria=<%= cat %>" class=" dropdown-item"><%= cat %></a></li>
+					<%		}
+						}	%>
 			  </ul>
 			</div>
 	
@@ -104,33 +88,26 @@
             <div class="card"> <!-- style="display: flex;justify-content: center;" -->
                 <h2 class="card-title">Actividades</h2>
                 
-                	<%
-                                	p
-                                	 
-                                				List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
-                                				
-                                	                	if (actividades.isEmpty())
-                                	%>
+                	<% 
+					List<DtActividadTuristica> actividades = (List<DtActividadTuristica>) request.getAttribute("actividades");
+					
+                	if (actividades.isEmpty()) {%>
                 		<span>No hay actividades para mostrar aquí.</span>
-               		<%
-               		p
-               		 } else {               	
-               						for(DtActividadTuristica actividad: actividades){
-               		%>
+               		<% } else {               	
+						for(DtActividadTuristica actividad: actividades){
+							%>
 							<div class="card mb-3" style="max-width: 800px;">
 			                    <div class="row g-0" style="margin: 10px">
 			                        <div class="col-md-4 img-contain">
-			                        	<%
-			                        	p
-			                        	 
-			                        			            			String path = "";
-			                        									if (actividad.getImg() == null) {
-			                        										path += "/noFoto.png";
-			                        									} else {
-			                        										path += actividad.getImg().getPath();
-			                        									}
-			                        	%>
-			                            <img src="<%=t(Utile.obtenerUrlParaImagen(actividad.getImg(%>" class="img-fluid rounded">
+			                        	<% 
+				            			String path = "";
+										if (actividad.getImg() == null) {
+											path += "/noFoto.png";
+										} else {
+											path += actividad.getImg().getPath();
+										}							
+										%>
+			                            <img src="<%=Utile.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded">
 			                            <!--  Falta el manejo de foto de la verdadera actividad -->
 			                        </div>
 			                        <div class="col-md-8">

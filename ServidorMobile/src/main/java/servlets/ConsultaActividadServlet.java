@@ -16,7 +16,7 @@ import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
 import publicar.paqueteturisticasservice.WebServicePaquetes;
 import publicar.paqueteturisticasservice.WebServicePaquetesService;
-import utils.Utiles;
+import utils.Utile;
 
 /**
  * Servlet implementation class ConsultaActividadServlet

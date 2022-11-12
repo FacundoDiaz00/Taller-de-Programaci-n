@@ -13,7 +13,7 @@ import publicar.actividadesturisticasservice.DtSalidaTuristica;
 import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
 import publicar.actividadesturisticasservice.WebServiceActividades;
 import publicar.actividadesturisticasservice.WebServiceActividadesService;
-import utils.Utiles;
+import utils.Utile;
 
 @WebServlet("/ConsultaSalida")
 public class ConsultaSalidaServlet extends HttpServlet {
