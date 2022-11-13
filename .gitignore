@@ -225,3 +225,7 @@ Implementacion/Servidor Central/src/.idea/
 *.iml
 
 Documentos de implementacion auxiliares/lib y programas necesarios/jaxws-ri/
+
+Deploy/target/
+
+Deploy/servidor.jar

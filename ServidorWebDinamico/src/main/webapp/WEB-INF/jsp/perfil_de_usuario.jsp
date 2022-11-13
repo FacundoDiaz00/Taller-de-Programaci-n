@@ -52,20 +52,16 @@
 						      		<div style="display:flex; justify-content: space-between">
 							      		<h5 class="card-title"><%=usr.getNombre()%> <%=usr.getApellido()%></h5>
 							    			
-							    			<%
-							    										    			if(!usr.getNickname().equals(usuario.getNickname())){
-							    										    								        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
-							    										    								        			if(seSiguenUsuarios){
-							    										    			%>
-							        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
-							        			<%
-							        			} else{
-							        			%>
-							        				<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></a>
-							        			<%
-							        			} 
-							        								        		}
-							        			%>
+							    			
+						    			<%if(usr != null && usuario != null && !usr.getNickname().equals(usuario.getNickname())){
+							        			boolean seSiguenUsuarios = (boolean)request.getAttribute("seSiguenUsuarios");
+							        			if(seSiguenUsuarios){ %>
+					        						<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-danger"><i class="fa-solid fa-user-minus"></i></a>
+					        					<% } else{ %> 
+						        					<a href="ConsultaDeUsuario?id=<%=usr.getNickname()%>&listar=false&seguir=<%=true%>" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></a>
+					        					<%} 
+					        			} %>
+							        			
 							        		
 						      		</div>
 						        		
@@ -355,9 +351,9 @@
 				                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
 			                            		</div>
 			                            		<%
-			                            		if(usr.getNickname().equals(usuario.getNickname())){
+			                            		if(usr != null && usuario != null && usr.getNickname().equals(usuario.getNickname())){
 			                            		%>
-			                                		<a href="ConsultaDeUsuario?listar=<%=false%>&idAct=<%=act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                		<a href="ConsultaDeUsuario?listar=<%=false%>&idAct=<%=act.getNombre()%>&finalizar=<%=true%>&id=<%=usr.getNickname()%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
 			                                	<%
 			                                	}
 			                                	%>
