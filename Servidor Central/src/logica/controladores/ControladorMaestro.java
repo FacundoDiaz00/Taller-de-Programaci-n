@@ -390,7 +390,7 @@ public class ControladorMaestro implements IControladorMaestro {
 
 			ipack.altaPaquete(datosPaq[0], datosPaq[1], datosPaqInt[0], datosPaqInt[1],
 					LocalDate.of(datosPaqInt[4], datosPaqInt[3], datosPaqInt[2]),
-					new Imagen("/paquetes/" + datosPaq[0] + ".png"));
+					(i == 3) ? null : new Imagen("/paquetes/" + datosPaq[0] + ".png"));
 		}
 
 		// Agregar Actividad a Paquete
