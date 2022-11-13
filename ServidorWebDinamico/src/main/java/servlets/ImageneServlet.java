@@ -34,6 +34,10 @@ public class ImageneServlet extends HttpServlet {
      * 
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getCharacterEncoding() == null) {
+			request.setCharacterEncoding("UTF-8");
+		}
+		
 		String href = (String) request.getParameter("href");
 		try {
 			String ext = Utile.devolverExtencionDelNombreDeArchivo(href);

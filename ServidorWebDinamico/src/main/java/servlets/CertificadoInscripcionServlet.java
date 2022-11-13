@@ -37,6 +37,11 @@ public class CertificadoInscripcionServlet extends HttpServlet {
      * 
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if (request.getCharacterEncoding() == null) {
+			request.setCharacterEncoding("UTF-8");
+		}
+		
 		String nickname = (String) request.getParameter("idTurista");
 		String nombreSalida = (String) request.getParameter("idSalida");
 	
