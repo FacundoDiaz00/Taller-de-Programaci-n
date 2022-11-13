@@ -85,19 +85,19 @@
                 <h6>Creado el <%=datosActividad.getFechaAltaStr()%></h6>
                 <%
                 boolean proveedorLogueado = false;
-                        		try {
-                	        		DtProveedor tur = (DtProveedor) session.getAttribute("usuarioLogeado");
-                	        		proveedorLogueado = tur != null;
-                        		} catch (Exception e) {
-                        			// nada
-                        		}
-                        		// Muestro el boton si soy proveedor
-                        		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) {
+          		try {
+  	        		DtProveedor tur = (DtProveedor) session.getAttribute("usuarioLogeado");
+  	        		proveedorLogueado = tur != null;
+          		} catch (Exception e) {
+          			// nada
+          		}
+          		// Muestro el boton si soy proveedor
+          		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) {
                 %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 					<%
 					DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");
-									if(usuario.getNickname().equals(datosActividad.getNicknameProveedor())){
+					if(usuario.getNickname().equals(datosActividad.getNicknameProveedor())){
 					%>
 						
 			               <a href="ConsultaActividad?id=<%=datosActividad.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
@@ -129,11 +129,15 @@
                     %>
                     	<p>Agregada sin confirmar</p>
                     <%
-                    } else {
+                    } else if(datosActividad.getEstado() == EstadoActividadTuristica.RECHAZADA){
                     %>
                     	<p>Rechazada</p>
                     <%
-                    }
+                    } else if(datosActividad.getEstado() == EstadoActividadTuristica.FINALIZADA){
+                        %>
+                        	<p>Finalizada</p>
+                        <%
+                        }
                     %>
                 </div>
 
