@@ -44,6 +44,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DtResultadoBusqueda }
+     * 
+     * @return
+     *     the new instance of {@link DtResultadoBusqueda }
+     */
+    public DtResultadoBusqueda createDtResultadoBusqueda() {
+        return new DtResultadoBusqueda();
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      * 
      * @param value

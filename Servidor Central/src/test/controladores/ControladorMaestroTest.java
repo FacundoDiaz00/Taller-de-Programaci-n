@@ -8,21 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
+import logica.controladores.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import excepciones.TurismoUyException;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorActividadTuristica;
-import logica.controladores.IControladorMaestro;
-import logica.controladores.IControladorPaquete;
-import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTProveedorDetallePrivado;
 import logica.datatypes.DTTuristaDetallePrivado;
 
 class ControladorMaestroTest {
     private static IControladorMaestro contrMaestro;
+
     private static String[][] datosDepartamentos = {
             { "Canelones", "División Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es" },
             { "Maldonado", "División Turismo de la Intendencia", "https://www.maldonado.gub.uy/" },
@@ -499,5 +497,8 @@ class ControladorMaestroTest {
             assertTrue(aparece);
         }
     }
+
+
+
 
 }

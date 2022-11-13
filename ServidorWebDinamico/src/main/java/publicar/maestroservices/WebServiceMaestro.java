@@ -43,4 +43,26 @@ public interface WebServiceMaestro {
         throws ObjetoNoExisteEnTurismoUy_Exception
     ;
 
+    /**
+     * 
+     * @param arg0
+     * @param arg1
+     * @param arg2
+     * @param arg3
+     * @return
+     *     returns publicar.maestroservices.DtResultadoBusqueda
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://maestroServices.publicar/WebServiceMaestro/buscarRequest", output = "http://maestroServices.publicar/WebServiceMaestro/buscarResponse")
+    public DtResultadoBusqueda buscar(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2,
+        @WebParam(name = "arg3", partName = "arg3")
+        TipoOrdenacion arg3);
+
 }

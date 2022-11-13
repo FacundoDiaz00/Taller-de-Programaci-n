@@ -8,9 +8,7 @@ import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import excepciones.PaquetesSinActividadesExcepcion;
-import logica.datatypes.DTPaquete;
-import logica.datatypes.DTPaqueteDetalles;
-import logica.datatypes.Imagen;
+import logica.datatypes.*;
 
 /**
  * @author Equipo taller prog 16
@@ -84,4 +82,6 @@ public interface IControladorPaquete {
     List<DTPaquete> obtenerDTPaquetesPorCategoria(String categoria) throws ObjetoNoExisteEnTurismoUy;
 
     DTPaqueteDetalles obtenerDTPaqueteDetalle(String nombrePaquete) throws ObjetoNoExisteEnTurismoUy;
+
+    List<DTPaquete> filtrarPaquetes(String filtro, String categoria, TipoOrdenacion ordenacion);
 }

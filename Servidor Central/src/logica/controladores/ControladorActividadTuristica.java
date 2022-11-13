@@ -22,15 +22,9 @@ import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import excepciones.TurismoUyException;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTInscripcion;
-import logica.datatypes.DTSalidaTuristica;
-import logica.datatypes.DTSalidaTuristicaDetalle;
-import logica.datatypes.EstadoActividadTuristica;
-import logica.datatypes.Imagen;
-import logica.datatypes.colleciones.DtActividadTuristicaCollection;
-import logica.datatypes.colleciones.DtMapActividadSalidaTuristicaCollection;
+import logica.datatypes.*;
+import logica.datatypes.comparadores.ComparatorDTActividadTuristicaByFechaCreacion;
+import logica.datatypes.comparadores.ComparatorDTActividadTuristicaByNombre;
 import logica.entidades.ActividadTuristica;
 import logica.entidades.Categoria;
 import logica.entidades.Compra;
@@ -413,4 +407,43 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		// Me quedo con el top 10
 		return tuplas.subList(0, Math.min(10, tuplas.size()));
 	}
+
+
+    @Override
+    public List<DTActividadTuristica> filtrarActividades(String filtro, String departamento, String categoria, TipoOrdenacion ordenacion) {
+        ManejadorActividadTuristica mact = ManejadorActividadTuristica.getInstancia();
+        List<DTActividadTuristica> actividades = new ArrayList<>();
+        for (ActividadTuristica act : mact.getActividades()){
+            /*
+                En ninguna parte del caso de uso dice que solo son confirmadas, pero no le encuentro sentido que
+                  sea de otro tipo en base a lo que siempre se dijo de donde se muestran los otros tipos de actividades
+            */
+            if(act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+                if (filtro == null || act.getNombre().contains(filtro) || act.getDescrpicion().contains(filtro)){
+                    boolean debeIngresar = true;
+
+                    if(categoria != null && !act.getCategorias().containsKey(categoria)){
+                        debeIngresar = false;
+                    }
+                    if(departamento != null && !act.getDepartamento().getNombre().equals(departamento)){
+                        debeIngresar = false;
+                    }
+                    if(debeIngresar){
+                        actividades.add(act.obtenerDTActividadTuristica());
+                    }
+                }
+            }
+        }
+
+        switch (ordenacion){
+            case ALFABETICAMENTE:
+                actividades.sort(new ComparatorDTActividadTuristicaByNombre());
+                break;
+
+            case FECHA_PUBLICACION:
+                actividades.sort(new ComparatorDTActividadTuristicaByFechaCreacion().reversed());
+                break;
+        }
+        return actividades;
+    }
 }

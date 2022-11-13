@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import logica.datatypes.*;
+import logica.entidades.ActividadTuristica;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -34,13 +36,6 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 import logica.controladores.IControladorUsuario;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTProveedorDetallePrivado;
-import logica.datatypes.DTSalidaTuristica;
-import logica.datatypes.DTSalidaTuristicaDetalle;
-import logica.datatypes.DTTuristaDetallePrivado;
-import logica.datatypes.EstadoActividadTuristica;
 
 class ControladorActividadTuristicaTest {
     private static IControladorActividadTuristica contrActTur;
@@ -1295,4 +1290,51 @@ class ControladorActividadTuristicaTest {
         var actDentroProv = provDT.getActividadesNoConfirmadas().get(EstadoActividadTuristica.FINALIZADA).get(0);
         assertEquals(nombreActividad, actDentroProv.getNombre());
     }
+
+    @Test
+    void filtrarActividadesTest() throws TurismoUyException{
+        String idTest = "filtrarActividadesTest";
+        String idTestNoFiltrable = "filtrar_______ActividadesTest";
+        List<String> prov = ControladorUsuarioTest.generarProveedores(1, idTest);
+        List<String> departamentos = ControladorActividadTuristicaTest.generarDepartamentos(3, idTest);
+        String idCat1 =  idTest + " cat1";
+        String idCat2 =  idTest + " cat2";
+        contrActTur.altaCategoria(idCat1);
+        contrActTur.altaCategoria(idCat2);
+
+        String[] nombreAct = {"_1" + idTest , "_2" + idTestNoFiltrable,"_3" + idTestNoFiltrable,"_4" + idTest , "_5" + idTest , "_6" + idTest };
+
+
+        contrActTur.altaActividadTuristica(prov.get(0), departamentos.get(0), nombreAct[0],"AAAAA",1, (float) 1.0, "aaa", localDateNow.minusDays(5), null, List.of(idCat1), null);
+        contrActTur.altaActividadTuristica(prov.get(0), departamentos.get(0), nombreAct[1],"AA" + idTest+  " AAA",1, (float) 1.0, "aaa", localDateNow.minusDays(4), null, List.of(idCat1), null);
+        contrActTur.altaActividadTuristica(prov.get(0), departamentos.get(0), nombreAct[2],"AAAAA",1, (float) 1.0, "aaa", localDateNow.minusDays(3), null, List.of(idCat1), null);
+        contrActTur.altaActividadTuristica(prov.get(0), departamentos.get(1), nombreAct[3],"AAAAA",1, (float) 1.0, "aaa", localDateNow.minusDays(2), null, List.of(idCat1), null);
+        contrActTur.altaActividadTuristica(prov.get(0), departamentos.get(1), nombreAct[4],"AAAAA",1, (float) 1.0, "aaa", localDateNow.minusDays(1), null, List.of(idCat1, idCat2), null);
+        contrActTur.altaActividadTuristica(prov.get(0), departamentos.get(2), nombreAct[5],"AAAAA",1, (float) 1.0, "aaa", localDateNow.minusDays(0), null, List.of(idCat2), null);
+
+        for (int i = 0; i<6; i++){
+            contrActTur.cambiarEstadoDeActividadTuristica(nombreAct[i], EstadoActividadTuristica.ACEPTADA);
+        }
+
+        List<DTActividadTuristica> resultadoFiltrado = contrActTur.filtrarActividades(idTest, null, null, TipoOrdenacion.ALFABETICAMENTE);
+        assertEquals(5, resultadoFiltrado.size());
+        assertEquals(nombreAct[0], resultadoFiltrado.get(0).getNombre());
+        assertEquals(nombreAct[5], resultadoFiltrado.get(4).getNombre());
+
+        resultadoFiltrado = contrActTur.filtrarActividades(idTest, departamentos.get(0), null, TipoOrdenacion.FECHA_PUBLICACION);
+        assertEquals(2, resultadoFiltrado.size());
+        assertEquals(nombreAct[1], resultadoFiltrado.get(0).getNombre());
+        assertEquals(nombreAct[0], resultadoFiltrado.get(1).getNombre());
+
+        resultadoFiltrado = contrActTur.filtrarActividades(idTest, null, idCat1, TipoOrdenacion.FECHA_PUBLICACION);
+        assertEquals(4, resultadoFiltrado.size());
+        assertEquals(nombreAct[4], resultadoFiltrado.get(0).getNombre());
+        assertEquals(nombreAct[3], resultadoFiltrado.get(1).getNombre());
+        assertEquals(nombreAct[1], resultadoFiltrado.get(2).getNombre());
+        assertEquals(nombreAct[0], resultadoFiltrado.get(3).getNombre());
+
+
+
+    }
+
 }

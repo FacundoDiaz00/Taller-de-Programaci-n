@@ -268,8 +268,6 @@ public class WebServiceActividades {
             e.printStackTrace();
             throw new ErrorAlProcesar("No se pudo generar el PDF");
         }
-
-
     }
 
 

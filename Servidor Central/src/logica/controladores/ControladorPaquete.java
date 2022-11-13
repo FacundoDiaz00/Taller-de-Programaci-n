@@ -9,10 +9,11 @@ import excepciones.CompraYaRegistradaException;
 import excepciones.ObjetoNoExisteEnTurismoUy;
 import excepciones.PaqueteYaRegistradoException;
 import excepciones.PaquetesSinActividadesExcepcion;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTPaquete;
-import logica.datatypes.DTPaqueteDetalles;
-import logica.datatypes.Imagen;
+import logica.datatypes.*;
+import logica.datatypes.comparadores.ComparatorDTActividadTuristicaByFechaCreacion;
+import logica.datatypes.comparadores.ComparatorDTActividadTuristicaByNombre;
+import logica.datatypes.comparadores.ComparatorDTPaqueteByFechaCreacion;
+import logica.datatypes.comparadores.ComparatorDTPaqueteByNombre;
 import logica.entidades.*;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
@@ -30,7 +31,7 @@ public class ControladorPaquete implements IControladorPaquete {
     }
 
     public void altaPaquete(String nombre, String descripcion, int periodovalidez, float descuento, LocalDate fechaR,
-            Imagen img) throws PaqueteYaRegistradoException {
+                            Imagen img) throws PaqueteYaRegistradoException {
 
         ManejadorPaquete manejadosPaq = ManejadorPaquete.getInstancia();
 
@@ -159,14 +160,42 @@ public class ControladorPaquete implements IControladorPaquete {
         return ret;
     }
 
-	public boolean actividadExisteEnAlgunPaquete(String idActividad) {
-		ManejadorPaquete manPaq = ManejadorPaquete.getInstancia();
-		List<Paquete> paquetes = manPaq.getPaquetes();
-		for (Paquete paquete : paquetes) {
-			if (paquete.getActividades().containsKey(idActividad))
-				return true;
-		}
-		return false;
-	}
+    public boolean actividadExisteEnAlgunPaquete(String idActividad) {
+        ManejadorPaquete manPaq = ManejadorPaquete.getInstancia();
+        List<Paquete> paquetes = manPaq.getPaquetes();
+        for (Paquete paquete : paquetes) {
+            if (paquete.getActividades().containsKey(idActividad))
+                return true;
+        }
+        return false;
+    }
 
+    @Override
+    public List<DTPaquete> filtrarPaquetes(String filtro, String categoria, TipoOrdenacion ordenacion) {
+        ManejadorPaquete mact = ManejadorPaquete.getInstancia();
+        List<DTPaquete> paquetes = new ArrayList<>();
+        for (Paquete pack : mact.getPaquetes()){
+            if (filtro == null || pack.getNombre().contains(filtro) || pack.getDescrpicion().contains(filtro)){
+                boolean debeIngresar = true;
+
+                if (categoria != null && !pack.getCategorias().contains(categoria)){
+                    debeIngresar = false;
+                }
+                if(debeIngresar){
+                    paquetes.add(pack.obtenerDTPaquete());
+                }
+            }
+        }
+
+        switch (ordenacion){
+            case ALFABETICAMENTE:
+                paquetes.sort(new ComparatorDTPaqueteByNombre());
+                break;
+
+            case FECHA_PUBLICACION:
+                paquetes.sort(new ComparatorDTPaqueteByFechaCreacion().reversed());
+                break;
+        }
+        return paquetes;
+    }
 }

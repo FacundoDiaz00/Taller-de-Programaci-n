@@ -22,13 +22,7 @@ import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SalidaYaRegistradaException;
 import excepciones.SuperaElMaximoDeTuristasException;
 import excepciones.TurismoUyException;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTInscripcion;
-import logica.datatypes.DTSalidaTuristica;
-import logica.datatypes.DTSalidaTuristicaDetalle;
-import logica.datatypes.EstadoActividadTuristica;
-import logica.datatypes.Imagen;
+import logica.datatypes.*;
 
 /**
  * @author Equipo taller prog 16
@@ -236,4 +230,6 @@ public interface IControladorActividadTuristica {
 	
 	// Devuelve una lista ordenada (descendente) de 4-tuplas con los datos: Actividad o Salida | Proveedor | Tipo | Cantidad de visitas
 	List<String[]> obtenerDatosVisitas();
+
+    List<DTActividadTuristica> filtrarActividades(String filtro, String departamento, String categoria, TipoOrdenacion ordenacion);
 }
