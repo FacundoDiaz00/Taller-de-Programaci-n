@@ -29,9 +29,10 @@
 
 
                 <ul class="navbar-nav d-flex">
-                    <form class="d-flex buscar" role="search" id="buscador">
-                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                        <button class="btn" ><i class="fas fa-search"></i></button>
+                    <form class="d-flex buscar" role="search" id="buscador" method="get" action="busqueda">
+                        <input id="busqueda" name="busqueda" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button type="submit" class="btn" ><i class="fas fa-search"></i></button>
+                        
                     </form>
                     
                     <%
