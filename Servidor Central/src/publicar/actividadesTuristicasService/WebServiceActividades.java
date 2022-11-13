@@ -237,7 +237,7 @@ public class WebServiceActividades {
             PdfWriter.getInstance(documento , streamSalida);
             documento.open();
 
-            Paragraph marca = new Paragraph("Turistmo UY ", FontFactory.getFont("system_ui", 30, Font.BOLD, BaseColor.BLACK));
+            Paragraph marca = new Paragraph("Turismo UY ", FontFactory.getFont("system_ui", 30, Font.BOLD, BaseColor.BLACK));
             Paragraph titulo = new Paragraph("\nComprobante inscripcion - Turistmo Uy \n", FontFactory.getFont("system_ui", 20, Font.BOLD, BaseColor.BLACK));
 
             documento.add(marca);
