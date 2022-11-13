@@ -255,6 +255,8 @@
                                              		                                             }
                                              		                                             %>
 		                                            <div class="botonera">
+		                                              		                                               
+		                                                <a style="margin-right: 8px"  target=”_blank” href="CertificadoInscripcion?idTurista=<%= usuario.getNickname() %>&idSalida=<%=insc.getSalida().getNombre()%>" class="btn btn-secondary">Descargar comprobante</a>
 		                                                <a href="ConsultaSalida?id=<%=insc.getSalida().getNombre()%>" class="btn btn-primary">Ver mas</a>
 		                                            </div>
 		                                        </div>

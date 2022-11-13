@@ -1,5 +1,8 @@
 package publicar.actividadesTuristicasService;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import configuraciones.Cargador;
 import excepciones.*;
 import jakarta.jws.WebMethod;
@@ -7,16 +10,17 @@ import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import logica.controladores.Fabrica;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTSalidaTuristica;
-import logica.datatypes.DTSalidaTuristicaDetalle;
-import logica.datatypes.EstadoActividadTuristica;
-import logica.datatypes.Imagen;
+import logica.datatypes.*;
 import logica.datatypes.colleciones.DtActividadTuristicaCollection;
 import logica.datatypes.colleciones.DtMapActividadSalidaTuristicaCollection;
 import logica.datatypes.colleciones.DtSalidaTuristicaCollection;
+import logica.entidades.SalidaTuristica;
 import logica.utils.UtilsDT;
 
+import java.awt.*;
+import java.awt.Font;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -208,5 +212,65 @@ public class WebServiceActividades {
 
     	return new DtMapActividadSalidaTuristicaCollection(respuestaInfo);
     }
+
+    @WebMethod
+    public byte[] getComprobanteInscripcion(String nicknameUsuario, String nombreSalida) throws ObjetoNoExisteEnTurismoUy, ErrorAlProcesar {
+        DTTuristaDetallePrivado dtTuristaDetallePrivado = (DTTuristaDetallePrivado) Fabrica.getInstancia().getIControladorUsuario().obtenerDTUsuarioDetallePrivado(nicknameUsuario);
+
+        DTInscripcion dtInscrBuscado = null;
+        for (DTInscripcion dtIsc : dtTuristaDetallePrivado.getDTInscripciones()){
+            if (dtIsc.getSalida().getNombre().equals(nombreSalida)){
+                dtInscrBuscado = dtIsc;
+                break;
+            }
+        }
+
+        if (dtInscrBuscado == null){
+            throw new ObjetoNoExisteEnTurismoUy("No se encontro la salida turistica para este turista");
+        }
+
+        Document documento = new Document();
+
+        ByteArrayOutputStream streamSalida = new ByteArrayOutputStream();
+
+        try{
+            PdfWriter.getInstance(documento , streamSalida);
+            documento.open();
+
+            Paragraph marca = new Paragraph("Turistmo UY ", FontFactory.getFont("system_ui", 30, Font.BOLD, BaseColor.BLACK));
+            Paragraph titulo = new Paragraph("\nComprobante inscripcion - Turistmo Uy \n", FontFactory.getFont("system_ui", 20, Font.BOLD, BaseColor.BLACK));
+
+            documento.add(marca);
+            documento.add(titulo);
+
+            Paragraph tituloDatosIncripcion = new Paragraph("Datos inscripcion \n \n", FontFactory.getFont("system_ui", 18, Font.BOLD, BaseColor.BLACK));
+            documento.add(tituloDatosIncripcion);
+
+            PdfPTable tabla = new PdfPTable(2);
+
+            //Celdas
+            tabla.addCell(new Paragraph("Actividad ", FontFactory.getFont("arial", 14, Font.BOLD, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph(dtInscrBuscado.getSalida().getActividad(), FontFactory.getFont("arial", 14, Font.PLAIN, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph("Salida ", FontFactory.getFont("arial", 14, Font.BOLD, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph(dtInscrBuscado.getSalida().getNombre(), FontFactory.getFont("arial", 14, Font.PLAIN, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph("Turista ", FontFactory.getFont("arial", 14, Font.BOLD, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph(dtTuristaDetallePrivado.getNombre() + dtTuristaDetallePrivado.getApellido(), FontFactory.getFont("arial", 14, Font.PLAIN, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph("Fecha inscripcion", FontFactory.getFont("arial", 14, Font.BOLD, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph(dtInscrBuscado.getFechaInscripcionStr(), FontFactory.getFont("arial", 14, Font.PLAIN, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph("Cantidad turistas", FontFactory.getFont("arial", 14, Font.BOLD, BaseColor.BLACK)));
+            tabla.addCell(new Paragraph(String.valueOf(dtInscrBuscado.getCantidadTuristas()), FontFactory.getFont("arial", 14, Font.PLAIN, BaseColor.BLACK)));
+
+            documento.add(tabla);
+            documento.close();
+            return streamSalida.toByteArray();
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+            throw new ErrorAlProcesar("No se pudo generar el PDF");
+        }
+
+
+    }
+
 
 }

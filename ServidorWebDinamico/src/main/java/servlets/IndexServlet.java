@@ -87,59 +87,67 @@ public class IndexServlet extends HttpServlet {
 
         List<String> departamentos = wbActi.obtenerIdDepartamentos().getItem();
         List<String> categorias = wbActi.obtenerIdCategorias().getItem();
-
-        String departamentoElegido = (String) req.getParameter("idDepartamento");
-        String categoriaElegida = (String) req.getParameter("idCategoria");
-
-        if (departamentoElegido == null && categoriaElegida == null) {
-            req.setAttribute("idDepartamento", departamentos.get(0));
-        } else if (departamentoElegido != null && categoriaElegida != null) {
-            req.setAttribute("motivoDeError",
-                    "No se puede ingresar el parametro idDepartamento y idCategoria a la vez");
-            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-            return;
-        } else {
-            req.setAttribute("idDepartamento", req.getParameter("idDepartamento"));
-            req.setAttribute("idCategoria", req.getParameter("idCategoria"));
-        }
-
-        departamentoElegido = (String) req.getAttribute("idDepartamento");
-        categoriaElegida = (String) req.getAttribute("idCategoria");
-
         List<publicar.actividadesturisticasservice.DtActividadTuristica> actividades = null;
         List<publicar.paqueteturisticasservice.DtPaquete> paquetes = null;
+        if(categorias.size() > 0 || departamentos.size() > 0) {
+        	 String departamentoElegido = (String) req.getParameter("idDepartamento");
+             String categoriaElegida = (String) req.getParameter("idCategoria");
 
-        try {
-            if (departamentoElegido != null) {
-                paquetes = wbPack.obtenerDtPaquetes().getPaquetes();
-                actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(departamentoElegido).getActividadTuristicas();
-            } else {
-                paquetes =  wbPack.obtenerDTPaquetesPorCategoria(categoriaElegida).getPaquetes();
-                actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida).getActividadTuristicas();
-            }
-            
-            HttpSession sesion = req.getSession(false);
-            Map<DtActividadTuristica, Boolean> actividadPerteneceAFavoritos = new HashMap<DtActividadTuristica, Boolean>();
-            if(sesion != null && user != null && user instanceof DtTurista) {
-            	for(var actividad: actividades) {
-            		actividadPerteneceAFavoritos.put(actividad, wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), actividad.getNombre()));
-            	}
-            	
-            	req.setAttribute("actividadFavorito", actividadPerteneceAFavoritos);
-            }
-        } catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
-            req.setAttribute("motivoDeError", "El nombre de la departamento no existe en el sistema");
-            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-            return;
-        } catch (publicar.paqueteturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
-            req.setAttribute("motivoDeError", "El nombre de la categoria no existe en el sistema");
-            req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
-            return;
-        } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+             if (departamentos.size() > 0 && departamentoElegido == null && categoriaElegida == null) {
+                 req.setAttribute("idDepartamento", departamentos.get(0));
+             } else if(categorias.size() > 0 && departamentoElegido == null && categoriaElegida == null) {
+            	 req.setAttribute("idCategoria", categorias.get(0));
+             }else if (departamentoElegido != null && categoriaElegida != null) {
+                 req.setAttribute("motivoDeError",
+                         "No se puede ingresar el parametro idDepartamento y idCategoria a la vez");
+                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                 return;
+             } else {
+                 req.setAttribute("idDepartamento", req.getParameter("idDepartamento"));
+                 req.setAttribute("idCategoria", req.getParameter("idCategoria"));
+             }
 
+             departamentoElegido = (String) req.getAttribute("idDepartamento");
+             categoriaElegida = (String) req.getAttribute("idCategoria");
+
+
+
+             try {
+                 if (departamentoElegido != null) {
+                     paquetes = wbPack.obtenerDtPaquetes().getPaquetes();
+                     actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorDepartamento(departamentoElegido).getActividadTuristicas();
+                 } else {
+                     paquetes =  wbPack.obtenerDTPaquetesPorCategoria(categoriaElegida).getPaquetes();
+                     actividades = wbActi.obtenerDTActividadesTuristicasConfirmadasPorCategoria(categoriaElegida).getActividadTuristicas();
+                 }
+                 
+                 HttpSession sesion = req.getSession(false);
+                 Map<DtActividadTuristica, Boolean> actividadPerteneceAFavoritos = new HashMap<DtActividadTuristica, Boolean>();
+                 if(sesion != null && user != null && user instanceof DtTurista) {
+                 	for(var actividad: actividades) {
+                 		actividadPerteneceAFavoritos.put(actividad, wbUsuarios.perteneceAFavoritosDeTurista(user.getNickname(), actividad.getNombre()));
+                 	}
+                 	
+                 	req.setAttribute("actividadFavorito", actividadPerteneceAFavoritos);
+                 }
+             } catch (publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+                 req.setAttribute("motivoDeError", "El nombre de la departamento no existe en el sistema");
+                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                 return;
+             } catch (publicar.paqueteturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
+                 req.setAttribute("motivoDeError", "El nombre de la categoria no existe en el sistema");
+                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
+                 return;
+             } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+     			// TODO Auto-generated catch block
+     			e.printStackTrace();
+     		}
+
+        } else {
+        	 paquetes = new ArrayList<>();
+             actividades = new ArrayList<>();
+        }
+       
         req.setAttribute("departamentos", departamentos);
         req.setAttribute("categorias", categorias);
         req.setAttribute("actividades", actividades);
