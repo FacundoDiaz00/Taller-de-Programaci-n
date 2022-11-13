@@ -1,7 +1,11 @@
 package logica.datatypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtResultadoBusqueda {
 
     List<DTActividadTuristica> actividades;
