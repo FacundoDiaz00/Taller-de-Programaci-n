@@ -17,7 +17,7 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>{@code
  * <complexType name="dtActividadTuristicaDetalle">
  *   <complexContent>
- *     <extension base="{http://maestroServices.publicar/}dtActividadTuristica">
+ *     <extension base="{http://maestroservices.publicar/}dtActividadTuristica">
  *       <sequence>
  *         <element name="salidas">
  *           <complexType>
@@ -30,7 +30,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           <sequence>
  *                             <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                             <element name="value" type="{http://maestroServices.publicar/}dtSalidaTuristica" minOccurs="0"/>
+ *                             <element name="value" type="{http://maestroservices.publicar/}dtSalidaTuristica" minOccurs="0"/>
  *                           </sequence>
  *                         </restriction>
  *                       </complexContent>
@@ -52,7 +52,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           <sequence>
  *                             <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                             <element name="value" type="{http://maestroServices.publicar/}dtPaquete" minOccurs="0"/>
+ *                             <element name="value" type="{http://maestroservices.publicar/}dtPaquete" minOccurs="0"/>
  *                           </sequence>
  *                         </restriction>
  *                       </complexContent>
@@ -150,7 +150,7 @@ public class DtActividadTuristicaDetalle
      *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 <sequence>
      *                   <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                   <element name="value" type="{http://maestroServices.publicar/}dtPaquete" minOccurs="0"/>
+     *                   <element name="value" type="{http://maestroservices.publicar/}dtPaquete" minOccurs="0"/>
      *                 </sequence>
      *               </restriction>
      *             </complexContent>
@@ -215,7 +215,7 @@ public class DtActividadTuristicaDetalle
          *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       <sequence>
          *         <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *         <element name="value" type="{http://maestroServices.publicar/}dtPaquete" minOccurs="0"/>
+         *         <element name="value" type="{http://maestroservices.publicar/}dtPaquete" minOccurs="0"/>
          *       </sequence>
          *     </restriction>
          *   </complexContent>
@@ -303,7 +303,7 @@ public class DtActividadTuristicaDetalle
      *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 <sequence>
      *                   <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                   <element name="value" type="{http://maestroServices.publicar/}dtSalidaTuristica" minOccurs="0"/>
+     *                   <element name="value" type="{http://maestroservices.publicar/}dtSalidaTuristica" minOccurs="0"/>
      *                 </sequence>
      *               </restriction>
      *             </complexContent>
@@ -368,7 +368,7 @@ public class DtActividadTuristicaDetalle
          *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       <sequence>
          *         <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *         <element name="value" type="{http://maestroServices.publicar/}dtSalidaTuristica" minOccurs="0"/>
+         *         <element name="value" type="{http://maestroservices.publicar/}dtSalidaTuristica" minOccurs="0"/>
          *       </sequence>
          *     </restriction>
          *   </complexContent>

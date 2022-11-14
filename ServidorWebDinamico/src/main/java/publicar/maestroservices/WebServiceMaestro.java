@@ -17,7 +17,7 @@ import jakarta.xml.ws.FaultAction;
  * Generated source version: 3.0
  * 
  */
-@WebService(name = "WebServiceMaestro", targetNamespace = "http://maestroServices.publicar/")
+@WebService(name = "WebServiceMaestro", targetNamespace = "http://maestroservices.publicar/")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 @XmlSeeAlso({
     ObjectFactory.class
@@ -34,8 +34,8 @@ public interface WebServiceMaestro {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://maestroServices.publicar/WebServiceMaestro/getImgRequest", output = "http://maestroServices.publicar/WebServiceMaestro/getImgResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://maestroServices.publicar/WebServiceMaestro/getImg/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://maestroservices.publicar/WebServiceMaestro/getImgRequest", output = "http://maestroservices.publicar/WebServiceMaestro/getImgResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://maestroservices.publicar/WebServiceMaestro/getImg/Fault/ObjetoNoExisteEnTurismoUy")
     })
     public byte[] getImg(
         @WebParam(name = "arg0", partName = "arg0")
@@ -54,7 +54,7 @@ public interface WebServiceMaestro {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://maestroServices.publicar/WebServiceMaestro/buscarRequest", output = "http://maestroServices.publicar/WebServiceMaestro/buscarResponse")
+    @Action(input = "http://maestroservices.publicar/WebServiceMaestro/buscarRequest", output = "http://maestroservices.publicar/WebServiceMaestro/buscarResponse")
     public DtResultadoBusqueda buscar(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,

@@ -17,10 +17,10 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>{@code
  * <complexType name="dtSalidaTuristicaDetalle">
  *   <complexContent>
- *     <extension base="{http://paqueteTuristicasService.publicar/}dtSalidaTuristica">
+ *     <extension base="{http://paqueteturisticasservice.publicar/}dtSalidaTuristica">
  *       <sequence>
- *         <element name="inscripciones" type="{http://paqueteTuristicasService.publicar/}dtInscripcion" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="dtActividad" type="{http://paqueteTuristicasService.publicar/}dtActividadTuristicaDetalle" minOccurs="0"/>
+ *         <element name="inscripciones" type="{http://paqueteturisticasservice.publicar/}dtInscripcion" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="dtActividad" type="{http://paqueteturisticasservice.publicar/}dtActividadTuristicaDetalle" minOccurs="0"/>
  *       </sequence>
  *     </extension>
  *   </complexContent>

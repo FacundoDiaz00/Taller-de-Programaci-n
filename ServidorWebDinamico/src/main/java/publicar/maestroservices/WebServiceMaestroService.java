@@ -19,14 +19,14 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServiceMaestroService", targetNamespace = "http://maestroServices.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
+@WebServiceClient(name = "WebServiceMaestroService", targetNamespace = "http://maestroservices.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
 public class WebServiceMaestroService
     extends Service
 {
 
     private final static URL WEBSERVICEMAESTROSERVICE_WSDL_LOCATION;
     private final static WebServiceException WEBSERVICEMAESTROSERVICE_EXCEPTION;
-    private final static QName WEBSERVICEMAESTROSERVICE_QNAME = new QName("http://maestroServices.publicar/", "WebServiceMaestroService");
+    private final static QName WEBSERVICEMAESTROSERVICE_QNAME = new QName("http://maestroservices.publicar/", "WebServiceMaestroService");
 
     static {
         URL url = null;
@@ -71,7 +71,7 @@ public class WebServiceMaestroService
      */
     @WebEndpoint(name = "WebServiceMaestroPort")
     public WebServiceMaestro getWebServiceMaestroPort() {
-        return super.getPort(new QName("http://maestroServices.publicar/", "WebServiceMaestroPort"), WebServiceMaestro.class);
+        return super.getPort(new QName("http://maestroservices.publicar/", "WebServiceMaestroPort"), WebServiceMaestro.class);
     }
 
     /**
@@ -83,7 +83,7 @@ public class WebServiceMaestroService
      */
     @WebEndpoint(name = "WebServiceMaestroPort")
     public WebServiceMaestro getWebServiceMaestroPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://maestroServices.publicar/", "WebServiceMaestroPort"), WebServiceMaestro.class, features);
+        return super.getPort(new QName("http://maestroservices.publicar/", "WebServiceMaestroPort"), WebServiceMaestro.class, features);
     }
 
     private static URL __getWsdlLocation() {

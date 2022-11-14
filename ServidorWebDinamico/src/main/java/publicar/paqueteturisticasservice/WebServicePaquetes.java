@@ -17,7 +17,7 @@ import jakarta.xml.ws.FaultAction;
  * Generated source version: 3.0
  * 
  */
-@WebService(name = "WebServicePaquetes", targetNamespace = "http://paqueteTuristicasService.publicar/")
+@WebService(name = "WebServicePaquetes", targetNamespace = "http://paqueteturisticasservice.publicar/")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 @XmlSeeAlso({
     ObjectFactory.class
@@ -34,8 +34,8 @@ public interface WebServicePaquetes {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaqueteDetalle/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleRequest", output = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDtPaqueteDetalleResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDtPaqueteDetalle/Fault/ObjetoNoExisteEnTurismoUy")
     })
     public DtPaqueteDetalles obtenerDtPaqueteDetalle(
         @WebParam(name = "arg0", partName = "arg0")
@@ -52,8 +52,8 @@ public interface WebServicePaquetes {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDTPaquetesPorCategoriaRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDTPaquetesPorCategoriaResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDTPaquetesPorCategoria/Fault/ObjetoNoExisteEnTurismoUy")
+    @Action(input = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDTPaquetesPorCategoriaRequest", output = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDTPaquetesPorCategoriaResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDTPaquetesPorCategoria/Fault/ObjetoNoExisteEnTurismoUy")
     })
     public DtPaqueteCollection obtenerDTPaquetesPorCategoria(
         @WebParam(name = "arg0", partName = "arg0")
@@ -71,10 +71,10 @@ public interface WebServicePaquetes {
      * @throws PaquetesSinActividadesExcepcion_Exception
      */
     @WebMethod
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaqueteRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaqueteResponse", fault = {
-        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaquete/Fault/ObjetoNoExisteEnTurismoUy"),
-        @FaultAction(className = CompraYaRegistradaException_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaquete/Fault/CompraYaRegistradaException"),
-        @FaultAction(className = PaquetesSinActividadesExcepcion_Exception.class, value = "http://paqueteTuristicasService.publicar/WebServicePaquetes/comprarPaquete/Fault/PaquetesSinActividadesExcepcion")
+    @Action(input = "http://paqueteturisticasservice.publicar/WebServicePaquetes/comprarPaqueteRequest", output = "http://paqueteturisticasservice.publicar/WebServicePaquetes/comprarPaqueteResponse", fault = {
+        @FaultAction(className = ObjetoNoExisteEnTurismoUy_Exception.class, value = "http://paqueteturisticasservice.publicar/WebServicePaquetes/comprarPaquete/Fault/ObjetoNoExisteEnTurismoUy"),
+        @FaultAction(className = CompraYaRegistradaException_Exception.class, value = "http://paqueteturisticasservice.publicar/WebServicePaquetes/comprarPaquete/Fault/CompraYaRegistradaException"),
+        @FaultAction(className = PaquetesSinActividadesExcepcion_Exception.class, value = "http://paqueteturisticasservice.publicar/WebServicePaquetes/comprarPaquete/Fault/PaquetesSinActividadesExcepcion")
     })
     public void comprarPaquete(
         @WebParam(name = "arg0", partName = "arg0")
@@ -93,7 +93,7 @@ public interface WebServicePaquetes {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesRequest", output = "http://paqueteTuristicasService.publicar/WebServicePaquetes/obtenerDtPaquetesResponse")
+    @Action(input = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDtPaquetesRequest", output = "http://paqueteturisticasservice.publicar/WebServicePaquetes/obtenerDtPaquetesResponse")
     public DtPaqueteCollection obtenerDtPaquetes();
 
 }

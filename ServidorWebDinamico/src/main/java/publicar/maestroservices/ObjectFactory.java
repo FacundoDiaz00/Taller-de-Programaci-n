@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://maestroServices.publicar/", "ObjetoNoExisteEnTurismoUy");
+    private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://maestroservices.publicar/", "ObjetoNoExisteEnTurismoUy");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: publicar.maestroservices
@@ -211,7 +211,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      */
-    @XmlElementDecl(namespace = "http://maestroServices.publicar/", name = "ObjetoNoExisteEnTurismoUy")
+    @XmlElementDecl(namespace = "http://maestroservices.publicar/", name = "ObjetoNoExisteEnTurismoUy")
     public JAXBElement<ObjetoNoExisteEnTurismoUy> createObjetoNoExisteEnTurismoUy(ObjetoNoExisteEnTurismoUy value) {
         return new JAXBElement<>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
     }

@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "ObjetoNoExisteEnTurismoUy", targetNamespace = "http://paqueteTuristicasService.publicar/")
+@WebFault(name = "ObjetoNoExisteEnTurismoUy", targetNamespace = "http://paqueteturisticasservice.publicar/")
 public class ObjetoNoExisteEnTurismoUy_Exception
     extends Exception
 {

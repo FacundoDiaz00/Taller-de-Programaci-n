@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "NoExisteConsumoParaLaActividadExcepcion", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "NoExisteConsumoParaLaActividadExcepcion", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class NoExisteConsumoParaLaActividadExcepcion_Exception
     extends Exception
 {

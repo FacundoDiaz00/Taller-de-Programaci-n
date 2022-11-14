@@ -1,2 +1,2 @@
-@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://usuarioTuristicasService.publicar/")
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://usuarioturisticasservice.publicar/")
 package publicar.usuarioturisticasservice;

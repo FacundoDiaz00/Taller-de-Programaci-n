@@ -20,7 +20,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="cantTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="costo" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         <element name="vencimientoStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="paquete" type="{http://actividadesTuristicasService.publicar/}dtPaquete" minOccurs="0"/>
+ *         <element name="paquete" type="{http://actividadesturisticasservice.publicar/}dtPaquete" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

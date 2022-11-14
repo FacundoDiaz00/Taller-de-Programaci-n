@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="salidas" type="{http://actividadesTuristicasService.publicar/}dtSalidaTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="salidas" type="{http://actividadesturisticasservice.publicar/}dtSalidaTuristica" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

@@ -22,7 +22,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="apellido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="correo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="fechaNacStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
+ *         <element name="img" type="{http://usuarioturisticasservice.publicar/}imagen" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

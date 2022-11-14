@@ -1,4 +1,4 @@
-package publicar.usuarioTuristicasService;
+package publicar.usuarioturisticasservice;
 
 import configuraciones.Cargador;
 import excepciones.ContraseniaInvalidaException;

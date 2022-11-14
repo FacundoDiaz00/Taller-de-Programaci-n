@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "TurismoUyException", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "TurismoUyException", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class TurismoUyException_Exception
     extends Exception
 {

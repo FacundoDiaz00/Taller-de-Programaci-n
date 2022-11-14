@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "CompraYaRegistradaException", targetNamespace = "http://paqueteTuristicasService.publicar/")
+@WebFault(name = "CompraYaRegistradaException", targetNamespace = "http://paqueteturisticasservice.publicar/")
 public class CompraYaRegistradaException_Exception
     extends Exception
 {

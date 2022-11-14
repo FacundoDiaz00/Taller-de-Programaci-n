@@ -24,22 +24,22 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ActividadTuristicaNoAceptada_QNAME = new QName("http://actividadesTuristicasService.publicar/", "ActividadTuristicaNoAceptada");
-    private final static QName _ActividadTuristicaYaRegistradaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "ActividadTuristicaYaRegistradaException");
-    private final static QName _AltaInscripcionPosteriorAFechaSalidaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "AltaInscripcionPosteriorAFechaSalidaException");
-    private final static QName _CompraConConsumosInsuficientesExcepcion_QNAME = new QName("http://actividadesTuristicasService.publicar/", "CompraConConsumosInsuficientesExcepcion");
-    private final static QName _CompraPaqueteVencidoExcepcion_QNAME = new QName("http://actividadesTuristicasService.publicar/", "CompraPaqueteVencidoExcepcion");
-    private final static QName _ErrorAlProcesar_QNAME = new QName("http://actividadesTuristicasService.publicar/", "ErrorAlProcesar");
-    private final static QName _FechaAltaActividadPosteriorAFechaAltaSalidaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "FechaAltaActividadPosteriorAFechaAltaSalidaException");
-    private final static QName _FechaAltaSalidaPosteriorAFechaSalidaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "FechaAltaSalidaPosteriorAFechaSalidaException");
-    private final static QName _FechaAltaSalidaTuristicaPosteriorAFechaInscripcion_QNAME = new QName("http://actividadesTuristicasService.publicar/", "FechaAltaSalidaTuristicaPosteriorAFechaInscripcion");
-    private final static QName _InscripcionYaRegistradaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "InscripcionYaRegistradaException");
-    private final static QName _NoExisteConsumoParaLaActividadExcepcion_QNAME = new QName("http://actividadesTuristicasService.publicar/", "NoExisteConsumoParaLaActividadExcepcion");
-    private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://actividadesTuristicasService.publicar/", "ObjetoNoExisteEnTurismoUy");
-    private final static QName _PaqueteNoCompradoExcepcion_QNAME = new QName("http://actividadesTuristicasService.publicar/", "PaqueteNoCompradoExcepcion");
-    private final static QName _SalidaYaRegistradaException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "SalidaYaRegistradaException");
-    private final static QName _SuperaElMaximoDeTuristasException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "SuperaElMaximoDeTuristasException");
-    private final static QName _TurismoUyException_QNAME = new QName("http://actividadesTuristicasService.publicar/", "TurismoUyException");
+    private final static QName _ActividadTuristicaNoAceptada_QNAME = new QName("http://actividadesturisticasservice.publicar/", "ActividadTuristicaNoAceptada");
+    private final static QName _ActividadTuristicaYaRegistradaException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "ActividadTuristicaYaRegistradaException");
+    private final static QName _AltaInscripcionPosteriorAFechaSalidaException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "AltaInscripcionPosteriorAFechaSalidaException");
+    private final static QName _CompraConConsumosInsuficientesExcepcion_QNAME = new QName("http://actividadesturisticasservice.publicar/", "CompraConConsumosInsuficientesExcepcion");
+    private final static QName _CompraPaqueteVencidoExcepcion_QNAME = new QName("http://actividadesturisticasservice.publicar/", "CompraPaqueteVencidoExcepcion");
+    private final static QName _ErrorAlProcesar_QNAME = new QName("http://actividadesturisticasservice.publicar/", "ErrorAlProcesar");
+    private final static QName _FechaAltaActividadPosteriorAFechaAltaSalidaException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "FechaAltaActividadPosteriorAFechaAltaSalidaException");
+    private final static QName _FechaAltaSalidaPosteriorAFechaSalidaException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "FechaAltaSalidaPosteriorAFechaSalidaException");
+    private final static QName _FechaAltaSalidaTuristicaPosteriorAFechaInscripcion_QNAME = new QName("http://actividadesturisticasservice.publicar/", "FechaAltaSalidaTuristicaPosteriorAFechaInscripcion");
+    private final static QName _InscripcionYaRegistradaException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "InscripcionYaRegistradaException");
+    private final static QName _NoExisteConsumoParaLaActividadExcepcion_QNAME = new QName("http://actividadesturisticasservice.publicar/", "NoExisteConsumoParaLaActividadExcepcion");
+    private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://actividadesturisticasservice.publicar/", "ObjetoNoExisteEnTurismoUy");
+    private final static QName _PaqueteNoCompradoExcepcion_QNAME = new QName("http://actividadesturisticasservice.publicar/", "PaqueteNoCompradoExcepcion");
+    private final static QName _SalidaYaRegistradaException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "SalidaYaRegistradaException");
+    private final static QName _SuperaElMaximoDeTuristasException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "SuperaElMaximoDeTuristasException");
+    private final static QName _TurismoUyException_QNAME = new QName("http://actividadesturisticasservice.publicar/", "TurismoUyException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: publicar.actividadesturisticasservice
@@ -416,7 +416,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ActividadTuristicaNoAceptada }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "ActividadTuristicaNoAceptada")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "ActividadTuristicaNoAceptada")
     public JAXBElement<ActividadTuristicaNoAceptada> createActividadTuristicaNoAceptada(ActividadTuristicaNoAceptada value) {
         return new JAXBElement<>(_ActividadTuristicaNoAceptada_QNAME, ActividadTuristicaNoAceptada.class, null, value);
     }
@@ -429,7 +429,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ActividadTuristicaYaRegistradaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "ActividadTuristicaYaRegistradaException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "ActividadTuristicaYaRegistradaException")
     public JAXBElement<ActividadTuristicaYaRegistradaException> createActividadTuristicaYaRegistradaException(ActividadTuristicaYaRegistradaException value) {
         return new JAXBElement<>(_ActividadTuristicaYaRegistradaException_QNAME, ActividadTuristicaYaRegistradaException.class, null, value);
     }
@@ -442,7 +442,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link AltaInscripcionPosteriorAFechaSalidaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "AltaInscripcionPosteriorAFechaSalidaException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "AltaInscripcionPosteriorAFechaSalidaException")
     public JAXBElement<AltaInscripcionPosteriorAFechaSalidaException> createAltaInscripcionPosteriorAFechaSalidaException(AltaInscripcionPosteriorAFechaSalidaException value) {
         return new JAXBElement<>(_AltaInscripcionPosteriorAFechaSalidaException_QNAME, AltaInscripcionPosteriorAFechaSalidaException.class, null, value);
     }
@@ -455,7 +455,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link CompraConConsumosInsuficientesExcepcion }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "CompraConConsumosInsuficientesExcepcion")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "CompraConConsumosInsuficientesExcepcion")
     public JAXBElement<CompraConConsumosInsuficientesExcepcion> createCompraConConsumosInsuficientesExcepcion(CompraConConsumosInsuficientesExcepcion value) {
         return new JAXBElement<>(_CompraConConsumosInsuficientesExcepcion_QNAME, CompraConConsumosInsuficientesExcepcion.class, null, value);
     }
@@ -468,7 +468,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link CompraPaqueteVencidoExcepcion }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "CompraPaqueteVencidoExcepcion")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "CompraPaqueteVencidoExcepcion")
     public JAXBElement<CompraPaqueteVencidoExcepcion> createCompraPaqueteVencidoExcepcion(CompraPaqueteVencidoExcepcion value) {
         return new JAXBElement<>(_CompraPaqueteVencidoExcepcion_QNAME, CompraPaqueteVencidoExcepcion.class, null, value);
     }
@@ -481,7 +481,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ErrorAlProcesar }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "ErrorAlProcesar")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "ErrorAlProcesar")
     public JAXBElement<ErrorAlProcesar> createErrorAlProcesar(ErrorAlProcesar value) {
         return new JAXBElement<>(_ErrorAlProcesar_QNAME, ErrorAlProcesar.class, null, value);
     }
@@ -494,7 +494,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link FechaAltaActividadPosteriorAFechaAltaSalidaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "FechaAltaActividadPosteriorAFechaAltaSalidaException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "FechaAltaActividadPosteriorAFechaAltaSalidaException")
     public JAXBElement<FechaAltaActividadPosteriorAFechaAltaSalidaException> createFechaAltaActividadPosteriorAFechaAltaSalidaException(FechaAltaActividadPosteriorAFechaAltaSalidaException value) {
         return new JAXBElement<>(_FechaAltaActividadPosteriorAFechaAltaSalidaException_QNAME, FechaAltaActividadPosteriorAFechaAltaSalidaException.class, null, value);
     }
@@ -507,7 +507,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link FechaAltaSalidaPosteriorAFechaSalidaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "FechaAltaSalidaPosteriorAFechaSalidaException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "FechaAltaSalidaPosteriorAFechaSalidaException")
     public JAXBElement<FechaAltaSalidaPosteriorAFechaSalidaException> createFechaAltaSalidaPosteriorAFechaSalidaException(FechaAltaSalidaPosteriorAFechaSalidaException value) {
         return new JAXBElement<>(_FechaAltaSalidaPosteriorAFechaSalidaException_QNAME, FechaAltaSalidaPosteriorAFechaSalidaException.class, null, value);
     }
@@ -520,7 +520,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link FechaAltaSalidaTuristicaPosteriorAFechaInscripcion }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "FechaAltaSalidaTuristicaPosteriorAFechaInscripcion")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "FechaAltaSalidaTuristicaPosteriorAFechaInscripcion")
     public JAXBElement<FechaAltaSalidaTuristicaPosteriorAFechaInscripcion> createFechaAltaSalidaTuristicaPosteriorAFechaInscripcion(FechaAltaSalidaTuristicaPosteriorAFechaInscripcion value) {
         return new JAXBElement<>(_FechaAltaSalidaTuristicaPosteriorAFechaInscripcion_QNAME, FechaAltaSalidaTuristicaPosteriorAFechaInscripcion.class, null, value);
     }
@@ -533,7 +533,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link InscripcionYaRegistradaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "InscripcionYaRegistradaException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "InscripcionYaRegistradaException")
     public JAXBElement<InscripcionYaRegistradaException> createInscripcionYaRegistradaException(InscripcionYaRegistradaException value) {
         return new JAXBElement<>(_InscripcionYaRegistradaException_QNAME, InscripcionYaRegistradaException.class, null, value);
     }
@@ -546,7 +546,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link NoExisteConsumoParaLaActividadExcepcion }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "NoExisteConsumoParaLaActividadExcepcion")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "NoExisteConsumoParaLaActividadExcepcion")
     public JAXBElement<NoExisteConsumoParaLaActividadExcepcion> createNoExisteConsumoParaLaActividadExcepcion(NoExisteConsumoParaLaActividadExcepcion value) {
         return new JAXBElement<>(_NoExisteConsumoParaLaActividadExcepcion_QNAME, NoExisteConsumoParaLaActividadExcepcion.class, null, value);
     }
@@ -559,7 +559,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "ObjetoNoExisteEnTurismoUy")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "ObjetoNoExisteEnTurismoUy")
     public JAXBElement<ObjetoNoExisteEnTurismoUy> createObjetoNoExisteEnTurismoUy(ObjetoNoExisteEnTurismoUy value) {
         return new JAXBElement<>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
     }
@@ -572,7 +572,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link PaqueteNoCompradoExcepcion }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "PaqueteNoCompradoExcepcion")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "PaqueteNoCompradoExcepcion")
     public JAXBElement<PaqueteNoCompradoExcepcion> createPaqueteNoCompradoExcepcion(PaqueteNoCompradoExcepcion value) {
         return new JAXBElement<>(_PaqueteNoCompradoExcepcion_QNAME, PaqueteNoCompradoExcepcion.class, null, value);
     }
@@ -585,7 +585,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link SalidaYaRegistradaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "SalidaYaRegistradaException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "SalidaYaRegistradaException")
     public JAXBElement<SalidaYaRegistradaException> createSalidaYaRegistradaException(SalidaYaRegistradaException value) {
         return new JAXBElement<>(_SalidaYaRegistradaException_QNAME, SalidaYaRegistradaException.class, null, value);
     }
@@ -598,7 +598,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link SuperaElMaximoDeTuristasException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "SuperaElMaximoDeTuristasException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "SuperaElMaximoDeTuristasException")
     public JAXBElement<SuperaElMaximoDeTuristasException> createSuperaElMaximoDeTuristasException(SuperaElMaximoDeTuristasException value) {
         return new JAXBElement<>(_SuperaElMaximoDeTuristasException_QNAME, SuperaElMaximoDeTuristasException.class, null, value);
     }
@@ -611,7 +611,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link TurismoUyException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://actividadesTuristicasService.publicar/", name = "TurismoUyException")
+    @XmlElementDecl(namespace = "http://actividadesturisticasservice.publicar/", name = "TurismoUyException")
     public JAXBElement<TurismoUyException> createTurismoUyException(TurismoUyException value) {
         return new JAXBElement<>(_TurismoUyException_QNAME, TurismoUyException.class, null, value);
     }

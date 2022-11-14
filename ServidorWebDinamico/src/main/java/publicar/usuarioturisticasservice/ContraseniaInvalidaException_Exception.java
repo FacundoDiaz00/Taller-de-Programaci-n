@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "ContraseniaInvalidaException", targetNamespace = "http://usuarioTuristicasService.publicar/")
+@WebFault(name = "ContraseniaInvalidaException", targetNamespace = "http://usuarioturisticasservice.publicar/")
 public class ContraseniaInvalidaException_Exception
     extends Exception
 {

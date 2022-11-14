@@ -15,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>{@code
  * <complexType name="dtTurista">
  *   <complexContent>
- *     <extension base="{http://usuarioTuristicasService.publicar/}dtUsuario">
+ *     <extension base="{http://usuarioturisticasservice.publicar/}dtUsuario">
  *       <sequence>
  *         <element name="nacionalidad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       </sequence>

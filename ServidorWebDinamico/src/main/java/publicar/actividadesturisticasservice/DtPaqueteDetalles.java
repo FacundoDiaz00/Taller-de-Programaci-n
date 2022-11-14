@@ -17,7 +17,7 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>{@code
  * <complexType name="dtPaqueteDetalles">
  *   <complexContent>
- *     <extension base="{http://actividadesTuristicasService.publicar/}dtPaquete">
+ *     <extension base="{http://actividadesturisticasservice.publicar/}dtPaquete">
  *       <sequence>
  *         <element name="actividades">
  *           <complexType>
@@ -30,7 +30,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           <sequence>
  *                             <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                             <element name="value" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
+ *                             <element name="value" type="{http://actividadesturisticasservice.publicar/}dtActividadTuristica" minOccurs="0"/>
  *                           </sequence>
  *                         </restriction>
  *                       </complexContent>
@@ -41,7 +41,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *             </complexContent>
  *           </complexType>
  *         </element>
- *         <element name="compras" type="{http://actividadesTuristicasService.publicar/}dtCompra" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="compras" type="{http://actividadesturisticasservice.publicar/}dtCompra" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </extension>
  *   </complexContent>
@@ -136,7 +136,7 @@ public class DtPaqueteDetalles
      *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 <sequence>
      *                   <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                   <element name="value" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
+     *                   <element name="value" type="{http://actividadesturisticasservice.publicar/}dtActividadTuristica" minOccurs="0"/>
      *                 </sequence>
      *               </restriction>
      *             </complexContent>
@@ -201,7 +201,7 @@ public class DtPaqueteDetalles
          *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       <sequence>
          *         <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *         <element name="value" type="{http://actividadesTuristicasService.publicar/}dtActividadTuristica" minOccurs="0"/>
+         *         <element name="value" type="{http://actividadesturisticasservice.publicar/}dtActividadTuristica" minOccurs="0"/>
          *       </sequence>
          *     </restriction>
          *   </complexContent>

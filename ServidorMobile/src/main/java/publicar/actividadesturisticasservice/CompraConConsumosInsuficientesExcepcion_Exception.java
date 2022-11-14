@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "CompraConConsumosInsuficientesExcepcion", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "CompraConConsumosInsuficientesExcepcion", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class CompraConConsumosInsuficientesExcepcion_Exception
     extends Exception
 {

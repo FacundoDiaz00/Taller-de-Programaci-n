@@ -18,9 +18,9 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>{@code
  * <complexType name="dtProveedorDetalle">
  *   <complexContent>
- *     <extension base="{http://usuarioTuristicasService.publicar/}dtProveedor">
+ *     <extension base="{http://usuarioturisticasservice.publicar/}dtProveedor">
  *       <sequence>
- *         <element name="actividades" type="{http://usuarioTuristicasService.publicar/}dtActividadTuristicaDetalle" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="actividades" type="{http://usuarioturisticasservice.publicar/}dtActividadTuristicaDetalle" maxOccurs="unbounded" minOccurs="0"/>
  *         <element name="seguidos" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         <element name="seguidores" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>

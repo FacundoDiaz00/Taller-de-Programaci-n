@@ -19,9 +19,9 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="fechaInscripcionStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="cantidadTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="costo" type="{http://www.w3.org/2001/XMLSchema}float"/>
- *         <element name="salida" type="{http://maestroServices.publicar/}dtSalidaTuristica" minOccurs="0"/>
+ *         <element name="salida" type="{http://maestroservices.publicar/}dtSalidaTuristica" minOccurs="0"/>
  *         <element name="turista" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="compra" type="{http://maestroServices.publicar/}dtCompra" minOccurs="0"/>
+ *         <element name="compra" type="{http://maestroservices.publicar/}dtCompra" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

@@ -1,4 +1,4 @@
-package publicar.paqueteTuristicasService;
+package publicar.paqueteturisticasservice;
 
 import java.util.logging.Logger;
 

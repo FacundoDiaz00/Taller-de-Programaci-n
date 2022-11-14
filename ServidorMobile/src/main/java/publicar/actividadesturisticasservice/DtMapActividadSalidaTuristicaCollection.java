@@ -30,7 +30,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *                         <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           <sequence>
  *                             <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                             <element name="value" type="{http://actividadesTuristicasService.publicar/}dtSalidaTuristicaCollection" minOccurs="0"/>
+ *                             <element name="value" type="{http://actividadesturisticasservice.publicar/}dtSalidaTuristicaCollection" minOccurs="0"/>
  *                           </sequence>
  *                         </restriction>
  *                       </complexContent>
@@ -99,7 +99,7 @@ public class DtMapActividadSalidaTuristicaCollection {
      *               <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 <sequence>
      *                   <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                   <element name="value" type="{http://actividadesTuristicasService.publicar/}dtSalidaTuristicaCollection" minOccurs="0"/>
+     *                   <element name="value" type="{http://actividadesturisticasservice.publicar/}dtSalidaTuristicaCollection" minOccurs="0"/>
      *                 </sequence>
      *               </restriction>
      *             </complexContent>
@@ -164,7 +164,7 @@ public class DtMapActividadSalidaTuristicaCollection {
          *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       <sequence>
          *         <element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *         <element name="value" type="{http://actividadesTuristicasService.publicar/}dtSalidaTuristicaCollection" minOccurs="0"/>
+         *         <element name="value" type="{http://actividadesturisticasservice.publicar/}dtSalidaTuristicaCollection" minOccurs="0"/>
          *       </sequence>
          *     </restriction>
          *   </complexContent>

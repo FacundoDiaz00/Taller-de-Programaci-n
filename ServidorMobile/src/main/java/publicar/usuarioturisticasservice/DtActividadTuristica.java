@@ -30,8 +30,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="nicknameProveedor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="departamento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="img" type="{http://usuarioTuristicasService.publicar/}imagen" minOccurs="0"/>
- *         <element name="estado" type="{http://usuarioTuristicasService.publicar/}estadoActividadTuristica" minOccurs="0"/>
+ *         <element name="img" type="{http://usuarioturisticasservice.publicar/}imagen" minOccurs="0"/>
+ *         <element name="estado" type="{http://usuarioturisticasservice.publicar/}estadoActividadTuristica" minOccurs="0"/>
  *         <element name="cantFavoritos" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="urlVideo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       </sequence>

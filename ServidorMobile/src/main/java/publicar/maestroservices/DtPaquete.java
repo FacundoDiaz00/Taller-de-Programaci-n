@@ -25,7 +25,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="descuento" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         <element name="validez" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         <element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="img" type="{http://maestroServices.publicar/}imagen" minOccurs="0"/>
+ *         <element name="img" type="{http://maestroservices.publicar/}imagen" minOccurs="0"/>
  *         <element name="fechaRegistroStr" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       </sequence>
  *     </restriction>

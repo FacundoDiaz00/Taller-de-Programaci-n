@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "ModificacionUsuarioNoPermitida", targetNamespace = "http://usuarioTuristicasService.publicar/")
+@WebFault(name = "ModificacionUsuarioNoPermitida", targetNamespace = "http://usuarioturisticasservice.publicar/")
 public class ModificacionUsuarioNoPermitida_Exception
     extends Exception
 {

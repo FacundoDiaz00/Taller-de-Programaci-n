@@ -1,4 +1,4 @@
-package publicar.actividadesTuristicasService;
+package publicar.actividadesturisticasservice;
 
 import java.awt.Font;
 import java.io.ByteArrayOutputStream;

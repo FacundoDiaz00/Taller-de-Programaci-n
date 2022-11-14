@@ -19,14 +19,14 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServiceActividadesService", targetNamespace = "http://actividadesTuristicasService.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
+@WebServiceClient(name = "WebServiceActividadesService", targetNamespace = "http://actividadesturisticasservice.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
 public class WebServiceActividadesService
     extends Service
 {
 
     private final static URL WEBSERVICEACTIVIDADESSERVICE_WSDL_LOCATION;
     private final static WebServiceException WEBSERVICEACTIVIDADESSERVICE_EXCEPTION;
-    private final static QName WEBSERVICEACTIVIDADESSERVICE_QNAME = new QName("http://actividadesTuristicasService.publicar/", "WebServiceActividadesService");
+    private final static QName WEBSERVICEACTIVIDADESSERVICE_QNAME = new QName("http://actividadesturisticasservice.publicar/", "WebServiceActividadesService");
 
     static {
         URL url = null;
@@ -71,7 +71,7 @@ public class WebServiceActividadesService
      */
     @WebEndpoint(name = "WebServiceActividadesPort")
     public WebServiceActividades getWebServiceActividadesPort() {
-        return super.getPort(new QName("http://actividadesTuristicasService.publicar/", "WebServiceActividadesPort"), WebServiceActividades.class);
+        return super.getPort(new QName("http://actividadesturisticasservice.publicar/", "WebServiceActividadesPort"), WebServiceActividades.class);
     }
 
     /**
@@ -83,7 +83,7 @@ public class WebServiceActividadesService
      */
     @WebEndpoint(name = "WebServiceActividadesPort")
     public WebServiceActividades getWebServiceActividadesPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://actividadesTuristicasService.publicar/", "WebServiceActividadesPort"), WebServiceActividades.class, features);
+        return super.getPort(new QName("http://actividadesturisticasservice.publicar/", "WebServiceActividadesPort"), WebServiceActividades.class, features);
     }
 
     private static URL __getWsdlLocation() {

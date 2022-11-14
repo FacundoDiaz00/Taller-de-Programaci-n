@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "SuperaElMaximoDeTuristasException", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "SuperaElMaximoDeTuristasException", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class SuperaElMaximoDeTuristasException_Exception
     extends Exception
 {

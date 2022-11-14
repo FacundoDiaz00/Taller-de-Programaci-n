@@ -1,4 +1,4 @@
-package publicar.maestroServices;
+package publicar.maestroservices;
 
 import java.io.File;
 import java.io.FileInputStream;

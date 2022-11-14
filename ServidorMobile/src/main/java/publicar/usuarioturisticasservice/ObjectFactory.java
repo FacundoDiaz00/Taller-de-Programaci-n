@@ -24,11 +24,11 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ContraseniaInvalidaException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ContraseniaInvalidaException");
-    private final static QName _ErrorAlProcesar_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ErrorAlProcesar");
-    private final static QName _ModificacionUsuarioNoPermitida_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ModificacionUsuarioNoPermitida");
-    private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://usuarioTuristicasService.publicar/", "ObjetoNoExisteEnTurismoUy");
-    private final static QName _UsuarioYaRegistradoException_QNAME = new QName("http://usuarioTuristicasService.publicar/", "UsuarioYaRegistradoException");
+    private final static QName _ContraseniaInvalidaException_QNAME = new QName("http://usuarioturisticasservice.publicar/", "ContraseniaInvalidaException");
+    private final static QName _ErrorAlProcesar_QNAME = new QName("http://usuarioturisticasservice.publicar/", "ErrorAlProcesar");
+    private final static QName _ModificacionUsuarioNoPermitida_QNAME = new QName("http://usuarioturisticasservice.publicar/", "ModificacionUsuarioNoPermitida");
+    private final static QName _ObjetoNoExisteEnTurismoUy_QNAME = new QName("http://usuarioturisticasservice.publicar/", "ObjetoNoExisteEnTurismoUy");
+    private final static QName _UsuarioYaRegistradoException_QNAME = new QName("http://usuarioturisticasservice.publicar/", "UsuarioYaRegistradoException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: publicar.usuarioturisticasservice
@@ -325,7 +325,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ContraseniaInvalidaException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ContraseniaInvalidaException")
+    @XmlElementDecl(namespace = "http://usuarioturisticasservice.publicar/", name = "ContraseniaInvalidaException")
     public JAXBElement<ContraseniaInvalidaException> createContraseniaInvalidaException(ContraseniaInvalidaException value) {
         return new JAXBElement<>(_ContraseniaInvalidaException_QNAME, ContraseniaInvalidaException.class, null, value);
     }
@@ -338,7 +338,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ErrorAlProcesar }{@code >}
      */
-    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ErrorAlProcesar")
+    @XmlElementDecl(namespace = "http://usuarioturisticasservice.publicar/", name = "ErrorAlProcesar")
     public JAXBElement<ErrorAlProcesar> createErrorAlProcesar(ErrorAlProcesar value) {
         return new JAXBElement<>(_ErrorAlProcesar_QNAME, ErrorAlProcesar.class, null, value);
     }
@@ -351,7 +351,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ModificacionUsuarioNoPermitida }{@code >}
      */
-    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ModificacionUsuarioNoPermitida")
+    @XmlElementDecl(namespace = "http://usuarioturisticasservice.publicar/", name = "ModificacionUsuarioNoPermitida")
     public JAXBElement<ModificacionUsuarioNoPermitida> createModificacionUsuarioNoPermitida(ModificacionUsuarioNoPermitida value) {
         return new JAXBElement<>(_ModificacionUsuarioNoPermitida_QNAME, ModificacionUsuarioNoPermitida.class, null, value);
     }
@@ -364,7 +364,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ObjetoNoExisteEnTurismoUy }{@code >}
      */
-    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "ObjetoNoExisteEnTurismoUy")
+    @XmlElementDecl(namespace = "http://usuarioturisticasservice.publicar/", name = "ObjetoNoExisteEnTurismoUy")
     public JAXBElement<ObjetoNoExisteEnTurismoUy> createObjetoNoExisteEnTurismoUy(ObjetoNoExisteEnTurismoUy value) {
         return new JAXBElement<>(_ObjetoNoExisteEnTurismoUy_QNAME, ObjetoNoExisteEnTurismoUy.class, null, value);
     }
@@ -377,7 +377,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link UsuarioYaRegistradoException }{@code >}
      */
-    @XmlElementDecl(namespace = "http://usuarioTuristicasService.publicar/", name = "UsuarioYaRegistradoException")
+    @XmlElementDecl(namespace = "http://usuarioturisticasservice.publicar/", name = "UsuarioYaRegistradoException")
     public JAXBElement<UsuarioYaRegistradoException> createUsuarioYaRegistradoException(UsuarioYaRegistradoException value) {
         return new JAXBElement<>(_UsuarioYaRegistradoException_QNAME, UsuarioYaRegistradoException.class, null, value);
     }

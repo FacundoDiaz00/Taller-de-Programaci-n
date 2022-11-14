@@ -19,8 +19,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="actividades" type="{http://maestroServices.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
- *         <element name="paquetes" type="{http://maestroServices.publicar/}dtPaquete" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="actividades" type="{http://maestroservices.publicar/}dtActividadTuristica" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="paquetes" type="{http://maestroservices.publicar/}dtPaquete" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

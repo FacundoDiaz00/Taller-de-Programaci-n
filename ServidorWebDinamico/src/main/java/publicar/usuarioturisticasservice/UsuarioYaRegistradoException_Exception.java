@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "UsuarioYaRegistradoException", targetNamespace = "http://usuarioTuristicasService.publicar/")
+@WebFault(name = "UsuarioYaRegistradoException", targetNamespace = "http://usuarioturisticasservice.publicar/")
 public class UsuarioYaRegistradoException_Exception
     extends Exception
 {

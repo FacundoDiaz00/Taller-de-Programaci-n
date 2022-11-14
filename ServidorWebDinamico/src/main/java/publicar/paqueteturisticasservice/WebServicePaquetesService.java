@@ -19,14 +19,14 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServicePaquetesService", targetNamespace = "http://paqueteTuristicasService.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
+@WebServiceClient(name = "WebServicePaquetesService", targetNamespace = "http://paqueteturisticasservice.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
 public class WebServicePaquetesService
     extends Service
 {
 
     private final static URL WEBSERVICEPAQUETESSERVICE_WSDL_LOCATION;
     private final static WebServiceException WEBSERVICEPAQUETESSERVICE_EXCEPTION;
-    private final static QName WEBSERVICEPAQUETESSERVICE_QNAME = new QName("http://paqueteTuristicasService.publicar/", "WebServicePaquetesService");
+    private final static QName WEBSERVICEPAQUETESSERVICE_QNAME = new QName("http://paqueteturisticasservice.publicar/", "WebServicePaquetesService");
 
     static {
         URL url = null;
@@ -71,7 +71,7 @@ public class WebServicePaquetesService
      */
     @WebEndpoint(name = "WebServicePaquetesPort")
     public WebServicePaquetes getWebServicePaquetesPort() {
-        return super.getPort(new QName("http://paqueteTuristicasService.publicar/", "WebServicePaquetesPort"), WebServicePaquetes.class);
+        return super.getPort(new QName("http://paqueteturisticasservice.publicar/", "WebServicePaquetesPort"), WebServicePaquetes.class);
     }
 
     /**
@@ -83,7 +83,7 @@ public class WebServicePaquetesService
      */
     @WebEndpoint(name = "WebServicePaquetesPort")
     public WebServicePaquetes getWebServicePaquetesPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://paqueteTuristicasService.publicar/", "WebServicePaquetesPort"), WebServicePaquetes.class, features);
+        return super.getPort(new QName("http://paqueteturisticasservice.publicar/", "WebServicePaquetesPort"), WebServicePaquetes.class, features);
     }
 
     private static URL __getWsdlLocation() {

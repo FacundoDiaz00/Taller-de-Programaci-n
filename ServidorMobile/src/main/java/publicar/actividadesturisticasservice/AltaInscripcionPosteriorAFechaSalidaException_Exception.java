@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "AltaInscripcionPosteriorAFechaSalidaException", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "AltaInscripcionPosteriorAFechaSalidaException", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class AltaInscripcionPosteriorAFechaSalidaException_Exception
     extends Exception
 {

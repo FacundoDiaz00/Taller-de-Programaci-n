@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "SalidaYaRegistradaException", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "SalidaYaRegistradaException", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class SalidaYaRegistradaException_Exception
     extends Exception
 {

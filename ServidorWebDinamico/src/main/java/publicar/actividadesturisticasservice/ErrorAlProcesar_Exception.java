@@ -10,7 +10,7 @@ import jakarta.xml.ws.WebFault;
  * Generated source version: 3.0
  * 
  */
-@WebFault(name = "ErrorAlProcesar", targetNamespace = "http://actividadesTuristicasService.publicar/")
+@WebFault(name = "ErrorAlProcesar", targetNamespace = "http://actividadesturisticasservice.publicar/")
 public class ErrorAlProcesar_Exception
     extends Exception
 {
