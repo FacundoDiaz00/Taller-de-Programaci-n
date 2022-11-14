@@ -355,7 +355,7 @@
 			                            		<%
 			                            		if(usr != null && usuario != null && usr.getNickname().equals(usuario.getNickname())){
 			                            		%>
-			                                		<a href="ConsultaDeUsuario?listar=<%=false%>&idAct=<%=act.getNombre()%>&finalizar=<%=true%>&id=<%=usr.getNickname()%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+			                                		<a href="ConsultaActividad?id=<%=act.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
 			                                	<%
 			                                	}
 			                                	%>
