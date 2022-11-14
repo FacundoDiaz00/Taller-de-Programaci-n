@@ -84,7 +84,7 @@ public class WebServiceUsuarios {
         if (contrasenia.equals(""))
         	contrasenia = null;
 
-        iControladorUsuario.modificarUsuario(datosNuevos, contrasenia, imgMetaData);
+        iControladorUsuario.modificarUsuario(datosNuevos, contrasenia, imgMetaData,false);
 
         if (imgContent.length > 0) {
             UtilsDT.guardarImagen(imgMetaData.getPath(), imgContent);

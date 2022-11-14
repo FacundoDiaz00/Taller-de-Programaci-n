@@ -394,8 +394,8 @@ class ControladorUsuarioTest {
             DTTurista dttur = (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur);
             DTProveedor dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv);
 
-            contrUsr.modificarUsuario(dttur, null, null);
-            contrUsr.modificarUsuario(dtprov, null, null);
+            contrUsr.modificarUsuario(dttur, null, null,false);
+            contrUsr.modificarUsuario(dtprov, null, null,false);
 
             assertEquals(dttur, (DTTurista) contrUsr.obtenerDTUsuario(nicknameTur));
             assertEquals(dtprov, (DTProveedor) contrUsr.obtenerDTUsuario(nicknameProv));
@@ -410,8 +410,8 @@ class ControladorUsuarioTest {
                     dtprov.getApellido() + nuevoString, dtprov.getCorreo(), dtprov.getFechaNac().plusDays(1), null,
                     dtprov.getDescrpicionGeneral() + nuevoString, dtprov.getLink() + nuevoString);
 
-            contrUsr.modificarUsuario(dtTurNuevo, null, null);
-            contrUsr.modificarUsuario(dtProvNuevo, null, null);
+            contrUsr.modificarUsuario(dtTurNuevo, null, null,false);
+            contrUsr.modificarUsuario(dtProvNuevo, null, null,false);
 
             dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
             dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
@@ -426,15 +426,15 @@ class ControladorUsuarioTest {
                     dtprov.getLink());
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtTurNuevo2, null, null);
+                contrUsr.modificarUsuario(dtTurNuevo2, null, null,false);
             });
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtProvNuevo2, null, null);
+                contrUsr.modificarUsuario(dtProvNuevo2, null, null,false);
             });
 
-            contrUsr.modificarUsuario(dtTurNuevo, null, null);
-            contrUsr.modificarUsuario(dtProvNuevo, null, null);
+            contrUsr.modificarUsuario(dtTurNuevo, null, null,false);
+            contrUsr.modificarUsuario(dtProvNuevo, null, null,false);
 
             dttur = (DTTurista) contrUsr.obtenerDTUsuario(dtTurNuevo.getNickname());
             dtprov = (DTProveedor) contrUsr.obtenerDTUsuario(dtProvNuevo.getNickname());
@@ -449,11 +449,11 @@ class ControladorUsuarioTest {
                     dtprov.getDescrpicionGeneral(), dtprov.getLink());
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtTurNuevo3, null, null);
+                contrUsr.modificarUsuario(dtTurNuevo3, null, null,false);
             });
 
             assertThrows(ModificacionUsuarioNoPermitida.class, () -> {
-                contrUsr.modificarUsuario(dtProvNuevo3, null, null);
+                contrUsr.modificarUsuario(dtProvNuevo3, null, null,false);
             });
 
             dttur = (DTTurista) contrUsr.obtenerDTUsuario(dttur.getNickname());
