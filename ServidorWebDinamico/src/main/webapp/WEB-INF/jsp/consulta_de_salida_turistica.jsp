@@ -127,15 +127,6 @@
         
 
     </section>
-
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        <div class="container text-center">
-        <span class="" style="font-size: 25px; color: Grey;">
-          <i class="fas fa-route"></i>
-        </span>
-            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
-        </div>
-    </footer>
 </main>
 
 
