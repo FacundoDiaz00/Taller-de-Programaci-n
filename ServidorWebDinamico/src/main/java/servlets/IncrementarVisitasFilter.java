@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
+import javax.servlet.http.HttpServletRequest;
 
 import publicar.actividadesturisticasservice.EstadoActividadTuristica;
 import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
@@ -20,7 +21,7 @@ import publicar.actividadesturisticasservice.DtSalidaTuristica;
 /**
  * Servlet Filter implementation class IncrementarVisitasFilter
  */
-@WebFilter("/IncrementarVisitasFilter")
+@WebFilter({"/ConsultaActividad", "/ConsultaSalida"})
 public class IncrementarVisitasFilter extends HttpFilter implements Filter {
 	private WebServiceActividades wbActi;
        
@@ -47,12 +48,13 @@ public class IncrementarVisitasFilter extends HttpFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		String xTuristica = request.getParameter("id");
-		String tipo = request.getParameter("tipo");
-		if (tipo.equals("actividad"))
+		HttpServletRequest httpReq = (HttpServletRequest) request;
+		String uri = httpReq.getRequestURI();
+		if (uri.contains("ConsultaActividad"))
 			wbActi.incrementarContadorActividad(xTuristica);
-		else if (tipo.equals("salida"))
+		else if (uri.contains("ConsultaSalida"))
 			wbActi.incrementarContadorSalida(xTuristica);
-			
+		else System.out.println(uri);
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
