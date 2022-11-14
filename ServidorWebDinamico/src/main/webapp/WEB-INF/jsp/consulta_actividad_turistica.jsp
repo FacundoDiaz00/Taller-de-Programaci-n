@@ -78,8 +78,10 @@
                      	
             		
             		</div>
-            		
-                    <p>favorito de <%=cantFavoritos%> persona/s </p>
+            		<% if (datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA){ %>
+                    	<p>favorito de <%=cantFavoritos%> persona/s </p>
+                    <%} %>
+                    
             	</div>
                 
                 <h6>Creado el <%=datosActividad.getFechaAltaStr()%></h6>

@@ -72,7 +72,8 @@ public class ConsultaActividadServlet extends HttpServlet {
 			try {
 				wbActi.cambiarEstadoDeActividadTuristica(idActividad, EstadoActividadTuristica.FINALIZADA);
 
-				resp.sendRedirect("index");
+				resp.sendRedirect("ConsultaActividad?id=" + idActividad);
+				return;
 			} catch (TurismoUyException_Exception e) {
 				req.setAttribute("motivoDeError", e.getMessage());
 				req.setAttribute("finalizar", false);

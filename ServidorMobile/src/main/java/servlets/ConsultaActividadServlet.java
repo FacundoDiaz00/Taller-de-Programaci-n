@@ -40,6 +40,9 @@ public class ConsultaActividadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	if (req.getCharacterEncoding() == null) {
+            req.setCharacterEncoding("UTF-8");
+        }
     	String debelistar = req.getParameter("listar");
     	if(debelistar != null && debelistar.equals("false") && req.getParameter("id") != null)  {
     		
@@ -59,9 +62,7 @@ public class ConsultaActividadServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
             
     	}else {
-        	if (req.getCharacterEncoding() == null) {
-                req.setCharacterEncoding("UTF-8");
-            }
+
 
             var sessionClosed = req.getParameter("sesionCerrada");
             if (sessionClosed != null && sessionClosed.equals("true")) {
