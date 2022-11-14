@@ -528,7 +528,7 @@
 	<script src="js/popUp_modificar_usuario.js"></script>
     <%if(request.getAttribute("exito") != null){ %>
 	    <script>
-	    	generarMensaje('success', "Operacion completada" , "Se ha finalizado la actividad de manera exitosa" , 500);
+	    	generarMensaje('success', "Operacion completada" , "Operacion completada con exito" , 500);
 	    </script>
     <%} %>
     
@@ -540,24 +540,8 @@
     	generarMensaje('error', "Error al finalizar actividad turística" , mensajeError , 200);
     </script>
     <%} %>
-    
-    
-    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
-    <script>
-    
-	    setTimeout(() => {
-	        Swal.fire({
-	            icon: "success",
-	            title: "Éxito",
-	            text: "La actividad turistica ha sido finalizada con éxito",
-	            confirmButtonText: 'Entendido'  
-	        }).then((res) => {
-	        	window.location.href = "index";
-	        })
-	    }, 200)
-    
-	</script>
-	<%} %>
+
+
     
   
 

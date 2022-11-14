@@ -89,9 +89,8 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 				if (usr != null && !((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
 					try {
 						wbUser.seguirODejarDeSeguirUsuario(((DtUsuario) usr).getNickname(), req.getParameter("id"));
-						seSiguenUsuarios = wbUser.usuariosSeSiguen(((DtUsuario) usr).getNickname(),
-								req.getParameter("id"));
-						req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+
+
 						req.setAttribute("exito", Boolean.TRUE);
 
 					} catch (ObjetoNoExisteEnTurismoUy_Exception e) {
@@ -103,7 +102,12 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 
 				}
 			}
-
+			try {
+				seSiguenUsuarios = wbUser.usuariosSeSiguen(((DtUsuario) usr).getNickname(), req.getParameter("id"));
+				req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+			} catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+				throw new RuntimeException(e);
+			}
 			try {
 				String usrVisitado = (String) req.getParameter("id");
 
