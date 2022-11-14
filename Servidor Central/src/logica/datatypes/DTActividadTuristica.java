@@ -1,20 +1,18 @@
 package logica.datatypes;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
 import logica.utils.UtilsDT;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
 /**
  * @author Equipo taller prog 16
  */
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso(DTActividadTuristicaDetalle.class)
+@XmlAccessorType(XmlAccessType.FIELD) @XmlSeeAlso(DTActividadTuristicaDetalle.class)
 public class DTActividadTuristica {
 	private String nombre;
 	private String descripcion;
@@ -35,7 +33,8 @@ public class DTActividadTuristica {
 	}
 
 	public DTActividadTuristica(String nombre, String descripcion, float costoPorTurista, String cuidad, int duracion,
-								LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img, EstadoActividadTuristica estado, int cantFavoritos, String urlVideo) {
+			LocalDate fechaAlta, String nicknameProveedor, String departamento, List<String> cats, Imagen img,
+			EstadoActividadTuristica estado, int cantFavoritos, String urlVideo) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.costoPorTurista = costoPorTurista;
@@ -50,7 +49,7 @@ public class DTActividadTuristica {
 		this.cantFavoritos = cantFavoritos;
 		this.urlVideo = urlVideo;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -90,7 +89,7 @@ public class DTActividadTuristica {
 	public Imagen getImg() {
 		return img;
 	}
-	
+
 	public EstadoActividadTuristica getEstado() {
 		return estado;
 	}
@@ -107,4 +106,3 @@ public class DTActividadTuristica {
 		return fechaAltaStr;
 	}
 }
-

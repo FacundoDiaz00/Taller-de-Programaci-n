@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class UsuarioJPA {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = "id", nullable = false)
-	private Long id;
+	private Long identifLong;
 
 	@Column(name = "nickname", unique = true)
 	private String nickname;
@@ -50,11 +50,11 @@ public class UsuarioJPA {
 	}
 
 	public Long getId() {
-		return id;
+		return identifLong;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long identifLong) {
+		this.identifLong = identifLong;
 	}
 
 	public String getNickname() {

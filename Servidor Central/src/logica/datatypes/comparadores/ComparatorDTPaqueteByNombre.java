@@ -1,13 +1,12 @@
 package logica.datatypes.comparadores;
 
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTPaquete;
-
 import java.util.Comparator;
 
+import logica.datatypes.DTPaquete;
+
 public class ComparatorDTPaqueteByNombre implements Comparator<DTPaquete> {
-    @Override
-    public int compare(DTPaquete o1, DTPaquete o2) {
-        return o1.getNombre().compareTo(o2.getNombre());
-    }
+	@Override
+	public int compare(DTPaquete paque1, DTPaquete opaque2) {
+		return paque1.getNombre().compareTo(opaque2.getNombre());
+	}
 }
