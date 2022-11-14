@@ -76,15 +76,16 @@
 				                                   <%
 				                                   if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
 				                                   			                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
+													   											String idCategoria = (String)request.getAttribute("idCategoria");
 				                                   			                                	if(actividadesFav.get(actividad)){
 				                                   %>
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
+						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%><%=idDepartamento == null ? "" : "&idDepartamento="+ idDepartamento%><%=idCategoria == null ? "" : "&idCategoria="+idCategoria%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
 						                                
 						                                <%
 						                                						                                } else {
 						                                						                                %>
-						                                
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
+
+															<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%><%=idDepartamento == null ? "" : "&idDepartamento="+ idDepartamento%><%=idCategoria == null ? "" : "&idCategoria="+idCategoria%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
 						                                	
 						                                <%
 						                                							                                } 

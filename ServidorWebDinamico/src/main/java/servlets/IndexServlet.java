@@ -92,6 +92,14 @@ public class IndexServlet extends HttpServlet {
         if(categorias.size() > 0 || departamentos.size() > 0) {
         	 String departamentoElegido = (String) req.getParameter("idDepartamento");
              String categoriaElegida = (String) req.getParameter("idCategoria");
+             if (departamentoElegido != null && departamentoElegido.trim().length() == 0){
+                 departamentoElegido = null;
+             }
+
+            if (categoriaElegida != null && categoriaElegida.trim().length() == 0){
+                categoriaElegida = null;
+            }
+
 
              if (departamentos.size() > 0 && departamentoElegido == null && categoriaElegida == null) {
                  req.setAttribute("idDepartamento", departamentos.get(0));
