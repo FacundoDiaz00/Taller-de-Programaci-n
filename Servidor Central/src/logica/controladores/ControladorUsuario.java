@@ -139,7 +139,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Imagen imgMetaData)
+    public void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Imagen imgMetaData, boolean ignoreCambioImagen)
             throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy {
 
         ManejadorUsuario ins = ManejadorUsuario.getInstancia();
@@ -153,9 +153,11 @@ public class ControladorUsuario implements IControladorUsuario {
                 
                 if (contrasenia != null)
                 	u_nick.setContrasenia(contrasenia);
-                
-            	u_nick.setImagen(imgMetaData);
-                
+
+                if(!ignoreCambioImagen){
+                    u_nick.setImagen(imgMetaData);
+                }
+
             } else {
                 throw new ModificacionUsuarioNoPermitida(
                         "No coincide el nickname con el correo de este usuario. Estos dos valores no debe ser modificados.");

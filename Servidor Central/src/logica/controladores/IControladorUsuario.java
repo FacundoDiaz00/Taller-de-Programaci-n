@@ -106,7 +106,8 @@ public interface IControladorUsuario {
 	 * @throws ObjetoNoExisteEnTurismoUy
 	 */
 
-	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Imagen imgMetaData)
+
+	void modificarUsuario(DTUsuario datosNuevos, String contrasenia, Imagen imgMetaData, boolean ignoreCambioImagen)
 			throws ModificacionUsuarioNoPermitida, ObjetoNoExisteEnTurismoUy;
 
 	void seguirODejarDeSeguirUsuario(String nickSeguidor, String nickSeguido) throws ObjetoNoExisteEnTurismoUy;
