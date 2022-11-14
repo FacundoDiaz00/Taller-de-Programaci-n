@@ -1,27 +1,14 @@
 package presentacion;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 
-import excepciones.ObjetoNoExisteEnTurismoUy;
 import logica.controladores.IControladorActividadTuristica;
-import logica.datatypes.DTActividadTuristica;
-import logica.datatypes.DTSalidaTuristica;
-
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 
 public class ActividadesSalidasMasVisitadas extends JInternalFrame {
 
@@ -29,6 +16,23 @@ public class ActividadesSalidasMasVisitadas extends JInternalFrame {
 
 	private IControladorActividadTuristica controladorAct;
 	private JTable topAS;
+	private JScrollPane scrollPane;
+	private List<String[]> listaTop;
+
+	@Override
+	public void setVisible(boolean visi) {
+		if (visi) {
+			String[] columnNames = { "Nombre", "Proveedor", "Tipo", "Cant. de Visitas" };
+
+			listaTop = controladorAct.obtenerDatosVisitas();
+			String[][] data = listaTop.toArray(new String[][] {});
+			topAS = new JTable(data, columnNames);
+
+			scrollPane.setViewportView(topAS);
+			topAS.setRowSelectionAllowed(false);
+		}
+		super.setVisible(visi);
+	}
 
 	/**
 	 * Create the frame.
@@ -47,20 +51,16 @@ public class ActividadesSalidasMasVisitadas extends JInternalFrame {
 		setTitle("Actividades/Salidas más Visitadas");
 		setBounds(100, 100, 461, 459);
 		getContentPane().setLayout(null);
-		
-		String[] columnNames = {
-                "Nombre",
-                "Proveedor",
-                "Tipo",
-                "Cant. de Visitas"};
-		
-		List<String[]> listaTop = controladorAct.obtenerDatosVisitas();
+
+		String[] columnNames = { "Nombre", "Proveedor", "Tipo", "Cant. de Visitas" };
+
+		listaTop = controladorAct.obtenerDatosVisitas();
 		String[][] data = listaTop.toArray(new String[][] {});
-		
-		JScrollPane scrollPane = new JScrollPane();
+
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 12, 427, 403);
 		getContentPane().add(scrollPane);
-		
+
 		topAS = new JTable(data, columnNames);
 		scrollPane.setViewportView(topAS);
 		topAS.setRowSelectionAllowed(false);
