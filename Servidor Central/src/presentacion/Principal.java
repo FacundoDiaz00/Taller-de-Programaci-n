@@ -21,10 +21,10 @@ import logica.controladores.Fabrica;
 import logica.controladores.IControladorActividadTuristica;
 import logica.controladores.IControladorPaquete;
 import logica.controladores.IControladorUsuario;
-import publicar.actividadesturisticasservice.WebServiceActividades;
-import publicar.maestroservices.WebServiceMaestro;
-import publicar.paqueteturisticasservice.WebServicePaquetes;
-import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.actividadesTuristicasService.WebServiceActividades;
+import publicar.maestroServices.WebServiceMaestro;
+import publicar.paqueteTuristicasService.WebServicePaquetes;
+import publicar.usuarioTuristicasService.WebServiceUsuarios;
 
 public class Principal {
 	private IControladorUsuario contrUsuario;
