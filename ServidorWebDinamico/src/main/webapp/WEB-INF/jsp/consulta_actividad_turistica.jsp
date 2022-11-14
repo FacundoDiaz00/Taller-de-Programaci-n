@@ -97,14 +97,14 @@
           		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) {
                 %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
+					<a style="margin-bottom: 4px" href="AltaDeSalida?id=<%=datosActividad.getNombre()%>" class="btn btn-primary">Crear una salida turística</a>
 					<%
 					DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");
 					if(usuario.getNickname().equals(datosActividad.getNicknameProveedor())){
 					%>
-						
+
 			               <a href="ConsultaActividad?id=<%=datosActividad.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
-			           	
-			           	<%
+					<%
 			           				           	}
 			           				           	%>
 	                       
