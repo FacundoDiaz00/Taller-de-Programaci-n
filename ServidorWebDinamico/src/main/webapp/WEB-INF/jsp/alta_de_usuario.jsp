@@ -37,9 +37,8 @@
                         	   aria-describedby="basic-addon1" 
                         	   value="<%= nickname %>">
                     </div>
-                    
-                    <strong>Ajax Response</strong>:
-					<div id="ajaxGetUserServletResponse"></div>
+
+					<div style="text-align: right; margin-bottom: 3px"  id="ajaxGetUserServletResponseNickname"></div>
                     
 
                     <div class="contenedorinput mb-3">
@@ -110,6 +109,8 @@
                          	   aria-describedby="basic-addon1"
                          	   value="<%= email %>">
                     </div>
+
+					<div style="text-align: right; margin-bottom: 3px" id="ajaxGetUserServletResponseCorreo"></div>
 
                     <div class="contenedorinput mb-3">
                     	<% String fechaNac = getTextWithoutNull((String)request.getAttribute("fechaNac")); %>
@@ -268,19 +269,32 @@
 	<%} %>
 	
 	<script>
-		$(document).ready(function() {
-			$('#input-nickname').blur(function() {
-				$.ajax({
-					url : 'UsuarioYaRegistradoServlet',
-					data : {
-						nickname : $('#input-nickname').val(),
-						correo : $('#input-correo-electronico').val()
-					},
-					success : function(responseText) {
-						$('#ajaxGetUserServletResponse').text(responseText);
-					}
-				});
+		$('#input-nickname')[0].addEventListener("focusout", function() {
+			console.log('entrè a coso de ajax')
+			$.ajax({
+				url : 'UsuarioYaRegistradoServlet',
+				data : {
+					nickname : $('#input-nickname').val()
+				},
+				success : function(responseText) {
+					$('#ajaxGetUserServletResponseNickname').text(responseText);
+				}
 			});
+
+		});
+
+		$('#input-correo-electronico')[0].addEventListener("focusout", function() {
+			console.log('entrè a coso de ajax')
+			$.ajax({
+				url : 'UsuarioYaRegistradoServlet',
+				data : {
+					correo : $('#input-correo-electronico').val()
+				},
+				success : function(responseText) {
+					$('#ajaxGetUserServletResponseCorreo').text(responseText);
+				}
+			});
+
 		});
 	</script>
 </body>
