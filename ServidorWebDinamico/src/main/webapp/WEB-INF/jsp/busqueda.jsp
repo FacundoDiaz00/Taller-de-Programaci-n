@@ -103,7 +103,7 @@
             </div>
 			
 			<!--Paquetes-->
-			<div class="card" id="contenedor-actividades-turisticas" style="padding: 3px">
+			<div class="card" id="contenedor-actividades-turisticas" style="padding: 3px; margin-top: 10px">
                 <div class="header-card-with-button" style="margin-left: 30px">
                 	<h2 class="card-title header_usuarios">Paquetes Encontrados:</h2>
             	</div>

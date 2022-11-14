@@ -158,7 +158,6 @@
                         <input 	type="text"
                            		id="url"
                        	   		name="url"<%= url %>"
-                        		required 
                         		class="form-control" 
                         		placeholder="Ingrese una el URL asociado al vídeo que desea agregar" 
                         		aria-label="url" 
