@@ -18,6 +18,11 @@
              <version>4.0.0</version>
              <scope>runtime</scope>
      </dependency>
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-servlet-api</artifactId>
+		<version>9.0.26</version>
+	</dependency>
      
 	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 	<dependency>
