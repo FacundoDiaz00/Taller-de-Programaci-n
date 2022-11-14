@@ -34,7 +34,7 @@ public class BusquedaServlet extends HttpServlet {
     public BusquedaServlet() {
     	super();
     	wbMaestro = new WebServiceMaestroService().getWebServiceMaestroPort();
-        
+        wbActi = new WebServiceActividadesService().getWebServiceActividadesPort();
     }
 
 	/**
@@ -55,7 +55,9 @@ public class BusquedaServlet extends HttpServlet {
 	        String depto = (String) req.getParameter("departamentoFiltro");
 	        String cat = (String) req.getParameter("categoriaFiltro");
 	        String ord = (String) req.getParameter("tipoOrdenacion");
-	        
+	        if(ord == null) {
+	        	ord = "1";
+	        }
 	        if(filtro == null ) {
 	        	filtro = "";
 	        }
@@ -65,7 +67,7 @@ public class BusquedaServlet extends HttpServlet {
 	        if(cat== null ) {
 	        	cat = "";
 	        }
-	        if(ord == "1") {
+	        if(ord.equals("1")) {
 	        	TipoOrdenacion Tord = TipoOrdenacion.ALFABETICAMENTE;
 	        }else {
 	        	TipoOrdenacion Tord = TipoOrdenacion.FECHA_PUBLICACION;

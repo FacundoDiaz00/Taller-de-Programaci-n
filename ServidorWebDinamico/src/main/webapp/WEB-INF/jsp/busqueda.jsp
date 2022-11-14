@@ -32,7 +32,7 @@
 			<form class="d-flex buscar" role="search" id="buscador" method="get" action="busqueda">
             	<div class="input-group mb-3">
 				  <div class="input-group-prepend">
-				    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+				    <button class="btn btn-primary" type="submit" style="margin-right:5px">Buscar</button>
 				  </div>
 				  
 <!-- 				  <input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
@@ -81,31 +81,12 @@
 						<div class="card mb-3" style="max-width: 800px;">
 				                    <div class="row g-0">
 				                        <div class="col-md-4 img-contain">
-<%-- 				                            <img src="<%=Utile.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
- --%>				                            <!--  Falta el manejo de foto de la verdadera actividad -->
+				                            <img src="<%=Utile.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
 				                        </div>
 				                        <div class="col-md-8">
 				                            <div class="card-body">
 				                            <div  style="justify-content: space-between; display: flex">
 				                                  <h5 class="card-title"><%=actividad.getNombre()%></h5>
-				                                   <%-- <%
-				                                   if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
-				                                   			                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
-				                                   			                                	if(actividadesFav.get(actividad)){
-				                                   %>
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
-						                                
-						                                <%
-						                                						                                } else {
-						                                						                                %>
-						                                
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
-						                                	
-						                                <%
-						                                							                                } 
-						                                							                                			                                	}
-						                                							                                %> --%>
-					                                	
 				                            </div>        	
 				                                <p class="card-text descripcion-actividad"><%=actividad.getDescripcion()%></p>
 				                               
@@ -134,34 +115,14 @@
 						<div class="card mb-3" style="max-width: 800px;">
 				                    <div class="row g-0">
 				                        <div class="col-md-4 img-contain">
-<%-- 				                            <img src="<%=Utile.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
- --%>				                            <!--  Falta el manejo de foto de la verdadera actividad -->
+ 				                            <img src="<%=Utile.obtenerUrlParaImagen(paq.getImg())%>" class="img-fluid rounded-start">
 				                        </div>
 				                        <div class="col-md-8">
 				                            <div class="card-body">
 				                            <div  style="justify-content: space-between; display: flex">
 				                                  <h5 class="card-title"><%=paq.getNombre()%></h5>
-				                                   <%-- <%
-				                                   if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
-				                                   			                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
-				                                   			                                	if(actividadesFav.get(actividad)){
-				                                   %>
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
-						                                
-						                                <%
-						                                						                                } else {
-						                                						                                %>
-						                                
-						                                	<a href="index?marcarComoFav=<%=true%>&nomAct=<%=actividad.getNombre()%>&idDepartamento=<%=idDepartamento%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
-						                                	
-						                                <%
-						                                							                                } 
-						                                							                                			                                	}
-						                                							                                %> --%>
-					                                	
 				                            </div>        	
-<%-- 				                                <p class="card-text descripcion-actividad"><%=paq.get%></p>
- --%>				                               
+		                               
 				                                
 				                                <div class="botonera">
 				                                    <a href="ConsultaPaquete?id=<%=paq.getNombre()%>" class="btn btn-primary">Ver más</a>
