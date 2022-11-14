@@ -95,11 +95,11 @@ public class Proveedor extends Usuario {
 
 	@Override
 	public UsuarioJPA obtenerUsuarioJPA() {
-		var usr = ManejadorPersistenciaJPA.getInstancia().encontrarUsuarioJPA(getNickname());
+		var usr = ManejadorPersistenciaJPA.getInstancia().encontrarProveedorJPA(getNickname());
 		if (usr == null)
 			usr = new ProveedorJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(),
 					getClass().getSimpleName(), descrpicionGeneral, link);
-		ManejadorPersistenciaJPA.getInstancia().agregarUsuarioPendientePersistencia(usr);
+		ManejadorPersistenciaJPA.getInstancia().agregarProveedorPendientePersistencia(usr);
 		return usr;
 	}
 

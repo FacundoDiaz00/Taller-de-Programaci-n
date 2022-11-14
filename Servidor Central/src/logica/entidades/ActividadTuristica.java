@@ -20,7 +20,6 @@ import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
-import logica.manejadores.ManejadorPersistenciaJPA;
 
 /**
  * @author Equipo taller prog 16
@@ -279,6 +278,8 @@ public class ActividadTuristica {
         salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA(actividad)));
         return actividad;
     }
+    
+    
     //PRECONDICIÒN: la actividad no tiene paquetes asociados
     public void eliminarLinks() {
         //eliminar de categorias

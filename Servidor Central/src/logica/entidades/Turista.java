@@ -123,11 +123,11 @@ public class Turista extends Usuario {
 
 	@Override
 	public UsuarioJPA obtenerUsuarioJPA() {
-		var usr = ManejadorPersistenciaJPA.getInstancia().encontrarUsuarioJPA(getNickname());
+		var usr = ManejadorPersistenciaJPA.getInstancia().encontrarTuristaJPA(getNickname());
 		if (usr == null)
 			usr = new TuristaJPA(getNickname(), getCorreo(), getNombre(), getApellido(), getFechaNac(),
 					getClass().getSimpleName(), nacionalidad);
-		ManejadorPersistenciaJPA.getInstancia().agregarUsuarioPendientePersistencia(usr);
+		ManejadorPersistenciaJPA.getInstancia().agregarTuristaPendientePersistencia(usr);
 		return usr;
 	}
 
