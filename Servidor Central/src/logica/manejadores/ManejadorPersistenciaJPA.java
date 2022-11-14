@@ -20,7 +20,9 @@ import logica.datatypes.DTSalidaTuristicaDetalle;
 import logica.entidades.ActividadTuristica;
 import logica.jpa.ActividadJPA;
 import logica.jpa.InscripcionJPA;
+import logica.jpa.ProveedorJPA;
 import logica.jpa.SalidaJPA;
+import logica.jpa.TuristaJPA;
 import logica.jpa.UsuarioJPA;
 
 public class ManejadorPersistenciaJPA {
@@ -28,11 +30,13 @@ public class ManejadorPersistenciaJPA {
 
 	private EntityManagerFactory entityManagerFactory = null;
 
-	private Map<String, UsuarioJPA> usuariosPendientesDePersistir;
+	private Map<String, TuristaJPA> turistasPendientesDePersistir;
+	private Map<String, ProveedorJPA> proveedoresPendientesDePersistir;
 
 	private ManejadorPersistenciaJPA() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("default");
-		usuariosPendientesDePersistir = new HashMap<String, UsuarioJPA>();
+		turistasPendientesDePersistir = new HashMap<String, TuristaJPA>();
+		proveedoresPendientesDePersistir = new HashMap<String, ProveedorJPA>();
 	}
 
 	public static ManejadorPersistenciaJPA getInstancia() {
@@ -51,11 +55,14 @@ public class ManejadorPersistenciaJPA {
 		ActividadJPA actJPA = act.obtenerActividadJPA();
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
-		entityManager.persist(actJPA);
+		
+		entityManager.merge(actJPA);
+		
 		entityManager.getTransaction().commit();
 		entityManager.close();
-
-		usuariosPendientesDePersistir = new HashMap<String, UsuarioJPA>();
+		
+		turistasPendientesDePersistir = new HashMap<String, TuristaJPA>();
+		proveedoresPendientesDePersistir = new HashMap<String, ProveedorJPA>();
 	}
 
 	public void persistirModificacionUsuario(UsuarioJPA usuario) {
@@ -154,20 +161,41 @@ public class ManejadorPersistenciaJPA {
 		return result;
 	}
 
-	public UsuarioJPA encontrarUsuarioJPA(String nickname) {
+	public ProveedorJPA encontrarProveedorJPA(String nickname) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 
-		TypedQuery<UsuarioJPA> query = em.createQuery("SELECT a FROM UsuarioJPA a WHERE a.nickname = ?1",
-				UsuarioJPA.class);
-		UsuarioJPA result;
+		TypedQuery<ProveedorJPA> query = em.createQuery("SELECT a FROM ProveedorJPA a WHERE a.nickname = ?1",
+				ProveedorJPA.class);
+		ProveedorJPA result;
 		try {
 			result = query.setParameter(1, nickname).getSingleResult();
 		} catch (NoResultException e) {
 			result = null;
 		}
 		if (result == null) {
-			result = usuariosPendientesDePersistir.get(nickname);
+			result = proveedoresPendientesDePersistir.get(nickname);
+		}
+
+		em.getTransaction().commit();
+		em.close();
+		return result;
+	}
+	
+	public TuristaJPA encontrarTuristaJPA(String nickname) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+
+		TypedQuery<TuristaJPA> query = em.createQuery("SELECT a FROM TuristaJPA a WHERE a.nickname = ?1",
+				TuristaJPA.class);
+		TuristaJPA result;
+		try {
+			result = query.setParameter(1, nickname).getSingleResult();
+		} catch (NoResultException e) {
+			result = null;
+		}
+		if (result == null) {
+			result = turistasPendientesDePersistir.get(nickname);
 		}
 
 		em.getTransaction().commit();
@@ -208,7 +236,11 @@ public class ManejadorPersistenciaJPA {
 		return result;
 	}
 
-	public void agregarUsuarioPendientePersistencia(UsuarioJPA usr) {
-		usuariosPendientesDePersistir.put(usr.getNickname(), usr);
+	public void agregarTuristaPendientePersistencia(TuristaJPA usr) {
+		turistasPendientesDePersistir.put(usr.getNickname(), usr);
+	}
+	
+	public void agregarProveedorPendientePersistencia(ProveedorJPA usr) {
+		proveedoresPendientesDePersistir.put(usr.getNickname(), usr);
 	}
 }

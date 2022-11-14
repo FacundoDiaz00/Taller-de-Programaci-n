@@ -308,6 +308,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
             throws TurismoUyException{
         ManejadorActividadTuristica manejActTur = ManejadorActividadTuristica.getInstancia();
         ActividadTuristica act = manejActTur.getActividad(idActividad);
+        
         if (nuevoEstado == EstadoActividadTuristica.AGREGADA)
             throw new TurismoUyException("No se puede cambiar el estado de una actividad a AGREGADA");
 
@@ -357,9 +358,9 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
         Map<String, List<DTSalidaTuristica>> res = new HashMap<>();
     	ManejadorActividadTuristica mact = ManejadorActividadTuristica.getInstancia();
     	for (ActividadTuristica act : mact.getActividades()) {
-            if(act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+            if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){
                 List<DTSalidaTuristica> colecionActividades = new ArrayList<>();
-                for(SalidaTuristica sal : act.getSalidas().values()){
+                for (SalidaTuristica sal : act.getSalidas().values()){
                     colecionActividades.add(sal.obtenerDTSalidaTuristica());
                 }
                 res.put(act.getNombre(), colecionActividades);
@@ -418,17 +419,17 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
                 En ninguna parte del caso de uso dice que solo son confirmadas, pero no le encuentro sentido que
                   sea de otro tipo en base a lo que siempre se dijo de donde se muestran los otros tipos de actividades
             */
-            if(act.getEstado() == EstadoActividadTuristica.ACEPTADA){
+            if (act.getEstado() == EstadoActividadTuristica.ACEPTADA){
                 if (filtro == null || act.getNombre().contains(filtro) || act.getDescrpicion().contains(filtro)){
                     boolean debeIngresar = true;
 
-                    if(categoria != null && !act.getCategorias().containsKey(categoria)){
+                    if (categoria != null && !act.getCategorias().containsKey(categoria)) {
                         debeIngresar = false;
                     }
-                    if(departamento != null && !act.getDepartamento().getNombre().equals(departamento)){
+                    if (departamento != null && !act.getDepartamento().getNombre().equals(departamento)) {
                         debeIngresar = false;
                     }
-                    if(debeIngresar){
+                    if (debeIngresar) {
                         actividades.add(act.obtenerDTActividadTuristica());
                     }
                 }
