@@ -3,11 +3,12 @@
          <span class="" style="font-size: 25px; color: Grey;">
          <i class="fas fa-route"></i>
          </span>
-         <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Díaz, Agustín Martí­nez, Daniel Padrón y Agustí­n Recoba</small>
+         <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Dï¿½az, Agustï¿½n Martï¿½nez, Daniel Padrï¿½n y Agustï¿½n Recoba</small>
       </div>
     </footer>
-    
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
+
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
+<%--    <script src="js/jquery-3.3.1.slim.min.js"></script>--%>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
