@@ -102,5 +102,11 @@ public class Utile {
     		return "Imagen?href=" + img.getPath();
     	}
     }
-
+    public static String obtenerUrlParaImagen(publicar.maestroservices.Imagen img) {
+    	if(img == null) {
+    		return "img/noFoto.png";
+    	} else {
+    		return "Imagen?href=" + img.getPath();
+    	}
+    }
 }
