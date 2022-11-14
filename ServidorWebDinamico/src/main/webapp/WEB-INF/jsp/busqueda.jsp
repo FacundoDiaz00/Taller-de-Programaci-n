@@ -59,8 +59,7 @@
 							<%} %>
 					</select>
 					<select   id="tipoOrdenacion" name="tipoOrdenacion" class="form-select" aria-label="Default select example">
-					  <option selected value="">Ordenar:</option>
-					  <option value="1">Alfabaticamente</option>
+					  <option selected value="1">Alfabaticamente</option>
 					  <option value="2">Por fecha de publicación</option>
 					</select>
 				</div>
