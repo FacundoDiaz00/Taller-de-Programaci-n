@@ -28,46 +28,43 @@
 		<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 		<div id="contenedor-items">
 			<h3>Buscar Actividades y Paquetes</h3>
-			<div class="input-group mb-3">
-			  <div class="input-group-prepend">
-			    <button class="btn btn-outline-secondary" type="button">Buscar</button>
-			  </div>
-			  <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-			  
-			  	<div class="dropdown">
-			  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			    	Departamento:
-			  	</button>
-				  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="#">Action</a></li>
-					    <li><a class="dropdown-item" href="#">Another action</a></li>
-					    <li><a class="dropdown-item" href="#">Something else here</a></li>
-				  </ul>
+			
+			<form class="d-flex buscar" role="search" id="buscador" method="get" action="busqueda">
+            	<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+				  </div>
+				  
+<!-- 				  <input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+ -->				  
+				  <input id="busqueda" name="busqueda" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+						
+				  <select id="departamentoFiltro" name="departamentoFiltro" class="form-select" aria-label="Default select example">
+					  <option selected value="">Departamento</option>
+					  <% 
+							List<String> departamentos = (List<String>) request.getAttribute("departamentos");
+							
+							for(String dep: departamentos){ %>
+								<option value=<%=dep %>><%=dep %></option>
+							<%} %>
+					</select>
+				  
+					<select id="categoriaFiltro" name="categoriaFiltro"class="form-select" aria-label="Default select example">
+					  <option selected value="">Categoría</option>
+					  <% 
+							List<String> categorias = (List<String>) request.getAttribute("categorias");
+							
+							for(String cat: categorias){ %>
+								<option value=<%=cat %>><%=cat %></option>
+							<%} %>
+					</select>
+					<select   id="tipoOrdenacion" name="tipoOrdenacion" class="form-select" aria-label="Default select example">
+					  <option selected value="">Ordenar:</option>
+					  <option value="1">Alfabaticamente</option>
+					  <option value="2">Por fecha de publicación</option>
+					</select>
 				</div>
-				
-				<div class="dropdown">
-			  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			    	Categoría:
-			  	</button>
-				  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="#">Action</a></li>
-					    <li><a class="dropdown-item" href="#">Another action</a></li>
-					    <li><a class="dropdown-item" href="#">Something else here</a></li>
-				  </ul>
-				</div>
-				
-				<div class="dropdown">
-			  	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			    	Ordenar por:
-			  	</button>
-				  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="#">Action</a></li>
-					    <li><a class="dropdown-item" href="#">Another action</a></li>
-					    <li><a class="dropdown-item" href="#">Something else here</a></li>
-				  </ul>
-				</div>
-				
-			</div>
+            </form>
 			
 			
 			

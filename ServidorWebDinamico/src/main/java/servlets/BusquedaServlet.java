@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,12 @@ public class BusquedaServlet extends HttpServlet {
 		 if (req.getCharacterEncoding() == null) {
 	            req.setCharacterEncoding("UTF-8");
 	        }
+		 	
+		 List<String> departamentos = wbActi.obtenerIdDepartamentos().getItem();
+         List<String> categorias = wbActi.obtenerIdCategorias().getItem();
+         req.setAttribute("departamentos", departamentos);
+         req.setAttribute("categorias", categorias);
+         
 			req = Utile.insertarLoDeSiempre(req);
 	        String filtro = (String) req.getParameter("busqueda");
 	        String depto = (String) req.getParameter("departamentoFiltro");
