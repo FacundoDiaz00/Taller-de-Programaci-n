@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +50,7 @@ public class ConsultaActividadServlet extends HttpServlet {
 		boolean finalizar = Boolean.valueOf(req.getParameter("finalizar"));
 		boolean marcarFav = Boolean.valueOf(req.getParameter("marcarComoFav"));
 		String idActividad = (String) req.getParameter("id");
+		
 		DtActividadTuristicaDetalle infoActividadTuristica;
 		boolean esFavorito = false;
 		HttpSession sesion = req.getSession(false);
@@ -67,8 +69,8 @@ public class ConsultaActividadServlet extends HttpServlet {
 		if (finalizar) {
 			try {
 				wbActi.cambiarEstadoDeActividadTuristica(idActividad, EstadoActividadTuristica.FINALIZADA);
-
-				resp.sendRedirect("ConsultaActividad?id=" + idActividad);
+				
+				resp.sendRedirect("ConsultaActividad?id=" + URLEncoder.encode(idActividad, "UTF-8"));
 				return;
 			} catch (TurismoUyException_Exception e) {
 				req.setAttribute("motivoDeError", e.getMessage());
