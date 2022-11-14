@@ -103,8 +103,14 @@ public class ConsultaDeUsuarioServlet extends HttpServlet {
 				}
 			}
 			try {
-				seSiguenUsuarios = wbUser.usuariosSeSiguen(((DtUsuario) usr).getNickname(), req.getParameter("id"));
-				req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+				if (usr != null && !((DtUsuario) usr).getNickname().equals(req.getParameter("id"))) {
+					seSiguenUsuarios = wbUser.usuariosSeSiguen(((DtUsuario) usr).getNickname(), req.getParameter("id"));
+					req.setAttribute("seSiguenUsuarios", seSiguenUsuarios);
+
+				}
+
+
+
 			} catch (ObjetoNoExisteEnTurismoUy_Exception e) {
 				throw new RuntimeException(e);
 			}
