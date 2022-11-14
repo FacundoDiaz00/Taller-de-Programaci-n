@@ -70,18 +70,18 @@ public class ManejadorPersistenciaJPA {
 	}
 
 	public List<DTActividadTuristica> obtenerActividadesFinalizadasDeProveedor(String nickname) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager entitiMan = entityManagerFactory.createEntityManager();
+		entitiMan.getTransaction().begin();
 
-		Query query = em.createQuery("SELECT a FROM ActividadJPA a WHERE a.proveedorJPA.nickname = ?1");
+		Query query = entitiMan.createQuery("SELECT a FROM ActividadJPA a WHERE a.proveedorJPA.nickname = ?1");
 		List<ActividadJPA> result;
 		try {
 			result = query.setParameter(1, nickname).getResultList();
 		} catch (NoResultException e) {
 			result = new ArrayList<ActividadJPA>();
 		}
-		em.getTransaction().commit();
-		em.close();
+		entitiMan.getTransaction().commit();
+		entitiMan.close();
 
 		var salida = new ArrayList<DTActividadTuristica>();
 
@@ -91,18 +91,18 @@ public class ManejadorPersistenciaJPA {
 	}
 
 	public List<DTInscripcion> obtenerInscripcionesDeTurista(String nickname) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager ntityMan = entityManagerFactory.createEntityManager();
+		ntityMan.getTransaction().begin();
 
-		Query query = em.createQuery("SELECT i FROM InscripcionJPA i WHERE i.turistaJPA.nickname = ?1");
+		Query query = ntityMan.createQuery("SELECT i FROM InscripcionJPA i WHERE i.turistaJPA.nickname = ?1");
 		List<InscripcionJPA> result;
 		try {
 			result = query.setParameter(1, nickname).getResultList();
 		} catch (NoResultException e) {
 			result = new ArrayList<InscripcionJPA>();
 		}
-		em.getTransaction().commit();
-		em.close();
+		ntityMan.getTransaction().commit();
+		ntityMan.close();
 
 		var salida = new ArrayList<DTInscripcion>();
 
@@ -112,18 +112,18 @@ public class ManejadorPersistenciaJPA {
 	}
 
 	public List<DTSalidaTuristica> obtenerSalidasDeTurista(String nickname) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager entityMan = entityManagerFactory.createEntityManager();
+		entityMan.getTransaction().begin();
 
-		Query query = em.createQuery("SELECT i.salidaJPA FROM InscripcionJPA i WHERE i.turistaJPA.nickname = ?1");
+		Query query = entityMan.createQuery("SELECT i.salidaJPA FROM InscripcionJPA i WHERE i.turistaJPA.nickname = ?1");
 		List<SalidaJPA> result;
 		try {
 			result = query.setParameter(1, nickname).getResultList();
 		} catch (NoResultException e) {
 			result = new ArrayList<SalidaJPA>();
 		}
-		em.getTransaction().commit();
-		em.close();
+		entityMan.getTransaction().commit();
+		entityMan.close();
 
 		var salida = new ArrayList<DTSalidaTuristica>();
 
@@ -133,22 +133,22 @@ public class ManejadorPersistenciaJPA {
 	}
 
 	public List<String> obtenerIdActividadesFinalizadas() {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager eneityMan = entityManagerFactory.createEntityManager();
+		eneityMan.getTransaction().begin();
 
-		Query query = em.createQuery("SELECT a.nombre FROM ActividadJPA a");
+		Query query = eneityMan.createQuery("SELECT a.nombre FROM ActividadJPA a");
 		List<String> result = query.getResultList();
 
-		em.getTransaction().commit();
-		em.close();
+		eneityMan.getTransaction().commit();
+		eneityMan.close();
 		return result;
 	}
 
 	public ActividadJPA encontrarActividadJPA(String nombre) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager entityMan = entityManagerFactory.createEntityManager();
+		entityMan.getTransaction().begin();
 
-		TypedQuery<ActividadJPA> query = em.createQuery("SELECT a FROM ActividadJPA a WHERE a.nombre = ?1",
+		TypedQuery<ActividadJPA> query = entityMan.createQuery("SELECT a FROM ActividadJPA a WHERE a.nombre = ?1",
 				ActividadJPA.class);
 		ActividadJPA result;
 		try {
@@ -156,16 +156,16 @@ public class ManejadorPersistenciaJPA {
 		} catch (NoResultException e) {
 			result = null;
 		}
-		em.getTransaction().commit();
-		em.close();
+		entityMan.getTransaction().commit();
+		entityMan.close();
 		return result;
 	}
 
 	public ProveedorJPA encontrarProveedorJPA(String nickname) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager entityMan = entityManagerFactory.createEntityManager();
+		entityMan.getTransaction().begin();
 
-		TypedQuery<ProveedorJPA> query = em.createQuery("SELECT a FROM ProveedorJPA a WHERE a.nickname = ?1",
+		TypedQuery<ProveedorJPA> query = entityMan.createQuery("SELECT a FROM ProveedorJPA a WHERE a.nickname = ?1",
 				ProveedorJPA.class);
 		ProveedorJPA result;
 		try {
@@ -177,16 +177,16 @@ public class ManejadorPersistenciaJPA {
 			result = proveedoresPendientesDePersistir.get(nickname);
 		}
 
-		em.getTransaction().commit();
-		em.close();
+		entityMan.getTransaction().commit();
+		entityMan.close();
 		return result;
 	}
 	
 	public TuristaJPA encontrarTuristaJPA(String nickname) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager entityMan = entityManagerFactory.createEntityManager();
+		entityMan.getTransaction().begin();
 
-		TypedQuery<TuristaJPA> query = em.createQuery("SELECT a FROM TuristaJPA a WHERE a.nickname = ?1",
+		TypedQuery<TuristaJPA> query = entityMan.createQuery("SELECT a FROM TuristaJPA a WHERE a.nickname = ?1",
 				TuristaJPA.class);
 		TuristaJPA result;
 		try {
@@ -198,8 +198,8 @@ public class ManejadorPersistenciaJPA {
 			result = turistasPendientesDePersistir.get(nickname);
 		}
 
-		em.getTransaction().commit();
-		em.close();
+		entityMan.getTransaction().commit();
+		entityMan.close();
 		return result;
 	}
 
@@ -220,10 +220,10 @@ public class ManejadorPersistenciaJPA {
 	}
 
 	private SalidaJPA encontrarSalidaJPA(String nomSal) {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
+		EntityManager entityMan = entityManagerFactory.createEntityManager();
+		entityMan.getTransaction().begin();
 
-		TypedQuery<SalidaJPA> query = em.createQuery("SELECT a FROM SalidaJPA a WHERE a.nombre = ?1", SalidaJPA.class);
+		TypedQuery<SalidaJPA> query = entityMan.createQuery("SELECT a FROM SalidaJPA a WHERE a.nombre = ?1", SalidaJPA.class);
 		SalidaJPA result;
 		try {
 			result = query.setParameter(1, nomSal).getSingleResult();
@@ -231,8 +231,8 @@ public class ManejadorPersistenciaJPA {
 			result = null;
 		}
 
-		em.getTransaction().commit();
-		em.close();
+		entityMan.getTransaction().commit();
+		entityMan.close();
 		return result;
 	}
 

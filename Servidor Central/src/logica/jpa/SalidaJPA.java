@@ -25,7 +25,7 @@ import logica.utils.UtilsDT;
 @Entity @Table(name = "salidas")
 public class SalidaJPA {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) @Column(name = "id", nullable = false)
-	private Long id;
+	private Long identifLong;
 
 	@Column(name = "nombre", unique = true, nullable = false)
 	private String nombre;
@@ -72,11 +72,11 @@ public class SalidaJPA {
 	}
 
 	public Long getId() {
-		return id;
+		return identifLong;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long identif) {
+		this.identifLong = identif;
 	}
 
 	public ActividadJPA getActividadJPA() {

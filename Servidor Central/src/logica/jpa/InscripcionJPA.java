@@ -15,19 +15,19 @@ import logica.datatypes.DTInscripcion;
 @Entity @Table(name = "inscripciones")
 public class InscripcionJPA {
 	@EmbeddedId
-	private ClaveInscripcionJPA id;
+	private ClaveInscripcionJPA identifClaveInscripcionJPA;
 
-	@ManyToOne @MapsId("id_salida")
+	@ManyToOne @MapsId("idSalida")
 	private SalidaJPA salidaJPA;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST }) @MapsId("id_turista")
+	@ManyToOne(cascade = { CascadeType.PERSIST }) @MapsId("idTurista")
 	private TuristaJPA turistaJPA;
 
 	@Column(name = "fecha_inscripcion", nullable = false, columnDefinition = "DATE")
-	private LocalDate fecha_inscripcion;
+	private LocalDate fechaInscripcion;
 
 	@Column(name = "cantidad_turistas", nullable = false)
-	private int cantidad_turistas;
+	private int cantidadTuristas;
 
 	@Column(name = "costo", nullable = false)
 	private float costo;
@@ -39,8 +39,8 @@ public class InscripcionJPA {
 			int cantidad_turistas, float costo) {
 		this.salidaJPA = salidaJPA;
 		this.turistaJPA = turistaJPA;
-		this.fecha_inscripcion = fecha_inscripcion;
-		this.cantidad_turistas = cantidad_turistas;
+		this.fechaInscripcion = fecha_inscripcion;
+		this.cantidadTuristas = cantidad_turistas;
 		this.costo = costo;
 	}
 
@@ -61,7 +61,7 @@ public class InscripcionJPA {
 	}
 
 	public DTInscripcion obtenerDTInscripcion() {
-		return new DTInscripcion(fecha_inscripcion, cantidad_turistas, costo, salidaJPA.obtenerDTSalidaTuristica(),
+		return new DTInscripcion(fechaInscripcion, cantidadTuristas, costo, salidaJPA.obtenerDTSalidaTuristica(),
 				turistaJPA.getNickname(), null);
 	}
 }

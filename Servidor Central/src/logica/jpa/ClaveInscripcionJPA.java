@@ -10,54 +10,54 @@ import jakarta.persistence.Embeddable;
 public class ClaveInscripcionJPA implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "id_salida", nullable = false)
-	private long id_salida;
+	@Column(name = "idSalida", nullable = false)
+	private long idSalida;
 
-	@Column(name = "id_turista", nullable = false)
-	private long id_turista;
+	@Column(name = "idTurista", nullable = false)
+	private long idTurista;
 
-	public long getId_turista() {
-		return id_turista;
+	public long getIdTurista() {
+		return idTurista;
 	}
 
-	public long getId_salida() {
-		return id_salida;
+	public long getIdSalida() {
+		return idSalida;
 	}
 
-	public void setId_salida(long id_salida) {
-		this.id_salida = id_salida;
+	public void setIdSalida(long id_salida) {
+		this.idSalida = id_salida;
 	}
 
-	public void setId_turista(long id_turista) {
-		this.id_turista = id_turista;
+	public void setIdTurista(long id_turista) {
+		this.idTurista = id_turista;
 	}
 
 	public ClaveInscripcionJPA(long id_sal, long id_tur) {
-		this.id_salida = id_sal;
-		this.id_turista = id_tur;
+		this.idSalida = id_sal;
+		this.idTurista = id_tur;
 	}
 
 	public ClaveInscripcionJPA() {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obje) {
+		if (this == obje)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (obje == null || getClass() != obje.getClass())
 			return false;
 
-		ClaveInscripcionJPA that = (ClaveInscripcionJPA) o;
+		ClaveInscripcionJPA that = (ClaveInscripcionJPA) obje;
 
-		if (id_salida != that.id_salida)
+		if (idSalida != that.idSalida)
 			return false;
-		return id_turista == that.id_turista;
+		return idTurista == that.idTurista;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id_salida ^ (id_salida >>> 32));
-		result = 31 * result + (int) (id_turista ^ (id_turista >>> 32));
+		int result = (int) (idSalida ^ (idSalida >>> 32));
+		result = 31 * result + (int) (idTurista ^ (idTurista >>> 32));
 		return result;
 	}
 }
