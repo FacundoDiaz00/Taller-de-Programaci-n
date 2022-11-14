@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Estacion de trabajo/Estacion de trabajo.iml" filepath="$PROJECT_DIR$/Estacion de trabajo/Estacion de trabajo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Servidor Central/Servidor Central.iml" filepath="$PROJECT_DIR$/Servidor Central/Servidor Central.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Servidor Central/ServidorCentral.iml" filepath="$PROJECT_DIR$/Servidor Central/ServidorCentral.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServidorWebDinamico/ServidorWebDinamico.iml" filepath="$PROJECT_DIR$/ServidorWebDinamico/ServidorWebDinamico.iml" />
     </modules>
   </component>
 </project>

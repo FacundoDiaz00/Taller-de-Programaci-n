@@ -37,6 +37,10 @@
                         	   aria-describedby="basic-addon1" 
                         	   value="<%= nickname %>">
                     </div>
+                    
+                    <strong>Ajax Response</strong>:
+					<div id="ajaxGetUserServletResponse"></div>
+                    
 
                     <div class="contenedorinput mb-3">
                     	<% String nombre = getTextWithoutNull((String)request.getAttribute("nombre")); %>
@@ -262,5 +266,22 @@
     
 	</script>
 	<%} %>
+	
+	<script>
+		$(document).ready(function() {
+			$('#input-nickname').blur(function() {
+				$.ajax({
+					url : 'UsuarioYaRegistradoServlet',
+					data : {
+						nickname : $('#input-nickname').val(),
+						correo : $('#input-correo-electronico').val()
+					},
+					success : function(responseText) {
+						$('#ajaxGetUserServletResponse').text(responseText);
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
