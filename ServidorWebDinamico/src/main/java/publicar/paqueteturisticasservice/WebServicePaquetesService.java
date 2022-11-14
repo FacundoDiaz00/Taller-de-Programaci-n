@@ -4,6 +4,8 @@ package publicar.paqueteturisticasservice;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
+
+import configuraciones.Cargador;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebEndpoint;
 import jakarta.xml.ws.WebServiceClient;
@@ -17,7 +19,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServicePaquetesService", targetNamespace = "http://paqueteTuristicasService.publicar/", wsdlLocation = "http://localhost:5558/webservices/paquetes?wsdl")
+@WebServiceClient(name = "WebServicePaquetesService", targetNamespace = "http://paqueteTuristicasService.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
 public class WebServicePaquetesService
     extends Service
 {
@@ -30,7 +32,7 @@ public class WebServicePaquetesService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:5558/webservices/paquetes?wsdl");
+            url = new URL(Cargador.getDirrecionDelCentral() + "/paquetes?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

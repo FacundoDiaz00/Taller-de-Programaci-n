@@ -4,6 +4,8 @@ package publicar.usuarioturisticasservice;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
+
+import configuraciones.Cargador;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebEndpoint;
 import jakarta.xml.ws.WebServiceClient;
@@ -17,11 +19,10 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServiceUsuariosService", targetNamespace = "http://usuarioTuristicasService.publicar/", wsdlLocation = "http://localhost:5558/webservices/usuarios?wsdl")
+@WebServiceClient(name = "WebServiceUsuariosService", targetNamespace = "http://usuarioTuristicasService.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
 public class WebServiceUsuariosService
     extends Service
-{
-
+{	
     private final static URL WEBSERVICEUSUARIOSSERVICE_WSDL_LOCATION;
     private final static WebServiceException WEBSERVICEUSUARIOSSERVICE_EXCEPTION;
     private final static QName WEBSERVICEUSUARIOSSERVICE_QNAME = new QName("http://usuarioTuristicasService.publicar/", "WebServiceUsuariosService");
@@ -30,7 +31,7 @@ public class WebServiceUsuariosService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:5558/webservices/usuarios?wsdl");
+            url = new URL(Cargador.getDirrecionDelCentral() + "/usuarios?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

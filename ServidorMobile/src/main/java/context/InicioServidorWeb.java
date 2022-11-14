@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 
 import configuraciones.Cargador;
 
-public class InicioServidorDinamico implements ServletContextListener {
+public class InicioServidorWeb implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {

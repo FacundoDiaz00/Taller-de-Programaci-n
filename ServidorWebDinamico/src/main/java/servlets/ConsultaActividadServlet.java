@@ -53,19 +53,15 @@ public class ConsultaActividadServlet extends HttpServlet {
 		boolean esFavorito = false;
 		HttpSession sesion = req.getSession(false);
 		if (marcarFav) {
-
 			if (sesion.getAttribute("usuarioLogeado") != null) {
 				try {
-
 					DtUsuario user = (DtUsuario) sesion.getAttribute("usuarioLogeado");
 					wbUsuarios.agregarOEliminarActividadDeFavoritos(user.getNickname(), idActividad);
-
 				} catch (publicar.usuarioturisticasservice.ObjetoNoExisteEnTurismoUy_Exception e) {
 					req.setAttribute("motivoDeError",
 							"La actividad que se desea marcar/desmarcar como favorita no existe en el sistema");
 				}
 			}
-
 		}
 
 		if (finalizar) {

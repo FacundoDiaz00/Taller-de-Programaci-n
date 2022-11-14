@@ -4,6 +4,8 @@ package publicar.maestroservices;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
+
+import configuraciones.Cargador;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebEndpoint;
 import jakarta.xml.ws.WebServiceClient;
@@ -17,7 +19,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "WebServiceMaestroService", targetNamespace = "http://maestroServices.publicar/", wsdlLocation = "http://localhost:5558/webservices/maestro?wsdl")
+@WebServiceClient(name = "WebServiceMaestroService", targetNamespace = "http://maestroServices.publicar/", wsdlLocation = "CONFIO QUE NO IMPORTA")
 public class WebServiceMaestroService
     extends Service
 {
@@ -30,7 +32,7 @@ public class WebServiceMaestroService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:5558/webservices/maestro?wsdl");
+            url = new URL(Cargador.getDirrecionDelCentral() + "/maestro?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
