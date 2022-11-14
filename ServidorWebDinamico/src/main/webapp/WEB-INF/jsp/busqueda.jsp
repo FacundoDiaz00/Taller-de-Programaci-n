@@ -37,7 +37,7 @@
 				  
 <!-- 				  <input id="busqueda" name="busqueda" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
  -->				  
-				  <input id="busqueda" name="busqueda" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+				  <input id="busqueda" name="busqueda" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" >
 						
 				  <select id="departamentoFiltro" name="departamentoFiltro" class="form-select" aria-label="Default select example">
 					  <option selected value="">Departamento</option>
@@ -45,7 +45,7 @@
 							List<String> departamentos = (List<String>) request.getAttribute("departamentos");
 							
 							for(String dep: departamentos){ %>
-								<option value=<%=dep %>><%=dep %></option>
+								<option value="<%=dep %>"><%=dep %></option>
 							<%} %>
 					</select>
 				  
@@ -55,7 +55,7 @@
 							List<String> categorias = (List<String>) request.getAttribute("categorias");
 							
 							for(String cat: categorias){ %>
-								<option value=<%=cat %>><%=cat %></option>
+								<option value="<%=cat %>"><%=cat %></option>
 							<%} %>
 					</select>
 					<select   id="tipoOrdenacion" name="tipoOrdenacion" class="form-select" aria-label="Default select example">
@@ -69,7 +69,7 @@
 			
             <!--Actividades-->
 			<%DtResultadoBusqueda res = (DtResultadoBusqueda)request.getAttribute("resultadosBusqueda");%>
-            <div class="card" id="contenedor-actividades-turisticas">
+            <div class="card" id="contenedor-actividades-turisticas" style="padding: 3px">
                 <div class="header-card-with-button" style="margin-left: 30px">
                 	<h2 class="card-title header_usuarios">Actividades encontradas:</h2>
             	</div>
@@ -78,8 +78,8 @@
 					<%
 					for(DtActividadTuristica actividad: res.getActividades()){
 					%>
-						<div class="card mb-3" style="max-width: 800px;">
-				                    <div class="row g-0">
+						<div class="card mb-3" style="max-width: 800px; margin-bottom: 10px; margin-left: 5px">
+				                    <div class="row g-0" style="padding: 5px">
 				                        <div class="col-md-4 img-contain">
 				                            <img src="<%=Utile.obtenerUrlParaImagen(actividad.getImg())%>" class="img-fluid rounded-start">
 				                        </div>
@@ -103,7 +103,7 @@
             </div>
 			
 			<!--Paquetes-->
-			<div class="card" id="contenedor-actividades-turisticas">
+			<div class="card" id="contenedor-actividades-turisticas" style="padding: 3px">
                 <div class="header-card-with-button" style="margin-left: 30px">
                 	<h2 class="card-title header_usuarios">Paquetes Encontrados:</h2>
             	</div>
@@ -112,7 +112,7 @@
 					<%
 					for(DtPaquete paq: res.getPaquetes()){
 					%>
-						<div class="card mb-3" style="max-width: 800px;">
+						<div class="card mb-3" style="max-width: 800px; margin-bottom: 10px; margin-left: 5px">
 				                    <div class="row g-0">
 				                        <div class="col-md-4 img-contain">
  				                            <img src="<%=Utile.obtenerUrlParaImagen(paq.getImg())%>" class="img-fluid rounded-start">

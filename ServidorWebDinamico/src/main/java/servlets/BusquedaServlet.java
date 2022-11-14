@@ -67,13 +67,13 @@ public class BusquedaServlet extends HttpServlet {
 	        if(cat== null ) {
 	        	cat = "";
 	        }
+			TipoOrdenacion Tord;
 	        if(ord.equals("1")) {
-	        	TipoOrdenacion Tord = TipoOrdenacion.ALFABETICAMENTE;
+				Tord = TipoOrdenacion.ALFABETICAMENTE;
 	        }else {
-	        	TipoOrdenacion Tord = TipoOrdenacion.FECHA_PUBLICACION;
+	        	Tord = TipoOrdenacion.FECHA_PUBLICACION;
 	        }
-	        
-	        TipoOrdenacion Tord = TipoOrdenacion.ALFABETICAMENTE;
+
 	        DtResultadoBusqueda result = wbMaestro.buscar(filtro, depto, cat, Tord); 
 	        req.setAttribute("resultadosBusqueda", result);
             req.getRequestDispatcher("/WEB-INF/jsp/busqueda.jsp").forward(req, resp);
