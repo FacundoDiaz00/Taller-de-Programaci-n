@@ -45,9 +45,9 @@ public class InscribirseASalidaServlet extends HttpServlet {
 
 		String nombSalida = (String) req.getParameter("id");
 
-		if (nombSalida == null) {
+		if (nombSalida == null || nombSalida.trim().length() == 0) {
 			req.setAttribute("motivoDeError", "No se ha incluido el id de la salida en los parámetros");
-			req.getRequestDispatcher("/WEB-INF/jsp/consulta_de_salida_turistica.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 		}
 
 		try {

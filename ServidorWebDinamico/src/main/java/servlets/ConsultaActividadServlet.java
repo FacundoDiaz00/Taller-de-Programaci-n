@@ -105,7 +105,6 @@ public class ConsultaActividadServlet extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
 			return;
 		} catch (ObjetoNoExisteEnTurismoUy_Exception e) {
-			// TODO Auto-generated catch block
 			req.setAttribute("motivoDeError",
 					"id de actividad invalido. No existe una actividad turistica con este nombre en el sistema");
 			req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
