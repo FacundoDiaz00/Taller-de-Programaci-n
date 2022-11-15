@@ -1263,7 +1263,7 @@ class ControladorActividadTuristicaTest {
 		int duracion = 10;
 		float costo = (float) 10.85;
 		String ciudad = "Ciudad";
-		LocalDate fechaAlta = localDateNow;
+		LocalDate fechaAlta = localDateNow.minusDays(4);
 
 		contrActTur.altaActividadTuristica(nickProveedor, departamento, nombreActividad, descripcion, duracion, costo,
 				ciudad, fechaAlta, null, muestraCategorias, null);
@@ -1274,8 +1274,8 @@ class ControladorActividadTuristicaTest {
 		for (int i1 = 0; i1 < cantSalidas; i1++) {
 			String nombreSalida = "Salida " + idTest + " i=" + i1;
 			String ciudadSal = "Ciudad salida";
-			LocalDate fechaAltaSal = localDateNow;
-			LocalDateTime fechaYHoraSalida = localDateTimeNow.plusDays(40);
+			LocalDate fechaAltaSal = localDateNow.minusDays(3);
+			LocalDateTime fechaYHoraSalida = localDateTimeNow.minusDays(2);
 			int cantMaxTur = 50;
 
 			contrActTur.altaSalidaTuristica(nombreActividad, nombreSalida, fechaYHoraSalida, fechaAltaSal, ciudadSal,

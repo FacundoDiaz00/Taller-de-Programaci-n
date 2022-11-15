@@ -336,6 +336,18 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 				throw new TurismoUyException("No es posible finalizar una activdad que esté dentro de un paquete");
 			}
 
+			boolean existeVigente = false;
+
+			for (var sal : act.getSalidas().values()) {
+				if (sal.getFechaHoraSalida().isAfter(LocalDateTime.now())) {
+					existeVigente = true;
+					break;
+				}
+			}
+
+			if (existeVigente)
+				throw new TurismoUyException("No es posible finalizar una actividad que tenga salidas vigentes");
+
 			ManejadorPersistenciaJPA.getInstancia().persistirActividad(idActividad);
 			act.eliminarLinks();
 
