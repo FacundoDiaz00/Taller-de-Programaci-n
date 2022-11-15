@@ -52,10 +52,11 @@ public class ActividadJPA {
 	@Column(name = "fechaAlta", nullable = false, columnDefinition = "DATE")
 	private LocalDate fechaAlta;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "actividadJPA", cascade = { CascadeType.PERSIST })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "actividadJPA", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Collection<SalidaJPA> salidas = new java.util.ArrayList<>();
 
-	@ManyToOne(cascade = { CascadeType.PERSIST }) @JoinColumn(name = "id_proveedor", nullable = false)
+	@ManyToOne(cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE }) @JoinColumn(name = "id_proveedor", nullable = false)
 	private ProveedorJPA proveedorJPA;
 
 	public ActividadJPA(String nombre, String descripcion, int duracion, float costo, String ciudad,

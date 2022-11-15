@@ -20,7 +20,7 @@ public class InscripcionJPA {
 	@ManyToOne @MapsId("idSalida")
 	private SalidaJPA salidaJPA;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST }) @MapsId("idTurista")
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }) @MapsId("idTurista")
 	private TuristaJPA turistaJPA;
 
 	@Column(name = "fecha_inscripcion", nullable = false, columnDefinition = "DATE")

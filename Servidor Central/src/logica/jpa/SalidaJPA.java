@@ -45,7 +45,7 @@ public class SalidaJPA {
 	@ManyToOne @JoinColumn(name = "actividad_jpa_id", nullable = false)
 	private ActividadJPA actividadJPA;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "salidaJPA", cascade = { CascadeType.PERSIST })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "salidaJPA", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Collection<InscripcionJPA> inscripciones = new java.util.ArrayList<>();
 
 	public SalidaJPA() {
