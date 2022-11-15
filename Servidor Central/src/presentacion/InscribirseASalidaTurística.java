@@ -35,9 +35,14 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import excepciones.AltaInscripcionPosteriorAFechaSalidaException;
+import excepciones.CompraConConsumosInsuficientesExcepcion;
+import excepciones.CompraPaqueteVencidoExcepcion;
 import excepciones.FechaAltaSalidaTuristicaPosteriorAFechaInscripcion;
 import excepciones.InscripcionYaRegistradaException;
+import excepciones.NoExisteConsumoParaLaActividadExcepcion;
 import excepciones.ObjetoNoExisteEnTurismoUy;
+import excepciones.PaqueteNoCompradoExcepcion;
 import excepciones.SuperaElMaximoDeTuristasException;
 import excepciones.TurismoUyException;
 import logica.controladores.IControladorActividadTuristica;
@@ -615,10 +620,25 @@ public class InscribirseASalidaTurística extends JInternalFrame {
 			JOptionPane.showMessageDialog(null,
 					"La fecha de inscripción no puede ser anterior a la fecha de alta de la salida turística.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} catch (TurismoUyException exception) {
+		} catch (AltaInscripcionPosteriorAFechaSalidaException e) {
+			JOptionPane.showMessageDialog(null,
+					"La fecha de inscripción no puede ser anterior a la fecha de salida de la salida turística.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (CompraPaqueteVencidoExcepcion e) {
+			JOptionPane.showMessageDialog(null,
+					"La compra esta vencida.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (CompraConConsumosInsuficientesExcepcion e) {
+			JOptionPane.showMessageDialog(null,
+					"La compra sin consumos suficientes para la inscripcion en esta actividad.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (PaqueteNoCompradoExcepcion e) {
+			JOptionPane.showMessageDialog(null,
+					"Paquete no comprado", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (TurismoUyException e) {
 			JOptionPane.showMessageDialog(null, "Error general al crear la inscripción.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-			exception.printStackTrace();
 		}
 	}
 

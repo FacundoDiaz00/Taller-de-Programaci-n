@@ -70,42 +70,42 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	
 	    JLabel lblNewLabel2 = new JLabel("Proveedores:");
 	    lblNewLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel2.setBounds(49, 16, 70, 14);
+	    lblNewLabel2.setBounds(12, 16, 107, 14);
 	    getContentPane().add(lblNewLabel2);
 	
 	    JLabel lblNewLabel = new JLabel("Departamentos:");
 	    lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel.setBounds(30, 41, 89, 14);
+	    lblNewLabel.setBounds(-13, 41, 132, 14);
 	    getContentPane().add(lblNewLabel);
 	
 	    JLabel lblNewLabel1 = new JLabel("Nombre:");
 	    lblNewLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel1.setBounds(48, 66, 71, 14);
+	    lblNewLabel1.setBounds(12, 66, 107, 14);
 	    getContentPane().add(lblNewLabel1);
 	
 	    JLabel lblNewLabel11 = new JLabel("Descripción:");
 	    lblNewLabel11.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel11.setBounds(49, 91, 70, 14);
+	    lblNewLabel11.setBounds(7, 91, 112, 14);
 	    getContentPane().add(lblNewLabel11);
 	
 	    JLabel lblNewLabel111 = new JLabel("Duración:");
 	    lblNewLabel111.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel111.setBounds(49, 114, 70, 14);
+	    lblNewLabel111.setBounds(12, 114, 107, 13);
 	    getContentPane().add(lblNewLabel111);
 	
 	    JLabel lblNewLabel1111 = new JLabel("Costo:");
 	    lblNewLabel1111.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel1111.setBounds(42, 139, 77, 14);
+	    lblNewLabel1111.setBounds(-28, 139, 147, 14);
 	    getContentPane().add(lblNewLabel1111);
 	
 	    JLabel lblNewLabel11111 = new JLabel("Ciudad:");
 	    lblNewLabel11111.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel11111.setBounds(74, 167, 45, 14);
+	    lblNewLabel11111.setBounds(-13, 167, 132, 14);
 	    getContentPane().add(lblNewLabel11111);
 	
 	    JLabel lblNewLabel1111111 = new JLabel("Fecha de alta:");
 	    lblNewLabel1111111.setHorizontalAlignment(SwingConstants.RIGHT);
-	    lblNewLabel1111111.setBounds(37, 192, 82, 14);
+	    lblNewLabel1111111.setBounds(-28, 192, 147, 14);
 	    getContentPane().add(lblNewLabel1111111);
 	
 	    comboProveedores = new JComboBox<String>();
@@ -208,7 +208,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	
 	    JLabel lblCategorias = new JLabel("Categorías");
 	    lblCategorias.setHorizontalAlignment(SwingConstants.CENTER);
-	    lblCategorias.setBounds(7, 216, 75, 15);
+	    lblCategorias.setBounds(7, 216, 132, 15);
 	    getContentPane().add(lblCategorias);
 	
 	    JList listCategorias = new JList();
@@ -218,7 +218,7 @@ public class AltaDeActividadTuristica extends JInternalFrame {
 	
 	    JLabel lblSeleccion = new JLabel("Selección");
 	    lblSeleccion.setHorizontalAlignment(SwingConstants.CENTER);
-	    lblSeleccion.setBounds(269, 220, 75, 15);
+	    lblSeleccion.setBounds(269, 220, 147, 15);
 	    getContentPane().add(lblSeleccion);
 	
 	    JList listSeleccion = new JList();
