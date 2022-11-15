@@ -138,7 +138,7 @@
                         		placeholder="Ingrese una cuidad" 
                         		aria-label="Cuidad" 
                         		aria-describedby="basic-addon1">
-                    </div>
+                    </div>                    
 
                     <div class="contenedorinput mb-3">
                         <span class="input-label">Imagen:</span>
@@ -151,6 +151,18 @@
                         	   aria-label="Imagen" 
                         	   aria-describedby="basic-addon1">
                     </div>
+                    
+                    <div class="contenedorinput mb-3">
+                    	<% String url = ""; %>
+                        <span class="input-label">URL vídeo de la actividad:</span>
+                        <input 	type="text"
+                           		id="url"
+                       	   		name="url"<%= url %>"
+                        		class="form-control" 
+                        		placeholder="Ingrese una el URL asociado al vídeo que desea agregar" 
+                        		aria-label="url" 
+                        		aria-describedby="basic-addon1">
+                    </div>  
                     
                     <div class="contenedorinput mb-3">
                         <span class="input-label">Categorías:</span>

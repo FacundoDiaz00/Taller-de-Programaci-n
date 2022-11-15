@@ -2,15 +2,15 @@
 
 # ATTRIBUTOS QUE PRECISA LA PÁGINA
 
-- DTUsuario "usuarioLogeado" (opcional)
+- DtUsuario "usuarioLogeado" (opcional)
 
  --%>
 
-
+<%@page import="utils.Utile"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="logica.datatypes.DTUsuario" %>
 
 
 
@@ -18,7 +18,7 @@
 
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="index.html">Turismo UY</a>
+            <a class="navbar-brand" href="index">Turismo UY</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,14 +29,16 @@
 
 
                 <ul class="navbar-nav d-flex">
-                    <form class="d-flex buscar" role="search" id="buscador">
-                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                        <button class="btn" ><i class="fas fa-search"></i></button>
+                    <form class="d-flex buscar" role="search" id="buscador" method="get" action="busqueda">
+                        <input id="busqueda" name="busqueda" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button type="submit" class="btn" ><i class="fas fa-search"></i></button>
+                        
                     </form>
                     
-                    <% 
-                	DTUsuario usuario = (DTUsuario)session.getAttribute("usuarioLogeado");   
-                    if(session.getAttribute("usuarioLogeado") == null){ %>
+                    <%
+                                        DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");   
+                                                            if(session.getAttribute("usuarioLogeado") == null){
+                                        %>
 	                    <li class="alta_de_usuario">
 	                        <a class="nav-link active" aria-current="page" href="AltaDeUsuario">Registrarse</a>
 	                    </li>
@@ -44,22 +46,16 @@
 	                        <a class="nav-link active" href="IniciarSesion">Iniciar Sesión</a>
 	                    </li>
                     
-                    <% }else{ %>
+                    <%
+                                        }else{
+                                        %>
                     
 	                    <div class="dropdown">
 	
 	                        <a class="nav-link dropdown-toggle nickname_usuario  dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                            <%=usuario.getNombre() %>
-	                            
-	                            <% 
-				        		String path = "";
-								if (usuario.getImg() == null) {
-									path += "/noFoto.png";
-								} else {
-									path += usuario.getImg().getPath();
-								}							
-								%>
-				                <img class="imagen_perfil " src="img<%=path%>" alt="">
+	                            <%=usuario.getNombre()%>
+
+				                <img class="imagen_perfil " src="<%=Utile.obtenerUrlParaImagen(usuario.getImg())%>" alt="">
 	                            
 	                        </a>
 	                        <ul class="dropdown-menu" id="dropDown">
@@ -71,6 +67,9 @@
                     <% } %>
                     
                 </ul>
+                
+                 
+                
             </div>
         </div>
 

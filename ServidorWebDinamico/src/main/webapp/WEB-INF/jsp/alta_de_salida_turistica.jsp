@@ -1,9 +1,10 @@
+<%@ page import="publicar.actividadesturisticasservice.DtActividadTuristicaDetalle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,7 @@
     	<jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
         
         <div id="contenedorForm">
-        	<% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
+        	<% DtActividadTuristicaDetalle datosActividad = (DtActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
         
             <form class="card" id="form-alta-salida" name="altaSalidaForm" enctype="multipart/form-data" method="post" action="AltaDeSalida?id=<%=datosActividad.getNombre()%>">
                 <div class="card-body">
@@ -68,7 +69,6 @@
                         <input  id="actividad"
                         	   	name="actividad" 
                         		type="text" 
-                        		0
                         		class="form-control" 
                         		placeholder="" 
                         		aria-label="Actividad" 
@@ -164,6 +164,7 @@
                         	   aria-label="Imagen" 
                         	   aria-describedby="basic-addon1">
                     </div>
+                   
                     
                     <div id="botonera">
                         <a href="index.html" class="btn btn-danger">Cancelar</a>

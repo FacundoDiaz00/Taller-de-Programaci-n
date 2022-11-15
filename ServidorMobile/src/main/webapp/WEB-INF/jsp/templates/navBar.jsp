@@ -1,0 +1,53 @@
+<%-- 
+
+# ATTRIBUTOS QUE PRECISA LA PÁGINA
+
+- DTUsuario "usuarioLogeado" (opcional)
+
+ --%>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
+
+
+
+	<% DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado"); %>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#">Turismo UY</a>
+             <b class="navbar-text" style="font-size: 13px;" >Bienvenido/a <%=usuario.getNombre() %></b>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex">
+                    
+                   <%--  <%   
+                    if(session.getAttribute("usuarioLogeado") == null){ %>
+                    <% }else{ %> --%>
+                    
+                    <li class="alta_de_usuario">
+	                        <a class="nav-link active" aria-current="page" href="ConsultaActividad?listar=<%=true %>">Ver Actividades</a>
+	                    </li>
+                     <li class="alta_de_usuario">
+                        <a class="nav-link active" aria-current="page" href="ConsultaSalida?listar=<%=true %>">Ver Salidas</a>
+                    </li>
+	                    <li class="iniciar_sesion">
+	                        <a class="nav-link active" href="IniciarSesion?sesionCerrada=<%=true%>">Salir</a>
+	                    </li>
+  
+                    <%-- <% } %> --%>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+
+

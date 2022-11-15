@@ -7,11 +7,12 @@
 
  --%>
 
-
-<%@page import="logica.datatypes.DTTurista"%>
-<%@page import="logica.datatypes.DTActividadTuristica"%>
-<%@page import="logica.datatypes.DTPaqueteDetalles"%>
-<%@page import="logica.datatypes.Imagen"%>
+<%@page import="utils.Utile"%>
+<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
+<%@page import="publicar.paqueteturisticasservice.DtPaqueteDetalles.Actividades.Entry"%>
+<%@page import="publicar.paqueteturisticasservice.DtActividadTuristica"%>
+<%@page import="publicar.paqueteturisticasservice.DtPaqueteDetalles"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -27,11 +28,14 @@
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
     
 <main>
-    <% 
-	DTPaqueteDetalles paquete = (DTPaqueteDetalles) request.getAttribute("paquete");
-    Map<String, DTActividadTuristica> actividadesPaquete = paquete.getActividades();
-	
-	%>
+    <%
+    DtPaqueteDetalles paquete = (DtPaqueteDetalles) request.getAttribute("paquete");
+        HashMap<String, DtActividadTuristica> actividadesPaquete = new HashMap<>();
+        
+        for (Entry ent: paquete.getActividades().getEntry()) {
+        	actividadesPaquete.put(ent.getKey(), ent.getValue());
+        }
+    %>
 
 
     <section id="contenedor">
@@ -47,21 +51,13 @@
 	        <div id="info-paquete">
 	
 	
-	            <div id="info-general-imagen">
-	            			<% 
-	            			String path = "";
-							if (paquete.getImg() == null) {
-								path += "/noFoto.png";
-							} else {
-								path += paquete.getImg().getPath();
-							}							
-							%>
-			                <img src="img<%=path%>" alt="">
+	            <div id="info-general-imagen">	            			
+			                <img src="<%=Utile.obtenerUrlParaImagen(paquete.getImg())%>" alt="">
 	            </div>
 	
 	            <div id="info">
 	                <h2><%=paquete.getNombre()%></h2>
-	                <h6>Creado el <%=paquete.getFechaRegistro().format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))%></h6>
+	                <h6>Creado el <%=paquete.getFechaRegistroStr()%></h6>
 	
 	            </div>
 	
@@ -70,7 +66,7 @@
 	
 	                <div class="div-doble" id="validesPaquete">
 	                    <h5 class="label">Validez del paquete: </h5>
-	                    <p><%=paquete.getValidez() %> dias</p>
+	                    <p><%=paquete.getValidez()%> dias</p>
 	                </div>
 	                <div class="div-doble" id="descuento">
 	                    <h5 class="label">Descuento: </h5>
@@ -83,16 +79,20 @@
                 <div id="categorias">
                     <h5 class="">Categorías:</h5>
                     <ul>
-                        <% if(paquete.getCategorias() != null ){
-                        		for(String cat : paquete.getCategorias() ) { %>
-                        			 <li> <%=cat %></li>
-                        <% 		}
-                        
-                            } else {
+                        <%
+                        if(paquete.getCategorias() != null ){
+                                                		for(String cat : paquete.getCategorias() ) {
+                        %>
+                        			 <li> <%=cat%></li>
+                        <%
+                        }
+                                                
+                                                    } else {
                         %>
 							<span>Sin categorías</span>                        
                         <%
-                        	}%>
+                                                }
+                                                %>
                        
                     </ul>
                 </div>
@@ -103,16 +103,17 @@
 	
 			
 	        <div id="actividades-compra-turisticas" style="max-width: 800px;">
-	        	<% 	
-		        	boolean turistaLogueado = false;
-	        		try {
-		        		DTTurista tur = (DTTurista) session.getAttribute("usuarioLogeado");
-		        		turistaLogueado = tur != null;
-	        		} catch (Exception e) {
-	        			// nada
-	        		}
-	        		// Muestro el form de compra solo si estoy logueado
-	        		if (turistaLogueado) { %>	
+	        	<%
+	        	boolean turistaLogueado = false;
+	        		        		try {
+	        			        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
+	        			        		turistaLogueado = tur != null;
+	        		        		} catch (Exception e) {
+	        		        			// nada
+	        		        		}
+	        		        		// Muestro el form de compra solo si estoy logueado
+	        		        		if (turistaLogueado) {
+	        	%>	
 			            <div class="card" id="contenedor-compra" style="max-width: 800px;">
 			                <div class="header-card-with-button">
 			                    <h2 class="card-title">Compra paquete</h2>
@@ -132,38 +133,51 @@
 			                    </form>
 			                </div>
 			            </div>
-	        		<% } %>
+	        		<%
+	        		}
+	        		%>
 
 	            <div class="card" id="contenedor-actividades-turisticas">
 	                <div class="header-card-with-button">
 	                    <h2 class="card-title">Actividades</h2>
 	                </div>
 	
-					<% for(DTActividadTuristica act: actividadesPaquete.values()) {%>	
+					<%
+						for(DtActividadTuristica act: actividadesPaquete.values()) {
+						%>	
 					
 		                <div class="card mb-3" style="max-width: 800px;">
 		                    <div class="row g-0">
 		                        <div class="col-md-4 img-contain">
-		                        	
-		                        	<% 
-			            			String pathImagen = "";
-									if (act.getImg() == null) {
-										pathImagen += "noFoto.png";
-									} else {
-										pathImagen += act.getImg().getPath();
-									}							
-									%>
-					                <img src="img/<%=pathImagen%>" alt="" class="img-fluid rounded-start imagen">
+
+					                <img src="<%=Utile.obtenerUrlParaImagen(act.getImg())%>" alt="" class="img-fluid rounded-start imagen">
 		                        </div>
 		                        <div class="col-md-8">
 		                            <div class="card-body card-actividad">
-		                            	<div>
-		                            		<h5 class="card-title"><%=act.getNombre()%></h5>
-		                                	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
-		                            	</div>
-		                            	<div class="botonera">
-		                            		<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>
-		                            	</div>		                           
+		                            	<div style="display:flex; justify-content: space-between;">		<h5 class="card-title"><%=act.getNombre()%></h5>
+		                            				                              
+					                                <%   	 
+					                                
+				                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+				                                	Map<DtActividadTuristica, Boolean> actividadesFav = (Map<DtActividadTuristica, Boolean>) request.getAttribute("actividadFavorito");
+				                                	String idDepartamento = (String)request.getAttribute("idDepartamento");
+				                                	if(actividadesFav.get(act.getNombre())){
+				                    
+					                                %>
+					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
+					                                
+					                                <%} else { %>
+					                                
+					                                	<a href="ConsultaPaquete?marcarComoFav=<%=true%>&nomAct=<%=act.getNombre()%>&idDepartamento=<%=act.getDepartamento()%>&id=<%=paquete.getNombre()%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
+					                                	
+					                                <% } 
+				                                	}%>
+		                            		
+		                            	</div>		  
+		                            	
+		                            	<p class="card-text descripcion-actividad"><%=act.getDescripcion()%></p>
+		                            	
+		                            	<a href="ConsultaActividad?id=<%=act.getNombre()%>" class="btn btn-primary">Ver más</a>                         
 		                                
 		                            </div>
 		                        </div>

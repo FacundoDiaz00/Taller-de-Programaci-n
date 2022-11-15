@@ -5,15 +5,17 @@
 
 
  --%>
-<%@page import="logica.datatypes.EstadoActividadTuristica"%>
-<%@page import="logica.datatypes.DTProveedor"%>
-<%@page import="logica.datatypes.DTPaquete"%>
-<%@page import="logica.datatypes.DTSalidaTuristica"%>
-<%@page import="logica.datatypes.DTActividadTuristicaDetalle"%>
-<%@page import="logica.datatypes.DTActividadTuristica"%>
+ <%@page import="utils.Utile"%>
+<%@page import="publicar.actividadesturisticasservice.DtActividadTuristicaDetalle"%>
+<%@page import="publicar.actividadesturisticasservice.EstadoActividadTuristica"%>
+<%@page import="publicar.usuarioturisticasservice.DtProveedor"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
+<%@page import="publicar.actividadesturisticasservice.DtPaquete"%>
+<%@page import="publicar.actividadesturisticasservice.DtSalidaTuristica"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="publicar.usuarioturisticasservice.DtTurista" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,95 +40,156 @@
         <div id="info-actividad">
         
         
-        	<% DTActividadTuristicaDetalle datosActividad = (DTActividadTuristicaDetalle) request.getAttribute("datosActividad"); %>
+        	<%
+                        	DtActividadTuristicaDetalle datosActividad = (DtActividadTuristicaDetalle) request.getAttribute("datosActividad");
+                        	%>
 
 
 
             <div id="info-general-imagen">
-                <% 
-        		String path = "";
-				if (datosActividad.getImg() == null) {
-					path += "/noFoto.png";
-				} else {
-					path += datosActividad.getImg().getPath();
-				}							
-				%>
-                <img src="img<%=path%>" alt="">
+                <img src="<%=Utile.obtenerUrlParaImagen(datosActividad.getImg())%>" alt="">
             </div>
 
             <div id="info">
-                <h2><%= datosActividad.getNombre() %></h2>
-                <h6>Creado el <%= datosActividad.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
+            	<div>
+            		<div style="display:flex; justify-content: space-between">
+            		
+	            		<h2><%=datosActividad.getNombre()%></h2>
+	            		<%
+	            		int cantFavoritos = (int) request.getAttribute("cantFavoritos");
+	            						 if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+	            							boolean esFavoritaActividad = (boolean)request.getAttribute("esFavoritaActividad");
+	            			                     	String idDepartamento = (String)request.getAttribute("idDepartamento");
+	            			                     	if(esFavoritaActividad){
+	            		%>
+	                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
+	                      
+	                      <%
+	                      	                      } else {
+	                      	                      %>
+	                      
+	                      	<a href="ConsultaActividad?marcarComoFav=<%=true%>&id=<%=datosActividad.getNombre()%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
+	                      	
+	                      <%
+	                      		                      }
+	                      		                      	                     	
+	                      		                      	                     	}
+	                      		                      %>
+                     	
+            		
+            		</div>
+            		<% if (datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA){ %>
+                    	<p>favorito de <%=cantFavoritos%> persona/s </p>
+                    <%} %>
+                    
+            	</div>
                 
-                <% 
+                <h6>Creado el <%=datosActividad.getFechaAltaStr()%></h6>
+                <%
                 boolean proveedorLogueado = false;
-        		try {
-	        		DTProveedor tur = (DTProveedor) session.getAttribute("usuarioLogeado");
-	        		proveedorLogueado = tur != null;
-        		} catch (Exception e) {
-        			// nada
-        		}
-        		// Muestro el boton si soy turista
-        		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) { %>		            
+          		try {
+  	        		DtProveedor tur = (DtProveedor) session.getAttribute("usuarioLogeado");
+  	        		proveedorLogueado = tur != null;
+          		} catch (Exception e) {
+          			// nada
+          		}
+          		// Muestro el boton si soy proveedor
+          		if (proveedorLogueado && datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA) {
+                %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
-	                <ul>
-	                    <li><a href="AltaDeSalida?id=<%=datosActividad.getNombre()%>">Crear una salida turística</a></li>
-	                </ul>	                
-        		<% } %>
+					<a style="margin-bottom: 4px" href="AltaDeSalida?id=<%=datosActividad.getNombre()%>" class="btn btn-primary">Crear una salida turística</a>
+					<%
+					DtUsuario usuario = (DtUsuario)session.getAttribute("usuarioLogeado");
+					if(usuario.getNickname().equals(datosActividad.getNicknameProveedor())){
+					%>
+
+			               <a href="ConsultaActividad?id=<%=datosActividad.getNombre()%>&finalizar=<%=true%>" class="btn btn-danger" style="height: 40px" >Finalizar Actividad <i class="fa-solid fa-ban"></i></a>
+					<%
+			           				           	}
+			           				           	%>
+	                       
+        		<%
+	                               		}
+	                               		%>
                 
             </div>
 
             <div id="resto-de-la-info-actividad">
                 <div id="descripcion">
                     <h5 class="">Descripción</h5>
-                    <p><%= datosActividad.getDescripcion() %>a</p>
+                    <p><%=datosActividad.getDescripcion()%>a</p>
                 </div>
 
                 <div class="div-doble" id="Duracion">
                     <h5 class="">Estado: </h5>
-                    <% if(datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA){%>
+                    <%
+                    if(datosActividad.getEstado() == EstadoActividadTuristica.ACEPTADA){
+                    %>
                     	<p>Confirmada</p>
-                    <%} else if(datosActividad.getEstado() == EstadoActividadTuristica.AGREGADA){%>
+                    <%
+                    } else if(datosActividad.getEstado() == EstadoActividadTuristica.AGREGADA){
+                    %>
                     	<p>Agregada sin confirmar</p>
-                    <%} else {%>
+                    <%
+                    } else if(datosActividad.getEstado() == EstadoActividadTuristica.RECHAZADA){
+                    %>
                     	<p>Rechazada</p>
-                    <%}%>
+                    <%
+                    } else if(datosActividad.getEstado() == EstadoActividadTuristica.FINALIZADA){
+                        %>
+                        	<p>Finalizada</p>
+                        <%
+                        }
+                    %>
                 </div>
 
                 <div class="div-doble" id="Duracion">
                     <h5 class="">Duración: </h5>
-                    <p><%= datosActividad.getDuracion() %> horas</p>
+                    <p><%=datosActividad.getDuracion()%> horas</p>
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="">Costo: </h5>
-                    <p><%= datosActividad.getCostoPorTurista() %>$</p>
+                    <p><%=datosActividad.getCostoPorTurista()%>$</p>
                 </div>
                 <div class="div-doble" id="Cuidad">
                     <h5 class="">Cuidad: </h5>
-                    <p><%= datosActividad.getCuidad() %></p>
+                    <p><%=datosActividad.getCuidad()%></p>
                 </div>
                 <div class="div-doble" id="Departamento">
                     <h5 class="">Departamento: </h5>
-                    <p><%= datosActividad.getDepartamento() %></p>
+                    <p><%=datosActividad.getDepartamento()%></p>
                 </div>
 
                 <div id="categorias">
                     <h5 class="">Categorías:</h5>
                     <ul>
-                        <% if(datosActividad.getCategorias() != null ){
-                        		for(String cat : datosActividad.getCategorias() ) { %>
-                        			 <li> <%=cat %></li>
-                        <% 		}
-                        
-                            } else {
+                        <%
+                        if(datosActividad.getCategorias() != null ){
+                                                		for(String cat : datosActividad.getCategorias() ) {
+                        %>
+                        			 <li> <%=cat%></li>
+                        <%
+                        }
+                                                
+                                                    } else {
                         %>
 							<span>Sin categorías</span>                        
                         <%
-                        	}%>
+                                                }
+                                                %>
                        
                     </ul>
                 </div>
+                <%
+                if(datosActividad.getUrlVideo() != null && datosActividad.toString().length() > 0 ){
+                %>
+                <iframe width="560" height="315" src="<%=datosActividad.getUrlVideo()%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <%
+                }
+                %>
             </div>
+            
+           
 
         </div>
 
@@ -136,39 +199,31 @@
                     <h2 class="card-title">Salidas Turísticas:</h2>
 
 					<%
-					
-					if(datosActividad.getSalidas().values().size() == 0){
+					if(datosActividad.getSalidas() == null || datosActividad.getSalidas().getEntry().size() == 0){
 					%>
 						<span style="margin-left: 10px">Sin informacion</span>
 					<%
 					}else{
-					
-						for(DTSalidaTuristica salida : datosActividad.getSalidas().values()){
-						
-						%>
+								
+									for(publicar.actividadesturisticasservice.DtActividadTuristicaDetalle.Salidas.Entry entrySalida : datosActividad.getSalidas().getEntry()){
+										DtSalidaTuristica salida = entrySalida.getValue();
+					%>
 	
 	
 	                    <div class="card mb-3" style="max-width: 800px;">
 	                        <div class="row g-0">
 	                            <div class="col-md-4 img-contain">
-	                                 <% 
-			            			String pathSalida = "";
-									if (salida.getImg() == null) {
-										pathSalida += "/noFoto.png";
-									} else {
-										pathSalida += salida.getImg().getPath();
-									}							
-									%>
-					                <img src="img<%=pathSalida%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
+	                                 
+					                <img src="<%=Utile.obtenerUrlParaImagen(salida.getImg())%>" class="img-fluid rounded-start"  style="margin: 10px" alt="">
 	                            </div>
 	                            <div class="col-md-8">
 	                                <div class="card-body">
 	                                    <div class="salidaInfo">
-	                                        <h5 class="card-title"><%=salida.getNombre() %></h5>
-	                                        <div><strong>Lugar salida: </strong><%=salida.getLugarSalida() %> </div>
-	                                        <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm")) %> </div>
+	                                        <h5 class="card-title"><%=salida.getNombre()%></h5>
+	                                        <div><strong>Lugar salida: </strong><%=salida.getLugarSalida()%> </div>
+	                                        <div><strong>Fecha y hora de partida: </strong><%=salida.getFechaHoraSalidaStr()%> </div>
 	                                        <div><strong>Capacidad de turistas: </strong><%=salida.getCantMaxTuristas()%></div>
-	                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></div>
+	                                        <div><strong>Fecha de creación: </strong><%=salida.getFechaAltaStr()%></div>
 	
 	                                    </div>
 	
@@ -182,9 +237,9 @@
 	                    </div>
 	                    
 	                    <%
-						}
-					}
-	                    %>
+	                    	                    }
+	                    	                    			}
+	                    	                    %>
                     
                     
                 </div>
@@ -195,27 +250,23 @@
                     <h2 class="card-title">Paquetes:</h2>
 
 					<%
-					if(datosActividad.getPaquetes().values().size() == 0){%>	
+					if(datosActividad.getPaquetes() == null || datosActividad.getPaquetes().getEntry().size() == 0){
+					%>	
 						<span style="margin-left: 10px">Sin informacion</span>
-					<%} else {%>
-						<%for(DTPaquete pack: datosActividad.getPaquetes().values()){
-						
+					<%
+					} else {
+					%>
+						<%
+						for(publicar.actividadesturisticasservice.DtActividadTuristicaDetalle.Paquetes.Entry entryPack: datosActividad.getPaquetes().getEntry()){
+											DtPaquete pack = entryPack.getValue();
 						%>
 	
 	                    <div class="card mb-3" style="max-width: 800px; margin-right: 20px; margin-top: 15px">
 	                        <div class="row g-0">
 	                            <div class="col-md-4 img-contain">
 	
-	                           
-	                                <% 
-			            			String pathPack = "";
-									if (pack.getImg() == null) {
-										pathPack += "/noFoto.png";
-									} else {
-										pathPack += pack.getImg().getPath();
-									}							
-									%>
-					                <img src="img<%=pathPack%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+	  
+					                <img src="<%=Utile.obtenerUrlParaImagen(pack.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
 	                                
 	                            </div>
 	                            <div class="col-md-8">
@@ -254,6 +305,35 @@
 	    	generarMensaje('success', "Operacion completada" , "Se ha realizado un alta de salida satisfactoriamente" , 500);
 	    </script>
     <%} %>
+    
+    
+ <%if(request.getAttribute("motivoDeError") != null){ %>
+    
+    <script>
+    	const mensajeError = "<%= (String) request.getAttribute("motivoDeError")%>"
+    	generarMensaje('error', "Error al finalizar actividad turística" , mensajeError , 200);
+    </script>
+    <%} %>
+    
+    
+    <% if( (Boolean)request.getAttribute("exito") == Boolean.TRUE){ %>
+    <script>
+    
+	    setTimeout(() => {
+	        Swal.fire({
+	            icon: "success",
+	            title: "Éxito",
+	            text: "La actividad turistica ha sido finalizada con éxito",
+	            confirmButtonText: 'Entendido'  
+	        }).then((res) => {
+	        	window.location.href = "index";
+	        })
+	    }, 200)
+    
+	</script>
+	<%} %>
+
+
  
 
 </main>

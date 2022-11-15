@@ -3,8 +3,7 @@ package context;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import excepciones.TurismoUyException;
-import logica.controladores.Fabrica;
+import configuraciones.Cargador;
 
 public class InicioServidorDinamico implements ServletContextListener {
 
@@ -15,13 +14,9 @@ public class InicioServidorDinamico implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        try {
-            // FIXME hay veces que esto en el tiempo se ejecuta mas de una vez, por ahora no
-            // afecta pq está bien hecho el control de errores
-            Fabrica.getInstancia().getIControladorMaestro().generarDatosDePrueba();
-            System.out.println("Datos de prueba cargados");
-        } catch (TurismoUyException e) {
-            e.printStackTrace();
-        }
+    	boolean resultado = Cargador.cargarPropiedades();
+    	if (!resultado) {
+    		System.exit(0);
+    	}
     }
 }

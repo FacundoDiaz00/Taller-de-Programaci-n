@@ -24,6 +24,7 @@ import logica.controladores.IControladorUsuario;
 import logica.datatypes.DTActividadTuristica;
 import logica.datatypes.DTPaqueteDetalles;
 import logica.datatypes.DTTuristaDetallePrivado;
+import logica.datatypes.EstadoActividadTuristica;
 
 class ControladorPaqueteTest {
     private static IControladorPaquete contrPaquete;
@@ -213,7 +214,7 @@ class ControladorPaqueteTest {
             String ciudad = "Ciudad";
 
             controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo,
-                    ciudad, localDateNow, null, muestraCategorias);
+                    ciudad, localDateNow, null, muestraCategorias, null);
 
             contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
         }
@@ -245,7 +246,7 @@ class ControladorPaqueteTest {
             String ciudad = "Ciudad";
 
             controladorAct.altaActividadTuristica(nickProv, nombreDep, nombreActividad, descripcion, duracion, costo,
-                    ciudad, localDateNow, null, muestraCategorias);
+                    ciudad, localDateNow, null, muestraCategorias, null);
 
             contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 
@@ -281,10 +282,10 @@ class ControladorPaqueteTest {
             String ciudad = "Ciudad";
 
             controladorAct.altaActividadTuristica(nickProveedor, nombreDep, nombreActividad, descripcion, duracion,
-                    costo, ciudad, localDateNow, null, muestraCategorias);
+                    costo, ciudad, localDateNow, null, muestraCategorias, null);
 
 			// 10 actividades de cada provedor en un pquete
-			controladorAct.aceptarORechazarActividadTuristica(nombreActividad, true);
+			controladorAct.cambiarEstadoDeActividadTuristica(nombreActividad, EstadoActividadTuristica.ACEPTADA);
 			if (i % 2 == 0) {
 				contrPaquete.agregarActividadAPaquete(nombreActividad, nombrePaq);
 			}
@@ -314,8 +315,8 @@ class ControladorPaqueteTest {
         List<String> nomTuristas = ControladorUsuarioTest.generarTuristas(2, idTest);
         List<String> nomActividades = ControladorActividadTuristicaTest.generarActividades(2, idTest);
 
-        contrActividad.aceptarORechazarActividadTuristica(nomActividades.get(0), true);
-        contrActividad.aceptarORechazarActividadTuristica(nomActividades.get(1), true);
+        contrActividad.cambiarEstadoDeActividadTuristica(nomActividades.get(0), EstadoActividadTuristica.ACEPTADA);
+        contrActividad.cambiarEstadoDeActividadTuristica(nomActividades.get(1), EstadoActividadTuristica.ACEPTADA);
         contrPaquete.agregarActividadAPaquete(nomActividades.get(0), nomPaquetes.get(0));
         contrPaquete.agregarActividadAPaquete(nomActividades.get(1), nomPaquetes.get(0));
 
@@ -362,7 +363,7 @@ class ControladorPaqueteTest {
         List<String> nomTuristas = ControladorUsuarioTest.generarTuristas(1, idTest);
         List<String> nomActividades = ControladorActividadTuristicaTest.generarActividades(1, idTest);
 
-        contrActividad.aceptarORechazarActividadTuristica(nomActividades.get(0), true);
+        contrActividad.cambiarEstadoDeActividadTuristica(nomActividades.get(0), EstadoActividadTuristica.ACEPTADA);
         contrPaquete.agregarActividadAPaquete(nomActividades.get(0), nomPaquetes.get(0));
 
         contrPaquete.comprarPaquete(nomTuristas.get(0), nomPaquetes.get(0), 2, null);

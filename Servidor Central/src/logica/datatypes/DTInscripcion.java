@@ -2,17 +2,25 @@ package logica.datatypes;
 
 import java.time.LocalDate;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import logica.utils.UtilsDT;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTInscripcion {
-	private LocalDate fechaInscripcion;
+	private String fechaInscripcionStr;
 	private int cantidadTuristas;
 	private float costo;
 	private DTSalidaTuristica salida;
 	private String turista;
 
 	private DTCompra compra;
+	
+	public DTInscripcion() {}
 
 	public DTInscripcion(LocalDate fechaInscripcion, int cantidadTuristas, float costo, DTSalidaTuristica salida, String turista, DTCompra compra) {
-		this.fechaInscripcion = fechaInscripcion;
+		this.fechaInscripcionStr = fechaInscripcion.format(UtilsDT.formatterLocalDate);
 		this.cantidadTuristas = cantidadTuristas;
 		this.costo = costo;
 		this.salida = salida;
@@ -21,7 +29,7 @@ public class DTInscripcion {
 	}
 
 	public LocalDate getFechaInscripcion() {
-		return this.fechaInscripcion;
+		return LocalDate.parse(this.fechaInscripcionStr, UtilsDT.formatterLocalDate);
 	}
 
 	public int getCantidadTuristas() {
@@ -42,5 +50,13 @@ public class DTInscripcion {
 
 	public DTCompra getCompra() {
 		return compra;
+	}
+
+	public String getFechaInscripcionStr() {
+		return fechaInscripcionStr;
+	}
+
+	public DTSalidaTuristica getSalida() {
+		return salida;
 	}
 }

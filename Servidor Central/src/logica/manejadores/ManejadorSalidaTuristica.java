@@ -51,4 +51,9 @@ public class ManejadorSalidaTuristica {
 	public Boolean existeSalidaTuristica(String nombre) {
 		return salidas.containsKey(nombre);
 	}
+
+	public void removeSalida(String nombre) {
+		salidas.remove(nombre);
+		
+	}
 }

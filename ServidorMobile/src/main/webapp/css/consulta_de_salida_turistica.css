@@ -1,0 +1,45 @@
+body{
+	display: grid;
+	grid-template-rows: 1fr auto;
+	min-height: 100vh;
+}
+
+#titulo{
+    background-color: #F0F0F0;
+    margin: 0px;
+}
+
+h1{
+	justify-content: center;
+	display: flex;	
+	padding: 10px
+	 
+}
+
+#info-salida{
+	margin: 0 5px 0 5px;
+}
+
+h2{
+	font-size: 25px
+}
+
+#info-general-imagen{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#info-general-imagen > img{
+	width: calc(100% - 10px);
+	margin: 0;
+}
+
+.div-doble{
+	display: flex;
+	justify-content: flex-start;
+}
+
+.div-doble h5{
+	margin-right: 10px
+}

@@ -1,7 +1,8 @@
 
-<%@page import="logica.datatypes.DTTurista"%>
-<%@page import="logica.datatypes.DTSalidaTuristicaDetalle"%>
-<%@page import="logica.datatypes.DTSalidaTuristica"%>
+<%@page import="utils.Utile"%>
+<%@page import="publicar.usuarioturisticasservice.DtTurista"%>
+<%@page import="publicar.actividadesturisticasservice.DtSalidaTuristicaDetalle"%>
+<%@page import="publicar.usuarioturisticasservice.DtUsuario"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,11 +19,12 @@
 
     <jsp:include page="/WEB-INF/jsp/templates/navBar.jsp"/>
 
-
     <section id="contenedor">
         <jsp:include page="/WEB-INF/jsp/templates/menuLateral.jsp"/>
 
-		<% DTSalidaTuristicaDetalle infoSalida = (DTSalidaTuristicaDetalle)request.getAttribute("datosSalida");%>
+		<%
+		DtSalidaTuristicaDetalle infoSalida = (DtSalidaTuristicaDetalle)request.getAttribute("datosSalida");
+		%>
 
         <div id="titulo">
             <h1>Consulta de Salida turística</h1>
@@ -31,36 +33,31 @@
         <div id="info-salida">
 
 
-            <div id="info-general-imagen">            
-                 <% 
-		            String pathSalida = "";
-					if (infoSalida.getImg() == null) {
-						pathSalida += "/noFoto.png";
-					} else {
-						pathSalida += infoSalida.getImg().getPath();
-					}							
-					%>
-				    <img src="img<%=pathSalida%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
+            <div id="info-general-imagen">                             
+			    <img src="<%=Utile.obtenerUrlParaImagen(infoSalida.getImg())%>" class="img-fluid rounded-start paquetes"  style="margin: 10px" alt="">
             </div>
 
             <div id="info">
-                <h2><%= infoSalida.getNombre() %></h2>
-                <h6>Creado el <%= infoSalida.getFechaAlta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ")) %></h6>
-                <% 
+                <h2><%=infoSalida.getNombre()%></h2>
+                <h6>Creado el <%=infoSalida.getFechaAltaStr()%></h6>
+                <%
                 boolean turistaLogueado = false;
-        		try {
-	        		DTTurista tur = (DTTurista) session.getAttribute("usuarioLogeado");
-	        		turistaLogueado = tur != null;
-        		} catch (Exception e) {
-        			// nada
-        		}
-        		// Muestro el boton si soy turista
-        		if (turistaLogueado) { %>		            
+                        		try {
+                	        		DtTurista tur = (DtTurista) session.getAttribute("usuarioLogeado");
+                	        		turistaLogueado = tur != null;
+                        		} catch (Exception e) {
+                        			// nada
+                        		}
+                        		// Muestro el boton si soy turista
+                        		if (turistaLogueado) {
+                %>		            
 	                <h5 id="label-acciones-relacionadas">Acciones relacionadas:</h5>
 	                <ul>
 	                    <li><a href="InscribiseASalida?id=<%=infoSalida.getNombre()%>">Inscribirse a la salida</a></li>
 	                </ul>
-        		<% } %>
+        		<%
+        		}
+        		%>
             </div>
 
             <div id="resto-de-la-info-actividad">
@@ -68,15 +65,15 @@
 
                 <div class="div-doble" id="FechaYhoraSalida">
                     <h5 class="label">Fecha y hora de partida: </h5>
-                    <p><%=infoSalida.getFechaHoraSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy ' a las ' HH:mm"))%> </p>
+                    <p><%=infoSalida.getFechaHoraSalidaStr()%> </p>
                 </div>
                 <div class="div-doble" id="Costo">
                     <h5 class="label">Capacidad de turistas: </h5>
-                    <p><%= infoSalida.getCantMaxTuristas() %></p>
+                    <p><%=infoSalida.getCantMaxTuristas()%></p>
                 </div>
                 <div class="div-doble" id="Cuidad">
                     <h5 class="label">Lugar: </h5>
-                    <p><%= infoSalida.getLugarSalida() %></p>
+                    <p><%=infoSalida.getLugarSalida()%></p>
                 </div>
 
             </div>
@@ -90,24 +87,34 @@
 	        	<div class="card mb-3 card-actividad" style="max-width: 800px;">
 	                    <div class="row g-0">
 	                        <div class="col-md-4 img-contain">
-	                        	<% 
-		            			String path = "";
-								if (infoSalida.getDtActividad().getImg() == null) {
-									path += "/noFoto.png";
-								} else {
-									path += infoSalida.getDtActividad().getImg().getPath();
-								}							
-								%>
-	                            <img src="img<%=path%>" class="img-fluid rounded-start">
+
+	                            <img src="<%=Utile.obtenerUrlParaImagen(infoSalida.getDtActividad().getImg())%>" class="img-fluid rounded-start">
 	                            <!-- Falta el manejo de foto de la verdadero paquete-->
 	                        </div>
 	                        <div class="col-md-8">
 	                            <div class="card-body card-actividad">
 	                            	<div>
+	                            	<div style="display: flex; justify-content: space-between;">
 	                            		<h5 class="card-title"><%= infoSalida.getDtActividad().getNombre()%> </h5>
+	                            		
+	                            		 <% 
+		                                if(session.getAttribute("usuarioLogeado") != null && session.getAttribute("usuarioLogeado") instanceof DtTurista ){ 
+		                                	boolean esActividadFavorita = (boolean) request.getAttribute("esFavoritaActividad");
+		                                	if(esActividadFavorita){
+		                    
+			                                %>
+			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>" ><i class="fa-solid fa-star fa-2x" style="color: #ffc700"></i></a>
+			                                
+			                                <%} else { %>
+			                                
+			                                	<a href="ConsultaSalida?marcarComoFav=<%=true%>&id=<%=infoSalida.getNombre()%>"><i class="fa-solid fa-star fa-2x" style="color: #CCD1D1"></i></a>
+			                                	
+			                                <% } 
+		                                	}%>
+	                            	</div>	
 	                                <p class="card-text descripcion-paquete"><%= infoSalida.getDtActividad().getDescripcion() %> </p>
 	                            	</div>                            
-	                                <div class="botonera">
+	                                <div>
 	                                    <a href="ConsultaActividad?id=<%=infoSalida.getDtActividad().getNombre()%>" class="btn btn-primary">Ver mas</a>
 	                                </div>
 	
@@ -120,15 +127,6 @@
         
 
     </section>
-
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        <div class="container text-center">
-        <span class="" style="font-size: 25px; color: Grey;">
-          <i class="fas fa-route"></i>
-        </span>
-            <small>Copyright &copy; Grupo 16: Valentina Alaniz, Facundo Diaz, Agustín Martínez, Daniel Padrón y Agustín Recoba</small>
-        </div>
-    </footer>
 </main>
 
 

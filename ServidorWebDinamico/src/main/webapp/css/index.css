@@ -16,17 +16,6 @@
     justify-content: space-between;
 }
 
-
-
-
-
-footer{
-
-}
-
-
-
-
 #contenedor-actividades-turisticas img, #contenedor-paquetes img{
     height: 100%;
 }
@@ -46,7 +35,7 @@ footer{
 .botonera{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .descripcion-actividad, .descripcion-paquete{

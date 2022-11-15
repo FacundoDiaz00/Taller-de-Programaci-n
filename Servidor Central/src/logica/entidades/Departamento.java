@@ -63,4 +63,9 @@ public class Departamento {
         actividadTuristicas.put(actTur.getNombre(), actTur);
     }
 
+	public void desasociarActividadTuristica(String nombre) {
+		actividadTuristicas.remove(nombre);
+		
+	}
+
 }

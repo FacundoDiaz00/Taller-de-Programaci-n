@@ -14,11 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import excepciones.UsuarioYaRegistradoException;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorUsuario;
-import logica.datatypes.Imagen;
-import utils.Utiles;
+
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.paqueteturisticasservice.WebServicePaquetes;
+import publicar.usuarioturisticasservice.ErrorAlProcesar_Exception;
+import publicar.usuarioturisticasservice.Imagen;
+import publicar.usuarioturisticasservice.UsuarioYaRegistradoException_Exception;
+import publicar.usuarioturisticasservice.WebServiceUsuarios;
+import publicar.usuarioturisticasservice.WebServiceUsuariosService;
+import utils.Utile;
 
 /**
  * Servlet implementation class AltaDeUsuario
@@ -27,14 +31,14 @@ import utils.Utiles;
 @MultipartConfig
 public class AltaDeUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorUsuario contUsuario;
+    private WebServiceUsuarios wbUser;
 
     private final String tipoUsuarioProveedor = "proveedor";
     private final String tipoUsuarioTurista = "turista";
 
     public AltaDeUsuarioServlet() {
         super();
-        this.contUsuario = Fabrica.getInstancia().getIControladorUsuario();
+        wbUser = new WebServiceUsuariosService().getWebServiceUsuariosPort();
     }
 
     /**
@@ -49,7 +53,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
             req.setCharacterEncoding("UTF-8");
         }
 
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 
     }
@@ -71,65 +75,45 @@ public class AltaDeUsuarioServlet extends HttpServlet {
         String nacionalidad = (String) req.getParameter("nacionalidad");
         String descripcionGeneral = (String) req.getParameter("descripcionGeneral");
         String link = (String) req.getParameter("link");
-        if(link != null && link.trim().length() == 0) {
-        	link = null;
+        if(link == null ) {
+        	link = "";
         }
         Part filePart = req.getPart("img");
 
         try {
 
             boolean hayImagen = filePart.getSize() > 0;
-            String ext = "";
-            String futuroNombreDelPath = "";
-            Imagen imgDt = null;
+            String ext = ""; 
+            byte[] imgContent = new byte[0]; 
             if (hayImagen) {
-                ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
-
-                futuroNombreDelPath = "/usuarios/" + nickname + ext; // Esto es
-                                                                     // la
-                                                                     // ruta
-                                                                     // relativa
-                imgDt = new Imagen(futuroNombreDelPath);
+            	
+            	InputStream imgInputStream = filePart.getInputStream();
+                ext = Utile.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+                imgContent = imgInputStream.readAllBytes();
+                imgInputStream.close();
             }
 
             LocalDate fechaNac = LocalDate.parse(fechaNacStr);
             if (tipoUsuario.equals(tipoUsuarioProveedor)) {
-                this.contUsuario.altaProveedor(nickname, nombre, apellido, email, password, fechaNac, imgDt,
-                        descripcionGeneral, link);
+            	wbUser.altaProveedor(nickname, nombre, apellido, email, password, Utile.localDateToString(fechaNac),imgContent, ext ,descripcionGeneral, link);
             } else if (tipoUsuario.equals(tipoUsuarioTurista)) {
-                this.contUsuario.altaTurista(nickname, nombre, apellido, email, password, fechaNac, imgDt,
-                        nacionalidad);
+            	wbUser.altaTurista(nickname, nombre, apellido, email, password, Utile.localDateToString(fechaNac), imgContent, ext, nacionalidad);
             } else {
                 req.setAttribute("motivoDeError", "No se soporta el alta de este tipo de usuario");
                 req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
                 return;
             }
 
-            if (hayImagen) {
-                // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-                InputStream imgInputStream = filePart.getInputStream();
-                String servidorPath = getServletContext().getRealPath("/");
-                File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-                imgFile.createNewFile();
-                FileOutputStream imgFileStream = new FileOutputStream(imgFile);
-
-                byte[] buffer = new byte[8192];
-
-                int readLength = imgInputStream.read(buffer);
-                while (readLength != -1) {
-                    imgFileStream.write(buffer, 0, readLength);
-                    readLength = imgInputStream.read(buffer);
-                }
-                imgFileStream.close();
-            }
-
             req.setAttribute("exito", Boolean.TRUE);
-            req = Utiles.insertarLoDeSiempre(req);
+            req = Utile.insertarLoDeSiempre(req);
             req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
             return;
-        } catch (UsuarioYaRegistradoException e) {
+        } catch (UsuarioYaRegistradoException_Exception e) {
             req.setAttribute("motivoDeError",
                     "Ya existe un usuario con este nickname o con ese correo, cambie alguno de estos y pruebe nuevamente");
+        } catch (ErrorAlProcesar_Exception e) {
+        	req.setAttribute("motivoDeError",
+                    "Error al procesar la solicitud");
         }
 
         // En este punto si o si hay error
@@ -146,7 +130,7 @@ public class AltaDeUsuarioServlet extends HttpServlet {
         req.setAttribute("descripcionGeneral", descripcionGeneral);
         req.setAttribute("link", link);
 
-        req = Utiles.insertarLoDeSiempre(req);
+        req = Utile.insertarLoDeSiempre(req);
 
         req.getRequestDispatcher("/WEB-INF/jsp/alta_de_usuario.jsp").forward(req, resp);
 

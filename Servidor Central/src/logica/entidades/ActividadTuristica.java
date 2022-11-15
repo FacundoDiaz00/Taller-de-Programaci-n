@@ -14,6 +14,9 @@ import logica.datatypes.DTPaquete;
 import logica.datatypes.DTSalidaTuristica;
 import logica.datatypes.EstadoActividadTuristica;
 import logica.datatypes.Imagen;
+import logica.jpa.ActividadJPA;
+import logica.jpa.ProveedorJPA;
+import logica.jpa.SalidaJPA;
 import logica.manejadores.ManejadorActividadTuristica;
 import logica.manejadores.ManejadorCategoria;
 import logica.manejadores.ManejadorDepartamento;
@@ -32,6 +35,8 @@ public class ActividadTuristica {
     private LocalDate fechaAlta;
     private EstadoActividadTuristica estado;
     private Imagen img;
+    private int cantFavoritos;
+    private String urlVideo;
 
     private Map<String, Paquete> paquetes;
     private Map<String, SalidaTuristica> salidas;
@@ -40,10 +45,11 @@ public class ActividadTuristica {
     private Map<String, Categoria> categorias;
 
     private Departamento departamento;
+	private long cantVisitas;
 
     public ActividadTuristica(String nombreProveedor, String departamento, String nombre, String descrpicion,
             int duracion, float costoPorTurista, String cuidad, LocalDate fechaAlta, Imagen img,
-            List<String> categorias) throws ObjetoNoExisteEnTurismoUy {
+            List<String> categorias, String urlVideo) throws ObjetoNoExisteEnTurismoUy {
         setNombre(nombre);
         setDescrpicion(descrpicion);
         setDuracion(duracion);
@@ -54,7 +60,9 @@ public class ActividadTuristica {
         setSalidas(new HashMap<>());
         setCategorias(new HashMap<>());
         setImagen(img);
+        setUrlVideo(urlVideo);
         estado = EstadoActividadTuristica.AGREGADA;
+        cantVisitas = 0;
 
         // Se agrega a la coleccion de actividades:
         ManejadorActividadTuristica manejadorAct = ManejadorActividadTuristica.getInstancia();
@@ -91,7 +99,7 @@ public class ActividadTuristica {
 
         return new DTActividadTuristica(getNombre(), getDescrpicion(), getCostoPorTurista(), getCuidad(), getDuracion(),
                 getFechaAlta(), getProveedor().getNickname(), this.getDepartamento().getNombre(), listaIdCats,
-                getImagen(), estado);
+                getImagen(), estado, cantFavoritos, urlVideo);
     }
 
     public DTActividadTuristicaDetalle obtenerDTActividadTuristicaDetalle() {
@@ -110,7 +118,7 @@ public class ActividadTuristica {
 
         return new DTActividadTuristicaDetalle(salid, packs, getNombre(), getDescrpicion(), getCostoPorTurista(),
                 getCuidad(), getDuracion(), getFechaAlta(), getProveedor().getNickname(), getDepartamento().getNombre(),
-                listaIdCats, getImagen(), estado);
+                listaIdCats, getImagen(), estado, cantFavoritos, urlVideo);
     }
 
     @Override
@@ -241,4 +249,60 @@ public class ActividadTuristica {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+	public void incrementarCantidadDeFavoritos() {
+		cantFavoritos = getCantFavoritos() + 1;
+	}
+
+	public void decrementarCantidadDeFavoritos() {
+		cantFavoritos = getCantFavoritos() - 1;
+	}
+
+	public int getCantFavoritos() {
+		return cantFavoritos;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
+	}
+
+	public void setUrlVideo(String urlVideo) {
+		this.urlVideo = urlVideo;
+	}
+
+    public ActividadJPA obtenerActividadJPA() {
+        var salidasJPA = new ArrayList<SalidaJPA>();
+        ActividadJPA actividad = new ActividadJPA(nombre, descrpicion, duracion, costoPorTurista, cuidad, departamento.getNombre(), fechaAlta, 
+    			salidasJPA, (ProveedorJPA) proveedor.obtenerUsuarioJPA()
+    		);
+        salidas.values().forEach((SalidaTuristica s) -> salidasJPA.add(s.obtenerSalidaJPA(actividad)));
+        return actividad;
+    }
+    
+    
+    //PRECONDICIÒN: la actividad no tiene paquetes asociados
+    public void eliminarLinks() {
+        //eliminar de categorias
+    	for (Categoria categoria : this.categorias.values())
+    		categoria.eliminarActividad(this.nombre);
+    	//eliminar de salidas y eliminar las salidas 
+    	for (SalidaTuristica salida : this.salidas.values())
+    		salida.eliminarLinks();
+    	
+    	this.proveedor.eliminarActividad(this.nombre);
+    	
+    	ManejadorActividadTuristica MAT = ManejadorActividadTuristica.getInstancia();
+    	MAT.removeActividad(this.nombre);
+    	
+    	//Desasocio departamento
+    	this.departamento.desasociarActividadTuristica(nombre);
+    }
+
+	public void incrementarContadorVisitas() {
+		this.cantVisitas++;
+	}
+	
+	public long getCantVisitas() {
+		return this.cantVisitas;
+	}
 }

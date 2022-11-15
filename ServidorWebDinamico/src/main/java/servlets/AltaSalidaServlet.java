@@ -1,10 +1,7 @@
 package servlets;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,18 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import excepciones.ActividadTuristicaNoAceptada;
-import excepciones.FechaAltaActividadPosteriorAFechaAltaSalidaException;
-import excepciones.FechaAltaSalidaPosteriorAFechaSalidaException;
-import excepciones.ObjetoNoExisteEnTurismoUy;
-import excepciones.SalidaYaRegistradaException;
-import logica.controladores.Fabrica;
-import logica.controladores.IControladorActividadTuristica;
-import logica.datatypes.DTActividadTuristicaDetalle;
-import logica.datatypes.DTProveedor;
-import logica.datatypes.DTUsuario;
-import logica.datatypes.Imagen;
-import utils.Utiles;
+import publicar.actividadesturisticasservice.ActividadTuristicaNoAceptada_Exception;
+import publicar.actividadesturisticasservice.DtActividadTuristicaDetalle;
+import publicar.actividadesturisticasservice.ErrorAlProcesar_Exception;
+import publicar.actividadesturisticasservice.FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception;
+import publicar.actividadesturisticasservice.FechaAltaSalidaPosteriorAFechaSalidaException_Exception;
+import publicar.actividadesturisticasservice.ObjetoNoExisteEnTurismoUy_Exception;
+import publicar.actividadesturisticasservice.SalidaYaRegistradaException_Exception;
+import publicar.actividadesturisticasservice.WebServiceActividades;
+import publicar.actividadesturisticasservice.WebServiceActividadesService;
+import publicar.usuarioturisticasservice.DtProveedor;
+import publicar.usuarioturisticasservice.DtUsuario;
+import utils.Utile;
 
 /**
  * Servlet implementation class AltaDeUsuario
@@ -36,11 +33,11 @@ import utils.Utiles;
 @MultipartConfig
 public class AltaSalidaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IControladorActividadTuristica cat;
+    private WebServiceActividades wbActi;
 
     public AltaSalidaServlet() {
         super();
-        this.cat = Fabrica.getInstancia().getIControladorActividadTuristica();
+        wbActi = new WebServiceActividadesService().getWebServiceActividadesPort();
     }
     
     
@@ -51,23 +48,23 @@ public class AltaSalidaServlet extends HttpServlet {
 
          // Solo muestro el form si es un proveedor:
 
-         DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
-         if (usuario == null || !(usuario instanceof DTProveedor)) {
-             req = Utiles.insertarLoDeSiempre(req);
+         DtUsuario usuario = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
+         if (usuario == null || !(usuario instanceof DtProveedor)) {
+             req = Utile.insertarLoDeSiempre(req);
              resp.sendRedirect("/index");
              return;
          }
          try {
-             DTActividadTuristicaDetalle datosActividad = cat.obtenerDTActividadTuristicaDetalle(nomActividad);
+             DtActividadTuristicaDetalle datosActividad = wbActi.obtenerDTActividadTuristicaDetalle(nomActividad);
              req.setAttribute("datosActividad", datosActividad);
 
-         } catch (ObjetoNoExisteEnTurismoUy e) {
+         } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
              req.setAttribute("motivoDeError", "No existe la actividad turistica");
              req.getRequestDispatcher("/WEB-INF/jsp/errores/400.jsp").forward(req, resp);
              return;
          }
 
-         req = Utiles.insertarLoDeSiempre(req);
+         req = Utile.insertarLoDeSiempre(req);
          req.getRequestDispatcher("/WEB-INF/jsp/alta_de_salida_turistica.jsp").forward(req, resp);
     }
     
@@ -84,14 +81,14 @@ public class AltaSalidaServlet extends HttpServlet {
         }
 
         // Solo analizo el request si es un proveedor:
-        DTUsuario usuario = (DTUsuario) req.getSession().getAttribute("usuarioLogeado");
-        if (usuario == null || !(usuario instanceof DTProveedor)) {
-            req = Utiles.insertarLoDeSiempre(req);
+        DtUsuario usuario = (DtUsuario) req.getSession().getAttribute("usuarioLogeado");
+        if (usuario == null || !(usuario instanceof DtProveedor)) {
+            req = Utile.insertarLoDeSiempre(req);
             resp.sendRedirect("index");
             return;
         }
 
-        String nickProveedor = ((DTUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
+        String nickProveedor = ((DtUsuario) req.getSession().getAttribute("usuarioLogeado")).getNickname();
 
         String actividad = req.getParameter("id");
         String nombre = req.getParameter("nombre");
@@ -102,52 +99,35 @@ public class AltaSalidaServlet extends HttpServlet {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime fechaYHoraSalida = LocalDateTime.parse(fechaSalida + " " + horaSalida, formatter);
-        LocalDate fechaDeAlta = null;
 
         Part filePart = req.getPart("img");
 
         boolean hayImagen = filePart.getSize() > 0;
         String ext = "";
-        String futuroNombreDelPath = "";
-        Imagen imgDt = null;
+        byte[] imgContent = new byte[0]; 
         if (hayImagen) {
-            ext = Utiles.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
-
-            // Esto es la ruta relativa
-            futuroNombreDelPath = "/salidas/" + nombre + ext;
-            imgDt = new Imagen(futuroNombreDelPath);
+         	InputStream imgInputStream = filePart.getInputStream();
+            ext = Utile.devolverExtencionDelNombreDeArchivo(filePart.getSubmittedFileName());
+            imgContent = imgInputStream.readAllBytes();
+            imgInputStream.close();
         }
 
         try {
-            cat.altaSalidaTuristica(actividad, nombre, fechaYHoraSalida, fechaDeAlta, lugar,
-                    Integer.valueOf(cantMaxTur), imgDt);
-            if (hayImagen) {
-                // Utiles.crearDirectorioImagenesSiNoEstaCreado(servidorPath);
-                InputStream imgInputStream = filePart.getInputStream();
-                String servidorPath = getServletContext().getRealPath("/");
-                File imgFile = new File(servidorPath + "/img" + futuroNombreDelPath);
-                imgFile.createNewFile();
-                FileOutputStream imgFileStream = new FileOutputStream(imgFile);
+        	        	
+        	wbActi.altaSalidaTuristica(actividad, nombre, Utile.localDateTimeToString(fechaYHoraSalida), lugar,
+                    Integer.valueOf(cantMaxTur), imgContent, ext);
+           
 
-                byte[] buffer = new byte[8192];
-
-                int readLength = imgInputStream.read(buffer);
-                while (readLength != -1) {
-                    imgFileStream.write(buffer, 0, readLength);
-                    readLength = imgInputStream.read(buffer);
-                }
-                imgFileStream.close();
-            }
-
-            req.setAttribute("exito", "exito");
+            req.setAttribute("exito", Boolean.FALSE); //Esto lo pongo asi porque hay otro cartel que lo atrapa
 
             
 
-            var infoActividadTuristica = cat.obtenerDTActividadTuristicaDetalle(actividad);
+            var infoActividadTuristica = wbActi.obtenerDTActividadTuristicaDetalle(actividad);
             
             req.setAttribute("datosActividad", infoActividadTuristica);
-            req = Utiles.insertarLoDeSiempre(req);
-            
+            req = Utile.insertarLoDeSiempre(req);
+
+            req.setAttribute("cantFavoritos", infoActividadTuristica.getCantFavoritos());
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
             return;
 
@@ -155,32 +135,28 @@ public class AltaSalidaServlet extends HttpServlet {
             req.setAttribute("motivoDeError",
                     "No se ingresaron los números de duracion o costo correctamente, cambielos y pruebe nuevamente");
 
-        } catch (FechaAltaActividadPosteriorAFechaAltaSalidaException e) {
+        } catch (FechaAltaActividadPosteriorAFechaAltaSalidaException_Exception e) {
             req.setAttribute("motivoDeError",
                     "La fecha de la salida debe ser posterior a la fecha de alta de la actividad");
 
-        } catch (FechaAltaSalidaPosteriorAFechaSalidaException e) {
+        } catch (FechaAltaSalidaPosteriorAFechaSalidaException_Exception e) {
             req.setAttribute("motivoDeError",
                     "La fecha de la salida debe ser posterior a la fecha actual");
 
-        } catch (SalidaYaRegistradaException e) {
+        } catch (SalidaYaRegistradaException_Exception e) {
             req.setAttribute("motivoDeError", "Ya existe una actividad con ese nombre, cambielo y pruebe nuevamente");
 
-        } catch (ActividadTuristicaNoAceptada e) {
+        } catch (ActividadTuristicaNoAceptada_Exception e) {
             req.setAttribute("motivoDeError",
                     "La actividad a la que intentó registrar una salida no está aceptada todavía.");
 
-        } catch (ObjetoNoExisteEnTurismoUy e) {
-            if (e.getClaseObjetoFaltante().equals("Actividad")) {
-                req.setAttribute("motivoDeError",
-                        "No existe la actividad seleccionada, cambielo y pruebe nuevamente");
-            } else if (e.getClaseObjetoFaltante().equals("Departamento")) {
-                req.setAttribute("motivoDeError",
-                        "No existe el departamento seleccionado, cambielo y pruebe nuevamente");
-            }
-
+        } catch (ObjetoNoExisteEnTurismoUy_Exception e) {
+            req.setAttribute("motivoDeError", "No existe entidades seleccionadas. ");        
             return;
-        }
+        } catch (ErrorAlProcesar_Exception e) {
+        	req.setAttribute("motivoDeError", "Error genera al procesar la solicitud.");        
+            return;
+		}
 
         // En este punto si o si hay error
         req.setAttribute("actividad", actividad);
