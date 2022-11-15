@@ -118,7 +118,7 @@ public class AltaSalidaServlet extends HttpServlet {
                     Integer.valueOf(cantMaxTur), imgContent, ext);
            
 
-            req.setAttribute("exito", "exito");
+            req.setAttribute("exito", Boolean.FALSE); //Esto lo pongo asi porque hay otro cartel que lo atrapa
 
             
 
@@ -126,7 +126,8 @@ public class AltaSalidaServlet extends HttpServlet {
             
             req.setAttribute("datosActividad", infoActividadTuristica);
             req = Utile.insertarLoDeSiempre(req);
-            
+
+            req.setAttribute("cantFavoritos", infoActividadTuristica.getCantFavoritos());
             req.getRequestDispatcher("/WEB-INF/jsp/consulta_actividad_turistica.jsp").forward(req, resp);
             return;
 
