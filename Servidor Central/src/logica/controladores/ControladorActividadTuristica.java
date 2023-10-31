@@ -1,5 +1,6 @@
 package logica.controladores;
 
+import java.security.cert.CertificateRevokedException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
@@ -170,7 +171,7 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 
 	@Override
 	public List<DTSalidaTuristica> obtenerDTSalidasTuristicas(String nombreActTuri) throws ObjetoNoExisteEnTurismoUy {
-		ArrayList<DTSalidaTuristica> dtsSal = new ArrayList<>();
+		List<DTSalidaTuristica> dtsSal = new ArrayList<>();
 
 		ManejadorActividadTuristica mat = ManejadorActividadTuristica.getInstancia();
 		ActividadTuristica act = mat.getActividad(nombreActTuri);
@@ -198,7 +199,6 @@ public class ControladorActividadTuristica implements IControladorActividadTuris
 		if (fechaInscripcion == null) {
 			fechaInscripcion = LocalDate.now();
 		}
-
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstancia();
 		Turista turis = (Turista) manejadorUsuario.getUsuarioPorNick(nicknameTuris);
 		if (turis.estaInscriptoASalida(nomSalTurim)) {
